@@ -1,0 +1,95 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import nbLogo from "@/assets/nb-logo-transparent.png";
+
+const navItems = [
+  { label: "Shop", path: "/shop" },
+  { label: "Ramen Box", path: "/ramen-box" },
+  { label: "Recipes", path: "/recipes" },
+  { label: "Sauce Finder", path: "/sauce-selector" },
+];
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav className={`sticky top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-border/50 bg-background/95 backdrop-blur-xl shadow-[0_2px_20px_hsl(0_0%_0%/0.3)]" : "border-transparent bg-transparent backdrop-blur-none"}`}>
+      <div className="container flex h-16 items-center justify-between">
+        <Link to="/" className="flex items-center">
+          <img src={nbLogo} alt="Noodle Bomb" className="h-14 w-auto drop-shadow-[0_0_12px_hsl(4,85%,50%,0.4)] transition-all duration-300 hover:drop-shadow-[0_0_20px_hsl(4,85%,50%,0.6)]" />
+        </Link>
+
+        {/* Desktop */}
+        <div className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`font-display text-sm font-medium uppercase tracking-widest transition-colors hover:text-primary ${
+                location.pathname === item.path ? "text-primary" : "text-muted-foreground"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            to="/shop"
+            className="bg-gradient-fire px-5 py-2 rounded-full font-display text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-fire"
+          >
+            Order Now
+          </Link>
+        </div>
+
+        {/* Mobile toggle */}
+        <button onClick={() => setOpen(!open)} className="md:hidden text-foreground">
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-border bg-background"
+          >
+            <div className="container py-6 flex flex-col gap-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setOpen(false)}
+                  className="font-display text-lg font-medium uppercase tracking-wider text-foreground hover:text-primary transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Link
+                to="/shop"
+                onClick={() => setOpen(false)}
+                className="bg-gradient-fire text-center px-5 py-3 rounded-full font-display text-sm font-semibold uppercase tracking-wider text-primary-foreground"
+              >
+                Order Now
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+};
+
+export default Navbar;

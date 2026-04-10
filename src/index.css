@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 4 85% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 30 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 4 85% 50%;
+
+    --radius: 0.75rem;
+
+    --flame: 15 95% 55%;
+    --flame-foreground: 0 0% 100%;
+    --ember: 25 100% 50%;
+    --smoke: 0 0% 30%;
+
+    --gradient-fire: linear-gradient(135deg, hsl(4, 85%, 50%), hsl(25, 100%, 50%));
+    --gradient-dark: linear-gradient(180deg, hsl(0, 0%, 6%), hsl(0, 0%, 2%));
+    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 10%), hsl(0, 0%, 6%));
+    --gradient-glass: linear-gradient(145deg, hsl(0 0% 100% / 0.04), hsl(0 0% 100% / 0.01));
+
+    --shadow-glow: 0 0 40px hsl(4 85% 50% / 0.2);
+    --shadow-fire: 0 4px 30px hsl(4 85% 50% / 0.3);
+    --shadow-lift: 0 20px 60px -15px hsl(0 0% 0% / 0.5);
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 4 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 4 85% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  h1 {
+    letter-spacing: -0.03em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+}
+
+@layer utilities {
+  .text-gradient-fire {
+    background: var(--gradient-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-fire {
+    background: var(--gradient-fire);
+  }
+
+  .bg-gradient-dark {
+    background: var(--gradient-dark);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .bg-gradient-glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(12px);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-fire {
+    box-shadow: var(--shadow-fire);
+  }
+
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  .label-caps {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    font-size: 0.7rem;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 38px hsl(4 85% 50% / 0.44); }
+    50% { box-shadow: 0 0 55px hsl(4 85% 50% / 0.6); }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, hsl(0 0% 100% / 0.04) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)) 20%, hsl(var(--primary) / 0.3) 50%, hsl(var(--border)) 80%, transparent);
+  }
+
+  .card-premium {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .card-premium:hover {
+    border-color: hsl(var(--primary) / 0.25);
+    box-shadow: 0 0 50px hsl(var(--primary) / 0.1), 0 20px 60px -15px hsl(0 0% 0% / 0.4);
+  }
+
+  @keyframes glow-line {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .section-divider-animated {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--border)) 15%, hsl(var(--primary) / 0.5) 50%, hsl(var(--border)) 85%, transparent);
+    background-size: 200% 100%;
+    animation: glow-line 4s ease-in-out infinite;
+  }
+
+  @keyframes text-glow {
+    0%, 100% { text-shadow: 0 0 20px hsl(var(--flame) / 0.3); }
+    50% { text-shadow: 0 0 40px hsl(var(--flame) / 0.6), 0 0 80px hsl(var(--flame) / 0.2); }
+  }
+
+  .animate-text-glow {
+    animation: text-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .animate-rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+  }
+
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+  }
+
+  /* Hero entrance: subtle upward drift + fade. Starts visible to avoid flash. */
+  @keyframes hero-enter {
+    from { opacity: 0.3; transform: translateY(18px); filter: blur(1px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  }
+
+  @keyframes scarcity-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(25 100% 50% / 0); border-color: hsl(var(--primary) / 0.2); }
+    50% { box-shadow: 0 0 14px 4px hsl(25 100% 50% / 0.35); border-color: hsl(25 100% 50% / 0.6); }
+  }
+
+  .animate-scarcity-pulse {
+    animation: scarcity-pulse 2.5s ease-in-out infinite;
+  }
+
+  .animate-hero-enter {
+    animation: hero-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-hero-enter-delayed {
+    animation: hero-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  }
+
+  .animate-hero-enter-delayed-2 {
+    animation: hero-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+  }
+
+  .animate-hero-enter-delayed-3 {
+    animation: hero-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
+  }
+
+  /*
+   * Scroll reveal: content is ALWAYS opacity:1.
+   * The "revealed" class only triggers a subtle translateY shift — decorative only.
+   * If JS never fires, content is fully visible and static.
+   */
+  .scroll-reveal {
+    opacity: 1;
+    transform: translateY(12px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal.revealed {
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-scale {
+    opacity: 1;
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal-scale.revealed {
+    transform: translateY(0) scale(1);
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal,
+    .scroll-reveal-scale,
+    .animate-hero-enter,
+    .animate-hero-enter-delayed,
+    .animate-hero-enter-delayed-2,
+    .animate-hero-enter-delayed-3 {
+      transform: none !important;
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* Smooth hover lift for cards */
+  .hover-lift {
+    transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 32px -8px hsl(0 0% 0% / 0.45), 0 0 20px hsl(var(--primary) / 0.06);
+  }
+
+  /* Icon glow on hover */
+  .icon-glow {
+    transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .group:hover .icon-glow {
+    color: hsl(var(--primary));
+    filter: drop-shadow(0 0 12px hsl(var(--primary) / 0.5));
+    transform: scale(1.1);
+  }
+
+  /* Subtle border glow on hover */
+  .border-glow {
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  .border-glow:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.1);
+  }
+}
