@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Mail } from "lucide-react";
 
@@ -43,27 +43,40 @@ const FAQItem = ({ q, a }: { q: string; a: string }) => {
   );
 };
 
-const FAQ = () => (
-  <div className="min-h-screen bg-background pt-24 pb-20 px-6">
-    <div className="max-w-2xl mx-auto">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <h1 className="font-display text-4xl font-black text-foreground mb-3">FAQ & Contact</h1>
-        <p className="text-muted-foreground text-lg mb-12">Everything you need to know about NoodleBomb.</p>
-        <div className="bg-card rounded-2xl border border-border px-6 mb-12">
-          {faqs.map((item, i) => <FAQItem key={i} {...item} />)}
-        </div>
-        <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 text-center">
-          <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="font-display text-2xl font-bold text-foreground mb-2">Still have questions?</h2>
-          <p className="text-muted-foreground mb-6">We respond within 24 hours, Monday–Friday.</p>
-          <a href="mailto:hello@noodlebomb.co" className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold tracking-wide shadow-lg hover:shadow-orange-500/40 transition-all duration-300">
-            <Mail className="w-4 h-4" />
-            hello@noodlebomb.co
-          </a>
-        </div>
-      </motion.div>
+const FAQ = () => {
+  useEffect(() => {
+    document.title = "FAQ | NoodleBomb Ramen Sauce";
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    meta.content = "Common questions about NoodleBomb ramen sauce — ingredients, shipping, and more.";
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background pt-24 pb-20 px-6">
+      <div className="max-w-2xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <h1 className="font-display text-4xl font-black text-foreground mb-3">FAQ & Contact</h1>
+          <p className="text-muted-foreground text-lg mb-12">Everything you need to know about NoodleBomb.</p>
+          <div className="bg-card rounded-2xl border border-border px-6 mb-12">
+            {faqs.map((item, i) => <FAQItem key={i} {...item} />)}
+          </div>
+          <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 text-center">
+            <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
+            <h2 className="font-display text-2xl font-bold text-foreground mb-2">Still have questions?</h2>
+            <p className="text-muted-foreground mb-6">We respond within 24 hours, Monday–Friday.</p>
+            <a href="mailto:hello@noodlebomb.co" className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold tracking-wide shadow-lg hover:shadow-orange-500/40 transition-all duration-300">
+              <Mail className="w-4 h-4" />
+              hello@noodlebomb.co
+            </a>
+          </div>
+        </motion.div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default FAQ;
