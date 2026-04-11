@@ -12,6 +12,8 @@ import Shop from "./pages/Shop";
 import Recipes from "./pages/Recipes";
 import SauceSelector from "./pages/SauceSelector";
 import RamenBox from "./pages/RamenBox";
+import FAQ from "./pages/FAQ";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/sauce-selector" element={<SauceSelector />} />
           <Route path="/sauce-finder" element={<Navigate to="/sauce-selector" replace />} />
           <Route path="/ramen-box" element={<RamenBox />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
