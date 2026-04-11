@@ -1,7 +1,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, ChevronDown } from "lucide-react";
 import SpiceLevel from "@/components/SpiceLevel";
+
+const ingredientData: Record<string, { ingredients: string; allergens: string }> = {
+  "Original Ramen Sauce": {
+    ingredients: "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Garlic, Ginger, Sesame Oil.",
+    allergens: "Soy, Wheat (Gluten), Sesame.",
+  },
+  "Spicy Tokyo Ramen Sauce": {
+    ingredients: "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Chili Paste, Garlic, Ginger, Sesame Oil.",
+    allergens: "Soy, Wheat (Gluten), Sesame.",
+  },
+  "Citrus Shoyu Ramen Sauce": {
+    ingredients: "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Citrus Juice (Yuzu, Sudachi), Mirin, Sake, Garlic, Sesame Oil.",
+    allergens: "Soy, Wheat (Gluten), Sesame.",
+  },
+};
+
 interface ProductCardProps {
   name: string;
   tagline: string;
@@ -20,6 +36,9 @@ interface ProductCardProps {
 
 const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWellWith, subscribePrice, flavorHook, badge, buyUrl, comingSoon, proTip }: ProductCardProps) => {
   const [purchaseType, setPurchaseType] = useState<"one-time" | "subscribe">("subscribe");
+  const [showDetails, setShowDetails] = useState(false);
+
+  const details = ingredientData[name];
 
   return (
     <motion.div
@@ -77,6 +96,31 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
               <span className="font-display font-bold text-primary uppercase tracking-wider text-[10px]">Pro Tip: </span>
               {proTip}
             </p>
+          </div>
+        )}
+
+        {/* Ingredients & Allergens accordion */}
+        {details && (
+          <div className="mb-4 border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => setShowDetails(!showDetails)}
+              className="w-full flex items-center justify-between px-4 py-2.5 text-left bg-secondary/30 hover:bg-secondary/50 transition-colors"
+            >
+              <span className="text-xs font-display font-bold uppercase tracking-wider text-foreground/70">Details</span>
+              <ChevronDown className={`w-4 h-4 text-primary transition-transform duration-200 ${showDetails ? "rotate-180" : ""}`} />
+            </button>
+            {showDetails && (
+              <div className="px-4 py-3 space-y-2">
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  <span className="font-display font-semibold text-foreground/70 uppercase tracking-wider text-[10px]">Ingredients: </span>
+                  {details.ingredients}
+                </p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  <span className="font-display font-semibold text-orange-400 uppercase tracking-wider text-[10px]">Allergens: </span>
+                  {details.allergens}
+                </p>
+              </div>
+            )}
           </div>
         )}
 
