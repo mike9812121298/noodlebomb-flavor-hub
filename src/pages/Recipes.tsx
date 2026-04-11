@@ -1,102 +1,126 @@
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Flame } from "lucide-react";
-import RecipeCard from "@/components/RecipeCard";
-import heroImage from "@/assets/hero-ramen.jpg";
-import recipeWings from "@/assets/nb-recipe-wings.jpeg";
-import recipeStirfry from "@/assets/nb-recipe-stirfry.jpeg";
-import recipePulledpork from "@/assets/nb-recipe-pulledpork.png";
-
-const categories = ["All", "Ramen", "Rice Bowls", "Grilling", "Quick Meals", "Seafood", "Under 20 Min"];
+import { Link } from "react-router-dom";
+import { Clock, Users, ChevronRight } from "lucide-react";
 
 const recipes = [
-  { title: "Spicy Miso Ramen", image: heroImage, time: "25 min", difficulty: "Medium", bestWith: "Spicy Tokyo", calories: "480", category: "Ramen" },
-  { title: "Garlic Butter Rice Bowl", image: recipeStirfry, time: "15 min", difficulty: "Easy", bestWith: "Original", calories: "350", category: "Rice Bowls" },
-  { title: "Grilled Chicken Thighs", image: recipeWings, time: "20 min", difficulty: "Easy", bestWith: "Original", calories: "320", category: "Grilling" },
-  { title: "5-Minute Egg Drop Noodles", image: heroImage, time: "5 min", difficulty: "Easy", bestWith: "Original", calories: "280", category: "Quick Meals" },
-  { title: "Citrus Shrimp Skewers", image: recipeStirfry, time: "15 min", difficulty: "Easy", bestWith: "Citrus Shoyu", calories: "220", category: "Seafood" },
-  { title: "Tokyo Fire Wings", image: recipeWings, time: "18 min", difficulty: "Medium", bestWith: "Spicy Tokyo", calories: "450", category: "Grilling" },
-  { title: "NoodleBomb Pulled Pork", image: recipePulledpork, time: "45 min", difficulty: "Medium", bestWith: "Original", calories: "520", category: "Grilling" },
-  { title: "Spicy Tuna Rice Bowl", image: heroImage, time: "10 min", difficulty: "Easy", bestWith: "Spicy Tokyo", calories: "410", category: "Rice Bowls" },
-  { title: "NoodleBomb Stir-Fry", image: recipeStirfry, time: "12 min", difficulty: "Easy", bestWith: "Original", calories: "380", category: "Quick Meals" },
+  {
+    name: "Classic NoodleBomb Ramen Bowl",
+    flavor: "Original",
+    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    time: "10 min",
+    serves: "1",
+    desc: "The one that started it all. Simple, bold, unforgettable.",
+    steps: [
+      "Cook 1 serving of ramen noodles according to package directions. Drain.",
+      "Pour half a bottle of NoodleBomb Original directly over the hot noodles.",
+      "Toss to coat evenly. Top with a soft-boiled egg, green onions, and sesame seeds.",
+      "Optional: Add sliced chashu pork or mushrooms for a fuller bowl.",
+    ],
+  },
+  {
+    name: "Spicy Tokyo Fire Ramen",
+    flavor: "Spicy Tokyo",
+    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    time: "12 min",
+    serves: "1",
+    desc: "Dark soy, roasted chili, and sesame — cranked to maximum.",
+    steps: [
+      "Cook noodles and drain. Slice 1 chicken thigh thin and sear in a hot pan with oil until golden.",
+      "Add half a bottle of Spicy Tokyo to the pan off heat. Toss chicken to coat.",
+      "Pour sauce and chicken over noodles. Top with crispy garlic, chili oil drizzle, and nori.",
+    ],
+  },
+  {
+    name: "NoodleBomb Wing Glaze",
+    flavor: "Any flavor",
+    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    time: "45 min",
+    serves: "4",
+    desc: "The TikTok-worthy wing recipe everyone asks about.",
+    steps: [
+      "Bake or air-fry 2 lbs chicken wings at 400°F for 35–40 minutes until crispy.",
+      "In a bowl, mix half a bottle of NoodleBomb with 1 tbsp butter and 1 tsp honey.",
+      "Toss hot wings in the sauce immediately out of the oven. Serve with ranch.",
+    ],
+  },
+  {
+    name: "5-Minute Garlic Noodles",
+    flavor: "Original",
+    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    time: "5 min",
+    serves: "1",
+    desc: "The fastest upgrade to instant noodles you'll ever make.",
+    steps: [
+      "Cook any noodle (ramen, spaghetti, udon) and drain.",
+      "Toss immediately with half a bottle of NoodleBomb Original and 1 tsp sesame oil.",
+      "Top with fried egg, crushed peanuts, and chili flakes. Done.",
+    ],
+  },
+  {
+    name: "Citrus Shoyu Cold Noodle Salad",
+    flavor: "Citrus Shoyu",
+    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
+    time: "15 min",
+    serves: "2",
+    desc: "Bright, tangy, and perfect for summer.",
+    steps: [
+      "Cook soba noodles, rinse under cold water, and chill.",
+      "Toss with half a bottle of Citrus Shoyu, sliced cucumber, shredded purple cabbage, and edamame.",
+      "Top with sesame seeds and a drizzle of rice vinegar. Serve cold.",
+    ],
+  },
+  {
+    name: "Spicy Tokyo Steak Marinade",
+    flavor: "Spicy Tokyo",
+    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    time: "20 min + marinate",
+    serves: "2",
+    desc: "The chili-oil infusion penetrates deep. Worth every minute of wait.",
+    steps: [
+      "Pour half a bottle of Spicy Tokyo over 1 lb flank steak in a zip bag. Marinate 10–60 minutes.",
+      "Sear steak in a screaming hot cast iron 3–4 minutes per side.",
+      "Rest 5 minutes, slice against the grain. Serve over rice with extra sauce on the side.",
+    ],
+  },
 ];
 
-function parseMinutes(time: string) {
-  const match = time.match(/(\d+)/);
-  return match ? parseInt(match[1], 10) : 99;
-}
-
-const Recipes = () => {
-  const [searchParams] = useSearchParams();
-  const initialCategory = searchParams.get("category") || "All";
-  const [active, setActive] = useState(
-    categories.includes(initialCategory) ? initialCategory : "All"
-  );
-
-  useEffect(() => {
-    const cat = searchParams.get("category") || "All";
-    if (categories.includes(cat)) setActive(cat);
-  }, [searchParams]);
-
-  const filtered = active === "All"
-    ? recipes
-    : active === "Under 20 Min"
-    ? recipes.filter((r) => parseMinutes(r.time) <= 20)
-    : recipes.filter((r) => r.category === active);
-
-  return (
-    <div className="min-h-screen bg-background pt-24">
-      <div className="container py-12">
-        {/* Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-10 bg-gradient-fire rounded-2xl px-6 py-4 flex items-center gap-3"
-        >
-          <Flame className="h-5 w-5 text-primary-foreground" />
-          <span className="font-display text-sm font-bold text-primary-foreground uppercase tracking-wider">
-            Every Recipe — Cooked With Noodle Bomb
-          </span>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-          <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-4 block">Recipes</span>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">Cook With the Bomb</h1>
-        </motion.div>
-
-        {/* Categories */}
-        <div className="flex flex-wrap gap-3 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-5 py-2 rounded-full font-display text-xs font-semibold uppercase tracking-wider transition-all ${
-                active === cat
-                  ? "bg-gradient-fire text-primary-foreground shadow-fire"
-                  : "border border-border text-muted-foreground hover:border-primary hover:text-primary"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((r, i) => (
-            <motion.div
-              key={r.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <RecipeCard {...r} />
-            </motion.div>
-          ))}
-        </div>
+const Recipes = () => (
+  <div className="min-h-screen bg-background pt-24 pb-20 px-6">
+    <div className="max-w-4xl mx-auto">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <h1 className="font-display text-4xl font-black text-foreground mb-3">Recipes</h1>
+        <p className="text-muted-foreground text-lg mb-12">Six ways to make any meal worth craving.</p>
+      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {recipes.map((r, i) => (
+          <motion.div key={r.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }}
+            className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-colors duration-300">
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-display font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded-full">{r.flavor}</span>
+                <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="w-3 h-3" />{r.time}</span>
+                <span className="text-xs text-muted-foreground flex items-center gap-1"><Users className="w-3 h-3" />Serves {r.serves}</span>
+              </div>
+              <h2 className="font-display text-xl font-bold text-foreground mb-2">{r.name}</h2>
+              <p className="text-muted-foreground text-sm mb-4">{r.desc}</p>
+              <ol className="space-y-2 mb-6">
+                {r.steps.map((step, j) => (
+                  <li key={j} className="flex gap-3 text-sm text-muted-foreground">
+                    <span className="font-display font-bold text-primary flex-shrink-0">{j + 1}.</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+              <a href={r.flavorLink} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-sm font-display font-bold text-primary hover:text-orange-400 transition-colors">
+                Shop {r.flavor} <ChevronRight className="w-4 h-4" />
+              </a>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default Recipes;
