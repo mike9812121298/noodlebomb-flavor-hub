@@ -8,6 +8,8 @@ const navItems = [
   { label: "Ramen Box", path: "/ramen-box" },
   { label: "Recipes", path: "/recipes" },
   { label: "Sauce Finder", path: "/sauce-selector" },
+  { label: "About", path: "/about" },
+  { label: "FAQ", path: "/faq" },
 ];
 
 const Navbar = () => {
