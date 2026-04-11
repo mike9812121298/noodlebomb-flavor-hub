@@ -18,6 +18,12 @@ const ingredientData: Record<string, { ingredients: string; allergens: string }>
   },
 };
 
+const upsellNudges: Record<string, string> = {
+  "Original Ramen Sauce": "🌶️ Love bold? Try Spicy Tokyo next.",
+  "Spicy Tokyo Ramen Sauce": "🍋 Try our Citrus Shoyu for a lighter hit.",
+  "Citrus Shoyu Ramen Sauce": "✨ Best value: grab the Variety 3-Pack.",
+};
+
 interface ProductCardProps {
   name: string;
   tagline: string;
@@ -39,6 +45,7 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
   const [showDetails, setShowDetails] = useState(false);
 
   const details = ingredientData[name];
+  const upsellNudge = upsellNudges[name];
 
   return (
     <motion.div
@@ -163,6 +170,10 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
                   <p className="text-[11px] text-muted-foreground pl-3">Delivered every 30 days. Cancel or skip anytime.</p>
                 )}
               </div>
+            )}
+
+            {upsellNudge && (
+              <p className="text-sm italic text-muted-foreground mb-3">{upsellNudge}</p>
             )}
 
             <div className="flex items-center justify-between">
