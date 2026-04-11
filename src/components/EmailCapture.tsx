@@ -23,8 +23,8 @@ const EmailCapture = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Show after 30 seconds
-    const timer = setTimeout(() => setVisible(true), 30000);
+    // Show after 5 seconds
+    const timer = setTimeout(() => setVisible(true), 5000);
 
     // Exit intent: mouse leaves viewport at top
     const handleMouseLeave = (e: MouseEvent) => {
@@ -86,7 +86,7 @@ const EmailCapture = () => {
                 </button>
               </form>
               <button onClick={dismiss} className="mt-4 text-xs text-muted-foreground hover:text-foreground">
-                No thanks, I'll pay full price
+                No thanks, I will pay full price
               </button>
             </>
           ) : (
