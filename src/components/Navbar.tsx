@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import nbLogo from "@/assets/nb-logo-transparent.png";
 
 const navItems = [
   { label: "Shop", path: "/shop" },
@@ -27,7 +26,7 @@ const Navbar = () => {
     <nav className={`sticky top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${scrolled ? "border-border/50 bg-background/95 backdrop-blur-xl shadow-[0_2px_20px_hsl(0_0%_0%/0.3)]" : "border-transparent bg-transparent backdrop-blur-none"}`}>
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center">
-          <img src={nbLogo} alt="Noodle Bomb" className="h-14 w-auto drop-shadow-[0_0_12px_hsl(4,85%,50%,0.4)] transition-all duration-300 hover:drop-shadow-[0_0_20px_hsl(4,85%,50%,0.6)]" />
+          <span className="font-display font-black tracking-tight text-xl leading-none"><span className="text-foreground">noodle</span><span className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">bomb</span></span>
         </Link>
 
         {/* Desktop */}
