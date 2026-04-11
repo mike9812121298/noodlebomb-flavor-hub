@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import nbLogo from "@/assets/nb-logo-transparent.png";
 
 const Footer = () => (
   <footer className="border-t border-border bg-background pt-20 pb-12">
@@ -7,7 +6,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div className="md:col-span-2">
           <Link to="/" className="inline-block mb-5">
-            <img src={nbLogo} alt="Noodle Bomb" className="h-14 w-auto drop-shadow-[0_0_12px_hsl(4,85%,50%,0.4)]" />
+            <span className="font-display font-black tracking-tight text-2xl leading-none"><span className="text-foreground">noodle</span><span className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">bomb</span></span>
           </Link>
           <p className="text-foreground/50 text-sm leading-relaxed max-w-sm">
             Small-batch ramen sauces crafted to bring restaurant-level flavor home. Bold. Balanced. Unforgettable.
