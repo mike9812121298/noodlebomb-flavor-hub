@@ -77,11 +77,11 @@ const Index = () => {
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center pt-28 pb-20 lg:pt-32 lg:pb-24">
           <div className="max-w-xl">
             <h1 className="font-display text-[3.5rem] md:text-[5.5rem] font-bold tracking-[-0.04em] mb-5 leading-[1.02] animate-hero-enter">
-              <span className="text-foreground">Drizzle. Sizzle.</span><br />
-              <span className="text-gradient-fire animate-text-glow drop-shadow-[0_0_40px_hsl(var(--flame)/0.3)]">Done.</span>
+              <span className="text-foreground">The Sauce That</span><br />
+              <span className="text-gradient-fire animate-text-glow drop-shadow-[0_0_40px_hsl(var(--flame)/0.3)]">Builds the Bowl.</span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 max-w-md mb-6 leading-relaxed animate-hero-enter-delayed">
-              Restaurant-level flavor in seconds. Small-batch crafted with premium ingredients.
+              Pacific Northwest-crafted ramen sauce. Bold. Clean. No shortcuts.
             </p>
             <p className="text-sm md:text-base text-foreground/50 max-w-md mb-6 leading-relaxed animate-hero-enter-delayed">
               Noodle Bomb isn't just a condiment; it's the secret weapon for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
@@ -99,11 +99,11 @@ const Index = () => {
               <span className="text-xs text-foreground/50 font-display font-semibold uppercase tracking-[0.15em]">7 fl oz • From $11.99</span>
             </div>
             <div className="flex flex-col sm:flex-row items-start gap-3 mb-8 animate-hero-enter-delayed-2">
-              <Link to="/shop" className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow">
+              <a href="#products" className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow">
                 Shop Now <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link to="/sauce-selector" className="border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5">
-                Find Your Sauce
+              </a>
+              <Link to="/about" className="border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5">
+                Learn Our Story
               </Link>
             </div>
             <div className="flex items-center gap-1.5 mb-6 animate-hero-enter-delayed-2">
