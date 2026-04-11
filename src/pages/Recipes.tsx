@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Clock, Users, ChevronRight } from "lucide-react";
@@ -84,43 +85,56 @@ const recipes = [
   },
 ];
 
-const Recipes = () => (
-  <div className="min-h-screen bg-background pt-24 pb-20 px-6">
-    <div className="max-w-4xl mx-auto">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <h1 className="font-display text-4xl font-black text-foreground mb-3">Recipes</h1>
-        <p className="text-muted-foreground text-lg mb-12">Six ways to make any meal worth craving.</p>
-      </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {recipes.map((r, i) => (
-          <motion.div key={r.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-colors duration-300">
-            <div className="p-6">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-display font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded-full">{r.flavor}</span>
-                <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="w-3 h-3" />{r.time}</span>
-                <span className="text-xs text-muted-foreground flex items-center gap-1"><Users className="w-3 h-3" />Serves {r.serves}</span>
+const Recipes = () => {
+  useEffect(() => {
+    document.title = "Recipes | NoodleBomb Ramen Sauce";
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    meta.content = "Creative recipes using NoodleBomb ramen sauce — ramen bowls, glazes, marinades, and more.";
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background pt-24 pb-20 px-6">
+      <div className="max-w-4xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <h1 className="font-display text-4xl font-black text-foreground mb-3">Recipes</h1>
+          <p className="text-muted-foreground text-lg mb-12">Six ways to make any meal worth craving.</p>
+        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {recipes.map((r, i) => (
+            <motion.div key={r.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-colors duration-300">
+              <div className="p-6">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs font-display font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded-full">{r.flavor}</span>
+                  <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="w-3 h-3" />{r.time}</span>
+                  <span className="text-xs text-muted-foreground flex items-center gap-1"><Users className="w-3 h-3" />Serves {r.serves}</span>
+                </div>
+                <h2 className="font-display text-xl font-bold text-foreground mb-2">{r.name}</h2>
+                <p className="text-muted-foreground text-sm mb-4">{r.desc}</p>
+                <ol className="space-y-2 mb-6">
+                  {r.steps.map((step, j) => (
+                    <li key={j} className="flex gap-3 text-sm text-muted-foreground">
+                      <span className="font-display font-bold text-primary flex-shrink-0">{j + 1}.</span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <a href={r.flavorLink} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-display font-bold text-primary hover:text-orange-400 transition-colors">
+                  Shop {r.flavor} <ChevronRight className="w-4 h-4" />
+                </a>
               </div>
-              <h2 className="font-display text-xl font-bold text-foreground mb-2">{r.name}</h2>
-              <p className="text-muted-foreground text-sm mb-4">{r.desc}</p>
-              <ol className="space-y-2 mb-6">
-                {r.steps.map((step, j) => (
-                  <li key={j} className="flex gap-3 text-sm text-muted-foreground">
-                    <span className="font-display font-bold text-primary flex-shrink-0">{j + 1}.</span>
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ol>
-              <a href={r.flavorLink} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-display font-bold text-primary hover:text-orange-400 transition-colors">
-                Shop {r.flavor} <ChevronRight className="w-4 h-4" />
-              </a>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Recipes;
