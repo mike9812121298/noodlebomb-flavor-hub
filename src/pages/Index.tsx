@@ -192,6 +192,13 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </section>
 
+      {/* Trust Bar */}
+      <div className="border-y border-border/40 py-4">
+        <p className="text-center text-xs tracking-widest uppercase text-muted-foreground">
+          Crafted in the Pacific Northwest&nbsp;&nbsp;·&nbsp;&nbsp;Real Ingredients&nbsp;&nbsp;·&nbsp;&nbsp;Bold Flavor&nbsp;&nbsp;·&nbsp;&nbsp;100% Satisfaction Guarantee
+        </p>
+      </div>
+
       <div className="section-divider-animated" />
       <PressBar />
 
