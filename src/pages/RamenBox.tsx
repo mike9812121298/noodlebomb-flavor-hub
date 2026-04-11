@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Package, Truck, Star, X, ChevronDown } from "lucide-react";
-import { useState } from "react";
 
 const faqs = [
   { q: "When does my box ship each month?", a: "Boxes ship on the 1st of each month. Order before the 1st to get that month's box." },
@@ -11,6 +11,17 @@ const faqs = [
 
 const RamenBox = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useEffect(() => {
+    document.title = "Monthly Ramen Box | NoodleBomb";
+    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "description";
+      document.head.appendChild(meta);
+    }
+    meta.content = "Get NoodleBomb's bold ramen sauces delivered monthly. Cancel anytime.";
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
