@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, Variants } from "framer-motion";
 import { useScrollReveal, useScrollRevealChildren } from "@/hooks/use-scroll-reveal";
 import { ArrowRight, Zap, ChefHat, Star, ShoppingCart } from "lucide-react";
 import nbLogo from "@/assets/nb-logo.png";
@@ -41,11 +41,52 @@ const heroSauces = [
   { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Lemon, orange, and yuzu-style citrus." },
 ] as const;
 
+// Stagger container for hero content
+const heroContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const heroItemVariants: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
+// Stagger for CTA buttons (tighter, 50ms apart)
+const ctaContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.6,
+    },
+  },
+};
+
+const ctaItemVariants: Variants = {
+  hidden: { opacity: 0, y: 14, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
+  },
+};
+
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  
+
   const bottleY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
@@ -74,19 +115,36 @@ const Index = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,hsl(0_0%_0%/0.6),transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h40v40H0z\' fill=\'none\' stroke=\'%23fff\' stroke-width=\'.5\'/%3E%3C/svg%3E")' }} />
 
-        <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center pt-28 pb-20 lg:pt-32 lg:pb-24">
-          <div className="max-w-xl">
-            <h1 className="font-display text-[3.5rem] md:text-[5.5rem] font-bold tracking-[-0.04em] mb-5 leading-[1.02] animate-hero-enter">
+        <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center pt-28 pb-20 lg:pt-32 lg:pb-24">  {/* Hero left — stagger all content on load */}
+          <motion.div
+            className="max-w-xl"
+            variants={heroContainerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h1
+              variants={heroItemVariants}
+              className="font-display text-[3.5rem] md:text-[5.5rem] font-bold tracking-[-0.04em] mb-5 leading-[1.02]"
+            >
               <span className="text-foreground">The Sauce That</span><br />
               <span className="text-gradient-fire animate-text-glow drop-shadow-[0_0_40px_hsl(var(--flame)/0.3)]">Builds the Bowl.</span>
-            </h1>
-            <p className="text-lg md:text-xl text-foreground/70 max-w-md mb-6 leading-relaxed animate-hero-enter-delayed">
+            </motion.h1>
+
+            <motion.p
+              variants={heroItemVariants}
+              className="text-lg md:text-xl text-foreground/70 max-w-md mb-6 leading-relaxed"
+            >
               Pacific Northwest-crafted ramen sauce. Bold. Clean. No shortcuts.
-            </p>
-            <p className="text-sm md:text-base text-foreground/50 max-w-md mb-6 leading-relaxed animate-hero-enter-delayed">
+            </motion.p>
+
+            <motion.p
+              variants={heroItemVariants}
+              className="text-sm md:text-base text-foreground/50 max-w-md mb-6 leading-relaxed"
+            >
               Noodle Bomb isn't just a condiment; it's the secret weapon for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
-            </p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 animate-hero-enter-delayed-2">
+            </motion.p>
+
+            <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
               <div className="flex items-center gap-2">
                 <div className="flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -97,38 +155,57 @@ const Index = () => {
               </div>
               <div className="h-3 w-px bg-border/60" />
               <span className="text-xs text-foreground/50 font-display font-semibold uppercase tracking-[0.15em]">7 fl oz • From $11.99</span>
-            </div>
-            <div className="flex flex-col sm:flex-row items-start gap-3 mb-8 animate-hero-enter-delayed-2">
-              <a href="#products" className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow">
+            </motion.div>
+
+            {/* CTA buttons — stagger 50ms apart */}
+            <motion.div
+              className="flex flex-col sm:flex-row items-start gap-3 mb-8"
+              variants={ctaContainerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.a
+                variants={ctaItemVariants}
+                href="#products"
+                className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow"
+              >
                 Shop Now <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              </a>
-              <Link to="/about" className="border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5">
-                Learn Our Story
-              </Link>
-            </div>
-            <div className="flex items-center gap-1.5 mb-6 animate-hero-enter-delayed-2">
+              </motion.a>
+              <motion.div variants={ctaItemVariants}>
+                <Link
+                  to="/about"
+                  className="border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5"
+                >
+                  Learn Our Story
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={heroItemVariants} className="flex items-center gap-1.5 mb-6">
               <div className="flex gap-0.5">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500 drop-shadow-[0_0_4px_hsl(40_100%_50%/0.4)]" />
                 ))}
               </div>
               <span className="text-xs font-display font-semibold text-foreground/50 tracking-wide">4.9 Stars (500+ Reviews)</span>
-            </div>
-            <div className="flex items-center gap-2 mb-4 animate-hero-enter-delayed-3">
+            </motion.div>
+
+            <motion.div variants={heroItemVariants} className="flex items-center gap-2 mb-4">
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 animate-scarcity-pulse">
                 <Zap className="h-3.5 w-3.5 text-primary" />
                 <span className="text-xs font-display font-semibold text-primary tracking-wide">Only 142 bottles left in this batch</span>
               </span>
-            </div>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 animate-hero-enter-delayed-3">
+            </motion.div>
+
+            <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-4 gap-y-1">
               {["Free Shipping $40+", "Small Batch Drops", "Premium Ingredients"].map((item, i) => (
                 <span key={item} className="flex items-center gap-1.5 text-[10px] text-foreground/35 font-display uppercase tracking-[0.2em]">
                   {i > 0 && <span className="text-primary/30 mr-1.5">✦</span>}
                   {item}
                 </span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           <motion.div
             style={{ y: bottleY }}
@@ -203,7 +280,7 @@ const Index = () => {
       <PressBar />
 
       {/* Sauce Lineup */}
-      <section className="py-32">
+      <section id="products" className="py-32">
         <div className="section-divider-animated mb-32" />
         <div className="container">
           <div ref={sauceHeaderRef} className="scroll-reveal text-center mb-20">
@@ -213,13 +290,21 @@ const Index = () => {
           </div>
           <div ref={sauceGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {sauces.map((sauce) => (
-              <div
+              <motion.div
                 key={sauce.name}
                 data-reveal
-                className="scroll-reveal group card-premium rounded-2xl overflow-hidden hover-lift"
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="scroll-reveal group card-premium rounded-2xl overflow-hidden"
+                style={{ willChange: "transform" }}
               >
                 <div className="relative aspect-[4/5] overflow-hidden flex items-center justify-center bg-card rounded-t-2xl px-4 pt-6">
-                  <img src={sauceImages[sauce.name]} alt={sauce.name} className={`h-full w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-105 ${sauce.comingSoon ? "opacity-60" : ""}`} />
+                  <img
+                    src={sauceImages[sauce.name]}
+                    alt={sauce.name}
+                    className={`h-full w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.05] ${sauce.comingSoon ? "opacity-60" : ""}`}
+                    style={{ willChange: "transform" }}
+                  />
                   {sauce.comingSoon && (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="px-6 py-2.5 rounded-full bg-background/90 border border-border text-foreground font-display text-xs font-bold uppercase tracking-[0.2em]">Coming Soon</span>
@@ -233,7 +318,7 @@ const Index = () => {
                   <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-display text-lg font-bold text-foreground mb-1 tracking-tight">{sauce.name}</h3>
+                  <h3 className="font-display text-lg font-bold text-foreground mb-1 tracking-tight transition-colors duration-300 group-hover:text-primary/90">{sauce.name}</h3>
                   <p className="text-[10px] font-display font-bold uppercase tracking-[0.15em] text-primary/80 mb-1.5">{sauce.tagline}</p>
                   {sauce.price && (
                     <p className="font-display text-2xl font-bold text-primary mb-2">{sauce.price}</p>
@@ -258,7 +343,7 @@ const Index = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -338,4 +423,3 @@ const Index = () => {
 };
 
 export default Index;
-
