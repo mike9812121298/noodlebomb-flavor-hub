@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ShoppingCart, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShoppingCart, ChevronDown, ShieldCheck } from "lucide-react";
 import SpiceLevel from "@/components/SpiceLevel";
 
 const ingredientData: Record<string, { ingredients: string; allergens: string }> = {
@@ -52,10 +52,16 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
       whileHover={{ y: -6, scale: 1.02 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="group bg-gradient-card rounded-2xl border border-border overflow-hidden transition-shadow duration-500 hover:shadow-[0_0_40px_hsl(var(--primary)/0.15)] hover:border-primary/20"
+      style={{ willChange: "transform" }}
     >
       <div className="relative aspect-[4/5] overflow-hidden bg-card rounded-t-2xl flex items-center justify-center px-4 pt-6">
         {image ? (
-          <img src={image} alt={name} className={`h-full w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.08] ${comingSoon ? "opacity-60" : ""}`} />
+          <img
+            src={image}
+            alt={name}
+            className={`h-full w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.08] ${comingSoon ? "opacity-60" : ""}`}
+            style={{ willChange: "transform" }}
+          />
         ) : (
           <div className={`text-5xl ${comingSoon ? "opacity-60" : ""}`}>🍜</div>
         )}
@@ -78,11 +84,10 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
             </span>
           </div>
         )}
-        {/* Dark gradient behind product name */}
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
       </div>
       <div className="p-6">
-        <h3 className="font-display text-lg font-bold text-foreground mb-1">{name}</h3>
+        <h3 className="font-display text-lg font-bold text-foreground mb-1 transition-colors duration-300 group-hover:text-primary/90">{name}</h3>
         {!comingSoon && <p className="font-display text-2xl font-bold text-primary mb-1.5">{price}</p>}
         <p className="text-sm text-foreground/70 mb-2">{tagline}</p>
         {flavorHook && (
@@ -106,7 +111,6 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
           </div>
         )}
 
-        {/* Ingredients & Allergens accordion */}
         {details && (
           <div className="mb-4 border border-border rounded-xl overflow-hidden">
             <button
@@ -114,26 +118,41 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
               className="w-full flex items-center justify-between px-4 py-2.5 text-left bg-secondary/30 hover:bg-secondary/50 transition-colors"
             >
               <span className="text-xs font-display font-bold uppercase tracking-wider text-foreground/70">Details</span>
-              <ChevronDown className={`w-4 h-4 text-primary transition-transform duration-200 ${showDetails ? "rotate-180" : ""}`} />
+              <motion.div
+                animate={{ rotate: showDetails ? 180 : 0 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+              >
+                <ChevronDown className="w-4 h-4 text-primary" />
+              </motion.div>
             </button>
-            {showDetails && (
-              <div className="px-4 py-3 space-y-2">
-                <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  <span className="font-display font-semibold text-foreground/70 uppercase tracking-wider text-[10px]">Ingredients: </span>
-                  {details.ingredients}
-                </p>
-                <p className="text-[11px] text-muted-foreground leading-relaxed">
-                  <span className="font-display font-semibold text-orange-400 uppercase tracking-wider text-[10px]">Allergens: </span>
-                  {details.allergens}
-                </p>
-              </div>
-            )}
+            <AnimatePresence initial={false}>
+              {showDetails && (
+                <motion.div
+                  key="accordion-content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="px-4 py-3 space-y-2">
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">
+                      <span className="font-display font-semibold text-foreground/70 uppercase tracking-wider text-[10px]">Ingredients: </span>
+                      {details.ingredients}
+                    </p>
+                    <p className="text-[11px] text-muted-foreground leading-relaxed">
+                      <span className="font-display font-semibold text-orange-400 uppercase tracking-wider text-[10px]">Allergens: </span>
+                      {details.allergens}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 
         {!comingSoon && (
           <>
-            {/* Purchase type selector */}
             {subscribePrice && (
               <div className="mb-4 space-y-2">
                 <label
@@ -195,6 +214,19 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
                 <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships week of May 5, 2026</p>
               </div>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="flex items-center justify-center gap-1.5 mt-4 pt-3 border-t border-border/40"
+            >
+              <ShieldCheck className="h-3.5 w-3.5 text-primary/50" />
+              <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
+                100% Satisfaction Guaranteed
+              </span>
+            </motion.div>
           </>
         )}
       </div>
