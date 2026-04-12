@@ -22,17 +22,23 @@ const BundleBuilder = () => {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const sectionRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [bottlesRevealed, setBottlesRevealed] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting && !bottlesRevealed) {
+          setBottlesRevealed(true);
+        }
+      },
       { threshold: 0.05 }
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [bottlesRevealed]);
 
   const updateQty = (id: string, delta: number) => {
     setQuantities((prev) => {
@@ -66,7 +72,13 @@ const BundleBuilder = () => {
     <>
     <section ref={sectionRef} className="py-28 border-t border-border">
       <div className="container">
-        <div className="text-center mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-center mb-4"
+        >
           <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-foreground/50 mb-4 block">
             Bundle & Save
           </span>
@@ -75,7 +87,7 @@ const BundleBuilder = () => {
             Pick your favorites. The more you grab, the more you save.
           </p>
           <p className="text-xs text-foreground/40 font-display mt-2">Most customers choose 3 bottles.</p>
-        </div>
+        </motion.div>
 
         <p className="text-center text-xs text-muted-foreground font-display uppercase tracking-wider mb-12">
           Free shipping automatically applied.
@@ -151,18 +163,30 @@ const BundleBuilder = () => {
         )}
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
-          {sauces.map((sauce) => {
+          {sauces.map((sauce, i) => {
             const qty = quantities[sauce.id] || 0;
             return (
               <motion.div
                 key={sauce.id}
+                initial={{ opacity: 0, y: 32, scale: 0.95 }}
+                animate={bottlesRevealed ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: i * 0.1,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
                 whileHover={{ y: -4 }}
                 className={`bg-gradient-card rounded-2xl border overflow-hidden transition-all ${
                   qty > 0 ? "border-primary shadow-glow" : "border-border"
                 }`}
+                style={{ willChange: "transform" }}
               >
                 <div className="aspect-[4/5] overflow-hidden bg-card rounded-t-2xl flex items-center justify-center px-4 pt-5">
-                  <img src={sauce.image} alt={sauce.name} className="h-full w-auto object-contain" />
+                  <img
+                    src={sauce.image}
+                    alt={sauce.name}
+                    className="h-full w-auto object-contain transition-transform duration-500 hover:scale-105"
+                  />
                 </div>
                 <div className="p-4 text-center">
                   <h4 className="font-display text-sm font-bold text-foreground mb-3">{sauce.name}</h4>
@@ -218,20 +242,27 @@ const BundleBuilder = () => {
             <div className="flex items-center justify-center gap-1.5 mb-3">
               <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Included</span>
             </div>
-            <a
+            <motion.a
               href="https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.5)] hover:scale-[1.02] transition-all animate-pulse-glow"
+              animate={{
+                boxShadow: [
+                  "0 0 20px hsl(4 85% 50% / 0.3)",
+                  "0 0 40px hsl(4 85% 50% / 0.6)",
+                  "0 0 20px hsl(4 85% 50% / 0.3)",
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:scale-[1.02] transition-transform"
             >
               <ShoppingCart className="h-4 w-4" /> Add Bundle to Cart
-            </a>
+            </motion.a>
           </motion.div>
         )}
       </div>
     </section>
 
-    {/* Mobile sticky bar */}
     <AnimatePresence>
       {totalItems > 0 && isInView && (
         <motion.div
