@@ -31,7 +31,7 @@ const SocialProof = () => (
     <div className="section-divider mb-32" />
     <div className="container">
       <motion.div
-        initial={{ opacity: 1, y: 12 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
@@ -47,15 +47,20 @@ const SocialProof = () => (
         {reviews.map((r, i) => (
           <motion.div
             key={r.name}
-            initial={{ opacity: 1, y: 16 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
-            transition={{ duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.55, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             whileHover={{ y: -8 }}
             className="card-premium rounded-2xl overflow-hidden group"
+            style={{ willChange: "transform" }}
           >
             <div className="aspect-[3/4] overflow-hidden relative">
-              <img src={r.image} alt={`Review by ${r.name}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img
+                src={r.image}
+                alt={`Review by ${r.name}`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
             </div>
             <div className="p-6 -mt-12 relative z-10">
@@ -73,12 +78,18 @@ const SocialProof = () => (
         ))}
       </div>
 
-      <div className="text-center mt-12">
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+        className="text-center mt-12"
+      >
         <Link to="/shop" className="inline-flex items-center gap-2 font-display text-sm font-bold uppercase tracking-[0.2em] text-primary/80 hover:text-primary transition-colors group">
           See All Reviews
           <span className="group-hover:translate-x-1 transition-transform">→</span>
         </Link>
-      </div>
+      </motion.div>
     </div>
   </section>
 );
