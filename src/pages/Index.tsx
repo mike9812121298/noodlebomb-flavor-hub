@@ -339,7 +339,7 @@ const Index = () => {
                       <a href={sauce.buyUrl} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:scale-[1.02]">
                         <ShoppingCart className="h-4 w-4" /> Pre-Order
                       </a>
-                      <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships week of May 5, 2026</p>
+                      <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships May 2026</p>
                     </div>
                   )}
                 </div>
@@ -352,6 +352,21 @@ const Index = () => {
       <EmailCaptureSection />
       <HowToUse />
       <BundleBuilder />
+      <section className="py-28 border-t border-white/5">
+        <div className="container max-w-3xl text-center">
+          <p className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-4">Monthly Subscription</p>
+          <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">The Monthly Ramen Box.<br/><span className="text-zinc-400 text-3xl font-normal">$29.99/month.</span></h2>
+          <p className="text-zinc-300 text-lg mb-8">Cancel anytime. Free shipping. 5+ exclusive ramen flavors monthly.</p>
+          <div className="flex flex-wrap justify-center gap-6 text-xs tracking-widest uppercase text-zinc-500 mb-10">
+            {["No Contracts", "Skip Anytime", "Free Shipping", "Members-Only Flavors"].map(f => (
+              <span key={f}>{f}</span>
+            ))}
+          </div>
+          <a href="/ramenbox" className="inline-block bg-[#C41E3A] hover:bg-[#9B1830] text-white px-10 py-4 font-semibold text-sm tracking-wide uppercase transition-colors rounded-sm">
+            Start Your Box →
+          </a>
+        </div>
+      </section>
       <HowItWorks />
 
 
