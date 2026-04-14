@@ -10,7 +10,7 @@ const sauces = [
   { id: "spicy", name: "Spicy Tokyo", price: 11.99, image: nbSpicyTokyo },
   { id: "citrus", name: "Citrus Shoyu", price: 11.99, image: nbCitrusShoyu },
 ];
-
+h
 function getDiscount(count: number) {
   if (count >= 4) return { pct: 20, label: "20%" };
   if (count >= 3) return { pct: 15, label: "15%" };
@@ -70,7 +70,7 @@ const BundleBuilder = () => {
 
   return (
     <>
-    <section ref={sectionRef} className="py-28 border-t border-border">
+    <section ref={sectionRef} className="py-28 border-t border-white/5">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,9 +82,9 @@ const BundleBuilder = () => {
           <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-foreground/50 mb-4 block">
             Bundle & Save
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">Build Your Box</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">Build Your Bundle. Save Up to 20%.</h2>
           <p className="text-muted-foreground/90 mt-4 max-w-md mx-auto">
-            Pick your favorites. The more you grab, the more you save.
+            Mix and match any combination of flavors.
           </p>
           <p className="text-xs text-foreground/40 font-display mt-2">Most customers choose 3 bottles.</p>
         </motion.div>
@@ -256,7 +256,7 @@ const BundleBuilder = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:scale-[1.02] transition-transform"
             >
-              <ShoppingCart className="h-4 w-4" /> Add Bundle to Cart
+              <ShoppingCart className="h-4 w-4" /> Build Your Bundle →
             </motion.a>
           </motion.div>
         )}
