@@ -38,7 +38,7 @@ const RamenBox = () => {
           <p className="text-muted-foreground text-xl max-w-2xl mx-auto mb-10">
             A curated box of premium instant ramen from around the world — plus a bottle of NoodleBomb sauce — every single month.
           </p>
-          <a href="https://www.noodlebomb.co/product-page/monthly-ramen-box" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.noodlebomb.co/ramenbox" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold text-lg tracking-wide shadow-lg hover:shadow-orange-500/40 transition-all duration-300 hover:scale-105">
             Subscribe Now — Cancel Anytime
           </a>
@@ -103,7 +103,7 @@ const RamenBox = () => {
           </div>
 
           <div className="text-center">
-            <a href="https://www.noodlebomb.co/product-page/monthly-ramen-box" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.noodlebomb.co/ramenbox" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold text-lg tracking-wide shadow-lg hover:shadow-orange-500/40 transition-all duration-300">
               Subscribe Now — Cancel Anytime
             </a>

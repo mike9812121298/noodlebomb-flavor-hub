@@ -243,7 +243,7 @@ const BundleBuilder = () => {
               <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Included</span>
             </div>
             <motion.a
-              href="https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack"
+              href="https://www.noodlebomb.co/product/variety-pack"
               target="_blank"
               rel="noopener noreferrer"
               animate={{

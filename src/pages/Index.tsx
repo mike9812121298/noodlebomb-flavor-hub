@@ -28,10 +28,10 @@ const sauceImages: Record<string, string> = {
 };
 
 const sauces = [
-  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Soy, garlic, ginger, and a hint of sweetness.", bestFor: "Ramen, rice bowls, stir fry", badge: null, buyUrl: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Bold dark soy, roasted chili, and sesame.", bestFor: "Wings, fried rice, steak", badge: "🔥 Most Popular", buyUrl: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
+  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Soy, garlic, ginger, and a hint of sweetness.", bestFor: "Ramen, rice bowls, stir fry", badge: null, buyUrl: "https://www.noodlebomb.co/product/original-ramen", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Bold dark soy, roasted chili, and sesame.", bestFor: "Wings, fried rice, steak", badge: "🔥 Most Popular", buyUrl: "https://www.noodlebomb.co/product/spicy-tokyo", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
   { name: "Ryu Garlic", tagline: "Fire-Breathing Umami King", spice: 2, desc: "Roasted black garlic, chili oil, and toasted sesame.", bestFor: "Steak, burgers, grilled meats", badge: null, comingSoon: true },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Lemon, orange, and yuzu-style citrus.", bestFor: "Seafood, shrimp, salads", badge: null, buyUrl: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Lemon, orange, and yuzu-style citrus.", bestFor: "Seafood, shrimp, salads", badge: null, buyUrl: "https://www.noodlebomb.co/product/yuzu-citrus", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
 ];
 
 const heroSauces = [
@@ -362,7 +362,7 @@ const Index = () => {
               <span key={f}>{f}</span>
             ))}
           </div>
-          <a href="/ramenbox" className="inline-block bg-[#C41E3A] hover:bg-[#9B1830] text-white px-10 py-4 font-semibold text-sm tracking-wide uppercase transition-colors rounded-sm">
+          <a href="/ramen-box" className="inline-block bg-[#C41E3A] hover:bg-[#9B1830] text-white px-10 py-4 font-semibold text-sm tracking-wide uppercase transition-colors rounded-sm">
             Start Your Box →
           </a>
         </div>
