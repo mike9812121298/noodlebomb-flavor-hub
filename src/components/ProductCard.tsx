@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, ChevronDown, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import SpiceLevel from "@/components/SpiceLevel";
 
 const ingredientData: Record<string, { ingredients: string; allergens: string }> = {
@@ -40,12 +41,29 @@ interface ProductCardProps {
   proTip?: string;
 }
 
-const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWellWith, subscribePrice, flavorHook, badge, buyUrl, comingSoon, proTip }: ProductCardProps) => {
+/** Extract a relative path from an absolute or relative buyUrl */
+function toProductPath(buyUrl?: string): string {
+  if (!buyUrl) return "/shop";
+  // Already relative
+  if (buyUrl.startsWith("/")) return buyUrl;
+  // Absolute URL on same domain — extract pathname
+  try {
+    return new URL(buyUrl).pathname;
+  } catch {
+    return "/shop";
+  }
+}
+
+const ProductCard = ({
+  name, tagline, price, image, spiceLevel, color, pairsWellWith,
+  subscribePrice, flavorHook, badge, buyUrl, comingSoon, proTip,
+}: ProductCardProps) => {
   const [purchaseType, setPurchaseType] = useState<"one-time" | "subscribe">("subscribe");
   const [showDetails, setShowDetails] = useState(false);
 
   const details = ingredientData[name];
   const upsellNudge = upsellNudges[name];
+  const productPath = toProductPath(buyUrl);
 
   return (
     <motion.div
@@ -86,12 +104,19 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
         )}
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background/80 to-transparent pointer-events-none" />
       </div>
+
       <div className="p-6">
-        <h3 className="font-display text-lg font-bold text-foreground mb-1 transition-colors duration-300 group-hover:text-primary/90">{name}</h3>
-        {!comingSoon && <p className="font-display text-2xl font-bold text-primary mb-1.5">{price}</p>}
+        <h3 className="font-display text-lg font-bold text-foreground mb-1 transition-colors duration-300 group-hover:text-primary/90">
+          {name}
+        </h3>
+        {!comingSoon && (
+          <p className="font-display text-2xl font-bold text-primary mb-1.5">{price}</p>
+        )}
         <p className="text-sm text-foreground/70 mb-2">{tagline}</p>
         {flavorHook && (
-          <p className="text-xs font-display font-bold uppercase tracking-wider text-foreground/50 mb-3">{flavorHook}</p>
+          <p className="text-xs font-display font-bold uppercase tracking-wider text-foreground/50 mb-3">
+            {flavorHook}
+          </p>
         )}
         <div className="mb-4">
           <SpiceLevel level={spiceLevel} />
@@ -105,7 +130,9 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
         {proTip && (
           <div className="mb-4 px-3 py-2.5 rounded-xl bg-primary/5 border border-primary/10">
             <p className="text-[11px] text-foreground/60 leading-relaxed">
-              <span className="font-display font-bold text-primary uppercase tracking-wider text-[10px]">Pro Tip: </span>
+              <span className="font-display font-bold text-primary uppercase tracking-wider text-[10px]">
+                Pro Tip:{" "}
+              </span>
               {proTip}
             </p>
           </div>
@@ -117,7 +144,9 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
               onClick={() => setShowDetails(!showDetails)}
               className="w-full flex items-center justify-between px-4 py-2.5 text-left bg-secondary/30 hover:bg-secondary/50 transition-colors"
             >
-              <span className="text-xs font-display font-bold uppercase tracking-wider text-foreground/70">Details</span>
+              <span className="text-xs font-display font-bold uppercase tracking-wider text-foreground/70">
+                Details
+              </span>
               <motion.div
                 animate={{ rotate: showDetails ? 180 : 0 }}
                 transition={{ duration: 0.25, ease: "easeInOut" }}
@@ -137,11 +166,15 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
                 >
                   <div className="px-4 py-3 space-y-2">
                     <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      <span className="font-display font-semibold text-foreground/70 uppercase tracking-wider text-[10px]">Ingredients: </span>
+                      <span className="font-display font-semibold text-foreground/70 uppercase tracking-wider text-[10px]">
+                        Ingredients:{" "}
+                      </span>
                       {details.ingredients}
                     </p>
                     <p className="text-[11px] text-muted-foreground leading-relaxed">
-                      <span className="font-display font-semibold text-orange-400 uppercase tracking-wider text-[10px]">Allergens: </span>
+                      <span className="font-display font-semibold text-orange-400 uppercase tracking-wider text-[10px]">
+                        Allergens:{" "}
+                      </span>
                       {details.allergens}
                     </p>
                   </div>
@@ -157,7 +190,9 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
               <div className="mb-4 space-y-2">
                 <label
                   className={`flex items-center gap-2 cursor-pointer text-sm px-3 py-2 rounded-lg transition-all ${
-                    purchaseType === "one-time" ? "bg-secondary/50 border border-border" : "border border-transparent"
+                    purchaseType === "one-time"
+                      ? "bg-secondary/50 border border-border"
+                      : "border border-transparent"
                   }`}
                 >
                   <input
@@ -183,10 +218,14 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
                     onChange={() => setPurchaseType("subscribe")}
                     className="accent-primary"
                   />
-                  <span className="text-primary font-display font-semibold">Subscribe & Save 20%</span>
+                  <span className="text-primary font-display font-semibold">
+                    Subscribe & Save 20%
+                  </span>
                 </label>
                 {purchaseType === "subscribe" && (
-                  <p className="text-[11px] text-muted-foreground pl-3">Delivered every 30 days. Cancel or skip anytime.</p>
+                  <p className="text-[11px] text-muted-foreground pl-3">
+                    Delivered every 30 days. Cancel or skip anytime.
+                  </p>
                 )}
               </div>
             )}
@@ -202,16 +241,16 @@ const ProductCard = ({ name, tagline, price, image, spiceLevel, color, pairsWell
                 </span>
               </div>
               <div className="text-center">
-                <a
-                  href={buyUrl || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to={productPath}
                   className="flex items-center gap-2 bg-primary hover:bg-primary/90 px-5 py-2.5 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:scale-105"
                 >
                   <ShoppingCart className="h-4 w-4" />
                   Pre-Order
-                </a>
-                <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships week of May 5, 2026</p>
+                </Link>
+                <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">
+                  Ships week of May 5, 2026
+                </p>
               </div>
             </div>
 
