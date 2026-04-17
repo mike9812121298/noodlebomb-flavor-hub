@@ -73,8 +73,8 @@ const PRODUCTS: Record<string, ProductData> = {
       "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Chili Paste, Garlic, Ginger, Sesame Oil.",
     allergens: "Soy, Wheat (Gluten), Sesame.",
   },
-  "yuzu-citrus": {
-    slug: "yuzu-citrus",
+  "citrus-shoyu": {
+    slug: "citrus-shoyu",
     name: "Citrus Shoyu Ramen Sauce",
     tagline: "Bright Side of Bold",
     price: 11.99,

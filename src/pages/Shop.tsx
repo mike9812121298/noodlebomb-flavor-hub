@@ -56,7 +56,7 @@ const products = [
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
     subscribePrice: "$9.59/mo",
     flavorHook: "Bright. Tangy. Fresh.",
-    buyUrl: "/product/yuzu-citrus",
+    buyUrl: "/product/citrus-shoyu",
   },
 ];
 
