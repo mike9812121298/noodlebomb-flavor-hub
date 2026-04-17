@@ -19,7 +19,7 @@ const products = [
     subscribePrice: "$9.59/mo",
     flavorHook: "Bold. Balanced. Essential.",
     badge: "⭐ Best Seller",
-    buyUrl: "https://shop.noodlebomb.co/ramensauce",
+    buyUrl: "https://shop.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
   },
   {
     name: "Spicy Tokyo",
@@ -32,7 +32,7 @@ const products = [
     subscribePrice: "$9.59/mo",
     flavorHook: "Heat That Hooks You.",
     badge: "🔥 Most Popular Heat",
-    buyUrl: "https://shop.noodlebomb.co/ramensauce-2",
+    buyUrl: "https://shop.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
   },
   {
     name: "Ryu Garlic",
@@ -44,6 +44,7 @@ const products = [
     pairsWellWith: ["Steak", "Burgers", "Grilled Meats"],
     flavorHook: "Dark. Garlicky. Addictive.",
     comingSoon: true,
+    buyUrl: "https://shop.noodlebomb.co/ramensauce-3",
   },
   {
     name: "Citrus Shoyu",
@@ -55,7 +56,7 @@ const products = [
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
     subscribePrice: "$9.59/mo",
     flavorHook: "Bright. Tangy. Fresh.",
-    buyUrl: "https://shop.noodlebomb.co/ramensauce-1",
+    buyUrl: "https://shop.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
   },
 ];
 
@@ -124,7 +125,7 @@ const Shop = () => (
               </span>
             </div>
             <a
-              href="https://shop.noodlebomb.co/ramenbox"
+              href="https://shop.noodlebomb.co/product-page/noodlebomb-variety-3-pack"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-fire px-8 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_35px_hsl(var(--flame)/0.45)] hover:scale-105 transition-all"
@@ -172,7 +173,7 @@ const Shop = () => (
                   <span className="text-xs text-foreground/60 font-display font-semibold uppercase tracking-wider">Free Shipping Included</span>
                 </div>
                 <a
-                  href="https://shop.noodlebomb.co/ramenbox"
+                  href="https://shop.noodlebomb.co/product-page/noodlebomb-variety-3-pack"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.5)] hover:scale-[1.02] transition-all animate-pulse-glow"
@@ -219,7 +220,7 @@ const Shop = () => (
 
     <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur-xl border-t border-border p-3">
       <a
-        href="https://shop.noodlebomb.co/ramensauce"
+        href="https://shop.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce"
         target="_blank"
         rel="noopener noreferrer"
         className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-fire"
