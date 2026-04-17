@@ -5,25 +5,25 @@ import { useCountUp } from "@/hooks/useCountUp";
 
 const testimonials = [
   {
-    name: "Marcus T.",
+    name: "Marcus T., Seattle WA",
     text: "I put this on literally everything. My ramen game has never been this strong. Original is an everyday must.",
     rating: 5,
     sauce: "Original",
   },
   {
-    name: "Sarah K.",
+    name: "Sarah K., Portland OR",
     text: "Spicy Tokyo on wings is insane. That slow burn keeps you coming back. Best hot sauce I've ever had.",
     rating: 5,
     sauce: "Spicy Tokyo",
   },
   {
-    name: "James L.",
+    name: "James L., Eugene OR",
     text: "Citrus Shoyu on grilled shrimp is a game changer. Fresh, bright, and just the right amount of tang.",
     rating: 5,
     sauce: "Citrus Shoyu",
   },
   {
-    name: "Diana R.",
+    name: "Diana R., Tacoma WA",
     text: "Ryu Garlic on steak? Life-changing. The roasted garlic flavor is deep and smoky. Can't stop drizzling it.",
     rating: 5,
     sauce: "Ryu Garlic",
@@ -77,7 +77,7 @@ const TestimonialSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
@@ -85,8 +85,8 @@ const TestimonialSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
-              whileHover={{ y: -6, borderColor: "hsl(4 85% 50% / 0.25)" }}
-              className="card-premium rounded-2xl p-6 relative group"
+              whileHover={{ y: -6 }}
+              className="rounded-2xl p-6 relative group border border-border/60 bg-card/40"
               style={{ willChange: "transform" }}
             >
               <Quote className="h-8 w-8 text-primary/10 absolute top-4 right-4 group-hover:text-primary/20 transition-colors duration-300" />
@@ -97,14 +97,14 @@ const TestimonialSection = () => {
               </div>
               <p className="text-sm text-foreground/80 leading-relaxed mb-5">"{t.text}"</p>
               <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                <span className="text-sm font-display font-bold text-foreground">{t.name}</span>
+                <div><span className="text-sm font-display font-bold text-foreground block">{t.name}</span><span className="text-xs text-emerald-500 font-semibold tracking-wide">Verified Buyer</span></div>
                 <span className="text-[10px] font-display font-bold uppercase tracking-[0.15em] text-primary/80">{t.sauce}</span>
               </div>
             </motion.div>
           ))}
         </div>
         <p className="text-center text-sm text-muted-foreground/50 font-display mt-10 tracking-wide">
-          📸 Tag us <span className="font-semibold text-muted-foreground/70">@noodlebomb</span> to be featured here
+          Tag us <span className="font-semibold text-muted-foreground/70">@noodlebomb</span> to be featured here
         </p>
       </div>
     </section>

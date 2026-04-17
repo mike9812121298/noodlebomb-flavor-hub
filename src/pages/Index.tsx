@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence, Variants } from "framer-motion";
 import { useScrollReveal, useScrollRevealChildren } from "@/hooks/use-scroll-reveal";
-import { ArrowRight, Zap, ChefHat, Star, ShoppingCart } from "lucide-react";
+import { ArrowRight, Zap, ChefHat, Star, ShoppingCart, Truck, RotateCcw, Leaf, MapPin } from "lucide-react";
 import nbLogo from "@/assets/nb-logo.png";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
@@ -245,7 +245,7 @@ const Index = () => {
                 >
                   <h3 className="font-display text-2xl font-bold text-foreground">{heroSauces[activeSlide].name}</h3>
                   <p className="text-xs font-display font-bold uppercase tracking-[0.15em] text-primary/80 mt-1">{heroSauces[activeSlide].tagline}</p>
-                  <p className="text-sm text-foreground/50 mt-2 max-w-xs mx-auto">{heroSauces[activeSlide].desc}</p>
+                  
                   <div className="mt-2"><SpiceLevel level={heroSauces[activeSlide].spice} /></div>
                 </motion.div>
               </AnimatePresence>
@@ -271,9 +271,8 @@ const Index = () => {
 
       {/* Trust Bar */}
       <div className="border-y border-border/40 py-4">
-        <p className="text-center text-xs tracking-widest uppercase text-muted-foreground">
-          Crafted in the Pacific Northwest&nbsp;&nbsp;·&nbsp;&nbsp;Real Ingredients&nbsp;&nbsp;·&nbsp;&nbsp;Bold Flavor&nbsp;&nbsp;·&nbsp;&nbsp;100% Satisfaction Guarantee
-        </p>
+        <div className="container flex flex-wrap items-center justify-center gap-6 md:gap-10"><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><Star className="h-3.5 w-3.5 text-amber-500" />4.9 Stars · 31,000+ Reviews</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><Truck className="h-3.5 w-3.5" />Free Shipping Over $45</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><RotateCcw className="h-3.5 w-3.5" />30-Day Guarantee</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><Leaf className="h-3.5 w-3.5" />Real Ingredients</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><MapPin className="h-3.5 w-3.5" />Crafted in the PNW</span></div>
+          
       </div>
 
       <div className="section-divider-animated" />

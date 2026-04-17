@@ -314,8 +314,8 @@ const ProductPage = () => {
                   Cart{itemCount > 0 && ` (${itemCount})`}
                 </Link>
               </div>
-              <p className="text-xs text-muted-foreground text-center mt-3">
-                Ships week of May 5, 2026
+              <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-3"><Truck className="h-3.5 w-3.5" />
+                Ships in 1–2 business days · Arrives in 3–5 days</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
               </p>
             </div>
 
