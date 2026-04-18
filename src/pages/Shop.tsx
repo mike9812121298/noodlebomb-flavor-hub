@@ -10,7 +10,7 @@ import { ArrowRight, Truck, Lock, Flame, Check } from "lucide-react";
 const products = [
   {
     name: "Original",
-    tagline: "Umami, Perfected. Soy, garlic, ginger, hihnt of sweetness.",
+    tagline: "Umami, Perfected. Soy, garlic, ginger, hint of sweetness.",
     price: "$11.99",
     image: nbOriginal,
     spiceLevel: 1,
