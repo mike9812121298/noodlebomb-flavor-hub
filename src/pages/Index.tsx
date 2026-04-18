@@ -15,6 +15,7 @@ import BundleBuilder from "@/components/BundleBuilder";
 import HowToUse from "@/components/HowToUse";
 import HowItWorks from "@/components/HowItWorks";
 import EmailCaptureSection from "@/components/EmailCaptureSection";
+import ComingSoonDrop from "@/components/ComingSoonDrop";
 import SocialProof from "@/components/SocialProof";
 import SpiceLevel from "@/components/SpiceLevel";
 import EmberParticles from "@/components/EmberParticles";
@@ -351,6 +352,7 @@ const Index = () => {
       <EmailCaptureSection />
       <HowToUse />
       <BundleBuilder />
+      <ComingSoonDrop />
       <section className="py-28 border-t border-white/5">
         <div className="container max-w-3xl text-center">
           <p className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-4">Monthly Subscription</p>

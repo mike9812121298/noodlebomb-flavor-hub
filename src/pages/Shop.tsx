@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
+import ComingSoonDrop from "@/components/ComingSoonDrop";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
@@ -179,6 +180,8 @@ const Shop = () => (
           ))}
         </div>
       </div>
+
+      <ComingSoonDrop />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
