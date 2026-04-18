@@ -4,7 +4,6 @@ import ComingSoonDrop from "@/components/ComingSoonDrop";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
-import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
 import { Link } from "react-router-dom";
 import { ArrowRight, Truck, Lock, Flame, Check } from "lucide-react";
 
@@ -34,18 +33,6 @@ const products = [
     flavorHook: "Heat That Hooks You.",
     badge: "🔥 Most Popular Heat",
     buyUrl: "/product/spicy-tokyo",
-  },
-  {
-    name: "Ryu Garlic",
-    tagline: "Fire-Breathing Umami King. Roasted black garlic & chili oil.",
-    price: "$11.99",
-    image: nbRyuGarlic,
-    spiceLevel: 2,
-    color: "bg-secondary text-secondary-foreground",
-    pairsWellWith: ["Steak", "Burgers", "Grilled Meats"],
-    flavorHook: "Dark. Garlicky. Addictive.",
-    comingSoon: true,
-    buyUrl: "/product/ryu-garlic",
   },
   {
     name: "Citrus Shoyu",
