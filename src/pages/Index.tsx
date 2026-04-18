@@ -7,7 +7,6 @@ import nbLogo from "@/assets/nb-logo.png";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
-import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
 import PressBar from "@/components/PressBar";
 import TestimonialSection from "@/components/TestimonialSection";
 import FounderStory from "@/components/FounderStory";
@@ -25,20 +24,17 @@ const sauceImages: Record<string, string> = {
   "Original": nbOriginal,
   "Spicy Tokyo": nbSpicyTokyo,
   "Citrus Shoyu": nbCitrusShoyu,
-  "Ryu Garlic": nbRyuGarlic,
 };
 
 const sauces = [
   { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Soy, garlic, ginger, and a hint of sweetness.", bestFor: "Ramen, rice bowls, stir fry", badge: null, buyUrl: "/product/original-ramen", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
   { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Bold dark soy, roasted chili, and sesame.", bestFor: "Wings, fried rice, steak", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
-  { name: "Ryu Garlic", tagline: "Fire-Breathing Umami King", spice: 2, desc: "Roasted black garlic, chili oil, and toasted sesame.", bestFor: "Steak, burgers, grilled meats", badge: null, comingSoon: true },
   { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Lemon, orange, and yuzu-style citrus.", bestFor: "Seafood, shrimp, salads", badge: null, buyUrl: "/product/citrus-shoyu", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
 ];
 
 const heroSauces = [
   { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Soy, garlic, ginger, and a hint of sweetness." },
   { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Bold dark soy, roasted chili, and sesame." },
-  { name: "Ryu Garlic", tagline: "Fire-Breathing Umami King", image: nbRyuGarlic, spice: 2, desc: "Roasted black garlic, chili oil, and toasted sesame." },
   { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Lemon, orange, and yuzu-style citrus." },
 ] as const;
 
