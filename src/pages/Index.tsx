@@ -28,10 +28,10 @@ const sauceImages: Record<string, string> = {
 };
 
 const sauces = [
-  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Soy, garlic, ginger, and a hint of sweetness.", bestFor: "Ramen, rice bowls, stir fry", badge: null, buyUrl: "https://www.noodlebomb.co/product/original-ramen", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Bold dark soy, roasted chili, and sesame.", bestFor: "Wings, fried rice, steak", badge: "🔥 Most Popular", buyUrl: "https://www.noodlebomb.co/product/spicy-tokyo", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
+  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Soy, garlic, ginger, and a hint of sweetness.", bestFor: "Ramen, rice bowls, stir fry", badge: null, buyUrl: "/product/original-ramen", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Bold dark soy, roasted chili, and sesame.", bestFor: "Wings, fried rice, steak", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
   { name: "Ryu Garlic", tagline: "Fire-Breathing Umami King", spice: 2, desc: "Roasted black garlic, chili oil, and toasted sesame.", bestFor: "Steak, burgers, grilled meats", badge: null, comingSoon: true },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Lemon, orange, and yuzu-style citrus.", bestFor: "Seafood, shrimp, salads", badge: null, buyUrl: "https://www.noodlebomb.co/product/yuzu-citrus", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Lemon, orange, and yuzu-style citrus.", bestFor: "Seafood, shrimp, salads", badge: null, buyUrl: "/product/citrus-shoyu", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
 ];
 
 const heroSauces = [
@@ -335,9 +335,9 @@ const Index = () => {
                   )}
                   {!sauce.comingSoon && (
                     <div className="w-full text-center">
-                      <a href={sauce.buyUrl} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:scale-[1.02]">
+                      <Link to={sauce.buyUrl} className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:scale-[1.02]">
                         <ShoppingCart className="h-4 w-4" /> Pre-Order
-                      </a>
+                      </Link>
                       <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships May 2026</p>
                     </div>
                   )}

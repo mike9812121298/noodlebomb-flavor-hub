@@ -1,16 +1,18 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, ShoppingCart, Flame } from "lucide-react";
+import { useCart } from "@/hooks/useCart";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
 
 const sauces = [
-  { id: "original", name: "Original", price: 11.99, image: nbOriginal },
-  { id: "spicy", name: "Spicy Tokyo", price: 11.99, image: nbSpicyTokyo },
-  { id: "citrus", name: "Citrus Shoyu", price: 11.99, image: nbCitrusShoyu },
+  { id: "original", slug: "original-ramen", name: "Original", price: 11.99, image: nbOriginal },
+  { id: "spicy", slug: "spicy-tokyo", name: "Spicy Tokyo", price: 11.99, image: nbSpicyTokyo },
+  { id: "citrus", slug: "citrus-shoyu", name: "Citrus Shoyu", price: 11.99, image: nbCitrusShoyu },
 ];
-h
+
 function getDiscount(count: number) {
   if (count >= 4) return { pct: 20, label: "20%" };
   if (count >= 3) return { pct: 15, label: "15%" };
@@ -21,6 +23,8 @@ function getDiscount(count: number) {
 const BundleBuilder = () => {
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const sectionRef = useRef<HTMLElement>(null);
+  const { addItem } = useCart();
+  const navigate = useNavigate();
   const [isInView, setIsInView] = useState(false);
   const [bottlesRevealed, setBottlesRevealed] = useState(false);
 
@@ -56,6 +60,16 @@ const BundleBuilder = () => {
   const discount = getDiscount(totalItems);
   const saved = subtotal * (discount.pct / 100);
   const total = subtotal - saved;
+
+  const handleAddToCart = useCallback(() => {
+    sauces.forEach((sauce) => {
+      const qty = quantities[sauce.id] || 0;
+      if (qty > 0) {
+        addItem({ slug: sauce.slug, name: sauce.name, price: sauce.price, quantity: qty, purchaseType: "one-time" });
+      }
+    });
+    navigate("/cart");
+  }, [quantities, addItem, navigate]);
 
   const nextTier = totalItems < 2 ? { need: 2 - totalItems, pct: "10%" }
     : totalItems < 3 ? { need: 3 - totalItems, pct: "15%" }
@@ -242,10 +256,8 @@ const BundleBuilder = () => {
             <div className="flex items-center justify-center gap-1.5 mb-3">
               <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Included</span>
             </div>
-            <motion.a
-              href="https://www.noodlebomb.co/product/variety-pack"
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              onClick={handleAddToCart}
               animate={{
                 boxShadow: [
                   "0 0 20px hsl(4 85% 50% / 0.3)",
@@ -256,8 +268,8 @@ const BundleBuilder = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:scale-[1.02] transition-transform"
             >
-              <ShoppingCart className="h-4 w-4" /> Build Your Bundle →
-            </motion.a>
+              <ShoppingCart className="h-4 w-4" /> Add to Cart →
+            </motion.button>
           </motion.div>
         )}
       </div>
