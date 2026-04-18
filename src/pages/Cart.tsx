@@ -19,7 +19,7 @@ import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 const PRODUCT_IMAGES: Record<string, string> = {
   "original-ramen": nbOriginal,
   "spicy-tokyo": nbSpicyTokyo,
-  "yuzu-citrus": nbCitrusShoyu,
+  "citrus-shoyu": nbCitrusShoyu,
   "variety-pack": nbLineupTrio,
 };
 
