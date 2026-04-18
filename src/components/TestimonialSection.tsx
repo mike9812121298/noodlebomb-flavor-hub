@@ -22,12 +22,6 @@ const testimonials = [
     rating: 5,
     sauce: "Citrus Shoyu",
   },
-  {
-    name: "Diana R., Tacoma WA",
-    text: "Ryu Garlic on steak? Life-changing. The roasted garlic flavor is deep and smoky. Can't stop drizzling it.",
-    rating: 5,
-    sauce: "Ryu Garlic",
-  },
 ];
 
 const TestimonialSection = () => {
