@@ -339,7 +339,7 @@ const ComingSoonDrop = () => {
             declassified
             briefLines={[
               "Traditionally brewed. 16.9 oz.",
-              "Cleaner than anything on your shelf.",
+              "Naturally fermented. No fillers. No shortcuts.",
               "REDACTED",
               "Less sodium. Full umami. No compromise.",
             ]}
