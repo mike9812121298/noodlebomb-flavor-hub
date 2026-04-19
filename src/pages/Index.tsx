@@ -13,6 +13,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import BundleBuilder from "@/components/BundleBuilder";
 import SpiceLevel from "@/components/SpiceLevel";
 import EmberParticles from "@/components/EmberParticles";
+import HeroParticles from "@/components/HeroParticles";
 
 
 const sauceImages: Record<string, string> = {
@@ -114,6 +115,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_65%_50%,hsl(4_85%_50%/0.08),transparent_70%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,hsl(0_0%_0%/0.6),transparent_60%)]" />
         <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h40v40H0z\' fill=\'none\' stroke=\'%23fff\' stroke-width=\'.5\'/%3E%3C/svg%3E")' }} />
+        <HeroParticles />
 
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center pt-28 pb-20 lg:pt-32 lg:pb-24">  {/* Hero left — stagger all content on load */}
           <motion.div
@@ -167,7 +169,9 @@ const Index = () => {
               <motion.a
                 variants={ctaItemVariants}
                 href="/shop"
-                className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-shadow flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow btn-shimmer"
               >
                 Shop the Collection
               </motion.a>
@@ -307,18 +311,19 @@ const Index = () => {
       <section id="products" className="py-32">
         <div className="section-divider-animated mb-32" />
         <div className="container">
-          <div ref={sauceHeaderRef} className="scroll-reveal text-center mb-20">
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-20">
             <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Our Sauces</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">Our Sauces. Your New Obsession.</h2>
             <p className="text-foreground/50 mt-3 text-sm max-w-md mx-auto">Small-batch crafted. Premium ingredients. Bold, unforgettable flavor.</p>
-          </div>
+          </motion.div>
           <div ref={sauceGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {sauces.map((sauce) => (
               <motion.div
                 key={sauce.name}
                 data-reveal
-                whileHover={{ y: -10, boxShadow: "0 0 50px hsl(var(--primary)/0.18), 0 24px 60px rgba(0,0,0,0.35)" }}
-                transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                whileHover={{ y: -6, scale: 1.02, boxShadow: "0 0 28px rgba(220,38,38,0.2), 0 24px 60px rgba(0,0,0,0.35)" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 className="scroll-reveal group card-premium rounded-2xl overflow-hidden"
                 style={{ willChange: "transform" }}
               >
@@ -388,19 +393,22 @@ const Index = () => {
       <section className="py-32">
         <div className="section-divider-animated mb-32" />
         <div className="container">
-          <div ref={featuresHeaderRef} className="scroll-reveal text-center mb-20">
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-20">
             <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Why NoodleBomb</span>
-          </div>
+          </motion.div>
           <div ref={featuresGridRef} className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
             {[
               { icon: Zap, title: "Instant Flavor", desc: "Just a drizzle transforms any dish into restaurant-level flavor." },
               { icon: ChefHat, title: "Chef Crafted", desc: "Small-batch recipes developed with premium, all-natural ingredients." },
               { icon: Star, title: "Versatile", desc: "Ramen, rice, grilled meats, dumplings, eggs — it goes on everything." },
-            ].map((f) => (
-              <div
+            ].map((f, index) => (
+              <motion.div
                 key={f.title}
-                data-reveal
-                className="scroll-reveal-scale text-center group hover-lift"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                className="text-center group"
               >
                 <motion.div
                   className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/80 border border-border border-glow group-hover:border-primary/30 group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500"
@@ -411,7 +419,7 @@ const Index = () => {
                 </motion.div>
                 <h3 className="font-display text-lg font-bold text-foreground mb-2 tracking-tight">{f.title}</h3>
                 <p className="text-sm text-foreground/50 leading-relaxed">{f.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -424,17 +432,54 @@ const Index = () => {
       {/* Subscription */}
       <section className="py-28 border-t border-white/5">
         <div className="container max-w-3xl text-center">
-          <p className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-4">Monthly Subscription</p>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">The Monthly Ramen Box.<br/><span className="text-zinc-400 text-3xl font-normal">$29.99/month.</span></h2>
-          <p className="text-zinc-300 text-lg mb-8">Cancel anytime. Free shipping. 5+ exclusive ramen flavors monthly.</p>
-          <div className="flex flex-wrap justify-center gap-6 text-xs tracking-widest uppercase text-zinc-500 mb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-4"
+          >Monthly Subscription</motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="font-heading text-4xl md:text-5xl font-bold text-white mb-4"
+          >The Monthly Ramen Box.<br/><span className="text-zinc-400 text-3xl font-normal">$29.99/month.</span></motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="text-zinc-300 text-lg mb-8"
+          >Cancel anytime. Free shipping. 5+ exclusive ramen flavors monthly.</motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex flex-wrap justify-center gap-6 text-xs tracking-widest uppercase text-zinc-500 mb-10"
+          >
             {["No Contracts", "Skip Anytime", "Free Shipping", "Members-Only Flavors"].map(f => (
               <span key={f}>{f}</span>
             ))}
-          </div>
-          <a href="/ramen-box" className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.6)] hover:scale-105 shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow">
+          </motion.div>
+          <motion.a
+            href="/ramen-box"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            animate={{
+              boxShadow: [
+                "0 0 0px rgba(220,38,38,0)",
+                "0 0 20px rgba(220,38,38,0.45)",
+                "0 0 0px rgba(220,38,38,0)",
+              ],
+            }}
+            transition={{ duration: 2.5, repeat: Infinity }}
+            className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_38px_hsl(var(--flame)/0.4)] btn-shimmer"
+          >
             Start Your Subscription
-          </a>
+          </motion.a>
         </div>
       </section>
 
@@ -453,12 +498,25 @@ const Index = () => {
               whileHover={{ scale: 1.08, rotate: -4 }}
               transition={{ type: "spring", stiffness: 300, damping: 12 }}
             />
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to Blow Up Your Meals?</h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4"
+            >Ready to Blow Up Your Meals?</motion.h2>
             <p className="text-foreground/50 mb-10 text-sm">Join thousands upgrading their cooking in seconds.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/shop" className="inline-flex items-center gap-2 bg-gradient-fire px-12 py-5 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.6)] hover:scale-105 shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="rounded-full"
+              >
+              <Link to="/shop" className="inline-flex items-center gap-2 bg-gradient-fire px-12 py-5 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground transition-shadow shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow btn-shimmer">
                 Try the Variety Pack
               </Link>
+              </motion.div>
               <Link to="/sauce-selector" className="inline-flex items-center gap-2 border border-border/60 px-8 py-5 rounded-full font-display text-sm font-semibold uppercase tracking-[0.15em] text-foreground/50 hover:border-primary/40 hover:text-primary/70 transition-all">
                 Find Your Sauce <ArrowRight className="h-4 w-4" />
               </Link>

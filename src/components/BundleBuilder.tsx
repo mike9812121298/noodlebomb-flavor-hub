@@ -107,7 +107,7 @@ const BundleBuilder = () => {
           Free shipping automatically applied.
         </p>
 
-        <div className="flex justify-center gap-3 md:gap-4 mb-14">
+        <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="flex justify-center gap-3 md:gap-4 mb-14">
           {[
             { min: 2, label: "The Dynamic Duo", sublabel: "2+ Bottles", pct: "10%", tagline: "Perfect for the weekend warrior." },
             { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING", featured: true, tagline: "The Fan Favorite. Covers all your bases from Mild to Wild." },
@@ -148,7 +148,7 @@ const BundleBuilder = () => {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {totalItems > 0 && (
           <motion.div
@@ -176,7 +176,7 @@ const BundleBuilder = () => {
           </motion.div>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+        <motion.div initial={{ x: 40 }} whileInView={{ x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }} className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
           {sauces.map((sauce, i) => {
             const qty = quantities[sauce.id] || 0;
             return (
@@ -223,7 +223,7 @@ const BundleBuilder = () => {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {totalItems > 0 && (
           <motion.div
