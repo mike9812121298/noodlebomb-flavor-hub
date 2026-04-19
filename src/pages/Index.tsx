@@ -171,14 +171,14 @@ const Index = () => {
                 href="#products"
                 className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow"
               >
-                Shop Now <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                Shop Now
               </motion.a>
               <motion.div variants={ctaItemVariants}>
                 <Link
                   to="/about"
-                  className="border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5"
+                  className="inline-flex items-center gap-2 border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5"
                 >
-                  Learn Our Story
+                  Learn Our Story <ArrowRight className="h-4 w-4" />
                 </Link>
               </motion.div>
             </motion.div>
@@ -366,7 +366,7 @@ const Index = () => {
                   )}
                   {!sauce.comingSoon && (
                     <div className="w-full text-center">
-                      <Link to={sauce.buyUrl} className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:scale-[1.02]">
+                      <Link to={sauce.buyUrl} className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--flame)/0.4)] hover:scale-[1.02]">
                         <ShoppingCart className="h-4 w-4" /> Pre-Order
                       </Link>
                       <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships May 2026</p>
@@ -392,8 +392,8 @@ const Index = () => {
               <span key={f}>{f}</span>
             ))}
           </div>
-          <a href="/ramen-box" className="inline-block bg-[#C41E3A] hover:bg-[#9B1830] text-white px-10 py-4 font-semibold text-sm tracking-wide uppercase transition-colors rounded-sm">
-            Start Your Box →
+          <a href="/ramen-box" className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.6)] hover:scale-105 shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow">
+            Start Your Box
           </a>
         </div>
       </section>
@@ -457,10 +457,10 @@ const Index = () => {
             <p className="text-foreground/50 mb-10 text-sm">Join thousands upgrading their cooking in seconds.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/shop" className="inline-flex items-center gap-2 bg-gradient-fire px-12 py-5 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.6)] hover:scale-105 shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow">
-                Shop Now <ArrowRight className="h-5 w-5" />
+                Shop Now
               </Link>
               <Link to="/sauce-selector" className="inline-flex items-center gap-2 border border-border/60 px-8 py-5 rounded-full font-display text-sm font-semibold uppercase tracking-[0.15em] text-foreground/50 hover:border-primary/40 hover:text-primary/70 transition-all">
-                Find Your Sauce
+                Find Your Sauce <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>

@@ -4,7 +4,7 @@ const messages = [
   "Loved by Ramen Fans Everywhere",
     "Free Shipping on All Orders Over $45",
       "Bundle & Save Up to 20%",
-        "4.9 Stars \u00B7 31,000+ Reviews",
+        "4.9 Stars \u00B7 500+ Reviews",
         ];
 
         const AnnouncementBar = () => (
