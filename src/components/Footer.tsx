@@ -58,7 +58,7 @@ const Footer = () => {
               {[
                 { label: "Recipes", to: "/recipes" },
                 { label: "Our Story", to: "/about" },
-                { label: "FAQ & Contact", to: "/faq" },
+                { label: "FAQ", to: "/faq" },
                 { label: "Monthly Ramen Box", to: "/ramen-box" },
               ].map(({ label, to }) => (
                 <li key={label}>
