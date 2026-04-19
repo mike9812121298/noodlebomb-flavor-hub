@@ -10,7 +10,7 @@ import { Truck, Lock, Flame, Check } from "lucide-react";
 const products = [
   {
     name: "Original Ramen Sauce",
-    tagline: "Umami, Perfected. Deep garlic-sesame umami, medium heat, goes with everything.",
+    tagline: "Deep umami that makes every bowl taste intentional.",
     price: "$11.99",
     image: nbOriginal,
     spiceLevel: 1,
@@ -23,7 +23,7 @@ const products = [
   },
   {
     name: "Spicy Tokyo Ramen Sauce",
-    tagline: "Street Heat Legend. Fiery chili-forward heat, dark roasted soy, hot and addictive.",
+    tagline: "Tokyo street heat — dark, layered, built to burn clean.",
     price: "$11.99",
     image: nbSpicyTokyo,
     spiceLevel: 3,
@@ -36,7 +36,7 @@ const products = [
   },
   {
     name: "Citrus Shoyu Ramen Sauce",
-    tagline: "Bright Side of Bold. Citrus over soy, mild heat, clean and surprisingly addictive.",
+    tagline: "Clean soy lifted by yuzu — bright, sharp, surprisingly bold.",
     price: "$11.99",
     image: nbCitrusShoyu,
     spiceLevel: 1,

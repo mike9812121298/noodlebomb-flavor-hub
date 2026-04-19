@@ -46,10 +46,10 @@ const PRODUCTS: Record<string, ProductData> = {
     image: nbOriginal,
     spiceLevel: 1,
     pairsWellWith: ["Ramen", "Rice Bowls", "Stir Fry"],
-    flavorHook: "Bold. Balanced. Essential.",
+    flavorHook: "Deep umami that makes every bowl taste intentional.",
     badge: "⭐ Best Seller",
     description:
-      "Deep soy umami anchored by garlic, ginger, and sesame oil — with a whisper of sweetness and medium heat. Balanced and versatile, it's built for ramen, rice bowls, and grilled proteins alike. The one that goes with everything.",
+      "Dark soy anchors a foundation of roasted garlic, warm ginger, and toasted sesame — then a slow medium heat moves through and settles. No sharp edges. It coats noodles instead of sitting on top, glazes protein without fighting the other flavors. Balanced enough for rice bowls, punchy enough for the wok. The one you reach for without thinking. The entry point that never gets old.",
     ingredients:
       "Water, light soy sauce (water, soybeans, wheat, salt, sugar, preservative), brown sugar, rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
     allergens: "Soy, wheat, milk, sesame, sulphites.",
@@ -65,10 +65,10 @@ const PRODUCTS: Record<string, ProductData> = {
     image: nbSpicyTokyo,
     spiceLevel: 3,
     pairsWellWith: ["Wings", "Fried Rice", "Steak"],
-    flavorHook: "Heat That Hooks You.",
+    flavorHook: "Tokyo street heat — dark, layered, built to burn clean.",
     badge: "🔥 Most Popular",
     description:
-      "Fiery, chili-forward heat layered over dark roasted soy and sesame oil — more intense than Original, less garlic-forward, pure Tokyo street energy. Hot enough to hook you, with enough umami depth to keep pulling you back. Turn up the heat without losing the flavor.",
+      "Chili-forward from the first drop. Dark roasted soy and sesame thread underneath, giving the heat something to stand on. The burn arrives fast and settles in the back of your throat — but there's enough umami depth to keep you coming back. Not just hot. Layered. Built for when you want the heat to be the main event, not an afterthought. Intensity without apology.",
     ingredients:
       "Water, light soy sauce (water, soybeans, wheat, salt, sugar), rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), brown sugar, honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
     allergens: "Soy, wheat, milk, sesame, sulphites.",
@@ -84,9 +84,9 @@ const PRODUCTS: Record<string, ProductData> = {
     image: nbCitrusShoyu,
     spiceLevel: 1,
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
-    flavorHook: "Bright. Tangy. Fresh.",
+    flavorHook: "Clean soy lifted by yuzu — bright, sharp, surprisingly bold.",
     description:
-      "Bright citrus and sudachi lift a clean soy base into something tangy, fresh, and surprisingly addictive. Mild heat with a citrus-forward profile — best on light ramen, sushi, fish, and anything where brightness matters. The fresh, light counterpart to the deeper sauces.",
+      "Yuzu-forward citrus breaks over a lighter shoyu base — tangy and bright up front, with a mild heat that whispers rather than burns. The texture runs lean and clean, coating without weighing anything down. Drizzle it cold, use it as a finish. Opens up seafood, brightens cold noodle bowls, cuts through anything fatty. The sauce that proves bold and bright aren't opposites.",
     ingredients:
       "Water, light soy sauce (water, soybeans, wheat, salt, sugar), rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), orange juice (water, orange juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), brown sugar, honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
     allergens: "Soy, wheat, milk, sesame, sulphites.",
