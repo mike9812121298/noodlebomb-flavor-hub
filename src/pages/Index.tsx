@@ -83,6 +83,7 @@ const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const { scrollYProgress: pageScrollProgress } = useScroll();
 
   const bottleY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
@@ -105,6 +106,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Scroll progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"
+        style={{ scaleX: pageScrollProgress, background: "linear-gradient(90deg, hsl(var(--flame)), hsl(var(--primary)), hsl(40 100% 55%))" }}
+      />
       {/* Hero */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
         <motion.div className="absolute inset-0 bg-gradient-dark" style={{ scale: bgScale }} />
@@ -250,9 +256,12 @@ const Index = () => {
               {/* Dots */}
               <div className="flex items-center gap-2.5 mt-6">
                 {heroSauces.map((sauce, i) => (
-                  <button
+                  <motion.button
                     key={sauce.name}
                     onClick={() => setActiveSlide(i)}
+                    whileTap={{ scale: 0.7 }}
+                    whileHover={{ scale: 1.4 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     className={`h-2 rounded-full transition-all duration-300 ${i === activeSlide ? "w-8 bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]" : "w-2 bg-foreground/20 hover:bg-foreground/40"}`}
                     aria-label={`View ${sauce.name}`}
                   />
@@ -268,8 +277,30 @@ const Index = () => {
 
       {/* Trust Bar */}
       <div className="border-y border-border/40 py-4">
-        <div className="container flex flex-wrap items-center justify-center gap-6 md:gap-10"><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><Star className="h-3.5 w-3.5 text-amber-500" />4.9 Stars · 31,000+ Reviews</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><Truck className="h-3.5 w-3.5" />Free Shipping Over $45</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><RotateCcw className="h-3.5 w-3.5" />30-Day Guarantee</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><Leaf className="h-3.5 w-3.5" />Real Ingredients</span><span className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground"><MapPin className="h-3.5 w-3.5" />Crafted in the PNW</span></div>
-          
+        <motion.div
+          className="container flex flex-wrap items-center justify-center gap-6 md:gap-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-20px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } }}
+        >
+          {[
+            { Icon: Star, label: "4.9 Stars · 31,000+ Reviews", iconClass: "text-amber-500" },
+            { Icon: Truck, label: "Free Shipping Over $45", iconClass: "" },
+            { Icon: RotateCcw, label: "30-Day Guarantee", iconClass: "" },
+            { Icon: Leaf, label: "Real Ingredients", iconClass: "" },
+            { Icon: MapPin, label: "Crafted in the PNW", iconClass: "" },
+          ].map(({ Icon, label, iconClass }) => (
+            <motion.span
+              key={label}
+              className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground cursor-default"
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } } }}
+              whileHover={{ y: -2, transition: { duration: 0.15 } }}
+            >
+              <Icon className={`h-3.5 w-3.5 ${iconClass}`} />{label}
+            </motion.span>
+          ))}
+        </motion.div>
       </div>
 
       <div className="section-divider-animated" />
@@ -289,8 +320,8 @@ const Index = () => {
               <motion.div
                 key={sauce.name}
                 data-reveal
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                whileHover={{ y: -10, boxShadow: "0 0 50px hsl(var(--primary)/0.18), 0 24px 60px rgba(0,0,0,0.35)" }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
                 className="scroll-reveal group card-premium rounded-2xl overflow-hidden"
                 style={{ willChange: "transform" }}
               >
@@ -307,9 +338,13 @@ const Index = () => {
                     </div>
                   )}
                   {sauce.badge && (
-                    <div className="absolute top-3 left-3">
+                    <motion.div
+                      className="absolute top-3 left-3"
+                      animate={{ scale: [1, 1.06, 1] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                    >
                       <span className="px-3 py-1.5 rounded-full bg-gradient-fire text-primary-foreground text-[10px] font-display font-bold uppercase tracking-wider shadow-fire">{sauce.badge}</span>
-                    </div>
+                    </motion.div>
                   )}
                   <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
                 </div>
@@ -387,9 +422,13 @@ const Index = () => {
                 data-reveal
                 className="scroll-reveal-scale text-center group hover-lift"
               >
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/80 border border-border border-glow group-hover:border-primary/30 group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500">
+                <motion.div
+                  className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/80 border border-border border-glow group-hover:border-primary/30 group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500"
+                  whileHover={{ scale: 1.15, rotate: 8 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 12 }}
+                >
                   <f.icon className="h-7 w-7 text-foreground/50 icon-glow" />
-                </div>
+                </motion.div>
                 <h3 className="font-display text-lg font-bold text-foreground mb-2 tracking-tight">{f.title}</h3>
                 <p className="text-sm text-foreground/50 leading-relaxed">{f.desc}</p>
               </div>
@@ -409,7 +448,13 @@ const Index = () => {
             ref={ctaRef}
             className="scroll-reveal-scale max-w-2xl mx-auto card-premium rounded-3xl p-16"
           >
-            <img src={nbLogo} alt="Noodle Bomb" className="h-14 w-auto mx-auto mb-8 drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)]" />
+            <motion.img
+              src={nbLogo}
+              alt="Noodle Bomb"
+              className="h-14 w-auto mx-auto mb-8 drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
+              whileHover={{ scale: 1.08, rotate: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 12 }}
+            />
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to Blow Up Your Meals?</h2>
             <p className="text-foreground/50 mb-10 text-sm">Join thousands upgrading their cooking in seconds.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
