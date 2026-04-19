@@ -84,34 +84,29 @@ const BundleBuilder = () => {
 
   return (
     <>
-    <section ref={sectionRef} className="py-28 border-t border-white/5">
+    <section ref={sectionRef} className="py-14 border-t border-white/5">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-center mb-4"
+          className="text-center mb-2"
         >
           <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-foreground/50 mb-4 block">
             Bundle & Save
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">Build Your Bundle. Save Up to 20%.</h2>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">Build Your Bundle. Save Up to 20%.</h2>
           <p className="text-muted-foreground/90 mt-4 max-w-md mx-auto">
             Mix and match any combination of flavors.
           </p>
-          <p className="text-xs text-foreground/40 font-display mt-2">Most customers choose 3 bottles.</p>
         </motion.div>
 
-        <p className="text-center text-xs text-muted-foreground font-display uppercase tracking-wider mb-12">
-          Free shipping automatically applied.
-        </p>
-
-        <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="flex justify-center gap-3 md:gap-4 mb-14">
+        <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="flex justify-center gap-3 md:gap-4 mb-8">
           {[
-            { min: 2, label: "The Dynamic Duo", sublabel: "2+ Bottles", pct: "10%", tagline: "Perfect for the weekend warrior." },
-            { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING", featured: true, tagline: "The Fan Favorite. Covers all your bases from Mild to Wild." },
-            { min: 4, label: "The Kitchen Hero", sublabel: "4+ Bottles", pct: "20%", tagline: "Stock the pantry. Never have a boring meal again." },
+            { min: 2, label: "The Dynamic Duo", sublabel: "2+ Bottles", pct: "10%" },
+            { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING", featured: true },
+            { min: 4, label: "The Kitchen Hero", sublabel: "4+ Bottles", pct: "20%" },
           ].map((tier) => {
             const active = totalItems >= tier.min;
             const isFeatured = tier.featured;
@@ -120,7 +115,7 @@ const BundleBuilder = () => {
                 key={tier.min}
                 animate={active ? { scale: [1, 1.08, 1] } : {}}
                 transition={{ duration: 0.3 }}
-                className={`relative px-5 py-3 rounded-xl text-center transition-all ${
+                className={`relative px-4 py-2 rounded-xl text-center transition-all ${
                   isFeatured ? "scale-105" : ""
                 } ${
                   active
@@ -141,9 +136,6 @@ const BundleBuilder = () => {
                 </span>
                 <span className={`text-[10px] font-display uppercase tracking-wider mt-0.5 block ${active ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
                   {tier.sublabel}
-                </span>
-                <span className={`text-[10px] font-display mt-1 block leading-tight ${active ? "text-primary-foreground/60" : "text-muted-foreground/70"}`}>
-                  {tier.tagline}
                 </span>
               </motion.div>
             );
@@ -176,7 +168,7 @@ const BundleBuilder = () => {
           </motion.div>
         )}
 
-        <motion.div initial={{ x: 40 }} whileInView={{ x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }} className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-12">
+        <motion.div initial={{ x: 40 }} whileInView={{ x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }} className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto mb-8">
           {sauces.map((sauce, i) => {
             const qty = quantities[sauce.id] || 0;
             return (
@@ -195,14 +187,14 @@ const BundleBuilder = () => {
                 }`}
                 style={{ willChange: "transform" }}
               >
-                <div className="aspect-[4/5] overflow-hidden bg-card rounded-t-2xl flex items-center justify-center px-4 pt-5">
+                <div className="aspect-[3/4] overflow-hidden bg-card rounded-t-2xl flex items-center justify-center px-3 pt-3">
                   <img
                     src={sauce.image}
                     alt={sauce.name}
                     className="h-full w-auto object-contain transition-transform duration-500 hover:scale-105"
                   />
                 </div>
-                <div className="p-4 text-center">
+                <div className="p-3 text-center">
                   <h4 className="font-display text-sm font-bold text-foreground mb-3">{sauce.name}</h4>
                   <div className="flex items-center justify-center gap-3">
                     <button
