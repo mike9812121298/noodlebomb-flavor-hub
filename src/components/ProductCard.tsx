@@ -199,7 +199,7 @@ const ProductCard = ({
               <div className="text-center">
                 <Link
                   to={productPath}
-                  className="flex items-center gap-2 bg-[#c8960c] hover:bg-[#b8860b] px-5 py-2.5 rounded-full text-sm font-display font-bold uppercase tracking-wider text-white transition-all hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:scale-105"
+                  className="flex items-center gap-2 bg-gradient-fire px-5 py-2.5 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--flame)/0.4)] hover:scale-105"
                 >
                   <ShoppingCart className="h-4 w-4" />
                   Pre-Order

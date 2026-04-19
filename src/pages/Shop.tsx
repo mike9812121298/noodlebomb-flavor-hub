@@ -5,7 +5,7 @@ import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
 import { Link } from "react-router-dom";
-import { ArrowRight, Truck, Lock, Flame, Check } from "lucide-react";
+import { Truck, Lock, Flame, Check } from "lucide-react";
 
 const products = [
   {
@@ -197,7 +197,7 @@ const Shop = () => (
           to="/ramen-box"
           className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_45px_hsl(var(--flame)/0.55)] hover:scale-105 transition-all animate-pulse-glow"
         >
-          Explore Membership Plans <ArrowRight className="h-5 w-5" />
+          Explore Membership Plans
         </Link>
       </motion.div>
     </div>

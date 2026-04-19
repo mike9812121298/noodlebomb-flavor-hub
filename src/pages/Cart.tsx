@@ -6,6 +6,7 @@ import {
   Plus,
   Minus,
   ArrowLeft,
+  ArrowRight,
   Truck,
   ShieldCheck,
   Package,
@@ -257,7 +258,7 @@ const Cart = () => {
                   to="/shop"
                   className="w-full flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-full font-display text-sm font-semibold uppercase tracking-wider text-foreground/70 hover:border-primary/50 hover:text-primary transition-all"
                 >
-                  Continue Shopping
+                  Continue Shopping <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
 

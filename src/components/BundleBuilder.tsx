@@ -268,7 +268,7 @@ const BundleBuilder = () => {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:scale-[1.02] transition-transform"
             >
-              <ShoppingCart className="h-4 w-4" /> Add to Cart →
+              <ShoppingCart className="h-4 w-4" /> Add to Cart
             </motion.button>
           </motion.div>
         )}
