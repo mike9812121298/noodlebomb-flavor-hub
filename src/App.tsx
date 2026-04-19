@@ -26,6 +26,7 @@ import Cart from "./pages/Cart";
 import SoySauce from "./pages/SoySauce";
 import NotFound from "./pages/NotFound";
 import Wholesale from "./pages/Wholesale";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +53,7 @@ const App = () => (
           <Route path="/cart" element={<Cart />} />
           <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/soy-sauce" element={<SoySauce />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

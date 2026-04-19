@@ -11,6 +11,7 @@ const navItems = [
   { label: "Sauce Finder", path: "/sauce-selector" },
   { label: "About", path: "/about" },
   { label: "FAQ", path: "/faq" },
+  { label: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
