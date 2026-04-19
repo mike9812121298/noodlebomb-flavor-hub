@@ -13,7 +13,6 @@ import FounderStory from "@/components/FounderStory";
 import BundleBuilder from "@/components/BundleBuilder";
 import HowToUse from "@/components/HowToUse";
 import HowItWorks from "@/components/HowItWorks";
-import EmailCaptureSection from "@/components/EmailCaptureSection";
 import ComingSoonDrop from "@/components/ComingSoonDrop";
 import SocialProof from "@/components/SocialProof";
 import SpiceLevel from "@/components/SpiceLevel";
@@ -285,7 +284,7 @@ const Index = () => {
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } }}
         >
           {[
-            { Icon: Star, label: "4.9 Stars · 31,000+ Reviews", iconClass: "text-amber-500" },
+            { Icon: Star, label: "4.9 Stars · 500+ Reviews", iconClass: "text-amber-500" },
             { Icon: Truck, label: "Free Shipping Over $45", iconClass: "" },
             { Icon: RotateCcw, label: "30-Day Guarantee", iconClass: "" },
             { Icon: Leaf, label: "Real Ingredients", iconClass: "" },
@@ -380,7 +379,6 @@ const Index = () => {
         </div>
       </section>
 
-      <EmailCaptureSection />
       <HowToUse />
       <BundleBuilder />
       <ComingSoonDrop />

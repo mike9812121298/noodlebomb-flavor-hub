@@ -136,14 +136,21 @@ const DropCard = ({ name, tagline, description, status, image, glowColor, cta }:
             {cta.label}
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
           </Link>
-        ) : (
+        ) : cta.href ? (
           <a
-            href={cta.href ?? "#notify-me"}
+            href={cta.href}
             className="w-full flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/80 border border-border hover:border-primary/40 px-4 py-2.5 rounded-full font-display text-sm font-semibold text-foreground/80 hover:text-primary transition-all duration-300 group/btn"
           >
             {cta.label}
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
           </a>
+        ) : (
+          <button
+            disabled
+            className="w-full flex items-center justify-center gap-2 bg-secondary border border-border px-4 py-2.5 rounded-full font-display text-sm font-semibold text-muted-foreground cursor-not-allowed opacity-50"
+          >
+            {cta.label}
+          </button>
         )}
       </div>
     </motion.div>
@@ -228,12 +235,12 @@ const ComingSoonDrop = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-14">
           <DropCard
             name="Ryu Garlic"
-            tagline="Fire-Breathing Umami King"
+            tagline="Bold, garlicky heat with deep umami"
             description="Roasted black garlic, chili oil, and deep umami. Built for steak, burgers, and anything that can take real heat."
             status="coming-soon"
             image={nbRyuGarlic}
             glowColor="hsl(var(--flame))"
-            cta={{ label: "Notify Me", href: "#notify-me" }}
+            cta={{ label: "Coming Soon" }}
           />
           <DropCard
             name="NoodleBomb Soy"

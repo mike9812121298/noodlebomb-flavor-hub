@@ -2,17 +2,42 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Mail } from "lucide-react";
 
-const faqs = [
-  { q: "How long does shipping take?", a: "Orders ship within 1–2 business days. Most U.S. customers receive their order within 3–5 business days after it ships." },
-  { q: "Do you offer free shipping?", a: "Yes! Every single order ships free — no minimum purchase required." },
-  { q: "What is your return/refund policy?", a: "We offer a 100% money-back guarantee. If you don't absolutely love NoodleBomb for any reason, contact us and we'll give you a full refund. No return shipping needed." },
-  { q: "How do I use NoodleBomb?", a: "Cook your noodles as normal. Pour half a bottle over your cooked noodles, toss to coat, and eat. One bottle = 2 servings. Also great as a stir-fry sauce, wing glaze, rice bowl drizzle, dumpling dipping sauce, or marinade for steak and seafood." },
-  { q: "How much sauce is one serving?", a: "One serving is approximately half a bottle (roughly 3.5 fl oz). Each bottle contains 2 servings." },
-  { q: "Can I subscribe and save?", a: "Yes! Check out the Monthly Ramen Box — a subscription that delivers a curated box of top-tier instant ramen plus a bottle of NoodleBomb every month. Cancel anytime, no hassle." },
-  { q: "Where is NoodleBomb made?", a: "NoodleBomb is crafted in small batches in the Pacific Northwest." },
-  { q: "How long does NoodleBomb stay fresh?", a: "NoodleBomb has an 18-month shelf life from the production date. Once opened, refrigerate and use within 30 days for best flavor." },
-  { q: "I have a wholesale or retail inquiry. Who do I contact?", a: "Email us at hello@noodlebomb.co with 'Wholesale' in the subject line. We love working with restaurants, retailers, and food subscription boxes." },
-  { q: "How do I contact you?", a: "Email: hello@noodlebomb.co — We respond to all emails within 24 hours, Monday–Friday." },
+const faqGroups = [
+  {
+    category: "Shipping & Orders",
+    items: [
+      { q: "How long does shipping take?", a: "Orders ship within 1–2 business days. Most U.S. customers receive their order within 3–5 business days after it ships." },
+      { q: "Do you offer free shipping?", a: "Yes! Every single order ships free — no minimum purchase required." },
+    ],
+  },
+  {
+    category: "Product & Ingredients",
+    items: [
+      { q: "How do I use NoodleBomb?", a: "Cook your noodles as normal. Pour half a bottle over your cooked noodles, toss to coat, and eat. One bottle = 2 servings. Also great as a stir-fry sauce, wing glaze, rice bowl drizzle, dumpling dipping sauce, or marinade for steak and seafood." },
+      { q: "How much sauce is one serving?", a: "One serving is approximately half a bottle (roughly 3.5 fl oz). Each bottle contains 2 servings." },
+      { q: "Where is NoodleBomb made?", a: "NoodleBomb is crafted in small batches in the Pacific Northwest." },
+      { q: "How long does NoodleBomb stay fresh?", a: "NoodleBomb has an 18-month shelf life from the production date. Once opened, refrigerate and use within 30 days for best flavor." },
+    ],
+  },
+  {
+    category: "Returns & Refunds",
+    items: [
+      { q: "What is your return/refund policy?", a: "We offer a 100% money-back guarantee. If you don't absolutely love NoodleBomb for any reason, contact us and we'll give you a full refund. No return shipping needed." },
+    ],
+  },
+  {
+    category: "Subscription",
+    items: [
+      { q: "Can I subscribe and save?", a: "Yes! Check out the Monthly Ramen Box — a subscription that delivers a curated box of top-tier instant ramen plus a bottle of NoodleBomb every month. Cancel anytime, no hassle." },
+    ],
+  },
+  {
+    category: "Contact & General",
+    items: [
+      { q: "I have a wholesale or retail inquiry. Who do I contact?", a: "Email us at hello@noodlebomb.co with 'Wholesale' in the subject line. We love working with restaurants, retailers, and food subscription boxes." },
+      { q: "How do I contact you?", a: "Email: hello@noodlebomb.co — We respond to all emails within 24 hours, Monday–Friday." },
+    ],
+  },
 ];
 
 const FAQItem = ({ q, a }: { q: string; a: string }) => {
@@ -62,7 +87,16 @@ const FAQ = () => {
           <h1 className="font-display text-4xl font-black text-foreground mb-3">FAQ & Contact</h1>
           <p className="text-muted-foreground text-lg mb-12">Everything you need to know about NoodleBomb.</p>
           <div className="bg-card rounded-2xl border border-border px-6 mb-12">
-            {faqs.map((item, i) => <FAQItem key={i} {...item} />)}
+            {faqGroups.map((group, gi) => (
+              <div key={group.category} className={gi > 0 ? "border-t border-border/50 mt-1 pt-1" : ""}>
+                <p className="text-[10px] font-display font-semibold uppercase tracking-[0.3em] text-muted-foreground/50 pt-5 pb-0">
+                  {group.category}
+                </p>
+                {group.items.map((item, i) => (
+                  <FAQItem key={i} {...item} />
+                ))}
+              </div>
+            ))}
           </div>
           <div className="bg-primary/5 border border-primary/20 rounded-2xl p-8 text-center">
             <Mail className="w-10 h-10 text-primary mx-auto mb-4" />
