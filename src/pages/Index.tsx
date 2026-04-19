@@ -13,8 +13,10 @@ import ReviewsSection from "@/components/ReviewsSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import BundleBuilder from "@/components/BundleBuilder";
 import SpiceLevel from "@/components/SpiceLevel";
+import FlavorWorldCard from "@/components/FlavorWorldCard";
 import EmberParticles from "@/components/EmberParticles";
 import HeroParticles from "@/components/HeroParticles";
+import FlavorScene from "@/components/FlavorScene";
 
 
 const sauceImages: Record<string, string> = {
@@ -25,10 +27,10 @@ const sauceImages: Record<string, string> = {
 };
 
 const sauces = [
-  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Dark soy, roasted garlic, ginger, and sesame — medium heat that settles clean. Coats noodles, glazes proteins. The one you reach for without thinking.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", ctaLabel: "Shop Original", comingSoon: false, proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Chili-forward from the first drop. Dark roasted soy underneath, a burn that settles in the back of your throat. Hot, layered, and deeply addictive.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", ctaLabel: "Shop Spicy Tokyo", comingSoon: false, proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Yuzu-forward citrus over a clean shoyu base — tangy, bright, mild heat. The one that opens up seafood and makes cold noodle bowls sing.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", ctaLabel: "Shop Citrus Shoyu", comingSoon: false, proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The citrus notes pop best with cold dishes." },
-  { name: "Ryu Garlic", tagline: "The Dragon's Breath", spice: 2, price: "$11.99", desc: "Roasted garlic-forward with a smoky depth and subtle heat. An umami bomb built for garlic lovers who don't do things halfway.", bestFor: "Noodles, dumplings, stir-fry, roasted veggies", badge: null, buyUrl: null, ctaLabel: "Notify Me", comingSoon: true, proTip: null },
+  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Dark soy, roasted garlic, ginger, and sesame — medium heat that settles clean. Coats noodles, glazes proteins. The one you reach for without thinking.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", ctaLabel: "Shop Original", comingSoon: false, proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish.", theme: "original" as const },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Chili-forward from the first drop. Dark roasted soy underneath, a burn that settles in the back of your throat. Hot, layered, and deeply addictive.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", ctaLabel: "Shop Spicy Tokyo", comingSoon: false, proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick.", theme: "spicy-tokyo" as const },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Yuzu-forward citrus over a clean shoyu base — tangy, bright, mild heat. The one that opens up seafood and makes cold noodle bowls sing.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", ctaLabel: "Shop Citrus Shoyu", comingSoon: false, proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The citrus notes pop best with cold dishes.", theme: "citrus-shoyu" as const },
+  { name: "Ryu Garlic", tagline: "The Dragon's Breath", spice: 2, price: "$11.99", desc: "Roasted garlic-forward with a smoky depth and subtle heat. An umami bomb built for garlic lovers who don't do things halfway.", bestFor: "Noodles, dumplings, stir-fry, roasted veggies", badge: null, buyUrl: null, ctaLabel: "Notify Me", comingSoon: true, proTip: null, theme: "original" as const },
 ];
 
 const heroSauces = [
@@ -110,11 +112,11 @@ const Index = () => {
       />
       {/* Hero */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        <motion.div className="absolute inset-0 bg-gradient-dark" style={{ scale: bgScale }} />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_65%_50%,hsl(4_85%_50%/0.08),transparent_70%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,hsl(0_0%_0%/0.6),transparent_60%)]" />
-        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h40v40H0z\' fill=\'none\' stroke=\'%23fff\' stroke-width=\'.5\'/%3E%3C/svg%3E")' }} />
-        <HeroParticles />
+        {/* Immersive flavor world background */}
+        <FlavorScene activeFlavor={heroSauces[activeSlide].name} />
+        {/* Content-readability overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,hsl(0_0%_0%/0.5),transparent_60%)]" />
 
         <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center pt-28 pb-20 lg:pt-32 lg:pb-24">  {/* Hero left — stagger all content on load */}
           <motion.div
@@ -317,72 +319,23 @@ const Index = () => {
           </motion.div>
           <div ref={sauceGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {sauces.map((sauce) => (
-              <motion.div
-                key={sauce.name}
-                data-reveal
-                whileHover={{ y: -6, scale: 1.02, boxShadow: "0 0 28px rgba(220,38,38,0.2), 0 24px 60px rgba(0,0,0,0.35)" }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="scroll-reveal group card-premium rounded-2xl overflow-hidden"
-                style={{ willChange: "transform" }}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden flex items-center justify-center bg-card rounded-t-2xl px-4 pt-6">
-                  <img
-                    src={sauceImages[sauce.name] ?? ""}
-                    alt={sauce.name}
-                    className={`h-full w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.05] ${sauce.comingSoon ? "opacity-60" : ""}`}
-                    style={{ willChange: "transform" }}
-                  />
-                  {sauce.comingSoon && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="px-6 py-2.5 rounded-full bg-background/90 border border-border text-foreground font-display text-xs font-bold uppercase tracking-[0.2em]">Coming Soon</span>
-                    </div>
-                  )}
-                  {sauce.badge && (
-                    <motion.div
-                      className="absolute top-3 left-3"
-                      animate={{ scale: [1, 1.06, 1] }}
-                      transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <span className="px-3 py-1.5 rounded-full bg-gradient-fire text-primary-foreground text-[10px] font-display font-bold uppercase tracking-wider shadow-fire">{sauce.badge}</span>
-                    </motion.div>
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-lg font-bold text-foreground mb-1 tracking-tight transition-colors duration-300 group-hover:text-primary/90">{sauce.name}</h3>
-                  <p className="text-[10px] font-display font-bold uppercase tracking-[0.15em] text-primary/80 mb-1.5">{sauce.tagline}</p>
-                  {sauce.price && (
-                    <p className="font-display text-2xl font-bold text-primary mb-2">{sauce.price}</p>
-                  )}
-                  <p className="text-xs text-foreground/50 mb-3">{sauce.desc}</p>
-                  <div className="mb-4"><SpiceLevel level={sauce.spice} /></div>
-                  <p className="text-[10px] font-display uppercase tracking-[0.15em] text-foreground/40 mb-3">Best for: {sauce.bestFor}</p>
-                  {sauce.proTip && (
-                    <div className="mb-4 px-3 py-2.5 rounded-xl bg-primary/5 border border-primary/10">
-                      <p className="text-[11px] text-foreground/60 leading-relaxed">
-                        <span className="font-display font-bold text-primary uppercase tracking-wider text-[10px]">Pro Tip: </span>
-                        {sauce.proTip}
-                      </p>
-                    </div>
-                  )}
-                  {sauce.comingSoon ? (
-                    <div className="w-full text-center">
-                      <button disabled className="w-full flex items-center justify-center gap-2 bg-secondary/60 px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-foreground/30 cursor-not-allowed">
-                        Notify Me
-                      </button>
-                      <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Coming Soon</p>
-                    </div>
-                  ) : (
-                    <div className="w-full text-center">
-                      <Link to={sauce.buyUrl!} className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-4 py-3 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--flame)/0.4)] hover:scale-[1.02]">
-                        <ShoppingCart className="h-4 w-4" /> {sauce.ctaLabel}
-                      </Link>
-                      <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">Ships May 2026</p>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
+              <div key={sauce.name} data-reveal className="scroll-reveal">
+                <FlavorWorldCard
+                  name={sauce.name}
+                  tagline={sauce.tagline}
+                  desc={sauce.desc}
+                  price={sauce.price}
+                  spice={sauce.spice}
+                  bestFor={sauce.bestFor}
+                  image={sauceImages[sauce.name] ?? ""}
+                  buyUrl={sauce.buyUrl ?? ""}
+                  ctaLabel={sauce.ctaLabel}
+                  proTip={sauce.proTip}
+                  badge={sauce.badge}
+                  comingSoon={sauce.comingSoon}
+                  theme={sauce.theme}
+                />
+              </div>
             ))}
           </div>
         </div>
