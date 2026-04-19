@@ -55,11 +55,11 @@ const SocialProof = () => (
             className="card-premium rounded-2xl overflow-hidden group"
             style={{ willChange: "transform" }}
           >
-            <div className="aspect-[3/4] overflow-hidden relative">
+            <div className="aspect-square overflow-hidden relative">
               <img
                 src={r.image}
                 alt={`Review by ${r.name}`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
             </div>

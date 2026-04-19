@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock, Flame, Mail, CheckCircle, AlertTriangle, Radio } from "lucide-react";
 import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
-import nbBottle from "@/assets/nb-bottle-2.png";
+import nbSoySauce from "@/assets/nb-review-photo-2.png";
 
 // ── Target drop date ─────────────────────────────────────────────────────────
 const DROP_DATE = new Date("2026-08-01T00:00:00");
@@ -333,7 +333,7 @@ const ComingSoonDrop = () => {
             tagline="Premium Private Label Soy Sauce"
             status="STATUS: PREVIEW LIVE"
             statusColor="text-[#c8a24a]/80"
-            image={nbBottle}
+            image={nbSoySauce}
             imageGlow="#c8a24a"
             rotate="right"
             declassified

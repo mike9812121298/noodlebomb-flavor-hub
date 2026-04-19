@@ -4,7 +4,6 @@ import { Flame } from "lucide-react";
 const badges = [
   { label: "Small Batch", icon: "🏺" },
   { label: "All Natural", icon: "🌿" },
-  { label: "No Preservatives", icon: "✨" },
   { label: "Vegan Friendly", icon: "🌱" },
 ];
 
