@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform, AnimatePresence, Variants } from "framer-motion";
 import { useScrollReveal, useScrollRevealChildren } from "@/hooks/use-scroll-reveal";
-import { ArrowRight, Zap, ChefHat, Star, ShoppingCart, Truck, RotateCcw, Leaf, MapPin } from "lucide-react";
+import { ArrowRight, Zap, Star, ShoppingCart, Truck, RotateCcw, Leaf, MapPin } from "lucide-react";
 import nbLogo from "@/assets/nb-logo.png";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
@@ -88,8 +88,6 @@ const Index = () => {
 
   const sauceHeaderRef = useScrollReveal();
   const sauceGridRef = useScrollRevealChildren({ staggerMs: 80 });
-  const featuresHeaderRef = useScrollReveal();
-  const featuresGridRef = useScrollRevealChildren({ staggerMs: 100 });
   const ctaRef = useScrollReveal();
 
   const nextSlide = useCallback(() => {
@@ -389,41 +387,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why NoodleBomb */}
-      <section className="py-32">
-        <div className="section-divider-animated mb-32" />
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-20">
-            <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Why NoodleBomb</span>
-          </motion.div>
-          <div ref={featuresGridRef} className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
-            {[
-              { icon: Zap, title: "Instant Flavor", desc: "Just a drizzle transforms any dish into restaurant-level flavor." },
-              { icon: ChefHat, title: "Chef Crafted", desc: "Small-batch recipes developed with premium, all-natural ingredients." },
-              { icon: Star, title: "Versatile", desc: "Ramen, rice, grilled meats, dumplings, eggs — it goes on everything." },
-            ].map((f, index) => (
-              <motion.div
-                key={f.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="text-center group"
-              >
-                <motion.div
-                  className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/80 border border-border border-glow group-hover:border-primary/30 group-hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] transition-all duration-500"
-                  whileHover={{ scale: 1.15, rotate: 8 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 12 }}
-                >
-                  <f.icon className="h-7 w-7 text-foreground/50 icon-glow" />
-                </motion.div>
-                <h3 className="font-display text-lg font-bold text-foreground mb-2 tracking-tight">{f.title}</h3>
-                <p className="text-sm text-foreground/50 leading-relaxed">{f.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <BundleBuilder />
 
