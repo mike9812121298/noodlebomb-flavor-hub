@@ -10,7 +10,7 @@ import { Truck, Lock, Flame, Check } from "lucide-react";
 const products = [
   {
     name: "Original",
-    tagline: "Umami, Perfected. Soy, garlic, ginger, hint of sweetness.",
+    tagline: "Umami, Perfected. Deep garlic-sesame umami, medium heat, goes with everything.",
     price: "$11.99",
     image: nbOriginal,
     spiceLevel: 1,
@@ -23,7 +23,7 @@ const products = [
   },
   {
     name: "Spicy Tokyo",
-    tagline: "Street Heat Legend. Bold dark soy, roasted chili, sesame.",
+    tagline: "Street Heat Legend. Fiery chili-forward heat, dark roasted soy, hot and addictive.",
     price: "$11.99",
     image: nbSpicyTokyo,
     spiceLevel: 3,
@@ -36,7 +36,7 @@ const products = [
   },
   {
     name: "Citrus Shoyu",
-    tagline: "Bright Side of Bold. Lemon, orange, yuzu-style citrus.",
+    tagline: "Bright Side of Bold. Yuzu citrus over soy, mild heat, clean and surprisingly addictive.",
     price: "$11.99",
     image: nbCitrusShoyu,
     spiceLevel: 1,
@@ -64,9 +64,9 @@ const Shop = () => (
     <div className="container py-16">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
         <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-4 block">Shop</span>
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">The Flavor Line</h1>
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">The Full Lineup</h1>
         <p className="text-foreground/70 mt-3 text-lg">
-          Small-batch ramen sauces crafted for bold, restaurant-level flavor at home.
+          Four flavors. One obsession. Pick yours or grab the bundle.
         </p>
         <p className="text-muted-foreground mt-1 text-sm">Free shipping on orders $40+ — limited small-batch inventory.</p>
       </motion.div>
@@ -207,7 +207,7 @@ const Shop = () => (
         to="/product/original-ramen"        className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-fire"
       >
         <Flame className="h-4 w-4" />
-        Shop Now
+        Shop Original
       </Link>
     </div>
   </div>

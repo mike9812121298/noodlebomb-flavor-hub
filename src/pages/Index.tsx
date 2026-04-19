@@ -26,15 +26,15 @@ const sauceImages: Record<string, string> = {
 };
 
 const sauces = [
-  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Soy, garlic, ginger, and a hint of sweetness.", bestFor: "Ramen, rice bowls, stir fry", badge: null, buyUrl: "/product/original-ramen", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Bold dark soy, roasted chili, and sesame.", bestFor: "Wings, fried rice, steak", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Lemon, orange, and yuzu-style citrus.", bestFor: "Seafood, shrimp, salads", badge: null, buyUrl: "/product/citrus-shoyu", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
+  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Deep umami, garlic, ginger, and sesame — medium heat. Balanced and versatile enough to go with everything.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Fiery, chili-forward heat layered over dark roasted soy and sesame. Hot — turns up the intensity without killing the umami.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Bright yuzu citrus lifts a clean soy base into something tangy and fresh. Mild heat — the light, bright counterpart to the deeper sauces.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The Yuzu notes pop best with cold dishes." },
 ];
 
 const heroSauces = [
-  { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Soy, garlic, ginger, and a hint of sweetness." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Bold dark soy, roasted chili, and sesame." },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Lemon, orange, and yuzu-style citrus." },
+  { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Deep umami, garlic, ginger, and sesame — medium heat. The one that goes with everything." },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Fiery, chili-forward heat over dark roasted soy. Hot — turn up the heat without losing the flavor." },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Bright yuzu citrus over a clean soy base — mild heat. Clean, bright, and surprisingly addictive." },
 ] as const;
 
 // Stagger container for hero content
@@ -171,7 +171,7 @@ const Index = () => {
                 href="#products"
                 className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.65)] hover:scale-105 active:scale-[0.98] flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow"
               >
-                Shop Now
+                Shop the Collection
               </motion.a>
               <motion.div variants={ctaItemVariants}>
                 <Link
@@ -393,7 +393,7 @@ const Index = () => {
             ))}
           </div>
           <a href="/ramen-box" className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.6)] hover:scale-105 shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow">
-            Start Your Box
+            Start Your Subscription
           </a>
         </div>
       </section>
@@ -457,7 +457,7 @@ const Index = () => {
             <p className="text-foreground/50 mb-10 text-sm">Join thousands upgrading their cooking in seconds.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/shop" className="inline-flex items-center gap-2 bg-gradient-fire px-12 py-5 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_55px_hsl(var(--flame)/0.6)] hover:scale-105 shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow">
-                Shop Now
+                Shop the Collection
               </Link>
               <Link to="/sauce-selector" className="inline-flex items-center gap-2 border border-border/60 px-8 py-5 rounded-full font-display text-sm font-semibold uppercase tracking-[0.15em] text-foreground/50 hover:border-primary/40 hover:text-primary/70 transition-all">
                 Find Your Sauce <ArrowRight className="h-4 w-4" />
@@ -470,7 +470,7 @@ const Index = () => {
       {/* Mobile sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur border-t border-border p-3">
         <Link to="/shop" className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_30px_hsl(var(--flame)/0.35)]">
-          <ShoppingCart className="h-4 w-4" /> Shop Now
+          <ShoppingCart className="h-4 w-4" /> Shop the Collection
         </Link>
       </div>
     </div>

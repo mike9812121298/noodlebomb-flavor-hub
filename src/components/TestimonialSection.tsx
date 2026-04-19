@@ -5,19 +5,19 @@ import { useCountUp } from "@/hooks/useCountUp";
 
 const testimonials = [
   {
-    name: "Marcus T., Seattle WA",
+    name: "Marcus T.",
     text: "I put this on literally everything. My ramen game has never been this strong. Original is an everyday must.",
     rating: 5,
-    sauce: "Original",
+    sauce: "Original Ramen Sauce",
   },
   {
-    name: "Sarah K., Portland OR",
+    name: "Sarah K.",
     text: "Spicy Tokyo on wings is insane. That slow burn keeps you coming back. Best hot sauce I've ever had.",
     rating: 5,
     sauce: "Spicy Tokyo",
   },
   {
-    name: "James L., Eugene OR",
+    name: "James L.",
     text: "Citrus Shoyu on grilled shrimp is a game changer. Fresh, bright, and just the right amount of tang.",
     rating: 5,
     sauce: "Citrus Shoyu",

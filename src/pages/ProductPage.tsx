@@ -49,7 +49,7 @@ const PRODUCTS: Record<string, ProductData> = {
     flavorHook: "Bold. Balanced. Essential.",
     badge: "⭐ Best Seller",
     description:
-      "Our flagship sauce — deep soy umami anchored by garlic, ginger, and a whisper of sweetness. The one that started it all.",
+      "Deep soy umami anchored by garlic, ginger, and sesame oil — with a whisper of sweetness and medium heat. Balanced and versatile, it's built for ramen, rice bowls, and grilled proteins alike. The one that goes with everything.",
     ingredients:
       "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Garlic, Ginger, Sesame Oil.",
     allergens: "Soy, Wheat (Gluten), Sesame.",
@@ -68,7 +68,7 @@ const PRODUCTS: Record<string, ProductData> = {
     flavorHook: "Heat That Hooks You.",
     badge: "🔥 Most Popular",
     description:
-      "Bold dark soy, roasted chili, and sesame oil bring the heat of Tokyo street food straight to your kitchen. Layered, complex, addictive.",
+      "Fiery, chili-forward heat layered over dark roasted soy and sesame oil — more intense than Original, less garlic-forward, pure Tokyo street energy. Hot enough to hook you, with enough umami depth to keep pulling you back. Turn up the heat without losing the flavor.",
     ingredients:
       "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Chili Paste, Garlic, Ginger, Sesame Oil.",
     allergens: "Soy, Wheat (Gluten), Sesame.",
@@ -86,7 +86,7 @@ const PRODUCTS: Record<string, ProductData> = {
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
     flavorHook: "Bright. Tangy. Fresh.",
     description:
-      "Yuzu-style citrus and sudachi lift the deep soy base into something clean and extraordinary. The sauce that converts citrus skeptics.",
+      "Bright yuzu and sudachi citrus lift a clean soy base into something tangy, fresh, and surprisingly addictive. Mild heat with a citrus-forward profile — best on light ramen, sushi, fish, and anything where brightness matters. The fresh, light counterpart to the deeper sauces.",
     ingredients:
       "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Citrus Juice (Yuzu, Sudachi), Mirin, Sake, Garlic, Sesame Oil.",
     allergens: "Soy, Wheat (Gluten), Sesame.",
