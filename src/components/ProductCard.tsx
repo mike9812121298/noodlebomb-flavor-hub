@@ -6,16 +6,16 @@ import SpiceLevel from "@/components/SpiceLevel";
 
 const ingredientData: Record<string, { ingredients: string; allergens: string }> = {
   "Original Ramen Sauce": {
-    ingredients: "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Garlic, Ginger, Sesame Oil.",
-    allergens: "Soy, Wheat (Gluten), Sesame.",
+    ingredients: "Water, light soy sauce (water, soybeans, wheat, salt, sugar, preservative), brown sugar, rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
+    allergens: "Soy, wheat, milk, sesame, sulphites.",
   },
   "Spicy Tokyo Ramen Sauce": {
-    ingredients: "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Mirin, Sake, Chili Paste, Garlic, Ginger, Sesame Oil.",
-    allergens: "Soy, Wheat (Gluten), Sesame.",
+    ingredients: "Water, light soy sauce (water, soybeans, wheat, salt, sugar), rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), brown sugar, honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
+    allergens: "Soy, wheat, milk, sesame, sulphites.",
   },
   "Citrus Shoyu Ramen Sauce": {
-    ingredients: "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Citrus Juice (Yuzu, Sudachi), Mirin, Sake, Garlic, Sesame Oil.",
-    allergens: "Soy, Wheat (Gluten), Sesame.",
+    ingredients: "Water, light soy sauce (water, soybeans, wheat, salt, sugar), rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), orange juice (water, orange juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), brown sugar, honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
+    allergens: "Soy, wheat, milk, sesame, sulphites.",
   },
 };
 
