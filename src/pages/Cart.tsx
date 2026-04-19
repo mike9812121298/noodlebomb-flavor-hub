@@ -153,17 +153,7 @@ const Cart = () => {
                         >
                           {item.name}
                         </Link>
-                        <div className="mt-0.5">
-                          {item.purchaseType === "subscribe" ? (
-                            <span className="text-[11px] px-2 py-0.5 rounded-full bg-primary/15 text-primary font-display font-bold uppercase tracking-wider">
-                              Subscribe & Save 20%
-                            </span>
-                          ) : (
-                            <span className="text-[11px] text-muted-foreground font-display">
-                              One-Time Purchase
-                            </span>
-                          )}
-                        </div>
+
                       </div>
                       <button
                         onClick={() =>
@@ -272,7 +262,7 @@ const Cart = () => {
               </div>
 
               <p className="text-[11px] text-muted-foreground text-center mt-4">
-                Ships week of May 5, 2026
+                🚚 Pre-order — ships May 8, 2026
               </p>
 
               <div className="mt-5 pt-5 border-t border-border/40 space-y-2">

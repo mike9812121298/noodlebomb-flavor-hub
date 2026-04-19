@@ -116,9 +116,6 @@ const ProductPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const { addItem, itemCount } = useCart();
   const { toast } = useToast();
-  const [purchaseType, setPurchaseType] = useState<"one-time" | "subscribe">(
-    "subscribe"
-  );
   const [showDetails, setShowDetails] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
 
@@ -137,24 +134,17 @@ const ProductPage = () => {
     );
   }
 
-  const effectivePrice =
-    purchaseType === "subscribe" && product.subscribePrice
-      ? product.subscribePrice
-      : product.price;
-
   const handleAddToCart = () => {
     addItem({
       slug: product.slug,
       name: product.name,
-      price: effectivePrice,
-      purchaseType,
+      price: product.price,
+      purchaseType: "one-time",
     });
     setAddedToCart(true);
     toast({
       title: "Added to cart!",
-      description: `${product.name} — ${
-        purchaseType === "subscribe" ? "Subscribe & Save" : "One-Time"
-      }`,
+      description: `${product.name} added.`,
     });
     setTimeout(() => setAddedToCart(false), 2000);
   };
@@ -230,69 +220,14 @@ const ProductPage = () => {
               )}
             </div>
 
-            {/* Purchase type */}
-            {product.subscribePrice && (
-              <div className="space-y-2">
-                <label
-                  className={`flex items-center gap-3 cursor-pointer px-4 py-3 rounded-xl border transition-all ${
-                    purchaseType === "one-time"
-                      ? "border-border bg-secondary/40"
-                      : "border-transparent"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="purchase-type"
-                    checked={purchaseType === "one-time"}
-                    onChange={() => setPurchaseType("one-time")}
-                    className="accent-primary"
-                  />
-                  <div>
-                    <span className="font-display font-semibold text-sm text-foreground">
-                      One-Time Purchase
-                    </span>
-                    <span className="text-muted-foreground text-sm ml-2">
-                      {product.displayPrice}
-                    </span>
-                  </div>
-                </label>
-                <label
-                  className={`flex items-center gap-3 cursor-pointer px-4 py-3 rounded-xl border transition-all ${
-                    purchaseType === "subscribe"
-                      ? "border-primary/40 bg-primary/[0.08] shadow-[0_0_20px_hsl(var(--primary)/0.1)]"
-                      : "border-transparent"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="purchase-type"
-                    checked={purchaseType === "subscribe"}
-                    onChange={() => setPurchaseType("subscribe")}
-                    className="accent-primary"
-                  />
-                  <div>
-                    <span className="font-display font-bold text-primary text-sm">
-                      Subscribe & Save 20%
-                    </span>
-                    <span className="text-muted-foreground text-xs block">
-                      {product.displaySubscribePrice} · Cancel or skip anytime
-                    </span>
-                  </div>
-                </label>
-              </div>
-            )}
+
 
             {/* Price + CTA */}
             <div className="pt-2">
               <div className="flex items-end gap-2 mb-4">
                 <span className="font-display text-4xl font-bold text-primary">
-                  ${effectivePrice.toFixed(2)}
+                  ${product.price.toFixed(2)}
                 </span>
-                {purchaseType === "subscribe" && product.subscribePrice && (
-                  <span className="text-muted-foreground text-sm line-through mb-1">
-                    {product.displayPrice}
-                  </span>
-                )}
               </div>
 
               <div className="flex gap-3">
@@ -315,7 +250,7 @@ const ProductPage = () => {
                 </Link>
               </div>
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-3"><Truck className="h-3.5 w-3.5" />
-                Ships in 1–2 business days · Arrives in 3–5 days</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
+                Pre-order · Ships May 8, 2026</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
               </p>
             </div>
 

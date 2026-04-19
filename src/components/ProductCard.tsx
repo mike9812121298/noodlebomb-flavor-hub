@@ -58,7 +58,6 @@ const ProductCard = ({
   name, tagline, price, image, spiceLevel, color, pairsWellWith,
   subscribePrice, flavorHook, badge, buyUrl, comingSoon, proTip,
 }: ProductCardProps) => {
-  const [purchaseType, setPurchaseType] = useState<"one-time" | "subscribe">("subscribe");
   const [showDetails, setShowDetails] = useState(false);
 
   const details = ingredientData[name];
@@ -186,60 +185,17 @@ const ProductCard = ({
 
         {!comingSoon && (
           <>
-            {subscribePrice && (
-              <div className="mb-4 space-y-2">
-                <label
-                  className={`flex items-center gap-2 cursor-pointer text-sm px-3 py-2 rounded-lg transition-all ${
-                    purchaseType === "one-time"
-                      ? "bg-secondary/50 border border-border"
-                      : "border border-transparent"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name={`purchase-${name}`}
-                    checked={purchaseType === "one-time"}
-                    onChange={() => setPurchaseType("one-time")}
-                    className="accent-primary"
-                  />
-                  <span className="text-foreground/80">One-Time Purchase</span>
-                </label>
-                <label
-                  className={`flex items-center gap-2 cursor-pointer text-sm px-3 py-2 rounded-lg transition-all ${
-                    purchaseType === "subscribe"
-                      ? "bg-primary/10 border border-primary/30 shadow-[0_0_15px_hsl(var(--primary)/0.1)]"
-                      : "border border-transparent"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name={`purchase-${name}`}
-                    checked={purchaseType === "subscribe"}
-                    onChange={() => setPurchaseType("subscribe")}
-                    className="accent-primary"
-                  />
-                  <span className="text-primary font-display font-semibold">
-                    Subscribe & Save 20%
-                  </span>
-                </label>
-                {purchaseType === "subscribe" && (
-                  <p className="text-[11px] text-muted-foreground pl-3">
-                    Delivered every 30 days. Cancel or skip anytime.
-                  </p>
-                )}
-              </div>
-            )}
 
             {upsellNudge && (
               <p className="text-sm italic text-muted-foreground mb-3">{upsellNudge}</p>
             )}
 
             <div className="flex items-center justify-between">
-              <div>
-                <span className="font-display text-2xl font-bold text-primary">
-                  {purchaseType === "subscribe" && subscribePrice ? subscribePrice : price}
-                </span>
-              </div>
+            <div>
+            <span className="font-display text-2xl font-bold text-primary">
+            {price}
+            </span>
+            </div>
               <div className="text-center">
                 <Link
                   to={productPath}
