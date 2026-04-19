@@ -66,9 +66,9 @@ const DropCard = ({ name, tagline, description, status, image, glowColor, cta }:
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      initial={{ y: 20 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
@@ -176,9 +176,9 @@ const ComingSoonDrop = () => {
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.55 }}
           className="text-center mb-14"
         >
@@ -199,9 +199,9 @@ const ComingSoonDrop = () => {
 
         {/* Countdown */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ y: 12 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex justify-center mb-14"
         >
@@ -249,9 +249,9 @@ const ComingSoonDrop = () => {
         {/* Email capture */}
         <motion.div
           id="notify-me"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ y: 12 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5 }}
           className="max-w-md mx-auto text-center"
         >
