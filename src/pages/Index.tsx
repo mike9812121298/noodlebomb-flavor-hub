@@ -9,6 +9,7 @@ import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
 import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
 import PressBar from "@/components/PressBar";
+import ReviewsSection from "@/components/ReviewsSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import BundleBuilder from "@/components/BundleBuilder";
 import SpiceLevel from "@/components/SpiceLevel";
@@ -24,16 +25,16 @@ const sauceImages: Record<string, string> = {
 };
 
 const sauces = [
-  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Deep umami, garlic, ginger, and sesame — medium heat. Balanced and versatile enough to go with everything.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", ctaLabel: "Shop Original", comingSoon: false, proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Fiery, chili-forward heat layered over dark roasted soy and sesame. Hot — turns up the intensity without killing the umami.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", ctaLabel: "Shop Spicy Tokyo", comingSoon: false, proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Bright citrus lifts a clean soy base into something tangy and fresh. Mild heat — the light, bright counterpart to the deeper sauces.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", ctaLabel: "Shop Citrus Shoyu", comingSoon: false, proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The citrus notes pop best with cold dishes." },
+  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Dark soy, roasted garlic, ginger, and sesame — medium heat that settles clean. Coats noodles, glazes proteins. The one you reach for without thinking.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", ctaLabel: "Shop Original", comingSoon: false, proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish." },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Chili-forward from the first drop. Dark roasted soy underneath, a burn that settles in the back of your throat. Hot, layered, and deeply addictive.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", ctaLabel: "Shop Spicy Tokyo", comingSoon: false, proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick." },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Yuzu-forward citrus over a clean shoyu base — tangy, bright, mild heat. The one that opens up seafood and makes cold noodle bowls sing.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", ctaLabel: "Shop Citrus Shoyu", comingSoon: false, proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The citrus notes pop best with cold dishes." },
   { name: "Ryu Garlic", tagline: "The Dragon's Breath", spice: 2, price: "$11.99", desc: "Roasted garlic-forward with a smoky depth and subtle heat. An umami bomb built for garlic lovers who don't do things halfway.", bestFor: "Noodles, dumplings, stir-fry, roasted veggies", badge: null, buyUrl: null, ctaLabel: "Notify Me", comingSoon: true, proTip: null },
 ];
 
 const heroSauces = [
-  { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Deep umami, garlic, ginger, and sesame — medium heat. The one that goes with everything." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Fiery, chili-forward heat over dark roasted soy. Hot — turn up the heat without losing the flavor." },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Bright citrus over a clean soy base — mild heat. Clean, bright, and surprisingly addictive." },
+  { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Dark soy, roasted garlic, ginger, and sesame — medium heat that coats and clings. The one that goes with everything." },
+  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Chili-forward heat over dark roasted soy and sesame. The burn arrives fast and lingers. Intensity without apology." },
+  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Yuzu-forward citrus over clean shoyu — tangy, bright, mild heat. The light sauce with serious edge." },
 ] as const;
 
 // Stagger container for hero content
@@ -387,6 +388,8 @@ const Index = () => {
         </div>
       </section>
 
+
+      <ReviewsSection />
 
       <BundleBuilder />
 
