@@ -84,7 +84,7 @@ const FAQ = () => {
     <div className="min-h-screen bg-background pt-24 pb-20 px-6">
       <div className="max-w-2xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <h1 className="font-display text-4xl font-black text-foreground mb-3">FAQ & Contact</h1>
+          <h1 className="font-display text-4xl font-black text-foreground mb-3">FAQ</h1>
           <p className="text-muted-foreground text-lg mb-12">Everything you need to know about NoodleBomb.</p>
           <div className="bg-card rounded-2xl border border-border px-6 mb-12">
             {faqGroups.map((group, gi) => (
