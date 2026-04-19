@@ -284,7 +284,7 @@ const Index = () => {
             <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">Meet the Lineup</h2>
             <p className="text-foreground/50 mt-3 text-sm max-w-md mx-auto">Small-batch crafted. Premium ingredients. Bold, unforgettable flavor.</p>
           </div>
-          <div ref={sauceGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div ref={sauceGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {sauces.map((sauce) => (
               <motion.div
                 key={sauce.name}
