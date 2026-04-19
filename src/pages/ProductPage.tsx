@@ -86,7 +86,7 @@ const PRODUCTS: Record<string, ProductData> = {
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
     flavorHook: "Bright. Tangy. Fresh.",
     description:
-      "Bright yuzu and sudachi citrus lift a clean soy base into something tangy, fresh, and surprisingly addictive. Mild heat with a citrus-forward profile — best on light ramen, sushi, fish, and anything where brightness matters. The fresh, light counterpart to the deeper sauces.",
+      "Bright citrus and sudachi lift a clean soy base into something tangy, fresh, and surprisingly addictive. Mild heat with a citrus-forward profile — best on light ramen, sushi, fish, and anything where brightness matters. The fresh, light counterpart to the deeper sauces.",
     ingredients:
       "Water, Soy Sauce (Water, Wheat, Soybeans, Salt), Citrus Juice (Yuzu, Sudachi), Mirin, Sake, Garlic, Sesame Oil.",
     allergens: "Soy, Wheat (Gluten), Sesame.",

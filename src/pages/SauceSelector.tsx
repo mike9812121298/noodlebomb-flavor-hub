@@ -73,7 +73,7 @@ const results: Record<string, SauceResult> = {
   citrus: {
     name: "Citrus Shoyu",
     tagline: "The Bright Side of Bold",
-    description: "Vibrant lemon, orange, and yuzu-style citrus for a clean, tangy finish.",
+    description: "Vibrant lemon, orange, and bright citrus for a clean, tangy finish.",
     spice: 1,
   },
 };

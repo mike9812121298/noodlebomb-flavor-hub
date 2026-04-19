@@ -36,7 +36,7 @@ const products = [
   },
   {
     name: "Citrus Shoyu",
-    tagline: "Bright Side of Bold. Yuzu citrus over soy, mild heat, clean and surprisingly addictive.",
+    tagline: "Bright Side of Bold. Citrus over soy, mild heat, clean and surprisingly addictive.",
     price: "$11.99",
     image: nbCitrusShoyu,
     spiceLevel: 1,
