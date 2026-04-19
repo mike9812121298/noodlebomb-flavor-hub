@@ -34,13 +34,34 @@ const About = () => {
       {/* Story */}
       <div className="max-w-3xl mx-auto px-6 pb-20">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="prose prose-invert max-w-none">
+
+          {/* Founder photo placeholder + story */}
           <div className="bg-card rounded-2xl border border-border p-8 mb-8">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4">The Origin</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              We started with one sauce — Original — and dialed it in until it was perfect. Soy, roasted garlic, ginger, a hint of sweetness. The kind of flavor that makes a $1 pack of instant noodles taste like something you'd pay $18 for.
+            <div className="flex flex-col sm:flex-row items-start gap-8 mb-8">
+              {/* Founder avatar placeholder */}
+              <div className="flex-shrink-0 w-24 h-24 rounded-full bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-[0_0_30px_hsl(var(--flame)/0.35)]">
+                <span className="font-display text-3xl font-black text-white">A</span>
+              </div>
+              <div>
+                <h2 className="font-display text-2xl font-bold text-foreground mb-1">Ashley's Story</h2>
+                <p className="text-xs font-display font-semibold uppercase tracking-[0.25em] text-primary/70">Founder · Pacific Northwest</p>
+              </div>
+            </div>
+
+            <p className="text-muted-foreground leading-relaxed mb-5">
+              Ashley didn't come back from Japan with souvenirs. She came back obsessed. After eating through izakayas, ramen shops, and convenience store shelves that somehow embarrassed American grocery stores, she landed home in the Pacific Northwest and stood in front of a sauce aisle that felt like a letdown. Nothing had the depth. Nothing had the balance. Nothing had whatever that thing was — the thing that made a $9 bowl in Tokyo feel like it was built just for you.
             </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-5">
+              She tried everything. Store-bought teriyaki, the "Asian-inspired" sauces, the ones with names that gesture vaguely at Japan without understanding it. They were sweet where they should've been savory. Thin where they needed weight. The frustration wasn't just culinary — it was personal. She'd tasted what was possible. She knew exactly what was missing.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed mb-5">
+              So she started making her own. The kitchen in her Pacific Northwest home became a testing ground — dark soy layered with roasted garlic, ginger dialed in, heat calibrated until it landed right. Batch after batch. Some were close. Some weren't. But each one got her closer to something real: a ramen sauce that carried the soul of what she'd eaten in Japan, built from scratch, without shortcuts.
+            </p>
+
             <p className="text-muted-foreground leading-relaxed">
-              Then we kept going. Four flavors later, we're on a mission to make every bowl worth remembering. Handcrafted in small batches, no mystery fillers, no shortcuts.
+              NoodleBomb is what came out of that obsession. Four flavors, each one developed the same way — start with the feeling you want, work backward until the sauce earns it. Ashley wants every bowl to feel intentional. Not like a shortcut. Not like a condiment you drizzle on and forget. Like someone genuinely cared about what you were about to eat.
             </p>
           </div>
 

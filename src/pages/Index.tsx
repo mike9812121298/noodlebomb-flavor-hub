@@ -395,6 +395,37 @@ const Index = () => {
 
       <TestimonialSection />
 
+      {/* Founder Strip */}
+      <section className="py-20 px-6">
+        <div className="container max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+            className="relative bg-gradient-to-br from-zinc-900 to-black border border-white/8 rounded-3xl px-10 py-12 text-center overflow-hidden"
+          >
+            {/* Subtle radial glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,hsl(4_85%_50%/0.06),transparent_70%)] pointer-events-none" />
+
+            {/* Avatar */}
+            <div className="relative z-10 w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_hsl(var(--flame)/0.4)]">
+              <span className="font-display text-xl font-black text-white">A</span>
+            </div>
+
+            {/* Quote */}
+            <blockquote className="relative z-10 font-display text-xl md:text-2xl font-semibold text-white/90 leading-snug max-w-2xl mx-auto mb-6">
+              &ldquo;I came back from Japan knowing exactly what was missing from every sauce on American shelves. So I made it myself — in my kitchen, batch after batch, until it felt right.&rdquo;
+            </blockquote>
+
+            {/* Attribution */}
+            <p className="relative z-10 text-xs font-display font-semibold uppercase tracking-[0.3em] text-primary/70">
+              Ashley &mdash; Founder of NoodleBomb &middot; Pacific Northwest
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Subscription */}
       <section className="py-28 border-t border-white/5">
         <div className="container max-w-3xl">
