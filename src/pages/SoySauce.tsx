@@ -296,9 +296,9 @@ const SoySauce = () => {
             </h2>
             <div style={{ width: 36, height: 2, background: GOLD, margin: "0 auto 2rem" }} />
             <p style={{ color: "rgba(245,240,232,0.68)", lineHeight: 1.95, fontSize: "0.95rem" }}>
-              Pearl River Bridge has been fermenting soy sauce in Guangdong since 1879. We source their
-              Superior Lite — naturally brewed, whole soybean, 35% less sodium than regular — and bring it
-              to your table under the NoodleBomb label.
+              Our soy sauce is rooted in Guangdong, China — one of the world's great fermentation traditions,
+              where craft has been honed for generations. We source a naturally brewed Superior Lite —
+              whole soybean, 35% less sodium than regular — and bring it to your table under the NoodleBomb label.
             </p>
             <p style={{ color: "rgba(245,240,232,0.68)", lineHeight: 1.95, fontSize: "0.95rem", marginTop: "1.5rem" }}>
               No reformulation. No dilution. The same sauce that's been in professional kitchens for

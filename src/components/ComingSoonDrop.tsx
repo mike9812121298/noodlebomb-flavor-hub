@@ -338,7 +338,7 @@ const ComingSoonDrop = () => {
             rotate="right"
             declassified
             briefLines={[
-              "PRB Superior Lite. 16.9 oz.",
+              "Traditionally brewed. 16.9 oz.",
               "Cleaner than anything on your shelf.",
               "REDACTED",
               "Less sodium. Full umami. No compromise.",
