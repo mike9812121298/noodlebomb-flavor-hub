@@ -35,7 +35,7 @@ const EmailCaptureSection = () => {
                 Unlock <span className="text-gradient-fire">15% Off</span> Your First Drop
               </h2>
               <p className="text-foreground/70 font-display text-sm mb-1">
-                Join the Noodle Bomb kitchen crew.
+                Join the NoodleBomb kitchen crew.
               </p>
               <p className="text-foreground/50 text-sm mb-10 max-w-md mx-auto leading-relaxed">
                 Get exclusive recipes, early drops, and 15% off your first bottle.

@@ -29,7 +29,7 @@ const FounderStory = () => (
           <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent mx-auto mb-8" />
           <p className="text-foreground/90 font-display font-semibold text-xl mb-6 tracking-tight">Honest flavor. No shortcuts.</p>
           <div className="space-y-4 text-foreground/60 leading-relaxed">
-            <p>I started Noodle Bomb because I was tired of overpaying for 'premium' sauces that were full of fillers and short on flavor.</p>
+            <p>I started NoodleBomb because I was tired of overpaying for 'premium' sauces that were full of fillers and short on flavor.</p>
             <p>We don't do outrageous markups, and we don't do shortcuts. Just small batches, honest ingredients, and enough heat to keep things interesting.</p>
             <p>If it's on this site, it's because it's exactly what I serve at my own table.</p>
           </div>

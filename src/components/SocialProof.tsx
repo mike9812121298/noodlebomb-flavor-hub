@@ -7,7 +7,7 @@ import reviewPhoto3 from "@/assets/nb-review-photo-3.png";
 
 const reviews = [
   {
-    quote: "Noodle Bomb is a flavor explosion! The richness paired with the perfect spicy kick makes every bowl unforgettable.",
+    quote: "NoodleBomb is a flavor explosion! The richness paired with the perfect spicy kick makes every bowl unforgettable.",
     name: "Ashley",
     rating: 5,
     image: reviewPhoto1,

@@ -144,7 +144,7 @@ const Index = () => {
               variants={heroItemVariants}
               className="text-sm md:text-base text-foreground/50 max-w-md mb-6 leading-relaxed"
             >
-              Noodle Bomb isn't just a condiment; it's the secret weapon for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
+              NoodleBomb isn't just a condiment; it's the secret weapon for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
             </motion.p>
 
             <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
@@ -409,7 +409,7 @@ const Index = () => {
         <div className="section-divider-animated mb-32" />
         <div className="container">
           <div ref={featuresHeaderRef} className="scroll-reveal text-center mb-20">
-            <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Why Noodle Bomb</span>
+            <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Why NoodleBomb</span>
           </div>
           <div ref={featuresGridRef} className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
             {[
@@ -450,7 +450,7 @@ const Index = () => {
           >
             <motion.img
               src={nbLogo}
-              alt="Noodle Bomb"
+              alt="NoodleBomb"
               className="h-14 w-auto mx-auto mb-8 drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
               whileHover={{ scale: 1.08, rotate: -4 }}
               transition={{ type: "spring", stiffness: 300, damping: 12 }}
