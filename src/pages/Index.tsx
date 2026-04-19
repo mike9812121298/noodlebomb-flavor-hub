@@ -394,55 +394,90 @@ const Index = () => {
 
       {/* Subscription */}
       <section className="py-28 border-t border-white/5">
-        <div className="container max-w-3xl text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-4"
-          >Monthly Subscription</motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="font-heading text-4xl md:text-5xl font-bold text-white mb-4"
-          >The Monthly Ramen Box.<br/><span className="text-zinc-400 text-3xl font-normal">$29.99/month.</span></motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.1 }}
-            className="text-zinc-300 text-lg mb-8"
-          >Cancel anytime. Free shipping. 5+ exclusive ramen flavors monthly.</motion.p>
+        <div className="container max-w-3xl">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex flex-wrap justify-center gap-6 text-xs tracking-widest uppercase text-zinc-500 mb-10"
+            transition={{ duration: 0.55 }}
+            className="bg-gradient-to-br from-card to-card/60 border border-primary/20 rounded-2xl px-8 py-14 text-center"
           >
-            {["No Contracts", "Skip Anytime", "Free Shipping", "Members-Only Flavors"].map(f => (
-              <span key={f}>{f}</span>
-            ))}
+            {/* Eyebrow */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-5"
+            >The NoodleBomb Club</motion.p>
+
+            {/* Headline */}
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight"
+            >Never Run Out.<br />Never Pay Full Price.</motion.h2>
+
+            {/* Sub-headline */}
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.1 }}
+              className="text-foreground/60 text-base mb-8 max-w-md mx-auto"
+            >Join the NoodleBomb Club — a new flavor experience delivered monthly. Cancel anytime.</motion.p>
+
+            {/* Benefit Pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.15 }}
+              className="flex flex-wrap justify-center gap-3 mb-10"
+            >
+              {[
+                { icon: "🔥", label: "New Flavor Every Month" },
+                { icon: "💰", label: "Members Save 15%" },
+                { icon: "🚚", label: "Free Shipping Always" },
+              ].map((pill) => (
+                <span
+                  key={pill.label}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-display font-semibold text-foreground/80 tracking-wide"
+                >
+                  <span>{pill.icon}</span> {pill.label}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTA */}
+            <motion.a
+              href="/ramen-box"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              animate={{
+                boxShadow: [
+                  "0 0 0px rgba(220,38,38,0)",
+                  "0 0 20px rgba(220,38,38,0.45)",
+                  "0 0 0px rgba(220,38,38,0)",
+                ],
+              }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+              className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_38px_hsl(var(--flame)/0.4)] btn-shimmer"
+            >
+              Start My Subscription →
+            </motion.a>
+
+            {/* Urgency micro-copy */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="mt-4 text-xs text-foreground/40 font-display tracking-wide"
+            >Join 200+ subscribers already on the list.</motion.p>
           </motion.div>
-          <motion.a
-            href="/ramen-box"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            animate={{
-              boxShadow: [
-                "0 0 0px rgba(220,38,38,0)",
-                "0 0 20px rgba(220,38,38,0.45)",
-                "0 0 0px rgba(220,38,38,0)",
-              ],
-            }}
-            transition={{ duration: 2.5, repeat: Infinity }}
-            className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_38px_hsl(var(--flame)/0.4)] btn-shimmer"
-          >
-            Start Your Subscription
-          </motion.a>
         </div>
       </section>
 
