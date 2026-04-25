@@ -9,7 +9,7 @@ function NextDrop() {
       bigNum: '04',
       accent: '#d4a24a',           // amber
       rim: '#f4d089',
-      status: 'IN R&D · BATCH 03',
+      status: 'COMING SOON · SUMMER 2026',
       eyebrow: 'VOL.04 · EST. SUMMER 2026',
       name: 'Ryu Garlic',
       oneliner: 'Aged black garlic, molasses-deep, slow burn.',
@@ -22,7 +22,7 @@ function NextDrop() {
       bigNum: '05',
       accent: '#ebe7dd',           // parchment
       rim: '#e8f0ff',              // cool cyan-white rim
-      status: 'IN R&D · BATCH 01',
+      status: 'COMING SOON · FALL 2026',
       eyebrow: 'VOL.05 · EST. FALL 2026',
       name: 'Shoyu Reserve',
       oneliner: 'Single-origin shoyu. Barrel-aged. Quietly devastating.',
@@ -46,9 +46,6 @@ function NextDrop() {
       <div className="nd-rail" aria-hidden="true">
         <div className="nd-rail-track">{railText}{railText}</div>
       </div>
-
-      {/* Top-right timestamp */}
-      <div className="nd-timestamp">LAST UPDATED · 04.25.26</div>
 
       <div style={{ maxWidth: 1300, margin: '0 auto', position: 'relative' }}>
         {/* Eyebrow row */}
@@ -143,12 +140,16 @@ function NextDrop() {
               <span className="nd-pulse" />
               BE FIRST IN LINE
             </div>
-            <form className="nd-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="nd-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+              <input type="hidden" name="_subject" value="NoodleBomb — Notify Me (Next Drop)" />
+              <input type="hidden" name="_template" value="table" />
               <input
                 className="nd-input"
                 type="email"
+                name="email"
                 placeholder="your@email.com"
                 aria-label="Email address"
+                required
               />
               <button type="submit" className="nd-submit">Notify me →</button>
             </form>

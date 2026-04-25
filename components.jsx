@@ -203,7 +203,6 @@ function Hero({ headline, bottleSrc }) {
           </div>
         </div>
         <div style={{ display:'flex', gap: 10 }}>
-          <button className="btn btn-ghost">Watch the film</button>
           <a className="btn btn-primary" href={NB_WIX.trio} target="_blank" rel="noopener" style={{ textDecoration: 'none', display: 'inline-block' }}>Try the 3-pack — $29.99</a>
         </div>
       </div>

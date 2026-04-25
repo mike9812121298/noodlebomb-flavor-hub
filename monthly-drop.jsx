@@ -321,17 +321,7 @@ function MonthlyDrop() {
                     </div>
                   ))}
                 </div>
-                <a href="#" style={{
-                  color: 'var(--ink)', fontFamily: 'Inter', fontSize: 13, fontWeight: 500,
-                  opacity: 0.85, textDecoration: 'none',
-                  borderBottom: '1px solid transparent', paddingBottom: 2,
-                  transition: 'border-color .2s, opacity .2s, transform .2s',
-                  display: 'inline-flex', alignItems: 'center', gap: 4
-                }}
-                onMouseOver={(e) => { e.currentTarget.style.borderBottomColor = 'var(--ink)'; e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
-                onMouseOut={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; e.currentTarget.style.opacity = 0.85; e.currentTarget.style.transform = 'translateX(0)'; }}>
-                  See past drops →
-                </a>
+
               </div>
             </Reveal>
           </div>

@@ -27,7 +27,7 @@ const FLAVORS = {
 const FLAVOR_IMAGES = {
   original: 'uploads/nb-original-clean.png',
   citrus: 'uploads/nb-citrus-shoyu-clean.png',
-  spicy: 'uploads/nb-spicy-tokyo-clean.png',
+  spicy: 'uploads/upload-spicy-v3.png',
   ryu: 'uploads/nb-ryu-garlic-clean.png'
 };
 
@@ -443,7 +443,7 @@ function Testimonials() {
         <Reveal>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 56 }}>
             <span className="mono" style={{ color: 'var(--muted)' }}>Index 07 — What They’re Saying</span>
-            <span className="mono" style={{ color: 'var(--muted)' }}>★ ★ ★ ★ ★ · 4.9 avg</span>
+            <span className="mono" style={{ color: 'var(--muted)' }}>★ ★ ★ ★ ★ · 4.9 · 127 reviews</span>
           </div>
         </Reveal>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
@@ -524,8 +524,8 @@ function FlavorPicker({ flavor, setFlavor }) {
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
                     <div className="serif" style={{ fontSize: 22, marginBottom: 14, fontStyle: 'italic' }}>{f.price}</div>
-                    <a className="tlink" href={wixFor(f.key)} target="_blank" rel="noopener" style={{ background: 'none', border: 0, padding: 0, color: 'var(--ink)', cursor: 'pointer', fontFamily: 'Inter', fontSize: 13, fontWeight: 500, textDecoration: 'none', display: 'inline-block' }}>
-                      {active ? 'Selected' : 'Add to cart'}<span className="arrow">→</span>
+                    <a className="tlink" href={wixFor(k)} target="_blank" rel="noopener" style={{ background: 'none', border: 0, padding: 0, color: 'var(--ink)', cursor: 'pointer', fontFamily: 'Inter', fontSize: 13, fontWeight: 500, textDecoration: 'none', display: 'inline-block' }}>
+                      Add to cart<span className="arrow">→</span>
                     </a>
                   </div>
                 </div>
@@ -551,7 +551,7 @@ function FlavorPicker({ flavor, setFlavor }) {
             </div>
             {/* Copy */}
             <div style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
-              <span className="mono" style={{ color: 'var(--muted)' }}>bundle · save $7</span>
+              <span className="mono" style={{ color: 'var(--muted)' }}>bundle · save $6</span>
               <div className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02 }}>
                 The 3-Pack Variety<br />
                 <span style={{ color: 'var(--muted)' }}>— $29.99.</span>
@@ -584,7 +584,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               </div>
 
               <div style={{ marginTop: 8 }}>
-                <button className="btn" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', padding: '16px 26px', fontWeight: 600, borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em', transition: 'transform .2s, filter .2s' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; }}>Add variety pack →</button>
+                <a className="btn" href={WIX_URLS.trio} target="_blank" rel="noopener" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', padding: '16px 26px', fontWeight: 600, borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em', transition: 'transform .2s, filter .2s', textDecoration: 'none', display: 'inline-block' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; }}>Buy the Bundle →</a>
               </div>
             </div>
           </div>
@@ -639,14 +639,14 @@ function FinalCTA() {
           <Reveal delay={3}>
             <div style={{ marginTop: 48, display: 'inline-flex', gap: 28, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
               <a className="btn" href={WIX_URLS.shop} target="_blank" rel="noopener" style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all — from $11.99</a>
-              <a href="#" className="ask-secondary" style={{ color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, fontWeight: 500, opacity: 0.85, textDecoration: 'none', borderBottom: '1px solid transparent', paddingBottom: 2, transition: 'border-color .2s, opacity .2s' }} onMouseOver={(e) => { e.currentTarget.style.borderBottomColor = 'var(--accent-ink)'; e.currentTarget.style.opacity = 1; }} onMouseOut={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; e.currentTarget.style.opacity = 0.85; }}>Join the waitlist →</a>
+              <a href="mailto:hello@noodlebomb.co?subject=Waitlist%20Signup&body=Add%20me%20to%20the%20waitlist%20-%20I%20want%20to%20know%20when%20the%20next%20drop%20ships." className="ask-secondary" style={{ color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, fontWeight: 500, opacity: 0.85, textDecoration: 'none', borderBottom: '1px solid transparent', paddingBottom: 2, transition: 'border-color .2s, opacity .2s' }} onMouseOver={(e) => { e.currentTarget.style.borderBottomColor = 'var(--accent-ink)'; e.currentTarget.style.opacity = 1; }} onMouseOut={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; e.currentTarget.style.opacity = 0.85; }}>Join the waitlist →</a>
             </div>
           </Reveal>
 
           {/* Trust line */}
           <Reveal delay={4}>
             <div className="mono" style={{ marginTop: 36, fontSize: 11, letterSpacing: '0.18em', opacity: 0.7 }}>
-              PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $25
+              PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $35
             </div>
           </Reveal>
         </div>
@@ -682,8 +682,10 @@ function FinalCTA() {
               Once a month. Never spam.
             </div>
           </div>
-          <form onSubmit={(e) => e.preventDefault()} style={{ display: 'flex', gap: 0, border: '1px solid var(--line)', borderRadius: 4, overflow: 'hidden', background: '#100E0C' }}>
-            <input type="email" placeholder="your@email.com" required
+          <form action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', gap: 0, border: '1px solid var(--line)', borderRadius: 4, overflow: 'hidden', background: '#100E0C' }}>
+            <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="email" name="email" placeholder="your@email.com" required
               style={{ flex: 1, minWidth: 0, padding: '16px 18px', background: 'transparent', border: 'none', outline: 'none', color: 'var(--ink)', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em' }} />
             <button type="submit" className="btn" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', padding: '0 28px', fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em', transition: 'filter .2s' }} onMouseOver={(e) => e.currentTarget.style.filter = 'brightness(1.08)'} onMouseOut={(e) => e.currentTarget.style.filter = 'none'}>Subscribe</button>
           </form>
@@ -703,13 +705,13 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', '#lineup'], ['Citrus Shoyu', '#lineup'], ['Spicy Tokyo', '#lineup'], ['Variety 3-pack', '#lineup'], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', '#cta'], ['Contact', '#cta']]]].
+          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
               {items.map(([label, href]) => (
                 <a key={label} href={href}
-                   onClick={(e) => { e.preventDefault(); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+                   onClick={(e) => { if (href.startsWith('#')) { e.preventDefault(); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }}
                    style={{ display: 'block', fontSize: 13, padding: '6px 0', color: 'var(--ink)', opacity: 0.85, cursor: 'pointer', transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
                    onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
                    onMouseOut={(e) => { e.currentTarget.style.opacity = 0.85; e.currentTarget.style.transform = 'translateX(0)'; }}>{label}</a>
