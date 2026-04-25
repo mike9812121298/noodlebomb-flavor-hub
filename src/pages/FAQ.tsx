@@ -29,7 +29,7 @@ const faqGroups = [
     items: [
       {
         q: "When will my order ship?",
-        a: "NoodleBomb is currently in pre-order. All orders are scheduled to ship in May 2025. You'll receive a shipping confirmation email with tracking information as soon as your order is on its way.",
+        a: "NoodleBomb is currently in pre-order. All orders are scheduled to ship in May 2026. You'll receive a shipping confirmation email with tracking information as soon as your order is on its way.",
       },
       {
         q: "Do you ship internationally?",
