@@ -214,7 +214,7 @@ function UseItOn() {
 
   const items = [
     { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png' },
-    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Yuzu, shoyu, a bright finish that cuts through fat.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
+    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Yuzu, shoyu. Bright finish. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
     { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png' },
     { key: 'ryu',      name: 'Ryu Garlic',   no: 'No.04', tag: 'DARK DEPTH',       line: 'Aged black garlic. Rich umami.',     note: 'Molasses-deep, with a whisper of sweet heat.',        bg: '#1A1A1A', ink: '#F5C842', sub: 'rgba(245,200,66,0.70)',  img: 'uploads/upload-ryu-v3.png' },
   ];
@@ -337,8 +337,8 @@ function PourAndCompare({ flavor = 'original' }) {
         <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 05 — Quiet Flex</div></Reveal>
         <Reveal delay={1}>
           <h2 className="display section-h2" style={{ margin: '0 0 56px' }}>
-            Not better.<br />
-            <span style={{ color: 'var(--muted)' }}>Just different.</span>
+            Not the same.<br />
+            <span style={{ color: 'var(--muted)' }}>By design.</span>
           </h2>
         </Reveal>
         <Reveal delay={2}>
@@ -391,7 +391,7 @@ function Origin() {
             <img src="uploads/lifestyle-founder-origin.png" alt="The founder pouring sauce over a bowl of noodles in a low-lit kitchen"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)', pointerEvents: 'none' }} />
-            <span className="mono" style={{ position: 'absolute', bottom: 20, left: 20, color: 'var(--paper)', opacity: 0.7 }}>Portland, OR · small batch</span>
+            <span className="mono" style={{ position: 'absolute', bottom: 20, left: 20, color: 'var(--paper)', opacity: 0.7 }}>Bonney Lake, WA · small batch</span>
           </div>
 
           {/* RIGHT — story */}
@@ -407,20 +407,20 @@ function Origin() {
             <Reveal delay={2}>
               <div style={{ maxWidth: '52ch', color: 'var(--ink)', opacity: 0.8 }}>
                 <p style={{ fontFamily: 'Inter', fontSize: 'clamp(16px, 1.1vw, 18px)', lineHeight: 1.6, letterSpacing: '-0.01em', margin: '0 0 20px' }}>
-                  In 2023, on a cold Tuesday in Portland, I made instant ramen from a packet and knew I could do better. Not fancier. Better. The broth was thin, the seasoning was flat, and the whole thing tasted like it had been designed by a spreadsheet.
+                  In 2023, on a cold Tuesday in Bonney Lake, WA, I made instant ramen from a packet and knew I could do better. Not fancier. Better. The broth was thin, the seasoning was flat, and the whole thing tasted like it had been designed by a spreadsheet.
                 </p>
                 <p style={{ fontFamily: 'Inter', fontSize: 'clamp(16px, 1.1vw, 18px)', lineHeight: 1.6, letterSpacing: '-0.01em', margin: '0 0 20px' }}>
                   So I spent the next eighteen months in my kitchen testing soy, sesame, garlic, and chili in every ratio I could think of. I kept five ingredients. I threw out forty. What came out the other side is what's in the bottle — a ramen sauce that makes a packet of noodles taste like a shop you'd fly to.
                 </p>
                 <p style={{ fontFamily: 'Inter', fontSize: 'clamp(16px, 1.1vw, 18px)', lineHeight: 1.6, letterSpacing: '-0.01em', margin: 0 }}>
-                  We still make it in small batches, here in the Pacific Northwest. No MSG, no fillers, no apologies. If you find something better, I want to know about it.
+                  We still make it in small batches, here in the Pacific Northwest. Premium ingredients, no fillers, no apologies. If you find something better, I want to know about it.
                 </p>
               </div>
             </Reveal>
             <Reveal delay={3}>
               <div style={{ marginTop: 40 }}>
                 <div className="serif" style={{ fontStyle: 'italic', fontSize: 20, color: 'var(--ink)' }}>— the founder</div>
-                <div className="mono" style={{ marginTop: 10, color: 'var(--muted)' }}>Small Batch · Portland, OR</div>
+                <div className="mono" style={{ marginTop: 10, color: 'var(--muted)' }}>Small Batch · Bonney Lake, WA</div>
               </div>
             </Reveal>
           </div>
@@ -475,7 +475,7 @@ function FlavorPicker({ flavor, setFlavor }) {
         <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 08 — The Lineup</div></Reveal>
         <Reveal delay={1}>
           <h2 className="display section-h2" style={{ margin: '0 0 60px', maxWidth: 900 }}>
-            Three sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or don’t.</span>
+            Three sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or all three.</span>
           </h2>
         </Reveal>
 
@@ -646,7 +646,7 @@ function FinalCTA() {
           {/* Trust line */}
           <Reveal delay={4}>
             <div className="mono" style={{ marginTop: 36, fontSize: 11, letterSpacing: '0.18em', opacity: 0.7 }}>
-              NO MSG · NO FILLERS · MADE IN PORTLAND · FREE SHIPPING AT $25
+              PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $25
             </div>
           </Reveal>
         </div>
@@ -663,7 +663,7 @@ function FinalCTA() {
         <div className="marq-track">
           {Array.from({ length: 2 }).map((_, j) =>
           <React.Fragment key={j}>
-              {['SMALL BATCH', '•', 'NO MSG', '•', 'NO FILLERS', '•', 'POUR IT ON EVERYTHING', '•', 'MADE IN PORTLAND', '•'].map((s, i) =>
+              {['SMALL BATCH', '•', 'PREMIUM INGREDIENTS', '•', 'NO FILLERS', '•', 'POUR IT ON EVERYTHING', '•', 'MADE IN BONNEY LAKE WA', '•'].map((s, i) =>
             <span key={i} className="display" style={{ fontSize: 96, letterSpacing: '-0.05em', color: 'var(--ink)', opacity: 0.18 }}>{s}</span>
             )}
             </React.Fragment>
@@ -697,7 +697,7 @@ function FinalCTA() {
               <span className="display" style={{ fontSize: 18, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
             </div>
             <p style={{ maxWidth: 320, color: 'var(--ink-60)', fontSize: 13, lineHeight: 1.6 }}>
-              Bold ramen sauce crafted in the Pacific Northwest. Small-batch bottled with real ingredients — no MSG, no fillers, no apologies.
+              Bold ramen sauce crafted in the Pacific Northwest. Small-batch bottled with real ingredients. Premium ingredients, no fillers, no apologies.
             </p>
           </div>
           {[
