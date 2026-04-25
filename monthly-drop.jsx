@@ -103,7 +103,7 @@ function MonthlyDrop() {
               </div>
             </Reveal>
             <Reveal delay={3}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
+              <div className="md-inside-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
                 {[
                   {
                     label: 'Spicy Tokyo', sub: 'sauce',

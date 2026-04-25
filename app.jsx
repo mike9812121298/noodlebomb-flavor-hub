@@ -289,7 +289,7 @@ function PourAndCompare({ flavor = 'original' }) {
   return (
     <section id="pour" style={{ background: 'var(--paper)', padding: '140px 28px', scrollMarginTop: 80 }}>
       {/* Pour shot */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center', maxWidth: 1400, margin: '0 auto' }}>
+      <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center', maxWidth: 1400, margin: '0 auto' }}>
         <div>
           <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 04 — The Pour</div></Reveal>
           <Reveal delay={1}>
@@ -319,7 +319,7 @@ function PourAndCompare({ flavor = 'original' }) {
           </Reveal>
         </div>
         <Reveal delay={2}>
-          <div style={{ position: 'relative', height: 560, display: 'flex', justifyContent: 'center' }}>
+          <div className="pour-bottle-stage" style={{ position: 'relative', height: 560, display: 'flex', justifyContent: 'center' }}>
             <div style={{ width: 260, height: '100%' }}>
               <div className="bottle-float">
                 <Bottle tilt={-14} dripping src={FLAVOR_IMAGES[flavor]} />
@@ -342,7 +342,7 @@ function PourAndCompare({ flavor = 'original' }) {
           </h2>
         </Reveal>
         <Reveal delay={2}>
-          <div style={{ border: '1px solid var(--line)' }}>
+          <div className="compare-table-wrap" style={{ border: '1px solid var(--line)' }}>
             {[
             ['Attribute', 'NoodleBomb', 'Regular soy', 'Hot sauce'],
             ['Flavor depth', '5-note umami', 'Salt-forward', 'Heat-forward'],
@@ -351,7 +351,7 @@ function PourAndCompare({ flavor = 'original' }) {
             ['MSG / fillers', 'None', 'Varies', 'Varies'],
             ['Made', 'Small batch, USA', 'Industrial', 'Industrial']].
             map((row, i) =>
-            <div key={i} style={{
+            <div key={i} className="compare-row" style={{
               display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr',
               padding: '20px 24px',
               borderTop: i ? '1px solid var(--line)' : 'none',
@@ -446,7 +446,7 @@ function Testimonials() {
             <span className="mono" style={{ color: 'var(--muted)' }}>★ ★ ★ ★ ★ · 4.9 · 94 reviews</span>
           </div>
         </Reveal>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {quotes.map((q, i) =>
           <Reveal key={i} delay={i + 1}>
               <div style={{ background: 'var(--paper-2)', padding: 32, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 280 }}>
@@ -542,7 +542,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
         {/* Trio cta — editorial bundle moment */}
         <Reveal delay={4}>
-          <div style={{
+          <div className="trio-bundle-grid" style={{
             marginTop: 28,
             background: 'var(--paper-2)',
             borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)',
@@ -550,13 +550,13 @@ function FlavorPicker({ flavor, setFlavor }) {
             minHeight: 420
           }}>
             {/* Photo */}
-            <div style={{ position: 'relative', overflow: 'hidden', background: '#14110E' }}>
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E' }}>
               <img src="uploads/lifestyle-woman-3pack.png" alt="A woman pouring NoodleBomb Original over a bowl of noodles, three bottles on the counter"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(8,7,6,0) 60%, rgba(22,19,16,0.35) 100%)', pointerEvents: 'none' }} />
             </div>
             {/* Copy */}
-            <div style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
+            <div className="trio-bundle-copy" style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
               <span className="mono" style={{ color: 'var(--muted)' }}>bundle · save $6</span>
               <h3 className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02, margin: 0, fontWeight: 700 }}>
                 The 3-Pack Variety<br />
@@ -679,7 +679,7 @@ function FinalCTA() {
 
       <footer style={{ background: '#080706', color: 'var(--ink)', padding: '80px 28px 40px' }}>
         {/* Newsletter capture */}
-        <div style={{ maxWidth: 1440, margin: '0 auto 48px', display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)', gap: 48, alignItems: 'center' }}>
+        <div className="footer-newsletter" style={{ maxWidth: 1440, margin: '0 auto 48px', display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 1fr)', gap: 48, alignItems: 'center' }}>
           <div>
             <div className="display" style={{ fontSize: 'clamp(28px, 3vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1.05, fontWeight: 600 }}>
               Sauce drops, restock alerts, the occasional recipe.
@@ -688,7 +688,7 @@ function FinalCTA() {
               Once a month. Never spam.
             </div>
           </div>
-          <form action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', gap: 0, border: '1px solid var(--line)', borderRadius: 4, overflow: 'hidden', background: '#100E0C' }}>
+          <form className="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', gap: 0, border: '1px solid var(--line)', borderRadius: 4, overflow: 'hidden', background: '#100E0C' }}>
             <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup" />
             <input type="hidden" name="_template" value="table" />
             <input type="email" name="email" placeholder="your@email.com" required
@@ -698,7 +698,7 @@ function FinalCTA() {
         </div>
         <div style={{ borderTop: '1px solid var(--line)', maxWidth: 1440, margin: '0 auto 56px' }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 64, maxWidth: 1440, margin: '0 auto' }}>
+        <div className="footer-cols" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 64, maxWidth: 1440, margin: '0 auto' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <div style={{ width: 20, height: 20, borderRadius: 4, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-ink)', fontFamily: 'Inter Tight', fontWeight: 800, fontSize: 12 }}>N</div>
@@ -717,6 +717,7 @@ function FinalCTA() {
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
               {items.map(([label, href]) => (
                 <a key={label} href={href}
+                   className="footer-link"
                    onClick={(e) => { if (href.startsWith('#')) { e.preventDefault(); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }}
                    style={{ display: 'block', fontSize: 13, padding: '6px 0', color: 'var(--ink)', opacity: 0.85, cursor: 'pointer', transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
                    onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
@@ -725,7 +726,7 @@ function FinalCTA() {
             </div>
           )}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 80, paddingTop: 28, borderTop: '1px solid var(--line)', maxWidth: 1440, marginLeft: 'auto', marginRight: 'auto', gap: 24, flexWrap: 'wrap' }}>
+        <div className="footer-bottom-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 80, paddingTop: 28, borderTop: '1px solid var(--line)', maxWidth: 1440, marginLeft: 'auto', marginRight: 'auto', gap: 24, flexWrap: 'wrap' }}>
           <span className="mono">© 2026 noodlebomb co. all rights reserved.</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
             <span className="mono">pour responsibly.</span>

@@ -116,7 +116,7 @@ function Nav({ flavor, setFlavor, flavors }) {
         }}>N</div>
         <span className="display" style={{ fontSize: 16, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
       </div>
-      <div style={{ display:'flex', gap: 32 }}>
+      <div className="nav-links" style={{ display:'flex', gap: 32 }}>
         {[
           ['Sauces', '#lineup'],
           ['The Range', '#range'],
@@ -132,7 +132,7 @@ function Nav({ flavor, setFlavor, flavors }) {
         ))}
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
-        <a className="btn btn-ghost" href={NB_WIX.shop} target="_blank" rel="noopener" style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}>Shop</a>
+        <a className="btn btn-ghost nav-shop-cta" href={NB_WIX.shop} target="_blank" rel="noopener" style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}>Shop</a>
       </div>
     </nav>
   );
@@ -152,7 +152,7 @@ function Hero({ headline, bottleSrc }) {
   return (
     <section style={{ position: 'relative', minHeight: '100vh', paddingTop: 80, overflow: 'hidden' }}>
       {/* top meta strip */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0 28px', marginTop: 8 }}>
+      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 28px', marginTop: 8 }}>
         <span className="mono" style={{ color: 'var(--muted)' }}>Vol.01 · 2026 Edition</span>
         <span className="mono" style={{ color: 'var(--muted)' }}>Batch 0247 / 1000</span>
       </div>
@@ -190,7 +190,7 @@ function Hero({ headline, bottleSrc }) {
       </div>
 
       {/* bottom subline + CTA */}
-      <div className="container" style={{
+      <div className="container hero-bottom-row" style={{
         position: 'absolute', left: 0, right: 0, bottom: 64,
         display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
         animation: 'fadeIn 1.2s cubic-bezier(.16,1,.3,1) 0.7s both', zIndex: 4,
@@ -202,7 +202,7 @@ function Hero({ headline, bottleSrc }) {
             <span style={{ color: 'var(--ink-60)' }}>Turns any noodles into shop-level ramen in seconds.</span>
           </div>
         </div>
-        <div style={{ display:'flex', gap: 10 }}>
+        <div className="hero-cta-row" style={{ display:'flex', gap: 10 }}>
           <a className="btn btn-primary" href={NB_WIX.trio} target="_blank" rel="noopener" style={{ textDecoration: 'none', display: 'inline-block' }}>Try the 3-pack — $29.99</a>
         </div>
       </div>

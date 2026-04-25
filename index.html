@@ -862,6 +862,119 @@
     transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
   }
   .reveal.in { opacity:1; transform: none; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOBILE RESPONSIVE FIXES — 2026-04-25
+     Inline-styled grids that need to collapse on mobile.
+     Uses !important to override JSX inline styles.
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* — Pour shot section (Index 04 — The Pour) — */
+  @media (max-width: 768px) {
+    .pour-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .pour-bottle-stage { height: 420px !important; }
+  }
+
+  /* — Comparison table (Index 05 — Quiet Flex) — horizontal scroll on mobile */
+  @media (max-width: 768px) {
+    .compare-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--line);
+      margin-left: -28px;
+      margin-right: -28px;
+      padding: 0 28px;
+    }
+    .compare-table-wrap > div { border: 0 !important; }
+    .compare-row { min-width: 600px; padding: 16px 20px !important; }
+  }
+
+  /* — Reviews / Testimonials (Index 07) — */
+  @media (max-width: 768px) {
+    .reviews-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+  }
+
+  /* — Trio bundle CTA — stack photo above copy on mobile */
+  @media (max-width: 768px) {
+    .trio-bundle-grid {
+      grid-template-columns: 1fr !important;
+      min-height: auto !important;
+    }
+    .trio-bundle-photo { min-height: 260px; aspect-ratio: 16/10; }
+    .trio-bundle-copy { padding: 28px !important; }
+  }
+
+  /* — Footer newsletter — */
+  @media (max-width: 768px) {
+    .footer-newsletter { grid-template-columns: 1fr !important; gap: 24px !important; }
+    .footer-newsletter-form { flex-wrap: wrap; }
+    .footer-newsletter-form input { width: 100%; }
+    .footer-newsletter-form button { width: 100%; padding: 14px 20px !important; min-height: 48px; }
+  }
+
+  /* — Footer columns — */
+  @media (max-width: 768px) {
+    .footer-cols { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+  }
+  @media (max-width: 480px) {
+    .footer-cols { grid-template-columns: 1fr !important; gap: 24px !important; }
+  }
+
+  /* — Footer links — bigger tap targets on mobile (≥44px) */
+  @media (max-width: 768px) {
+    .footer-link { padding: 12px 0 !important; min-height: 44px; display: flex !important; align-items: center; }
+    .footer-bottom-row { gap: 16px !important; }
+  }
+
+  /* — Monthly drop "What's inside" 4-up grid — */
+  @media (max-width: 480px) {
+    .md-inside-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+
+  /* — Nav: hide secondary links on mobile, hide free-shipping mono text — */
+  @media (max-width: 768px) {
+    .nav-links { display: none !important; }
+    .nav-shipping { display: none !important; }
+    .nav-shop-cta { padding: 12px 18px !important; min-height: 44px; display: inline-flex !important; align-items: center; }
+  }
+
+  /* — Hero: stack subline + CTA, hide decorative meta strip on mobile — */
+  @media (max-width: 768px) {
+    .hero-meta-strip { display: none !important; }
+    .hero-bottom-row {
+      position: static !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 16px !important;
+      padding: 0 24px 48px !important;
+      bottom: auto !important;
+      margin-top: 32px;
+    }
+    .hero-cta-row { flex-direction: column !important; gap: 12px !important; width: 100%; }
+    .hero-cta-row .btn { width: 100%; min-height: 48px; display: inline-flex !important; align-items: center; justify-content: center; }
+  }
+  @media (max-width: 768px) {
+    .hero-h1 { font-size: clamp(48px, 14vw, 96px) !important; padding-right: 0 !important; }
+  }
+
+  /* — Buttons: ensure ≥44px tap targets on mobile — */
+  @media (max-width: 768px) {
+    .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    .ask-secondary { min-height: 44px; padding: 10px 0; display: inline-flex; align-items: center; }
+  }
+
+  /* — Section padding: tighten horizontal padding so text doesn't get pinched — */
+  @media (max-width: 480px) {
+    section[id="pour"], section[id="reviews"], section[id="origin"] { padding-left: 20px !important; padding-right: 20px !important; }
+  }
+
+  /* — Origin section: founder photo + story stack — already auto-fits but tighten gap — */
+  @media (max-width: 768px) {
+    .origin-grid { gap: 32px !important; }
+  }
+
+  /* MOBILE FIXES END ═══════════════════════════════════════════════ */
+
 </style>
 <body class="grain">
 <div id="scroll-progress"></div>
