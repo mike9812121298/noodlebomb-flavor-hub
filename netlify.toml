@@ -1,11 +1,32 @@
+# Static deploy — Mike's design (2026-04-25). Vite build is skipped.
+# To roll back to the React/Vite SPA, restore this file to commit 862db66 and revert index.html.
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "echo 'Static deploy - serving index.html from repo root.'"
+  publish = "."
+  ignore = "/bin/false"
+
+[[redirects]]
+  from = "/product-page/*"
+  to = "https://mikejmarch.wixstudio.com/mysite-5/product-page/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/cart-page"
+  to = "https://mikejmarch.wixstudio.com/mysite-5/cart-page"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/cart"
+  to = "https://mikejmarch.wixstudio.com/mysite-5/cart-page"
+  status = 302
+  force = true
 
 [[headers]]
   for = "/*"
     [headers.values]
         X-Frame-Options = "SAMEORIGIN"
-            X-Content-Type-Options = "nosniff"
-                Referrer-Policy = "strict-origin-when-cross-origin"
-                    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+        X-Content-Type-Options = "nosniff"
+        Referrer-Policy = "strict-origin-when-cross-origin"
+        Permissions-Policy = "camera=(), microphone=(), geolocation=()"
