@@ -167,7 +167,7 @@ function Hero({ headline, bottleSrc }) {
       </div>
 
       {/* Bottle center — outer positions, inner animates (so transforms don't collide) */}
-      <div style={{
+      <div className="hero-bottle-positioner" style={{
         position: 'absolute',
         left: 'calc(50% - 40px)', top: '58%',
         transform: 'translate(-50%, -50%)',
@@ -208,7 +208,7 @@ function Hero({ headline, bottleSrc }) {
       </div>
 
       {/* refined scroll hint — centered under bottle */}
-      <div className="scroll-hint" style={{ left: 'calc(50% - 40px)', bottom: 12, transform: 'translateX(-50%)', zIndex: 4 }}>
+      <div className="scroll-hint hero-scroll-hint" style={{ left: 'calc(50% - 40px)', bottom: 12, transform: 'translateX(-50%)', zIndex: 4 }}>
         <div className="label">Scroll</div>
         <div className="line"></div>
       </div>

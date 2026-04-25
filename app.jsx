@@ -66,17 +66,17 @@ function FlavorBreakdown({ flavor }) {
 
 
   return (
-    <section id="ingredients" ref={stickyRef} style={{ position: 'relative', height: '320vh', background: 'var(--paper)', scrollMarginTop: 80 }}>
-      <div style={{
+    <section id="ingredients" className="fb-section" ref={stickyRef} style={{ position: 'relative', height: '320vh', background: 'var(--paper)', scrollMarginTop: 80 }}>
+      <div className="fb-sticky" style={{
         position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
         display: 'flex', alignItems: 'center', justifyContent: 'center'
       }}>
         {/* Section header */}
-        <div style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
+        <div className="fb-section-header" style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
           <span className="mono" style={{ color: 'var(--muted)' }}>Index 02 — Flavor Breakdown</span>
           <span className="mono" style={{ color: 'var(--muted)' }}>pour.02 / of.05</span>
         </div>
-        <h2 className="display section-h2" style={{
+        <h2 className="display section-h2 fb-headline" style={{
           position: 'absolute', top: 140, left: 28, margin: 0,
           maxWidth: '60vw',
           opacity: Math.max(0, 1 - p * 12),
@@ -88,7 +88,7 @@ function FlavorBreakdown({ flavor }) {
         </h2>
 
         {/* Bottle center */}
-        <div style={{ width: 'min(300px, 22vw)', height: 'min(580px, 58vh)', position: 'relative', zIndex: 2 }}>
+        <div className="fb-bottle" style={{ width: 'min(300px, 22vw)', height: 'min(580px, 58vh)', position: 'relative', zIndex: 2 }}>
           <div className="bottle-float">
             <Bottle flavor={FLAVORS[flavor].tag} tilt={p * 6} src={FLAVOR_IMAGES[flavor]} />
           </div>
@@ -102,7 +102,7 @@ function FlavorBreakdown({ flavor }) {
           const x = Math.cos(ang) * rad;
           const y = Math.sin(ang) * rad;
           return (
-            <div key={i} style={{
+            <div key={i} className="ingredient-orbit" style={{
               position: 'absolute',
               left: '50%', top: '50%',
               transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
@@ -110,7 +110,7 @@ function FlavorBreakdown({ flavor }) {
               transition: 'opacity 0.7s ease, transform 0.9s cubic-bezier(.2,.7,.2,1)',
               pointerEvents: 'none'
             }}>
-              <div style={{
+              <div className="ingredient-orbit-inner" style={{
                 transform: active ? 'translateY(0)' : 'translateY(16px)',
                 transition: 'transform 0.9s cubic-bezier(.2,.7,.2,1)',
                 textAlign: ang > 0 || Math.abs(ang) > Math.PI / 2 ? 'left' : 'right',
@@ -125,7 +125,7 @@ function FlavorBreakdown({ flavor }) {
         })}
 
         {/* progress dots */}
-        <div style={{ position: 'absolute', right: 28, top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div className="fb-progress-dots" style={{ position: 'absolute', right: 28, top: '50%', transform: 'translateY(-50%)', display: 'flex', flexDirection: 'column', gap: 12 }}>
           {ingredients.map((ing, i) =>
           <div key={i} style={{
             width: p >= ing.appearAt ? 10 : 8, height: p >= ing.appearAt ? 10 : 8, borderRadius: 999,

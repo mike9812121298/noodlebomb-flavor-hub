@@ -973,6 +973,101 @@
     .origin-grid { gap: 32px !important; }
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     MOBILE BUG FIXES — 2026-04-25 (round 2)
+     Bug 1: Hero bottle absolute-positioned over body copy + CTA.
+     Bug 2: Flavor Breakdown orbit labels bleeding off both edges.
+     ═══════════════════════════════════════════════════════════════ */
+
+  /* — BUG 1: Hero bottle stack on mobile (was absolute-overlapping copy) — */
+  @media (max-width: 768px) {
+    .hero-bottle-positioner {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+      width: 70% !important;
+      max-width: 280px !important;
+      height: 320px !important;
+      margin: 16px auto 8px !important;
+      z-index: 1 !important;
+    }
+    .hero-bottle-positioner .bottle-float {
+      transform: none !important;
+    }
+    /* Hide the radial vignette on mobile — it sized for 600px and looks blown out */
+    .hero-bottle-positioner > div[aria-hidden="true"] {
+      display: none !important;
+    }
+    /* Hide the scroll hint on mobile — would overlap the bottom CTA */
+    .hero-scroll-hint {
+      display: none !important;
+    }
+    /* Headline: tighten so bottle fits below it on a phone */
+    .hero-h1 {
+      line-height: 0.95 !important;
+    }
+  }
+
+  /* — BUG 2: Flavor Breakdown — kill sticky orbit, stack list vertically — */
+  @media (max-width: 768px) {
+    /* Collapse the 320vh sticky scroll-progress — flow naturally on mobile */
+    .fb-section {
+      height: auto !important;
+      padding: 80px 24px 64px !important;
+    }
+    .fb-sticky {
+      position: static !important;
+      top: auto !important;
+      height: auto !important;
+      overflow: visible !important;
+      display: block !important;
+    }
+    .fb-section-header {
+      position: static !important;
+      top: auto !important; left: auto !important; right: auto !important;
+      flex-direction: row !important;
+      gap: 16px !important;
+      margin-bottom: 16px !important;
+      flex-wrap: wrap !important;
+    }
+    .fb-headline {
+      position: static !important;
+      top: auto !important; left: auto !important;
+      transform: none !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      max-width: none !important;
+      font-size: clamp(40px, 9vw, 64px) !important;
+      margin: 0 0 32px !important;
+    }
+    .fb-bottle {
+      width: 70% !important;
+      max-width: 240px !important;
+      height: 360px !important;
+      margin: 0 auto 32px !important;
+    }
+    /* Take the orbit divs out of absolute & center, list them vertically */
+    .ingredient-orbit {
+      position: static !important;
+      left: auto !important; top: auto !important;
+      transform: none !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      margin: 0 0 22px !important;
+      width: 100% !important;
+    }
+    .ingredient-orbit-inner {
+      transform: none !important;
+      text-align: left !important;
+      min-width: 0 !important;
+    }
+    /* Hide the side dots — replaced by the natural list order */
+    .fb-progress-dots {
+      display: none !important;
+    }
+  }
+
   /* MOBILE FIXES END ═══════════════════════════════════════════════ */
 
 </style>
