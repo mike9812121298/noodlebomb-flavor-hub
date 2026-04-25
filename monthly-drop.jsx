@@ -267,7 +267,7 @@ function MonthlyDrop() {
                 }}
                 onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(139,30,30,0.4)'; }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; e.currentTarget.style.boxShadow = 'none'; }}>
-                  Subscribe — ships Mar 7
+                  Subscribe — ships May 15
                 </button>
               </div>
             </Reveal>

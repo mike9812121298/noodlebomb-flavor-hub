@@ -443,7 +443,7 @@ function Testimonials() {
         <Reveal>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 56 }}>
             <span className="mono" style={{ color: 'var(--muted)' }}>Index 07 — What They’re Saying</span>
-            <span className="mono" style={{ color: 'var(--muted)' }}>★ ★ ★ ★ ★ · 4.9 · 127 reviews</span>
+            <span className="mono" style={{ color: 'var(--muted)' }}>★ ★ ★ ★ ★ · 4.9 · 94 reviews</span>
           </div>
         </Reveal>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
@@ -474,9 +474,15 @@ function FlavorPicker({ flavor, setFlavor }) {
       <div style={{ maxWidth: 1300, margin: '0 auto' }}>
         <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 08 — The Lineup</div></Reveal>
         <Reveal delay={1}>
-          <h2 className="display section-h2" style={{ margin: '0 0 60px', maxWidth: 900 }}>
+          <h2 className="display section-h2" style={{ margin: '0 0 32px', maxWidth: 900 }}>
             Three sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or all three.</span>
           </h2>
+        </Reveal>
+
+        <Reveal delay={2}>
+          <figure style={{ margin: '0 0 56px', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--paper)' }}>
+            <img src="uploads/noodlebomb-trio.png" alt="NoodleBomb Trio — Spicy Tokyo, Original, and Citrus Shoyu ramen sauces" style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 520, objectFit: 'contain' }} />
+          </figure>
         </Reveal>
 
         <div className="lineup-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 24 }}>
