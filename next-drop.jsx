@@ -91,7 +91,7 @@ function NextDrop() {
                 {/* Bottle silhouette */}
                 <div className="nd-bottle-stage">
                   <div className="nd-bottle-wrap">
-                    <img src={c.img} alt="" />
+                    <img src={c.img} alt={`NoodleBomb ${c.name} ramen sauce bottle preview`} />
                     <div className="nd-rim" aria-hidden="true" />
                   </div>
                 </div>

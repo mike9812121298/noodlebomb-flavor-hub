@@ -253,15 +253,15 @@ function UseItOn() {
               {/* Bottle image */}
               <div style={{ flex: '1 1 46%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                 <div className="clip-reveal flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <img src={it.img} alt={it.name} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))' }} />
+                  <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce bottle`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))' }} />
                 </div>
               </div>
               {/* Side copy */}
               <div style={{ flex: '1 1 46%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', paddingBottom: 40, position: 'relative', zIndex: 2 }}>
                 <div className="mono" style={{ color: it.sub, opacity: 1, marginBottom: 16, letterSpacing: '0.15em' }}>{it.no} · {it.tag}</div>
-                <div className="display" style={{ fontSize: 'clamp(72px, 9vw, 160px)', lineHeight: 0.92, color: it.ink }}>
+                <h3 className="display" style={{ fontSize: 'clamp(72px, 9vw, 160px)', lineHeight: 0.92, color: it.ink, margin: 0, fontWeight: 700, letterSpacing: '-0.05em' }}>
                   {it.name}.
-                </div>
+                </h3>
                 <div className="serif" style={{ fontStyle: 'italic', fontSize: 'clamp(22px, 2.2vw, 30px)', marginTop: 20, color: it.ink, opacity: 0.88, letterSpacing: '-0.01em', maxWidth: 480 }}>
                   {it.line}
                 </div>
@@ -525,7 +525,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     </div>
                   </div>
                   <div style={{ marginTop: 24 }}>
-                    <div className="display" style={{ fontSize: 32, letterSpacing: '-0.04em', fontWeight: 700 }}>{f.name}.</div>
+                    <h3 className="display" style={{ fontSize: 32, letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.9 }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
@@ -558,10 +558,10 @@ function FlavorPicker({ flavor, setFlavor }) {
             {/* Copy */}
             <div style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
               <span className="mono" style={{ color: 'var(--muted)' }}>bundle · save $6</span>
-              <div className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02 }}>
+              <h3 className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02, margin: 0, fontWeight: 700 }}>
                 The 3-Pack Variety<br />
                 <span style={{ color: 'var(--muted)' }}>— $29.99.</span>
-              </div>
+              </h3>
               <div style={{ fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.55, maxWidth: '42ch' }}>
                 One of each: Original, Citrus Shoyu, Spicy Tokyo. Enough to find your favorite — and a backup.
               </div>

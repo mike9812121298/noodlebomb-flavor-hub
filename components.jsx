@@ -24,7 +24,7 @@ function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var
   if (src) {
     return (
       <div className="bottle" style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.8s cubic-bezier(.2,.7,.2,1)', width: '100%', height: '100%' }}>
-        <img src={src} alt={flavor} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+        <img src={src} alt={`NoodleBomb ${flavor} ramen sauce bottle`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
       </div>
     );
   }
