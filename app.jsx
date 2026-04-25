@@ -9,19 +9,19 @@ const FLAVORS = {
   original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#8B1E1E', ink: '#F5F1EA',
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
-    price: '$9.50', pack: '$25.00 / 3-pack' },
+    price: '$11.99', pack: '$29.99 / 3-pack' },
   citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
-    price: '$9.50', pack: '$25.00 / 3-pack' },
+    price: '$11.99', pack: '$29.99 / 3-pack' },
   spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#C2410C', ink: '#F5F1EA',
     line1: 'Umami meets fire.',
     line2: 'Dark soy, roasted chili, sesame.',
-    price: '$9.50', pack: '$25.00 / 3-pack' },
+    price: '$11.99', pack: '$29.99 / 3-pack' },
   ryu: { name: 'Ryu Garlic', tag: 'No.04 · Ryu Garlic', short: 'No.04', color: '#3D2B1F', ink: '#F5C842',
     line1: 'Black garlic. Dark depth.',
     line2: 'Aged black garlic, rich umami, subtle heat.',
-    price: '$9.50', pack: '$25.00 / 3-pack' }
+    price: '$11.99', pack: '$29.99 / 3-pack' }
 };
 
 const FLAVOR_IMAGES = {
@@ -554,7 +554,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               <span className="mono" style={{ color: 'var(--muted)' }}>bundle · save $7</span>
               <div className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02 }}>
                 The 3-Pack Variety<br />
-                <span style={{ color: 'var(--muted)' }}>— $25.</span>
+                <span style={{ color: 'var(--muted)' }}>— $29.99.</span>
               </div>
               <div style={{ fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.55, maxWidth: '42ch' }}>
                 One of each: Original, Citrus Shoyu, Spicy Tokyo. Enough to find your favorite — and a backup.
@@ -638,7 +638,7 @@ function FinalCTA() {
 
           <Reveal delay={3}>
             <div style={{ marginTop: 48, display: 'inline-flex', gap: 28, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <a className="btn" href={WIX_URLS.shop} target="_blank" rel="noopener" style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all — from $9.50</a>
+              <a className="btn" href={WIX_URLS.shop} target="_blank" rel="noopener" style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all — from $11.99</a>
               <a href="#" className="ask-secondary" style={{ color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, fontWeight: 500, opacity: 0.85, textDecoration: 'none', borderBottom: '1px solid transparent', paddingBottom: 2, transition: 'border-color .2s, opacity .2s' }} onMouseOver={(e) => { e.currentTarget.style.borderBottomColor = 'var(--accent-ink)'; e.currentTarget.style.opacity = 1; }} onMouseOut={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; e.currentTarget.style.opacity = 0.85; }}>Join the waitlist →</a>
             </div>
           </Reveal>
