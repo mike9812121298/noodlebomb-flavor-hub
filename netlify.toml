@@ -1,5 +1,8 @@
-# Static deploy — Mike's design (2026-04-25). Vite build is skipped.
+# NoodleBomb production — premium editorial design (POUR IT ON EVERYTHING)
+# Static deploy — index.html + 4 .jsx files + uploads/ images served from repo root
+# Vite build is skipped via no-op command + ignore.
 # To roll back to the React/Vite SPA, restore this file to commit 862db66 and revert index.html.
+
 [build]
   command = "echo 'Static deploy - serving index.html from repo root.'"
   publish = "."
@@ -24,9 +27,25 @@
   force = true
 
 [[headers]]
+  for = "/*.jsx"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
   for = "/*"
-    [headers.values]
-        X-Frame-Options = "SAMEORIGIN"
-        X-Content-Type-Options = "nosniff"
-        Referrer-Policy = "strict-origin-when-cross-origin"
-        Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
