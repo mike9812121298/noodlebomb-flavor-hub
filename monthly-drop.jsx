@@ -242,16 +242,15 @@ function MonthlyDrop() {
             <Reveal delay={4}>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, marginBottom: 28, flexWrap: 'wrap' }}>
                 <span className="display" style={{ fontSize: 'clamp(48px, 5vw, 72px)', fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1, color: 'var(--ink)' }}>
-                  $32<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
+                  $29.99<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
                 </span>
-                <span style={{ fontFamily: 'Inter', fontSize: 18, color: 'var(--muted)', textDecoration: 'line-through', textDecorationThickness: 1.5 }}>$45</span>
                 <span style={{
                   display: 'inline-flex', alignItems: 'center',
                   background: 'var(--accent)', color: 'var(--accent-ink)',
                   padding: '5px 11px', borderRadius: 999,
                   fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
                   letterSpacing: '0.18em'
-                }}>SAVE 28%</span>
+                }}>FREE SHIPPING</span>
               </div>
             </Reveal>
 

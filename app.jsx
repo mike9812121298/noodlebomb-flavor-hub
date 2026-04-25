@@ -305,7 +305,7 @@ function PourAndCompare({ flavor = 'original' }) {
           </Reveal>
           <Reveal delay={3}>
             <div style={{ marginTop: 32, display: 'flex', gap: 24 }}>
-              {[{ k: 'Bottle', v: '7 oz', num: true }, { k: 'Servings', v: '≈11', num: true }, { k: 'MSG', v: 'None' }].map((s) => {
+              {[{ k: 'Bottle', v: '7 oz', num: true }, { k: 'Servings', v: '≈11', num: true }, { k: 'Fillers', v: 'None' }].map((s) => {
                 const [popped, setPopped] = useState(false);
                 useEffect(() => {setPopped(true);const t = setTimeout(() => setPopped(false), 400);return () => clearTimeout(t);}, [s.v]);
                 return (
@@ -348,7 +348,7 @@ function PourAndCompare({ flavor = 'original' }) {
             ['Flavor depth', '5-note umami', 'Salt-forward', 'Heat-forward'],
             ['Finish', 'Long, rounded', 'Short', 'Lingering burn'],
             ['Versatility', 'Ramen → wings → rice', 'Asian dishes', 'Specific uses'],
-            ['MSG / fillers', 'None', 'Varies', 'Varies'],
+            ['Fillers', 'None', 'Varies', 'Varies'],
             ['Made', 'Small batch, USA', 'Industrial', 'Industrial']].
             map((row, i) =>
             <div key={i} className="compare-row" style={{
@@ -419,7 +419,7 @@ function Origin() {
             </Reveal>
             <Reveal delay={3}>
               <div style={{ marginTop: 40 }}>
-                <div className="serif" style={{ fontStyle: 'italic', fontSize: 20, color: 'var(--ink)' }}>— the founder</div>
+                <div className="serif" style={{ fontStyle: 'italic', fontSize: 20, color: 'var(--ink)' }}>— Ashley March, founder</div>
                 <div className="mono" style={{ marginTop: 10, color: 'var(--muted)' }}>Small Batch · Bonney Lake, WA</div>
               </div>
             </Reveal>
