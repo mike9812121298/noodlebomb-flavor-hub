@@ -1,7 +1,7 @@
 // NoodleBomb — app composition
 const { useEffect, useRef, useState } = React;
 // Wix Stores deep links (added 2026-04-25 for production deploy)
-const WIX_URLS = {"original": "https://mikejmarch.wixstudio.com/mysite-5/product-page/noodlebomb-original-ramen-sauce", "citrus": "https://mikejmarch.wixstudio.com/mysite-5/product-page/noodle-bomb-citrus-shoyu-ramen-sauce", "spicy": "https://mikejmarch.wixstudio.com/mysite-5/product-page/noodle-bomb-spicy-tokyo-ramen-sauce", "trio": "https://mikejmarch.wixstudio.com/mysite-5/product-page/the-noodlebomb-trio", "cart": "https://mikejmarch.wixstudio.com/mysite-5/cart-page", "shop": "https://mikejmarch.wixstudio.com/mysite-5/category/all-products"};
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
 const wixFor = (key) => WIX_URLS[key] || WIX_URLS.shop;
 
 

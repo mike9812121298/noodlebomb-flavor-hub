@@ -10,19 +10,19 @@
 
 [[redirects]]
   from = "/product-page/*"
-  to = "https://mikejmarch.wixstudio.com/mysite-5/product-page/:splat"
+  to = "https://shop.noodlebomb.co/product-page/:splat"
   status = 302
   force = true
 
 [[redirects]]
   from = "/cart-page"
-  to = "https://mikejmarch.wixstudio.com/mysite-5/cart-page"
+  to = "https://shop.noodlebomb.co/cart-page"
   status = 302
   force = true
 
 [[redirects]]
   from = "/cart"
-  to = "https://mikejmarch.wixstudio.com/mysite-5/cart-page"
+  to = "https://shop.noodlebomb.co/cart-page"
   status = 302
   force = true
 
