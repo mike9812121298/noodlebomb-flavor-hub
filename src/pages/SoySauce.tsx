@@ -31,7 +31,7 @@ const pairings = [
   { item: "Finishing Drizzle", note: "A few drops over ramen, roasted vegetables, or eggs. No cooking needed — raw flavor at full strength." },
 ];
 
-const BUY_URL = "https://noodlebomb.co/product/soy-sauce";
+const BUY_URL = "/contact";  // Soy sauce is in development — point to waitlist signup
 
 const SoySauce = () => {
   const [openPairing, setOpenPairing] = useState<number | null>(null);
@@ -457,8 +457,6 @@ const SoySauce = () => {
 
             <a
               href={BUY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               style={{
                 background: GOLD, color: BLACK,
                 fontFamily: serif,
@@ -471,7 +469,7 @@ const SoySauce = () => {
               className="uppercase hover:opacity-90 transition-opacity"
             >
               <ShoppingCart size={15} />
-              Add to Cart
+              Join the Waitlist
             </a>
 
             {/* Trust row */}

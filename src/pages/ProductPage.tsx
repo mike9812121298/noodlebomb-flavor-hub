@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { getCheckoutUrl } from "@/lib/wix-checkout";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingCart,
@@ -231,17 +232,15 @@ const ProductPage = () => {
               </div>
 
               <div className="flex gap-3">
-                <button
-                  onClick={handleAddToCart}
-                  className={`flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all ${
-                    addedToCart
-                      ? "bg-green-500 scale-[0.98]"
-                      : "bg-gradient-fire hover:shadow-[0_0_40px_hsl(var(--flame)/0.45)] hover:scale-[1.02]"
-                  }`}
+                <a
+                  href={getCheckoutUrl(slug)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground bg-gradient-fire hover:shadow-[0_0_40px_hsl(var(--flame)/0.45)] hover:scale-[1.02] transition-all"
                 >
                   <ShoppingCart className="h-4 w-4" />
-                  {addedToCart ? "Added!" : "Add to Cart"}
-                </button>
+                  Order Now
+                </a>
                 <Link
                   to="/cart"
                   className="px-5 py-4 rounded-full border border-border hover:border-primary/50 hover:bg-primary/5 transition-all font-display text-sm font-bold uppercase tracking-wider text-foreground/70 whitespace-nowrap"
@@ -250,7 +249,7 @@ const ProductPage = () => {
                 </Link>
               </div>
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-3"><Truck className="h-3.5 w-3.5" />
-                Pre-order · Ships May 8, 2026</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
+                Free shipping · Ships from WA</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
               </p>
             </div>
 

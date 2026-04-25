@@ -12,6 +12,7 @@ import {
   Package,
 } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
+import { getCheckoutUrl, WIX_STORE_BASE } from "@/lib/wix-checkout";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
@@ -247,13 +248,21 @@ const Cart = () => {
               </div>
 
               <div className="space-y-3">
+                {/* Smart deep-link: 1 unique slug → that product page; otherwise store homepage */}
                 <a
-                  href={`mailto:hello@noodlebomb.co?subject=Pre-Order%20%E2%80%94%20${itemCount}%20item(s)&body=Hi%2C%20I%27d%20like%20to%20complete%20my%20pre-order%20for%20%24${subtotal.toFixed(2)}%20worth%20of%20sauces.`}
+                  href={items.length === 1 ? getCheckoutUrl(items[0].slug) : WIX_STORE_BASE}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.45)] hover:scale-[1.02] transition-all"
                 >
                   <Package className="h-4 w-4" />
-                  Complete Pre-Order
+                  Checkout — ${subtotal.toFixed(2)}
                 </a>
+                {items.length > 1 && (
+                  <p className="text-[11px] text-muted-foreground/80 text-center -mt-1">
+                    Opens our store — re-add your {itemCount} items in one quick step to complete checkout.
+                  </p>
+                )}
                 <Link
                   to="/shop"
                   className="w-full flex items-center justify-center gap-2 border border-border px-6 py-3 rounded-full font-display text-sm font-semibold uppercase tracking-wider text-foreground/70 hover:border-primary/50 hover:text-primary transition-all"
@@ -263,7 +272,7 @@ const Cart = () => {
               </div>
 
               <p className="text-[11px] text-muted-foreground text-center mt-4">
-                🚚 Pre-order — ships May 8, 2026
+                🚚 Free shipping on orders $40+ · Ships from WA
               </p>
 
               <div className="mt-5 pt-5 border-t border-border/40 space-y-2">

@@ -23,7 +23,7 @@ const Contact = () => {
       canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.href = "https://noodlebomb.com/contact";
+    canonical.href = "https://noodlebomb.co/contact";
 
     return () => {
       canonical?.remove();
@@ -41,7 +41,7 @@ const Contact = () => {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
     );
-    window.location.href = `mailto:hello@noodlebomb.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:hello@noodlebomb.co?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
@@ -67,10 +67,10 @@ const Contact = () => {
             <div>
               <p className="text-muted-foreground text-sm mb-0.5">Email us directly</p>
               <a
-                href="mailto:hello@noodlebomb.com"
+                href="mailto:hello@noodlebomb.co"
                 className="font-display font-bold text-foreground hover:text-primary transition-colors"
               >
-                hello@noodlebomb.com
+                hello@noodlebomb.co
               </a>
             </div>
           </div>
