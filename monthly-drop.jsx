@@ -59,7 +59,7 @@ function MonthlyDrop() {
           <div>
             <Reveal>
               <div className="mono" style={{ color: 'var(--muted)', marginBottom: 32, letterSpacing: '0.18em', fontSize: 11 }}>
-                VOL.04 — MARCH 2026 DROP
+                VOL.04 — MAY 2026 DROP
               </div>
             </Reveal>
 

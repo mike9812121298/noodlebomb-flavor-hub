@@ -96,11 +96,50 @@ function Shot({ label, aspect = '4/5', tag, style, children }) {
 // ———————————————————————————————————————————— Navbar
 function Nav({ flavor, setFlavor, flavors }) {
   const [solid, setSolid] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(() => (window.NB_CART ? window.NB_CART.getItemCount() : 0));
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
     window.addEventListener('scroll', on, { passive: true }); on();
     return () => window.removeEventListener('scroll', on);
   }, []);
+  useEffect(() => {
+    if (!window.NB_CART) return;
+    setCartCount(window.NB_CART.getItemCount());
+    return window.NB_CART.onChange(() => setCartCount(window.NB_CART.getItemCount()));
+  }, []);
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    if (drawerOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [drawerOpen]);
+  // Close drawer on Escape
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setDrawerOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [drawerOpen]);
+
+  const navLinks = [
+    ['Sauces', '#lineup'],
+    ['The Range', '#range'],
+    ['Ingredients', '#ingredients'],
+    ['Origin', '#origin'],
+    ['Monthly Box', '#monthly'],
+  ];
+
+  const goToHash = (href) => {
+    setDrawerOpen(false);
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+
   return (
     <nav className={`nav ${solid ? 'scrolled' : ''}`} style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
@@ -117,13 +156,7 @@ function Nav({ flavor, setFlavor, flavors }) {
         <span className="display" style={{ fontSize: 16, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
       </div>
       <div className="nav-links" style={{ display:'flex', gap: 32 }}>
-        {[
-          ['Sauces', '#lineup'],
-          ['The Range', '#range'],
-          ['Ingredients', '#ingredients'],
-          ['Monthly Box', '#monthly'],
-          ['Origin', '#origin']
-        ].map(([label, href]) => (
+        {navLinks.map(([label, href]) => (
           <a key={label} href={href} onClick={(e) => {
             e.preventDefault();
             const el = document.querySelector(href);
@@ -132,7 +165,155 @@ function Nav({ flavor, setFlavor, flavors }) {
         ))}
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
+        <a
+          href="/cart"
+          aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
+          style={{
+            position: 'relative',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 36,
+            height: 36,
+            borderRadius: 4,
+            color: 'var(--ink)',
+            textDecoration: 'none',
+            transition: 'background .2s, color .2s',
+          }}
+          onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(240,235,227,0.06)'; }}
+          onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          {cartCount > 0 && (
+            <span style={{
+              position: 'absolute',
+              top: 2,
+              right: 2,
+              minWidth: 16,
+              height: 16,
+              padding: '0 4px',
+              borderRadius: 999,
+              background: 'var(--accent)',
+              color: 'var(--accent-ink)',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 10,
+              fontWeight: 700,
+              lineHeight: '16px',
+              textAlign: 'center',
+              transition: 'background .6s',
+            }}>{cartCount > 9 ? '9+' : cartCount}</span>
+          )}
+        </a>
         <a className="btn btn-ghost nav-shop-cta" href={NB_WIX.shop} target="_blank" rel="noopener" style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}>Shop</a>
+        {/* Hamburger — mobile only */}
+        <button
+          className="nav-hamburger"
+          aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={drawerOpen}
+          onClick={() => setDrawerOpen(!drawerOpen)}
+          style={{
+            display: 'none',
+            width: 44,
+            height: 44,
+            background: 'transparent',
+            border: 0,
+            color: 'var(--ink)',
+            cursor: 'pointer',
+            padding: 0,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+            {drawerOpen ? (
+              <>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="7" x2="21" y2="7" />
+                <line x1="3" y1="13" x2="21" y2="13" />
+                <line x1="3" y1="19" x2="21" y2="19" />
+              </>
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile drawer overlay */}
+      <div
+        className="nav-drawer"
+        aria-hidden={!drawerOpen}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99,
+          background: 'rgba(8,7,6,0.97)',
+          backdropFilter: 'blur(8px)',
+          opacity: drawerOpen ? 1 : 0,
+          pointerEvents: drawerOpen ? 'auto' : 'none',
+          transition: 'opacity .3s cubic-bezier(.2,.7,.2,1)',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '88px 32px 32px',
+        }}
+      >
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24, paddingTop: 16 }}>
+          {navLinks.map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              onClick={(e) => { e.preventDefault(); goToHash(href); }}
+              className="display"
+              style={{
+                fontSize: 32,
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                color: 'var(--ink)',
+                textDecoration: 'none',
+                paddingBlock: 8,
+                borderBottom: '1px solid rgba(240,235,227,0.08)',
+                transform: drawerOpen ? 'translateY(0)' : 'translateY(8px)',
+                opacity: drawerOpen ? 1 : 0,
+                transition: 'transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s',
+              }}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+        <a
+          href={NB_WIX.shop}
+          target="_blank"
+          rel="noopener"
+          onClick={() => setDrawerOpen(false)}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 10,
+            padding: '18px 24px',
+            borderRadius: 999,
+            background: 'var(--accent)',
+            color: 'var(--accent-ink)',
+            fontFamily: 'Inter',
+            fontWeight: 600,
+            fontSize: 14,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            marginTop: 24,
+          }}
+        >
+          Shop the Range
+          <span style={{ fontSize: 16 }}>→</span>
+        </a>
       </div>
     </nav>
   );

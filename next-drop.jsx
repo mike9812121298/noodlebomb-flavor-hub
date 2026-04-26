@@ -28,7 +28,7 @@ function NextDrop() {
       oneliner: 'Single-origin shoyu. Barrel-aged. Quietly devastating.',
       pills: ['Saline', 'Round', 'Long finish'],
       progress: 2,
-      img: 'uploads/nb-citrus-shoyu-clean.png', // visual placeholder until real shoyu render exists
+      img: 'uploads/upload-ryu-v3.png', // dark-bottle placeholder until real Shoyu Reserve render exists — do NOT use Citrus Shoyu image (caused customer confusion)
     },
   ];
 

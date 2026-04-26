@@ -216,7 +216,7 @@ function UseItOn() {
     { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png' },
     { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Yuzu, shoyu. Bright finish. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
     { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png' },
-    { key: 'ryu',      name: 'Ryu Garlic',   no: 'No.04', tag: 'DARK DEPTH',       line: 'Aged black garlic. Rich umami.',     note: 'Molasses-deep, with a whisper of sweet heat.',        bg: '#1A1A1A', ink: '#F5C842', sub: 'rgba(245,200,66,0.70)',  img: 'uploads/upload-ryu-v3.png' },
+    { key: 'ryu',      name: 'Ryu Garlic',   no: 'No.04', tag: 'DARK DEPTH',       line: 'Aged black garlic. Rich umami.',     note: 'Molasses-deep, with a whisper of sweet heat.',        bg: '#1A1A1A', ink: '#F5C842', sub: 'rgba(245,200,66,0.70)',  img: 'uploads/upload-ryu-v3.png', comingSoon: 'COMING SOON · SUMMER 2026' },
   ];
   const panelCount = items.length;
   // Shift by (panels-1) * 100vw
@@ -253,13 +253,34 @@ function UseItOn() {
               {/* Bottle image */}
               <div style={{ flex: '1 1 46%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                 <div className="clip-reveal flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce bottle`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))' }} />
+                  <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce bottle`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
+                  {it.comingSoon && (
+                    <div style={{
+                      position: 'absolute',
+                      top: 16,
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      padding: '8px 16px',
+                      background: 'rgba(11,11,11,0.78)',
+                      border: `1px solid ${it.ink}`,
+                      color: it.ink,
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: 10,
+                      fontWeight: 600,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                      zIndex: 3,
+                    }}>
+                      {it.comingSoon}
+                    </div>
+                  )}
                 </div>
               </div>
               {/* Side copy */}
               <div style={{ flex: '1 1 46%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', paddingBottom: 40, position: 'relative', zIndex: 2 }}>
                 <div className="mono" style={{ color: it.sub, opacity: 1, marginBottom: 16, letterSpacing: '0.15em' }}>{it.no} · {it.tag}</div>
-                <h3 className="display" style={{ fontSize: 'clamp(72px, 9vw, 160px)', lineHeight: 0.92, color: it.ink, margin: 0, fontWeight: 700, letterSpacing: '-0.05em' }}>
+                <h3 className="display range-flavor-name" style={{ fontSize: 'clamp(48px, 9vw, 160px)', lineHeight: 0.92, color: it.ink, margin: 0, fontWeight: 700, letterSpacing: '-0.05em', overflowWrap: 'break-word' }}>
                   {it.name}.
                 </h3>
                 <div className="serif" style={{ fontStyle: 'italic', fontSize: 'clamp(22px, 2.2vw, 30px)', marginTop: 20, color: it.ink, opacity: 0.88, letterSpacing: '-0.01em', maxWidth: 480 }}>
@@ -380,6 +401,191 @@ function PourAndCompare({ flavor = 'original' }) {
 
 }
 
+// ——————————————————————————— Origin (editorial, stats-driven, conversion-aware)
+function Origin() {
+  const stats = [
+    { num: '18', label: 'months in development' },
+    { num: '5', label: 'ingredients kept' },
+    { num: '40+', label: 'thrown out' },
+    { num: '1', label: 'kitchen in Bonney Lake' },
+  ];
+  return (
+    <section
+      id="origin"
+      style={{
+        background: 'var(--paper-2)',
+        padding: 'clamp(96px, 12vw, 140px) clamp(24px, 5.5vw, 80px)',
+        borderTop: '1px solid var(--line)',
+        scrollMarginTop: 80,
+      }}
+    >
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+        <Reveal>
+          <div className="mono" style={{ color: 'var(--muted)', marginBottom: 28, letterSpacing: '0.18em' }}>
+            Index 06 — Made by hand
+          </div>
+        </Reveal>
+
+        <Reveal delay={1}>
+          <h2
+            className="display"
+            style={{
+              margin: '0 0 56px',
+              fontSize: 'clamp(40px, 5.5vw, 76px)',
+              letterSpacing: '-0.04em',
+              lineHeight: 0.95,
+              fontWeight: 700,
+              maxWidth: '14ch',
+            }}
+          >
+            Five ingredients.<br />
+            <span style={{ color: 'var(--muted)' }}>Forty rejected.</span>
+          </h2>
+        </Reveal>
+
+        {/* Stats row */}
+        <Reveal delay={2}>
+          <div
+            className="origin-stats"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+              gap: 24,
+              padding: '40px 0',
+              borderTop: '1px solid var(--line)',
+              borderBottom: '1px solid var(--line)',
+              marginBottom: 56,
+            }}
+          >
+            {stats.map((s, i) => (
+              <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div
+                  className="display"
+                  style={{
+                    fontSize: 'clamp(48px, 6vw, 80px)',
+                    fontWeight: 700,
+                    letterSpacing: '-0.04em',
+                    lineHeight: 0.9,
+                    color: 'var(--ink)',
+                  }}
+                >
+                  {s.num}
+                </div>
+                <div
+                  className="mono"
+                  style={{
+                    color: 'var(--muted)',
+                    fontSize: 11,
+                    letterSpacing: '0.16em',
+                    maxWidth: '18ch',
+                  }}
+                >
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Single editorial line — no long story */}
+        <Reveal delay={3}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'minmax(0, 1.4fr) minmax(0, 1fr)',
+              gap: 'clamp(32px, 5vw, 80px)',
+              alignItems: 'end',
+            }}
+            className="origin-quote-row"
+          >
+            <p
+              className="serif"
+              style={{
+                fontSize: 'clamp(22px, 2.4vw, 32px)',
+                lineHeight: 1.35,
+                letterSpacing: '-0.015em',
+                fontStyle: 'italic',
+                color: 'var(--ink)',
+                margin: 0,
+                maxWidth: '36ch',
+              }}
+            >
+              "If you find a ramen sauce better than this one, I want to know about it."
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div
+                style={{
+                  fontFamily: 'Inter Tight',
+                  fontWeight: 700,
+                  fontSize: 18,
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                — Ashley March
+              </div>
+              <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.16em' }}>
+                Founder · Bonney Lake, WA
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Conversion CTA — turn the section into a buy moment, not a dead end */}
+        <Reveal delay={4}>
+          <div
+            style={{
+              marginTop: 64,
+              paddingTop: 40,
+              borderTop: '1px solid var(--line)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 16,
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.16em' }}>
+              Small batch · est. 2024
+            </div>
+            <a
+              href={WIX_URLS.trio}
+              target="_blank"
+              rel="noopener"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 12,
+                padding: '14px 28px',
+                borderRadius: 999,
+                background: 'var(--ink)',
+                color: 'var(--paper)',
+                fontFamily: 'Inter',
+                fontWeight: 600,
+                fontSize: 13,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'transform .28s, box-shadow .35s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 16px 36px rgba(0,0,0,0.35)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = '';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              Try the Trio — $29.99
+              <span style={{ fontSize: 16 }}>→</span>
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 // ——————————————————————————— Testimonials (real brand voice)
 function Testimonials() {
   const quotes = [
@@ -419,6 +625,16 @@ function Testimonials() {
 function FlavorPicker({ flavor, setFlavor }) {
   // Only currently-shipping flavors in the lineup. Ryu lives in The Range + The Next Drop.
   const keys = Object.keys(FLAVORS).filter((k) => k !== 'ryu');
+  const [addedKey, setAddedKey] = useState(null);
+  const handleAdd = (k) => {
+    const f = FLAVORS[k];
+    if (window.NB_CART) {
+      const price = parseFloat(String(f.price).replace(/[^0-9.]/g, '')) || 11.99;
+      window.NB_CART.add({ slug: k, name: f.name, price: price });
+    }
+    setAddedKey(k);
+    window.setTimeout(() => setAddedKey((cur) => (cur === k ? null : cur)), 1400);
+  };
   return (
     <section id="lineup" style={{ background: 'var(--paper-2)', padding: '140px clamp(24px, 5.5vw, 80px)', scrollMarginTop: 80 }}>
       <div style={{ maxWidth: 1300, margin: '0 auto' }}>
@@ -483,11 +699,9 @@ function FlavorPicker({ flavor, setFlavor }) {
                       <div className="serif" style={{ fontSize: 22, fontStyle: 'italic' }}>{f.price}</div>
                       <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>7 fl oz</span>
                     </div>
-                    <a
-                      href={wixFor(k)}
-                      target="_blank"
-                      rel="noopener"
-                      onClick={(e) => e.stopPropagation()}
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); handleAdd(k); }}
                       className="lineup-buy-btn"
                       style={{
                         display: 'flex',
@@ -496,34 +710,44 @@ function FlavorPicker({ flavor, setFlavor }) {
                         gap: 10,
                         width: '100%',
                         padding: '14px 20px',
-                        background: 'transparent',
+                        background: addedKey === k ? f.color : 'transparent',
                         border: `1px solid ${f.color}`,
-                        color: f.color,
+                        color: addedKey === k ? f.ink : f.color,
                         fontFamily: 'Inter',
                         fontSize: 12,
                         fontWeight: 600,
                         letterSpacing: '0.18em',
                         textTransform: 'uppercase',
-                        textDecoration: 'none',
                         cursor: 'pointer',
                         transition: 'background 0.35s cubic-bezier(.2,.7,.2,1), color 0.35s, transform 0.28s, box-shadow 0.35s',
                       }}
                       onMouseEnter={(e) => {
+                        if (addedKey === k) return;
                         e.currentTarget.style.background = f.color;
                         e.currentTarget.style.color = f.ink;
                         e.currentTarget.style.transform = 'translateY(-2px)';
                         e.currentTarget.style.boxShadow = `0 12px 28px ${f.color}40`;
                       }}
                       onMouseLeave={(e) => {
+                        if (addedKey === k) return;
                         e.currentTarget.style.background = 'transparent';
                         e.currentTarget.style.color = f.color;
                         e.currentTarget.style.transform = '';
                         e.currentTarget.style.boxShadow = 'none';
                       }}
                     >
-                      Add to Cart
-                      <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
-                    </a>
+                      {addedKey === k ? (
+                        <>
+                          Added
+                          <span style={{ fontSize: 14, lineHeight: 1 }}>✓</span>
+                        </>
+                      ) : (
+                        <>
+                          Add to Cart
+                          <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
+                        </>
+                      )}
+                    </button>
                   </div>
                 </div>
               </Reveal>);
@@ -700,20 +924,25 @@ function FinalCTA() {
             </p>
           </div>
           {[
-          ['Shop', [['Original', '#lineup'], ['Citrus Shoyu', '#lineup'], ['Spicy Tokyo', '#lineup'], ['Variety 3-pack', '#lineup'], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
-          ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
+          ['Shop', [['Original', WIX_URLS.original], ['Citrus Shoyu', WIX_URLS.citrus], ['Spicy Tokyo', WIX_URLS.spicy], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
+          ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
-              {items.map(([label, href]) => (
-                <a key={label} href={href}
-                   className="footer-link"
-                   onClick={(e) => { if (href.startsWith('#')) { e.preventDefault(); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }}
-                   style={{ display: 'block', fontSize: 13, padding: '6px 0', color: 'var(--ink)', opacity: 0.85, cursor: 'pointer', transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
-                   onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
-                   onMouseOut={(e) => { e.currentTarget.style.opacity = 0.85; e.currentTarget.style.transform = 'translateX(0)'; }}>{label}</a>
-              ))}
+              {items.map(([label, href]) => {
+                const external = href.startsWith('http');
+                return (
+                  <a key={label} href={href}
+                     className="footer-link"
+                     target={external ? '_blank' : undefined}
+                     rel={external ? 'noopener' : undefined}
+                     onClick={(e) => { if (href.startsWith('#')) { e.preventDefault(); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }}
+                     style={{ display: 'block', fontSize: 13, padding: '6px 0', color: 'var(--ink)', opacity: 0.85, cursor: 'pointer', transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
+                     onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
+                     onMouseOut={(e) => { e.currentTarget.style.opacity = 0.85; e.currentTarget.style.transform = 'translateX(0)'; }}>{label}</a>
+                );
+              })}
             </div>
           )}
         </div>
@@ -832,6 +1061,7 @@ function App() {
       <FlavorBreakdown flavor={state.flavor} />
       <UseItOn />
       <PourAndCompare flavor={state.flavor} />
+      <Origin />
       <Testimonials />
       <FlavorPicker flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <NextDrop />
