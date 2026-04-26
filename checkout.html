@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" style="--accent: #8B1E1E; --accent-ink: #F5F1EA;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — NoodleBomb</title>
+<meta name="description" content="Review your NoodleBomb order and complete checkout." />
+<meta name="robots" content="noindex" />
+<link rel="canonical" href="https://noodlebomb.co/checkout" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --ink: #F0EBE3;
+  --ink-60: rgba(240,235,227,0.78);
+  --ink-40: rgba(240,235,227,0.70);
+  --ink-20: rgba(240,235,227,0.45);
+  --paper: #0E0D0C;
+  --paper-2: #17140F;
+  --paper-3: #1F1B15;
+  --line: rgba(240,235,227,0.08);
+  --line-strong: rgba(240,235,227,0.14);
+  --accent: #8B1E1E;
+  --accent-ink: #F5F1EA;
+  --error: #E04A4A;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+body { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-weight: 400; -webkit-font-smoothing: antialiased; }
+.display { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
+.serif { font-family: 'Fraunces', serif; }
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+a { color: inherit; }
+
+.nav-cart {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(24px, 5.5vw, 80px);
+  background: rgba(14,13,12,0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-cart .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.nav-cart .brand-mark { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); color: var(--accent-ink); font-family: 'Inter Tight'; font-weight: 800; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+.nav-cart .brand-name { font-family: 'Inter Tight'; font-weight: 700; font-size: 16px; letter-spacing: -0.04em; }
+.nav-cart-link { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-60); text-decoration: none; transition: color .2s; }
+.nav-cart-link:hover { color: var(--ink); }
+
+main { padding-top: 96px; padding-bottom: 140px; min-height: 100vh; }
+.container { max-width: 1180px; margin: 0 auto; padding: 0 clamp(24px, 5.5vw, 80px); }
+
+.crumb {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--ink-60); text-decoration: none; transition: color .2s;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.crumb:hover { color: var(--ink); }
+
+h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px); letter-spacing: -0.04em; font-weight: 700; line-height: 1.02; margin: 0 0 8px; }
+h1.page-title em { font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent); }
+.page-meta { color: var(--ink-60); font-size: 14px; margin: 0 0 32px; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+.card { background: var(--paper-2); border: 1px solid var(--line); padding: 28px; }
+.card + .card { margin-top: 14px; }
+
+.section-h { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; }
+.section-h .label { font-family: 'Inter Tight'; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+.section-h .icon { color: var(--accent); }
+
+label.field-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-40); margin-bottom: 8px;
+}
+input.field {
+  width: 100%; padding: 14px 16px;
+  background: var(--paper); border: 1px solid var(--line-strong); color: var(--ink);
+  font-family: 'Inter'; font-size: 14px; outline: none;
+  transition: border-color .2s;
+}
+input.field:focus { border-color: var(--ink-40); }
+input.field.error { border-color: var(--error); }
+.field-error { color: var(--error); font-size: 12px; margin-top: 6px; font-family: 'Inter'; }
+
+.checkbox-row { display: flex; align-items: flex-start; gap: 10px; margin-top: 16px; cursor: pointer; }
+.checkbox-row input { margin-top: 3px; accent-color: var(--accent); cursor: pointer; }
+.checkbox-row span { color: var(--ink-60); font-size: 13px; line-height: 1.5; }
+
+.review-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.review-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.review-row .img { position: relative; width: 60px; height: 60px; flex-shrink: 0; background: var(--paper-3); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 6px; }
+.review-row .img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.review-row .qty-bubble { position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--ink); color: var(--paper); font-family: 'Inter Tight'; font-weight: 700; font-size: 11px; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.review-row .name { font-family: 'Inter Tight'; font-weight: 600; font-size: 14px; color: var(--ink); margin: 0; }
+.review-row .meta { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-40); margin-top: 4px; }
+.review-row .price { font-family: 'Inter Tight'; font-weight: 700; font-size: 14px; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.handoff {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 22px; background: rgba(139,30,30,0.08); border: 1px solid rgba(139,30,30,0.4);
+  margin-top: 14px;
+}
+.handoff .ico { width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.handoff h3 { font-family: 'Inter Tight'; font-weight: 700; font-size: 14px; margin: 0 0 6px; color: var(--ink); }
+.handoff p { color: var(--ink-60); font-size: 13px; line-height: 1.55; margin: 0; }
+.handoff strong { color: var(--accent); font-weight: 600; }
+
+.summary { position: sticky; top: 96px; }
+.summary h2 { font-family: 'Inter Tight'; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; margin: 0 0 4px; }
+.summary .lede { color: var(--ink-40); font-size: 11px; font-family: 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 22px; }
+.row-line { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; font-size: 13px; color: var(--ink-60); }
+.row-line .v { color: var(--ink); font-variant-numeric: tabular-nums; }
+.divider { height: 1px; background: var(--line); margin: 12px 0; }
+.row-line.total { padding-top: 8px; }
+.row-line.total .label { font-family: 'Inter Tight'; font-weight: 700; font-size: 14px; color: var(--ink); }
+.row-line.total .v { font-family: 'Inter Tight'; font-weight: 700; font-size: 28px; letter-spacing: -0.02em; color: var(--accent); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 16px 24px;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+  font-family: 'Inter'; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none;
+  transition: background .25s, color .25s, transform .2s, box-shadow .25s;
+}
+.btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(139,30,30,0.35); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-secondary:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: none; }
+
+.delivery {
+  margin-top: 18px; padding: 12px 14px; border: 1px solid var(--line);
+  display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-60);
+}
+.delivery svg { color: var(--accent); flex-shrink: 0; }
+
+.redirect-confirm {
+  margin-top: 14px; padding: 14px 16px;
+  background: rgba(139,30,30,0.08); border: 1px solid rgba(139,30,30,0.4);
+  font-size: 12px; color: var(--ink-60);
+}
+.redirect-confirm strong { color: var(--ink); display: block; font-family: 'Inter Tight'; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.redirect-confirm a { color: var(--accent); text-decoration: underline; }
+.redirect-confirm button { display: block; margin-top: 10px; background: transparent; border: 0; color: var(--ink-40); font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; padding: 0; transition: color .2s; }
+.redirect-confirm button:hover { color: var(--accent); }
+
+.trust { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
+.trust-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 11px; color: var(--ink-40); font-family: 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase; }
+.trust-row svg { color: var(--accent); flex-shrink: 0; }
+
+.payment { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--line); }
+.payment .lbl { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 8px; }
+.payment .row { display: flex; flex-wrap: wrap; gap: 6px; }
+.payment .pill { padding: 5px 9px; border: 1px solid var(--line); font-size: 10px; font-family: 'Inter'; font-weight: 600; color: var(--ink-60); background: var(--paper); }
+
+.steps { display: inline-flex; gap: 12px; align-items: center; font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-40); }
+.steps .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--ink-20); }
+.steps .dot.active { background: var(--accent); }
+.steps .dot.done { background: var(--ink-40); }
+.steps .sep { width: 18px; height: 1px; background: var(--ink-20); }
+
+.sticky-mobile { display: none; }
+@media (max-width: 900px) {
+  .summary { position: static; }
+  .sticky-mobile {
+    display: flex; align-items: center; gap: 12px;
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+    padding: 14px clamp(16px, 5vw, 28px);
+    background: rgba(14,13,12,0.95); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+  }
+  .sticky-mobile .total { flex: 1; }
+  .sticky-mobile .total small { display: block; color: var(--ink-40); font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .sticky-mobile .total strong { font-family: 'Inter Tight'; font-weight: 700; font-size: 22px; color: var(--accent); }
+  .sticky-mobile .btn { flex: 1.2; padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav-cart">
+  <a class="brand" href="/">
+    <div class="brand-mark">N</div>
+    <span class="brand-name">noodlebomb</span>
+  </a>
+  <a class="nav-cart-link" href="/cart.html">← Edit cart</a>
+</nav>
+
+<main>
+  <div class="container">
+    <div id="checkout-root"></div>
+  </div>
+</main>
+
+<script src="cart-store.js"></script>
+<script type="text/babel" src="checkout.jsx" data-plugins="transform-react-jsx-source" data-filename="checkout.jsx"></script>
+</body>
+</html>
