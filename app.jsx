@@ -40,7 +40,7 @@ const FOOD_IMAGES = {
   pulledpork: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=1600&q=80&auto=format&fit=crop'
 };
 
-// ——————————————————————————— Flavor Breakdown: sticky bottle + orbiting ingredients
+// ——————————————————————————— Flavor Profile: sticky bottle + orbiting flavor dimensions
 function FlavorBreakdown({ flavor }) {
   const stickyRef = useRef(null);
   const [p, setP] = useState(0); // 0..1 progress
@@ -58,11 +58,11 @@ function FlavorBreakdown({ flavor }) {
   }, []);
 
   const ingredients = [
-  { label: 'Soy + dark soy', note: 'the umami backbone', angle: -140, appearAt: 0.10 },
-  { label: 'Roasted garlic', note: 'slow-roasted, fresh', angle: -55, appearAt: 0.28 },
-  { label: 'Toasted sesame', note: 'nutty, smooth finish', angle: 40, appearAt: 0.46 },
-  { label: 'Rice vinegar', note: 'balance + brightness', angle: 135, appearAt: 0.64 },
-  { label: 'Mushroom + chili', note: 'depth and a whisper of heat', angle: 270, appearAt: 0.82 }];
+  { label: 'Umami', note: 'the backbone', angle: -140, appearAt: 0.10 },
+  { label: 'Roasted depth', note: 'the warmth', angle: -55, appearAt: 0.28 },
+  { label: 'Brightness', note: 'the lift', angle: 40, appearAt: 0.46 },
+  { label: 'Richness', note: 'the coat', angle: 135, appearAt: 0.64 },
+  { label: 'Heat', note: 'the whisper', angle: 270, appearAt: 0.82 }];
 
 
   return (
@@ -70,10 +70,10 @@ function FlavorBreakdown({ flavor }) {
       {/* MOBILE: stacked layout (≤768px) */}
       <div className="fb-mobile" style={{ display: 'none', padding: '80px 24px 96px' }}>
         <div className="mono" style={{ color: 'var(--muted)', marginBottom: 24, letterSpacing: '0.18em' }}>
-          Index 02 — Flavor Breakdown
+          Index 02 — Flavor Profile
         </div>
         <h2 className="display" style={{ margin: '0 0 48px', fontSize: 'clamp(40px, 11vw, 56px)', letterSpacing: '-0.04em', lineHeight: 0.95, fontWeight: 700 }}>
-          Five ingredients.<br /><span className="accent-fg">One obsession.</span>
+          Five flavors.<br /><span className="accent-fg">One obsession.</span>
         </h2>
         {/* Stacked ingredient rows */}
         <div style={{ borderTop: '1px solid var(--line)', marginBottom: 48 }}>
@@ -109,7 +109,7 @@ function FlavorBreakdown({ flavor }) {
       }}>
         {/* Section header */}
         <div className="fb-section-header" style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
-          <span className="mono" style={{ color: 'var(--muted)' }}>Index 02 — Flavor Breakdown</span>
+          <span className="mono" style={{ color: 'var(--muted)' }}>Index 02 — Flavor Profile</span>
           <span className="mono" style={{ color: 'var(--muted)' }}>pour.02 / of.05</span>
         </div>
         <h2 className="display section-h2 fb-headline" style={{
@@ -120,7 +120,7 @@ function FlavorBreakdown({ flavor }) {
           transition: 'opacity .3s linear',
           pointerEvents: p > 0.08 ? 'none' : 'auto'
         }}>
-          Five ingredients.<br /><span className="accent-fg">One obsession.</span>
+          Five flavors.<br /><span className="accent-fg">One obsession.</span>
         </h2>
 
         {/* Bottle center */}
@@ -615,7 +615,7 @@ function PourAndCompare({ flavor = 'original' }) {
 function Origin() {
   const stats = [
     { num: '18', label: 'months in development' },
-    { num: '5', label: 'ingredients kept' },
+    { num: '5', label: 'flavors kept' },
     { num: '40+', label: 'thrown out' },
     { num: '1', label: 'kitchen in Bonney Lake' },
   ];
@@ -648,7 +648,7 @@ function Origin() {
               maxWidth: '14ch',
             }}
           >
-            Five ingredients.<br />
+            Five flavors.<br />
             <span style={{ color: 'var(--muted)' }}>Forty rejected.</span>
           </h2>
         </Reveal>
