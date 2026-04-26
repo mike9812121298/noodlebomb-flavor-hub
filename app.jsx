@@ -503,18 +503,21 @@ function PourAndCompare({ flavor = 'original' }) {
 
       {/* Comparison */}
       <div style={{ marginTop: 180, maxWidth: 1100, margin: '180px auto 0' }}>
-        <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 05 — Quiet Flex</div></Reveal>
+        <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 05 — Where it sits</div></Reveal>
         <Reveal delay={1}>
-          <h2 className="display section-h2" style={{ margin: '0 0 56px' }}>
-            Not the same.<br />
-            <span style={{ color: 'var(--muted)' }}>By design.</span>
+          <h2 className="display section-h2" style={{ margin: '0 0 32px' }}>
+            Where it<br />
+            <span style={{ color: 'var(--muted)' }}>sits.</span>
           </h2>
+        </Reveal>
+        <Reveal delay={1.5}>
+          <p style={{ fontFamily: 'Inter Tight', fontSize: 'clamp(18px, 2.2vw, 22px)', lineHeight: 1.5, color: 'var(--muted)', maxWidth: 720, margin: '0 0 56px', letterSpacing: '-0.01em' }}>
+            Soy sauce seasons. Chili crisp adds heat. <span style={{ color: 'var(--ink)', fontWeight: 600 }}>NoodleBomb finishes</span> — the last splash that pulls a bowl together.
+          </p>
         </Reveal>
         <Reveal delay={2}>
           {(() => {
             const rows = [
-              ['Flavor depth', '5-note umami', 'Salt-forward', 'Heat-forward'],
-              ['Finish', 'Long, rounded', 'Short', 'Lingering burn'],
               ['Versatility', 'Ramen → wings → rice', 'Asian dishes', 'Specific uses'],
               ['Fillers', 'None', 'Varies', 'Varies'],
               ['Made', 'Small batch, USA', 'Industrial', 'Industrial'],
