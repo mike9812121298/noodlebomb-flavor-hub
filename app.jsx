@@ -509,7 +509,7 @@ function PourAndCompare({ flavor = 'original' }) {
               ['Fillers', 'None', 'Varies', 'Varies'],
               ['Made', 'Small batch, USA', 'Industrial', 'Industrial'],
             ];
-            const colHeaders = ['NoodleBomb', 'Regular soy', 'Hot sauce'];
+            const colHeaders = ['NoodleBomb', 'Regular soy', 'Chili crisp'];
             return (
               <>
                 {/* DESKTOP table — NoodleBomb column dominant per #26 */}
@@ -585,7 +585,7 @@ function PourAndCompare({ flavor = 'original' }) {
                           <span style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink)', textAlign: 'right' }}>{soy}</span>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
-                          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--muted)', textTransform: 'uppercase', flexShrink: 0 }}>Hot sauce</span>
+                          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--muted)', textTransform: 'uppercase', flexShrink: 0 }}>Chili crisp</span>
                           <span style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink)', textAlign: 'right' }}>{hot}</span>
                         </div>
                       </div>
@@ -789,7 +789,7 @@ function Origin() {
 // ——————————————————————————— Testimonials (real brand voice)
 function Testimonials() {
   const quotes = [
-  { body: 'Noodle Bomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley', tag: 'verified buyer' },
+  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley', tag: 'verified buyer' },
   { body: 'I wasn’t expecting this much punch from one sauce. Took my plain store-bought ramen and made it restaurant-worthy in seconds. I’m officially hooked.', name: 'Marcus', tag: 'verified buyer' },
   { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades any ramen.', name: 'Priya', tag: 'verified buyer' }];
 
