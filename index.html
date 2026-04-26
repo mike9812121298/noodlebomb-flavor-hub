@@ -983,6 +983,13 @@
     .compare-mobile { display: flex !important; }
   }
 
+  /* — The Range (Index 03): swap sticky desktop carousel for native scroll-snap on mobile — */
+  @media (max-width: 768px) {
+    .range-desktop { display: none !important; }
+    .range-mobile { display: block !important; }
+  }
+  .range-mobile-scroller::-webkit-scrollbar { display: none; }
+
   /* — Final CTA waitlist row: stack on mobile — */
   @media (max-width: 768px) {
     .finalcta-row { flex-direction: column !important; gap: 12px !important; }

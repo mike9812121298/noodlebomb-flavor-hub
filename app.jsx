@@ -235,7 +235,9 @@ function FlavorScene({ kind }) {
 function UseItOn() {
   const wrap = useRef(null);
   const track = useRef(null);
+  const mobileScroller = useRef(null);
   const [progress, setProgress] = useState(0);
+  const [mobileIdx, setMobileIdx] = useState(0);
 
   useEffect(() => {
     const on = () => {
@@ -256,6 +258,21 @@ function UseItOn() {
     { key: 'ryu',      name: 'Ryu Garlic',   no: 'No.04', tag: 'DARK DEPTH',       line: 'Aged black garlic. Rich umami.',     note: 'Molasses-deep, with a whisper of sweet heat.',        bg: '#1A1A1A', ink: '#F5C842', sub: 'rgba(245,200,66,0.70)',  img: 'uploads/upload-ryu-v3.png', comingSoon: 'COMING SOON · SUMMER 2026' },
   ];
   const panelCount = items.length;
+
+  // Mobile carousel: track which panel is centered
+  useEffect(() => {
+    const el = mobileScroller.current;
+    if (!el) return;
+    const on = () => {
+      const w = el.clientWidth;
+      const i = Math.round(el.scrollLeft / w);
+      setMobileIdx(Math.max(0, Math.min(panelCount - 1, i)));
+    };
+    el.addEventListener('scroll', on, { passive: true });
+    return () => el.removeEventListener('scroll', on);
+  }, [panelCount]);
+
+  const mobileActive = items[mobileIdx];
   // Shift by (panels-1) * 100vw
   const shift = progress * (panelCount - 1) * 100;
 
@@ -264,7 +281,90 @@ function UseItOn() {
   const active = items[activeIdx];
 
   return (
-    <section id="range" ref={wrap} style={{ position: 'relative', height: `${panelCount * 100}vh`, background: active.bg, transition: 'background 0.6s cubic-bezier(.2,.7,.2,1)', color: active.ink, scrollMarginTop: 80 }}>
+    <section id="range" ref={wrap} className="range-section" style={{ position: 'relative', background: mobileActive.bg, transition: 'background 0.6s cubic-bezier(.2,.7,.2,1)', color: mobileActive.ink, scrollMarginTop: 80 }}>
+      {/* MOBILE: native scroll-snap carousel with dots */}
+      <div className="range-mobile" style={{ display: 'none', padding: '64px 0 28px', background: mobileActive.bg, transition: 'background .5s cubic-bezier(.2,.7,.2,1)' }}>
+        <div style={{ padding: '0 24px', display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
+          <span className="mono" style={{ color: mobileActive.sub }}>Index 03 — The Range</span>
+          <span className="mono" style={{ color: mobileActive.sub }}>{String(mobileIdx + 1).padStart(2, '0')} / {String(panelCount).padStart(2, '0')}</span>
+        </div>
+        <div
+          ref={mobileScroller}
+          className="range-mobile-scroller"
+          style={{
+            display: 'flex',
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            paddingInline: '4vw',
+            gap: 16,
+          }}
+        >
+          {items.map((it, i) => (
+            <div key={i} style={{
+              flex: '0 0 88vw',
+              scrollSnapAlign: 'center',
+              padding: '16px 12px 28px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              minHeight: 520,
+            }}>
+              <div style={{ position: 'relative', width: '100%', height: 320, marginBottom: 24 }}>
+                <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name}`} style={{ width: '100%', height: '100%', objectFit: 'contain', filter: it.comingSoon ? 'drop-shadow(0 24px 40px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 24px 40px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
+                {it.comingSoon && (
+                  <div style={{
+                    position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
+                    padding: '6px 12px', background: 'rgba(11,11,11,0.78)',
+                    border: `1px solid ${it.ink}`, color: it.ink,
+                    fontFamily: 'JetBrains Mono, monospace', fontSize: 9, fontWeight: 600,
+                    letterSpacing: '0.16em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+                  }}>{it.comingSoon}</div>
+                )}
+              </div>
+              <div className="mono" style={{ color: it.sub, marginBottom: 12, letterSpacing: '0.15em', fontSize: 11 }}>{it.no} · {it.tag}</div>
+              <h3 className="display" style={{ fontSize: 'clamp(40px, 11vw, 64px)', lineHeight: 0.92, color: it.ink, margin: '0 0 16px', fontWeight: 700, letterSpacing: '-0.04em', overflowWrap: 'break-word', maxWidth: '100%' }}>
+                {it.name}.
+              </h3>
+              <div className="serif" style={{ fontStyle: 'italic', fontSize: 20, color: it.ink, opacity: 0.88, letterSpacing: '-0.01em', marginBottom: 10 }}>
+                {it.line}
+              </div>
+              <div style={{ fontFamily: 'Inter Tight', fontSize: 14, color: it.sub, lineHeight: 1.5 }}>
+                {it.note}
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 24 }}>
+          {items.map((it, i) => (
+            <button
+              key={i}
+              aria-label={`Go to ${it.name}`}
+              onClick={() => {
+                const el = mobileScroller.current;
+                if (el) el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' });
+              }}
+              style={{
+                width: i === mobileIdx ? 24 : 8,
+                height: 8,
+                borderRadius: 999,
+                background: i === mobileIdx ? mobileActive.ink : mobileActive.sub,
+                opacity: i === mobileIdx ? 1 : 0.4,
+                border: 0,
+                padding: 0,
+                cursor: 'pointer',
+                transition: 'width .3s, opacity .3s, background .3s',
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* DESKTOP: original sticky horizontal scroll */}
+      <div className="range-desktop" style={{ height: `${panelCount * 100}vh`, background: active.bg, transition: 'background 0.6s cubic-bezier(.2,.7,.2,1)', color: active.ink }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
         {/* header */}
         <div style={{ position: 'absolute', top: 28, left: 28, right: 28, zIndex: 5, display: 'flex', justifyContent: 'space-between' }}>
@@ -338,6 +438,7 @@ function UseItOn() {
           </div>
         </div>
       </div>
+      </div> {/* /.range-desktop */}
     </section>);
 
 }
@@ -411,26 +512,50 @@ function PourAndCompare({ flavor = 'original' }) {
             const colHeaders = ['NoodleBomb', 'Regular soy', 'Hot sauce'];
             return (
               <>
-                {/* DESKTOP table */}
-                <div className="compare-desktop compare-table-wrap" style={{ border: '1px solid var(--line)' }}>
+                {/* DESKTOP table — NoodleBomb column dominant per #26 */}
+                <div className="compare-desktop compare-table-wrap" style={{ border: '1px solid var(--line)', position: 'relative', overflow: 'hidden' }}>
+                  {/* Faint red NoodleBomb-column highlight bar (sits behind cells) */}
+                  <div aria-hidden="true" style={{
+                    position: 'absolute',
+                    top: 0, bottom: 0,
+                    left: 'calc(28% / 1.2 * 100% / 100)', /* approx — falls inside NoodleBomb column */
+                    pointerEvents: 'none',
+                  }} />
                   {[['Attribute', ...colHeaders], ...rows].map((row, i) =>
                     <div key={i} className="compare-row" style={{
-                      display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr',
-                      padding: '20px 24px',
+                      display: 'grid', gridTemplateColumns: '1.2fr 2fr 1fr 1fr',
+                      padding: '24px 28px',
                       borderTop: i ? '1px solid var(--line)' : 'none',
-                      alignItems: 'center'
+                      alignItems: 'center',
+                      position: 'relative',
                     }}>
+                      {/* NoodleBomb column highlight bar — only behind that column */}
+                      {i === 0 && (
+                        <div aria-hidden="true" style={{
+                          position: 'absolute',
+                          top: 0,
+                          bottom: `calc(-${rows.length} * 100%)`,
+                          left: 'calc(1.2 / 5.2 * 100%)',
+                          width: 'calc(2 / 5.2 * 100%)',
+                          background: 'rgba(139,30,30,0.08)',
+                          pointerEvents: 'none',
+                          zIndex: 0,
+                        }} />
+                      )}
                       {row.map((cell, j) =>
                         <div key={j} style={{
+                          position: 'relative',
+                          zIndex: 1,
                           fontFamily: i === 0 ? 'JetBrains Mono' : 'Inter Tight',
-                          fontSize: i === 0 ? 11 : 18,
+                          fontSize: i === 0 ? 11 : (j === 1 ? 22 : 16),
                           textTransform: i === 0 ? 'uppercase' : 'none',
                           letterSpacing: i === 0 ? '0.08em' : '-0.015em',
-                          color: i === 0 ? 'var(--muted)' : j === 1 ? 'var(--ink)' : 'var(--muted)',
-                          fontWeight: j === 1 && i > 0 ? 600 : 400
+                          color: i === 0 ? (j === 1 ? 'var(--accent)' : 'var(--muted)') : j === 1 ? 'var(--ink)' : 'var(--muted)',
+                          fontWeight: j === 1 && i > 0 ? 700 : (j === 1 && i === 0 ? 700 : 400),
+                          opacity: j === 1 ? 1 : (i === 0 ? 0.85 : 0.6),
                         }}>
                           {cell}
-                          {j === 1 && i > 0 && <span className="accent-fg" style={{ marginLeft: 8 }}>●</span>}
+                          {j === 1 && i > 0 && <span className="accent-fg" style={{ marginLeft: 10, fontSize: 10 }}>●</span>}
                         </div>
                       )}
                     </div>
@@ -710,6 +835,17 @@ function FlavorPicker({ flavor, setFlavor }) {
     setAddedKey(k);
     window.setTimeout(() => setAddedKey((cur) => (cur === k ? null : cur)), 1400);
   };
+  // Per-flavor card background tints (subtle warm tones layered over paper-2)
+  const cardBg = {
+    original: 'linear-gradient(170deg, rgba(139,30,30,0.10) 0%, rgba(139,30,30,0.04) 100%)',
+    citrus:   'linear-gradient(170deg, rgba(201,162,39,0.10) 0%, rgba(201,162,39,0.04) 100%)',
+    spicy:    'linear-gradient(170deg, rgba(194,65,12,0.12) 0%, rgba(194,65,12,0.04) 100%)',
+  };
+  const cardBorder = {
+    original: 'rgba(139,30,30,0.22)',
+    citrus:   'rgba(201,162,39,0.22)',
+    spicy:    'rgba(194,65,12,0.25)',
+  };
   return (
     <section id="lineup" style={{ background: 'var(--paper-2)', padding: '140px clamp(24px, 5.5vw, 80px)', scrollMarginTop: 80 }}>
       <div style={{ maxWidth: 1300, margin: '0 auto' }}>
@@ -748,12 +884,13 @@ function FlavorPicker({ flavor, setFlavor }) {
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
                   style={{
-                    background: active ? 'var(--paper-2)' : 'transparent',
+                    background: cardBg[k] || 'transparent',
+                    border: `1px solid ${cardBorder[k] || 'var(--line)'}`,
                     padding: 32,
                     cursor: 'pointer',
-                    transition: 'transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s, background .4s',
+                    transition: 'transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s, background .4s, border-color .4s',
                     transform: active ? 'translateY(-4px)' : 'none',
-                    boxShadow: active ? '0 24px 60px rgba(0,0,0,0.35)' : 'none'
+                    boxShadow: active ? `0 24px 60px ${f.color}30` : 'none'
                   }}>
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
@@ -784,29 +921,33 @@ function FlavorPicker({ flavor, setFlavor }) {
                         justifyContent: 'center',
                         gap: 10,
                         width: '100%',
+                        minHeight: 48,
                         padding: '14px 20px',
-                        background: addedKey === k ? f.color : 'transparent',
-                        border: `1px solid ${f.color}`,
-                        color: addedKey === k ? f.ink : f.color,
+                        borderRadius: 999,
+                        background: addedKey === k ? f.color : '#0B0A09',
+                        border: `1px solid ${addedKey === k ? f.color : '#0B0A09'}`,
+                        color: addedKey === k ? f.ink : '#F5F1EA',
                         fontFamily: 'Inter',
                         fontSize: 12,
                         fontWeight: 600,
                         letterSpacing: '0.18em',
                         textTransform: 'uppercase',
                         cursor: 'pointer',
-                        transition: 'background 0.35s cubic-bezier(.2,.7,.2,1), color 0.35s, transform 0.28s, box-shadow 0.35s',
+                        transition: 'background 0.35s cubic-bezier(.2,.7,.2,1), color 0.35s, transform 0.28s, box-shadow 0.35s, border-color 0.35s',
                       }}
                       onMouseEnter={(e) => {
                         if (addedKey === k) return;
                         e.currentTarget.style.background = f.color;
+                        e.currentTarget.style.borderColor = f.color;
                         e.currentTarget.style.color = f.ink;
                         e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = `0 12px 28px ${f.color}40`;
+                        e.currentTarget.style.boxShadow = `0 12px 28px ${f.color}55`;
                       }}
                       onMouseLeave={(e) => {
                         if (addedKey === k) return;
-                        e.currentTarget.style.background = 'transparent';
-                        e.currentTarget.style.color = f.color;
+                        e.currentTarget.style.background = '#0B0A09';
+                        e.currentTarget.style.borderColor = '#0B0A09';
+                        e.currentTarget.style.color = '#F5F1EA';
                         e.currentTarget.style.transform = '';
                         e.currentTarget.style.boxShadow = 'none';
                       }}
@@ -839,11 +980,11 @@ function FlavorPicker({ flavor, setFlavor }) {
             display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'stretch',
             minHeight: 420
           }}>
-            {/* Photo */}
-            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E' }}>
-              <img src="uploads/lifestyle-woman-3pack.png" alt="A woman pouring NoodleBomb Original over a bowl of noodles, three bottles on the counter"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(8,7,6,0) 60%, rgba(22,19,16,0.35) 100%)', pointerEvents: 'none' }} />
+            {/* Photo — show all three distinct bottles per #16 (was Original-only lifestyle shot) */}
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+              <img src="uploads/noodlebomb-trio.png" alt="The NoodleBomb Trio — Original, Citrus Shoyu, and Spicy Tokyo bottles together"
+              style={{ width: '100%', height: '100%', maxHeight: 420, objectFit: 'contain', filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.5))' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 50%, rgba(8,7,6,0.4) 100%)', pointerEvents: 'none' }} />
             </div>
             {/* Copy */}
             <div className="trio-bundle-copy" style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
@@ -880,7 +1021,45 @@ function FlavorPicker({ flavor, setFlavor }) {
               </div>
 
               <div style={{ marginTop: 8 }}>
-                <a className="btn" href={WIX_URLS.trio} target="_blank" rel="noopener" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', padding: '16px 26px', fontWeight: 600, borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em', transition: 'transform .2s, filter .2s', textDecoration: 'none', display: 'inline-block' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; }}>Buy the Bundle →</a>
+                <a
+                  className="btn trio-bundle-cta"
+                  href={WIX_URLS.trio}
+                  target="_blank"
+                  rel="noopener"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    background: '#8B1E1E',
+                    color: '#F5F1EA',
+                    border: 'none',
+                    padding: '18px 32px',
+                    minHeight: 56,
+                    fontWeight: 600,
+                    borderRadius: 999,
+                    cursor: 'pointer',
+                    fontFamily: 'Inter',
+                    fontSize: 14,
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    transition: 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .35s, background .35s',
+                    textDecoration: 'none',
+                    boxShadow: '0 12px 28px rgba(139,30,30,0.30)',
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 18px 40px rgba(139,30,30,0.45)';
+                    e.currentTarget.style.background = '#A02525';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.30)';
+                    e.currentTarget.style.background = '#8B1E1E';
+                  }}
+                >
+                  Buy the Bundle — $29.99
+                  <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+                </a>
               </div>
             </div>
           </div>
