@@ -139,7 +139,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 }
 
 // ———————————————————————————————————————————— Hero with parallax
-function Hero({ headline, bottleSrc }) {
+function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }) {
   const [y, setY] = useState(0);
   useEffect(() => {
     const on = () => setY(window.scrollY);
@@ -202,8 +202,49 @@ function Hero({ headline, bottleSrc }) {
             <span style={{ color: 'var(--ink-60)' }}>Turns any noodles into shop-level ramen in seconds.</span>
           </div>
         </div>
-        <div className="hero-cta-row" style={{ display:'flex', gap: 10 }}>
-          <a className="btn btn-primary" href={NB_WIX.trio} target="_blank" rel="noopener" style={{ textDecoration: 'none', display: 'inline-block' }}>Try the 3-pack — $29.99</a>
+        <div className="hero-cta-row" style={{ display:'flex', gap: 10, flexWrap: 'wrap' }}>
+          <a
+            href={NB_WIX[flavorKey] || NB_WIX.shop}
+            target="_blank"
+            rel="noopener"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '14px 22px',
+              borderRadius: 999,
+              border: `1px solid ${flavorMeta?.color || 'var(--accent)'}`,
+              background: flavorMeta?.color || 'var(--accent)',
+              color: flavorMeta?.ink || 'var(--accent-ink)',
+              fontFamily: 'Inter',
+              fontWeight: 600,
+              fontSize: 13,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              transition: 'transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .35s, opacity .25s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = `0 16px 36px ${flavorMeta?.color || 'var(--accent)'}55`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = '';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            Add {flavorMeta?.name || 'to Cart'} — $11.99
+            <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+          </a>
+          <a
+            className="btn btn-ghost"
+            href={NB_WIX.trio}
+            target="_blank"
+            rel="noopener"
+            style={{ textDecoration: 'none', display: 'inline-block' }}
+          >
+            Try the 3-pack — $29.99
+          </a>
         </div>
       </div>
 

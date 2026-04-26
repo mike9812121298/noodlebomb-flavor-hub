@@ -380,56 +380,6 @@ function PourAndCompare({ flavor = 'original' }) {
 
 }
 
-// ——————————————————————————— Origin (founder story)
-function Origin() {
-  return (
-    <section id="origin" style={{ background: 'var(--paper)', padding: 'clamp(96px, 14vw, 160px) 28px', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
-      <div style={{ maxWidth: 1400, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 48 }} className="origin-grid">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(32px, 6vw, 96px)', alignItems: 'start' }}>
-          {/* LEFT — founder photograph */}
-          <div style={{ position: 'relative', aspectRatio: '4 / 5', background: '#14110E', overflow: 'hidden' }}>
-            <img src="uploads/lifestyle-founder-origin.png" alt="The founder pouring sauce over a bowl of noodles in a low-lit kitchen"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)', pointerEvents: 'none' }} />
-            <span className="mono" style={{ position: 'absolute', bottom: 20, left: 20, color: 'var(--paper)', opacity: 0.7 }}>Bonney Lake, WA · small batch</span>
-          </div>
-
-          {/* RIGHT — story */}
-          <div style={{ paddingLeft: 'clamp(0px, 2vw, 80px)' }}>
-            <Reveal>
-              <div className="mono" style={{ color: 'var(--muted)', marginBottom: 24 }}>Index 06 — The Origin</div>
-            </Reveal>
-            <Reveal delay={1}>
-              <h2 className="serif" style={{ fontWeight: 500, fontSize: 'clamp(36px, 5.2vw, 64px)', lineHeight: 1.05, letterSpacing: '-0.02em', margin: '0 0 40px', color: 'var(--ink)' }}>
-                Started after one bad<br />bowl of ramen.
-              </h2>
-            </Reveal>
-            <Reveal delay={2}>
-              <div style={{ maxWidth: '52ch', color: 'var(--ink)', opacity: 0.8 }}>
-                <p style={{ fontFamily: 'Inter', fontSize: 'clamp(16px, 1.1vw, 18px)', lineHeight: 1.6, letterSpacing: '-0.01em', margin: '0 0 20px' }}>
-                  In 2023, on a cold Tuesday in Bonney Lake, WA, I made instant ramen from a packet and knew I could do better. Not fancier. Better. The broth was thin, the seasoning was flat, and the whole thing tasted like it had been designed by a spreadsheet.
-                </p>
-                <p style={{ fontFamily: 'Inter', fontSize: 'clamp(16px, 1.1vw, 18px)', lineHeight: 1.6, letterSpacing: '-0.01em', margin: '0 0 20px' }}>
-                  So I spent the next eighteen months in my kitchen testing soy, sesame, garlic, and chili in every ratio I could think of. I kept five ingredients. I threw out forty. What came out the other side is what's in the bottle — a ramen sauce that makes a packet of noodles taste like a shop you'd fly to.
-                </p>
-                <p style={{ fontFamily: 'Inter', fontSize: 'clamp(16px, 1.1vw, 18px)', lineHeight: 1.6, letterSpacing: '-0.01em', margin: 0 }}>
-                  We still make it in small batches, here in the Pacific Northwest. Premium ingredients, no fillers, no apologies. If you find something better, I want to know about it.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={3}>
-              <div style={{ marginTop: 40 }}>
-                <div className="serif" style={{ fontStyle: 'italic', fontSize: 20, color: 'var(--ink)' }}>— Ashley March, founder</div>
-                <div className="mono" style={{ marginTop: 10, color: 'var(--muted)' }}>Small Batch · Bonney Lake, WA</div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </div>
-    </section>);
-
-}
-
 // ——————————————————————————— Testimonials (real brand voice)
 function Testimonials() {
   const quotes = [
@@ -529,9 +479,50 @@ function FlavorPicker({ flavor, setFlavor }) {
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
-                    <div className="serif" style={{ fontSize: 22, marginBottom: 14, fontStyle: 'italic' }}>{f.price}</div>
-                    <a className="tlink" href={wixFor(k)} target="_blank" rel="noopener" style={{ background: 'none', border: 0, padding: 0, color: 'var(--ink)', cursor: 'pointer', fontFamily: 'Inter', fontSize: 13, fontWeight: 500, textDecoration: 'none', display: 'inline-block' }}>
-                      Add to cart<span className="arrow">→</span>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 16 }}>
+                      <div className="serif" style={{ fontSize: 22, fontStyle: 'italic' }}>{f.price}</div>
+                      <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>7 fl oz</span>
+                    </div>
+                    <a
+                      href={wixFor(k)}
+                      target="_blank"
+                      rel="noopener"
+                      onClick={(e) => e.stopPropagation()}
+                      className="lineup-buy-btn"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 10,
+                        width: '100%',
+                        padding: '14px 20px',
+                        background: 'transparent',
+                        border: `1px solid ${f.color}`,
+                        color: f.color,
+                        fontFamily: 'Inter',
+                        fontSize: 12,
+                        fontWeight: 600,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
+                        textDecoration: 'none',
+                        cursor: 'pointer',
+                        transition: 'background 0.35s cubic-bezier(.2,.7,.2,1), color 0.35s, transform 0.28s, box-shadow 0.35s',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = f.color;
+                        e.currentTarget.style.color = f.ink;
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = `0 12px 28px ${f.color}40`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.color = f.color;
+                        e.currentTarget.style.transform = '';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }}
+                    >
+                      Add to Cart
+                      <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
                     </a>
                   </div>
                 </div>
@@ -710,7 +701,7 @@ function FinalCTA() {
           </div>
           {[
           ['Shop', [['Original', '#lineup'], ['Citrus Shoyu', '#lineup'], ['Spicy Tokyo', '#lineup'], ['Variety 3-pack', '#lineup'], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
-          ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
+          ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
           map(([h, items]) =>
           <div key={h}>
@@ -837,11 +828,10 @@ function App() {
     <>
       {state.spam && <div className="spam-banner">⚡ LIMITED TIME!!! 50% OFF — HURRY — ONLY 3 LEFT!!! ⚡</div>}
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
-      <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} />
+      <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <FlavorBreakdown flavor={state.flavor} />
       <UseItOn />
       <PourAndCompare flavor={state.flavor} />
-      <Origin />
       <Testimonials />
       <FlavorPicker flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <NextDrop />
