@@ -333,9 +333,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
   return (
     <section style={{ position: 'relative', minHeight: '100vh', paddingTop: 80, overflow: 'hidden' }}>
       {/* top meta strip */}
-      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 28px', marginTop: 8 }}>
+      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'flex-start', padding: '0 28px', marginTop: 8 }}>
         <span className="mono" style={{ color: 'var(--muted)' }}>Vol.01 · 2026 Edition</span>
-        <span className="mono" style={{ color: 'var(--muted)' }}>Batch 0247 / 1000</span>
       </div>
 
       {/* Big headline — backdrop wash behind bottle */}

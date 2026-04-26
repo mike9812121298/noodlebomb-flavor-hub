@@ -283,46 +283,6 @@ function MonthlyDrop() {
                 </div>
               </div>
             </Reveal>
-
-            {/* Past drops row */}
-            <Reveal delay={6}>
-              <div style={{ marginTop: 36, paddingTop: 24, borderTop: '1px solid rgba(245,241,234,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  {[
-                    { vol: '01', month: 'Dec' },
-                    { vol: '02', month: 'Jan' },
-                    { vol: '03', month: 'Feb' }
-                  ].map((d, i) => (
-                    <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                      <div className="md-past-card" style={{
-                        width: 40, height: 40, borderRadius: 4,
-                        background: 'linear-gradient(135deg, #B8956A 0%, #8C6A48 100%)',
-                        border: '1px solid rgba(0,0,0,0.3)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        position: 'relative', overflow: 'hidden',
-                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.4)',
-                        cursor: 'pointer'
-                      }}>
-                        {/* Tiny seal */}
-                        <div style={{
-                          position: 'absolute', top: 4, right: 4,
-                          width: 7, height: 7, borderRadius: 999,
-                          background: 'radial-gradient(circle at 30% 30%, #C8362E 0%, #7A1A1A 100%)',
-                          boxShadow: '0 1px 1px rgba(0,0,0,0.5)'
-                        }} />
-                        <div style={{ fontFamily: 'Fraunces, serif', fontStyle: 'italic', fontWeight: 500, fontSize: 16, color: 'rgba(60,40,28,0.7)', letterSpacing: '-0.04em' }}>
-                          {d.vol}
-                        </div>
-                      </div>
-                      <div className="mono" style={{ fontSize: 9, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                        VOL.{d.vol} · {d.month.toUpperCase()}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-            </Reveal>
           </div>
         </div>
       </div>

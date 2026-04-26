@@ -1129,7 +1129,7 @@ function FinalCTA() {
           {/* Trust line */}
           <Reveal delay={4}>
             <div className="mono" style={{ marginTop: 36, fontSize: 11, letterSpacing: '0.18em', opacity: 0.7 }}>
-              PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $35
+              PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $40
             </div>
           </Reveal>
         </div>
@@ -1285,6 +1285,15 @@ function App() {
   const [tweaksOpen, setTweaksOpen] = useState(false);
   const [inquiry, setInquiry] = useState(null); // null | 'wholesale' | 'contact'
 
+  // Dev-mode gate: only enable Tweaks panel + spam banner + parent postMessage hooks
+  // when running on localhost or with ?dev=1 in URL. Keeps these out of production traffic.
+  const IS_DEV_MODE = (() => {
+    if (typeof window === 'undefined') return false;
+    if (window.location.search.includes('dev=1')) return true;
+    const h = window.location.hostname;
+    return h === 'localhost' || h === '127.0.0.1' || h.endsWith('.lovable.dev') || h.endsWith('.lovable.app');
+  })();
+
   // Expose modal opener globally so footer/anchor clicks can trigger it
   useEffect(() => {
     window.NB_OPEN_INQUIRY = (kind) => setInquiry(kind);
@@ -1293,7 +1302,9 @@ function App() {
   const set = (patch) => {
     setState((s) => {
       const next = { ...s, ...patch };
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: patch }, '*');
+      if (IS_DEV_MODE) {
+        try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits: patch }, '*'); } catch (_) {}
+      }
       return next;
     });
   };
@@ -1319,23 +1330,24 @@ function App() {
     document.body.classList.toggle('grain', state.grain);
   }, [state.grain]);
 
-  // Edit mode messaging
+  // Edit mode messaging — DEV ONLY (gated by IS_DEV_MODE so prod traffic gets no postMessage hooks)
   useEffect(() => {
+    if (!IS_DEV_MODE) return;
     const onMsg = (e) => {
       if (!e.data || !e.data.type) return;
       if (e.data.type === '__activate_edit_mode') setTweaksOpen(true);
       if (e.data.type === '__deactivate_edit_mode') setTweaksOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (_) {}
     return () => window.removeEventListener('message', onMsg);
-  }, []);
+  }, [IS_DEV_MODE]);
 
   const headline = (state.headline || '').replace(/\\n/g, '\n');
 
   return (
     <>
-      {state.spam && <div className="spam-banner">⚡ LIMITED TIME!!! 50% OFF — HURRY — ONLY 3 LEFT!!! ⚡</div>}
+      {IS_DEV_MODE && state.spam && <div className="spam-banner">⚡ LIMITED TIME!!! 50% OFF — HURRY — ONLY 3 LEFT!!! ⚡</div>}
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <FlavorBreakdown flavor={state.flavor} />
@@ -1347,7 +1359,7 @@ function App() {
       <NextDrop />
       <MonthlyDrop />
       <FinalCTA />
-      <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />
+      {IS_DEV_MODE && <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />}
       <InquiryModal open={!!inquiry} kind={inquiry} onClose={() => setInquiry(null)} />
     </>);
 
