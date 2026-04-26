@@ -949,7 +949,8 @@
   @media (max-width: 768px) {
     .hero-meta-strip { display: none !important; }
     .hero-bottom-row {
-      position: static !important;
+      position: relative !important;
+      z-index: 5 !important;
       flex-direction: column !important;
       align-items: stretch !important;
       gap: 16px !important;
@@ -958,7 +959,35 @@
       margin-top: 32px;
     }
     .hero-cta-row { flex-direction: column !important; gap: 12px !important; width: 100%; }
-    .hero-cta-row .btn { width: 100%; min-height: 48px; display: inline-flex !important; align-items: center; justify-content: center; }
+    .hero-cta-row a { width: 100%; min-height: 48px; display: inline-flex !important; align-items: center; justify-content: center; text-align: center; }
+    /* Constrain bottle on mobile so it doesn't crash into CTA */
+    .hero-bottle-positioner {
+      position: relative !important;
+      top: auto !important; left: auto !important;
+      transform: none !important;
+      width: 70vw !important; max-width: 280px;
+      height: 62vh !important; max-height: 480px;
+      margin: 24px auto 0 !important;
+    }
+  }
+
+  /* — FlavorBreakdown (Index 02): swap sticky mechanic for stacked layout on mobile — */
+  @media (max-width: 768px) {
+    .fb-desktop { display: none !important; }
+    .fb-mobile { display: block !important; }
+  }
+
+  /* — Compare table (Index 05): swap to attribute cards on mobile — */
+  @media (max-width: 768px) {
+    .compare-desktop { display: none !important; }
+    .compare-mobile { display: flex !important; }
+  }
+
+  /* — Final CTA waitlist row: stack on mobile — */
+  @media (max-width: 768px) {
+    .finalcta-row { flex-direction: column !important; gap: 12px !important; }
+    .finalcta-row .btn { width: 100%; }
+    .finalcta-waitlist { width: 100%; }
   }
   @media (max-width: 768px) {
     .hero-h1 { font-size: clamp(48px, 14vw, 96px) !important; padding-right: 0 !important; }

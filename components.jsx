@@ -438,4 +438,162 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
   );
 }
 
-Object.assign(window, { Reveal, Bottle, Shot, FoodShot, Nav, Hero });
+// ———————————————————————————————————————————— Inquiry modal (Wholesale + Contact)
+function InquiryModal({ open, kind, onClose }) {
+  const [submitted, setSubmitted] = useState(false);
+  useEffect(() => { if (!open) setSubmitted(false); }, [open]);
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => { document.body.style.overflow = prev; window.removeEventListener('keydown', onKey); };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const isWholesale = kind === 'wholesale';
+  const title = isWholesale ? 'Wholesale Inquiry' : 'Get in Touch';
+  const intro = isWholesale
+    ? "Tell us about your shop. We'll be in touch with wholesale terms."
+    : "Questions, press, partnerships — drop us a line.";
+  const subject = isWholesale ? 'NoodleBomb Wholesale Inquiry' : 'NoodleBomb Contact';
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        background: 'rgba(8,7,6,0.78)', backdropFilter: 'blur(6px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: 20, animation: 'fadeIn 0.2s ease',
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: 'var(--paper-2)',
+          border: '1px solid var(--line-strong)',
+          borderRadius: 6,
+          width: '100%', maxWidth: 520,
+          maxHeight: '90vh', overflowY: 'auto',
+          padding: 'clamp(28px, 4vw, 40px)',
+          color: 'var(--ink)',
+          position: 'relative',
+        }}
+      >
+        <button
+          aria-label="Close"
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: 14, right: 14,
+            width: 36, height: 36,
+            background: 'transparent', border: 0, color: 'var(--ink)',
+            opacity: 0.65, cursor: 'pointer', padding: 0,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
+        <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.18em', marginBottom: 12 }}>
+          {isWholesale ? 'Stockists & Retail' : 'Hello@noodlebomb.co'}
+        </div>
+        <h2 className="display" style={{ margin: '0 0 12px', fontSize: 28, letterSpacing: '-0.03em', fontWeight: 700 }}>
+          {title}
+        </h2>
+        <p style={{ margin: '0 0 24px', color: 'var(--ink-60)', fontSize: 14, lineHeight: 1.5 }}>
+          {intro}
+        </p>
+
+        {submitted ? (
+          <div style={{ padding: '24px 0', textAlign: 'center' }}>
+            <div style={{ fontFamily: 'Inter Tight', fontSize: 22, fontWeight: 600, marginBottom: 8 }}>Thanks — we got it.</div>
+            <div style={{ color: 'var(--ink-60)', fontSize: 14 }}>We'll reply within 1–2 business days.</div>
+            <button
+              onClick={onClose}
+              style={{
+                marginTop: 24, padding: '12px 24px', borderRadius: 999,
+                background: 'var(--ink)', color: 'var(--paper)',
+                border: 0, fontFamily: 'Inter', fontSize: 13, fontWeight: 600,
+                letterSpacing: '0.16em', textTransform: 'uppercase', cursor: 'pointer',
+              }}
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <form
+            action="https://formsubmit.co/hello@noodlebomb.co"
+            method="POST"
+            onSubmit={() => setSubmitted(true)}
+            style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+          >
+            <input type="hidden" name="_subject" value={subject} />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" style={{ display: 'none' }} />
+
+            <input
+              type="text" name="name" placeholder="Your name *" required
+              style={inputStyle}
+            />
+            <input
+              type="email" name="email" placeholder="Email *" required
+              style={inputStyle}
+            />
+            {isWholesale && (
+              <>
+                <input type="text" name="business" placeholder="Business name *" required style={inputStyle} />
+                <input type="text" name="location" placeholder="Location (city, state) *" required style={inputStyle} />
+                <input type="text" name="volume" placeholder="Estimated monthly volume" style={inputStyle} />
+              </>
+            )}
+            <textarea
+              name="message"
+              placeholder={isWholesale ? "Anything else we should know?" : "Your message *"}
+              required={!isWholesale}
+              rows={4}
+              style={{ ...inputStyle, resize: 'vertical' }}
+            />
+            <button
+              type="submit"
+              style={{
+                marginTop: 8,
+                padding: '14px 24px',
+                background: 'var(--accent)',
+                color: 'var(--accent-ink)',
+                border: 0, borderRadius: 4,
+                fontFamily: 'Inter', fontSize: 14, fontWeight: 600,
+                letterSpacing: '0.06em', textTransform: 'uppercase',
+                cursor: 'pointer', transition: 'filter .2s',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.filter = 'brightness(1.08)'}
+              onMouseOut={(e) => e.currentTarget.style.filter = 'none'}
+            >
+              Send Inquiry
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const inputStyle = {
+  width: '100%',
+  padding: '12px 14px',
+  background: '#100E0C',
+  border: '1px solid var(--line)',
+  borderRadius: 4,
+  color: 'var(--ink)',
+  fontFamily: 'Inter',
+  fontSize: 14,
+  outline: 'none',
+};
+
+Object.assign(window, { Reveal, Bottle, Shot, FoodShot, Nav, Hero, InquiryModal });

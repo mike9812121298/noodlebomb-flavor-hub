@@ -66,7 +66,43 @@ function FlavorBreakdown({ flavor }) {
 
 
   return (
-    <section id="ingredients" className="fb-section" ref={stickyRef} style={{ position: 'relative', height: '320vh', background: 'var(--paper)', scrollMarginTop: 80 }}>
+    <section id="ingredients" className="fb-section" ref={stickyRef} style={{ position: 'relative', background: 'var(--paper)', scrollMarginTop: 80 }}>
+      {/* MOBILE: stacked layout (≤768px) */}
+      <div className="fb-mobile" style={{ display: 'none', padding: '80px 24px 96px' }}>
+        <div className="mono" style={{ color: 'var(--muted)', marginBottom: 24, letterSpacing: '0.18em' }}>
+          Index 02 — Flavor Breakdown
+        </div>
+        <h2 className="display" style={{ margin: '0 0 48px', fontSize: 'clamp(40px, 11vw, 56px)', letterSpacing: '-0.04em', lineHeight: 0.95, fontWeight: 700 }}>
+          Five ingredients.<br /><span className="accent-fg">One obsession.</span>
+        </h2>
+        {/* Stacked ingredient rows */}
+        <div style={{ borderTop: '1px solid var(--line)', marginBottom: 48 }}>
+          {ingredients.map((ing, i) => (
+            <div key={i} style={{ display: 'flex', gap: 20, alignItems: 'baseline', padding: '20px 0', borderBottom: '1px solid var(--line)' }}>
+              <div className="display accent-fg" style={{ fontSize: 32, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1, flexShrink: 0, width: 56 }}>
+                {String(i + 1).padStart(2, '0')}
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', lineHeight: 1.2, marginBottom: 4 }}>
+                  {ing.label}
+                </div>
+                <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', lineHeight: 1.4 }}>
+                  {ing.note}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Bottle below */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '70vw', maxWidth: 320, aspectRatio: '0.55 / 1' }}>
+            <Bottle flavor={FLAVORS[flavor].tag} src={FLAVOR_IMAGES[flavor]} />
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP: sticky scroll mechanic (>768px) */}
+      <div className="fb-desktop" style={{ height: '320vh' }}>
       <div className="fb-sticky" style={{
         position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
         display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -136,6 +172,7 @@ function FlavorBreakdown({ flavor }) {
           )}
         </div>
       </div>
+      </div> {/* /.fb-desktop */}
     </section>);
 
 }
@@ -363,38 +400,76 @@ function PourAndCompare({ flavor = 'original' }) {
           </h2>
         </Reveal>
         <Reveal delay={2}>
-          <div className="compare-table-wrap" style={{ border: '1px solid var(--line)' }}>
-            {[
-            ['Attribute', 'NoodleBomb', 'Regular soy', 'Hot sauce'],
-            ['Flavor depth', '5-note umami', 'Salt-forward', 'Heat-forward'],
-            ['Finish', 'Long, rounded', 'Short', 'Lingering burn'],
-            ['Versatility', 'Ramen → wings → rice', 'Asian dishes', 'Specific uses'],
-            ['Fillers', 'None', 'Varies', 'Varies'],
-            ['Made', 'Small batch, USA', 'Industrial', 'Industrial']].
-            map((row, i) =>
-            <div key={i} className="compare-row" style={{
-              display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr',
-              padding: '20px 24px',
-              borderTop: i ? '1px solid var(--line)' : 'none',
-              background: i === 0 ? 'transparent' : 'transparent',
-              alignItems: 'center'
-            }}>
-                {row.map((cell, j) =>
-              <div key={j} style={{
-                fontFamily: i === 0 ? 'JetBrains Mono' : 'Inter Tight',
-                fontSize: i === 0 ? 11 : 18,
-                textTransform: i === 0 ? 'uppercase' : 'none',
-                letterSpacing: i === 0 ? '0.08em' : '-0.015em',
-                color: i === 0 ? 'var(--muted)' : j === 1 ? 'var(--ink)' : 'var(--muted)',
-                fontWeight: j === 1 && i > 0 ? 600 : 400
-              }}>
-                    {cell}
-                    {j === 1 && i > 0 && <span className="accent-fg" style={{ marginLeft: 8 }}>●</span>}
-                  </div>
-              )}
-              </div>
-            )}
-          </div>
+          {(() => {
+            const rows = [
+              ['Flavor depth', '5-note umami', 'Salt-forward', 'Heat-forward'],
+              ['Finish', 'Long, rounded', 'Short', 'Lingering burn'],
+              ['Versatility', 'Ramen → wings → rice', 'Asian dishes', 'Specific uses'],
+              ['Fillers', 'None', 'Varies', 'Varies'],
+              ['Made', 'Small batch, USA', 'Industrial', 'Industrial'],
+            ];
+            const colHeaders = ['NoodleBomb', 'Regular soy', 'Hot sauce'];
+            return (
+              <>
+                {/* DESKTOP table */}
+                <div className="compare-desktop compare-table-wrap" style={{ border: '1px solid var(--line)' }}>
+                  {[['Attribute', ...colHeaders], ...rows].map((row, i) =>
+                    <div key={i} className="compare-row" style={{
+                      display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr',
+                      padding: '20px 24px',
+                      borderTop: i ? '1px solid var(--line)' : 'none',
+                      alignItems: 'center'
+                    }}>
+                      {row.map((cell, j) =>
+                        <div key={j} style={{
+                          fontFamily: i === 0 ? 'JetBrains Mono' : 'Inter Tight',
+                          fontSize: i === 0 ? 11 : 18,
+                          textTransform: i === 0 ? 'uppercase' : 'none',
+                          letterSpacing: i === 0 ? '0.08em' : '-0.015em',
+                          color: i === 0 ? 'var(--muted)' : j === 1 ? 'var(--ink)' : 'var(--muted)',
+                          fontWeight: j === 1 && i > 0 ? 600 : 400
+                        }}>
+                          {cell}
+                          {j === 1 && i > 0 && <span className="accent-fg" style={{ marginLeft: 8 }}>●</span>}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* MOBILE stacked attribute cards */}
+                <div className="compare-mobile" style={{ display: 'none', flexDirection: 'column', gap: 16 }}>
+                  {rows.map(([attr, nb, soy, hot], i) => (
+                    <div key={i} style={{ border: '1px solid var(--line)', padding: '20px 20px 16px' }}>
+                      <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.18em', marginBottom: 16, textTransform: 'uppercase' }}>
+                        {attr}
+                      </div>
+                      {/* NoodleBomb — dominant */}
+                      <div style={{ marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid rgba(240,235,227,0.06)' }}>
+                        <div className="mono accent-fg" style={{ fontSize: 10, letterSpacing: '0.18em', marginBottom: 4 }}>
+                          NoodleBomb
+                        </div>
+                        <div style={{ fontFamily: 'Inter Tight', fontSize: 22, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--ink)', lineHeight: 1.2 }}>
+                          {nb}
+                        </div>
+                      </div>
+                      {/* Competitors — muted */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, opacity: 0.5 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
+                          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--muted)', textTransform: 'uppercase', flexShrink: 0 }}>Regular soy</span>
+                          <span style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink)', textAlign: 'right' }}>{soy}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
+                          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--muted)', textTransform: 'uppercase', flexShrink: 0 }}>Hot sauce</span>
+                          <span style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink)', textAlign: 'right' }}>{hot}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            );
+          })()}
         </Reveal>
       </div>
     </section>);
@@ -858,9 +933,17 @@ function FinalCTA() {
           </Reveal>
 
           <Reveal delay={3}>
-            <div style={{ marginTop: 48, display: 'inline-flex', gap: 28, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <a className="btn" href={WIX_URLS.shop} target="_blank" rel="noopener" style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all — from $11.99</a>
-              <a href="mailto:hello@noodlebomb.co?subject=Waitlist%20Signup&body=Add%20me%20to%20the%20waitlist%20-%20I%20want%20to%20know%20when%20the%20next%20drop%20ships." className="ask-secondary" style={{ color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, fontWeight: 500, opacity: 0.85, textDecoration: 'none', borderBottom: '1px solid transparent', paddingBottom: 2, transition: 'border-color .2s, opacity .2s' }} onMouseOver={(e) => { e.currentTarget.style.borderBottomColor = 'var(--accent-ink)'; e.currentTarget.style.opacity = 1; }} onMouseOut={(e) => { e.currentTarget.style.borderBottomColor = 'transparent'; e.currentTarget.style.opacity = 0.85; }}>Join the waitlist →</a>
+            <div className="finalcta-row" style={{ marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
+              <a className="btn" href={WIX_URLS.shop} target="_blank" rel="noopener" style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all — from $11.99</a>
+              <form className="finalcta-waitlist" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', flex: 1, minWidth: 280, gap: 0, border: '1px solid rgba(245,241,234,0.35)', borderRadius: 4, overflow: 'hidden', background: 'rgba(0,0,0,0.18)' }}>
+                <input type="hidden" name="_subject" value="NoodleBomb Waitlist Signup" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="email" name="email" placeholder="Join the waitlist · your@email.com" required
+                  style={{ flex: 1, minWidth: 0, padding: '14px 16px', background: 'transparent', border: 'none', outline: 'none', color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em' }} />
+                <button type="submit" style={{ background: 'transparent', color: 'var(--accent-ink)', border: 'none', borderLeft: '1px solid rgba(245,241,234,0.25)', padding: '0 20px', fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter', fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', transition: 'background .2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(245,241,234,0.08)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>Notify me →</button>
+              </form>
             </div>
           </Reveal>
 
@@ -926,18 +1009,29 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Citrus Shoyu', WIX_URLS.citrus], ['Spicy Tokyo', WIX_URLS.spicy], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
+          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
               {items.map(([label, href]) => {
                 const external = href.startsWith('http');
+                const sentinel = href.startsWith('#open-');
                 return (
-                  <a key={label} href={href}
+                  <a key={label} href={sentinel ? '#' : href}
                      className="footer-link"
                      target={external ? '_blank' : undefined}
                      rel={external ? 'noopener' : undefined}
-                     onClick={(e) => { if (href.startsWith('#')) { e.preventDefault(); const el = document.querySelector(href); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }}
+                     onClick={(e) => {
+                       if (sentinel) {
+                         e.preventDefault();
+                         const kind = href.replace('#open-', '');
+                         if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY(kind);
+                       } else if (href.startsWith('#')) {
+                         e.preventDefault();
+                         const el = document.querySelector(href);
+                         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                       }
+                     }}
                      style={{ display: 'block', fontSize: 13, padding: '6px 0', color: 'var(--ink)', opacity: 0.85, cursor: 'pointer', transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
                      onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
                      onMouseOut={(e) => { e.currentTarget.style.opacity = 0.85; e.currentTarget.style.transform = 'translateX(0)'; }}>{label}</a>
@@ -1010,6 +1104,13 @@ function App() {
 
   const [state, setState] = useState(DEFAULTS);
   const [tweaksOpen, setTweaksOpen] = useState(false);
+  const [inquiry, setInquiry] = useState(null); // null | 'wholesale' | 'contact'
+
+  // Expose modal opener globally so footer/anchor clicks can trigger it
+  useEffect(() => {
+    window.NB_OPEN_INQUIRY = (kind) => setInquiry(kind);
+    return () => { delete window.NB_OPEN_INQUIRY; };
+  }, []);
   const set = (patch) => {
     setState((s) => {
       const next = { ...s, ...patch };
@@ -1068,6 +1169,7 @@ function App() {
       <MonthlyDrop />
       <FinalCTA />
       <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />
+      <InquiryModal open={!!inquiry} kind={inquiry} onClose={() => setInquiry(null)} />
     </>);
 
 }
