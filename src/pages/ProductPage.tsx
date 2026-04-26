@@ -85,9 +85,9 @@ const PRODUCTS: Record<string, ProductData> = {
     image: nbCitrusShoyu,
     spiceLevel: 1,
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
-    flavorHook: "Clean soy lifted by yuzu — bright, sharp, surprisingly bold.",
+    flavorHook: "Clean soy lifted by bright citrus — bright, sharp, surprisingly bold.",
     description:
-      "Yuzu-forward citrus breaks over a lighter shoyu base — tangy and bright up front, with a mild heat that whispers rather than burns. The texture runs lean and clean, coating without weighing anything down. Drizzle it cold, use it as a finish. Opens up seafood, brightens cold noodle bowls, cuts through anything fatty. The sauce that proves bold and bright aren't opposites.",
+      "Bright citrus breaks over a lighter shoyu base — tangy and bright up front, with a mild heat that whispers rather than burns. The texture runs lean and clean, coating without weighing anything down. Drizzle it cold, use it as a finish. Opens up seafood, brightens cold noodle bowls, cuts through anything fatty. The sauce that proves bold and bright aren't opposites.",
     ingredients:
       "Water, light soy sauce (water, soybeans, wheat, salt, sugar), rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), orange juice (water, orange juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), brown sugar, honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
     allergens: "Soy, wheat, milk, sesame, sulphites.",

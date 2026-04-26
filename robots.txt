@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block thrash from automated tools hitting deprecated paths
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /supabase/
+
+Sitemap: https://noodlebomb.co/sitemap.xml

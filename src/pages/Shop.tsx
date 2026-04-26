@@ -36,7 +36,7 @@ const products = [
   },
   {
     name: "Citrus Shoyu Ramen Sauce",
-    tagline: "Clean soy lifted by yuzu — bright, sharp, surprisingly bold.",
+    tagline: "Clean soy lifted by bright citrus — bright, sharp, surprisingly bold.",
     price: "$11.99",
     image: nbCitrusShoyu,
     spiceLevel: 1,

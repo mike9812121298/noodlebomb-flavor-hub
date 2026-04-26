@@ -18,7 +18,6 @@ const WIX_PRODUCT_SLUG: Record<string, string> = {
   // Singles (NB-001 / NB-002 / NB-003)
   "original-ramen": "noodlebomb-original-ramen-sauce",
   "spicy-tokyo": "noodle-bomb-spicy-tokyo-ramen-sauce",
-  "yuzu-citrus": "noodle-bomb-citrus-shoyu-ramen-sauce",
   "citrus-shoyu": "noodle-bomb-citrus-shoyu-ramen-sauce", // legacy alias
   // Bundles
   "variety-pack": "the-noodlebomb-trio", // NB-004 (live trio)
