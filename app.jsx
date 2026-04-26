@@ -364,9 +364,9 @@ function UseItOn() {
                 width: i === mobileIdx ? 24 : 8,
                 height: 8,
                 borderRadius: 999,
-                background: i === mobileIdx ? mobileActive.ink : mobileActive.sub,
+                background: '#ffffff',
                 opacity: i === mobileIdx ? 1 : 0.4,
-                transition: 'width .3s, opacity .3s, background .3s',
+                transition: 'width .3s, opacity .3s',
               }} />
             </button>
           ))}
@@ -456,7 +456,7 @@ function UseItOn() {
 // ——————————————————————————— Pour shot + Comparison
 function PourAndCompare({ flavor = 'original' }) {
   return (
-    <section id="pour" style={{ background: 'var(--paper)', padding: '140px 28px', scrollMarginTop: 80 }}>
+    <section id="pour" style={{ background: 'var(--paper)', padding: '140px clamp(24px, 5.5vw, 80px)', scrollMarginTop: 80 }}>
       {/* Pour shot */}
       <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center', maxWidth: 1400, margin: '0 auto' }}>
         <div>
@@ -804,7 +804,7 @@ function Testimonials() {
   { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades any ramen.', name: 'Priya', tag: 'verified buyer' }];
 
   return (
-    <section id="reviews" style={{ background: 'var(--paper)', padding: '140px 28px', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
+    <section id="reviews" style={{ background: 'var(--paper)', padding: '140px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
       <div style={{ maxWidth: 1300, margin: '0 auto' }}>
         <Reveal>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 56 }}>
@@ -835,16 +835,6 @@ function Testimonials() {
 function FlavorPicker({ flavor, setFlavor }) {
   // Only currently-shipping flavors in the lineup. Ryu lives in The Range + The Next Drop.
   const keys = Object.keys(FLAVORS).filter((k) => k !== 'ryu');
-  const [addedKey, setAddedKey] = useState(null);
-  const handleAdd = (k) => {
-    const f = FLAVORS[k];
-    if (window.NB_CART) {
-      const price = parseFloat(String(f.price).replace(/[^0-9.]/g, '')) || 11.99;
-      window.NB_CART.add({ slug: k, name: f.name, price: price });
-    }
-    setAddedKey(k);
-    window.setTimeout(() => setAddedKey((cur) => (cur === k ? null : cur)), 1400);
-  };
   // Per-flavor card background tints (subtle warm tones layered over paper-2)
   const cardBg = {
     original: 'linear-gradient(170deg, rgba(139,30,30,0.10) 0%, rgba(139,30,30,0.04) 100%)',
@@ -867,8 +857,14 @@ function FlavorPicker({ flavor, setFlavor }) {
         </Reveal>
 
         <Reveal delay={2}>
-          <figure style={{ margin: '0 0 56px', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--paper)' }}>
-            <img src="uploads/noodlebomb-trio.png" alt="NoodleBomb Trio — Spicy Tokyo, Original, and Citrus Shoyu ramen sauces" style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 520, objectFit: 'contain' }} />
+          <figure className="trio-composite" style={{ margin: '0 0 56px', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--paper)', padding: '40px clamp(16px, 3vw, 40px)', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'clamp(16px, 3vw, 40px)', alignItems: 'end', justifyItems: 'center' }}>
+            {[
+              { src: 'uploads/nb-original-clean.png', alt: 'NoodleBomb Original ramen sauce bottle' },
+              { src: 'uploads/nb-citrus-shoyu-clean.png', alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
+              { src: 'uploads/nb-spicy-tokyo-clean.png', alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
+            ].map((b) => (
+              <img key={b.src} src={b.src} alt={b.alt} style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 440, objectFit: 'contain', filter: 'drop-shadow(0 24px 32px rgba(0,0,0,0.45))' }} />
+            ))}
           </figure>
         </Reveal>
 
@@ -921,9 +917,11 @@ function FlavorPicker({ flavor, setFlavor }) {
                       <div className="serif" style={{ fontSize: 22, fontStyle: 'italic' }}>{f.price}</div>
                       <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>7 fl oz</span>
                     </div>
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); handleAdd(k); }}
+                    <a
+                      href={wixFor(k)}
+                      target="_blank"
+                      rel="noopener"
+                      onClick={(e) => e.stopPropagation()}
                       className="lineup-buy-btn"
                       style={{
                         display: 'flex',
@@ -934,19 +932,19 @@ function FlavorPicker({ flavor, setFlavor }) {
                         minHeight: 48,
                         padding: '14px 20px',
                         borderRadius: 999,
-                        background: addedKey === k ? f.color : '#0B0A09',
-                        border: `1px solid ${addedKey === k ? f.color : '#0B0A09'}`,
-                        color: addedKey === k ? f.ink : '#F5F1EA',
+                        background: '#0B0A09',
+                        border: '1px solid #0B0A09',
+                        color: '#F5F1EA',
                         fontFamily: 'Inter',
                         fontSize: 12,
                         fontWeight: 600,
                         letterSpacing: '0.18em',
                         textTransform: 'uppercase',
+                        textDecoration: 'none',
                         cursor: 'pointer',
                         transition: 'background 0.35s cubic-bezier(.2,.7,.2,1), color 0.35s, transform 0.28s, box-shadow 0.35s, border-color 0.35s',
                       }}
                       onMouseEnter={(e) => {
-                        if (addedKey === k) return;
                         e.currentTarget.style.background = f.color;
                         e.currentTarget.style.borderColor = f.color;
                         e.currentTarget.style.color = f.ink;
@@ -954,7 +952,6 @@ function FlavorPicker({ flavor, setFlavor }) {
                         e.currentTarget.style.boxShadow = `0 12px 28px ${f.color}55`;
                       }}
                       onMouseLeave={(e) => {
-                        if (addedKey === k) return;
                         e.currentTarget.style.background = '#0B0A09';
                         e.currentTarget.style.borderColor = '#0B0A09';
                         e.currentTarget.style.color = '#F5F1EA';
@@ -962,18 +959,9 @@ function FlavorPicker({ flavor, setFlavor }) {
                         e.currentTarget.style.boxShadow = 'none';
                       }}
                     >
-                      {addedKey === k ? (
-                        <>
-                          Added
-                          <span style={{ fontSize: 14, lineHeight: 1 }}>✓</span>
-                        </>
-                      ) : (
-                        <>
-                          Add to Cart
-                          <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
-                        </>
-                      )}
-                    </button>
+                      Add to Cart
+                      <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
+                    </a>
                   </div>
                 </div>
               </Reveal>);
@@ -990,11 +978,17 @@ function FlavorPicker({ flavor, setFlavor }) {
             display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'stretch',
             minHeight: 420
           }}>
-            {/* Photo — show all three distinct bottles per #16 (was Original-only lifestyle shot) */}
-            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, minWidth: 0, maxWidth: '100%' }}>
-              <img src="uploads/noodlebomb-trio.png" alt="The NoodleBomb Trio — Original, Citrus Shoyu, and Spicy Tokyo bottles together"
-              style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 420, objectFit: 'contain', filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.5))' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 50%, rgba(8,7,6,0.4) 100%)', pointerEvents: 'none' }} />
+            {/* Photo — composite three individual clean-bottle PNGs side by side
+                (replaces broken composite image where Citrus Shoyu label wrapped as "CITRU SSHOYU") */}
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'clamp(8px, 2vw, 20px)', alignItems: 'end', padding: 'clamp(16px, 3vw, 32px)', minWidth: 0, maxWidth: '100%' }}>
+              {[
+                { src: 'uploads/nb-original-clean.png', alt: 'NoodleBomb Original ramen sauce bottle' },
+                { src: 'uploads/nb-citrus-shoyu-clean.png', alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
+                { src: 'uploads/nb-spicy-tokyo-clean.png', alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
+              ].map((b) => (
+                <img key={b.src} src={b.src} alt={b.alt} style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 360, objectFit: 'contain', filter: 'drop-shadow(0 16px 28px rgba(0,0,0,0.5))' }} />
+              ))}
+              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 55%, rgba(8,7,6,0.45) 100%)', pointerEvents: 'none' }} />
             </div>
             {/* Copy */}
             <div className="trio-bundle-copy" style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
@@ -1085,7 +1079,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 function FinalCTA() {
   return (
     <>
-      <section id="cta" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', transition: 'background .6s, color .6s', padding: '128px 28px 96px', textAlign: 'center', position: 'relative', overflow: 'hidden', scrollMarginTop: 80 }}>
+      <section id="cta" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', transition: 'background .6s, color .6s', padding: '128px clamp(24px, 5.5vw, 80px) 96px', textAlign: 'center', position: 'relative', overflow: 'hidden', scrollMarginTop: 80 }}>
         <div className="ask-grain"></div>
         {/* Dotted texture overlay */}
         <div aria-hidden="true" style={{
@@ -1138,10 +1132,16 @@ function FinalCTA() {
             </div>
           </Reveal>
 
-          {/* Trust line */}
+          {/* Trust line — desktop: static one-liner. Mobile: scrolling marquee (text doesn't fit on one line, so animate it). */}
           <Reveal delay={4}>
-            <div className="mono" style={{ marginTop: 36, fontSize: 11, letterSpacing: '0.18em', opacity: 0.7 }}>
-              PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $40
+            <div className="trust-line-wrap" style={{ marginTop: 36, overflow: 'hidden', maskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)', WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)' }}>
+              <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
+                {Array.from({ length: 4 }).map((_, j) => (
+                  <span key={j} style={{ paddingRight: 32 }}>
+                    PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $40 ·
+                  </span>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
@@ -1233,7 +1233,39 @@ function FinalCTA() {
             </div>
           )}
         </div>
-        <div className="footer-bottom-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 80, paddingTop: 28, borderTop: '1px solid var(--line)', maxWidth: 1440, marginLeft: 'auto', marginRight: 'auto', gap: 24, flexWrap: 'wrap' }}>
+        {/* Social row — Instagram + TikTok */}
+        <div className="footer-social-row" style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, maxWidth: 1440, marginLeft: 'auto', marginRight: 'auto', marginTop: 48, paddingTop: 24, borderTop: '1px solid var(--line)' }}>
+          <a
+            href="https://instagram.com/noodlebomb"
+            target="_blank"
+            rel="noopener"
+            aria-label="NoodleBomb on Instagram"
+            style={{ width: 44, height: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink)', opacity: 0.65, transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
+            onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.opacity = 0.65; e.currentTarget.style.transform = 'translateY(0)'; }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a
+            href="https://tiktok.com/@noodlebomb"
+            target="_blank"
+            rel="noopener"
+            aria-label="NoodleBomb on TikTok"
+            style={{ width: 44, height: 44, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ink)', opacity: 0.65, transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
+            onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.opacity = 0.65; e.currentTarget.style.transform = 'translateY(0)'; }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+            </svg>
+          </a>
+        </div>
+
+        <div className="footer-bottom-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 32, paddingTop: 28, borderTop: '1px solid var(--line)', maxWidth: 1440, marginLeft: 'auto', marginRight: 'auto', gap: 24, flexWrap: 'wrap' }}>
           <span className="mono">© 2026 noodlebomb co. all rights reserved.</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
             <span className="mono">pour responsibly.</span>

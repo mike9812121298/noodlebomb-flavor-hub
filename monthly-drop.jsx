@@ -284,40 +284,73 @@ function MonthlyDrop() {
               </div>
             </Reveal>
 
-            {/* Drop timeline — current drop highlighted */}
+            {/* Drop timeline — full history with current drop highlighted */}
             <Reveal delay={6}>
               <div style={{ marginTop: 36, paddingTop: 24, borderTop: '1px solid rgba(245,241,234,0.08)' }}>
                 <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.18em', marginBottom: 14 }}>
                   DROP TIMELINE
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 6,
-                      background: 'linear-gradient(135deg, var(--accent) 0%, #6F1818 100%)',
-                      border: '1px solid rgba(0,0,0,0.35)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      position: 'relative', overflow: 'hidden',
-                      boxShadow: '0 0 0 2px rgba(139,30,30,0.35), 0 4px 14px rgba(139,30,30,0.45)',
-                    }}>
-                      {/* current pulse dot */}
-                      <span style={{
-                        position: 'absolute', top: 5, right: 5,
-                        width: 7, height: 7, borderRadius: 999,
-                        background: '#F5C842',
-                        boxShadow: '0 0 8px rgba(245,200,66,0.85)',
-                      }} />
-                      <div style={{ fontFamily: 'Fraunces, serif', fontStyle: 'italic', fontWeight: 600, fontSize: 18, color: 'var(--accent-ink)', letterSpacing: '-0.04em' }}>
-                        04
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
+                  {[
+                    { vol: '01', month: 'DEC', current: false },
+                    { vol: '02', month: 'JAN', current: false },
+                    { vol: '03', month: 'FEB', current: false },
+                    { vol: '04', month: 'MAY', current: true },
+                  ].map((d) => (
+                    <div key={d.vol} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, minWidth: 64 }}>
+                      <div style={{
+                        width: 44, height: 44, borderRadius: 6,
+                        background: d.current
+                          ? 'linear-gradient(135deg, var(--accent) 0%, #6F1818 100%)'
+                          : 'linear-gradient(135deg, #B8956A 0%, #8C6A48 100%)',
+                        border: '1px solid rgba(0,0,0,0.35)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        position: 'relative', overflow: 'hidden',
+                        boxShadow: d.current
+                          ? '0 0 0 2px rgba(139,30,30,0.35), 0 4px 14px rgba(139,30,30,0.45)'
+                          : 'inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.4)',
+                        opacity: d.current ? 1 : 0.85,
+                      }}>
+                        {d.current && (
+                          <span style={{
+                            position: 'absolute', top: 5, right: 5,
+                            width: 7, height: 7, borderRadius: 999,
+                            background: '#F5C842',
+                            boxShadow: '0 0 8px rgba(245,200,66,0.85)',
+                          }} />
+                        )}
+                        {!d.current && (
+                          <span style={{
+                            position: 'absolute', top: 4, right: 4,
+                            width: 7, height: 7, borderRadius: 999,
+                            background: 'radial-gradient(circle at 30% 30%, #C8362E 0%, #7A1A1A 100%)',
+                            boxShadow: '0 1px 1px rgba(0,0,0,0.5)',
+                          }} />
+                        )}
+                        <div style={{
+                          fontFamily: 'Fraunces, serif',
+                          fontStyle: 'italic',
+                          fontWeight: d.current ? 600 : 500,
+                          fontSize: d.current ? 18 : 16,
+                          color: d.current ? 'var(--accent-ink)' : 'rgba(60,40,28,0.7)',
+                          letterSpacing: '-0.04em',
+                        }}>
+                          {d.vol}
+                        </div>
                       </div>
+                      <div
+                        className={`mono${d.current ? ' accent-fg' : ''}`}
+                        style={{ fontSize: 9, letterSpacing: '0.14em', fontWeight: d.current ? 600 : 400, color: d.current ? undefined : 'var(--muted)' }}
+                      >
+                        VOL.{d.vol} · {d.month}
+                      </div>
+                      {d.current && (
+                        <div className="mono" style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: '0.14em' }}>
+                          CURRENT — SHIPS MAY 15
+                        </div>
+                      )}
                     </div>
-                    <div className="mono accent-fg" style={{ fontSize: 9, letterSpacing: '0.14em', fontWeight: 600 }}>
-                      VOL.04 · MAY
-                    </div>
-                    <div className="mono" style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                      CURRENT — SHIPS MAY 15
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </Reveal>

@@ -367,6 +367,14 @@
   .marq-track { display: inline-flex; gap: 48px; animation: marq 40s linear infinite; white-space: nowrap; will-change: transform; }
   .marq-wrap:hover .marq-track { animation-play-state: paused; }
 
+  /* Final CTA trust-line scrolling marquee (works at every viewport) */
+  @keyframes trust-line-scroll { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+  .trust-line-track { animation: trust-line-scroll 32s linear infinite; }
+  .trust-line-wrap:hover .trust-line-track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .marq-track, .trust-line-track { animation: none !important; }
+  }
+
   /* Lineup grid — prevent overflow */
   .lineup-grid > * { min-width: 0; }
   .lineup-grid .tilt-card { max-width: 100%; box-sizing: border-box; }
