@@ -903,9 +903,9 @@ function FlavorPicker({ flavor, setFlavor }) {
                     boxShadow: active ? `0 24px 60px ${f.color}30` : 'none'
                   }}>
                   
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-                    <span className="mono" style={{ color: 'var(--ink-40)' }}>{f.tag}</span>
-                    <div style={{ width: 8, height: 8, borderRadius: 999, background: f.color, opacity: active ? 1 : 0.35, transition: 'opacity .3s' }} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, gap: 8 }}>
+                    <span className="mono" style={{ color: 'var(--ink-40)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0, flex: 1 }}>{f.tag}</span>
+                    <div style={{ width: 8, height: 8, borderRadius: 999, background: f.color, opacity: active ? 1 : 0.35, transition: 'opacity .3s', flexShrink: 0 }} />
                   </div>
                   <div style={{ height: 340, display: 'flex', justifyContent: 'center' }}>
                     <div style={{ width: 200, height: '100%' }}>
@@ -913,7 +913,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     </div>
                   </div>
                   <div style={{ marginTop: 24 }}>
-                    <h3 className="display" style={{ fontSize: 32, letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.9 }}>{f.name}.</h3>
+                    <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95, wordBreak: 'keep-all', overflowWrap: 'normal', hyphens: 'none' }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
@@ -1017,7 +1017,9 @@ function FlavorPicker({ flavor, setFlavor }) {
                     borderRadius: 999,
                     fontFamily: 'Inter', fontSize: 12, fontWeight: 500,
                     color: 'var(--ink)', background: 'rgba(245,241,234,0.6)',
-                    letterSpacing: '-0.005em'
+                    letterSpacing: '-0.005em',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}>
                     <span style={{ width: 6, height: 6, borderRadius: 999, background: 'var(--accent)', display: 'inline-block', boxShadow: '0 0 0 2px rgba(139,30,30,0.18)' }} />
                     {label}
