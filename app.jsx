@@ -518,8 +518,9 @@ function PourAndCompare({ flavor = 'original' }) {
         <Reveal delay={2}>
           {(() => {
             const rows = [
+              ['Taste', 'Layered, 5 dimensions', 'Salt-forward', 'Heat-forward'],
               ['Versatility', 'Ramen → wings → rice', 'Asian dishes', 'Specific uses'],
-              ['Fillers', 'None', 'Varies', 'Varies'],
+              ['Fillers', 'None', 'Some', 'Some'],
               ['Made', 'Small batch, USA', 'Industrial', 'Industrial'],
             ];
             const colHeaders = ['NoodleBomb', 'Regular soy', 'Chili crisp'];
@@ -608,6 +609,13 @@ function PourAndCompare({ flavor = 'original' }) {
               </>
             );
           })()}
+        </Reveal>
+        <Reveal delay={3}>
+          <div style={{ marginTop: 56, textAlign: 'center' }}>
+            <a href="#lineup" style={{ fontFamily: 'JetBrains Mono', fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)', textDecoration: 'none', borderBottom: '1px solid var(--accent)', paddingBottom: 6, display: 'inline-block' }}>
+              Try the lineup →
+            </a>
+          </div>
         </Reveal>
       </div>
     </section>);
