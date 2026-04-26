@@ -5,26 +5,26 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NoodleBomb — Small Batch Ramen Sauce | Bold. Clean. Pacific Northwest.</title>
+<title>NoodleBomb — Small Batch Ramen Sauce | Bonney Lake, WA</title>
 
 <!-- SEO: Description -->
-<meta name="description" content="Bold small-batch ramen sauce made in Bonney Lake, WA. Premium ingredients, no fillers. Turns any noodle into restaurant-quality ramen. Original, Citrus Shoyu, and Spicy Tokyo. From $11.99." />
+<meta name="description" content="Bold small-batch ramen sauce crafted in Bonney Lake, WA. Premium ingredients, no fillers. Turns any noodle into restaurant-quality ramen in seconds. From $11.99." />
 
 <!-- SEO: Canonical -->
 <link rel="canonical" href="https://noodlebomb.co/" />
 
 <!-- SEO: Open Graph -->
 <meta property="og:title" content="NoodleBomb — Small Batch Ramen Sauce" />
-<meta property="og:description" content="Bold ramen sauce. Made in Bonney Lake, WA. Turns any noodle into restaurant-quality ramen." />
+<meta property="og:description" content="Bold small-batch ramen sauce crafted in Bonney Lake, WA. Premium ingredients, no fillers. From $11.99." />
 <meta property="og:image" content="https://noodlebomb.co/uploads/noodlebomb-trio.png" />
-<meta property="og:url" content="https://noodlebomb.co/" />
+<meta property="og:url" content="https://noodlebomb.co" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="NoodleBomb" />
 
 <!-- SEO: Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="NoodleBomb — Small Batch Ramen Sauce" />
-<meta name="twitter:description" content="Bold ramen sauce. Made in Bonney Lake, WA. Premium ingredients." />
+<meta name="twitter:description" content="Bold small-batch ramen sauce crafted in Bonney Lake, WA. Premium ingredients, no fillers. From $11.99." />
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/noodlebomb-trio.png" />
 
 <!-- SEO: Schema.org JSON-LD -->
@@ -186,7 +186,7 @@
     --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 40px;
     --s-5: 64px; --s-6: 96px; --s-7: 128px; --s-8: 160px;
   }
-  html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); }
+  html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); overflow-x: hidden; }
   html { scroll-behavior: auto; }
   body {
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
@@ -995,6 +995,9 @@
     .finalcta-row { flex-direction: column !important; gap: 12px !important; }
     .finalcta-row .btn { width: 100%; }
     .finalcta-waitlist { width: 100%; }
+    /* Bottom corner labels collide on mobile — stack one above the other */
+    .finalcta-corner { position: static !important; display: block !important; text-align: center !important; padding: 4px 16px !important; }
+    .finalcta-corner-right { display: none !important; } /* keep just left line */
   }
   @media (max-width: 768px) {
     .hero-h1 { font-size: clamp(48px, 14vw, 96px) !important; padding-right: 0 !important; }

@@ -219,7 +219,7 @@ function MonthlyDrop() {
                 maxWidth: '52ch',
                 margin: '0 0 32px'
               }}>
-                One curated box. One sauce of the month, two noodle styles, a seasonal topping, and a recipe zine — designed by the founder, shipped on the first Friday of every month. Cancel any time.
+                One curated box. One sauce of the month, two noodle styles, a seasonal topping, and a recipe zine — designed by the founder, shipped on a set date each month. Cancel any time.
               </p>
             </Reveal>
 
@@ -280,6 +280,44 @@ function MonthlyDrop() {
                 </div>
                 <div style={{ width: '100%', height: 3, background: 'rgba(245,241,234,0.1)', borderRadius: 999, overflow: 'hidden' }}>
                   <div style={{ width: '62.4%', height: '100%', background: 'linear-gradient(90deg, var(--accent) 0%, #C8362E 100%)', borderRadius: 999, boxShadow: '0 0 12px rgba(139,30,30,0.6)' }} />
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Drop timeline — current drop highlighted */}
+            <Reveal delay={6}>
+              <div style={{ marginTop: 36, paddingTop: 24, borderTop: '1px solid rgba(245,241,234,0.08)' }}>
+                <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.18em', marginBottom: 14 }}>
+                  DROP TIMELINE
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: 6,
+                      background: 'linear-gradient(135deg, var(--accent) 0%, #6F1818 100%)',
+                      border: '1px solid rgba(0,0,0,0.35)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      position: 'relative', overflow: 'hidden',
+                      boxShadow: '0 0 0 2px rgba(139,30,30,0.35), 0 4px 14px rgba(139,30,30,0.45)',
+                    }}>
+                      {/* current pulse dot */}
+                      <span style={{
+                        position: 'absolute', top: 5, right: 5,
+                        width: 7, height: 7, borderRadius: 999,
+                        background: '#F5C842',
+                        boxShadow: '0 0 8px rgba(245,200,66,0.85)',
+                      }} />
+                      <div style={{ fontFamily: 'Fraunces, serif', fontStyle: 'italic', fontWeight: 600, fontSize: 18, color: 'var(--accent-ink)', letterSpacing: '-0.04em' }}>
+                        04
+                      </div>
+                    </div>
+                    <div className="mono accent-fg" style={{ fontSize: 9, letterSpacing: '0.14em', fontWeight: 600 }}>
+                      VOL.04 · MAY
+                    </div>
+                    <div className="mono" style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: '0.14em' }}>
+                      CURRENT — SHIPS MAY 15
+                    </div>
+                  </div>
                 </div>
               </div>
             </Reveal>

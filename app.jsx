@@ -337,8 +337,8 @@ function UseItOn() {
             </div>
           ))}
         </div>
-        {/* Dots */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginTop: 24 }}>
+        {/* Dots — visible 8/24px pill, but each button is 44x44 tap target */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginTop: 16 }}>
           {items.map((it, i) => (
             <button
               key={i}
@@ -348,17 +348,27 @@ function UseItOn() {
                 if (el) el.scrollTo({ left: i * el.clientWidth, behavior: 'smooth' });
               }}
               style={{
+                width: 44,
+                height: 44,
+                background: 'transparent',
+                border: 0,
+                padding: 0,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span aria-hidden="true" style={{
+                display: 'block',
                 width: i === mobileIdx ? 24 : 8,
                 height: 8,
                 borderRadius: 999,
                 background: i === mobileIdx ? mobileActive.ink : mobileActive.sub,
                 opacity: i === mobileIdx ? 1 : 0.4,
-                border: 0,
-                padding: 0,
-                cursor: 'pointer',
                 transition: 'width .3s, opacity .3s, background .3s',
-              }}
-            />
+              }} />
+            </button>
           ))}
         </div>
       </div>
@@ -789,7 +799,7 @@ function Origin() {
 // ——————————————————————————— Testimonials (real brand voice)
 function Testimonials() {
   const quotes = [
-  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley', tag: 'verified buyer' },
+  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley R.', tag: 'verified buyer' },
   { body: 'I wasn’t expecting this much punch from one sauce. Took my plain store-bought ramen and made it restaurant-worthy in seconds. I’m officially hooked.', name: 'Marcus', tag: 'verified buyer' },
   { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades any ramen.', name: 'Priya', tag: 'verified buyer' }];
 
@@ -805,12 +815,12 @@ function Testimonials() {
         <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {quotes.map((q, i) =>
           <Reveal key={i} delay={i + 1}>
-              <div style={{ background: 'var(--paper-2)', padding: 32, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 280 }}>
-                <div className="accent-fg display" style={{ fontSize: 48, lineHeight: 0.6, marginBottom: 16 }}>"</div>
-                <div style={{ fontFamily: 'Inter Tight', fontSize: 20, lineHeight: 1.35, letterSpacing: '-0.01em' }}>{q.body}</div>
-                <div style={{ marginTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+              <div style={{ background: 'var(--paper-2)', padding: 32, height: '100%', display: 'flex', flexDirection: 'column', gap: 20, minHeight: 280, overflow: 'visible' }}>
+                <div className="accent-fg display" style={{ fontSize: 48, lineHeight: 1, marginBottom: 0, flexShrink: 0 }}>"</div>
+                <div style={{ fontFamily: 'Inter Tight', fontSize: 18, lineHeight: 1.45, letterSpacing: '-0.01em', flex: 1, overflow: 'visible' }}>{q.body}</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, flexShrink: 0, paddingTop: 4, borderTop: '1px solid rgba(240,235,227,0.06)' }}>
                   <div style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 14 }}>— {q.name}</div>
-                  <div className="mono" style={{ color: 'var(--muted)' }}>{q.tag}</div>
+                  <div className="mono" style={{ color: 'var(--muted)', fontSize: 10 }}>{q.tag}</div>
                 </div>
               </div>
             </Reveal>
@@ -981,9 +991,9 @@ function FlavorPicker({ flavor, setFlavor }) {
             minHeight: 420
           }}>
             {/* Photo — show all three distinct bottles per #16 (was Original-only lifestyle shot) */}
-            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, minWidth: 0, maxWidth: '100%' }}>
               <img src="uploads/noodlebomb-trio.png" alt="The NoodleBomb Trio — Original, Citrus Shoyu, and Spicy Tokyo bottles together"
-              style={{ width: '100%', height: '100%', maxHeight: 420, objectFit: 'contain', filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.5))' }} />
+              style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 420, objectFit: 'contain', filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.5))' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 50%, rgba(8,7,6,0.4) 100%)', pointerEvents: 'none' }} />
             </div>
             {/* Copy */}
@@ -1133,10 +1143,10 @@ function FinalCTA() {
             </div>
           </Reveal>
         </div>
-        <div style={{ position: 'absolute', bottom: 24, left: 28, zIndex: 1 }}>
+        <div className="finalcta-corner finalcta-corner-left" style={{ position: 'absolute', bottom: 24, left: 28, zIndex: 1 }}>
           <span className="mono" style={{ opacity: 0.65 }}>small-batch · made in the USA</span>
         </div>
-        <div style={{ position: 'absolute', bottom: 24, right: 28, zIndex: 1 }}>
+        <div className="finalcta-corner finalcta-corner-right" style={{ position: 'absolute', bottom: 24, right: 28, zIndex: 1 }}>
           <span className="mono" style={{ opacity: 0.65 }}>pacific northwest · est. 2024</span>
         </div>
       </section>
@@ -1188,12 +1198,13 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Citrus Shoyu', WIX_URLS.citrus], ['Spicy Tokyo', WIX_URLS.spicy], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact']]]].
+          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale (MOQ 12)', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
               {items.map(([label, href]) => {
                 const external = href.startsWith('http');
+                const isHash = href.startsWith('#') && !href.startsWith('#open-');
                 const sentinel = href.startsWith('#open-');
                 return (
                   <a key={label} href={sentinel ? '#' : href}
@@ -1205,11 +1216,12 @@ function FinalCTA() {
                          e.preventDefault();
                          const kind = href.replace('#open-', '');
                          if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY(kind);
-                       } else if (href.startsWith('#')) {
+                       } else if (isHash) {
                          e.preventDefault();
                          const el = document.querySelector(href);
                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                        }
+                       // mailto: and http(s): links fall through to default behavior
                      }}
                      style={{ display: 'block', fontSize: 13, padding: '6px 0', color: 'var(--ink)', opacity: 0.85, cursor: 'pointer', transition: 'opacity .2s, transform .2s', textDecoration: 'none' }}
                      onMouseOver={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.transform = 'translateX(3px)'; }}
@@ -1223,7 +1235,7 @@ function FinalCTA() {
           <span className="mono">© 2026 noodlebomb co. all rights reserved.</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
             <span className="mono">pour responsibly.</span>
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="mono" style={{ background: 'none', border: 'none', color: 'var(--ink)', opacity: 0.7, cursor: 'pointer', padding: 0, transition: 'opacity .2s', display: 'inline-flex', alignItems: 'center', gap: 6 }} onMouseOver={(e) => e.currentTarget.style.opacity = 1} onMouseOut={(e) => e.currentTarget.style.opacity = 0.7}>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="mono" style={{ background: 'none', border: 'none', color: 'var(--ink)', opacity: 0.7, cursor: 'pointer', padding: '15px 0', minHeight: 44, transition: 'opacity .2s', display: 'inline-flex', alignItems: 'center', gap: 6 }} onMouseOver={(e) => e.currentTarget.style.opacity = 1} onMouseOut={(e) => e.currentTarget.style.opacity = 0.7}>
               <span>↑</span> back to top
             </button>
           </div>

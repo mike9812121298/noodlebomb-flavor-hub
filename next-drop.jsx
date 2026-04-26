@@ -28,7 +28,10 @@ function NextDrop() {
       oneliner: 'Single-origin shoyu. Barrel-aged. Quietly devastating.',
       pills: ['Saline', 'Round', 'Long finish'],
       progress: 2,
-      img: 'uploads/upload-ryu-v3.png', // dark-bottle placeholder until real Shoyu Reserve render exists — do NOT use Citrus Shoyu image (caused customer confusion)
+      img: 'uploads/nb-original-clean.png', // placeholder silhouette — applied via CSS filter (frosted/desaturated) so it doesn't read as Original. Real Shoyu Reserve render TBD.
+      placeholderFilter: 'grayscale(0.95) brightness(0.5) contrast(1.2) blur(0.6px)',
+      placeholderOpacity: 0.65,
+      altOverride: 'Shoyu Reserve — Coming Fall 2026',
     },
   ];
 
@@ -91,7 +94,11 @@ function NextDrop() {
                 {/* Bottle silhouette */}
                 <div className="nd-bottle-stage">
                   <div className="nd-bottle-wrap">
-                    <img src={c.img} alt={`NoodleBomb ${c.name} ramen sauce bottle preview`} />
+                    <img
+                      src={c.img}
+                      alt={c.altOverride || `NoodleBomb ${c.name} ramen sauce bottle preview`}
+                      style={c.placeholderFilter ? { filter: c.placeholderFilter, opacity: c.placeholderOpacity ?? 1 } : undefined}
+                    />
                     <div className="nd-rim" aria-hidden="true" />
                   </div>
                 </div>
