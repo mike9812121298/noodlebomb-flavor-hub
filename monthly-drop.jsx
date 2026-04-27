@@ -254,21 +254,61 @@ function MonthlyDrop() {
               </div>
             </Reveal>
 
-            {/* CTAs */}
+            {/* CTA — Monthly Box subscribe (formsubmit lead capture; replaces dead button reported by Kevin Malcolm 2026-04-25). Real Wix subscription product TBD — until then this captures the lead so Mike/Ashley can manually onboard before VOL.04 ships May 15. */}
             <Reveal delay={5}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 28, marginBottom: 32, flexWrap: 'wrap' }}>
-                <button className="btn" style={{
-                  background: 'var(--accent)', color: 'var(--accent-ink)',
-                  border: 'none', padding: '16px 26px',
-                  fontWeight: 600, borderRadius: 4, cursor: 'pointer',
-                  fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em',
-                  transition: 'transform .2s, filter .2s, box-shadow .2s'
-                }}
-                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(139,30,30,0.4)'; }}
-                onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; e.currentTarget.style.boxShadow = 'none'; }}>
-                  Subscribe — ships May 15
-                </button>
-              </div>
+              <form
+                action="https://formsubmit.co/hello@noodlebomb.co"
+                method="POST"
+                style={{ marginBottom: 32, maxWidth: 480 }}
+              >
+                <input type="hidden" name="_subject" value="NoodleBomb Monthly Box — Subscribe Request" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="box_volume" value="VOL.04 — MAY 2026 DROP" />
+                <input type="hidden" name="ships" value="May 15, 2026" />
+                <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+                <div style={{ display: 'flex', alignItems: 'stretch', gap: 8, flexWrap: 'wrap' }}>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="your@email.com"
+                    required
+                    aria-label="Email address for Monthly Box subscription"
+                    autoComplete="email"
+                    style={{
+                      flex: '1 1 220px',
+                      minHeight: 49,
+                      padding: '0 16px',
+                      background: 'rgba(245,241,234,0.04)',
+                      border: '1px solid rgba(245,241,234,0.18)',
+                      borderRadius: 4,
+                      color: 'var(--ink)',
+                      fontFamily: 'Inter',
+                      fontSize: 14,
+                      outline: 'none',
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className="btn"
+                    style={{
+                      background: 'var(--accent)', color: 'var(--accent-ink)',
+                      border: 'none', padding: '16px 26px',
+                      fontWeight: 600, borderRadius: 4, cursor: 'pointer',
+                      fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em',
+                      transition: 'transform .2s, filter .2s, box-shadow .2s',
+                      flex: '0 0 auto',
+                    }}
+                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(139,30,30,0.4)'; }}
+                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
+                  >
+                    Subscribe — ships May 15
+                  </button>
+                </div>
+                <div className="mono" style={{ marginTop: 10, fontSize: 10, color: 'var(--muted)', letterSpacing: '0.14em' }}>
+                  WE'LL EMAIL YOU TO LOCK IN VOL.04 BEFORE IT SHIPS · NO CHARGE YET
+                </div>
+              </form>
             </Reveal>
 
             {/* Counter + progress */}
