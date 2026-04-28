@@ -555,18 +555,44 @@ function Nav({ flavor, setFlavor, flavors }) {
             </svg>
             <p style={{ fontFamily: 'Inter Tight', fontSize: 16, color: 'var(--ink)', margin: 0 }}>Your cart is empty.</p>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-60)', margin: 0, maxWidth: 240 }}>Pick a sauce. Build the bowl.</p>
+
+            {/* One-click Trio shortcut — frictionless path to the highest-AOV
+                product for users who clicked the cart icon with an empty cart. */}
+            <button
+              onClick={() => {
+                if (window.NB_CART) window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
+              }}
+              style={{
+                marginTop: 12,
+                padding: '14px 24px', borderRadius: 999,
+                background: 'var(--accent)', color: 'var(--accent-ink)',
+                border: 0, cursor: 'pointer',
+                fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
+                letterSpacing: '0.16em', textTransform: 'uppercase',
+                transition: 'transform .2s, box-shadow .2s',
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
+            >
+              Add the Trio — $29.99
+            </button>
+            <div style={{ fontSize: 10, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.16em', textTransform: 'uppercase', marginTop: -8 }}>
+              All 3 flavors · save $5.98
+            </div>
+
             <button
               onClick={() => setCartDrawerOpen(false)}
               style={{
-                marginTop: 8,
-                padding: '12px 24px', borderRadius: 999,
-                background: 'var(--accent)', color: 'var(--accent-ink)',
-                border: 0, cursor: 'pointer',
-                fontFamily: 'Inter', fontSize: 12, fontWeight: 600,
+                marginTop: 4,
+                padding: '10px 20px',
+                background: 'transparent', color: 'var(--ink-60)',
+                border: '1px solid var(--line-strong)', borderRadius: 999,
+                cursor: 'pointer',
+                fontFamily: 'Inter', fontSize: 11, fontWeight: 500,
                 letterSpacing: '0.16em', textTransform: 'uppercase',
               }}
             >
-              Keep shopping →
+              or keep shopping →
             </button>
           </div>
         ) : (
