@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects — translated from netlify.toml
+# 302! = forced 302 redirect (overrides any matching static file), Netlify equivalent of force=true
+# 200 = rewrite (proxies the destination at the requested URL — no client redirect)
+
+# Wix-pattern URLs that may appear in old links — bounce to the live store
+/product-page/*  https://shop.noodlebomb.co/product-page/:splat  302!
+/cart-page       https://shop.noodlebomb.co/cart-page            302!
+
+# Pretty URLs for the new local cart/checkout pages
+/cart            /cart.html                                      200
+/checkout        /checkout.html                                  200

@@ -1,27 +1,34 @@
 // NoodleBomb — app composition
 const { useEffect, useRef, useState } = React;
 // Wix Stores deep links (added 2026-04-25 for production deploy)
+// Kept for the Footer "Shop all" browse links — purchases now flow through
+// the local cart (cart.html → checkout.html → Wix payment handoff).
 const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
-const wixFor = (key) => WIX_URLS[key] || WIX_URLS.shop;
 
+// Trio bundle price — used by the bundle CTAs.
+const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+
+// Add an item to the local NB_CART. Buy buttons set href="/cart.html",
+// so the browser handles navigation; this just writes localStorage first.
+const addToCart = (item) => { if (window.NB_CART) window.NB_CART.add(item); };
 
 const FLAVORS = {
   original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#8B1E1E', ink: '#F5F1EA',
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
-    price: '$11.99', pack: '$29.99 / 3-pack' },
+    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
   citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
-    price: '$11.99', pack: '$29.99 / 3-pack' },
+    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
   spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#C2410C', ink: '#F5F1EA',
     line1: 'Umami meets fire.',
     line2: 'Dark soy, roasted chili, sesame.',
-    price: '$11.99', pack: '$29.99 / 3-pack' },
+    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
   ryu: { name: 'Ryu Garlic', tag: 'No.04 · Ryu Garlic', short: 'No.04', color: '#3D2B1F', ink: '#F5C842',
     line1: 'Black garlic. Dark depth.',
     line2: 'Aged black garlic, rich umami, subtle heat.',
-    price: '$11.99', pack: '$29.99 / 3-pack' }
+    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
 };
 
 const FLAVOR_IMAGES = {
@@ -769,9 +776,8 @@ function Origin() {
               Small batch · est. 2024
             </div>
             <a
-              href={WIX_URLS.trio}
-              target="_blank"
-              rel="noopener"
+              href="/cart.html"
+              onClick={() => addToCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd })}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -929,10 +935,11 @@ function FlavorPicker({ flavor, setFlavor }) {
                       <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>7 fl oz</span>
                     </div>
                     <a
-                      href={wixFor(k)}
-                      target="_blank"
-                      rel="noopener"
-                      onClick={(e) => e.stopPropagation()}
+                      href="/cart.html"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart({ slug: k, name: f.name, price: f.priceUsd });
+                      }}
                       className="lineup-buy-btn"
                       style={{
                         display: 'flex',
@@ -1040,9 +1047,8 @@ function FlavorPicker({ flavor, setFlavor }) {
               <div style={{ marginTop: 8 }}>
                 <a
                   className="btn trio-bundle-cta"
-                  href={WIX_URLS.trio}
-                  target="_blank"
-                  rel="noopener"
+                  href="/cart.html"
+                  onClick={() => addToCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd })}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -1355,6 +1361,18 @@ function App() {
   useEffect(() => {
     window.NB_OPEN_INQUIRY = (kind) => setInquiry(kind);
     return () => { delete window.NB_OPEN_INQUIRY; };
+  }, []);
+
+  // Honor ?flavor=X on initial load — used by the empty-cart recommendations
+  // (cart.jsx links to "/?flavor=spicy#lineup") so the homepage reflects the
+  // flavor the user clicked through to instead of defaulting to original.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get('flavor');
+    if (requested && FLAVORS[requested]) {
+      setState((s) => ({ ...s, flavor: requested }));
+    }
   }, []);
   const set = (patch) => {
     setState((s) => {

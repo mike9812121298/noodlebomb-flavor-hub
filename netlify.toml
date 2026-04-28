@@ -1,5 +1,6 @@
 # NoodleBomb production — premium editorial design (POUR IT ON EVERYTHING)
-# Static deploy — index.html + 4 .jsx files + uploads/ images served from repo root
+# Static deploy — index.html + 6 .jsx files + uploads/ images served from repo root
+# Pages: index.html (landing), cart.html (/cart), checkout.html (/checkout)
 # Vite build is skipped via no-op command + ignore.
 # To roll back to the React/Vite SPA, restore this file to commit 862db66 and revert index.html.
 
@@ -8,6 +9,7 @@
   publish = "."
   ignore = "/bin/false"
 
+# Wix-pattern URLs that may appear in old links — bounce to the live store
 [[redirects]]
   from = "/product-page/*"
   to = "https://shop.noodlebomb.co/product-page/:splat"
@@ -20,11 +22,18 @@
   status = 302
   force = true
 
+# Pretty URLs for the new local cart/checkout pages
+# (Netlify automatically serves cart.html for /cart, but force=false ensures
+#  it doesn't conflict with anything else and is explicit.)
 [[redirects]]
   from = "/cart"
-  to = "https://shop.noodlebomb.co/cart-page"
-  status = 302
-  force = true
+  to = "/cart.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/checkout.html"
+  status = 200
 
 [[headers]]
   for = "/*.jsx"

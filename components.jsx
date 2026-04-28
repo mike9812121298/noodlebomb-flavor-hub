@@ -1,5 +1,14 @@
 // Wix Stores deep links (added 2026-04-25)
+// Kept for the mobile drawer "Shop the Range" browse link — purchases now flow
+// through the local cart (cart.html → checkout.html → Wix payment handoff).
 const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+
+// Single-bottle and trio prices (must match app.jsx FLAVORS).
+const NB_BOTTLE_PRICE = 11.99;
+const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+
+// Add to local NB_CART; buy buttons navigate via href="/cart.html".
+const nbAddToCart = (item) => { if (window.NB_CART) window.NB_CART.add(item); };
 
 // NoodleBomb — shared components
 const { useEffect, useRef, useState, useMemo, useLayoutEffect } = React;
@@ -166,7 +175,7 @@ function Nav({ flavor, setFlavor, flavors }) {
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
         <a
-          href="/cart"
+          href="/cart.html"
           aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
           style={{
             position: 'relative',
@@ -384,9 +393,12 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </div>
         <div className="hero-cta-row" style={{ display:'flex', gap: 10, flexWrap: 'wrap' }}>
           <a
-            href={NB_WIX[flavorKey] || NB_WIX.shop}
-            target="_blank"
-            rel="noopener"
+            href="/cart.html"
+            onClick={() => nbAddToCart({
+              slug: flavorKey,
+              name: flavorMeta?.name || flavorKey,
+              price: NB_BOTTLE_PRICE,
+            })}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -418,9 +430,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
           </a>
           <a
             className="btn btn-ghost"
-            href={NB_WIX.trio}
-            target="_blank"
-            rel="noopener"
+            href="/cart.html"
+            onClick={() => nbAddToCart({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd })}
             style={{ textDecoration: 'none', display: 'inline-block' }}
           >
             Try the 3-pack — $29.99
