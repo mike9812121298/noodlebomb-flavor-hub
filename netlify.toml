@@ -5,7 +5,10 @@
 # To roll back to the React/Vite SPA, restore this file to commit 862db66 and revert index.html.
 
 [build]
-  command = "echo 'Static deploy - serving index.html from repo root.'"
+  # Compiles repo-root *.jsx → build/*.js via esbuild, replacing the prior
+  # Babel-in-browser setup (~770KB shipped to every visitor, gone). Netlify
+  # auto-runs `npm install` first to fetch esbuild from devDeps.
+  command = "npm run build:static"
   publish = "."
   ignore = "/bin/false"
 
@@ -151,6 +154,13 @@
   for = "/*.jsx"
   [headers.values]
     Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# Compiled bundles — same short-cache treatment as the source .jsx
+# (no content hashing yet; if added later, switch to immutable + 1y).
+[[headers]]
+  for = "/build/*"
+  [headers.values]
     Cache-Control = "public, max-age=300, must-revalidate"
 
 # cart-store.js is the cart logic — short cache so threshold/price updates

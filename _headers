@@ -5,6 +5,9 @@
   Content-Type: application/javascript; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
 
+/build/*
+  Cache-Control: public, max-age=300, must-revalidate
+
 /cart-store.js
   Cache-Control: public, max-age=300, must-revalidate
 
