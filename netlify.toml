@@ -109,6 +109,14 @@
   status = 404
   force = true
 
+# JSX source files — compiled to /build/*.js by esbuild on deploy. The
+# source remains in the repo for diff/review but isn't needed at runtime.
+[[redirects]]
+  from = "/*.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Dotfiles — .env contains only Supabase publishable keys (safe to expose by
 # design) but leaking the file is poor hygiene; .gitignore is harmless but
 # pollutes the surface area.
