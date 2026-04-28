@@ -367,7 +367,18 @@ function Nav({ flavor, setFlavor, flavors }) {
             }}>{cartCount > 9 ? '9+' : cartCount}</span>
           )}
         </a>
-        <a className="btn btn-ghost nav-shop-cta" href={NB_WIX.shop} target="_blank" rel="noopener" style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}>Shop</a>
+        <a
+          className="btn btn-ghost nav-shop-cta"
+          href="#lineup"
+          onClick={(e) => {
+            // Modifier-click → let browser handle the in-page hash normally.
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+            e.preventDefault();
+            const el = document.querySelector('#lineup');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+          style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}
+        >Shop</a>
         {/* Hamburger — mobile only */}
         <button
           className="nav-hamburger"
