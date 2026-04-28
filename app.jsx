@@ -8,9 +8,16 @@ const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus":
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
-// Add an item to the local NB_CART. Buy buttons set href="/cart.html",
-// so the browser handles navigation; this just writes localStorage first.
-const addToCart = (item) => { if (window.NB_CART) window.NB_CART.add(item); };
+// Add to local NB_CART and open the slide-out cart drawer instead of navigating
+// to /cart.html. Modifier-click (cmd/ctrl/shift, middle button) preserves
+// browser-native navigation so right-click "Open in new tab" still works.
+// Buttons keep href="/cart.html" as the no-JS / accessibility fallback.
+const addAndOpenCart = (item, e) => {
+  if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+  if (e) e.preventDefault();
+  if (window.NB_CART) window.NB_CART.add(item);
+  window.dispatchEvent(new CustomEvent('nb-open-cart'));
+};
 
 const FLAVORS = {
   original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#8B1E1E', ink: '#F5F1EA',
@@ -783,7 +790,7 @@ function Origin() {
             </div>
             <a
               href="/cart.html"
-              onClick={() => addToCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd })}
+              onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -820,11 +827,16 @@ function Origin() {
 }
 
 // ——————————————————————————— Testimonials (real brand voice)
+// Pre-launch (May 8): "verified buyer" tag was wrong (trademark misuse + nobody can
+// be a verified buyer pre-launch). "Ashley R." needs verification — if that's founder
+// Ashley March, it's undisclosed founder endorsement and must be removed/attributed.
+// Confirm these quotes are from real beta tasters before launch; if any are fabricated,
+// replace bodies. Tag changed to "early taste-tester" as honest pre-launch framing.
 function Testimonials() {
   const quotes = [
-  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley R.', tag: 'verified buyer' },
-  { body: 'I wasn’t expecting this much punch from one sauce. Took my plain store-bought ramen and made it restaurant-worthy in seconds. I’m officially hooked.', name: 'Marcus', tag: 'verified buyer' },
-  { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades any ramen.', name: 'Priya', tag: 'verified buyer' }];
+  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley R.', tag: 'early taste-tester' },
+  { body: 'I wasn’t expecting this much punch from one sauce. Took my plain store-bought ramen and made it restaurant-worthy in seconds. I’m officially hooked.', name: 'Marcus', tag: 'early taste-tester' },
+  { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades any ramen.', name: 'Priya', tag: 'early taste-tester' }];
 
   return (
     <section id="reviews" style={{ background: 'var(--paper)', padding: '140px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
@@ -949,7 +961,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                       href="/cart.html"
                       onClick={(e) => {
                         e.stopPropagation();
-                        addToCart({ slug: k, name: f.name, price: f.priceUsd });
+                        addAndOpenCart({ slug: k, name: f.name, price: f.priceUsd }, e);
                       }}
                       className="lineup-buy-btn"
                       style={{
@@ -1062,7 +1074,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                 <a
                   className="btn trio-bundle-cta"
                   href="/cart.html"
-                  onClick={() => addToCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd })}
+                  onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
