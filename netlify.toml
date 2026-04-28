@@ -32,6 +32,14 @@
   status = 404
   force = true
 
+# /dist/ is a stale Vite build (different homepage, sitemap with broken
+# paths and a "yuzu" reference banned per commit a577290).
+[[redirects]]
+  from = "/dist/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/package.json"
   to = "/404.html"
