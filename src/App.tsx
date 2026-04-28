@@ -23,6 +23,7 @@ import FAQ from "./pages/FAQ";
 import About from "./pages/About";
 import ProductPage from "./pages/ProductPage";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import SoySauce from "./pages/SoySauce";
 import NotFound from "./pages/NotFound";
 import Wholesale from "./pages/Wholesale";
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/product/:slug" element={<ProductPage />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/soy-sauce" element={<SoySauce />} />
           <Route path="/contact" element={<Contact />} />

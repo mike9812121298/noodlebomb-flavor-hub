@@ -288,7 +288,7 @@ const Index = () => {
         >
           {[
             { Icon: Star, label: "4.9 Stars · 500+ Reviews", iconClass: "text-amber-500" },
-            { Icon: Truck, label: "Free Shipping Over $45", iconClass: "" },
+            { Icon: Truck, label: "Free Shipping Over $40", iconClass: "" },
             { Icon: RotateCcw, label: "30-Day Guarantee", iconClass: "" },
             { Icon: Leaf, label: "Real Ingredients", iconClass: "" },
             { Icon: MapPin, label: "Crafted in the PNW", iconClass: "" },

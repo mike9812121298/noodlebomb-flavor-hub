@@ -31,7 +31,7 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "sampler": nbLineupTrio,
 };
 
-const FREE_SHIPPING_THRESHOLD = 45;
+const FREE_SHIPPING_THRESHOLD = 40;
 const EMAIL_KEY = "nb_checkout_email";
 
 const Checkout = () => {
@@ -469,7 +469,7 @@ const Checkout = () => {
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-foreground/55">
                   <Truck className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" />
-                  <span>Free shipping on orders $45+</span>
+                  <span>Free shipping on orders $40+</span>
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-foreground/55">
                   <Repeat className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" />
