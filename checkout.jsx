@@ -319,7 +319,7 @@ function CheckoutPage() {
       </div>
 
       <div className="sticky-mobile">
-        <div className="total"><small>Total</small><strong>{fmtUSD(subtotal)}</strong></div>
+        <div className="total"><small>Subtotal</small><strong>{fmtUSD(subtotal)}</strong></div>
         <button className="btn" onClick={proceed} disabled={!emailValid || redirecting}>
           <Lock /> Pay
         </button>

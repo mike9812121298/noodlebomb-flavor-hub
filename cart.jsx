@@ -225,7 +225,7 @@ function CartPage() {
           <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free' : 'At checkout'}</span></div>
           <div className="row-line"><span>Estimated tax</span><span className="v" style={{ color: 'var(--ink-40)', fontSize: 12 }}>At checkout</span></div>
           <div className="divider"></div>
-          <div className="row-line total"><span className="label">Total</span><span className="v">{fmtUSD(subtotal)}</span></div>
+          <div className="row-line total"><span className="label">Subtotal</span><span className="v">{fmtUSD(subtotal)}</span></div>
 
           <div style={{ marginTop: 18, padding: '12px 14px', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, color: 'var(--ink-60)' }}>
             <Truck />
@@ -249,7 +249,7 @@ function CartPage() {
       {/* Mobile sticky */}
       <div className="sticky-mobile">
         <div className="total">
-          <small>Total</small>
+          <small>Subtotal</small>
           <strong>{fmtUSD(subtotal)}</strong>
         </div>
         <a className="btn" href="/checkout.html">Checkout →</a>
