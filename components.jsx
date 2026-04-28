@@ -136,8 +136,12 @@ function Nav({ flavor, setFlavor, flavors }) {
   // Listen for global "open cart" event — fired by Add-to-Cart buttons
   // across app.jsx and components.jsx so the drawer becomes the universal
   // post-add-to-cart UX without coupling those buttons to Nav state.
+  // Also closes the mobile menu drawer if open (mutually exclusive).
   useEffect(() => {
-    const open = () => setCartDrawerOpen(true);
+    const open = () => {
+      setDrawerOpen(false);
+      setCartDrawerOpen(true);
+    };
     window.addEventListener('nb-open-cart', open);
     return () => window.removeEventListener('nb-open-cart', open);
   }, []);
@@ -219,6 +223,7 @@ function Nav({ flavor, setFlavor, flavors }) {
             // Modifier-click or middle-click → let browser navigate normally
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
             e.preventDefault();
+            setDrawerOpen(false);
             setCartDrawerOpen(true);
           }}
           aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
@@ -269,7 +274,11 @@ function Nav({ flavor, setFlavor, flavors }) {
           className="nav-hamburger"
           aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={drawerOpen}
-          onClick={() => setDrawerOpen(!drawerOpen)}
+          onClick={() => {
+            // Mutually exclusive: opening menu closes cart drawer.
+            if (!drawerOpen) setCartDrawerOpen(false);
+            setDrawerOpen(!drawerOpen);
+          }}
           style={{
             display: 'none',
             width: 44,
