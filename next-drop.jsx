@@ -97,6 +97,7 @@ function NextDrop() {
                     <img
                       src={c.img}
                       alt={c.altOverride || `NoodleBomb ${c.name} ramen sauce bottle preview`}
+                      loading="lazy"
                       style={c.placeholderFilter ? { filter: c.placeholderFilter, opacity: c.placeholderOpacity ?? 1 } : undefined}
                     />
                     <div className="nd-rim" aria-hidden="true" />

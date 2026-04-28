@@ -326,7 +326,7 @@ function UseItOn() {
               minHeight: 520,
             }}>
               <div style={{ position: 'relative', width: '100%', height: 320, marginBottom: 24 }}>
-                <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name}`} style={{ width: '100%', height: '100%', objectFit: 'contain', filter: it.comingSoon ? 'drop-shadow(0 24px 40px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 24px 40px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
+                <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: it.comingSoon ? 'drop-shadow(0 24px 40px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 24px 40px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
                 {it.comingSoon && (
                   <div style={{
                     position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
@@ -413,7 +413,7 @@ function UseItOn() {
               {/* Bottle image */}
               <div style={{ flex: '1 1 46%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                 <div className="clip-reveal flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce bottle`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
+                  <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce bottle`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
                   {it.comingSoon && (
                     <div style={{
                       position: 'absolute',
@@ -886,7 +886,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               { src: 'uploads/nb-citrus-shoyu-clean.png', alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
               { src: 'uploads/nb-spicy-tokyo-clean.png', alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
             ].map((b) => (
-              <img key={b.src} src={b.src} alt={b.alt} style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 440, objectFit: 'contain', filter: 'drop-shadow(0 24px 32px rgba(0,0,0,0.45))' }} />
+              <img key={b.src} src={b.src} alt={b.alt} loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 440, objectFit: 'contain', filter: 'drop-shadow(0 24px 32px rgba(0,0,0,0.45))' }} />
             ))}
           </figure>
         </Reveal>
@@ -1010,7 +1010,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                 { src: 'uploads/nb-citrus-shoyu-clean.png', alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
                 { src: 'uploads/nb-spicy-tokyo-clean.png', alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
               ].map((b) => (
-                <img key={b.src} src={b.src} alt={b.alt} style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 360, objectFit: 'contain', filter: 'drop-shadow(0 16px 28px rgba(0,0,0,0.5))' }} />
+                <img key={b.src} src={b.src} alt={b.alt} loading="lazy" style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 360, objectFit: 'contain', filter: 'drop-shadow(0 16px 28px rgba(0,0,0,0.5))' }} />
               ))}
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 55%, rgba(8,7,6,0.45) 100%)', pointerEvents: 'none' }} />
             </div>

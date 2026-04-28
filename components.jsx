@@ -29,11 +29,14 @@ function Reveal({ children, delay = 0, as: Tag = 'div', className = '', style })
 }
 
 // ———————————————————————————————————————————— Bottle (real photo or SVG fallback)
-function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var(--accent)', tilt = 0, dripping = false, src = null }) {
+// `loading` defaults to "lazy" — bottle is used in Hero (passes "eager"),
+// FlavorBreakdown, PourAndCompare, and the Lineup cards. Only the Hero bottle
+// is above the fold on initial paint, so the rest stays out of the critical path.
+function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var(--accent)', tilt = 0, dripping = false, src = null, loading = 'lazy' }) {
   if (src) {
     return (
       <div className="bottle" style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.8s cubic-bezier(.2,.7,.2,1)', width: '100%', height: '100%' }}>
-        <img src={src} alt={`NoodleBomb ${flavor} ramen sauce bottle`} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+        <img src={src} alt={`NoodleBomb ${flavor} ramen sauce bottle`} loading={loading} style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
       </div>
     );
   }
@@ -85,7 +88,7 @@ function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var
 function FoodShot({ src, alt = '', style }) {
   if (src) return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', ...style }}>
-      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <img src={src} alt={alt} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
     </div>
   );
   return null;
@@ -373,7 +376,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         }} />
         <div className="hero-bottle-wrap" style={{ width:'100%', height:'100%' }}>
           <div className="bottle-float" style={{ width: '100%', height: '100%', transform: `translateY(${-parY * 0.5}px)` }}>
-            <Bottle src={bottleSrc} />
+            <Bottle src={bottleSrc} loading="eager" />
           </div>
         </div>
       </div>
