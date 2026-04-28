@@ -775,8 +775,11 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
 
   return (
     <section style={{ position: 'relative', minHeight: '100vh', paddingTop: 80, overflow: 'hidden' }}>
-      {/* top meta strip */}
-      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'flex-start', padding: '0 28px', marginTop: 8 }}>
+      {/* top meta strip — leads with launch date for above-the-fold urgency
+          (every visitor sees this; lineup-card "Launching May 8" badge is
+          mid-page only). Brand-true: May 8 is the actual launch date. */}
+      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 28px', marginTop: 8, gap: 16, flexWrap: 'wrap' }}>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600 }}>Launching May 8, 2026</span>
         <span className="mono" style={{ color: 'var(--muted)' }}>Vol.01 · 2026 Edition</span>
       </div>
 
