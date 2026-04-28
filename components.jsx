@@ -195,6 +195,55 @@ function Nav({ flavor, setFlavor, flavors }) {
     window.addEventListener('keydown', trap);
     return () => window.removeEventListener('keydown', trap);
   }, [cartDrawerOpen]);
+
+  // a11y: same focus pattern for the mobile menu drawer (drawerOpen).
+  // No explicit close button — the menu closes on link-click, outside-click,
+  // or Escape. Initial focus goes to the first nav link.
+  const menuDrawerRef = useRef(null);
+  const menuTriggerRef = useRef(null);
+  useEffect(() => {
+    if (drawerOpen) {
+      menuTriggerRef.current = document.activeElement;
+      const t = setTimeout(() => {
+        const drawer = menuDrawerRef.current;
+        if (!drawer) return;
+        const firstFocusable = drawer.querySelector(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+        if (firstFocusable) firstFocusable.focus();
+      }, 100);
+      return () => clearTimeout(t);
+    } else {
+      const trigger = menuTriggerRef.current;
+      if (trigger && document.contains(trigger) && typeof trigger.focus === 'function') {
+        trigger.focus();
+      }
+      menuTriggerRef.current = null;
+    }
+  }, [drawerOpen]);
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const trap = (e) => {
+      if (e.key !== 'Tab') return;
+      const drawer = menuDrawerRef.current;
+      if (!drawer) return;
+      const focusables = drawer.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener('keydown', trap);
+    return () => window.removeEventListener('keydown', trap);
+  }, [drawerOpen]);
   // Lock body scroll when either drawer is open
   useEffect(() => {
     const anyOpen = drawerOpen || cartDrawerOpen;
@@ -362,8 +411,13 @@ function Nav({ flavor, setFlavor, flavors }) {
 
       {/* Mobile drawer overlay */}
       <div
+        ref={menuDrawerRef}
         className="nav-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
         aria-hidden={!drawerOpen}
+        tabIndex={drawerOpen ? 0 : -1}
         style={{
           position: 'fixed',
           inset: 0,
