@@ -64,12 +64,15 @@ function FlavorBreakdown({ flavor }) {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
+  // appearAt evenly spans 0.05 → 0.95 so the last ingredient lands just
+  // before the section ends — eliminates the ~40vh trailing dead zone
+  // that existed when the last appearAt was 0.82.
   const ingredients = [
-  { label: 'Umami', note: 'the backbone', angle: -140, appearAt: 0.10 },
-  { label: 'Roasted depth', note: 'the warmth', angle: -55, appearAt: 0.28 },
-  { label: 'Brightness', note: 'the lift', angle: 40, appearAt: 0.46 },
-  { label: 'Richness', note: 'the coat', angle: 135, appearAt: 0.64 },
-  { label: 'Heat', note: 'the whisper', angle: 270, appearAt: 0.82 }];
+  { label: 'Umami', note: 'the backbone', angle: -140, appearAt: 0.05 },
+  { label: 'Roasted depth', note: 'the warmth', angle: -55, appearAt: 0.275 },
+  { label: 'Brightness', note: 'the lift', angle: 40, appearAt: 0.50 },
+  { label: 'Richness', note: 'the coat', angle: 135, appearAt: 0.725 },
+  { label: 'Heat', note: 'the whisper', angle: 270, appearAt: 0.95 }];
 
 
   return (
@@ -109,7 +112,10 @@ function FlavorBreakdown({ flavor }) {
       </div>
 
       {/* DESKTOP: sticky scroll mechanic (>768px) */}
-      <div className="fb-desktop" style={{ height: '320vh' }}>
+      {/* Height: 240vh = 140vh of sticky pin (for ingredients to fade in) +
+          100vh of natural sticky exit. Was 320vh — extra 80vh was pure dead
+          scroll past the last ingredient. */}
+      <div className="fb-desktop" style={{ height: '240vh' }}>
       <div className="fb-sticky" style={{
         position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
         display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -509,7 +515,7 @@ function PourAndCompare({ flavor = 'original' }) {
       </div>
 
       {/* Comparison */}
-      <div style={{ marginTop: 180, maxWidth: 1100, margin: '180px auto 0' }}>
+      <div style={{ maxWidth: 1100, margin: '120px auto 0' }}>
         <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 05 — Where it sits</div></Reveal>
         <Reveal delay={1}>
           <h2 className="display section-h2" style={{ margin: '0 0 32px' }}>
