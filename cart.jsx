@@ -92,9 +92,26 @@ function CartPage() {
         </div>
         <h1>Your cart is <em>empty.</em></h1>
         <p>Pick a sauce. Build the bowl.</p>
-        <a className="btn" href="/#lineup" style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px' }}>
-          Shop the lineup →
-        </a>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* One-click Trio shortcut — same pattern as the drawer empty state.
+              Lets a returning visitor with empty localStorage land in a populated
+              cart in one tap. */}
+          <button
+            onClick={() => {
+              if (window.NB_CART) window.NB_CART.add({ slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 });
+            }}
+            className="btn"
+            style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px', cursor: 'pointer', border: 0 }}
+          >
+            Add the Trio — {fmtUSD(29.99)}
+          </button>
+          <a className="btn btn-secondary" href="/#lineup" style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px' }}>
+            Shop the lineup →
+          </a>
+        </div>
+        <div style={{ marginTop: 8, fontSize: 11, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+          All 3 flavors · save $5.98
+        </div>
 
         <div className="recommendations">
           {RECS.map((r) => (
