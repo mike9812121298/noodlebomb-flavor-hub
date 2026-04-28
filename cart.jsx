@@ -4,6 +4,10 @@ const { useEffect, useState, useMemo } = React;
 
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
 
+// Trio bundle — single source of truth for slug/name/price within this file.
+// Mirrors app.jsx TRIO and components.jsx NB_TRIO. Keep all three in sync.
+const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+
 const PRODUCT_IMAGES = {
   original: 'uploads/nb-original-clean.png',
   citrus:   'uploads/nb-citrus-shoyu-clean.png',
@@ -98,12 +102,12 @@ function CartPage() {
               cart in one tap. */}
           <button
             onClick={() => {
-              if (window.NB_CART) window.NB_CART.add({ slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 });
+              if (window.NB_CART) window.NB_CART.add({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd });
             }}
             className="btn"
             style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px', cursor: 'pointer', border: 0 }}
           >
-            Add the Trio — {fmtUSD(29.99)}
+            Add the Trio — {fmtUSD(TRIO.priceUsd)}
           </button>
           <a className="btn btn-secondary" href="/#lineup" style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px' }}>
             Shop the lineup →
@@ -184,7 +188,7 @@ function CartPage() {
             if (!showTrioUpsell) return null;
             const addTrio = () => {
               if (window.NB_CART) {
-                window.NB_CART.add({ slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 });
+                window.NB_CART.add({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd });
               }
             };
             return (
