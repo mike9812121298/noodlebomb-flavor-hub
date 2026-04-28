@@ -153,15 +153,44 @@
     Content-Type = "application/javascript; charset=utf-8"
     Cache-Control = "public, max-age=300, must-revalidate"
 
+# cart-store.js is the cart logic — short cache so threshold/price updates
+# propagate quickly. Same revalidate behavior as the .jsx files.
+[[headers]]
+  for = "/cart-store.js"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
 [[headers]]
   for = "/uploads/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# HTML pages — always revalidate so updates ship immediately.
 [[headers]]
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/cart.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/checkout.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/404.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Favicon — long cache, the file rarely changes.
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 [[headers]]
   for = "/*"
