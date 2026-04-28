@@ -12,7 +12,7 @@ const testimonials = [
   },
   {
     name: "Sarah K.",
-    text: "Spicy Tokyo on wings is insane. That slow burn keeps you coming back. Best hot sauce I've ever had.",
+    text: "Spicy Tokyo on wings is insane. That slow burn keeps you coming back. Best ramen sauce I've ever had.",
     rating: 5,
     sauce: "Spicy Tokyo",
   },

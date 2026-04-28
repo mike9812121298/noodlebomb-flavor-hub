@@ -27,7 +27,7 @@ const RecipeCard = ({ title, image, time, difficulty, bestWith, calories }: Reci
         </span>
       </div>
       <div className="absolute bottom-4 left-4 right-4">
-        <span className="text-[10px] font-display uppercase tracking-wider text-primary/80 mb-1 block">Cooked With Noodle Bomb</span>
+        <span className="text-[10px] font-display uppercase tracking-wider text-primary/80 mb-1 block">Cooked With NoodleBomb</span>
         <h3 className="font-display text-lg font-bold text-foreground">{title}</h3>
       </div>
     </div>
