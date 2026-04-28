@@ -809,7 +809,7 @@ function Origin() {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              Try the Trio — $29.99
+              Try the Trio — $29.99 · Save $6
               <span style={{ fontSize: 16 }}>→</span>
             </a>
           </div>
@@ -1018,7 +1018,7 @@ function FlavorPicker({ flavor, setFlavor }) {
             </div>
             {/* Copy */}
             <div className="trio-bundle-copy" style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
-              <span className="mono" style={{ color: 'var(--muted)' }}>bundle · save $6</span>
+              <span className="mono" style={{ color: 'var(--accent)', fontSize: 12, fontWeight: 600, letterSpacing: '0.18em' }}>BUNDLE · SAVE $5.98</span>
               <h3 className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02, margin: 0, fontWeight: 700 }}>
                 The 3-Pack Variety<br />
                 <span style={{ color: 'var(--muted)' }}>— $29.99.</span>
@@ -1088,7 +1088,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     e.currentTarget.style.background = '#8B1E1E';
                   }}
                 >
-                  Buy the Bundle — $29.99
+                  Buy the Trio — $29.99 · Save $6
                   <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
                 </a>
               </div>

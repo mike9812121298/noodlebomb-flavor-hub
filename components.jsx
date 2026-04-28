@@ -437,7 +437,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
             onClick={() => nbAddToCart({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd })}
             style={{ textDecoration: 'none', display: 'inline-block' }}
           >
-            Try the 3-pack — $29.99
+            Try the 3-pack — save $6
           </a>
         </div>
       </div>
