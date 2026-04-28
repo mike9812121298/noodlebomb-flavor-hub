@@ -1053,9 +1053,12 @@ function FlavorPicker({ flavor, setFlavor }) {
                 ))}
               </div>
 
-              {/* Microline */}
+              {/* Microline — "SHIPS FREE" claim removed pending Wix backend
+                  verification (trio is $29.99, below the $40 free-ship line
+                  the local cart enforces; if Wix has a special trio rule
+                  Mike can confirm, restore the claim). */}
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
-                SHIPS FREE · ARRIVES IN 3–5 DAYS · 1,200+ SOLD THIS MONTH
+                MOST POPULAR · ARRIVES IN 3–5 DAYS · 1,200+ SOLD THIS MONTH
               </div>
 
               <div style={{ marginTop: 8 }}>
