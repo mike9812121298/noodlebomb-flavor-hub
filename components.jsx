@@ -661,7 +661,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                 const hasTrio = cartItems.some((i) => i.slug === 'trio');
                 if (hasTrio || cartFreeShipping || cartItems.length === 0) return null;
                 const addTrio = () => {
-                  if (window.NB_CART) window.NB_CART.add({ slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 });
+                  if (window.NB_CART) window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
                 };
                 return (
                   <div style={{
