@@ -157,6 +157,73 @@ function CartPage() {
             </div>
           )}
 
+          {/* Smart Trio upsell — only when cart has items, no trio yet, and user
+              hasn't crossed the free-shipping line. Adding the trio flips the
+              order over $40 (assuming any starting subtotal > $10) and saves
+              the user $5.98 vs buying the same 3 flavors as singles. */}
+          {(() => {
+            const hasTrio = items.some((i) => i.slug === 'trio');
+            const showTrioUpsell = !hasTrio && itemCount > 0 && !freeShipping;
+            if (!showTrioUpsell) return null;
+            const addTrio = () => {
+              if (window.NB_CART) {
+                window.NB_CART.add({ slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 });
+              }
+            };
+            return (
+              <div className="card" style={{
+                border: '1px solid var(--accent)',
+                background: 'linear-gradient(180deg, rgba(139,30,30,0.10) 0%, rgba(139,30,30,0.04) 100%)',
+                padding: 22,
+                display: 'flex',
+                gap: 18,
+                alignItems: 'center',
+              }}>
+                <div style={{
+                  width: 56, height: 56, flexShrink: 0,
+                  background: 'var(--paper-3)', border: '1px solid var(--line)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: 4,
+                }}>
+                  <img src="uploads/noodlebomb-trio.png" alt="The NoodleBomb Trio" loading="lazy"
+                    style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div className="mono" style={{ color: 'var(--accent)', fontSize: 10, letterSpacing: '0.18em', fontWeight: 700, marginBottom: 4 }}>
+                    BUNDLE · SAVE $5.98
+                  </div>
+                  <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 16, color: 'var(--ink)', marginBottom: 4 }}>
+                    Make it a Trio — get all 3 flavors
+                  </div>
+                  <div style={{ fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)', lineHeight: 1.5 }}>
+                    Add the bundle for $29.99 — unlocks free shipping and saves $5.98 vs. three singles.
+                  </div>
+                </div>
+                <button onClick={addTrio} aria-label="Add the Trio bundle to cart" style={{
+                  flexShrink: 0,
+                  padding: '12px 20px',
+                  borderRadius: 999,
+                  background: 'var(--accent)',
+                  color: 'var(--accent-ink)',
+                  border: 0,
+                  fontFamily: 'Inter',
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  transition: 'transform .2s, box-shadow .2s',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(139,30,30,0.35)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
+                >
+                  Add Trio →
+                </button>
+              </div>
+            );
+          })()}
+
           {/* Items */}
           {items.map((item) => (
             <div key={item.slug} className="card line-item">
