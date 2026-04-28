@@ -509,6 +509,49 @@ function Nav({ flavor, setFlavor, flavors }) {
               background: 'var(--paper)',
               display: 'flex', flexDirection: 'column', gap: 14,
             }}>
+              {/* Trio upsell — only when no trio yet AND under free-ship line.
+                  Earlier impression than the /cart.html upsell card; same logic. */}
+              {(() => {
+                const hasTrio = cartItems.some((i) => i.slug === 'trio');
+                if (hasTrio || cartFreeShipping || cartItems.length === 0) return null;
+                const addTrio = () => {
+                  if (window.NB_CART) window.NB_CART.add({ slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 });
+                };
+                return (
+                  <div style={{
+                    padding: '12px 14px',
+                    border: '1px solid var(--accent)',
+                    borderRadius: 6,
+                    background: 'rgba(139,30,30,0.08)',
+                    display: 'flex', alignItems: 'center', gap: 10,
+                  }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 700, marginBottom: 2 }}>
+                        Save $5.98
+                      </div>
+                      <div style={{ fontFamily: 'Inter Tight', fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>
+                        Make it a Trio — all 3 flavors
+                      </div>
+                    </div>
+                    <button
+                      onClick={addTrio}
+                      aria-label="Add The NoodleBomb Trio bundle"
+                      style={{
+                        flexShrink: 0,
+                        padding: '8px 14px', borderRadius: 999,
+                        background: 'var(--accent)', color: 'var(--accent-ink)',
+                        border: 0, cursor: 'pointer',
+                        fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
+                        letterSpacing: '0.16em', textTransform: 'uppercase',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      + $29.99
+                    </button>
+                  </div>
+                );
+              })()}
+
               {/* Free shipping bar */}
               {cartFreeShipping ? (
                 <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
