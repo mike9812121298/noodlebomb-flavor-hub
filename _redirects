@@ -1,6 +1,22 @@
 # Cloudflare Pages redirects — translated from netlify.toml
 # 302! = forced 302 redirect (overrides any matching static file), Netlify equivalent of force=true
 # 200 = rewrite (proxies the destination at the requested URL — no client redirect)
+# 404! = forced 404 (used to block repo internals that publish="." would otherwise expose)
+
+# Block repo internals — robots.txt only deters crawlers, this returns 404
+/src/*              /404.html   404!
+/node_modules/*     /404.html   404!
+/supabase/*         /404.html   404!
+/package.json       /404.html   404!
+/package-lock.json  /404.html   404!
+/bun.lock*          /404.html   404!
+/tsconfig*.json     /404.html   404!
+/vite.config.ts     /404.html   404!
+/vitest.config.ts   /404.html   404!
+/postcss.config.js  /404.html   404!
+/tailwind.config.ts /404.html   404!
+/eslint.config.js   /404.html   404!
+/components.json    /404.html   404!
 
 # Wix-pattern URLs that may appear in old links — bounce to the live store
 /product-page/*  https://shop.noodlebomb.co/product-page/:splat  302!

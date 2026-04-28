@@ -9,6 +9,95 @@
   publish = "."
   ignore = "/bin/false"
 
+# Block repo internals from being served. publish = "." means every file at
+# the root gets deployed, including /src/ (dormant Vite tree), /node_modules/,
+# /supabase/config.toml, package.json, and lockfiles. robots.txt only deters
+# search engines — these rules return 404 to anyone fetching the paths
+# directly, with force = true to override the filesystem match.
+[[redirects]]
+  from = "/src/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/node_modules/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/supabase/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/bun.lock*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tsconfig*.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/vite.config.ts"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/vitest.config.ts"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/postcss.config.js"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tailwind.config.ts"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/eslint.config.js"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/components.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/cart-store.js.bak*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # Wix-pattern URLs that may appear in old links — bounce to the live store
 [[redirects]]
   from = "/product-page/*"
