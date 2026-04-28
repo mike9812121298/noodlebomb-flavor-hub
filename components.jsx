@@ -621,7 +621,37 @@ function Nav({ flavor, setFlavor, flavors }) {
                       {item.name}
                     </div>
                     <div style={{ fontSize: 11, color: 'var(--ink-40)', marginTop: 4, fontFamily: 'JetBrains Mono', letterSpacing: '0.08em' }}>
-                      {fmtUSD(item.price)} × {item.qty}
+                      {fmtUSD(item.price)} each
+                    </div>
+                    {/* Inline qty stepper — minus/plus buttons let users adjust
+                        without navigating to /cart.html. Disabled minus at 1
+                        prevents accidental remove (use the explicit Remove btn). */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: 8, border: '1px solid var(--line-strong)', borderRadius: 999, width: 'fit-content' }}>
+                      <button
+                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty - 1)}
+                        disabled={item.qty <= 1}
+                        aria-label={`Decrease ${item.name} quantity`}
+                        style={{
+                          width: 26, height: 26, padding: 0,
+                          background: 'transparent', border: 0,
+                          color: item.qty <= 1 ? 'var(--ink-20)' : 'var(--ink-60)',
+                          cursor: item.qty <= 1 ? 'not-allowed' : 'pointer',
+                          fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600,
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        }}
+                      >−</button>
+                      <span style={{ minWidth: 22, textAlign: 'center', fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 12, color: 'var(--ink)' }}>{item.qty}</span>
+                      <button
+                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty + 1)}
+                        aria-label={`Increase ${item.name} quantity`}
+                        style={{
+                          width: 26, height: 26, padding: 0,
+                          background: 'transparent', border: 0,
+                          color: 'var(--ink-60)', cursor: 'pointer',
+                          fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600,
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        }}
+                      >+</button>
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8, flexShrink: 0 }}>
