@@ -17,6 +17,8 @@
 /tailwind.config.ts /404.html   404!
 /eslint.config.js   /404.html   404!
 /components.json    /404.html   404!
+/.env*              /404.html   404!
+/.gitignore         /404.html   404!
 
 # Wix-pattern URLs that may appear in old links — bounce to the live store
 /product-page/*  https://shop.noodlebomb.co/product-page/:splat  302!
