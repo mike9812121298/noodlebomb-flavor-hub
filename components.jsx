@@ -7,8 +7,15 @@ const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "
 const NB_BOTTLE_PRICE = 11.99;
 const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
-// Add to local NB_CART; buy buttons navigate via href="/cart.html".
-const nbAddToCart = (item) => { if (window.NB_CART) window.NB_CART.add(item); };
+// Add to local NB_CART and open the slide-out cart drawer (handled by Nav).
+// Modifier-click preserves browser-native navigation; href="/cart.html" stays
+// as the no-JS / accessibility fallback.
+const nbAddAndOpenCart = (item, e) => {
+  if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+  if (e) e.preventDefault();
+  if (window.NB_CART) window.NB_CART.add(item);
+  window.dispatchEvent(new CustomEvent('nb-open-cart'));
+};
 
 // NoodleBomb — shared components
 const { useEffect, useRef, useState, useMemo, useLayoutEffect } = React;
@@ -109,7 +116,9 @@ function Shot({ label, aspect = '4/5', tag, style, children }) {
 function Nav({ flavor, setFlavor, flavors }) {
   const [solid, setSolid] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [cartCount, setCartCount] = useState(() => (window.NB_CART ? window.NB_CART.getItemCount() : 0));
+  const [cartItems, setCartItems] = useState(() => (window.NB_CART ? window.NB_CART.getItems() : []));
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
     window.addEventListener('scroll', on, { passive: true }); on();
@@ -118,23 +127,48 @@ function Nav({ flavor, setFlavor, flavors }) {
   useEffect(() => {
     if (!window.NB_CART) return;
     setCartCount(window.NB_CART.getItemCount());
-    return window.NB_CART.onChange(() => setCartCount(window.NB_CART.getItemCount()));
+    setCartItems(window.NB_CART.getItems());
+    return window.NB_CART.onChange(() => {
+      setCartCount(window.NB_CART.getItemCount());
+      setCartItems(window.NB_CART.getItems());
+    });
   }, []);
-  // Lock body scroll when drawer is open
+  // Listen for global "open cart" event — fired by Add-to-Cart buttons
+  // across app.jsx and components.jsx so the drawer becomes the universal
+  // post-add-to-cart UX without coupling those buttons to Nav state.
   useEffect(() => {
-    if (drawerOpen) {
+    const open = () => setCartDrawerOpen(true);
+    window.addEventListener('nb-open-cart', open);
+    return () => window.removeEventListener('nb-open-cart', open);
+  }, []);
+  // Lock body scroll when either drawer is open
+  useEffect(() => {
+    const anyOpen = drawerOpen || cartDrawerOpen;
+    if (anyOpen) {
       const prev = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => { document.body.style.overflow = prev; };
     }
-  }, [drawerOpen]);
-  // Close drawer on Escape
+  }, [drawerOpen, cartDrawerOpen]);
+  // Close drawers on Escape
   useEffect(() => {
-    if (!drawerOpen) return;
-    const onKey = (e) => { if (e.key === 'Escape') setDrawerOpen(false); };
+    if (!drawerOpen && !cartDrawerOpen) return;
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return;
+      setDrawerOpen(false);
+      setCartDrawerOpen(false);
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [drawerOpen]);
+  }, [drawerOpen, cartDrawerOpen]);
+
+  // Cart drawer derived values
+  const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
+  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+  const cartFreeShipping = cartSubtotal >= cartFreeShipThreshold;
+  const cartShipRemaining = Math.max(cartFreeShipThreshold - cartSubtotal, 0);
+  const cartShipProgress = Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
+  const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 
   const navLinks = [
     ['Sauces', '#lineup'],
@@ -177,8 +211,16 @@ function Nav({ flavor, setFlavor, flavors }) {
         ))}
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
+        {/* Cart icon opens the slide-out drawer; right-click + middle-click
+            still navigate to /cart.html (full cart page) for accessibility. */}
         <a
           href="/cart.html"
+          onClick={(e) => {
+            // Modifier-click or middle-click → let browser navigate normally
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+            e.preventDefault();
+            setCartDrawerOpen(true);
+          }}
           aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
           style={{
             position: 'relative',
@@ -191,6 +233,7 @@ function Nav({ flavor, setFlavor, flavors }) {
             color: 'var(--ink)',
             textDecoration: 'none',
             transition: 'background .2s, color .2s',
+            cursor: 'pointer',
           }}
           onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(240,235,227,0.06)'; }}
           onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; }}
@@ -327,6 +370,196 @@ function Nav({ flavor, setFlavor, flavors }) {
           <span style={{ fontSize: 16 }}>→</span>
         </a>
       </div>
+
+      {/* ─── Cart drawer — slide-out from right on Add to Cart and on Nav cart icon click. */}
+      <div
+        onClick={() => setCartDrawerOpen(false)}
+        aria-hidden="true"
+        style={{
+          position: 'fixed', inset: 0, zIndex: 105,
+          background: 'rgba(8,7,6,0.55)',
+          backdropFilter: 'blur(2px)',
+          opacity: cartDrawerOpen ? 1 : 0,
+          pointerEvents: cartDrawerOpen ? 'auto' : 'none',
+          transition: 'opacity .3s cubic-bezier(.2,.7,.2,1)',
+        }}
+      />
+      <aside
+        aria-label="Shopping cart"
+        aria-hidden={!cartDrawerOpen}
+        style={{
+          position: 'fixed', top: 0, right: 0, bottom: 0,
+          width: 'min(420px, 100vw)',
+          background: 'var(--paper-2)',
+          borderLeft: '1px solid var(--line)',
+          zIndex: 110,
+          transform: `translateX(${cartDrawerOpen ? '0' : '100%'})`,
+          transition: 'transform .35s cubic-bezier(.2,.7,.2,1)',
+          display: 'flex', flexDirection: 'column',
+          boxShadow: cartDrawerOpen ? '-24px 0 60px rgba(0,0,0,0.4)' : 'none',
+        }}
+      >
+        {/* Header */}
+        <div style={{
+          padding: '20px 24px',
+          borderBottom: '1px solid var(--line)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <h2 style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', margin: 0, color: 'var(--ink)' }}>
+            Your cart{cartCount > 0 && (
+              <span style={{ color: 'var(--ink-40)', fontWeight: 500, marginLeft: 6 }}>
+                · {cartCount} {cartCount === 1 ? 'item' : 'items'}
+              </span>
+            )}
+          </h2>
+          <button
+            onClick={() => setCartDrawerOpen(false)}
+            aria-label="Close cart"
+            style={{
+              background: 'transparent', border: 0, color: 'var(--ink-60)',
+              cursor: 'pointer', padding: 6, display: 'inline-flex',
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Empty state */}
+        {cartItems.length === 0 ? (
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, padding: 32, textAlign: 'center' }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--ink-40)' }} aria-hidden="true">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <p style={{ fontFamily: 'Inter Tight', fontSize: 16, color: 'var(--ink)', margin: 0 }}>Your cart is empty.</p>
+            <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-60)', margin: 0, maxWidth: 240 }}>Pick a sauce. Build the bowl.</p>
+            <button
+              onClick={() => setCartDrawerOpen(false)}
+              style={{
+                marginTop: 8,
+                padding: '12px 24px', borderRadius: 999,
+                background: 'var(--accent)', color: 'var(--accent-ink)',
+                border: 0, cursor: 'pointer',
+                fontFamily: 'Inter', fontSize: 12, fontWeight: 600,
+                letterSpacing: '0.16em', textTransform: 'uppercase',
+              }}
+            >
+              Keep shopping →
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Items — scrollable */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '8px 24px' }}>
+              {cartItems.map((item) => (
+                <div key={item.slug} style={{
+                  padding: '14px 0',
+                  borderBottom: '1px solid var(--line)',
+                  display: 'flex', alignItems: 'flex-start', gap: 12,
+                }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 14, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {item.name}
+                    </div>
+                    <div style={{ fontSize: 11, color: 'var(--ink-40)', marginTop: 4, fontFamily: 'JetBrains Mono', letterSpacing: '0.08em' }}>
+                      {fmtUSD(item.price)} × {item.qty}
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8, flexShrink: 0 }}>
+                    <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtUSD(item.price * item.qty)}
+                    </div>
+                    <button
+                      onClick={() => window.NB_CART && window.NB_CART.remove(item.slug)}
+                      aria-label={`Remove ${item.name}`}
+                      style={{
+                        background: 'transparent', border: 0,
+                        color: 'var(--ink-40)', cursor: 'pointer',
+                        fontFamily: 'JetBrains Mono', fontSize: 10,
+                        letterSpacing: '0.12em', textTransform: 'uppercase',
+                        padding: 0, transition: 'color .2s',
+                      }}
+                      onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent)'}
+                      onMouseOut={(e) => e.currentTarget.style.color = 'var(--ink-40)'}
+                    >
+                      remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div style={{
+              padding: '20px 24px',
+              borderTop: '1px solid var(--line)',
+              background: 'var(--paper)',
+              display: 'flex', flexDirection: 'column', gap: 14,
+            }}>
+              {/* Free shipping bar */}
+              {cartFreeShipping ? (
+                <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
+                  ✓ Free shipping unlocked
+                </div>
+              ) : (
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--ink-60)', marginBottom: 6, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    Add {fmtUSD(cartShipRemaining)} for free shipping
+                  </div>
+                  <div style={{ height: 4, background: 'var(--paper-3)', borderRadius: 999, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: cartShipProgress + '%', background: 'var(--accent)', borderRadius: 999, transition: 'width .3s' }} />
+                  </div>
+                </div>
+              )}
+
+              {/* Subtotal */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <span style={{ fontSize: 13, color: 'var(--ink-60)' }}>Subtotal</span>
+                <span style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 22, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
+                  {fmtUSD(cartSubtotal)}
+                </span>
+              </div>
+
+              {/* Checkout CTA */}
+              <a
+                href="/checkout.html"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  gap: 8, padding: '16px 24px', borderRadius: 999,
+                  background: 'var(--accent)', color: 'var(--accent-ink)',
+                  fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
+                  letterSpacing: '0.18em', textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  transition: 'transform .2s, box-shadow .2s',
+                }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
+                onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
+              >
+                Checkout — {fmtUSD(cartSubtotal)} →
+              </a>
+
+              {/* View full cart escape hatch */}
+              <a
+                href="/cart.html"
+                style={{
+                  textAlign: 'center',
+                  fontFamily: 'JetBrains Mono', fontSize: 10,
+                  letterSpacing: '0.18em', textTransform: 'uppercase',
+                  color: 'var(--ink-40)', textDecoration: 'underline',
+                  textUnderlineOffset: 4,
+                }}
+                onClick={() => setCartDrawerOpen(false)}
+              >
+                View full cart
+              </a>
+            </div>
+          </>
+        )}
+      </aside>
     </nav>
   );
 }
@@ -397,11 +630,11 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         <div className="hero-cta-row" style={{ display:'flex', gap: 10, flexWrap: 'wrap' }}>
           <a
             href="/cart.html"
-            onClick={() => nbAddToCart({
+            onClick={(e) => nbAddAndOpenCart({
               slug: flavorKey,
               name: flavorMeta?.name || flavorKey,
               price: NB_BOTTLE_PRICE,
-            })}
+            }, e)}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -434,7 +667,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
           <a
             className="btn btn-ghost"
             href="/cart.html"
-            onClick={() => nbAddToCart({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd })}
+            onClick={(e) => nbAddAndOpenCart({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd }, e)}
             style={{ textDecoration: 'none', display: 'inline-block' }}
           >
             Try the 3-pack — save $6
