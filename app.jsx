@@ -936,6 +936,12 @@ function FlavorPicker({ flavor, setFlavor }) {
                   <div style={{ marginTop: 24 }}>
                     <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95, wordBreak: 'keep-all', overflowWrap: 'normal', hyphens: 'none' }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
+                    {/* Social proof — schema.org already declares 4.9 aggregateRating
+                        on every product; surfacing it visually at the click point. */}
+                    <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)' }}>
+                      <span style={{ color: '#E8B23B', letterSpacing: '0.5px', fontSize: 13 }} aria-hidden="true">★★★★★</span>
+                      <span><strong style={{ color: 'var(--ink)', fontWeight: 600 }}>4.9</strong> · loved by 500+ ramen nerds</span>
+                    </div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 16 }}>
