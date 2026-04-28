@@ -178,6 +178,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://unpkg.com" crossorigin="">
+
+<!-- Preload critical above-the-fold assets so the browser fetches them
+     during HTML parse instead of waiting to discover them in the body.
+     Hero bottle = the default LCP candidate (state.flavor defaults to
+     'original' on first paint). React + Babel are sync scripts the
+     deployed JSX-via-CDN setup can't run without — preloading lets them
+     download in parallel with the HTML parse. -->
+<link rel="preload" as="image" href="uploads/nb-original-clean.png" fetchpriority="high">
+<link rel="preload" as="script" href="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous">
+<link rel="preload" as="script" href="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous">
+<link rel="preload" as="script" href="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <!-- Lenis smooth scroll -->
