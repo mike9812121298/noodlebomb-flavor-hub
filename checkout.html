@@ -147,6 +147,12 @@ input.field.error { border-color: var(--error); }
 .handoff-items--checklist { margin-top: 10px; border-top-color: rgba(139,30,30,0.25); }
 .handoff-items--checklist li { border-bottom-color: rgba(139,30,30,0.18); }
 
+@media (max-width: 520px) {
+  .handoff-items li { flex-wrap: wrap; row-gap: 8px; }
+  .handoff-items .lbl { white-space: normal; }
+  .handoff-items a { flex-basis: 100%; margin-left: 30px; text-align: center; }
+}
+
 .summary { position: sticky; top: 96px; }
 .summary h2 { font-family: 'Inter Tight'; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; margin: 0 0 4px; }
 .summary .lede { color: var(--ink-40); font-size: 11px; font-family: 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 22px; }

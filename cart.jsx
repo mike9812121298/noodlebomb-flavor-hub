@@ -92,7 +92,7 @@ function CartPage() {
         </div>
         <h1>Your cart is <em>empty.</em></h1>
         <p>Pick a sauce. Build the bowl.</p>
-        <a className="btn" href="/" style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px' }}>
+        <a className="btn" href="/#lineup" style={{ width: 'auto', display: 'inline-flex', padding: '14px 32px' }}>
           Shop the lineup →
         </a>
 
@@ -118,7 +118,7 @@ function CartPage() {
   // ── Filled cart ──
   return (
     <>
-      <a className="crumb" href="/">← Continue shopping</a>
+      <a className="crumb" href="/#lineup">← Continue shopping</a>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
         <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Fraunces', fontStyle: 'italic', fontWeight: 400 }}>cart.</span></h1>
@@ -235,7 +235,7 @@ function CartPage() {
 
           <div style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <a className="btn" href="/checkout.html">Secure checkout — {fmtUSD(subtotal)}</a>
-            <a className="btn btn-secondary" href="/" style={{ display: 'inline-flex' }}>Continue shopping</a>
+            <a className="btn btn-secondary" href="/#lineup" style={{ display: 'inline-flex' }}>Continue shopping</a>
           </div>
 
           <div className="trust">
