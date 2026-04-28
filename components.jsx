@@ -145,6 +145,56 @@ function Nav({ flavor, setFlavor, flavors }) {
     window.addEventListener('nb-open-cart', open);
     return () => window.removeEventListener('nb-open-cart', open);
   }, []);
+
+  // a11y: focus management for cart drawer (per follow-up flagged in 91af087).
+  // On open: save the element that triggered the open, then move focus to the
+  // close button. On close: return focus to the triggering element.
+  const cartDrawerRef = useRef(null);
+  const cartDrawerCloseBtnRef = useRef(null);
+  const cartTriggerRef = useRef(null);
+  useEffect(() => {
+    if (cartDrawerOpen) {
+      cartTriggerRef.current = document.activeElement;
+      // Wait briefly for the slide-in animation to start so focus lands on
+      // a visible element rather than mid-transform.
+      const t = setTimeout(() => {
+        if (cartDrawerCloseBtnRef.current) cartDrawerCloseBtnRef.current.focus();
+      }, 100);
+      return () => clearTimeout(t);
+    } else {
+      const trigger = cartTriggerRef.current;
+      if (trigger && document.contains(trigger) && typeof trigger.focus === 'function') {
+        trigger.focus();
+      }
+      cartTriggerRef.current = null;
+    }
+  }, [cartDrawerOpen]);
+
+  // a11y: focus trap inside cart drawer — Tab/Shift-Tab cycle within the drawer
+  // while it's open so keyboard users can't tab into the inert page behind.
+  useEffect(() => {
+    if (!cartDrawerOpen) return;
+    const trap = (e) => {
+      if (e.key !== 'Tab') return;
+      const drawer = cartDrawerRef.current;
+      if (!drawer) return;
+      const focusables = drawer.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener('keydown', trap);
+    return () => window.removeEventListener('keydown', trap);
+  }, [cartDrawerOpen]);
   // Lock body scroll when either drawer is open
   useEffect(() => {
     const anyOpen = drawerOpen || cartDrawerOpen;
@@ -394,6 +444,7 @@ function Nav({ flavor, setFlavor, flavors }) {
         }}
       />
       <aside
+        ref={cartDrawerRef}
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"
@@ -425,6 +476,7 @@ function Nav({ flavor, setFlavor, flavors }) {
             )}
           </h2>
           <button
+            ref={cartDrawerCloseBtnRef}
             onClick={() => setCartDrawerOpen(false)}
             aria-label="Close cart"
             style={{
