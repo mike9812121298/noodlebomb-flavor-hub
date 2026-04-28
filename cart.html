@@ -159,28 +159,6 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 }
 .btn-secondary:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: none; }
 
-.promo-row { display: flex; gap: 8px; margin-bottom: 18px; }
-.promo-row input {
-  flex: 1; padding: 12px 14px; border: 1px solid var(--line-strong); background: var(--paper);
-  color: var(--ink); font-family: 'Inter'; font-size: 13px; outline: none;
-  transition: border-color .2s;
-}
-.promo-row input:focus { border-color: var(--ink-40); }
-.promo-row button {
-  background: transparent; color: var(--ink-60); border: 1px solid var(--line-strong);
-  font-family: 'Inter'; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 0 16px; cursor: pointer; transition: color .2s, border-color .2s;
-}
-.promo-row button:hover:not(:disabled) { color: var(--ink); border-color: var(--ink-40); }
-.promo-row button:disabled { opacity: 0.4; cursor: not-allowed; }
-.promo-applied {
-  display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid var(--accent);
-  background: rgba(139,30,30,0.1); color: var(--ink); font-size: 13px; font-family: 'Inter Tight'; font-weight: 600;
-  margin-bottom: 14px;
-}
-.promo-applied button { background: transparent; border: 0; color: var(--ink-40); cursor: pointer; font-size: 11px; padding: 0; margin-left: auto; }
-.promo-applied button:hover { color: var(--accent); }
-
 .trust { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
 .trust-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 11px; color: var(--ink-40); font-family: 'JetBrains Mono'; letter-spacing: 0.1em; text-transform: uppercase; }
 .trust-row svg { color: var(--accent); flex-shrink: 0; }

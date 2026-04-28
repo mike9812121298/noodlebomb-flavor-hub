@@ -5,9 +5,9 @@ const { useEffect, useState, useMemo } = React;
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/noodlebomb-original.png',
-  citrus:   'uploads/noodlebomb-citrus.png',
-  spicy:    'uploads/noodlebomb-spicy.png',
+  original: 'uploads/nb-original-clean.png',
+  citrus:   'uploads/nb-citrus-shoyu-clean.png',
+  spicy:    'uploads/nb-spicy-tokyo-clean.png',
   trio:     'uploads/noodlebomb-trio.png'
 };
 
@@ -51,16 +51,9 @@ const Repeat = (props) => (
 const Check = (props) => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><polyline points="20 6 9 17 4 12"/></svg>
 );
-const Tag = (props) => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>
-  </svg>
-);
 
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
-  const [discount, setDiscount] = useState('');
-  const [discountApplied, setDiscountApplied] = useState(false);
 
   useEffect(() => {
     if (!window.NB_CART) return;
@@ -227,25 +220,6 @@ function CartPage() {
         <div className="card summary">
           <h2>Order summary</h2>
           <p className="lede">Final total at checkout</p>
-
-          {/* Promo */}
-          {discountApplied ? (
-            <div className="promo-applied">
-              <Tag />
-              <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{discount.toUpperCase()}</span>
-              <button onClick={() => { setDiscount(''); setDiscountApplied(false); }}>Remove</button>
-            </div>
-          ) : (
-            <div className="promo-row">
-              <input type="text" placeholder="Promo code" value={discount} onChange={(e) => setDiscount(e.target.value)} />
-              <button disabled={!discount.trim()} onClick={() => setDiscountApplied(true)}>Apply</button>
-            </div>
-          )}
-          {discountApplied && (
-            <p style={{ fontSize: 11, color: 'var(--ink-40)', marginTop: -8, marginBottom: 14, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Code validated at checkout
-            </p>
-          )}
 
           <div className="row-line"><span>Subtotal ({itemCount})</span><span className="v">{fmtUSD(subtotal)}</span></div>
           <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free' : 'At checkout'}</span></div>
