@@ -17,9 +17,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <!-- React + Babel (same CDNs as index.html) -->
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <style>
 :root {
@@ -37,6 +37,17 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+.skip-to-content {
+  position: absolute; top: 0; left: 0;
+  transform: translateY(-110%);
+  background: var(--accent); color: var(--accent-ink);
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.02em; text-decoration: none;
+  z-index: 200;
+  transition: transform .2s cubic-bezier(.2,.7,.2,1);
+}
+.skip-to-content:focus { transform: translateY(0); outline: 2px solid var(--ink); outline-offset: 2px; }
 body {
   font-family: 'Inter', -apple-system, system-ui, sans-serif;
   font-weight: 400;
@@ -225,6 +236,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
 
 <nav class="nav-cart">
   <a class="brand" href="/">
@@ -234,13 +246,13 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   <a class="nav-cart-link" href="/">← Back to site</a>
 </nav>
 
-<main>
+<main id="main-content">
   <div class="container">
     <div id="cart-root"></div>
   </div>
 </main>
 
-<script src="cart-store.js"></script>
+<script defer src="cart-store.js"></script>
 <script type="text/babel" src="cart.jsx" data-plugins="transform-react-jsx-source" data-filename="cart.jsx"></script>
 </body>
 </html>

@@ -191,13 +191,18 @@
 <link rel="preload" as="script" href="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
-<!-- Lenis smooth scroll -->
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<!-- Lenis smooth scroll — deferred (defensively-handled in app.jsx's
+     `if (!window.Lenis) return` guard, so missing-on-init is safe). -->
+<script defer src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
-<!-- React + Babel -->
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<!-- React + Babel — all deferred. Order preserved: React → ReactDOM → Babel
+     execute in document order at end of HTML parse, before DOMContentLoaded.
+     Babel processes type="text/babel" scripts on DOMContentLoaded, by which
+     time window.React + window.ReactDOM are set. Removes the parse-blocking
+     hit (~770KB Babel was the worst offender). -->
+<script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script defer src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <style>
   :root {
@@ -219,6 +224,21 @@
   }
   html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); overflow-x: hidden; }
   html { scroll-behavior: auto; }
+
+  /* Skip-to-content — visible only on focus, lets keyboard users bypass
+     the Nav and editorial sections to jump straight to main content.
+     WCAG 2.4.1 (Bypass Blocks) compliance. */
+  .skip-to-content {
+    position: absolute; top: 0; left: 0;
+    transform: translateY(-110%);
+    background: var(--accent); color: var(--accent-ink);
+    padding: 12px 20px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.02em; text-decoration: none;
+    z-index: 200;
+    transition: transform .2s cubic-bezier(.2,.7,.2,1);
+  }
+  .skip-to-content:focus { transform: translateY(0); outline: 2px solid var(--ink); outline-offset: 2px; }
   body {
     font-family: 'Inter', -apple-system, system-ui, sans-serif;
     font-weight: 400;
@@ -1157,8 +1177,9 @@
 
 </style>
 <body class="grain">
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
 <div id="scroll-progress"></div>
-<div id="root"><noscript><div style="padding:80px 28px;color:#F0EBE3;font-family:Inter,sans-serif;max-width:760px;margin:0 auto;line-height:1.6;">
+<main id="main-content"><div id="root"><noscript><div style="padding:80px 28px;color:#F0EBE3;font-family:Inter,sans-serif;max-width:760px;margin:0 auto;line-height:1.6;">
 <h1 style="font-family:Inter Tight,sans-serif;font-size:56px;letter-spacing:-0.04em;margin:0 0 16px;line-height:1;">NoodleBomb</h1>
 <p style="font-size:18px;opacity:0.85;margin:0 0 8px;">Small Batch Ramen Sauce — Bonney Lake, WA</p>
 <p style="opacity:0.7;margin:0 0 32px;">Bold ramen sauce, crafted in the Pacific Northwest. Premium ingredients, no fillers. Turns any noodle into restaurant-quality ramen in seconds. From $11.99.</p>
@@ -1177,9 +1198,12 @@
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
 <p style="opacity:0.7;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Five flavors kept, forty rejected. Made by hand in the Pacific Northwest. Free shipping at $40.</p>
 <p><a href="https://shop.noodlebomb.co/category/all-products" style="display:inline-block;color:#F0EBE3;background:#8B1E1E;padding:14px 28px;text-decoration:none;font-weight:600;border-radius:999px;">Shop the Range →</a></p>
-</div></noscript></div>
+</div></noscript></div></main>
 
-<script src="cart-store.js"></script>
+<!-- cart-store.js sets window.NB_CART. Deferred — runs in document order
+     before Babel processes the text/babel scripts on DOMContentLoaded, so
+     cart-store is ready when components.jsx / app.jsx evaluate. -->
+<script defer src="cart-store.js"></script>
 <script type="text/babel" src="components.jsx" data-plugins="transform-react-jsx-source" data-filename="components.jsx"></script>
 <script type="text/babel" src="monthly-drop.jsx" data-plugins="transform-react-jsx-source" data-filename="monthly-drop.jsx"></script>
 <script type="text/babel" src="next-drop.jsx" data-plugins="transform-react-jsx-source" data-filename="next-drop.jsx"></script>
