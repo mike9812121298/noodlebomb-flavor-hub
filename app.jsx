@@ -881,12 +881,14 @@ function FlavorPicker({ flavor, setFlavor }) {
 
         <Reveal delay={2}>
           <figure className="trio-composite" style={{ margin: '0 0 56px', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--paper)', padding: '40px clamp(16px, 3vw, 40px)', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'clamp(16px, 3vw, 40px)', alignItems: 'end', justifyItems: 'center' }}>
+            {/* width/height = native PNG dimensions — reserves aspect ratio
+                so the browser doesn't reflow when lazy images settle. */}
             {[
-              { src: 'uploads/nb-original-clean.png', alt: 'NoodleBomb Original ramen sauce bottle' },
-              { src: 'uploads/nb-citrus-shoyu-clean.png', alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
-              { src: 'uploads/nb-spicy-tokyo-clean.png', alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
+              { src: 'uploads/nb-original-clean.png',     w: 606, h: 1449, alt: 'NoodleBomb Original ramen sauce bottle' },
+              { src: 'uploads/nb-citrus-shoyu-clean.png', w: 612, h: 1433, alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
+              { src: 'uploads/nb-spicy-tokyo-clean.png',  w: 848, h: 1264, alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
             ].map((b) => (
-              <img key={b.src} src={b.src} alt={b.alt} loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 440, objectFit: 'contain', filter: 'drop-shadow(0 24px 32px rgba(0,0,0,0.45))' }} />
+              <img key={b.src} src={b.src} alt={b.alt} width={b.w} height={b.h} loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 440, objectFit: 'contain', filter: 'drop-shadow(0 24px 32px rgba(0,0,0,0.45))' }} />
             ))}
           </figure>
         </Reveal>
@@ -1006,11 +1008,11 @@ function FlavorPicker({ flavor, setFlavor }) {
                 (replaces broken composite image where Citrus Shoyu label wrapped as "CITRU SSHOYU") */}
             <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'clamp(8px, 2vw, 20px)', alignItems: 'end', padding: 'clamp(16px, 3vw, 32px)', minWidth: 0, maxWidth: '100%' }}>
               {[
-                { src: 'uploads/nb-original-clean.png', alt: 'NoodleBomb Original ramen sauce bottle' },
-                { src: 'uploads/nb-citrus-shoyu-clean.png', alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
-                { src: 'uploads/nb-spicy-tokyo-clean.png', alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
+                { src: 'uploads/nb-original-clean.png',     w: 606, h: 1449, alt: 'NoodleBomb Original ramen sauce bottle' },
+                { src: 'uploads/nb-citrus-shoyu-clean.png', w: 612, h: 1433, alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
+                { src: 'uploads/nb-spicy-tokyo-clean.png',  w: 848, h: 1264, alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
               ].map((b) => (
-                <img key={b.src} src={b.src} alt={b.alt} loading="lazy" style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 360, objectFit: 'contain', filter: 'drop-shadow(0 16px 28px rgba(0,0,0,0.5))' }} />
+                <img key={b.src} src={b.src} alt={b.alt} width={b.w} height={b.h} loading="lazy" style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 360, objectFit: 'contain', filter: 'drop-shadow(0 16px 28px rgba(0,0,0,0.5))' }} />
               ))}
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 55%, rgba(8,7,6,0.45) 100%)', pointerEvents: 'none' }} />
             </div>
