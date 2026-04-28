@@ -394,8 +394,11 @@ function Nav({ flavor, setFlavor, flavors }) {
         }}
       />
       <aside
+        role="dialog"
+        aria-modal="true"
         aria-label="Shopping cart"
         aria-hidden={!cartDrawerOpen}
+        tabIndex={cartDrawerOpen ? 0 : -1}
         style={{
           position: 'fixed', top: 0, right: 0, bottom: 0,
           width: 'min(420px, 100vw)',
