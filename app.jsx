@@ -1,5 +1,10 @@
-// NoodleBomb — app composition
-const { useEffect, useRef, useState } = React;
+// NoodleBomb — app composition.
+// React hooks are destructured once in components.jsx (loaded before app.jsx)
+// so they're already available in this shared global scope. Re-declaring them
+// here would throw "Identifier 'useEffect' has already been declared" now that
+// the JSX bundles ship as plain <script> tags (post-Babel-in-browser) and
+// share global scope. cart.jsx and checkout.jsx keep their own destructures
+// because they ship as single-file bundles on cart.html / checkout.html.
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // the local cart (cart.html → checkout.html → Wix payment handoff).
