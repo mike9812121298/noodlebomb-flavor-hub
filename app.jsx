@@ -126,11 +126,22 @@ function FlavorBreakdown({ flavor }) {
       {/* DESKTOP: sticky scroll mechanic (>768px) */}
       {/* Height: 240vh = 140vh of sticky pin (for ingredients to fade in) +
           100vh of natural sticky exit. Was 320vh — extra 80vh was pure dead
-          scroll past the last ingredient. */}
+          scroll past the last ingredient.
+
+          The 100vh exit phase is structural to sticky positioning (the sticky
+          child has to scroll its own height to leave viewport). Without
+          intervention, the user sees ~100vh of "scene-already-shown,
+          slowly-scrolling-away" which reads as a blank section. The
+          `sceneOpacity` below fades the entire pinned scene out as progress
+          approaches 1.0 so by the time the exit phase begins, there's
+          nothing visible to "scroll past" — Range section's content takes
+          over cleanly underneath. */}
       <div className="fb-desktop" style={{ height: '240vh' }}>
       <div className="fb-sticky" style={{
         position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
-        display: 'flex', alignItems: 'center', justifyContent: 'center'
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        opacity: Math.max(0, Math.min(1, (1 - p) / 0.15)),
+        transition: 'opacity .15s linear',
       }}>
         {/* Section header */}
         <div className="fb-section-header" style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
