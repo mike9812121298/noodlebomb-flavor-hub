@@ -20,6 +20,16 @@
 /components.json    /404.html   404!
 /.env*              /404.html   404!
 /.gitignore         /404.html   404!
+# Netlify's wildcard `/*.jsx` does NOT override existing static files at
+# the publish root — verified 2026-04-30 (/app.jsx still returned 200).
+# Enumerate each known source file explicitly. Wildcard kept last as
+# defense-in-depth for any future .jsx file added to the repo.
+/app.jsx            /404.html   404!
+/components.jsx     /404.html   404!
+/cart.jsx           /404.html   404!
+/checkout.jsx       /404.html   404!
+/monthly-drop.jsx   /404.html   404!
+/next-drop.jsx      /404.html   404!
 /*.jsx              /404.html   404!
 
 # Wix-pattern URLs that may appear in old links — bounce to the live store

@@ -111,6 +111,46 @@
 
 # JSX source files — compiled to /build/*.js by esbuild on deploy. The
 # source remains in the repo for diff/review but isn't needed at runtime.
+# NOTE: Netlify's `/*.jsx` glob silently does NOT override existing static
+# files (verified live 2026-04-30: /app.jsx returned 200 despite the rule).
+# Enumerate every known source file explicitly. The trailing `/*.jsx` rule
+# stays as a defense-in-depth catch for any future .jsx that gets added.
+[[redirects]]
+  from = "/app.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/components.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/cart.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/checkout.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/monthly-drop.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/next-drop.jsx"
+  to = "/404.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/*.jsx"
   to = "/404.html"
