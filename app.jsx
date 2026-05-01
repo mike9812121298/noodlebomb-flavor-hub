@@ -36,18 +36,13 @@ const FLAVORS = {
   spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#C2410C', ink: '#F5F1EA',
     line1: 'Umami meets fire.',
     line2: 'Dark soy, roasted chili, sesame.',
-    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  ryu: { name: 'Ryu Garlic', tag: 'No.04 · Ryu Garlic', short: 'No.04', color: '#3D2B1F', ink: '#F5C842',
-    line1: 'Black garlic. Dark depth.',
-    line2: 'Aged black garlic, rich umami, subtle heat.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
 };
 
 const FLAVOR_IMAGES = {
   original: 'uploads/nb-original-clean.png',
   citrus: 'uploads/nb-citrus-shoyu-clean.png',
-  spicy: 'uploads/upload-spicy-v3.png',
-  ryu: 'uploads/nb-ryu-garlic-clean.png'
+  spicy: 'uploads/upload-spicy-v3.png'
 };
 
 const FOOD_IMAGES = {
@@ -95,7 +90,7 @@ function FlavorBreakdown({ flavor }) {
           Index 02 — Flavor Profile
         </div>
         <h2 className="display" style={{ margin: '0 0 48px', fontSize: 'clamp(40px, 11vw, 56px)', letterSpacing: '-0.04em', lineHeight: 0.95, fontWeight: 700 }}>
-          Five flavors.<br /><span className="accent-fg">One obsession.</span>
+          Three flavors.<br /><span className="accent-fg">One obsession.</span>
         </h2>
         {/* Stacked ingredient rows */}
         <div style={{ borderTop: '1px solid var(--line)', marginBottom: 48 }}>
@@ -156,7 +151,7 @@ function FlavorBreakdown({ flavor }) {
           transition: 'opacity .3s linear',
           pointerEvents: p > 0.08 ? 'none' : 'auto'
         }}>
-          Five flavors.<br /><span className="accent-fg">One obsession.</span>
+          Three flavors.<br /><span className="accent-fg">One obsession.</span>
         </h2>
 
         {/* Bottle center */}
@@ -252,18 +247,6 @@ function FlavorScene({ kind }) {
       </div>
     );
   }
-  if (kind === 'ryu') {
-    const specks = [[10,20],[22,65],[35,30],[48,80],[62,20],[75,55],[88,75],[15,85],[45,15],[70,40],[82,18],[28,45]];
-    return (
-      <div className="scene scene-ryu scene-grain">
-        <div className="ink" />
-        <div className="shimmer" />
-        {specks.map(([l,t],i) => (
-          <span key={i} className="gold-speck" style={{ left:`${l}%`, top:`${t}%`, animationDelay:`${(i*0.4)%5}s` }} />
-        ))}
-      </div>
-    );
-  }
   return null;
 }
 
@@ -291,7 +274,6 @@ function UseItOn() {
     { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png' },
     { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
     { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png' },
-    { key: 'ryu',      name: 'Ryu Garlic',   no: 'No.04', tag: 'DARK DEPTH',       line: 'Aged black garlic. Rich umami.',     note: 'Molasses-deep, with a whisper of sweet heat.',        bg: '#1A1A1A', ink: '#F5C842', sub: 'rgba(245,200,66,0.70)',  img: 'uploads/upload-ryu-v3.png', comingSoon: 'COMING SOON · SUMMER 2026' },
   ];
   const panelCount = items.length;
 
@@ -695,7 +677,7 @@ function Origin() {
               maxWidth: '14ch',
             }}
           >
-            Five flavors.<br />
+            Three flavors.<br />
             <span style={{ color: 'var(--muted)' }}>Forty rejected.</span>
           </h2>
         </Reveal>
@@ -884,8 +866,7 @@ function Testimonials() {
 
 // ——————————————————————————— Flavor picker (changes accent color)
 function FlavorPicker({ flavor, setFlavor }) {
-  // Only currently-shipping flavors in the lineup. Ryu lives in The Range + The Next Drop.
-  const keys = Object.keys(FLAVORS).filter((k) => k !== 'ryu');
+  const keys = Object.keys(FLAVORS);
   // Per-flavor card background tints (subtle warm tones layered over paper-2)
   const cardBg = {
     original: 'linear-gradient(170deg, rgba(139,30,30,0.10) 0%, rgba(139,30,30,0.04) 100%)',

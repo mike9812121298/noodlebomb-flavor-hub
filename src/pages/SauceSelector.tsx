@@ -5,7 +5,6 @@ import SpiceLevel from "@/components/SpiceLevel";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
-import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
 import { Link } from "react-router-dom";
 
 const questions = [
@@ -31,7 +30,6 @@ const questions = [
     question: "Flavor preference?",
     options: [
       { label: "Rich & Umami", value: "rich" },
-      { label: "Garlic-forward", value: "garlic" },
       { label: "Bright & Citrus", value: "fresh" },
     ],
   },
@@ -47,7 +45,6 @@ type SauceResult = {
 const sauceImages: Record<string, string> = {
   original: nbOriginal,
   spicy: nbSpicyTokyo,
-  ryugarlic: nbRyuGarlic,
   citrus: nbCitrusShoyu,
 };
 
@@ -64,12 +61,6 @@ const results: Record<string, SauceResult> = {
     description: "Bold dark soy, roasted chili, and sesame combine for that rich, layered spice.",
     spice: 3,
   },
-  ryugarlic: {
-    name: "Ryu Garlic",
-    tagline: "The Fire-Breathing Umami King",
-    description: "A fusion of roasted black garlic, chili oil, and toasted sesame, creating a deep, rich umami punch.",
-    spice: 2,
-  },
   citrus: {
     name: "Citrus Shoyu",
     tagline: "The Bright Side of Bold",
@@ -80,7 +71,6 @@ const results: Record<string, SauceResult> = {
 
 function getRecommendation(answers: string[]): string {
   const [spice, cooking, flavor] = answers;
-  if (flavor === "garlic") return "ryugarlic";
   if (spice === "hot" || (spice === "medium" && (cooking === "grill" || cooking === "wings"))) return "spicy";
   if (cooking === "seafood" || flavor === "fresh" || spice === "mild") return "citrus";
   return "original";

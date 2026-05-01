@@ -5,25 +5,12 @@
 function NextDrop() {
   const cards = [
     {
-      key: 'ryu',
-      bigNum: '04',
-      accent: '#d4a24a',           // amber
-      rim: '#f4d089',
-      status: 'COMING SOON · SUMMER 2026',
-      eyebrow: 'VOL.04 · EST. SUMMER 2026',
-      name: 'Ryu Garlic',
-      oneliner: 'Aged black garlic, molasses-deep, slow burn.',
-      pills: ['Umami', 'Smoky', 'Sweet finish'],
-      progress: 3, // out of 4
-      img: 'uploads/nb-ryu-garlic-clean.png',
-    },
-    {
       key: 'shoyu',
-      bigNum: '05',
+      bigNum: '04',
       accent: '#ebe7dd',           // parchment
       rim: '#e8f0ff',              // cool cyan-white rim
       status: 'COMING SOON · FALL 2026',
-      eyebrow: 'VOL.05 · EST. FALL 2026',
+      eyebrow: 'VOL.04 · EST. FALL 2026',
       name: 'Shoyu Reserve',
       oneliner: 'Single-origin shoyu. Barrel-aged. Quietly devastating.',
       pills: ['Saline', 'Round', 'Long finish'],
@@ -55,7 +42,7 @@ function NextDrop() {
         <Reveal>
           <div className="nd-eyebrow-row">
             <span>INDEX 09 — THE NEXT DROP</span>
-            <span>2 / IN DEVELOPMENT</span>
+            <span>1 / IN DEVELOPMENT</span>
           </div>
         </Reveal>
         <div className="nd-divider" />
@@ -64,7 +51,7 @@ function NextDrop() {
         <div style={{ marginTop: 80 }}>
           <Reveal delay={1}>
             <h2 className="nd-headline serif" style={{ fontFamily: 'Fraunces, "Cormorant Garamond", serif', fontWeight: 400, fontStyle: 'normal', letterSpacing: '-0.025em' }}>
-              Two more on the way.
+              One more on the way.
             </h2>
           </Reveal>
           <Reveal delay={2}>

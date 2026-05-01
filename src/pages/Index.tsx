@@ -7,7 +7,6 @@ import nbLogo from "@/assets/nb-logo.png";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
-import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
 import PressBar from "@/components/PressBar";
 import ReviewsSection from "@/components/ReviewsSection";
 import TestimonialSection from "@/components/TestimonialSection";
@@ -23,14 +22,12 @@ const sauceImages: Record<string, string> = {
   "Original": nbOriginal,
   "Spicy Tokyo": nbSpicyTokyo,
   "Citrus Shoyu": nbCitrusShoyu,
-  "Ryu Garlic": nbRyuGarlic,
 };
 
 const sauces = [
   { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Dark soy, roasted garlic, ginger, and sesame — medium heat that settles clean. Coats noodles, glazes proteins. The one you reach for without thinking.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", ctaLabel: "Shop Original", comingSoon: false, proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish.", theme: "original" as const },
   { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Chili-forward from the first drop. Dark roasted soy underneath, a burn that settles in the back of your throat. Hot, layered, and deeply addictive.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", ctaLabel: "Shop Spicy Tokyo", comingSoon: false, proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick.", theme: "spicy-tokyo" as const },
   { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Bright citrus over a clean shoyu base — tangy, bright, mild heat. The one that opens up seafood and makes cold noodle bowls sing.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", ctaLabel: "Shop Citrus Shoyu", comingSoon: false, proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The citrus notes pop best with cold dishes.", theme: "citrus-shoyu" as const },
-  { name: "Ryu Garlic", tagline: "The Dragon's Breath", spice: 2, price: "$11.99", desc: "Roasted garlic-forward with a smoky depth and subtle heat. An umami bomb built for garlic lovers who don't do things halfway.", bestFor: "Noodles, dumplings, stir-fry, roasted veggies", badge: null, buyUrl: null, ctaLabel: "Notify Me", comingSoon: true, proTip: null, theme: "original" as const },
 ];
 
 const heroSauces = [

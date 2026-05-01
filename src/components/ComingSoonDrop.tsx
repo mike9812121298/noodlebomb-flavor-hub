@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flame, Mail, CheckCircle, ArrowRight, Clock } from "lucide-react";
-import nbRyuGarlic from "@/assets/nb-ryu-garlic-clean.png";
 import nbSoySauce from "@/assets/nb-review-photo-2.png";
 
 // ── Target drop date ──────────────────────────────────────────────────────────
@@ -232,16 +231,7 @@ const ComingSoonDrop = () => {
         </motion.div>
 
         {/* Drop cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-14">
-          <DropCard
-            name="Ryu Garlic"
-            tagline="Bold, garlicky heat with deep umami"
-            description="Roasted black garlic, chili oil, and deep umami. Built for steak, burgers, and anything that can take real heat."
-            status="coming-soon"
-            image={nbRyuGarlic}
-            glowColor="hsl(var(--flame))"
-            cta={{ label: "Coming Soon" }}
-          />
+        <div className="grid grid-cols-1 gap-6 max-w-md mx-auto mb-14">
           <DropCard
             name="NoodleBomb Soy"
             tagline="Premium Private Label Soy Sauce"

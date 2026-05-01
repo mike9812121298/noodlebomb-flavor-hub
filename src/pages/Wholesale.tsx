@@ -4,7 +4,6 @@ import { ArrowRight, Package, ShieldCheck, Truck } from "lucide-react";
 const products = [
   { name: "Original Shoyu", sku: "NB-OG-001", size: "12 fl oz (354ml)", msrp: "$11.99", wholesale: "$5.75", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
     { name: "Spicy Tokyo", sku: "NB-ST-002", size: "12 fl oz (354ml)", msrp: "$11.99", wholesale: "$5.75", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
-      { name: "Ryu Garlic", sku: "NB-RG-003", size: "12 fl oz (354ml)", msrp: "$11.99", wholesale: "$5.75", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
         { name: "Citrus Shoyu", sku: "NB-CS-004", size: "12 fl oz (354ml)", msrp: "$11.99", wholesale: "$5.75", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
         ];
 

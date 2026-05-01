@@ -79,18 +79,6 @@ function getBottleTone(name: string): BottleTone {
         short: "TOKYO",
         kicker: "Street Heat",
       };
-    case "ryu garlic":
-      return {
-        accent: "text-secondary-foreground",
-        ring: "border-secondary/70",
-        glow: "bg-secondary/60",
-        glowSoft: "bg-secondary/20",
-        surface: "from-card via-card to-secondary",
-        bar: "bg-gradient-to-r from-secondary-foreground via-secondary to-transparent",
-        series: "NB-03",
-        short: "RYU",
-        kicker: "Black Garlic",
-      };
     case "citrus shoyu":
       return {
         accent: "text-accent",
