@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Package, ShieldCheck, Truck } from "lucide-react";
+import wholesaleHero from "@/assets/nb-atmosphere-wholesale-kitchen.png";
+import wholesaleTrio from "@/assets/nb-scene-trio-lineup.png";
 
 const products = [
   { name: "Original Shoyu", sku: "NB-OG-001", size: "12 fl oz (354ml)", msrp: "$11.99", wholesale: "$5.75", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
@@ -20,19 +22,37 @@ const products = [
                       return (
                           <div className="min-h-screen bg-background text-foreground">
                                 {/* Hero */}
-                                      <section className="py-20 px-4 text-center bg-gradient-to-b from-zinc-900 to-background">
-                                              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-                                                        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                                                                    Wholesale <span className="text-primary">Program</span>
-                                                                              </h1>
-                                                                                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                                                                                                    Bring NoodleBomb to your shelves. Premium ramen sauces with retail margins that make sense.
-                                                                                                              </p>
-                                                                                                                        <a href="mailto:wholesale@noodlebomb.co" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:opacity-90 transition">
-                                                                                                                                    Apply Now <ArrowRight className="w-4 h-4" />
-                                                                                                                                              </a>
-                                                                                                                                                      </motion.div>
-                                                                                                                                                            </section>
+      <section className="relative py-24 px-4 text-center overflow-hidden bg-gradient-to-b from-zinc-900 to-background">
+        <div className="absolute inset-0 z-0">
+          <img src={wholesaleHero} alt="Busy ramen shop kitchen — NoodleBomb at the line" className="w-full h-full object-cover opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-background/85 to-background" />
+        </div>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10">
+          <p className="text-xs font-display font-bold uppercase tracking-[0.3em] text-primary/80 mb-4">One Sauce. Endless Possibilities.</p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Wholesale <span className="text-primary">Program</span>
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+            Bring NoodleBomb to your shelves. Premium ramen sauces with retail margins that make sense.
+          </p>
+          <a href="mailto:wholesale@noodlebomb.co" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-full font-semibold hover:opacity-90 transition">
+            Apply Now <ArrowRight className="w-4 h-4" />
+          </a>
+        </motion.div>
+      </section>
+
+      {/* Lineup glamour shot */}
+      <section className="px-4 py-12 max-w-5xl mx-auto">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-3xl border border-border bg-card">
+          <img src={wholesaleTrio} alt="NoodleBomb trio — Original, Spicy Tokyo, Citrus Shoyu" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6">
+            <p className="text-xs font-display font-bold uppercase tracking-[0.25em] text-primary/85 mb-2">The Full Lineup</p>
+            <p className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight">Original · Spicy Tokyo · Citrus Shoyu</p>
+            <p className="text-sm text-white/70 mt-2">$5.75 wholesale · 18-month shelf life · MOQ 12 units</p>
+          </div>
+        </div>
+      </section>
 
                                                                                                                                                                   {/* Product Specs Table */}
                                                                                                                                                                         <section className="py-16 px-4 max-w-5xl mx-auto">
