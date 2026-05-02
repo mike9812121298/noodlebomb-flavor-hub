@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Flame, Leaf, Shield, Star } from "lucide-react";
+import aboutHero from "@/assets/nb-hero-scene-chef-alley.png";
+import aboutStory from "@/assets/nb-scene-original-flatlay.png";
+import aboutAtmosphere from "@/assets/nb-atmosphere-ingredient-flatlay.png";
 
 const About = () => {
   useEffect(() => {
@@ -17,9 +20,13 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero */}
-      <div className="pt-32 pb-20 px-6 text-center">
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+      {/* Hero with founder atmosphere image */}
+      <div className="relative pt-32 pb-20 px-6 text-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={aboutHero} alt="NoodleBomb Original — Pacific Northwest small batch" className="w-full h-full object-cover opacity-30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/85 to-background" />
+        </div>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10">
           <Flame className="w-12 h-12 text-primary mx-auto mb-6 drop-shadow-[0_0_20px_rgba(234,88,12,0.8)]" />
           <h1 className="font-display text-5xl font-black text-foreground mb-6 leading-tight">
             We Blew Up Ramen.<br />
@@ -28,6 +35,25 @@ const About = () => {
           <p className="text-muted-foreground text-xl max-w-2xl mx-auto">
             NoodleBomb was born in the Pacific Northwest out of one simple obsession: great ramen flavor shouldn't require a restaurant.
           </p>
+          <p className="mt-4 text-xs font-display font-bold uppercase tracking-[0.3em] text-primary/70">
+            Bonney Lake, WA · Small Batch · Crafted to Finish
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Process / atmosphere strip */}
+      <div className="max-w-5xl mx-auto px-6 -mt-4 mb-12">
+        <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-card">
+            <img src={aboutStory} alt="Hand-built in the kitchen" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
+            <p className="absolute bottom-3 left-4 text-xs font-display font-bold uppercase tracking-[0.18em] text-white/90">Hand-built. Batch by batch.</p>
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-card">
+            <img src={aboutAtmosphere} alt="Premium ingredients, small-batch craft" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
+            <p className="absolute bottom-3 left-4 text-xs font-display font-bold uppercase tracking-[0.18em] text-white/90">Real ingredients. No shortcuts.</p>
+          </div>
         </motion.div>
       </div>
 
