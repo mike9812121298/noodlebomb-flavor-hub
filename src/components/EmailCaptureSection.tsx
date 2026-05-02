@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Flame, ArrowRight } from "lucide-react";
+import emailBanner from "@/assets/nb-atmosphere-email-banner.png";
 
 const EmailCaptureSection = () => {
   const [email, setEmail] = useState("");
@@ -20,8 +21,16 @@ const EmailCaptureSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          className="max-w-2xl mx-auto text-center"
+          className="relative max-w-3xl mx-auto rounded-3xl overflow-hidden border border-border"
         >
+          {/* Atmospheric steam-banner backdrop */}
+          <div className="absolute inset-0 z-0">
+            <img src={emailBanner} alt="" aria-hidden className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/95" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60" />
+          </div>
+          <div className="relative z-10 px-6 py-16 text-center">
+          <p className="text-[10px] md:text-xs font-display font-bold uppercase tracking-[0.4em] text-primary/85 mb-6">TURN UP THE FLAVOR. NOT THE HEAT.</p>
           {!submitted ? (
             <>
               <motion.div
@@ -65,6 +74,7 @@ const EmailCaptureSection = () => {
               <p className="text-sm text-muted-foreground">Check your inbox for your 15% off code.</p>
             </motion.div>
           )}
+          </div>
         </motion.div>
       </div>
     </section>
