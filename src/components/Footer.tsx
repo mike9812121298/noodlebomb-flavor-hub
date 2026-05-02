@@ -82,7 +82,11 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">© 2026 NoodleBomb. All rights reserved.</p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+            <p className="text-xs text-muted-foreground">© 2026 NoodleBomb. All rights reserved.</p>
+            <span className="hidden sm:inline text-muted-foreground/40">·</span>
+            <p className="text-xs text-muted-foreground">Bonney Lake, WA 98391</p>
+          </div>
           <p className="text-xs text-muted-foreground font-display tracking-widest uppercase">Small Batch · Handcrafted · Premium</p>
         </div>
       </div>
