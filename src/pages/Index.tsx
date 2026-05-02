@@ -7,6 +7,16 @@ import nbLogo from "@/assets/nb-logo.png";
 import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
+import heroSceneTrioCounter from "@/assets/nb-hero-scene-trio-counter.png";
+import heroScenePourOriginal from "@/assets/nb-hero-scene-pour-original.png";
+import heroOriginalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";
+import heroSpicyBoldFlavor from "@/assets/nb-hero-spicy-bold-flavor.png";
+import heroSceneChefAlley from "@/assets/nb-hero-scene-chef-alley.png";
+import sceneChefKitchenOriginal from "@/assets/nb-scene-chef-kitchen-original.png";
+import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.png";
+import sceneOriginalSteamingBowl from "@/assets/nb-scene-original-steaming-bowl.png";
+import sceneSpicyWokAction from "@/assets/nb-scene-spicy-wok-action.png";
+import atmosphereIngredientFlatlay from "@/assets/nb-atmosphere-ingredient-flatlay.png";
 import PressBar from "@/components/PressBar";
 import ReviewsSection from "@/components/ReviewsSection";
 import TestimonialSection from "@/components/TestimonialSection";
@@ -34,6 +44,15 @@ const heroSauces = [
   { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Dark soy, roasted garlic, ginger, and sesame — medium heat that coats and clings. The one that goes with everything." },
   { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Chili-forward heat over dark roasted soy and sesame. The burn arrives fast and lingers. Intensity without apology." },
   { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Bright citrus over clean shoyu — tangy, bright, mild heat. The light sauce with serious edge." },
+] as const;
+
+// Cinematic hero rotator — 5 slides, mix of atmosphere shots and designer creatives
+const heroSlides = [
+  { name: "Trio Lineup", caption: "TURN UP THE FLAVOR. NOT THE HEAT.", image: heroSceneTrioCounter, flavor: "Original" as const },
+  { name: "Pour Action", caption: "SAUCE THAT HITS", image: heroScenePourOriginal, flavor: "Original" as const },
+  { name: "Original — Bold. Timeless.", caption: "BOLD FLAVOR. NEXT LEVEL RAMEN.", image: heroOriginalBoldTimeless, flavor: "Original" as const },
+  { name: "Spicy Tokyo — Bold Flavor", caption: "BOLD HEAT. DEEP UMAMI. NEXT LEVEL FLAVOR.", image: heroSpicyBoldFlavor, flavor: "Spicy Tokyo" as const },
+  { name: "Founder Alley", caption: "ONE SAUCE. ENDLESS POSSIBILITIES.", image: heroSceneChefAlley, flavor: "Original" as const },
 ] as const;
 
 // Stagger container for hero content
@@ -91,7 +110,7 @@ const Index = () => {
   const ctaRef = useScrollReveal();
 
   const nextSlide = useCallback(() => {
-    setActiveSlide((prev) => (prev + 1) % heroSauces.length);
+    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
   }, []);
 
   useEffect(() => {
@@ -110,7 +129,7 @@ const Index = () => {
       {/* Hero */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
         {/* Immersive flavor world background */}
-        <FlavorScene activeFlavor={heroSauces[activeSlide].name} />
+        <FlavorScene activeFlavor={heroSlides[activeSlide].flavor} />
         {/* Content-readability overlay */}
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,hsl(0_0%_0%/0.5),transparent_60%)]" />
@@ -218,24 +237,26 @@ const Index = () => {
               <div className="w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,hsl(4_85%_50%/0.14)_0%,hsl(25_100%_50%/0.07)_30%,transparent_70%)] blur-2xl" />
             </div>
 
-            {/* Carousel */}
-            <div className="relative z-10 w-full max-w-[420px] flex flex-col items-center">
-              <div className="relative h-[400px] w-[280px] mx-auto flex items-center justify-center overflow-hidden rounded-3xl border border-border bg-card shadow-lg animate-float">
+            {/* Cinematic Hero Rotator — 5 slides, atmospheric scenes + designer creatives */}
+            <div className="relative z-10 w-full max-w-[560px] flex flex-col items-center">
+              <div className="relative aspect-[4/3] w-full mx-auto flex items-center justify-center overflow-hidden rounded-3xl border border-border bg-card shadow-lg">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeSlide}
-                    src={heroSauces[activeSlide].image}
-                    alt={heroSauces[activeSlide].name}
-                    className="absolute inset-0 w-full h-full object-contain p-4"
-                    initial={{ opacity: 0, scale: 0.85, x: 60 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.85, x: -60 }}
-                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                    src={heroSlides[activeSlide].image}
+                    alt={heroSlides[activeSlide].name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
                   />
                 </AnimatePresence>
+                {/* Bottom gradient for caption legibility */}
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
               </div>
 
-              {/* Sauce info */}
+              {/* Slide caption */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeSlide}
@@ -243,26 +264,23 @@ const Index = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
-                  className="text-center mt-4"
+                  className="text-center mt-4 px-4"
                 >
-                  <h3 className="font-display text-2xl font-bold text-foreground">{heroSauces[activeSlide].name}</h3>
-                  <p className="text-xs font-display font-bold uppercase tracking-[0.15em] text-primary/80 mt-1">{heroSauces[activeSlide].tagline}</p>
-                  
-                  <div className="mt-2"><SpiceLevel level={heroSauces[activeSlide].spice} /></div>
+                  <p className="text-xs md:text-sm font-display font-bold uppercase tracking-[0.18em] text-primary/85">{heroSlides[activeSlide].caption}</p>
                 </motion.div>
               </AnimatePresence>
 
               {/* Dots */}
               <div className="flex items-center gap-2.5 mt-6">
-                {heroSauces.map((sauce, i) => (
+                {heroSlides.map((slide, i) => (
                   <motion.button
-                    key={sauce.name}
+                    key={slide.name}
                     onClick={() => setActiveSlide(i)}
                     whileTap={{ scale: 0.7 }}
                     whileHover={{ scale: 1.4 }}
                     transition={{ type: "spring", stiffness: 500, damping: 15 }}
                     className={`h-2 rounded-full transition-all duration-300 ${i === activeSlide ? "w-8 bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]" : "w-2 bg-foreground/20 hover:bg-foreground/40"}`}
-                    aria-label={`View ${sauce.name}`}
+                    aria-label={`View ${slide.name}`}
                   />
                 ))}
               </div>
@@ -338,6 +356,62 @@ const Index = () => {
         </div>
       </section>
 
+
+      {/* Made for Everything — versatility 4-up */}
+      <section className="py-24">
+        <div className="container">
+          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
+            <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Made for Everything</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">One Sauce. Endless Possibilities.</h2>
+            <p className="text-foreground/50 mt-3 text-sm max-w-md mx-auto">Ramen · Rice · Stir Fry · Dumplings. Drizzle, dip, marinate, finish.</p>
+          </motion.div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[
+              { img: atmosphereRamenOverhead, label: "Ramen", caption: "Deepens the broth, coats every noodle." },
+              { img: sceneOriginalSteamingBowl, label: "Rice Bowls", caption: "Adds umami-packed kick to any grain bowl." },
+              { img: sceneSpicyWokAction, label: "Stir Fry", caption: "Turn up the heat on any dish." },
+              { img: atmosphereIngredientFlatlay, label: "Dumplings & More", caption: "Dip, drizzle, or use as a marinade." },
+            ].map((item) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5 }}
+                className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-card"
+              >
+                <img src={item.img} alt={item.label} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <p className="font-display text-base md:text-lg font-bold text-white tracking-tight mb-1">{item.label}</p>
+                  <p className="text-xs text-white/75 leading-snug">{item.caption}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Brand story teaser */}
+      <section className="py-20">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
+            <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }} className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-card">
+              <img src={sceneChefKitchenOriginal} alt="Ashley in the kitchen with NoodleBomb Original" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }}>
+              <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Our Story</span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-5 leading-tight">Bold. Timeless.<br /><span className="text-gradient-fire">Crafted to Finish.</span></h2>
+              <p className="text-foreground/70 leading-relaxed mb-4">Stop settling for flat flavor. NoodleBomb brings rich savory depth to noodles, rice, dumplings, sushi, stir fry, marinades, and more. One bottle. Endless possibilities.</p>
+              <p className="text-foreground/55 leading-relaxed text-sm mb-6">Small batch, made in Bonney Lake, WA. Real ingredients. No shortcuts. Built batch-by-batch in a Pacific Northwest kitchen until every drop earned its place.</p>
+              <Link to="/about" className="inline-flex items-center gap-2 border border-border/60 px-7 py-3.5 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/70 hover:border-primary/40 hover:text-primary transition-all">
+                Read Ashley's Story <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       <ReviewsSection />
 
