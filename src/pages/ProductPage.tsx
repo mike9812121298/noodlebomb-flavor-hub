@@ -16,6 +16,20 @@ import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
+// Designer / lifestyle creatives — per flavor gallery
+import originalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";
+import originalYellow from "@/assets/nb-creative-original-yellow.png";
+import originalTeal3panel from "@/assets/nb-creative-original-teal-3panel.png";
+import originalChefKitchen from "@/assets/nb-scene-chef-kitchen-original.png";
+import originalPourUdon from "@/assets/nb-hero-scene-pour-original.png";
+import originalFlatlay from "@/assets/nb-scene-original-flatlay.png";
+import spicyBoldFlavor from "@/assets/nb-hero-spicy-bold-flavor.png";
+import spicy3panel from "@/assets/nb-creative-spicy-3panel-infographic.png";
+import spicy3panelDark from "@/assets/nb-creative-spicy-3panel-dark.png";
+import spicySauceBanner from "@/assets/nb-creative-spicy-sauce-banner.png";
+import spicyAlleyLedge from "@/assets/nb-scene-spicy-alley-ledge.png";
+import spicyWokAction from "@/assets/nb-scene-spicy-wok-action.png";
+import trioLineupCounter from "@/assets/nb-hero-scene-trio-counter.png";
 
 interface ProductData {
   slug: string;
@@ -110,6 +124,27 @@ const PRODUCTS: Record<string, ProductData> = {
     ingredients:
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
     allergens: "Soy, Wheat (Gluten), Sesame.",
+  },
+};
+
+type Gallery = { hero?: string; gallery: string[]; lifestyle: string[] };
+
+const PRODUCT_GALLERIES: Record<string, Gallery> = {
+  "original-ramen": {
+    gallery: [originalBoldTimeless, originalYellow, originalTeal3panel],
+    lifestyle: [originalChefKitchen, originalPourUdon, originalFlatlay],
+  },
+  "spicy-tokyo": {
+    gallery: [spicyBoldFlavor, spicy3panel, spicy3panelDark, spicySauceBanner],
+    lifestyle: [spicyAlleyLedge, spicyWokAction],
+  },
+  "citrus-shoyu": {
+    gallery: [],
+    lifestyle: [],
+  },
+  "variety-pack": {
+    gallery: [trioLineupCounter],
+    lifestyle: [trioLineupCounter],
   },
 };
 
@@ -311,6 +346,48 @@ const ProductPage = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* Designer Gallery + Lifestyle Strip */}
+        {(() => {
+          const g = slug ? PRODUCT_GALLERIES[slug] : null;
+          if (!g) return null;
+          return (
+            <>
+              {g.gallery.length > 0 && (
+                <div className="mt-20">
+                  <div className="text-center mb-8">
+                    <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 block">The Drop</span>
+                    <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mt-2">Bold Flavor. Next Level Ramen.</h2>
+                  </div>
+                  <div className={`grid gap-4 ${g.gallery.length === 1 ? "grid-cols-1 max-w-3xl mx-auto" : g.gallery.length === 2 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3"}`}>
+                    {g.gallery.map((src, i) => (
+                      <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-card">
+                        <img src={src} alt={`${product.name} creative ${i + 1}`} className="absolute inset-0 w-full h-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {g.lifestyle.length > 0 && (
+                <div className="mt-16">
+                  <div className="text-center mb-8">
+                    <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 block">In the Kitchen</span>
+                    <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mt-2">Made for Everything</h2>
+                    <p className="text-foreground/55 text-sm mt-2">Ramen · Rice · Stir Fry · Dumplings</p>
+                  </div>
+                  <div className={`grid gap-4 ${g.lifestyle.length === 1 ? "grid-cols-1 max-w-3xl mx-auto" : g.lifestyle.length === 2 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-3"}`}>
+                    {g.lifestyle.map((src, i) => (
+                      <div key={i} className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-card">
+                        <img src={src} alt={`${product.name} lifestyle ${i + 1}`} className="absolute inset-0 w-full h-full object-cover" />
+                        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          );
+        })()}
       </div>
     </div>
   );
