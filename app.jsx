@@ -1016,17 +1016,17 @@ function FlavorPicker({ flavor, setFlavor }) {
             display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'stretch',
             minHeight: 420
           }}>
-            {/* Photo — composite three individual clean-bottle PNGs side by side
-                (replaces broken composite image where Citrus Shoyu label wrapped as "CITRU SSHOYU") */}
-            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'clamp(8px, 2vw, 20px)', alignItems: 'end', padding: 'clamp(16px, 3vw, 32px)', minWidth: 0, maxWidth: '100%' }}>
-              {[
-                { src: 'uploads/nb-original-clean.png',     w: 606, h: 1449, alt: 'NoodleBomb Original ramen sauce bottle' },
-                { src: 'uploads/nb-citrus-shoyu-clean.png', w: 612, h: 1433, alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
-                { src: 'uploads/nb-spicy-tokyo-clean.png',  w: 848, h: 1264, alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
-              ].map((b) => (
-                <img key={b.src} src={b.src} alt={b.alt} width={b.w} height={b.h} loading="lazy" style={{ display: 'block', width: '100%', maxWidth: '100%', height: 'auto', maxHeight: 360, objectFit: 'contain', filter: 'drop-shadow(0 16px 28px rgba(0,0,0,0.5))' }} />
-              ))}
-              <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, transparent 55%, rgba(8,7,6,0.45) 100%)', pointerEvents: 'none' }} />
+            {/* Photo — warm kitchen-counter lifestyle hero (2026-05-02 refresh)
+                Replaces 3-bottle composite. Trio shot in-context on a kitchen counter
+                with steam and warm light. Source: trio_kitchen_counter_warm.png. */}
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', minWidth: 0, maxWidth: '100%' }}>
+              <img
+                src="uploads/trio_kitchen_counter_warm.png"
+                alt="NoodleBomb Trio — Original, Citrus Shoyu, and Spicy Tokyo on a warm-lit kitchen counter"
+                loading="lazy"
+                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)', pointerEvents: 'none' }} />
             </div>
             {/* Copy */}
             <div className="trio-bundle-copy" style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
@@ -1108,6 +1108,150 @@ function FlavorPicker({ flavor, setFlavor }) {
                 </a>
               </div>
             </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>);
+
+}
+
+// ——————————————————————————— Citrus Spotlight — "BRIGHT. BALANCED."
+// Editorial showcase for the Citrus Shoyu refresh (2026-05-02).
+// Three-creative gallery + headline. Lives between FlavorPicker and NextDrop in App().
+function CitrusSpotlight() {
+  return (
+    <section
+      id="citrus-spotlight"
+      style={{
+        position: 'relative',
+        background: 'linear-gradient(180deg, #1A1410 0%, #2A1F18 100%)',
+        color: '#F5F1EA',
+        padding: '128px clamp(24px, 5.5vw, 80px) 112px',
+        overflow: 'hidden',
+        scrollMarginTop: 80,
+      }}>
+      <div style={{ maxWidth: 1320, margin: '0 auto' }}>
+        <Reveal>
+          <div className="mono" style={{ color: 'rgba(245,241,234,0.55)', letterSpacing: '0.18em', marginBottom: 18 }}>
+            Index 09 — Citrus Shoyu
+          </div>
+        </Reveal>
+        <Reveal delay={1}>
+          <h2 className="display" style={{
+            fontSize: 'clamp(56px, 9vw, 132px)',
+            letterSpacing: '-0.045em',
+            lineHeight: 0.92,
+            margin: '0 0 48px',
+            fontWeight: 700,
+          }}>
+            BRIGHT.<br />
+            <span style={{ color: '#F5C842' }}>BALANCED.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={2}>
+          <p style={{
+            fontFamily: 'Inter Tight',
+            fontSize: 'clamp(18px, 1.6vw, 22px)',
+            lineHeight: 1.5,
+            maxWidth: 640,
+            color: 'rgba(245,241,234,0.78)',
+            margin: '0 0 64px',
+          }}>
+            Shoyu base with a clean citrus lift. Cuts through richness without ever turning sweet —
+            the bottle that took three years to dial in.
+          </p>
+        </Reveal>
+
+        {/* Hero feature image — Unleash Bomb Flavor */}
+        <Reveal delay={3}>
+          <figure style={{
+            position: 'relative',
+            margin: '0 0 32px',
+            borderRadius: 0,
+            overflow: 'hidden',
+            background: '#0B0A09',
+            aspectRatio: '16/9',
+          }}>
+            <img
+              src="uploads/citrus_unleash_bomb_flavor_hero.png"
+              alt="NoodleBomb Citrus Shoyu — unleash bomb flavor over fresh ramen"
+              loading="lazy"
+              style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <figcaption style={{
+              position: 'absolute', left: 24, bottom: 20, right: 24,
+              fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.18em',
+              color: 'rgba(245,241,234,0.85)', textTransform: 'uppercase',
+            }}>
+              No.02 · Citrus Shoyu · 7 fl oz · Bonney Lake, WA
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        {/* Two-up secondary creatives */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: 24,
+          marginBottom: 56,
+        }}>
+          <Reveal delay={4}>
+            <figure style={{ margin: 0, position: 'relative', overflow: 'hidden', background: '#0B0A09', aspectRatio: '4/5' }}>
+              <img
+                src="uploads/citrus_bright_balance_ramen_hero.png"
+                alt="Citrus Shoyu poured over a steaming ramen bowl — bright and balanced"
+                loading="lazy"
+                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </figure>
+          </Reveal>
+          <Reveal delay={5}>
+            <figure style={{ margin: 0, position: 'relative', overflow: 'hidden', background: '#0B0A09', aspectRatio: '4/5' }}>
+              <img
+                src="uploads/citrus_turn_up_flavor_splash_hero.png"
+                alt="Citrus Shoyu mid-pour splash — turn up the flavor"
+                loading="lazy"
+                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </figure>
+          </Reveal>
+        </div>
+
+        {/* Three-bottle showcase footer */}
+        <Reveal delay={6}>
+          <figure style={{ margin: 0, position: 'relative', overflow: 'hidden', background: '#0B0A09', aspectRatio: '21/9' }}>
+            <img
+              src="uploads/citrus_3_bottle_showcase.png"
+              alt="Three Citrus Shoyu bottles — editorial product showcase"
+              loading="lazy"
+              style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </figure>
+        </Reveal>
+
+        {/* CTA */}
+        <Reveal delay={7}>
+          <div style={{ marginTop: 48, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
+            <div className="mono" style={{ color: 'rgba(245,241,234,0.55)', letterSpacing: '0.18em' }}>
+              LAUNCHING MAY 8 · LIMITED FIRST RUN
+            </div>
+            <a
+              href="/cart.html"
+              onClick={(e) => addAndOpenCart({ slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 }, e)}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 12,
+                padding: '16px 28px', borderRadius: 999,
+                background: '#F5C842', color: '#0B0A09',
+                fontFamily: 'Inter', fontWeight: 600, fontSize: 13,
+                letterSpacing: '0.18em', textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'transform .28s, box-shadow .35s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px rgba(245,200,66,0.45)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}>
+              Add Citrus Shoyu — $11.99
+              <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+            </a>
           </div>
         </Reveal>
       </div>
@@ -1454,6 +1598,7 @@ function App() {
       <Origin />
       <Testimonials />
       <FlavorPicker flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
+      <CitrusSpotlight />
       <NextDrop />
       <MonthlyDrop />
       <FinalCTA />
