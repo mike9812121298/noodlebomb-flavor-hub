@@ -131,12 +131,14 @@ function FlavorBreakdown({ flavor }) {
           approaches 1.0 so by the time the exit phase begins, there's
           nothing visible to "scroll past" — Range section's content takes
           over cleanly underneath. */}
-      <div className="fb-desktop" style={{ height: '240vh' }}>
+      <div className="fb-desktop" style={{ height: '200vh' }}>
       <div className="fb-sticky" style={{
         position: 'sticky', top: 0, height: '100vh', overflow: 'hidden',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        opacity: Math.max(0, Math.min(1, (1 - p) / 0.15)),
-        transition: 'opacity .15s linear',
+        // Keep scene fully visible until last ingredient lands at p=0.95,
+        // then fade out in the final 5% so the next section enters cleanly.
+        opacity: p < 0.95 ? 1 : Math.max(0, Math.min(1, (1 - p) / 0.05)),
+        transition: 'opacity .25s linear',
       }}>
         {/* Section header */}
         <div className="fb-section-header" style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
@@ -146,10 +148,10 @@ function FlavorBreakdown({ flavor }) {
         <h2 className="display section-h2 fb-headline" style={{
           position: 'absolute', top: 140, left: 28, margin: 0,
           maxWidth: '60vw',
-          opacity: Math.max(0, 1 - p * 12),
+          opacity: Math.max(0, Math.min(1, (0.20 - p) / 0.12)),
           transform: `translateY(${-p * 80}px) scale(${1 - p * 0.08})`,
           transition: 'opacity .3s linear',
-          pointerEvents: p > 0.08 ? 'none' : 'auto'
+          pointerEvents: p > 0.18 ? 'none' : 'auto'
         }}>
           Three flavors.<br /><span className="accent-fg">One obsession.</span>
         </h2>
@@ -1551,13 +1553,18 @@ function App() {
     });
   };
 
-  // Lenis smooth scroll
+  // Lenis smooth scroll — DISABLED 2026-05-03.
+  // Lenis sets `overflow: hidden auto` on <html>, which breaks `position: sticky`
+  // on FlavorBreakdown (Index 02) and UseItOn / Range (Index 03). When sticky
+  // fails, the pinned content scrolls off-screen and the user sees a black/blank
+  // section background — exactly the "scrolls into black screen" bug Mike flagged.
+  // Native scroll works fine; smooth-scroll polish isn't worth the regression.
   useEffect(() => {
-    if (!window.Lenis) return;
-    const lenis = new window.Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-    const raf = (t) => {lenis.raf(t);requestAnimationFrame(raf);};
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
+    // Explicitly remove any Lenis-set overflow if the script loaded before this
+    // effect ran (defense-in-depth, since the Lenis script tag is still in HTML).
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.documentElement.classList.remove('lenis-smooth', 'lenis-scrolling');
   }, []);
 
   // Accent color swap
