@@ -29,13 +29,13 @@ const FLAVORS = {
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
-    line1: 'Bright, tangy, refreshing.',
-    line2: 'Shoyu base with a clean citrus lift.',
-    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
   spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#C2410C', ink: '#F5F1EA',
     line1: 'Umami meets fire.',
     line2: 'Dark soy, roasted chili, sesame.',
+    price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
+  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
+    line1: 'Bright, tangy, refreshing.',
+    line2: 'Shoyu base with a clean citrus lift.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
 };
 
@@ -274,8 +274,8 @@ function UseItOn() {
 
   const items = [
     { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png' },
-    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
     { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png' },
+    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
   ];
   const panelCount = items.length;
 
@@ -1015,7 +1015,7 @@ function FlavorPicker({ flavor, setFlavor }) {
             <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', minWidth: 0, maxWidth: '100%' }}>
               <img
                 src="uploads/trio_kitchen_counter_warm.png"
-                alt="NoodleBomb Trio — Original, Citrus Shoyu, and Spicy Tokyo on a warm-lit kitchen counter"
+                alt="NoodleBomb Trio — Original, Spicy Tokyo, and Citrus Shoyu on a warm-lit kitchen counter"
                 loading="lazy"
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
               />
@@ -1029,12 +1029,12 @@ function FlavorPicker({ flavor, setFlavor }) {
                 <span style={{ color: 'var(--muted)' }}>— $29.99.</span>
               </h3>
               <div style={{ fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.55, maxWidth: '42ch' }}>
-                One of each: Original, Citrus Shoyu, Spicy Tokyo. Enough to find your favorite — and a backup.
+                One of each: Original, Spicy Tokyo, Citrus Shoyu. Enough to find your favorite — and a backup.
               </div>
 
               {/* Included chips */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 }}>
-                {['Original', 'Citrus Shoyu', 'Spicy Tokyo'].map((label) => (
+                {['Original', 'Spicy Tokyo', 'Citrus Shoyu'].map((label) => (
                   <span key={label} style={{
                     display: 'inline-flex', alignItems: 'center', gap: 8,
                     padding: '6px 12px 6px 10px',
@@ -1375,7 +1375,7 @@ function FinalCTA() {
             </p>
           </div>
           {[
-          ['Shop', [['Original', WIX_URLS.original], ['Citrus Shoyu', WIX_URLS.citrus], ['Spicy Tokyo', WIX_URLS.spicy], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
+          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale (MOQ 12)', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
           map(([h, items]) =>
