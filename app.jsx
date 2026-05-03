@@ -890,19 +890,10 @@ function FlavorPicker({ flavor, setFlavor }) {
           </h2>
         </Reveal>
 
-        <Reveal delay={2}>
-          <figure className="trio-composite" style={{ margin: '0 0 56px', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--paper)', padding: '40px clamp(16px, 3vw, 40px)', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'clamp(16px, 3vw, 40px)', alignItems: 'end', justifyItems: 'center' }}>
-            {/* width/height = native PNG dimensions — reserves aspect ratio
-                so the browser doesn't reflow when lazy images settle. */}
-            {[
-              { src: 'uploads/nb-original-clean.png',     w: 606, h: 1449, alt: 'NoodleBomb Original ramen sauce bottle' },
-              { src: 'uploads/nb-citrus-shoyu-clean.png', w: 612, h: 1433, alt: 'NoodleBomb Citrus Shoyu ramen sauce bottle' },
-              { src: 'uploads/nb-spicy-tokyo-clean.png',  w: 848, h: 1264, alt: 'NoodleBomb Spicy Tokyo ramen sauce bottle' },
-            ].map((b) => (
-              <img key={b.src} src={b.src} alt={b.alt} width={b.w} height={b.h} loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', maxHeight: 440, objectFit: 'contain', filter: 'drop-shadow(0 24px 32px rgba(0,0,0,0.45))' }} />
-            ))}
-          </figure>
-        </Reveal>
+        {/* Removed redundant <figure className="trio-composite"> — it rendered the
+            same 3 bottles already shown in the interactive lineup-grid below,
+            producing 6 duplicate bottles under "Pick one. Or all three."
+            (Bug: noodlebomb.co · 2026-05-03) */}
 
         <div className="lineup-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 24 }}>
           {keys.map((k, i) => {
