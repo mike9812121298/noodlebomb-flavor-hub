@@ -227,8 +227,11 @@
     --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 40px;
     --s-5: 64px; --s-6: 96px; --s-7: 128px; --s-8: 160px;
   }
-  html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+  /* `overflow-x: hidden` on html breaks `position: sticky` (computed becomes
+     `hidden auto` which makes html a scroll-container). Apply it only on body. */
+  html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); }
   html { scroll-behavior: auto; }
+  body { overflow-x: hidden; }
 
   /* Skip-to-content — visible only on focus, lets keyboard users bypass
      the Nav and editorial sections to jump straight to main content.
