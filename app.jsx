@@ -54,7 +54,7 @@ const FOOD_IMAGES = {
   pulledpork: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=1600&q=80&auto=format&fit=crop'
 };
 
-// ——————————————————————————— Flavor Profile: sticky bottle + orbiting flavor dimensions
+// ——————————————————————————— Flavor Breakdown: sticky bottle + orbiting flavor dimensions
 function FlavorBreakdown({ flavor }) {
   const stickyRef = useRef(null);
   const [p, setP] = useState(0); // 0..1 progress
@@ -87,7 +87,7 @@ function FlavorBreakdown({ flavor }) {
       {/* MOBILE: stacked layout (≤768px) */}
       <div className="fb-mobile" style={{ display: 'none', padding: '80px 24px 96px' }}>
         <div className="mono" style={{ color: 'var(--muted)', marginBottom: 24, letterSpacing: '0.18em' }}>
-          Index 02 — Flavor Profile
+          Index 02 — Flavor Breakdown
         </div>
         <h2 className="display" style={{ margin: '0 0 48px', fontSize: 'clamp(40px, 11vw, 56px)', letterSpacing: '-0.04em', lineHeight: 0.95, fontWeight: 700 }}>
           Three flavors.<br /><span className="accent-fg">One obsession.</span>
@@ -142,7 +142,7 @@ function FlavorBreakdown({ flavor }) {
       }}>
         {/* Section header */}
         <div className="fb-section-header" style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
-          <span className="mono" style={{ color: 'var(--muted)' }}>Index 02 — Flavor Profile</span>
+          <span className="mono" style={{ color: 'var(--muted)' }}>Index 02 — Flavor Breakdown</span>
           <span className="mono" style={{ color: 'var(--muted)' }}>pour.02 / of.05</span>
         </div>
         <h2 className="display section-h2 fb-headline" style={{
