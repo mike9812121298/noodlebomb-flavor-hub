@@ -477,178 +477,100 @@ function UseItOn() {
 function PourAndCompare({ flavor = 'original' }) {
   return (
     <section id="pour" style={{ background: 'var(--paper)', padding: '140px clamp(24px, 5.5vw, 80px)', scrollMarginTop: 80 }}>
-      {/* Pour shot */}
-      <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center', maxWidth: 1400, margin: '0 auto' }}>
-        <div>
-          <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 04 — The Pour</div></Reveal>
-          <Reveal delay={1}>
-            <h2 className="display section-h2" style={{ margin: 0 }}>
-              Slow drip.<br />
-              <span style={{ color: 'var(--muted)' }}>No rush.</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={2}>
-            <p style={{ fontFamily: 'Inter Tight', fontSize: 22, maxWidth: 460, lineHeight: 1.3, marginTop: 32, color: 'var(--ink)' }}>
-              Carefully crafted to balance rich flavors without being salty. Coats a spoon. Clings to a noodle. Finishes a dumpling.
-            </p>
-          </Reveal>
-          <Reveal delay={3}>
-            <div style={{ marginTop: 32, display: 'flex', gap: 24 }}>
-              {[{ k: 'Bottle', v: '7 oz', num: true }, { k: 'Servings', v: '≈11', num: true }, { k: 'Fillers', v: 'None' }].map((s) => {
-                const [popped, setPopped] = useState(false);
-                useEffect(() => {setPopped(true);const t = setTimeout(() => setPopped(false), 400);return () => clearTimeout(t);}, [s.v]);
-                return (
-                  <div key={s.k}>
-                    <div className="mono" style={{ color: 'var(--ink)', fontWeight: 600, fontSize: 12, letterSpacing: '0.18em', opacity: 0.9, marginBottom: 6 }}>{s.k.toUpperCase()}</div>
-                    <div className={`display ${popped ? 'stat-pop' : ''}`} style={{ fontSize: 38, letterSpacing: '-0.03em' }}>{s.v}</div>
-                  </div>);
-
-              })}
-            </div>
-          </Reveal>
-        </div>
-        <Reveal delay={2}>
-          <div className="pour-bottle-stage" style={{ position: 'relative', height: 560, display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: 260, height: '100%' }}>
-              <div className="bottle-float">
-                <Bottle tilt={-14} dripping src={FLAVOR_IMAGES[flavor]} />
-              </div>
-            </div>
-            {/* landing surface */}
-            <div style={{ position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)', width: 320, height: 1, background: 'var(--line)' }} />
-            <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', width: 180, height: 20, borderRadius: '50%', background: 'var(--accent)', opacity: 0.35, filter: 'blur(14px)' }} />
-          </div>
-        </Reveal>
-      </div>
-
-      {/* Comparison */}
-      <div style={{ maxWidth: 1100, margin: '120px auto 0' }}>
-        <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 05 — Where it sits</div></Reveal>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>How It Works</div></Reveal>
         <Reveal delay={1}>
-          <h2 className="display section-h2" style={{ margin: '0 0 32px' }}>
-            Where it<br />
-            <span style={{ color: 'var(--muted)' }}>sits.</span>
+          <h2 className="display section-h2" style={{ margin: '0 0 20px' }}>
+            One bottle.<br />
+            <span style={{ color: 'var(--muted)' }}>Restaurant ramen.</span>
           </h2>
         </Reveal>
         <Reveal delay={1.5}>
-          <p style={{ fontFamily: 'Inter Tight', fontSize: 'clamp(18px, 2.2vw, 22px)', lineHeight: 1.5, color: 'var(--muted)', maxWidth: 720, margin: '0 0 56px', letterSpacing: '-0.01em' }}>
-            Soy sauce seasons. Chili crisp adds heat. <span style={{ color: 'var(--ink)', fontWeight: 600 }}>NoodleBomb finishes</span> — the last splash that pulls a bowl together.
+          <p style={{ fontFamily: 'Inter Tight', fontSize: 'clamp(17px, 1.6vw, 20px)', lineHeight: 1.55, color: 'var(--ink-60)', maxWidth: 560, margin: '0 0 64px' }}>
+            NoodleBomb is a concentrated ramen tare — the flavor base that ramen shops spend hours building. You get it in 30 seconds.
           </p>
         </Reveal>
-        <Reveal delay={2}>
-          {(() => {
-            const rows = [
-              ['Taste', 'Layered, 5 dimensions', 'Salt-forward', 'Heat-forward'],
-              ['Versatility', 'Ramen → wings → rice', 'Asian dishes', 'Specific uses'],
-              ['Fillers', 'None', 'Some', 'Some'],
-              ['Made', 'Small batch, USA', 'Industrial', 'Industrial'],
-            ];
-            const colHeaders = ['NoodleBomb', 'Regular soy', 'Chili crisp'];
-            return (
-              <>
-                {/* DESKTOP table — NoodleBomb column dominant per #26 */}
-                <div className="compare-desktop compare-table-wrap" style={{ border: '1px solid var(--line)', position: 'relative', overflow: 'hidden' }}>
-                  {/* Faint red NoodleBomb-column highlight bar (sits behind cells) */}
-                  <div aria-hidden="true" style={{
-                    position: 'absolute',
-                    top: 0, bottom: 0,
-                    left: 'calc(28% / 1.2 * 100% / 100)', /* approx — falls inside NoodleBomb column */
-                    pointerEvents: 'none',
-                  }} />
-                  {[['Attribute', ...colHeaders], ...rows].map((row, i) =>
-                    <div key={i} className="compare-row" style={{
-                      display: 'grid', gridTemplateColumns: '1.2fr 2fr 1fr 1fr',
-                      padding: '24px 28px',
-                      borderTop: i ? '1px solid var(--line)' : 'none',
-                      alignItems: 'center',
-                      position: 'relative',
-                    }}>
-                      {/* NoodleBomb column highlight bar — only behind that column */}
-                      {i === 0 && (
-                        <div aria-hidden="true" style={{
-                          position: 'absolute',
-                          top: 0,
-                          bottom: `calc(-${rows.length} * 100%)`,
-                          left: 'calc(1.2 / 5.2 * 100%)',
-                          width: 'calc(2 / 5.2 * 100%)',
-                          background: 'rgba(139,30,30,0.08)',
-                          pointerEvents: 'none',
-                          zIndex: 0,
-                        }} />
-                      )}
-                      {row.map((cell, j) =>
-                        <div key={j} style={{
-                          position: 'relative',
-                          zIndex: 1,
-                          fontFamily: i === 0 ? 'JetBrains Mono' : 'Inter Tight',
-                          fontSize: i === 0 ? 11 : (j === 1 ? 22 : 16),
-                          textTransform: i === 0 ? 'uppercase' : 'none',
-                          letterSpacing: i === 0 ? '0.08em' : '-0.015em',
-                          color: i === 0 ? (j === 1 ? 'var(--accent)' : 'var(--muted)') : j === 1 ? 'var(--ink)' : 'var(--muted)',
-                          fontWeight: j === 1 && i > 0 ? 700 : (j === 1 && i === 0 ? 700 : 400),
-                          opacity: j === 1 ? 1 : (i === 0 ? 0.85 : 0.6),
-                        }}>
-                          {cell}
-                          {j === 1 && i > 0 && <span className="accent-fg" style={{ marginLeft: 10, fontSize: 10 }}>●</span>}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
 
-                {/* MOBILE stacked attribute cards */}
-                <div className="compare-mobile" style={{ display: 'none', flexDirection: 'column', gap: 16 }}>
-                  {rows.map(([attr, nb, soy, hot], i) => (
-                    <div key={i} style={{ border: '1px solid var(--line)', padding: '20px 20px 16px' }}>
-                      <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.18em', marginBottom: 16, textTransform: 'uppercase' }}>
-                        {attr}
-                      </div>
-                      {/* NoodleBomb — dominant */}
-                      <div style={{ marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid rgba(240,235,227,0.06)' }}>
-                        <div className="mono accent-fg" style={{ fontSize: 10, letterSpacing: '0.18em', marginBottom: 4 }}>
-                          NoodleBomb
-                        </div>
-                        <div style={{ fontFamily: 'Inter Tight', fontSize: 22, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--ink)', lineHeight: 1.2 }}>
-                          {nb}
-                        </div>
-                      </div>
-                      {/* Competitors — muted */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, opacity: 0.5 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
-                          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--muted)', textTransform: 'uppercase', flexShrink: 0 }}>Regular soy</span>
-                          <span style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink)', textAlign: 'right' }}>{soy}</span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
-                          <span className="mono" style={{ fontSize: 10, letterSpacing: '0.16em', color: 'var(--muted)', textTransform: 'uppercase', flexShrink: 0 }}>Chili crisp</span>
-                          <span style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink)', textAlign: 'right' }}>{hot}</span>
-                        </div>
-                      </div>
+        {/* 3-step guide */}
+        <Reveal delay={2}>
+          <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(24px, 4vw, 48px)', marginBottom: 80 }}>
+            {[
+              { step: '01', title: 'Cook your noodles', desc: 'Any noodles work — instant, fresh, dried. Boil and drain.' },
+              { step: '02', title: 'Add 1–2 tablespoons', desc: 'Pour NoodleBomb into the bowl. Add a splash of hot broth or pasta water.' },
+              { step: '03', title: 'Top and eat', desc: 'Egg, scallions, whatever you have. You just made real ramen.' },
+            ].map((s, i) => (
+              <div key={i}>
+                <div className="display accent-fg" style={{ fontSize: 48, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 16, opacity: 0.7 }}>{s.step}</div>
+                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', marginBottom: 8 }}>{s.title}</div>
+                <div style={{ fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.55 }}>{s.desc}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* What NoodleBomb Replaces */}
+        <Reveal delay={2}>
+          <div style={{ borderTop: '1px solid var(--line)', paddingTop: 64 }}>
+            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 24, letterSpacing: '0.18em' }}>What NoodleBomb Replaces</div>
+            <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
+              <div>
+                <div style={{ fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 20 }}>The old way</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {['Soy sauce', 'Mirin', 'Sesame oil', 'Garlic paste', 'Dashi stock', 'Chili oil', '20 minutes of prep'].map((item, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-40)' }}>
+                      <span style={{ color: 'var(--ink-40)', fontSize: 14 }}>✕</span>
+                      <span style={{ textDecoration: 'line-through' }}>{item}</span>
                     </div>
                   ))}
                 </div>
-              </>
-            );
-          })()}
+              </div>
+              <div>
+                <div style={{ fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 20 }}>The NoodleBomb way</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {['One bottle of NoodleBomb', '30 seconds', 'Restaurant-quality flavor'].map((item, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: 'Inter Tight', fontSize: i === 0 ? 20 : 15, fontWeight: i === 0 ? 700 : 500, color: 'var(--ink)' }}>
+                      <span style={{ color: 'var(--accent)', fontSize: 14 }}>✓</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginTop: 28 }}>
+                  <a href="#lineup" className="btn btn-accent" style={{ textDecoration: 'none', display: 'inline-flex', padding: '14px 24px', borderRadius: 999 }}>Shop sauces →</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </Reveal>
+
+        {/* Quick stats */}
         <Reveal delay={3}>
-          <div style={{ marginTop: 56, textAlign: 'center' }}>
-            <a href="#lineup" style={{ fontFamily: 'JetBrains Mono', fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--accent)', textDecoration: 'none', borderBottom: '1px solid var(--accent)', paddingBottom: 6, display: 'inline-block' }}>
-              Try the lineup →
-            </a>
+          <div className="pour-grid" style={{ marginTop: 64, paddingTop: 40, borderTop: '1px solid var(--line)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+            {[
+              { num: '7', unit: 'oz', label: 'per bottle' },
+              { num: '14', unit: '', label: 'servings per bottle' },
+              { num: '30', unit: 'sec', label: 'bowl to table' },
+              { num: '0', unit: '', label: 'fillers or preservatives' },
+            ].map((s, i) => (
+              <div key={i} style={{ textAlign: 'center' }}>
+                <div className="display" style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1 }}>
+                  {s.num}{s.unit && <span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>{s.unit}</span>}
+                </div>
+                <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: 8 }}>{s.label}</div>
+              </div>
+            ))}
           </div>
         </Reveal>
       </div>
     </section>);
-
 }
 
 // ——————————————————————————— Origin (editorial, stats-driven, conversion-aware)
 function Origin() {
   const stats = [
-    { num: '18', label: 'months in development' },
-    { num: '5', label: 'flavors kept' },
-    { num: '40+', label: 'thrown out' },
-    { num: '1', label: 'kitchen in Bonney Lake' },
+    { num: '7', label: 'real ingredients per bottle' },
+    { num: '14', label: 'servings per bottle' },
+    { num: '3', label: 'flavors, each hand-tuned' },
+    { num: '1', label: 'kitchen in Bonney Lake, WA' },
   ];
   return (
     <section
@@ -726,6 +648,21 @@ function Origin() {
               </div>
             ))}
           </div>
+        </Reveal>
+
+        {/* Behind-the-scenes: making-of photo */}
+        <Reveal delay={2}>
+          <figure style={{ margin: '0 0 56px', position: 'relative', overflow: 'hidden', borderRadius: 0, aspectRatio: '21/9' }}>
+            <img
+              src="uploads/origin-making.png"
+              alt="NoodleBomb sauce being crafted by hand in Bonney Lake, WA"
+              loading="lazy"
+              style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <figcaption style={{ position: 'absolute', left: 24, bottom: 16, fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.18em', color: 'rgba(245,241,234,0.85)', textTransform: 'uppercase' }}>
+              Small batch · Made by hand · Bonney Lake, WA
+            </figcaption>
+          </figure>
         </Reveal>
 
         {/* Single editorial line — no long story */}
@@ -939,7 +876,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95, wordBreak: 'keep-all', overflowWrap: 'normal', hyphens: 'none' }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                     <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)' }}>
-                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>Launching May 8</span>
+                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>IN STOCK · SHIPS IN 3 DAYS</span>
                     </div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
@@ -1226,7 +1163,7 @@ function CitrusSpotlight() {
         <Reveal delay={7}>
           <div style={{ marginTop: 48, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
             <div className="mono" style={{ color: 'rgba(245,241,234,0.55)', letterSpacing: '0.18em' }}>
-              LAUNCHING MAY 8 · LIMITED FIRST RUN
+              NEW · LIMITED FIRST RUN · SHIPS IN 3 DAYS
             </div>
             <a
               href="/cart.html"
@@ -1377,7 +1314,7 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale (MOQ 12)', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
+          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Shipping & Returns', '#faq'], ['FAQ', '#faq'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
@@ -1496,6 +1433,103 @@ function Tweaks({ state, set, open, setOpen }) {
 }
 
 // ——————————————————————————— App
+// ——————————————————————————— TrustStrip — 4-icon trust signals (under hero)
+function TrustStrip() {
+  const items = [
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>, label: 'Ships in 3 days' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: 'Free shipping over $35' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: 'Love it or your money back' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in WA' },
+  ];
+  return (
+    <section style={{ background: 'var(--paper-2)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '28px clamp(24px, 5.5vw, 80px)' }}>
+      <div className="trust-strip-grid" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, alignItems: 'center' }}>
+        {items.map((it, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, justifyContent: 'center' }}>
+            <div style={{ color: 'var(--accent)', flexShrink: 0, opacity: 0.85 }}>{it.icon}</div>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ink-60)' }}>{it.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ——————————————————————————— StickyCartBar — fixed top-of-page bar after hero scroll
+function StickyCartBar({ flavor, flavors }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  const f = flavors[flavor] || flavors.original;
+  return (
+    <div className={'sticky-cart-bar' + (visible ? ' visible' : '')}>
+      <div className="scb-left">
+        <span className="scb-dot" style={{ background: f.color }} />
+        <span className="scb-name">NoodleBomb {f.name}</span>
+        <span className="scb-price">— {f.price}</span>
+        <span className="scb-ship">· Ships in 3 days</span>
+      </div>
+      <div className="scb-right">
+        <a
+          href="/cart.html"
+          className="scb-trio"
+          onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
+        >3-Pack — $29.99</a>
+        <a
+          href="/cart.html"
+          className="scb-btn"
+          onClick={(e) => addAndOpenCart({ slug: flavor, name: f.name, price: f.priceUsd }, e)}
+        >Add to Cart →</a>
+      </div>
+    </div>
+  );
+}
+
+// ——————————————————————————— FAQ — expandable Q&A above footer
+function FAQ() {
+  const [open, setOpen] = useState({});
+  const toggle = (i) => setOpen((prev) => ({ ...prev, [i]: !prev[i] }));
+  const items = [
+    { q: 'How long does a bottle last?', a: 'A 7 oz bottle is roughly 14 servings. Most people get 3–4 weeks of regular use out of one.' },
+    { q: 'Does it need to be refrigerated?', a: 'Refrigerate after opening. Use within 6 months for peak flavor.' },
+    { q: 'What can I put it on besides ramen?', a: 'Rice bowls, dumplings, stir-fry, eggs, roasted vegetables, wings, marinades. If it\u2019s savory, it probably works.' },
+    { q: 'How spicy is Spicy Tokyo?', a: 'Medium heat — noticeable warmth, not a punishment. About a 5 out of 10.' },
+    { q: 'When will my order ship?', a: 'Orders placed by 2pm PT ship the next business day from Bonney Lake, WA. Most US orders arrive in 3–5 days.' },
+    { q: 'What\u2019s your return policy?', a: 'If you don\u2019t love it, email us within 30 days for a full refund. Keep the bottle.' },
+  ];
+  return (
+    <section id="faq" style={{ background: 'var(--paper)', padding: '120px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
+      <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>FAQ</div></Reveal>
+        <Reveal delay={1}>
+          <h2 className="display" style={{ fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 56px', fontWeight: 700 }}>
+            Questions,<br /><span style={{ color: 'var(--muted)' }}>answered.</span>
+          </h2>
+        </Reveal>
+        {items.map((it, i) => (
+          <Reveal key={i} delay={Math.min(i + 2, 5)}>
+            <div style={{ borderTop: '1px solid var(--line)', cursor: 'pointer' }} onClick={() => toggle(i)}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', gap: 16 }}>
+                <span style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 17, letterSpacing: '-0.01em' }}>{it.q}</span>
+                <span style={{ fontFamily: 'Inter Tight', fontSize: 22, color: 'var(--muted)', flexShrink: 0, transition: 'transform .25s', transform: open[i] ? 'rotate(45deg)' : 'none' }}>+</span>
+              </div>
+              {open[i] && (
+                <div style={{ paddingBottom: 22, fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.6, maxWidth: '60ch' }}>{it.a}</div>
+              )}
+            </div>
+          </Reveal>
+        ))}
+        <div style={{ borderTop: '1px solid var(--line)' }} />
+      </div>
+    </section>
+  );
+}
+
+
 function App() {
   const DEFAULTS = /*EDITMODE-BEGIN*/{
     "flavor": "original",
@@ -1588,8 +1622,10 @@ function App() {
   return (
     <>
       {IS_DEV_MODE && state.spam && <div className="spam-banner">⚡ LIMITED TIME!!! 50% OFF — HURRY — ONLY 3 LEFT!!! ⚡</div>}
+      <StickyCartBar flavor={state.flavor} flavors={FLAVORS} />
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
+      <TrustStrip />
       <FlavorBreakdown flavor={state.flavor} />
       <UseItOn />
       <PourAndCompare flavor={state.flavor} />
@@ -1599,6 +1635,7 @@ function App() {
       <CitrusSpotlight />
       <NextDrop />
       <MonthlyDrop />
+      <FAQ />
       <FinalCTA />
       {IS_DEV_MODE && <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />}
       <InquiryModal open={!!inquiry} kind={inquiry} onClose={() => setInquiry(null)} />

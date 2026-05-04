@@ -804,61 +804,39 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
   const scale = 1 + Math.min(y, 600) / 2400;
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', paddingTop: 80, overflow: 'hidden' }}>
-      {/* top meta strip — leads with launch date for above-the-fold urgency
-          (every visitor sees this; lineup-card "Launching May 8" badge is
-          mid-page only). Brand-true: May 8 is the actual launch date. */}
-      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 28px', marginTop: 8, gap: 16, flexWrap: 'wrap' }}>
-        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600 }}>Launching May 8, 2026</span>
-        <span className="mono" style={{ color: 'var(--muted)' }}>Vol.01 · 2026 Edition</span>
+    <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      {/* Background photo — full-bleed pour shot */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <img
+          src="uploads/nb-hero-pour.png"
+          alt="NoodleBomb trio — Original, Spicy Tokyo, Citrus Shoyu with sauce pour"
+          loading="eager"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%', transform: `scale(${scale}) translateY(${-parY * 0.15}px)`, transition: 'transform 0.05s linear' }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(14,13,12,0.35) 0%, rgba(14,13,12,0.15) 30%, rgba(14,13,12,0.5) 65%, rgba(14,13,12,0.92) 100%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(14,13,12,0.7) 0%, rgba(14,13,12,0) 50%)', pointerEvents: 'none' }} />
       </div>
 
-      {/* Big headline — backdrop wash behind bottle */}
-      <div style={{ padding: '8px 28px 0', position: 'relative', zIndex: 1 }}>
-        <h1 className="display hero-h1" style={{ margin: 0, transform: `translateY(${-parY * 0.3}px)`, color: 'rgba(245,241,234,0.32)', letterSpacing: '-0.045em' }}>
+      {/* Top meta strip — IN STOCK · SHIPS IN 3 DAYS / Vol.01 · First Run */}
+      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 clamp(24px, 5.5vw, 80px)', marginTop: 88, gap: 16, flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>IN STOCK · SHIPS IN 3 DAYS</span>
+        <span className="mono" style={{ color: 'var(--ink-40)' }}>Vol.01 · First Run</span>
+      </div>
+
+      {/* Main hero content */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(24px, 5.5vw, 80px) clamp(64px, 8vh, 120px)', position: 'relative', zIndex: 2, maxWidth: 780 }}>
+        <h1 className="display" style={{ margin: '0 0 24px', fontSize: 'clamp(56px, 10vw, 140px)', lineHeight: 0.9, letterSpacing: '-0.045em', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.2s both' }}>
           {headline.split('\n').map((line, i) => (
-            <div key={i} style={{ opacity: i === 1 ? 0.55 : 1 }}>{line}</div>
+            <div key={i} style={{ opacity: i === 1 ? 0.6 : 1 }}>{line}</div>
           ))}
         </h1>
-      </div>
-
-      {/* Bottle center — outer positions, inner animates (so transforms don't collide) */}
-      <div className="hero-bottle-positioner" style={{
-        position: 'absolute',
-        left: 'calc(50% - 40px)', top: '58%',
-        transform: 'translate(-50%, -50%)',
-        width: 'min(454px, 34.5vw)', height: 'min(778px, 77.7vh)',
-        pointerEvents: 'none',
-        zIndex: 3,
-      }}>
-        {/* Radial vignette behind bottle */}
-        <div aria-hidden="true" style={{
-          position: 'absolute', left: '50%', top: '50%',
-          width: 600, height: 600, transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.28) 35%, rgba(0,0,0,0) 65%)',
-          pointerEvents: 'none', zIndex: -1
-        }} />
-        <div className="hero-bottle-wrap" style={{ width:'100%', height:'100%' }}>
-          <div className="bottle-float" style={{ width: '100%', height: '100%', transform: `translateY(${-parY * 0.5}px)` }}>
-            <Bottle src={bottleSrc} loading="eager" />
-          </div>
-        </div>
-      </div>
-
-      {/* bottom subline + CTA */}
-      <div className="container hero-bottom-row" style={{
-        position: 'absolute', left: 0, right: 0, bottom: 64,
-        display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
-        animation: 'fadeIn 1.2s cubic-bezier(.16,1,.3,1) 0.7s both', zIndex: 4,
-      }}>
-        <div>
-          <div className="mono" style={{ marginBottom: 12 }}>Index 01 — The Hero</div>
-          <div style={{ fontFamily:'Inter Tight', fontWeight: 500, fontSize: 20, letterSpacing: '-0.02em', maxWidth: 380, lineHeight: 1.35, marginBottom: -12 }}>
-            Bold ramen sauce. Small batch.<br/>
+        <div style={{ animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both' }}>
+          <div style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
+            Bold ramen sauce. Small batch.<br />
             <span style={{ color: 'var(--ink-60)' }}>Turns any noodles into shop-level ramen in seconds.</span>
           </div>
         </div>
-        <div className="hero-cta-row" style={{ display:'flex', gap: 10, flexWrap: 'wrap' }}>
+        <div className="hero-cta-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.7s both' }}>
           <a
             href="/cart.html"
             onClick={(e) => nbAddAndOpenCart({
@@ -870,50 +848,49 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
               display: 'inline-flex',
               alignItems: 'center',
               gap: 10,
-              padding: '14px 22px',
+              padding: '16px 28px',
               borderRadius: 999,
-              border: `1px solid ${flavorMeta?.color || 'var(--accent)'}`,
-              background: flavorMeta?.color || 'var(--accent)',
-              color: flavorMeta?.ink || 'var(--accent-ink)',
+              background: 'var(--accent)',
+              color: 'var(--accent-ink)',
               fontFamily: 'Inter',
               fontWeight: 600,
-              fontSize: 13,
-              letterSpacing: '0.16em',
+              fontSize: 14,
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
               textDecoration: 'none',
-              transition: 'transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .35s, opacity .25s',
+              transition: 'transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .35s',
+              boxShadow: '0 8px 24px rgba(139,30,30,0.4)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = `0 16px 36px ${flavorMeta?.color || 'var(--accent)'}55`;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = '';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px rgba(139,30,30,0.55)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px rgba(139,30,30,0.4)'; }}
           >
-            Add {flavorMeta?.name || 'to Cart'} — $11.99
+            Add Original — $11.99
             <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
           </a>
           <a
             className="btn btn-ghost"
             href="/cart.html"
             onClick={(e) => nbAddAndOpenCart({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd }, e)}
-            style={{ textDecoration: 'none', display: 'inline-block' }}
+            style={{ textDecoration: 'none', display: 'inline-block', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', background: 'rgba(245,241,234,0.08)', borderColor: 'rgba(245,241,234,0.25)' }}
           >
             Try the 3-pack — save $6
           </a>
         </div>
+        {/* Trust line under CTAs */}
+        <div style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
+          Ships in 3 days from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
+        </div>
       </div>
 
-      {/* refined scroll hint — centered under bottle */}
-      <div className="scroll-hint hero-scroll-hint" style={{ left: 'calc(50% - 40px)', bottom: 12, transform: 'translateX(-50%)', zIndex: 4 }}>
+      {/* Scroll hint */}
+      <div className="scroll-hint hero-scroll-hint" style={{ position: 'absolute', left: '50%', bottom: 20, transform: 'translateX(-50%)', zIndex: 4 }}>
         <div className="label">Scroll</div>
-        <div className="line"></div>
+        <div className="line" />
       </div>
     </section>
   );
 }
+
 
 // ———————————————————————————————————————————— Inquiry modal (Wholesale + Contact)
 function InquiryModal({ open, kind, onClose }) {

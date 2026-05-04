@@ -228,7 +228,8 @@ function MonthlyDrop() {
                 {[
                   'Limited to 500 boxes per drop',
                   'New flavor pairing every month',
-                  'Free shipping in the US'
+                  'Free shipping in the US',
+                  'Cancel anytime, no commitment'
                 ].map((line, i) => (
                   <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Inter', fontSize: 14, color: 'var(--ink)', letterSpacing: '-0.005em' }}>
                     <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--accent)', flexShrink: 0, boxShadow: '0 0 0 3px rgba(139,30,30,0.22)' }} />
@@ -240,6 +241,7 @@ function MonthlyDrop() {
 
             {/* Pricing block */}
             <Reveal delay={4}>
+              <div className="mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.22em', fontWeight: 600, marginBottom: 12 }}>THE NOODLEBOMB CLUB — MEMBERS ONLY</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, marginBottom: 28, flexWrap: 'wrap' }}>
                 <span className="display" style={{ fontSize: 'clamp(48px, 5vw, 72px)', fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1, color: 'var(--ink)' }}>
                   $29.99<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
@@ -252,6 +254,7 @@ function MonthlyDrop() {
                   letterSpacing: '0.18em'
                 }}>FREE SHIPPING</span>
               </div>
+              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>First box ships within 7 days of signup.</div>
             </Reveal>
 
             {/* CTA — Monthly Box subscribe (formsubmit lead capture; replaces dead button reported by Kevin Malcolm 2026-04-25). Real Wix subscription product TBD — until then this captures the lead so Mike/Ashley can manually onboard before VOL.04 ships May 15. */}
