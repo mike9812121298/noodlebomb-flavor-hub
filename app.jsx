@@ -1134,7 +1134,7 @@ function CitrusSpotlight() {
               fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.18em',
               color: 'rgba(245,241,234,0.85)', textTransform: 'uppercase',
             }}>
-              No.02 · Citrus Shoyu · 7 fl oz · Bonney Lake, WA
+              No.03 · Citrus Shoyu · 7 fl oz · Bonney Lake, WA
             </figcaption>
           </figure>
         </Reveal>
