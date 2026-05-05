@@ -75,11 +75,11 @@ function FlavorBreakdown({ flavor }) {
   // before the section ends — eliminates the ~40vh trailing dead zone
   // that existed when the last appearAt was 0.82.
   const ingredients = [
-  { label: 'Umami', note: 'the backbone', angle: -140, appearAt: 0.05 },
-  { label: 'Roasted depth', note: 'the warmth', angle: -55, appearAt: 0.275 },
-  { label: 'Brightness', note: 'the lift', angle: 40, appearAt: 0.50 },
-  { label: 'Richness', note: 'the coat', angle: 135, appearAt: 0.725 },
-  { label: 'Heat', note: 'the whisper', angle: 270, appearAt: 0.95 }];
+  { label: 'Umami', note: 'the backbone', angle: -140, appearAt: 0.05, img: 'uploads/fb-umami.jpg' },
+  { label: 'Roasted depth', note: 'the warmth', angle: -55, appearAt: 0.275, img: 'uploads/fb-roasted.jpg' },
+  { label: 'Brightness', note: 'the lift', angle: 40, appearAt: 0.50, img: 'uploads/fb-brightness.jpg' },
+  { label: 'Richness', note: 'the coat', angle: 135, appearAt: 0.725, img: 'uploads/fb-richness.jpg' },
+  { label: 'Heat', note: 'the whisper', angle: 270, appearAt: 0.95, img: 'uploads/fb-heat.jpg' }];
 
 
   return (
@@ -140,6 +140,27 @@ function FlavorBreakdown({ flavor }) {
         opacity: p < 0.95 ? 1 : Math.max(0, Math.min(1, (1 - p) / 0.05)),
         transition: 'opacity .25s linear',
       }}>
+        {/* Atmospheric backgrounds — fade in/out per ingredient */}
+        {ingredients.map((ing, i) => {
+          const nextAppear = i < ingredients.length - 1 ? ingredients[i + 1].appearAt : 1.0;
+          const fadeIn = Math.max(0, Math.min(1, (p - ing.appearAt) / 0.08));
+          const fadeOut = Math.max(0, Math.min(1, (p - nextAppear + 0.05) / 0.08));
+          const bgOpacity = Math.min(fadeIn, 1 - fadeOut) * 0.35;
+          return (
+            <div key={`bg${i}`} style={{
+              position: 'absolute', inset: 0, zIndex: 0,
+              opacity: bgOpacity,
+              transition: 'opacity 0.3s linear',
+              pointerEvents: 'none'
+            }}>
+              <img src={ing.img} alt="" loading="lazy" style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                filter: 'brightness(0.5) saturate(0.7)',
+                transform: 'scale(1.05)'
+              }} />
+            </div>
+          );
+        })}
         {/* Section header */}
         <div className="fb-section-header" style={{ position: 'absolute', top: 100, left: 28, right: 28, display: 'flex', justifyContent: 'space-between' }}>
           <span className="mono" style={{ color: 'var(--muted)' }}>Index 02 — Flavor Breakdown</span>
@@ -273,9 +294,9 @@ function UseItOn() {
   }, []);
 
   const items = [
-    { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png' },
-    { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png' },
-    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png' },
+    { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png', lifestyle: 'uploads/range-original.jpg' },
+    { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png', lifestyle: 'uploads/range-spicy.jpg' },
+    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png', lifestyle: 'uploads/range-citrus.jpg' },
   ];
   const panelCount = items.length;
 
@@ -420,7 +441,7 @@ function UseItOn() {
               {/* Bottle image */}
               <div style={{ flex: '1 1 46%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                 <div className="clip-reveal flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <img src={it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce bottle`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
+                  <img src={it.lifestyle || it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 4, filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
                   {it.comingSoon && (
                     <div style={{
                       position: 'absolute',
