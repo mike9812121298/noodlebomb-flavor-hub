@@ -795,7 +795,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       {/* Top meta strip — live-store transition: lead with availability so the
           first thing every visitor sees is "you can buy this today". */}
       <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 28px', marginTop: 8, gap: 16, flexWrap: 'wrap' }}>
-        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.2em' }}>IN STOCK · SHIPS IN 3 DAYS</span>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.2em' }}>IN STOCK</span>
         <span className="mono" style={{ color: 'var(--muted)' }}>VOL.01 · FIRST RUN</span>
       </div>
 
@@ -892,7 +892,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
           </a>
         </div>
         <div className="hero-trust-line" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, textAlign: 'right', maxWidth: 380 }}>
-          Ships in 3 days from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
+          Ships from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
         </div>
         </div>
       </div>
@@ -1065,19 +1065,11 @@ const inputStyle = {
 };
 
 // ———————————————————————————————————————————— TrustStrip
-// Four-icon strip rendered immediately under the hero so the live-store
-// guarantees (ships in 3 days / free shipping / refund / made in WA) are
-// visible without needing to scroll into product copy.
+// Three-icon strip rendered immediately under the hero so the live-store
+// guarantees (free shipping / refund / made in WA) are visible without needing
+// to scroll into product copy.
 function TrustStrip() {
   const items = [
-    {
-      label: 'Ships in 3 days',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        </svg>
-      ),
-    },
     {
       label: 'Free shipping over $35',
       icon: (
@@ -1206,7 +1198,6 @@ function StickyCartBar({ flavor, flavors }) {
         <span className="scb-dot" style={{ background: f.color }} />
         <span className="scb-name">NoodleBomb {f.name}</span>
         <span className="scb-price">— {f.price}</span>
-        <span className="scb-ship">· Ships in 3 days</span>
       </div>
       <div className="scb-right">
         <a href="/cart.html" className="scb-trio" onClick={addTrio}>3-Pack — $29.99</a>

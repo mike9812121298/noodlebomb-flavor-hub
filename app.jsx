@@ -946,7 +946,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95, wordBreak: 'keep-all', overflowWrap: 'normal', hyphens: 'none' }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                     <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)' }}>
-                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>In Stock · Ships in 3 days</span>
+                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>In Stock</span>
                     </div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
@@ -1233,7 +1233,7 @@ function CitrusSpotlight() {
         <Reveal delay={7}>
           <div style={{ marginTop: 48, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
             <div className="mono" style={{ color: 'rgba(245,241,234,0.55)', letterSpacing: '0.18em' }}>
-              NEW · LIMITED FIRST RUN · SHIPS IN 3 DAYS
+              NEW · LIMITED FIRST RUN
             </div>
             <a
               href="/cart.html"
