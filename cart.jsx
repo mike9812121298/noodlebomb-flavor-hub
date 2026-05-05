@@ -65,6 +65,16 @@ const Check = (props) => (
 
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  const onCheckoutClick = (e) => {
+    if (checkoutLoading) { e.preventDefault(); return; }
+    if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+      setCheckoutLoading(true);
+      window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items))
+        .finally(() => setCheckoutLoading(false));
+    }
+  };
 
   useEffect(() => {
     if (!window.NB_CART) return;
@@ -322,12 +332,11 @@ function CartPage() {
             <a
               className="btn"
               href={getCheckoutUrl(items)}
-              onClick={(e) => {
-                if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
-                  window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items));
-                }
-              }}
-            >Secure checkout — {fmtUSD(subtotal)}</a>
+              onClick={onCheckoutClick}
+              aria-busy={checkoutLoading}
+              aria-disabled={checkoutLoading}
+              style={{ opacity: checkoutLoading ? 0.7 : 1, pointerEvents: checkoutLoading ? 'none' : 'auto' }}
+            >{checkoutLoading ? 'Opening checkout…' : `Secure checkout — ${fmtUSD(subtotal)}`}</a>
             {items.length > 1 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', justifyContent: 'center', paddingTop: 2 }}>
                 {items.map((it) => WIX_URLS[it.slug] && (
@@ -357,12 +366,11 @@ function CartPage() {
         <a
           className="btn"
           href={getCheckoutUrl(items)}
-          onClick={(e) => {
-            if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
-              window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items));
-            }
-          }}
-        >Checkout →</a>
+          onClick={onCheckoutClick}
+          aria-busy={checkoutLoading}
+          aria-disabled={checkoutLoading}
+          style={{ opacity: checkoutLoading ? 0.7 : 1, pointerEvents: checkoutLoading ? 'none' : 'auto' }}
+        >{checkoutLoading ? 'Opening…' : 'Checkout →'}</a>
       </div>
     </>
   );

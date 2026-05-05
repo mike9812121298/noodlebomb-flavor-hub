@@ -125,6 +125,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [cartCount, setCartCount] = useState(() => (window.NB_CART ? window.NB_CART.getItemCount() : 0));
   const [cartItems, setCartItems] = useState(() => (window.NB_CART ? window.NB_CART.getItems() : []));
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
     window.addEventListener('scroll', on, { passive: true }); on();
@@ -748,9 +749,14 @@ function Nav({ flavor, setFlavor, flavors }) {
               {/* Checkout CTA — Shopify when enabled, else Wix product/shop URL */}
               <a
                 href={nbCheckoutUrl(cartItems)}
+                aria-busy={checkoutLoading}
+                aria-disabled={checkoutLoading}
                 onClick={(e) => {
+                  if (checkoutLoading) { e.preventDefault(); return; }
                   if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
-                    window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(cartItems, e, nbCheckoutUrl(cartItems));
+                    setCheckoutLoading(true);
+                    window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(cartItems, e, nbCheckoutUrl(cartItems))
+                      .finally(() => setCheckoutLoading(false));
                   }
                 }}
                 style={{
@@ -760,12 +766,14 @@ function Nav({ flavor, setFlavor, flavors }) {
                   fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
                   letterSpacing: '0.18em', textTransform: 'uppercase',
                   textDecoration: 'none',
-                  transition: 'transform .2s, box-shadow .2s',
+                  transition: 'transform .2s, box-shadow .2s, opacity .2s',
+                  opacity: checkoutLoading ? 0.7 : 1,
+                  pointerEvents: checkoutLoading ? 'none' : 'auto',
                 }}
-                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
+                onMouseOver={(e) => { if (!checkoutLoading) { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; } }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                Checkout — {fmtUSD(cartSubtotal)} →
+                {checkoutLoading ? 'Opening checkout…' : `Checkout — ${fmtUSD(cartSubtotal)} →`}
               </a>
               {/* Per-item shortcuts for multi-item carts */}
               {cartItems.length > 1 && (
