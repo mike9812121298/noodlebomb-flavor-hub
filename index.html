@@ -1218,6 +1218,10 @@
 <!-- cart-store.js sets window.NB_CART. Deferred — runs before the build/*.js
      bundles in document order, so window.NB_CART is ready when they evaluate. -->
 <script defer src="cart-store.js"></script>
+<!-- Shopify config + checkout client. Feature-flagged in shopify-config.js;
+     when enabled:false, these are inert and the Wix flow remains live. -->
+<script defer src="shopify-config.js"></script>
+<script defer src="shopify-checkout.js"></script>
 <!-- Pre-compiled JSX bundles (esbuild via `npm run build:static`).
      Order matches the prior text/babel order: components first (defines
      shared Reveal, Bottle, Nav etc), then drops, then app.jsx (which

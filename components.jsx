@@ -745,9 +745,14 @@ function Nav({ flavor, setFlavor, flavors }) {
                 </span>
               </div>
 
-              {/* Checkout CTA — goes directly to Wix store */}
+              {/* Checkout CTA — Shopify when enabled, else Wix product/shop URL */}
               <a
                 href={nbCheckoutUrl(cartItems)}
+                onClick={(e) => {
+                  if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+                    window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(cartItems, e, nbCheckoutUrl(cartItems));
+                  }
+                }}
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                   gap: 8, padding: '16px 24px', borderRadius: 999,

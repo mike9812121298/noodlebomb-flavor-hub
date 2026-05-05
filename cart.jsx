@@ -319,7 +319,15 @@ function CartPage() {
           </div>
 
           <div style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <a className="btn" href={getCheckoutUrl(items)}>Secure checkout — {fmtUSD(subtotal)}</a>
+            <a
+              className="btn"
+              href={getCheckoutUrl(items)}
+              onClick={(e) => {
+                if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+                  window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items));
+                }
+              }}
+            >Secure checkout — {fmtUSD(subtotal)}</a>
             {items.length > 1 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', justifyContent: 'center', paddingTop: 2 }}>
                 {items.map((it) => WIX_URLS[it.slug] && (
@@ -346,7 +354,15 @@ function CartPage() {
           <small>Subtotal</small>
           <strong>{fmtUSD(subtotal)}</strong>
         </div>
-        <a className="btn" href={getCheckoutUrl(items)}>Checkout →</a>
+        <a
+          className="btn"
+          href={getCheckoutUrl(items)}
+          onClick={(e) => {
+            if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+              window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items));
+            }
+          }}
+        >Checkout →</a>
       </div>
     </>
   );
