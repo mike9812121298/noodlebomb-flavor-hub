@@ -1,7 +1,13 @@
-// Wix Stores deep links (added 2026-04-25)
-// Kept for the mobile drawer "Shop the Range" browse link — purchases now flow
-// through the local cart (cart.html → checkout.html → Wix payment handoff).
+// Wix Stores deep links
 const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+
+// Returns the best Wix URL for a given cart item list.
+// Single unique product → its product page; anything else → the shop page.
+const nbCheckoutUrl = (items) => {
+  if (!items || items.length === 0) return NB_WIX.shop;
+  if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
+  return NB_WIX.shop;
+};
 
 // Single-bottle and trio prices (must match app.jsx FLAVORS).
 const NB_BOTTLE_PRICE = 11.99;
@@ -739,9 +745,9 @@ function Nav({ flavor, setFlavor, flavors }) {
                 </span>
               </div>
 
-              {/* Checkout CTA */}
+              {/* Checkout CTA — goes directly to Wix store */}
               <a
-                href="/checkout.html"
+                href={nbCheckoutUrl(cartItems)}
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                   gap: 8, padding: '16px 24px', borderRadius: 999,
@@ -756,6 +762,16 @@ function Nav({ flavor, setFlavor, flavors }) {
               >
                 Checkout — {fmtUSD(cartSubtotal)} →
               </a>
+              {/* Per-item shortcuts for multi-item carts */}
+              {cartItems.length > 1 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', justifyContent: 'center' }}>
+                  {cartItems.map((it) => NB_WIX[it.slug] && (
+                    <a key={it.slug} href={NB_WIX[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                      {it.name} →
+                    </a>
+                  ))}
+                </div>
+              )}
 
               {/* View full cart escape hatch */}
               <a

@@ -2,6 +2,13 @@
 // Reads from window.NB_CART (cart-store.js).
 const { useEffect, useState, useMemo } = React;
 
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const getCheckoutUrl = (items) => {
+  if (!items || items.length === 0) return WIX_URLS.shop;
+  if (items.length === 1) return WIX_URLS[items[0].slug] || WIX_URLS.shop;
+  return WIX_URLS.shop;
+};
+
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
 
 // Trio bundle — single source of truth for slug/name/price within this file.
@@ -143,18 +150,8 @@ function CartPage() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
         <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Fraunces', fontStyle: 'italic', fontWeight: 400 }}>cart.</span></h1>
-        <div className="steps">
-          <span className="dot active"></span>
-          <span style={{ color: 'var(--accent)' }}>Cart</span>
-          <span className="sep"></span>
-          <span className="dot"></span>
-          <span>Review</span>
-          <span className="sep"></span>
-          <span className="dot"></span>
-          <span>Pay</span>
-        </div>
       </div>
-      <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · final total at checkout</p>
+      <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · final total at checkout on shop.noodlebomb.co</p>
 
       <div className="layout">
         {/* Left column */}
@@ -322,7 +319,16 @@ function CartPage() {
           </div>
 
           <div style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <a className="btn" href="/checkout.html">Secure checkout — {fmtUSD(subtotal)}</a>
+            <a className="btn" href={getCheckoutUrl(items)}>Secure checkout — {fmtUSD(subtotal)}</a>
+            {items.length > 1 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', justifyContent: 'center', paddingTop: 2 }}>
+                {items.map((it) => WIX_URLS[it.slug] && (
+                  <a key={it.slug} href={WIX_URLS[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.13em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                    {it.name} →
+                  </a>
+                ))}
+              </div>
+            )}
             <a className="btn btn-secondary" href="/#lineup" style={{ display: 'inline-flex' }}>Continue shopping</a>
           </div>
 
@@ -340,7 +346,7 @@ function CartPage() {
           <small>Subtotal</small>
           <strong>{fmtUSD(subtotal)}</strong>
         </div>
-        <a className="btn" href="/checkout.html">Checkout →</a>
+        <a className="btn" href={getCheckoutUrl(items)}>Checkout →</a>
       </div>
     </>
   );
