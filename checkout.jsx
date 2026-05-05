@@ -1,7 +1,7 @@
 // NoodleBomb checkout — editorial palette, Wix handoff.
 const { useEffect, useState, useMemo } = React;
 
-const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
 const EMAIL_KEY = 'nb_checkout_email';
 
 const WIX_URLS = {
@@ -303,7 +303,7 @@ function CheckoutPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> Free shipping at $40+</div>
+            <div className="trust-row"><Truck /> Free shipping at $35+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

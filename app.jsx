@@ -946,7 +946,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95, wordBreak: 'keep-all', overflowWrap: 'normal', hyphens: 'none' }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                     <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)' }}>
-                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>Launching May 8</span>
+                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>In Stock · Ships in 3 days</span>
                     </div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
@@ -1060,7 +1060,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               </div>
 
               {/* Microline — "SHIPS FREE" claim removed pending Wix backend
-                  verification (trio is $29.99, below the $40 free-ship line
+                  verification (trio is $29.99, below the $35 free-ship line
                   the local cart enforces; if Wix has a special trio rule
                   Mike can confirm, restore the claim). */}
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
@@ -1233,7 +1233,7 @@ function CitrusSpotlight() {
         <Reveal delay={7}>
           <div style={{ marginTop: 48, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
             <div className="mono" style={{ color: 'rgba(245,241,234,0.55)', letterSpacing: '0.18em' }}>
-              LAUNCHING MAY 8 · LIMITED FIRST RUN
+              NEW · LIMITED FIRST RUN · SHIPS IN 3 DAYS
             </div>
             <a
               href="/cart.html"
@@ -1322,7 +1322,7 @@ function FinalCTA() {
               <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
                 {Array.from({ length: 4 }).map((_, j) => (
                   <span key={j} style={{ paddingRight: 32 }}>
-                    PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $40 ·
+                    PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $35 ·
                   </span>
                 ))}
               </div>
@@ -1384,7 +1384,7 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Citrus Shoyu', WIX_URLS.citrus], ['Spicy Tokyo', WIX_URLS.spicy], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale (MOQ 12)', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry']]]].
+          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Shipping & Returns', '#faq'], ['FAQ', '#faq'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
@@ -1590,8 +1590,10 @@ function App() {
   return (
     <>
       {IS_DEV_MODE && state.spam && <div className="spam-banner">⚡ LIMITED TIME!!! 50% OFF — HURRY — ONLY 3 LEFT!!! ⚡</div>}
+      <StickyCartBar flavor={state.flavor} flavors={FLAVORS} />
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
+      <TrustStrip />
       <FlavorBreakdown flavor={state.flavor} />
       <UseItOn />
       <PourAndCompare flavor={state.flavor} />
@@ -1601,6 +1603,7 @@ function App() {
       <CitrusSpotlight />
       <NextDrop />
       <MonthlyDrop />
+      <FAQ />
       <FinalCTA />
       {IS_DEV_MODE && <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />}
       <InquiryModal open={!!inquiry} kind={inquiry} onClose={() => setInquiry(null)} />

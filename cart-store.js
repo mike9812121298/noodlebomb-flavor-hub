@@ -106,7 +106,7 @@
       remove: remove,
       clear: clear,
       onChange: onChange,
-      FREE_SHIPPING_THRESHOLD: 40
+      FREE_SHIPPING_THRESHOLD: 35
     };
   }
 })();

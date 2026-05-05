@@ -2,7 +2,7 @@
 // Reads from window.NB_CART (cart-store.js).
 const { useEffect, useState, useMemo } = React;
 
-const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
 
 // Trio bundle — single source of truth for slug/name/price within this file.
 // Mirrors app.jsx TRIO and components.jsx NB_TRIO. Keep all three in sync.
@@ -180,7 +180,7 @@ function CartPage() {
 
           {/* Smart Trio upsell — only when cart has items, no trio yet, and user
               hasn't crossed the free-shipping line. Adding the trio flips the
-              order over $40 (assuming any starting subtotal > $10) and saves
+              order over $35 (assuming any starting subtotal > $5) and saves
               the user $5.98 vs buying the same 3 flavors as singles. */}
           {(() => {
             const hasTrio = items.some((i) => i.slug === 'trio');
@@ -328,7 +328,7 @@ function CartPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> Free shipping at $40+</div>
+            <div className="trust-row"><Truck /> Free shipping at $35+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
         </div>

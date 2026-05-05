@@ -41,8 +41,8 @@ function NextDrop() {
         {/* Eyebrow row */}
         <Reveal>
           <div className="nd-eyebrow-row">
-            <span>INDEX 09 — THE NEXT DROP</span>
-            <span>1 / IN DEVELOPMENT</span>
+            <span>INDEX 09 — WHAT'S NEXT</span>
+            <span>1 / COMING SOON</span>
           </div>
         </Reveal>
         <div className="nd-divider" />
@@ -133,7 +133,7 @@ function NextDrop() {
           <div className="nd-notify">
             <div className="nd-notify-label">
               <span className="nd-pulse" />
-              BE FIRST IN LINE
+              GET NOTIFIED
             </div>
             <form className="nd-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
               <input type="hidden" name="_subject" value="NoodleBomb — Notify Me (Next Drop)" />

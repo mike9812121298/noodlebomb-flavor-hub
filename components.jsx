@@ -267,17 +267,16 @@ function Nav({ flavor, setFlavor, flavors }) {
 
   // Cart drawer derived values
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
-  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
   const cartFreeShipping = cartSubtotal >= cartFreeShipThreshold;
   const cartShipRemaining = Math.max(cartFreeShipThreshold - cartSubtotal, 0);
   const cartShipProgress = Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
   const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 
   const navLinks = [
-    ['Sauces', '#lineup'],
-    ['The Range', '#range'],
+    ['Shop', '#lineup'],
     ['Ingredients', '#ingredients'],
-    ['Origin', '#origin'],
+    ['Our Story', '#origin'],
     ['Monthly Box', '#monthly'],
   ];
 
@@ -367,18 +366,6 @@ function Nav({ flavor, setFlavor, flavors }) {
             }}>{cartCount > 9 ? '9+' : cartCount}</span>
           )}
         </a>
-        <a
-          className="btn btn-ghost nav-shop-cta"
-          href="#lineup"
-          onClick={(e) => {
-            // Modifier-click → let browser handle the in-page hash normally.
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-            e.preventDefault();
-            const el = document.querySelector('#lineup');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
-          style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}
-        >Shop</a>
         {/* Hamburger — mobile only */}
         <button
           className="nav-hamburger"
@@ -805,12 +792,11 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
 
   return (
     <section style={{ position: 'relative', minHeight: '100vh', paddingTop: 80, overflow: 'hidden' }}>
-      {/* top meta strip — leads with launch date for above-the-fold urgency
-          (every visitor sees this; lineup-card "Launching May 8" badge is
-          mid-page only). Brand-true: May 8 is the actual launch date. */}
+      {/* Top meta strip — live-store transition: lead with availability so the
+          first thing every visitor sees is "you can buy this today". */}
       <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 28px', marginTop: 8, gap: 16, flexWrap: 'wrap' }}>
-        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600 }}>Launching May 8, 2026</span>
-        <span className="mono" style={{ color: 'var(--muted)' }}>Vol.01 · 2026 Edition</span>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, letterSpacing: '0.2em' }}>IN STOCK · SHIPS IN 3 DAYS</span>
+        <span className="mono" style={{ color: 'var(--muted)' }}>VOL.01 · FIRST RUN</span>
       </div>
 
       {/* Big headline — backdrop wash behind bottle */}
@@ -858,7 +844,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
             <span style={{ color: 'var(--ink-60)' }}>Turns any noodles into shop-level ramen in seconds.</span>
           </div>
         </div>
-        <div className="hero-cta-row" style={{ display:'flex', gap: 10, flexWrap: 'wrap' }}>
+        <div className="hero-cta-col" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12 }}>
+        <div className="hero-cta-row" style={{ display:'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           <a
             href="/cart.html"
             onClick={(e) => nbAddAndOpenCart({
@@ -903,6 +890,10 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
           >
             Try the 3-pack — save $6
           </a>
+        </div>
+        <div className="hero-trust-line" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, textAlign: 'right', maxWidth: 380 }}>
+          Ships in 3 days from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
+        </div>
         </div>
       </div>
 
@@ -1073,4 +1064,156 @@ const inputStyle = {
   outline: 'none',
 };
 
-Object.assign(window, { Reveal, Bottle, Shot, FoodShot, Nav, Hero, InquiryModal });
+// ———————————————————————————————————————————— TrustStrip
+// Four-icon strip rendered immediately under the hero so the live-store
+// guarantees (ships in 3 days / free shipping / refund / made in WA) are
+// visible without needing to scroll into product copy.
+function TrustStrip() {
+  const items = [
+    {
+      label: 'Ships in 3 days',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      ),
+    },
+    {
+      label: 'Free shipping over $35',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <rect x="1" y="3" width="15" height="13" />
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+          <circle cx="5.5" cy="18.5" r="2.5" />
+          <circle cx="18.5" cy="18.5" r="2.5" />
+        </svg>
+      ),
+    },
+    {
+      label: 'Love it or your money back',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      ),
+    },
+    {
+      label: 'Small-batch, made in WA',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+      ),
+    },
+  ];
+  return (
+    <section
+      aria-label="Shopping guarantees"
+      style={{
+        background: 'var(--paper-2)',
+        borderTop: '1px solid var(--line)',
+        borderBottom: '1px solid var(--line)',
+        padding: '28px clamp(24px, 5.5vw, 80px)',
+      }}
+    >
+      <div style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24, alignItems: 'center' }}>
+        {items.map((it, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, justifyContent: 'center' }}>
+            <span style={{ color: 'var(--accent)', flexShrink: 0, opacity: 0.85, display: 'inline-flex' }}>{it.icon}</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--ink-60)' }}>{it.label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ———————————————————————————————————————————— FAQ
+// Six expandable Q&A items above the footer. Mirrors the design: editorial
+// type, plus-icon toggle, anchored at #faq so the footer "Shipping & Returns"
+// and "FAQ" links land here.
+function FAQ() {
+  const [open, setOpen] = useState({});
+  const toggle = (i) => setOpen((prev) => ({ ...prev, [i]: !prev[i] }));
+  const items = [
+    { q: 'How long does a bottle last?', a: 'A 7 oz bottle is roughly 14 servings. Most people get 3–4 weeks of regular use out of one.' },
+    { q: 'Does it need to be refrigerated?', a: 'Refrigerate after opening. Use within 6 months for peak flavor.' },
+    { q: 'What can I put it on besides ramen?', a: 'Rice bowls, dumplings, stir-fry, eggs, roasted vegetables, wings, marinades. If it’s savory, it probably works.' },
+    { q: 'How spicy is Spicy Tokyo?', a: 'Medium heat — noticeable warmth, not a punishment. About a 5 out of 10.' },
+    { q: 'When will my order ship?', a: 'Orders placed by 2pm PT ship the next business day from Bonney Lake, WA. Most US orders arrive in 3–5 days.' },
+    { q: 'What’s your return policy?', a: 'If you don’t love it, email us within 30 days for a full refund. Keep the bottle.' },
+  ];
+  return (
+    <section id="faq" style={{ background: 'var(--paper)', padding: '120px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
+      <div style={{ maxWidth: 880, margin: '0 auto' }}>
+        <Reveal>
+          <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>FAQ</div>
+        </Reveal>
+        <Reveal delay={1}>
+          <h2 className="display" style={{ fontSize: 'clamp(40px, 6vw, 72px)', letterSpacing: '-0.04em', lineHeight: 0.95, margin: '0 0 56px', fontWeight: 700 }}>
+            Questions,<br /><span style={{ color: 'var(--muted)' }}>answered.</span>
+          </h2>
+        </Reveal>
+        {items.map((it, i) => (
+          <Reveal key={i} delay={Math.min(i + 2, 5)}>
+            <div style={{ borderTop: '1px solid var(--line)', cursor: 'pointer' }} onClick={() => toggle(i)}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', gap: 16 }}>
+                <span style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 17, letterSpacing: '-0.01em' }}>{it.q}</span>
+                <span style={{ fontFamily: 'Inter Tight', fontSize: 22, color: 'var(--muted)', flexShrink: 0, transition: 'transform .25s', transform: open[i] ? 'rotate(45deg)' : 'none' }}>+</span>
+              </div>
+              {open[i] && (
+                <div style={{ paddingBottom: 22, fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.6, maxWidth: '60ch' }}>{it.a}</div>
+              )}
+            </div>
+          </Reveal>
+        ))}
+        <div style={{ borderTop: '1px solid var(--line)' }} />
+      </div>
+    </section>
+  );
+}
+
+// ———————————————————————————————————————————— StickyCartBar
+// Slides in from the top once the user scrolls past the hero. Always shows the
+// current flavor + price; on desktop also shows the 3-pack alternative. Uses
+// the same window NB_CART + 'nb-open-cart' dispatch the rest of the site uses.
+function StickyCartBar({ flavor, flavors }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  const f = flavors[flavor] || flavors.original;
+  const addCurrent = (e) => {
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+    if (e) e.preventDefault();
+    if (window.NB_CART) window.NB_CART.add({ slug: flavor, name: f.name, price: f.priceUsd });
+    window.dispatchEvent(new CustomEvent('nb-open-cart'));
+  };
+  const addTrio = (e) => {
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+    if (e) e.preventDefault();
+    if (window.NB_CART) window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
+    window.dispatchEvent(new CustomEvent('nb-open-cart'));
+  };
+  return (
+    <div className={'sticky-cart-bar' + (visible ? ' visible' : '')} aria-hidden={!visible}>
+      <div className="scb-left">
+        <span className="scb-dot" style={{ background: f.color }} />
+        <span className="scb-name">NoodleBomb {f.name}</span>
+        <span className="scb-price">— {f.price}</span>
+        <span className="scb-ship">· Ships in 3 days</span>
+      </div>
+      <div className="scb-right">
+        <a href="/cart.html" className="scb-trio" onClick={addTrio}>3-Pack — $29.99</a>
+        <a href="/cart.html" className="scb-btn" onClick={addCurrent}>Add to Cart →</a>
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, { Reveal, Bottle, Shot, FoodShot, Nav, Hero, InquiryModal, TrustStrip, FAQ, StickyCartBar });
