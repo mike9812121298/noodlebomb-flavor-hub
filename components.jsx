@@ -815,6 +815,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(14,13,12,0.35) 0%, rgba(14,13,12,0.15) 30%, rgba(14,13,12,0.5) 65%, rgba(14,13,12,0.92) 100%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(14,13,12,0.7) 0%, rgba(14,13,12,0) 50%)', pointerEvents: 'none' }} />
+        {/* Mobile-only right-side overlay so the bottle photo doesn't fight the headline */}
+        <div className="hero-bg-overlay-mobile" aria-hidden="true" />
       </div>
 
       {/* Top meta strip — IN STOCK · SHIPS IN 3 DAYS / Vol.01 · First Run */}

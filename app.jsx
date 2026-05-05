@@ -29,11 +29,11 @@ const FLAVORS = {
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#C2410C', ink: '#F5F1EA',
+  spicy: { name: 'Spicy Tokyo', tag: 'No.02 · Spicy Tokyo', short: 'No.02', color: '#C2410C', ink: '#F5F1EA',
     line1: 'Umami meets fire.',
     line2: 'Dark soy, roasted chili, sesame.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
+  citrus: { name: 'Citrus Shoyu', tag: 'No.03 · Citrus Shoyu', short: 'No.03', color: '#C9A227', ink: '#0B0B0B',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
