@@ -14,6 +14,18 @@
 
   if (typeof window === 'undefined') return;
 
+  // Positive-match: a valid Shopify variant GID looks like
+  // "gid://shopify/ProductVariant/1234567890" — must have the prefix
+  // AND non-empty content after it. Catches "", "TODO", "REPLACE_ME",
+  // and the prefix-only string "gid://shopify/ProductVariant/".
+  var VARIANT_GID_PREFIX = 'gid://shopify/ProductVariant/';
+  function isValidVariantGid(v) {
+    return typeof v === 'string'
+      && v.lastIndexOf(VARIANT_GID_PREFIX, 0) === 0
+      && v.length > VARIANT_GID_PREFIX.length
+      && v.indexOf('REPLACE') === -1;
+  }
+
   function isEnabled() {
     var c = window.NB_SHOPIFY;
     if (!c || !c.enabled) return false;
@@ -21,19 +33,16 @@
     if (!c.storefrontToken || c.storefrontToken.indexOf('REPLACE') !== -1) return false;
     // Require at least one mapped variant — otherwise no checkout can succeed.
     var v = c.variantIds || {};
-    var hasMapped = false;
     for (var k in v) {
-      if (v[k] && v[k].indexOf('REPLACE') === -1) { hasMapped = true; break; }
+      if (isValidVariantGid(v[k])) return true;
     }
-    if (!hasMapped) return false;
-    return true;
+    return false;
   }
 
   function variantIdFor(slug) {
     var c = window.NB_SHOPIFY;
     var id = c && c.variantIds && c.variantIds[slug];
-    if (!id || id.indexOf('REPLACE') !== -1) return null;
-    return id;
+    return isValidVariantGid(id) ? id : null;
   }
 
   function buildLines(items) {

@@ -26,11 +26,15 @@
  *   5. Run `npm run build:static` and deploy.
  *
  * Token note: we use the *public* Storefront API access token (no shpat_
- * prefix). Public tokens are intended for client-side embedding — they're
- * scoped to allowed domains, so even though the value is visible in the
- * compiled JS bundle, only requests from approved origins succeed. The
- * private `shpat_...` token is for server-to-server use; do not put it in
- * client-side code.
+ * prefix). It IS visible in the compiled JS bundle to anyone who views
+ * source — that's intended; the scopes are read-only/unauthenticated and
+ * rate-limited per IP. The "safety" comes from:
+ *   (a) the unauthenticated_* scopes can't read orders, customers, etc.,
+ *   (b) the Headless app's "Allowed domains" list, which IS configurable
+ *       and SHOULD be set to noodlebomb.co + www.noodlebomb.co before
+ *       flipping the flag — without it, anyone scraping the bundle can
+ *       reuse the token from any origin (still scoped, but rude).
+ * The private `shpat_...` token must NEVER ship in client-side code.
  *
  * The Wix flow remains the fallback when enabled is false OR if the
  * Shopify API call errors at runtime.
@@ -52,7 +56,9 @@
     // Public Storefront API access token (origin-restricted; safe in JS).
     storefrontToken: '6e1316274bfe7f5fcc9c8edd8a4cdcf7',
 
-    // Storefront API version (pin to a known version; bump quarterly).
+    // Storefront API version. Shopify deprecates each version on a rolling
+    // 12-month window. SUNSET CHECK: bump before 2025-10-01 (review quarterly).
+    // See https://shopify.dev/docs/api/usage/versioning
     apiVersion: '2024-10',
 
     // ── Product mapping ─────────────────────────────────────────────
