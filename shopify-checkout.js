@@ -17,8 +17,15 @@
   function isEnabled() {
     var c = window.NB_SHOPIFY;
     if (!c || !c.enabled) return false;
-    if (!c.domain || c.domain.indexOf('REPLACE') === 0) return false;
-    if (!c.storefrontToken || c.storefrontToken.indexOf('REPLACE') === 0) return false;
+    if (!c.domain || c.domain.indexOf('REPLACE') !== -1) return false;
+    if (!c.storefrontToken || c.storefrontToken.indexOf('REPLACE') !== -1) return false;
+    // Require at least one mapped variant — otherwise no checkout can succeed.
+    var v = c.variantIds || {};
+    var hasMapped = false;
+    for (var k in v) {
+      if (v[k] && v[k].indexOf('REPLACE') === -1) { hasMapped = true; break; }
+    }
+    if (!hasMapped) return false;
     return true;
   }
 
