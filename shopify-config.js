@@ -67,10 +67,10 @@
     // Format: 'gid://shopify/ProductVariant/1234567890'
     // Captured from paid store via Storefront API 2026-05-06.
     variantIds: {
-      original: 'gid://shopify/ProductVariant/53996111429942',
-      citrus:   'gid://shopify/ProductVariant/53996155568438',
-      spicy:    'gid://shopify/ProductVariant/53996166480182',
-      trio:     'gid://shopify/ProductVariant/53996172083510'
+      original: 'gid://shopify/ProductVariant/53998041596214',
+      citrus:   'gid://shopify/ProductVariant/53998041071926',
+      spicy:    'gid://shopify/ProductVariant/53998042120502',
+      trio:     'gid://shopify/ProductVariant/53998042644790'
     }
   };
 })();
