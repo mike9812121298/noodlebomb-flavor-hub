@@ -1,6 +1,6 @@
 /* NoodleBomb Shopify config — feature-flagged, OFF by default.
  *
- * Status: store + token captured. Variant IDs pending until products exist.
+ * Status: PAID store wired. Variant GIDs captured 2026-05-06.
  *
  * To go live with Shopify checkout:
  *   1. Confirm 4 products are created in the Shopify store and published
@@ -11,7 +11,7 @@
  *        - The NoodleBomb Trio ($29.99)
  *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:
- *        fetch('https://noodlebomb.myshopify.com/api/2026-04/graphql.json', {
+ *        fetch('https://nu2vqa-ma.myshopify.com/api/2026-04/graphql.json', {
  *          method: 'POST',
  *          headers: {
  *            'Content-Type': 'application/json',
@@ -49,10 +49,12 @@
     enabled: true,
 
     // ── Store identity ──────────────────────────────────────────────
-    domain: 'noodlebomb.myshopify.com',
+    // Migrated from dev store noodlebomb.myshopify.com → paid store nu2vqa-ma.myshopify.com on 2026-05-06.
+    domain: 'nu2vqa-ma.myshopify.com',
 
     // Public Storefront API access token (origin-restricted; safe in JS).
-    storefrontToken: '6e1316274bfe7f5fcc9c8edd8a4cdcf7',
+    // Generated via Headless app on paid store 2026-05-06.
+    storefrontToken: 'f59fc9587d70903d22d0b8cc53e882b7',
 
     // Storefront API version. Shopify deprecates each version on a rolling
     // 12-month window. SUNSET CHECK: bump before 2027-04-01 (review quarterly).
@@ -63,12 +65,12 @@
     // ── Product mapping ─────────────────────────────────────────────
     // Map local cart slugs → Shopify variant GIDs.
     // Format: 'gid://shopify/ProductVariant/1234567890'
+    // Captured from paid store via Storefront API 2026-05-06.
     variantIds: {
-      original: 'gid://shopify/ProductVariant/45491811582131',
-      citrus:   'gid://shopify/ProductVariant/45491823706291',
-      spicy:    'gid://shopify/ProductVariant/45491823804595',
-      trio:     'gid://shopify/ProductVariant/45491823902899'
+      original: 'gid://shopify/ProductVariant/53996111429942',
+      citrus:   'gid://shopify/ProductVariant/53996155568438',
+      spicy:    'gid://shopify/ProductVariant/53996166480182',
+      trio:     'gid://shopify/ProductVariant/53996172083510'
     }
   };
 })();
-
