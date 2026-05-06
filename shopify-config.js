@@ -9,10 +9,7 @@
  *        - Citrus Shoyu ($11.99)
  *        - Spicy Tokyo ($11.99)
  *        - The NoodleBomb Trio ($29.99)
- *   2. Add `noodlebomb.co` and `www.noodlebomb.co` to the Headless app's
- *      "Allowed domains" so the public token works from the production site.
- *      Without this, the cartCreate call returns 403 "host_not_allowed".
- *   3. Fill in the variantIds map below with each product's variant GID.
+ *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:
  *        fetch('https://noodlebomb.myshopify.com/api/2024-10/graphql.json', {
  *          method: 'POST',
@@ -22,19 +19,22 @@
  *          },
  *          body: JSON.stringify({ query: '{ products(first:20){ edges{ node{ title handle variants(first:1){ edges{ node{ id } } } } } } }' })
  *        }).then(r=>r.json()).then(console.log)
- *   4. Set `enabled: true`.
- *   5. Run `npm run build:static` and deploy.
+ *   3. Set `enabled: true`.
+ *   4. Run `npm run build:static` and deploy.
  *
  * Token note: we use the *public* Storefront API access token (no shpat_
  * prefix). It IS visible in the compiled JS bundle to anyone who views
- * source — that's intended; the scopes are read-only/unauthenticated and
- * rate-limited per IP. The "safety" comes from:
- *   (a) the unauthenticated_* scopes can't read orders, customers, etc.,
- *   (b) the Headless app's "Allowed domains" list, which IS configurable
- *       and SHOULD be set to noodlebomb.co + www.noodlebomb.co before
- *       flipping the flag — without it, anyone scraping the bundle can
- *       reuse the token from any origin (still scoped, but rude).
- * The private `shpat_...` token must NEVER ship in client-side code.
+ * source — that's intended. The Headless sales channel does NOT expose a
+ * configurable per-token origin allowlist in its current UI (verified
+ * 2026-05). The token's safety relies on:
+ *   (a) the unauthenticated_* scopes — can't read orders, customers, or
+ *       admin data; can only query published products and create carts,
+ *   (b) Shopify's per-IP rate limiting on the Storefront API,
+ *   (c) the fact that "abusing" cartCreate just generates checkout URLs
+ *       that someone would still have to pay through to cause damage.
+ *
+ * Acceptable risk for these scopes. The private `shpat_...` token must
+ * NEVER ship in client-side code — that one CAN read sensitive data.
  *
  * The Wix flow remains the fallback when enabled is false OR if the
  * Shopify API call errors at runtime.
