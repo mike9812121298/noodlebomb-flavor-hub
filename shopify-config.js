@@ -64,12 +64,11 @@
     // ── Product mapping ─────────────────────────────────────────────
     // Map local cart slugs → Shopify variant GIDs.
     // Format: 'gid://shopify/ProductVariant/1234567890'
-    // PENDING: will be filled in once products exist in the Shopify store.
     variantIds: {
-      original: 'gid://shopify/ProductVariant/REPLACE',
-      citrus:   'gid://shopify/ProductVariant/REPLACE',
-      spicy:    'gid://shopify/ProductVariant/REPLACE',
-      trio:     'gid://shopify/ProductVariant/REPLACE'
+      original: 'gid://shopify/ProductVariant/45491811582131',
+      citrus:   'gid://shopify/ProductVariant/45491823706291',
+      spicy:    'gid://shopify/ProductVariant/45491823804595',
+      trio:     'gid://shopify/ProductVariant/45491823902899'
     }
   };
 })();
