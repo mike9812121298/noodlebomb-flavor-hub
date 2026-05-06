@@ -1,7 +1,7 @@
 // NoodleBomb checkout — editorial palette, Wix handoff.
 const { useEffect, useState, useMemo } = React;
 
-const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
 const EMAIL_KEY = 'nb_checkout_email';
 
 const WIX_URLS = {
@@ -45,10 +45,6 @@ function CheckoutPage() {
   const [emailTouched, setEmailTouched] = useState(false);
   const [marketing, setMarketing] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
-  // Tracks which slugs the user has already clicked through to Wix.
-  // Lets the multi-item handoff checklist show progress so the user
-  // can pick up where they left off if they get distracted.
-  const [openedSlugs, setOpenedSlugs] = useState(() => new Set());
 
   // Restore email
   useEffect(() => {
@@ -90,10 +86,7 @@ function CheckoutPage() {
     qty: it.qty,
     url: WIX_URLS[it.slug] || WIX_URLS.shop,
   }));
-  // Pay-button target: single-item carts go straight to that product;
-  // multi-item carts open the first product (rest are listed in the
-  // redirect-confirm panel as direct links the user clicks in order).
-  const wixUrl = wixLinks.length > 0 ? wixLinks[0].url : WIX_URLS.shop;
+  const wixUrl = wixLinks.length === 1 ? wixLinks[0].url : WIX_URLS.shop;
   const emailValid = validEmail(email);
 
   const onEmailChange = (e) => {
@@ -104,18 +97,9 @@ function CheckoutPage() {
     }
   };
 
-  const markOpened = (slug) => {
-    setOpenedSlugs((prev) => {
-      const next = new Set(prev);
-      next.add(slug);
-      return next;
-    });
-  };
-
   const proceed = () => {
     if (!emailValid) { setEmailTouched(true); return; }
     setRedirecting(true);
-    if (wixLinks[0]) markOpened(wixLinks[0].slug);
     window.open(wixUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -201,32 +185,10 @@ function CheckoutPage() {
             <div className="ico"><Shield /></div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <h3>You'll finish on our secure store.</h3>
-              {items.length === 1 ? (
-                <p>
-                  Payment, shipping, and tax are handled on <strong>shop.noodlebomb.co</strong>.
-                  When you click below, we'll open the product page in a new tab.
-                  Your cart here stays saved.
-                </p>
-              ) : (
-                <>
-                  <p>
-                    Payment is handled on <strong>shop.noodlebomb.co</strong>. Because you have{' '}
-                    {itemCount} items, you'll add each one over there in this order:
-                  </p>
-                  <ol className="handoff-items">
-                    {wixLinks.map((it, i) => (
-                      <li key={it.slug}>
-                        <span className="num">{i + 1}.</span>
-                        <span className="lbl">{it.name}{it.qty > 1 ? ' × ' + it.qty : ''}</span>
-                        <a href={it.url} target="_blank" rel="noopener noreferrer">Open →</a>
-                      </li>
-                    ))}
-                  </ol>
-                  <p style={{ marginTop: 10 }}>
-                    Click <strong>Pay</strong> to start with item #1 — we'll open the rest from a checklist on this page.
-                  </p>
-                </>
-              )}
+              <p>
+                Payment, shipping, and tax are handled on <strong>shop.noodlebomb.co</strong> — our Wix store.
+                When you click below, we'll open it in a new tab.
+              </p>
             </div>
           </div>
         </div>
@@ -260,7 +222,7 @@ function CheckoutPage() {
             </button>
           </div>
 
-          {redirecting && wixLinks.length <= 1 && (
+          {redirecting && (
             <div className="redirect-confirm">
               <strong>New tab opened.</strong>
               If nothing happened, your browser may have blocked the popup —{' '}
@@ -271,39 +233,9 @@ function CheckoutPage() {
             </div>
           )}
 
-          {redirecting && wixLinks.length > 1 && (
-            <div className="redirect-confirm">
-              <strong>Item {openedSlugs.size} of {wixLinks.length} opened.</strong>
-              Add it to your cart on shop.noodlebomb.co, then come back here and click the next one.
-              <ol className="handoff-items handoff-items--checklist">
-                {wixLinks.map((it) => {
-                  const done = openedSlugs.has(it.slug);
-                  return (
-                    <li key={it.slug} className={done ? 'is-done' : ''}>
-                      <span className="num" aria-hidden="true">{done ? '✓' : '·'}</span>
-                      <span className="lbl">{it.name}{it.qty > 1 ? ' × ' + it.qty : ''}</span>
-                      <a
-                        href={it.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => markOpened(it.slug)}
-                      >{done ? 'Reopen →' : 'Open →'}</a>
-                    </li>
-                  );
-                })}
-              </ol>
-              <p style={{ margin: '10px 0 0', fontSize: 11, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                When all are added on shop.noodlebomb.co, complete checkout there.
-              </p>
-              <button onClick={() => { window.NB_CART && window.NB_CART.clear(); window.location.href = '/'; }}>
-                I finished my order — clear my cart
-              </button>
-            </div>
-          )}
-
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> Free shipping at $40+</div>
+            <div className="trust-row"><Truck /> Free shipping at $35+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

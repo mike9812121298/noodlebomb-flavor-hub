@@ -1,7 +1,13 @@
-// Wix Stores deep links (added 2026-04-25)
-// Kept for the mobile drawer "Shop the Range" browse link — purchases now flow
-// through the local cart (cart.html → checkout.html → Wix payment handoff).
+// Wix Stores deep links
 const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+
+// Returns the best Wix URL for a given cart item list.
+// Single unique product → its product page; anything else → the shop page.
+const nbCheckoutUrl = (items) => {
+  if (!items || items.length === 0) return NB_WIX.shop;
+  if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
+  return NB_WIX.shop;
+};
 
 // Single-bottle and trio prices (must match app.jsx FLAVORS).
 const NB_BOTTLE_PRICE = 11.99;
@@ -119,6 +125,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [cartCount, setCartCount] = useState(() => (window.NB_CART ? window.NB_CART.getItemCount() : 0));
   const [cartItems, setCartItems] = useState(() => (window.NB_CART ? window.NB_CART.getItems() : []));
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
     window.addEventListener('scroll', on, { passive: true }); on();
@@ -267,17 +274,16 @@ function Nav({ flavor, setFlavor, flavors }) {
 
   // Cart drawer derived values
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
-  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
   const cartFreeShipping = cartSubtotal >= cartFreeShipThreshold;
   const cartShipRemaining = Math.max(cartFreeShipThreshold - cartSubtotal, 0);
   const cartShipProgress = Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
   const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 
   const navLinks = [
-    ['Sauces', '#lineup'],
-    ['The Range', '#range'],
+    ['Shop', '#lineup'],
     ['Ingredients', '#ingredients'],
-    ['Origin', '#origin'],
+    ['Our Story', '#origin'],
     ['Monthly Box', '#monthly'],
   ];
 
@@ -367,18 +373,6 @@ function Nav({ flavor, setFlavor, flavors }) {
             }}>{cartCount > 9 ? '9+' : cartCount}</span>
           )}
         </a>
-        <a
-          className="btn btn-ghost nav-shop-cta"
-          href="#lineup"
-          onClick={(e) => {
-            // Modifier-click → let browser handle the in-page hash normally.
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-            e.preventDefault();
-            const el = document.querySelector('#lineup');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
-          style={{ padding: '8px 18px', fontSize: 12, textDecoration: 'none', display: 'inline-block' }}
-        >Shop</a>
         {/* Hamburger — mobile only */}
         <button
           className="nav-hamburger"
@@ -752,9 +746,19 @@ function Nav({ flavor, setFlavor, flavors }) {
                 </span>
               </div>
 
-              {/* Checkout CTA */}
+              {/* Checkout CTA — Shopify when enabled, else Wix product/shop URL */}
               <a
-                href="/checkout.html"
+                href={nbCheckoutUrl(cartItems)}
+                aria-busy={checkoutLoading}
+                aria-disabled={checkoutLoading}
+                onClick={(e) => {
+                  if (checkoutLoading) { e.preventDefault(); return; }
+                  if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+                    setCheckoutLoading(true);
+                    window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(cartItems, e, nbCheckoutUrl(cartItems))
+                      .finally(() => setCheckoutLoading(false));
+                  }
+                }}
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                   gap: 8, padding: '16px 24px', borderRadius: 999,
@@ -762,13 +766,25 @@ function Nav({ flavor, setFlavor, flavors }) {
                   fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
                   letterSpacing: '0.18em', textTransform: 'uppercase',
                   textDecoration: 'none',
-                  transition: 'transform .2s, box-shadow .2s',
+                  transition: 'transform .2s, box-shadow .2s, opacity .2s',
+                  opacity: checkoutLoading ? 0.7 : 1,
+                  pointerEvents: checkoutLoading ? 'none' : 'auto',
                 }}
-                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
+                onMouseOver={(e) => { if (!checkoutLoading) { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; } }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                Checkout — {fmtUSD(cartSubtotal)} →
+                {checkoutLoading ? 'Opening checkout…' : `Checkout — ${fmtUSD(cartSubtotal)} →`}
               </a>
+              {/* Per-item shortcuts for multi-item carts */}
+              {cartItems.length > 1 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', justifyContent: 'center' }}>
+                  {cartItems.map((it) => NB_WIX[it.slug] && (
+                    <a key={it.slug} href={NB_WIX[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                      {it.name} →
+                    </a>
+                  ))}
+                </div>
+              )}
 
               {/* View full cart escape hatch */}
               <a
@@ -819,9 +835,9 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         <div className="hero-bg-overlay-mobile" aria-hidden="true" />
       </div>
 
-      {/* Top meta strip — IN STOCK · SHIPS IN 3 DAYS / Vol.01 · First Run */}
+      {/* Top meta strip — IN STOCK / Vol.01 · First Run */}
       <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 clamp(24px, 5.5vw, 80px)', marginTop: 88, gap: 16, flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
-        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>IN STOCK · SHIPS IN 3 DAYS</span>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>IN STOCK</span>
         <span className="mono" style={{ color: 'var(--ink-40)' }}>Vol.01 · First Run</span>
       </div>
 
@@ -880,7 +896,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </div>
         {/* Trust line under CTAs */}
         <div style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
-          Ships in 3 days from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
+          Ships from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
         </div>
       </div>
 
@@ -1051,5 +1067,6 @@ const inputStyle = {
   fontSize: 14,
   outline: 'none',
 };
+
 
 Object.assign(window, { Reveal, Bottle, Shot, FoodShot, Nav, Hero, InquiryModal });

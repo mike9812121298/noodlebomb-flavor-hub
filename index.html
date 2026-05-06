@@ -498,6 +498,53 @@
   }
   @keyframes blink { 50% { background: #fff200; color: #ff1f1f; } }
 
+  /* Sticky Add-to-Cart bar — slides in once the user scrolls past the hero. */
+  .sticky-cart-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+    background: rgba(8,7,6,0.92);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 clamp(24px, 5.5vw, 80px);
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    transform: translateY(-100%);
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .sticky-cart-bar.visible { transform: translateY(0); }
+  .sticky-cart-bar .scb-left { display: flex; align-items: center; gap: 14px; }
+  .sticky-cart-bar .scb-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); flex-shrink: 0; }
+  .sticky-cart-bar .scb-name { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: -0.02em; }
+  .sticky-cart-bar .scb-price { font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--ink-60); margin-left: 4px; }
+  .sticky-cart-bar .scb-ship { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--ink-40); text-transform: uppercase; }
+  .sticky-cart-bar .scb-right { display: flex; align-items: center; gap: 10px; }
+  .sticky-cart-bar .scb-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 999px;
+    background: var(--accent); color: var(--accent-ink);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .sticky-cart-bar .scb-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(139,30,30,0.4); }
+  .sticky-cart-bar .scb-trio {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 10px 16px; border-radius: 999px;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line-strong);
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition: border-color .2s, background .2s, transform .2s;
+  }
+  .sticky-cart-bar .scb-trio:hover { border-color: var(--ink); background: rgba(245,241,234,0.04); transform: translateY(-1px); }
+  @media (max-width: 768px) {
+    .sticky-cart-bar .scb-ship { display: none; }
+    .sticky-cart-bar .scb-trio { display: none; }
+    .sticky-cart-bar .scb-price { display: none; }
+  }
+
   ::selection { background: var(--accent); color: var(--accent-ink); }
 
   /* ── Apple-feel animations ── */
@@ -1268,13 +1315,17 @@
   <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> — Single-origin shoyu, barrel-aged. Fall 2026.</li>
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
-<p style="opacity:0.7;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Three flavors kept, forty rejected. Made by hand in the Pacific Northwest. Free shipping at $40.</p>
+<p style="opacity:0.7;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Three flavors kept, forty rejected. Made by hand in the Pacific Northwest. Free shipping at $35.</p>
 <p><a href="https://shop.noodlebomb.co/category/all-products" style="display:inline-block;color:#F0EBE3;background:#8B1E1E;padding:14px 28px;text-decoration:none;font-weight:600;border-radius:999px;">Shop the Range →</a></p>
 </div></noscript></div></main>
 
 <!-- cart-store.js sets window.NB_CART. Deferred — runs before the build/*.js
      bundles in document order, so window.NB_CART is ready when they evaluate. -->
 <script defer src="cart-store.js"></script>
+<!-- Shopify config + checkout client. Feature-flagged in shopify-config.js;
+     when enabled:false, these are inert and the Wix flow remains live. -->
+<script defer src="shopify-config.js"></script>
+<script defer src="shopify-checkout.js"></script>
 <!-- Pre-compiled JSX bundles (esbuild via `npm run build:static`).
      Order matches the prior text/babel order: components first (defines
      shared Reveal, Bottle, Nav etc), then drops, then app.jsx (which

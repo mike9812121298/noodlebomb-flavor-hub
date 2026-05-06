@@ -440,7 +440,7 @@ function UseItOn() {
               </div>
               {/* Bottle image */}
               <div style={{ flex: '1 1 46%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
-                <div className="clip-reveal flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                <div className="flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                   <img src={it.lifestyle || it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 4, filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
                   {it.comingSoon && (
                     <div style={{
@@ -897,7 +897,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95, wordBreak: 'keep-all', overflowWrap: 'normal', hyphens: 'none' }}>{f.name}.</h3>
                     <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{f.line1} {f.line2}</div>
                     <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)' }}>
-                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>IN STOCK · SHIPS IN 3 DAYS</span>
+                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>In Stock</span>
                     </div>
                   </div>
                   <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
@@ -1011,7 +1011,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               </div>
 
               {/* Microline — "SHIPS FREE" claim removed pending Wix backend
-                  verification (trio is $29.99, below the $40 free-ship line
+                  verification (trio is $29.99, below the $35 free-ship line
                   the local cart enforces; if Wix has a special trio rule
                   Mike can confirm, restore the claim). */}
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
@@ -1184,7 +1184,7 @@ function CitrusSpotlight() {
         <Reveal delay={7}>
           <div style={{ marginTop: 48, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 24 }}>
             <div className="mono" style={{ color: 'rgba(245,241,234,0.55)', letterSpacing: '0.18em' }}>
-              NEW · LIMITED FIRST RUN · SHIPS IN 3 DAYS
+              NEW · LIMITED FIRST RUN
             </div>
             <a
               href="/cart.html"
@@ -1273,7 +1273,7 @@ function FinalCTA() {
               <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
                 {Array.from({ length: 4 }).map((_, j) => (
                   <span key={j} style={{ paddingRight: 32 }}>
-                    PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $40 ·
+                    PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $35 ·
                   </span>
                 ))}
               </div>
@@ -1457,7 +1457,6 @@ function Tweaks({ state, set, open, setOpen }) {
 // ——————————————————————————— TrustStrip — 4-icon trust signals (under hero)
 function TrustStrip() {
   const items = [
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>, label: 'Ships in 3 days' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: 'Free shipping over $35' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: 'Love it or your money back' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in WA' },
@@ -1487,22 +1486,27 @@ function StickyCartBar({ flavor, flavors }) {
   }, []);
   const f = flavors[flavor] || flavors.original;
   return (
-    <div className={'sticky-cart-bar' + (visible ? ' visible' : '')}>
+    <div
+      className={'sticky-cart-bar' + (visible ? ' visible' : '')}
+      aria-hidden={!visible}
+      inert={!visible ? '' : undefined}
+    >
       <div className="scb-left">
         <span className="scb-dot" style={{ background: f.color }} />
         <span className="scb-name">NoodleBomb {f.name}</span>
         <span className="scb-price">— {f.price}</span>
-        <span className="scb-ship">· Ships in 3 days</span>
       </div>
       <div className="scb-right">
         <a
           href="/cart.html"
           className="scb-trio"
+          tabIndex={visible ? undefined : -1}
           onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
         >3-Pack — $29.99</a>
         <a
           href="/cart.html"
           className="scb-btn"
+          tabIndex={visible ? undefined : -1}
           onClick={(e) => addAndOpenCart({ slug: flavor, name: f.name, price: f.priceUsd }, e)}
         >Add to Cart →</a>
       </div>
@@ -1533,13 +1537,25 @@ function FAQ() {
         </Reveal>
         {items.map((it, i) => (
           <Reveal key={i} delay={Math.min(i + 2, 5)}>
-            <div style={{ borderTop: '1px solid var(--line)', cursor: 'pointer' }} onClick={() => toggle(i)}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 0', gap: 16 }}>
+            <div style={{ borderTop: '1px solid var(--line)' }}>
+              <button
+                type="button"
+                onClick={() => toggle(i)}
+                aria-expanded={!!open[i]}
+                aria-controls={`faq-panel-${i}`}
+                style={{
+                  width: '100%',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '22px 0', gap: 16,
+                  background: 'transparent', border: 0, color: 'inherit',
+                  cursor: 'pointer', textAlign: 'left', font: 'inherit',
+                }}
+              >
                 <span style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 17, letterSpacing: '-0.01em' }}>{it.q}</span>
-                <span style={{ fontFamily: 'Inter Tight', fontSize: 22, color: 'var(--muted)', flexShrink: 0, transition: 'transform .25s', transform: open[i] ? 'rotate(45deg)' : 'none' }}>+</span>
-              </div>
+                <span aria-hidden="true" style={{ fontFamily: 'Inter Tight', fontSize: 22, color: 'var(--muted)', flexShrink: 0, transition: 'transform .25s', transform: open[i] ? 'rotate(45deg)' : 'none' }}>+</span>
+              </button>
               {open[i] && (
-                <div style={{ paddingBottom: 22, fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.6, maxWidth: '60ch' }}>{it.a}</div>
+                <div id={`faq-panel-${i}`} style={{ paddingBottom: 22, fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.6, maxWidth: '60ch' }}>{it.a}</div>
               )}
             </div>
           </Reveal>

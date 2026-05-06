@@ -2,7 +2,14 @@
 // Reads from window.NB_CART (cart-store.js).
 const { useEffect, useState, useMemo } = React;
 
-const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 40;
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const getCheckoutUrl = (items) => {
+  if (!items || items.length === 0) return WIX_URLS.shop;
+  if (items.length === 1) return WIX_URLS[items[0].slug] || WIX_URLS.shop;
+  return WIX_URLS.shop;
+};
+
+const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
 
 // Trio bundle — single source of truth for slug/name/price within this file.
 // Mirrors app.jsx TRIO and components.jsx NB_TRIO. Keep all three in sync.
@@ -58,6 +65,16 @@ const Check = (props) => (
 
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  const onCheckoutClick = (e) => {
+    if (checkoutLoading) { e.preventDefault(); return; }
+    if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+      setCheckoutLoading(true);
+      window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items))
+        .finally(() => setCheckoutLoading(false));
+    }
+  };
 
   useEffect(() => {
     if (!window.NB_CART) return;
@@ -143,18 +160,8 @@ function CartPage() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
         <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Fraunces', fontStyle: 'italic', fontWeight: 400 }}>cart.</span></h1>
-        <div className="steps">
-          <span className="dot active"></span>
-          <span style={{ color: 'var(--accent)' }}>Cart</span>
-          <span className="sep"></span>
-          <span className="dot"></span>
-          <span>Review</span>
-          <span className="sep"></span>
-          <span className="dot"></span>
-          <span>Pay</span>
-        </div>
       </div>
-      <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · final total at checkout</p>
+      <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · final total at checkout on shop.noodlebomb.co</p>
 
       <div className="layout">
         {/* Left column */}
@@ -180,7 +187,7 @@ function CartPage() {
 
           {/* Smart Trio upsell — only when cart has items, no trio yet, and user
               hasn't crossed the free-shipping line. Adding the trio flips the
-              order over $40 (assuming any starting subtotal > $10) and saves
+              order over $35 (assuming any starting subtotal > $5) and saves
               the user $5.98 vs buying the same 3 flavors as singles. */}
           {(() => {
             const hasTrio = items.some((i) => i.slug === 'trio');
@@ -322,13 +329,29 @@ function CartPage() {
           </div>
 
           <div style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <a className="btn" href="/checkout.html">Secure checkout — {fmtUSD(subtotal)}</a>
+            <a
+              className="btn"
+              href={getCheckoutUrl(items)}
+              onClick={onCheckoutClick}
+              aria-busy={checkoutLoading}
+              aria-disabled={checkoutLoading}
+              style={{ opacity: checkoutLoading ? 0.7 : 1, pointerEvents: checkoutLoading ? 'none' : 'auto' }}
+            >{checkoutLoading ? 'Opening checkout…' : `Secure checkout — ${fmtUSD(subtotal)}`}</a>
+            {items.length > 1 && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', justifyContent: 'center', paddingTop: 2 }}>
+                {items.map((it) => WIX_URLS[it.slug] && (
+                  <a key={it.slug} href={WIX_URLS[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.13em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                    {it.name} →
+                  </a>
+                ))}
+              </div>
+            )}
             <a className="btn btn-secondary" href="/#lineup" style={{ display: 'inline-flex' }}>Continue shopping</a>
           </div>
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> Free shipping at $40+</div>
+            <div className="trust-row"><Truck /> Free shipping at $35+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
         </div>
@@ -340,7 +363,14 @@ function CartPage() {
           <small>Subtotal</small>
           <strong>{fmtUSD(subtotal)}</strong>
         </div>
-        <a className="btn" href="/checkout.html">Checkout →</a>
+        <a
+          className="btn"
+          href={getCheckoutUrl(items)}
+          onClick={onCheckoutClick}
+          aria-busy={checkoutLoading}
+          aria-disabled={checkoutLoading}
+          style={{ opacity: checkoutLoading ? 0.7 : 1, pointerEvents: checkoutLoading ? 'none' : 'auto' }}
+        >{checkoutLoading ? 'Opening…' : 'Checkout →'}</a>
       </div>
     </>
   );
