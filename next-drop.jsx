@@ -41,7 +41,7 @@ function NextDrop() {
         {/* Eyebrow row */}
         <Reveal>
           <div className="nd-eyebrow-row">
-            <span>INDEX 09 — WHAT'S NEXT</span>
+            <span>WHAT’S NEXT</span>
             <span>1 / COMING SOON</span>
           </div>
         </Reveal>
@@ -56,7 +56,7 @@ function NextDrop() {
           </Reveal>
           <Reveal delay={2}>
             <p className="nd-sub">
-              We don’t ship until it’s right. These two are close. Drop your email and you’ll be first when they land.
+              We’re already cooking on the next flavor. Get on the list and you’ll hear about it first.
             </p>
           </Reveal>
         </div>
