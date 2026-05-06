@@ -36,6 +36,12 @@
 /product-page/*  https://shop.noodlebomb.co/product-page/:splat  302!
 /cart-page       https://shop.noodlebomb.co/cart-page            302!
 
+# Product deep-link rewrites — match netlify.toml. Customers hitting a
+# specific flavor's URL from a marketing email/ad/social land on the
+# homepage lineup instead of 404. 200 = rewrite (URL stays put).
+/product/*       /index.html                                     200
+
+
 # Pretty URLs for the new local cart/checkout pages
 /cart            /cart.html                                      200
 /checkout        /checkout.html                                  200

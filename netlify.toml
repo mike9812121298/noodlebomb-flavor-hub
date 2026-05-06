@@ -198,6 +198,18 @@
   to = "/checkout.html"
   status = 200
 
+
+# Product deep-link rewrites — direct links from emails / ads / social to a
+# specific flavor's page should resolve to the homepage (which renders the
+# full lineup) instead of 404ing. Status 200 is a rewrite (URL stays
+# /product/<slug>), not a 301, so canonical deep-links keep working as the
+# brand grows out true PDPs. Slugs are canonical per memory:
+# original-ramen, spicy-tokyo, citrus-shoyu (NOT yuzu-citrus).
+[[redirects]]
+  from = "/product/*"
+  to = "/index.html"
+  status = 200
+
 [[headers]]
   for = "/*.jsx"
   [headers.values]
