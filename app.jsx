@@ -1160,7 +1160,7 @@ function CitrusSpotlight() {
             <figure style={{ margin: 0, position: 'relative', overflow: 'hidden', background: '#0B0A09', aspectRatio: '4/5' }}>
               <img
                 src="uploads/citrus_turn_up_flavor_splash_hero.png"
-                alt="Citrus Shoyu mid-pour splash — turn up the flavor"
+                alt="Citrus Shoyu mid-pour splash — bright lift, bold finish"
                 loading="lazy"
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
               />

@@ -30,7 +30,7 @@ const EmailCaptureSection = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/60" />
           </div>
           <div className="relative z-10 px-6 py-16 text-center">
-          <p className="text-[10px] md:text-xs font-display font-bold uppercase tracking-[0.4em] text-primary/85 mb-6">TURN UP THE FLAVOR. NOT THE HEAT.</p>
+          <p className="text-[10px] md:text-xs font-display font-bold uppercase tracking-[0.4em] text-primary/85 mb-6">POUR BOLD.</p>
           {!submitted ? (
             <>
               <motion.div

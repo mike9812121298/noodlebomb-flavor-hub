@@ -48,7 +48,7 @@ const heroSauces = [
 
 // Cinematic hero rotator — 5 slides, mix of atmosphere shots and designer creatives
 const heroSlides = [
-  { name: "Trio Lineup", caption: "TURN UP THE FLAVOR. NOT THE HEAT.", image: heroSceneTrioCounter, flavor: "Original" as const },
+  { name: "Trio Lineup", caption: "POUR BOLD.", image: heroSceneTrioCounter, flavor: "Original" as const },
   { name: "Pour Action", caption: "SAUCE THAT HITS", image: heroScenePourOriginal, flavor: "Original" as const },
   { name: "Original — Bold. Timeless.", caption: "BOLD FLAVOR. NEXT LEVEL RAMEN.", image: heroOriginalBoldTimeless, flavor: "Original" as const },
   { name: "Spicy Tokyo — Bold Flavor", caption: "BOLD HEAT. DEEP UMAMI. NEXT LEVEL FLAVOR.", image: heroSpicyBoldFlavor, flavor: "Spicy Tokyo" as const },
