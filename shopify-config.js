@@ -46,9 +46,7 @@
 
   window.NB_SHOPIFY = {
     // ── Feature flag ────────────────────────────────────────────────
-    // Flip to true once variantIds below are filled in and noodlebomb.co
-    // is on the Headless app's allowed-domains list.
-    enabled: false,
+    enabled: true,
 
     // ── Store identity ──────────────────────────────────────────────
     domain: 'noodlebomb.myshopify.com',
