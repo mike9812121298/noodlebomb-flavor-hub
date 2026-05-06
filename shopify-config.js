@@ -11,7 +11,7 @@
  *        - The NoodleBomb Trio ($29.99)
  *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:
- *        fetch('https://noodlebomb.myshopify.com/api/2024-10/graphql.json', {
+ *        fetch('https://noodlebomb.myshopify.com/api/2026-04/graphql.json', {
  *          method: 'POST',
  *          headers: {
  *            'Content-Type': 'application/json',
@@ -55,9 +55,10 @@
     storefrontToken: '6e1316274bfe7f5fcc9c8edd8a4cdcf7',
 
     // Storefront API version. Shopify deprecates each version on a rolling
-    // 12-month window. SUNSET CHECK: bump before 2025-10-01 (review quarterly).
+    // 12-month window. SUNSET CHECK: bump before 2027-04-01 (review quarterly).
+    // Bumped 2026-05-06 from 2024-10 → 2026-04 (latest stable). Verified cartCreate works.
     // See https://shopify.dev/docs/api/usage/versioning
-    apiVersion: '2024-10',
+    apiVersion: '2026-04',
 
     // ── Product mapping ─────────────────────────────────────────────
     // Map local cart slugs → Shopify variant GIDs.
