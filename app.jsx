@@ -1334,8 +1334,8 @@ function FinalCTA() {
           </div>
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
-          ['Learn', [['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Origin', '#origin'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '#origin'], ['Reviews', '#reviews'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Shipping & Returns', '#faq'], ['FAQ', '#faq'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co']]]].
+          ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
+          ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
@@ -1459,7 +1459,8 @@ function TrustStrip() {
   const items = [
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: 'Free shipping over $35' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: 'Love it or your money back' },
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in WA' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>, label: 'Ships in 1-2 days' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in USA' },
   ];
   return (
     <section style={{ background: 'var(--paper-2)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '28px clamp(24px, 5.5vw, 80px)' }}>

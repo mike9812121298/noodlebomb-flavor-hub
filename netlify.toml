@@ -269,3 +269,21 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Pretty-URL rewrites for the new structural pages added 2026-05-06.
+# Netlify normally pretty-URLs *.html, but explicit rewrites make the
+# behavior deterministic (and self-document the new routes).
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/recipes"
+  to = "/recipes.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200

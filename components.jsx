@@ -280,11 +280,16 @@ function Nav({ flavor, setFlavor, flavors }) {
   const cartShipProgress = Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
   const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 
+  // navLinks: tuples of [label, href]. Hrefs starting with '#' are
+  // smooth-scrolled in-page; hrefs starting with '/' are real-page nav.
+  // /about, /recipes, /faq are static HTML pages added 2026-05-06 to fix
+  // the launch audit — those routes used to 404 because the prior nav
+  // was hash-only against the one-page index.html.
   const navLinks = [
     ['Shop', '#lineup'],
-    ['Ingredients', '#ingredients'],
-    ['Our Story', '#origin'],
-    ['Monthly Box', '#monthly'],
+    ['Recipes', '/recipes'],
+    ['About', '/about'],
+    ['FAQ', '/faq'],
   ];
 
   const goToHash = (href) => {
@@ -311,13 +316,17 @@ function Nav({ flavor, setFlavor, flavors }) {
         <span className="display" style={{ fontSize: 16, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
       </div>
       <div className="nav-links" style={{ display:'flex', gap: 32 }}>
-        {navLinks.map(([label, href]) => (
-          <a key={label} href={href} onClick={(e) => {
-            e.preventDefault();
-            const el = document.querySelector(href);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}>{label}</a>
-        ))}
+        {navLinks.map(([label, href]) => {
+          const isHash = href.startsWith('#');
+          return (
+            <a key={label} href={href} onClick={(e) => {
+              if (!isHash) return; // real route — let browser navigate
+              e.preventDefault();
+              const el = document.querySelector(href);
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}>{label}</a>
+          );
+        })}
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
         {/* Cart icon opens the slide-out drawer; right-click + middle-click
@@ -442,7 +451,7 @@ function Nav({ flavor, setFlavor, flavors }) {
             <a
               key={label}
               href={href}
-              onClick={(e) => { e.preventDefault(); goToHash(href); }}
+              onClick={(e) => { if (!href.startsWith('#')) { setDrawerOpen(false); return; } e.preventDefault(); goToHash(href); }}
               className="display"
               style={{
                 fontSize: 32,

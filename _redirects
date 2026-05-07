@@ -45,3 +45,10 @@
 # Pretty URLs for the new local cart/checkout pages
 /cart            /cart.html                                      200
 /checkout        /checkout.html                                  200
+
+# Pretty URLs for the new structural pages (about / recipes / faq) added 2026-05-06.
+# Netlify normally serves /about as about.html automatically, but we add explicit
+# rewrites so the behavior is deterministic across hosts (Netlify, Cloudflare).
+/about       /about.html        200
+/recipes     /recipes.html      200
+/faq         /faq.html          200
