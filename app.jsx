@@ -570,7 +570,7 @@ function PourAndCompare({ flavor = 'original' }) {
               { num: '7', unit: 'oz', label: 'per bottle' },
               { num: '14', unit: '', label: 'servings per bottle' },
               { num: '30', unit: 'sec', label: 'bowl to table' },
-              { num: '0', unit: '', label: 'fillers or preservatives' },
+              { num: '40', unit: '', label: 'test batches before launch' },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
                 <div className="display" style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1 }}>
@@ -1274,7 +1274,7 @@ function FinalCTA() {
               <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
                 {Array.from({ length: 4 }).map((_, j) => (
                   <span key={j} style={{ paddingRight: 32 }}>
-                    PREMIUM INGREDIENTS · NO FILLERS · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $35 ·
+                    PREMIUM INGREDIENTS · SMALL BATCH · MADE IN BONNEY LAKE, WA · FREE SHIPPING AT $35 ·
                   </span>
                 ))}
               </div>
@@ -1294,7 +1294,7 @@ function FinalCTA() {
         <div className="marq-track">
           {Array.from({ length: 2 }).map((_, j) =>
           <React.Fragment key={j}>
-              {['SMALL BATCH', '•', 'PREMIUM INGREDIENTS', '•', 'NO FILLERS', '•', 'POUR IT ON EVERYTHING', '•', 'MADE IN BONNEY LAKE WA', '•'].map((s, i) =>
+              {['SMALL BATCH', '•', 'PREMIUM INGREDIENTS', '•', 'SLOW-BREWED FOR DEPTH', '•', 'POUR IT ON EVERYTHING', '•', 'MADE IN BONNEY LAKE WA', '•'].map((s, i) =>
             <span key={i} className="display" style={{ fontSize: 96, letterSpacing: '-0.05em', color: 'var(--ink)', opacity: 0.18 }}>{s}</span>
             )}
             </React.Fragment>
@@ -1330,7 +1330,7 @@ function FinalCTA() {
               <span className="display" style={{ fontSize: 18, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
             </div>
             <p style={{ maxWidth: 320, color: 'var(--ink-60)', fontSize: 13, lineHeight: 1.6 }}>
-              Bold ramen sauce crafted in the Pacific Northwest. Small-batch bottled with real ingredients. Premium ingredients, no fillers, no apologies.
+              Bold ramen sauce crafted in the Pacific Northwest. Small-batch bottled with real ingredients. Slow-brewed for depth, no apologies.
             </p>
           </div>
           {[
