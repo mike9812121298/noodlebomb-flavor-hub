@@ -1288,6 +1288,24 @@
     z-index: 1;
   }
 
+  /* DUPLICATE-WORDMARK FIX (2026-05-07) ════════════════════════════
+     The React app (build/app.js) still renders its legacy <nav class="nav">
+     on top of the canonical static <nav class="page-nav"> added in d3d8a7c.
+     On mobile both wordmarks stack/overlap. Collapse the legacy nav's
+     visible bar (brand + links + nav-right) but preserve descendant
+     cart-drawer overlays so Add-to-Cart UX still slides. */
+  nav.nav {
+    height: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    overflow: visible !important;
+  }
+  nav.nav > div:not([role]):not([aria-hidden]),
+  nav.nav > div[role="dialog"][aria-label="Site navigation"] {
+    display: none !important;
+  }
+
   /* MOBILE FIXES END ═══════════════════════════════════════════════ */
 
 </style>
