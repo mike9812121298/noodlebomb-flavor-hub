@@ -1336,7 +1336,7 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co']]]].
+          ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
