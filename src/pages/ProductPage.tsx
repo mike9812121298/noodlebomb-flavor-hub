@@ -21,7 +21,7 @@ import originalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";
 import originalYellow from "@/assets/nb-creative-original-yellow.png";
 import originalTeal3panel from "@/assets/nb-creative-original-teal-3panel.png";
 import originalChefKitchen from "@/assets/nb-scene-chef-kitchen-original.png";
-import originalPourUdon from "@/assets/nb-hero-scene-pour-original.png";
+import originalPourUdon from "@/assets/nb-hero-scene-pour-original-v2.jpg";
 import originalFlatlay from "@/assets/nb-scene-original-flatlay.png";
 import spicyBoldFlavor from "@/assets/nb-hero-spicy-bold-flavor.png";
 import spicy3panel from "@/assets/nb-creative-spicy-3panel-infographic.png";
@@ -30,6 +30,12 @@ import spicySauceBanner from "@/assets/nb-creative-spicy-sauce-banner.png";
 import spicyAlleyLedge from "@/assets/nb-scene-spicy-alley-ledge.png";
 import spicyWokAction from "@/assets/nb-scene-spicy-wok-action.png";
 import trioLineupCounter from "@/assets/nb-hero-scene-trio-counter.png";
+// New 2026-05-06 — high-quality lifestyle / context shots
+import originalLifestyleHandsPour from "@/assets/nb-lifestyle-hands-pour-original.jpg";
+import originalCounterSteam from "@/assets/nb-scene-original-counter-steam.jpg";
+import trioFlatlayChopsticks from "@/assets/nb-scene-trio-flatlay-chopsticks.jpg";
+import citrusLifestylePour from "@/assets/nb-lifestyle-citrus-pour-sashimi.jpg";
+import spicyLifestylePour from "@/assets/nb-lifestyle-spicy-pour-bowl.jpg";
 
 interface ProductData {
   slug: string;
@@ -132,19 +138,19 @@ type Gallery = { hero?: string; gallery: string[]; lifestyle: string[] };
 const PRODUCT_GALLERIES: Record<string, Gallery> = {
   "original-ramen": {
     gallery: [originalBoldTimeless, originalYellow, originalTeal3panel],
-    lifestyle: [originalChefKitchen, originalPourUdon, originalFlatlay],
+    lifestyle: [originalPourUdon, originalLifestyleHandsPour, originalCounterSteam, originalChefKitchen, originalFlatlay],
   },
   "spicy-tokyo": {
     gallery: [spicyBoldFlavor, spicy3panel, spicy3panelDark, spicySauceBanner],
-    lifestyle: [spicyAlleyLedge, spicyWokAction],
+    lifestyle: [spicyLifestylePour, spicyAlleyLedge, spicyWokAction],
   },
   "citrus-shoyu": {
     gallery: [],
-    lifestyle: [],
+    lifestyle: [citrusLifestylePour],
   },
   "variety-pack": {
-    gallery: [trioLineupCounter],
-    lifestyle: [trioLineupCounter],
+    gallery: [trioLineupCounter, trioFlatlayChopsticks],
+    lifestyle: [trioFlatlayChopsticks, trioLineupCounter],
   },
 };
 

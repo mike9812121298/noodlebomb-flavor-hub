@@ -8,7 +8,7 @@ import nbOriginal from "@/assets/nb-original-clean.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
 import heroSceneTrioCounter from "@/assets/nb-hero-scene-trio-counter.png";
-import heroScenePourOriginal from "@/assets/nb-hero-scene-pour-original.png";
+import heroScenePourOriginal from "@/assets/nb-hero-scene-pour-original-v2.jpg";
 import heroOriginalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";
 import heroSpicyBoldFlavor from "@/assets/nb-hero-spicy-bold-flavor.png";
 import heroSceneChefAlley from "@/assets/nb-hero-scene-chef-alley.png";
