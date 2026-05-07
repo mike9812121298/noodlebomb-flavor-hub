@@ -351,7 +351,7 @@ function CartPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> Free shipping at $35+</div>
+            <div className="trust-row"><Truck /> Free shipping over $35</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
         </div>

@@ -285,11 +285,18 @@ function Nav({ flavor, setFlavor, flavors }) {
   // /about, /recipes, /faq are static HTML pages added 2026-05-06 to fix
   // the launch audit — those routes used to 404 because the prior nav
   // was hash-only against the one-page index.html.
+  // Canonical 7-item nav (locked 2026-05-07 pre-launch). Hash hrefs scroll
+  // in-page; '/'-prefixed hrefs are real routes; mailto: opens the user's
+  // mail client. Order MUST match the static-page nav in about/faq/recipes/
+  // monthly-box so the brand experience is identical across entry points.
   const navLinks = [
-    ['Shop', '#lineup'],
+    ['Home', '/'],
+    ['Shop Sauces', '/shop'],
     ['Recipes', '/recipes'],
     ['About', '/about'],
+    ['Monthly Ramen Box', '/monthly-box'],
     ['FAQ', '/faq'],
+    ['Contact', 'mailto:hello@noodlebomb.co'],
   ];
 
   const goToHash = (href) => {

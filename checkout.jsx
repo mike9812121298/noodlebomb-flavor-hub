@@ -235,7 +235,7 @@ function CheckoutPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> Free shipping at $35+</div>
+            <div className="trust-row"><Truck /> Free shipping over $35</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

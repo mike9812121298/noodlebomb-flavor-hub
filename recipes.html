@@ -27,22 +27,28 @@
 <nav class="page-nav" aria-label="Primary">
   <a class="nav-brand" href="/"><span class="nav-brand-mark">N</span><span class="nav-brand-name">noodlebomb</span></a>
   <div class="nav-links">
-    <a href="/#lineup">Shop</a>
+    <a href="/">Home</a>
+    <a href="/shop">Shop Sauces</a>
     <a href="/recipes" aria-current="page">Recipes</a>
     <a href="/about">About</a>
+    <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
+    <a href="mailto:hello@noodlebomb.co">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/#lineup">Shop sauces &rarr;</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
-  <a href="/#lineup">Shop</a>
-  <a href="/recipes" aria-current="page">Recipes</a>
-  <a href="/about">About</a>
-  <a href="/faq">FAQ</a>
-  <a class="drawer-cta" href="/#lineup">Shop sauces &rarr;</a>
+    <a href="/">Home</a>
+    <a href="/shop">Shop Sauces</a>
+    <a href="/recipes" aria-current="page">Recipes</a>
+    <a href="/about">About</a>
+    <a href="/monthly-box">Monthly Ramen Box</a>
+    <a href="/faq">FAQ</a>
+    <a href="mailto:hello@noodlebomb.co">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 <main id="main">
@@ -209,30 +215,32 @@
         <div class="footer-newsletter-sub">Once a month. Never spam.</div>
       </div>
       <form class="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
-        <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup (recipes)">
+        <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1">
         <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
         <button type="submit">Subscribe</button>
       </form>
     </div>
-    <div class="footer-cols">
-      <div>
-        <div class="footer-brand"><span class="brand-mark">N</span><span class="brand-name">noodlebomb</span></div>
-        <p class="footer-tagline">Pour bold.</p>
-        <p class="footer-blurb">Bold ramen sauce, crafted in the Pacific Northwest. Small-batch. Premium ingredients, slow-brewed for depth.</p>
-      </div>
-      <div><div class="footer-h">Shop</div><a href="/#lineup">All sauces</a><a href="/#monthly">Monthly Box</a><a href="/#next-drop">The Next Drop</a></div>
-      <div><div class="footer-h">Learn</div><a href="/recipes">Recipes</a><a href="/about">About</a><a href="/faq">FAQ</a></div>
-      <div><div class="footer-h">Company</div><a href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb">Wholesale</a><a href="mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry">Contact</a><a href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a></div>
+    <div class="footer-policy" style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;padding:36px 0 18px;border-top:1px solid var(--line);font-size:13px;letter-spacing:-0.005em;">
+      <a href="/privacy" style="color:var(--ink);opacity:0.8;text-decoration:none;">Privacy Policy</a>
+      <span style="opacity:0.3;">|</span>
+      <a href="/terms" style="color:var(--ink);opacity:0.8;text-decoration:none;">Terms of Service</a>
+      <span style="opacity:0.3;">|</span>
+      <a href="/shipping-returns" style="color:var(--ink);opacity:0.8;text-decoration:none;">Shipping &amp; Returns</a>
+      <span style="opacity:0.3;">|</span>
+      <a href="/faq" style="color:var(--ink);opacity:0.8;text-decoration:none;">FAQ</a>
     </div>
-    <div class="footer-social">
-      <a href="https://instagram.com/noodlebomb" target="_blank" rel="noopener" aria-label="NoodleBomb on Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      <a href="https://tiktok.com/@noodlebomb" target="_blank" rel="noopener" aria-label="NoodleBomb on TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+    <div class="footer-contact" style="text-align:center;padding:6px 0 18px;">
+      <a href="mailto:hello@noodlebomb.co" style="color:var(--ink);opacity:0.85;text-decoration:none;font-size:14px;">hello@noodlebomb.co</a>
     </div>
-    <div class="footer-bottom">
-      <span class="mono">&copy; 2026 noodlebomb co. all rights reserved.</span>
-      <span class="mono">pour responsibly.</span>
+    <div class="footer-social" style="justify-content:center;border-top:none;padding:6px 0 24px;">
+      <a href="https://instagram.com/noodlebombsauce" target="_blank" rel="noopener" aria-label="NoodleBomb on Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://tiktok.com/@noodlebombsauce" target="_blank" rel="noopener" aria-label="NoodleBomb on TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+    </div>
+    <div class="footer-bottom" style="justify-content:center;flex-direction:column;gap:6px;text-align:center;border-top:1px solid var(--line);padding-top:20px;">
+      <span class="mono">&copy; 2026 NoodleBomb</span>
+      <span style="font-size:12.5px;opacity:0.7;letter-spacing:-0.005em;">Handcrafted in Bonney Lake, WA &middot; Small batch &middot; Pour bold.</span>
     </div>
   </div>
 </footer>
