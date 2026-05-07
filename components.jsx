@@ -833,10 +833,10 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       {/* Background photo — full-bleed pour shot */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img
-          src="uploads/nb-hero-pour-v2.jpg"
-          alt="NoodleBomb trio — Original, Spicy Tokyo, Citrus Shoyu with sauce pour"
+          src="uploads/nb-hero-trio-studio-v1.jpg"
+          alt="NoodleBomb trio — Original, Spicy Tokyo, Citrus Shoyu (studio backdrop)"
           loading="eager"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%', transform: `scale(${scale}) translateY(${-parY * 0.15}px)`, transition: 'transform 0.05s linear' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%', transform: `scale(${scale}) translateY(${-parY * 0.15}px)`, transition: 'transform 0.05s linear' }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(14,13,12,0.35) 0%, rgba(14,13,12,0.15) 30%, rgba(14,13,12,0.5) 65%, rgba(14,13,12,0.92) 100%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(14,13,12,0.7) 0%, rgba(14,13,12,0) 50%)', pointerEvents: 'none' }} />
