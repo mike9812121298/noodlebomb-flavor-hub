@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0E0D0C">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5EFE3">
 <title>Your Cart — NoodleBomb</title>
 <meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. Free shipping over $35." />
 <meta name="robots" content="noindex" />
@@ -22,17 +22,17 @@
 
 <style>
 :root {
-  --ink: #F0EBE3;
-  --ink-60: rgba(240,235,227,0.78);
-  --ink-40: rgba(240,235,227,0.70);
-  --ink-20: rgba(240,235,227,0.45);
-  --paper: #0E0D0C;
-  --paper-2: #17140F;
-  --paper-3: #1F1B15;
-  --line: rgba(240,235,227,0.08);
-  --line-strong: rgba(240,235,227,0.14);
+  --ink: #0F0F0F;
+  --ink-60: rgba(15,15,15,0.74);
+  --ink-40: rgba(15,15,15,0.55);
+  --ink-20: rgba(15,15,15,0.30);
+  --paper: #F5EFE3;
+  --paper-2: #FBF7EC;
+  --paper-3: #EFE7D3;
+  --line: rgba(15,15,15,0.10);
+  --line-strong: rgba(15,15,15,0.18);
   --accent: #8B1E1E;
-  --accent-ink: #F5F1EA;
+  --accent-ink: #FBF7EC;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
@@ -64,8 +64,9 @@ a { color: inherit; }
   height: 72px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(24px, 5.5vw, 80px);
-  background: rgba(14,13,12,0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(245,239,227,0.88);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--line);
 }
 .nav-cart .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
@@ -107,13 +108,16 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   border: 1px solid var(--line);
   padding: 24px;
   position: relative;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(15,15,15,0.04), 0 8px 24px rgba(15,15,15,0.04);
 }
 .card + .card { margin-top: 14px; }
+.summary.card { box-shadow: 0 2px 4px rgba(15,15,15,0.05), 0 12px 32px rgba(15,15,15,0.06); }
 
 .ship-bar { padding: 18px 22px; }
 .ship-bar .row { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 12px; font-size: 13px; }
 .ship-bar .accent { color: var(--accent); font-weight: 700; }
-.ship-bar .track { height: 4px; background: rgba(240,235,227,0.06); position: relative; overflow: hidden; }
+.ship-bar .track { height: 4px; background: rgba(15,15,15,0.08); position: relative; overflow: hidden; border-radius: 2px; }
 .ship-bar .fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); transition: width .5s cubic-bezier(.2,.7,.2,1); }
 .ship-bar.unlocked { display: flex; gap: 12px; align-items: center; }
 .ship-bar.unlocked .icon { width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -138,7 +142,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   cursor: pointer; transition: color .2s, background .2s;
   font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center;
 }
-.qty button:hover:not(:disabled) { color: var(--ink); background: rgba(240,235,227,0.04); }
+.qty button:hover:not(:disabled) { color: var(--ink); background: rgba(15,15,15,0.05); }
 .qty button:disabled { opacity: 0.3; cursor: not-allowed; }
 .qty span { padding: 0 12px; min-width: 28px; text-align: center; font-family: 'Inter Tight'; font-weight: 600; font-size: 13px; }
 
@@ -166,9 +170,9 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   cursor: pointer; text-decoration: none;
   transition: background .25s, color .25s, transform .2s, box-shadow .25s;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(139,30,30,0.35); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(139,30,30,0.28); }
 .btn-secondary {
-  background: transparent; color: var(--ink); border: 1px solid var(--line-strong);
+  background: var(--paper-2); color: var(--ink); border: 1px solid var(--line-strong);
 }
 .btn-secondary:hover { border-color: var(--ink); transform: translateY(-2px); box-shadow: none; }
 
@@ -201,7 +205,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   transition: border-color .25s, transform .25s;
   display: block;
 }
-.empty .rec-card:hover { border-color: var(--ink-40); transform: translateY(-3px); }
+.empty .rec-card:hover { border-color: var(--ink-40); transform: translateY(-3px); box-shadow: 0 14px 32px rgba(15,15,15,0.08); }
 .empty .rec-card .img-wrap { aspect-ratio: 1; background: var(--paper-3); margin-bottom: 14px; display: flex; align-items: center; justify-content: center; padding: 16px; }
 .empty .rec-card .img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .empty .rec-card h3 { font-family: 'Inter Tight'; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin: 0; }
@@ -218,8 +222,8 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
     display: flex; align-items: center; gap: 12px;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
     padding: 14px clamp(16px, 5vw, 28px);
-    background: rgba(14,13,12,0.95); backdrop-filter: blur(12px);
-    border-top: 1px solid var(--line);
+    background: rgba(245,239,227,0.96); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(15,15,15,0.06);
   }
   .sticky-mobile .total { flex: 1; }
   .sticky-mobile .total small { display: block; color: var(--ink-40); font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
