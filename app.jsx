@@ -46,7 +46,7 @@ const FLAVOR_IMAGES = {
 };
 
 const FOOD_IMAGES = {
-  ramen: 'uploads/ramen-pour-hero.png',
+  ramen: 'uploads/nb-hero-pour-action-v2.jpg',
   stirfry: 'uploads/nb-recipe-stirfry.jpeg',
   // Editorial wings — glossy, saucy, close crop
   wings: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?w=1600&q=80&auto=format&fit=crop',

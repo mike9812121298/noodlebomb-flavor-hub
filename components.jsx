@@ -833,7 +833,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       {/* Background photo — full-bleed pour shot */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img
-          src="uploads/nb-hero-pour.png"
+          src="uploads/nb-hero-pour-v2.jpg"
           alt="NoodleBomb trio — Original, Spicy Tokyo, Citrus Shoyu with sauce pour"
           loading="eager"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%', transform: `scale(${scale}) translateY(${-parY * 0.15}px)`, transition: 'transform 0.05s linear' }}
