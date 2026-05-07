@@ -71,3 +71,9 @@
 /about       /about.html        200
 /recipes     /recipes.html      200
 /faq         /faq.html          200
+
+# Pretty URLs for new structural pages added 2026-05-07 launch pass.
+/monthly-box        /monthly-box.html        200
+/privacy            /privacy.html            200
+/terms              /terms.html              200
+/shipping-returns   /shipping-returns.html   200
