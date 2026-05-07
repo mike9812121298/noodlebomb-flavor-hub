@@ -967,13 +967,13 @@ function FlavorPicker({ flavor, setFlavor }) {
             display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'stretch',
             minHeight: 420
           }}>
-            {/* Photo — canon-order trio hero (2026-05-07).
-                Real-photo lineup with bottles in canon order Original → Spicy Tokyo → Citrus Shoyu.
-                Cache-bust filename forces fresh fetch past prior wrong-order
-                trio_kitchen_counter_warm.png. */}
+            {/* Photo — canon-order trio hero (2026-05-07, studio rebuild).
+                Real studio FRONT shots composited canon order Original -> Spicy Tokyo -> Citrus Shoyu
+                on warm dark backdrop. Cache-bust filename forces fresh fetch past
+                prior strip-cut nb-hero-trio-canon-v1.jpg with wood-grain seams. */}
             <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', minWidth: 0, maxWidth: '100%' }}>
               <img
-                src="uploads/nb-hero-trio-canon-v1.jpg"
+                src="uploads/nb-hero-trio-studio-v1.jpg"
                 alt="NoodleBomb Trio — Original (left), Spicy Tokyo (center), Citrus Shoyu (right)"
                 loading="lazy"
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
