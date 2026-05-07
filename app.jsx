@@ -967,13 +967,14 @@ function FlavorPicker({ flavor, setFlavor }) {
             display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', alignItems: 'stretch',
             minHeight: 420
           }}>
-            {/* Photo — warm kitchen-counter lifestyle hero (2026-05-02 refresh)
-                Replaces 3-bottle composite. Trio shot in-context on a kitchen counter
-                with steam and warm light. Source: trio_kitchen_counter_warm.png. */}
+            {/* Photo — canon-order trio hero (2026-05-07).
+                Real-photo lineup with bottles in canon order Original → Spicy Tokyo → Citrus Shoyu.
+                Cache-bust filename forces fresh fetch past prior wrong-order
+                trio_kitchen_counter_warm.png. */}
             <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', minWidth: 0, maxWidth: '100%' }}>
               <img
-                src="uploads/trio_kitchen_counter_warm.png"
-                alt="NoodleBomb Trio — Original, Spicy Tokyo, and Citrus Shoyu on a warm-lit kitchen counter"
+                src="uploads/nb-hero-trio-canon-v1.jpg"
+                alt="NoodleBomb Trio — Original (left), Spicy Tokyo (center), Citrus Shoyu (right)"
                 loading="lazy"
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
               />
