@@ -1,0 +1,3596 @@
+%PDF-1.3
+%ºß¬à
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 4 0 R
+>>
+endobj
+4 0 obj
+<<
+/Length 5918
+>>
+stream
+0.200025 w
+0 G
+0.78 0.06 0.18 rg
+0. 792. 612. -110. re
+f
+BT
+/F2 28 Tf
+32.1999999999999957 TL
+1. g
+50. 732. Td
+(NoodleBomb) Tj
+ET
+BT
+/F1 12 Tf
+13.7999999999999989 TL
+1. g
+50. 710. Td
+(Pour bold.) Tj
+ET
+BT
+/F2 22 Tf
+25.2999999999999972 TL
+0.102 g
+50. 652. Td
+(Recipe Library Expansion) Tj
+ET
+BT
+/F1 11 Tf
+12.6499999999999986 TL
+0.4 g
+50. 626. Td
+(2026-05-07  |  6 -> 15 recipes  |  +9 new) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 598. Td
+(Repo: mike9812121298/noodlebomb-flavor-hub) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 585. Td
+(File edited: recipes.html \(static deploy at noodlebomb.co/recipes\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 572. Td
+(Commit: 3b8824641feff0838793bd46448490c721046a18) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 559. Td
+(Pushed: 2026-05-07 to main \(Netlify auto-deploy on push\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 546. Td
+(Live verified: noodlebomb.co/recipes shows all 15 cards across 4 sections.) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 525. Td
+(Important: the production /recipes route is the static recipes.html file \(per netlify.toml redirect /recipes ->) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 512. Td
+(/recipes.html\). The src/pages/Recipes.tsx React component is dormant code. Both were updated for consistency,) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 499. Td
+(but recipes.html is what users see.) Tj
+ET
+BT
+/F2 15 Tf
+17.25 TL
+0.784 0.063 0.18 rg
+50. 476. Td
+(Categorization Breakdown) Tj
+ET
+0.78 0.06 0.18 rg
+50. 469. 512. -16. re
+f
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+1. g
+54. 458. Td
+(#) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+1. g
+74. 458. Td
+(Recipe) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+1. g
+274. 458. Td
+(Anchor SKU) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+1. g
+354. 458. Td
+(Section) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 442. Td
+(1) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 442. Td
+(Crispy Rice Salmon Bowl) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 442. Td
+(Original) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 442. Td
+(Restaurant bowls) Tj
+ET
+0.99 0.93 0.91 rg
+50. 437. 512. -16. re
+f
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 426. Td
+(2) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 426. Td
+(Tokyo Heat Mapo Udon) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 426. Td
+(Spicy Tokyo) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 426. Td
+(Restaurant bowls) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 410. Td
+(3) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 410. Td
+(Citrus Shoyu Tuna Poke) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 410. Td
+(Citrus Shoyu) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 410. Td
+(Restaurant bowls) Tj
+ET
+0.99 0.93 0.91 rg
+50. 405. 512. -16. re
+f
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 394. Td
+(4) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 394. Td
+(Citrus Shoyu Glazed Salmon) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 394. Td
+(Citrus Shoyu) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 394. Td
+(Restaurant bowls) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 378. Td
+(5) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 378. Td
+(Spicy Tokyo Smashburger) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 378. Td
+(Spicy Tokyo) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 378. Td
+(Beyond the bowl) Tj
+ET
+0.99 0.93 0.91 rg
+50. 373. 512. -16. re
+f
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 362. Td
+(6) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 362. Td
+(Tokyo Heat Dumpling Dip) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 362. Td
+(Spicy Tokyo) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 362. Td
+(Beyond the bowl) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 346. Td
+(7) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 346. Td
+(Spring Onion Citrus Slaw) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 346. Td
+(Citrus Shoyu) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 346. Td
+(Beyond the bowl) Tj
+ET
+0.99 0.93 0.91 rg
+50. 341. 512. -16. re
+f
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 330. Td
+(8) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 330. Td
+(Sunday Night Chashu Ramen) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 330. Td
+(Original) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 330. Td
+(Project recipes) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+54. 314. Td
+(9) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+74. 314. Td
+(Charred Broccoli Crunch Bowl) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+274. 314. Td
+(Original) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+354. 314. Td
+(Project recipes) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 288. Td
+(Per-SKU split: Original 3 / Spicy Tokyo 3 / Citrus Shoyu 3) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 270. Td
+(Final library lineup on the live page) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 256. Td
+(Quick wins \(existing 6\): The Restaurant-Style Ramen, Citrus Shoyu Salmon Bowl, Spicy Tokyo Wing Toss,) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 243. Td
+(Soy-Butter Eggs, Charred Brassicas, Spicy Tokyo Stir-Fry) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 230. Td
+(Restaurant bowls \(4 new\): Crispy Rice Salmon Bowl, Tokyo Heat Mapo Udon, Citrus Shoyu Tuna Poke, Citrus) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 217. Td
+(Shoyu Glazed Salmon) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 204. Td
+(Beyond the bowl \(3 new\): Spicy Tokyo Smashburger, Tokyo Heat Dumpling Dip, Spring Onion Citrus Slaw) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 191. Td
+(Project recipes \(2 new\): Sunday Night Chashu Ramen, Charred Broccoli Crunch Bowl) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 178. Td
+(Total: 15 recipes, 4 sections, 5/5/5 per-SKU split \(Original/Spicy/Citrus\).) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 1 of 9) Tj
+ET
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 6284
+>>
+stream
+0.200025 w
+0 G
+BT
+/F2 20 Tf
+23. TL
+0.784 0.063 0.18 rg
+50. 742. Td
+(The 9 New Recipes — Full Detail) Tj
+ET
+0.78 0.06 0.18 RG
+1.5 w
+50. 720. m
+562. 720. l
+S
+0.99 0.93 0.91 rg
+50. 716. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 702. Td
+(1. Sunday Night Chashu Ramen) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 684. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 684. Td
+(Original) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 672. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 672. Td
+(2 hr 30 min  |  Project  |  4) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 660. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 660. Td
+(Project recipe / restaurant-bowl) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 648. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 648. Td
+(Finish bowls with a side drizzle of Spicy Tokyo for heat-seekers at the table.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 632. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 618. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 618. Td
+(1.5 lb pork belly, kitchen twine) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 605. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 605. Td
+(4 cups dashi or chicken stock) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 592. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 592. Td
+(1/4 cup soy sauce + 1/4 cup mirin) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 579. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 579. Td
+(4 garlic cloves + 2-inch knob fresh ginger) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 566. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 566. Td
+(4 portions fresh ramen noodles) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 553. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 553. Td
+(4 marinated soft eggs, scallions, nori) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 540. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 540. Td
+(12 tablespoons NoodleBomb Original \(3 tbsp per bowl\)) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 523. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 509. Td
+(1. Tie 1.5 lb pork belly into a tight log with kitchen twine. Sear all sides in a Dutch oven until deep brown.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 494. Td
+(2. Add 4 cups dashi or chicken stock, 1/4 cup soy sauce, 1/4 cup mirin, 4 garlic cloves, and a 2-inch knob of) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+68. 481. Td
+(ginger sliced thin.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 466. Td
+(3. Cover and braise at 300F for 2 hours, turning the pork halfway through.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 451. Td
+(4. Lift the pork out, slice into 1/2-inch coins, and torch or sear the slices for caramelized edges.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 436. Td
+(5. Cook 4 portions of fresh ramen noodles. Divide into bowls.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 421. Td
+(6. Pour 3 tablespoons of NoodleBomb Original over each bowl, then ladle 1 cup of the hot braising broth on top.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 406. Td
+(7. Top with chashu coins, a marinated soft egg, scallions, and sheet of nori.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 387. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 373. Td
+(The braising liquid carries fat and umami - strain it before using as broth so the bowl reads clean, not greasy.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 356. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 342. Td
+(Overhead shot of a wide, dark-glazed donburi bowl. Glossy chashu coins fan across the top, soft egg halved with) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 329. Td
+(bright orange yolk, scallions and nori in dramatic upright placement. Steam visible. NoodleBomb Original bottle out) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 316. Td
+(of focus in the background top-right corner. Warm tungsten lighting, late-evening kitchen mood.) Tj
+ET
+0.4 G
+0.5 w
+50. 295. m
+562. 295. l
+S
+0.99 0.93 0.91 rg
+50. 295. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 281. Td
+(2. Crispy Rice Salmon Bowl) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 263. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 263. Td
+(Original) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 251. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 251. Td
+(25 min  |  Weeknight+  |  2) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 239. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 239. Td
+(Restaurant-bowl) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 227. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 227. Td
+(Drizzle Citrus Shoyu over the avocado for a bright counterpoint.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 211. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 197. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 197. Td
+(2 salmon fillets \(6 oz each\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 184. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 184. Td
+(2 cups cooked short-grain rice) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 171. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 171. Td
+(2 tbsp neutral oil) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 158. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 158. Td
+(NoodleBomb Original \(4-5 tbsp total\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 145. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 145. Td
+(1 avocado, scallions, sesame seeds, lime wedge) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 128. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 114. Td
+(1. Pat 2 salmon fillets dry. Brush with NoodleBomb Original and let sit 10 minutes.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 99. Td
+(2. Heat 2 tbsp neutral oil in a non-stick pan. Press 2 cups cooked short-grain rice flat into the pan and let it crisp) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+68. 86. Td
+(6-8 minutes without stirring.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 71. Td
+(3. Sear salmon skin-side down in a separate pan for 4 minutes, flip, glaze with another spoon of NoodleBomb,) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 2 of 9) Tj
+ET
+endstream
+endobj
+7 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 8 0 R
+>>
+endobj
+8 0 obj
+<<
+/Length 6052
+>>
+stream
+0.5 w
+0.4 G
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+68. 742. Td
+(finish 2 more minutes.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 727. Td
+(4. Slide the crispy rice onto plates, browned-side up. Top with salmon.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 712. Td
+(5. Drizzle with extra NoodleBomb, scatter sliced scallions and toasted sesame seeds, finish with avocado and a) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+68. 699. Td
+(wedge of lime.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 680. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 666. Td
+(Don't move the rice while it crisps - patience builds the crust. If you stir, you get fried rice; if you wait, you get tahdig.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 649. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 635. Td
+(Tight 3/4 shot of a single bowl. Golden-brown crispy rice cake on the bottom with visible char marks; salmon fillet) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 622. Td
+(glistening with NoodleBomb glaze on top; sliced avocado fan, scallion confetti, sesame seeds, lime wedge. Side) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 609. Td
+(glass of cold beer slightly out of focus. Daylight, clean modern ceramic bowl.) Tj
+ET
+0.4 G
+0.5 w
+50. 588. m
+562. 588. l
+S
+0.99 0.93 0.91 rg
+50. 588. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 574. Td
+(3. Charred Broccoli Crunch Bowl) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 556. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 556. Td
+(Original) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 544. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 544. Td
+(15 min  |  Weeknight  |  2) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 532. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 532. Td
+(Project / pantry rescue) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 520. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 520. Td
+(Spoon over rice or stuff into a baguette for a Vietnamese-style broccoli sandwich.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 504. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 490. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 490. Td
+(1 large head broccoli \(florets + stems\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 477. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 477. Td
+(2 tbsp neutral oil) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 464. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 464. Td
+(4 tbsp NoodleBomb Original) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 451. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 451. Td
+(1/2 cup roasted peanuts) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 438. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 438. Td
+(Fried shallots, torn cilantro) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 421. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 407. Td
+(1. Cut 1 large head of broccoli into long flat planks \(florets, stems and all\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 392. Td
+(2. Heat a cast iron skillet until smoking. Add 2 tbsp neutral oil and lay broccoli planks flat.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 377. Td
+(3. Char hard, 3-4 minutes per side, until edges are deep black-brown.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 362. Td
+(4. Slide broccoli into a wide bowl. Pour 4 tbsp NoodleBomb Original over while still hot.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 347. Td
+(5. Toss with 1/2 cup roasted peanuts, a handful of fried shallots, and torn cilantro.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 332. Td
+(6. Serve over rice or noodles, or eat straight from the bowl with a fork.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 313. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 299. Td
+(Broccoli stems are the best part once you peel the tough skin - slice them on a bias and treat them like the planks.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 282. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 268. Td
+(Cast iron skillet straight from the stovetop, broccoli planks black-edged and steaming. Dark-toned bowl beside it,) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 255. Td
+(peanuts catching highlight. Hand reaching in with a fork. High contrast, dramatic side lighting, restaurant-kitchen) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 242. Td
+(feel.) Tj
+ET
+0.4 G
+0.5 w
+50. 221. m
+562. 221. l
+S
+0.99 0.93 0.91 rg
+50. 221. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 207. Td
+(4. Tokyo Heat Mapo Udon) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 189. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 189. Td
+(Spicy Tokyo) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 177. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 177. Td
+(20 min  |  Weeknight+  |  2) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 165. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 165. Td
+(Restaurant-bowl) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 153. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 153. Td
+(A cold beer and the Tokyo Heat Dumpling Dip on the side for gyoza appetizer.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 137. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 123. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 123. Td
+(1/2 lb ground pork) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 110. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 110. Td
+(4 cloves garlic, 1 tbsp ginger, 1 tbsp doubanjiang) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 97. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 97. Td
+(1 cup chicken stock) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 84. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 84. Td
+(4 tbsp Spicy Tokyo) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 71. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 71. Td
+(1 block silken tofu) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 3 of 9) Tj
+ET
+endstream
+endobj
+9 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 10 0 R
+>>
+endobj
+10 0 obj
+<<
+/Length 4777
+>>
+stream
+0.5 w
+0.4 G
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 742. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 742. Td
+(2 portions thick udon) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 729. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 729. Td
+(Sichuan peppercorns, scallions, chili oil) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 712. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 698. Td
+(1. Crumble 1/2 lb ground pork into a hot wok. Cook hard until edges crisp, 5 minutes.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 683. Td
+(2. Add 4 cloves minced garlic, 1 tbsp grated ginger, 1 tbsp doubanjiang. Stir-fry 1 minute.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 668. Td
+(3. Pour in 1 cup chicken stock and 4 tbsp Spicy Tokyo. Bring to a boil.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 653. Td
+(4. Slide in 1 block silken tofu cut into cubes. Simmer 3 minutes without stirring \(let the tofu hold shape\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 638. Td
+(5. Cook 2 portions thick udon, drain, divide into bowls.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 623. Td
+(6. Spoon mapo over noodles. Finish with toasted Sichuan peppercorns, scallions, and a drizzle of chili oil.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 604. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 590. Td
+(Toast whole Sichuan peppercorns in a dry pan 60 seconds before crushing - it doubles the floral-tingle effect over) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 577. Td
+(pre-ground.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 560. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 546. Td
+(Top-down on thick udon noodles tangled in glossy red-orange mapo sauce. Cubes of silken tofu peeking through.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 533. Td
+(Sichuan peppercorns visible. Black ceramic bowl, chopsticks resting across. Dramatic red-tinted lighting.) Tj
+ET
+0.4 G
+0.5 w
+50. 512. m
+562. 512. l
+S
+0.99 0.93 0.91 rg
+50. 512. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 498. Td
+(5. Tokyo Heat Dumpling Dip) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 480. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 480. Td
+(Spicy Tokyo) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 468. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 468. Td
+(3 min  |  Effortless  |  4) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 456. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 456. Td
+(Beyond the bowl \(dip\)) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 444. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 444. Td
+(Pan-fried gyoza, frozen soup dumplings, or wontons - anything that needs a hit.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 428. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 414. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 414. Td
+(1/4 cup Spicy Tokyo) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 401. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 401. Td
+(1 tbsp rice vinegar) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 388. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 388. Td
+(1 tsp toasted sesame oil) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 375. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 375. Td
+(Scallion, sesame seeds, optional crushed garlic) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 358. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 344. Td
+(1. Pour 1/4 cup Spicy Tokyo into a small dipping bowl.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 329. Td
+(2. Add 1 tbsp rice vinegar and 1 tsp toasted sesame oil. Whisk with a fork.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 314. Td
+(3. Top with thin-sliced scallion, a pinch of sesame seeds, and crushed garlic if you want a heavier hit.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 299. Td
+(4. Serve next to pan-fried gyoza, soup dumplings, or wontons.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 284. Td
+(5. Tell people you make it from scratch. They will never know.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 265. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 251. Td
+(A drop of black vinegar instead of rice vinegar pushes this toward Shanghai-style - both are correct.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 234. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 220. Td
+(Tight overhead on a small cobalt-blue ceramic dipping bowl filled with glossy dark sauce, scallion slices floating. A) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 207. Td
+(pair of perfectly pleated gyoza beside it, one being dipped mid-frame. Wood table, cinematic shallow depth.) Tj
+ET
+0.4 G
+0.5 w
+50. 186. m
+562. 186. l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 4 of 9) Tj
+ET
+endstream
+endobj
+11 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 12 0 R
+>>
+endobj
+12 0 obj
+<<
+/Length 5980
+>>
+stream
+0.5 w
+0.4 G
+0.99 0.93 0.91 rg
+50. 756. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 742. Td
+(6. Spicy Tokyo Smashburger) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 724. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 724. Td
+(Spicy Tokyo) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 712. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 712. Td
+(15 min  |  Weeknight  |  2) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 700. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 700. Td
+(Beyond the bowl \(burger\)) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 688. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 688. Td
+(Spring Onion Citrus Slaw on the side for crunch and acid.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 672. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 658. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 658. Td
+(1 lb ground beef \(80/20\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 645. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 645. Td
+(Spicy Tokyo \(2-3 tbsp\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 632. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 632. Td
+(4 slices American cheese) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 619. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 619. Td
+(2 brioche buns) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 606. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 606. Td
+(Iceberg, dill pickle, Kewpie mayo) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 589. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 575. Td
+(1. Divide 1 lb ground beef \(80/20\) into 4 loose 4-oz balls. Do not pack.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 560. Td
+(2. Heat a cast iron skillet until smoking. Lay the balls in, season tops with salt.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 545. Td
+(3. Smash flat with a stiff spatula. Cook hard 90 seconds for crust, flip.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 530. Td
+(4. Brush each patty with 1 tsp Spicy Tokyo, top with American cheese, finish 30 seconds.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 515. Td
+(5. Stack two patties per bun. Add shredded iceberg, dill pickle, and a swipe of Kewpie mayo cut with another) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+68. 502. Td
+(spoon of Spicy Tokyo.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 487. Td
+(6. Eat over the sink. Have napkins ready.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 468. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 454. Td
+(The lacy edges happen because you smashed early and didn't move it. Patience earns crust here too.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 437. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 423. Td
+(Side-on hero shot of a double-stack smashburger, melted American cheese flowing over crispy lace-edged patties.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 410. Td
+(Dill pickles peeking out, bun lightly toasted. Splash of glossy Spicy Tokyo glaze on the patty surface visible.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 397. Td
+(Diner-counter aesthetic, warm light.) Tj
+ET
+0.4 G
+0.5 w
+50. 376. m
+562. 376. l
+S
+0.99 0.93 0.91 rg
+50. 376. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 362. Td
+(7. Citrus Shoyu Glazed Salmon) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 344. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 344. Td
+(Citrus Shoyu) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 332. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 332. Td
+(20 min  |  Weeknight  |  2) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 320. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 320. Td
+(Restaurant-bowl) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 308. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 308. Td
+(Spring Onion Citrus Slaw makes this a 25-minute restaurant plate.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 292. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 278. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 278. Td
+(2 skin-on salmon fillets \(6 oz each\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 265. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 265. Td
+(1 tbsp neutral oil) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 252. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 252. Td
+(3 tbsp Citrus Shoyu) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 239. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 239. Td
+(2 cups jasmine rice \(cooked\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 226. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 226. Td
+(Scallions, sesame seeds, fresh lemon) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 209. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 195. Td
+(1. Pat 2 skin-on salmon fillets dry, season lightly with salt.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 180. Td
+(2. Heat 1 tbsp oil in a non-stick pan over medium-high. Lay salmon skin-side down, press flat for 30 seconds.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 165. Td
+(3. Cook undisturbed 5 minutes until skin is shatter-crisp. Flip, cook 2 minutes more.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 150. Td
+(4. Pour 3 tbsp Citrus Shoyu around the fillets. Tilt the pan so the sauce reduces and glazes the fish.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 135. Td
+(5. Plate over jasmine rice. Spoon any extra glaze from the pan over the top.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 120. Td
+(6. Finish with thin-sliced scallions, sesame seeds, and a squeeze of fresh lemon.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 101. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 87. Td
+(Press the fillet flat for the first 30 seconds - it stops the skin curling and gives you full-edge contact for the crisp.) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 5 of 9) Tj
+ET
+endstream
+endobj
+13 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 14 0 R
+>>
+endobj
+14 0 obj
+<<
+/Length 5938
+>>
+stream
+0.5 w
+0.4 G
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 742. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 728. Td
+(Top-down on a single fillet plated over jasmine rice. Skin shatter-crisp, glaze pooling around the fish, scallions and) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 715. Td
+(sesame on top, lemon wedge to one side. Soft daylight on light-grey ceramic plate. Minimal styling.) Tj
+ET
+0.4 G
+0.5 w
+50. 694. m
+562. 694. l
+S
+0.99 0.93 0.91 rg
+50. 694. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 680. Td
+(8. Spring Onion Citrus Slaw) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 662. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 662. Td
+(Citrus Shoyu) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 650. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 650. Td
+(10 min  |  Effortless  |  4) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 638. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 638. Td
+(Beyond the bowl \(side\)) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 626. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 626. Td
+(Spicy Tokyo Smashburger or grilled fish tacos.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 610. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 596. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 596. Td
+(1/2 head napa cabbage) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 583. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 583. Td
+(2 carrots) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 570. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 570. Td
+(4 spring onions) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 557. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 557. Td
+(1/3 cup Citrus Shoyu) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 544. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 544. Td
+(2 tbsp toasted sesame oil) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 531. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 531. Td
+(Cilantro, mint, Thai basil) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 514. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 500. Td
+(1. Shred 1/2 head napa cabbage and 2 carrots on a box grater.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 485. Td
+(2. Thin-slice 4 spring onions on a sharp diagonal.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 470. Td
+(3. Toss everything in a large bowl with 1/3 cup Citrus Shoyu and 2 tbsp toasted sesame oil.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 455. Td
+(4. Add a small handful of cilantro, mint, and Thai basil torn by hand.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 440. Td
+(5. Let sit 5 minutes. Toss again before serving.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 425. Td
+(6. Pile next to grilled fish, smashburgers, or fish tacos.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 406. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 392. Td
+(The slaw gets better in the fridge for 2-3 hours but loses the crunch by morning - make it the day of, not the night) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 379. Td
+(before.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 362. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 348. Td
+(Wide overhead of a generous mound of bright-green slaw in a wide white bowl. Threads of cabbage and carrot) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 335. Td
+(tangled with herbs, scattered sesame. A wooden serving spoon resting in. Spring sunlight, picnic-table mood.) Tj
+ET
+0.4 G
+0.5 w
+50. 314. m
+562. 314. l
+S
+0.99 0.93 0.91 rg
+50. 314. 512. -22. re
+f
+BT
+/F2 14 Tf
+16.0999999999999979 TL
+0.784 0.063 0.18 rg
+56. 300. Td
+(9. Citrus Shoyu Tuna Poke) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 282. Td
+(Anchor:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 282. Td
+(Citrus Shoyu) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 270. Td
+(Time / Difficulty / Serves:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 270. Td
+(10 min  |  No-cook  |  2) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 258. Td
+(Category:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 258. Td
+(Restaurant-bowl \(no-cook\)) Tj
+ET
+BT
+/F2 9 Tf
+10.3499999999999996 TL
+0.4 g
+50. 246. Td
+(Pairing:) Tj
+ET
+BT
+/F1 9 Tf
+10.3499999999999996 TL
+0.102 g
+125. 246. Td
+(Add a swipe of Spicy Tokyo to the rice for poke-bowl heat without burying the citrus.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 230. Td
+(Ingredients) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 216. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 216. Td
+(1/2 lb sushi-grade ahi tuna) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 203. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 203. Td
+(3 tbsp Citrus Shoyu) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 190. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 190. Td
+(1 tsp toasted sesame oil) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 177. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 177. Td
+(1 tsp grated ginger) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 164. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 164. Td
+(2 cups warm rice) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 151. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 151. Td
+(Avocado, cucumber, edamame, sesame, scallions, fried shallots) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 134. Td
+(Steps) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 120. Td
+(1. Cube 1/2 lb sushi-grade ahi tuna into 1/2-inch pieces.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 105. Td
+(2. In a bowl, whisk 3 tbsp Citrus Shoyu, 1 tsp toasted sesame oil, and 1 tsp grated ginger.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 90. Td
+(3. Fold the tuna into the marinade. Rest 5 minutes \(no longer, or the citrus cooks the fish\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 75. Td
+(4. Build bowls over warm rice with sliced avocado, cucumber matchsticks, and edamame.) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 6 of 9) Tj
+ET
+endstream
+endobj
+15 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 16 0 R
+>>
+endobj
+16 0 obj
+<<
+/Length 1018
+>>
+stream
+0.5 w
+0.4 G
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 742. Td
+(5. Pile the marinated tuna in the center.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 727. Td
+(6. Finish with toasted sesame seeds, scallions, and crispy fried shallots.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 708. Td
+(Chef note) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 694. Td
+(Ask for 'sashimi-grade' by name at the counter - and use it the same day. There's no shortcut on freshness here.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 677. Td
+(Image direction) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 663. Td
+(Glossy poke bowl, top-down. Glistening cubes of bright red ahi piled center, ringed by avocado fan, cucumber) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.4 g
+50. 650. Td
+(matchsticks, edamame. Fried shallots scattered. Black bowl, white rice peeking through. Minimalist, clean lighting.) Tj
+ET
+0.4 G
+0.5 w
+50. 629. m
+562. 629. l
+S
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 7 of 9) Tj
+ET
+endstream
+endobj
+17 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 18 0 R
+>>
+endobj
+18 0 obj
+<<
+/Length 4800
+>>
+stream
+0.5 w
+0.4 G
+BT
+/F2 20 Tf
+23. TL
+0.784 0.063 0.18 rg
+50. 742. Td
+(Image Direction List \(consolidated\)) Tj
+ET
+0.78 0.06 0.18 RG
+1.5 w
+50. 720. m
+562. 720. l
+S
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 702. Td
+(For AI-gen or photographer pass. Naming convention: recipe_{slug}_hero.jpg. Aspect 4:5 portrait for grid + 16:9) Tj
+ET
+BT
+/F3 10 Tf
+11.5 TL
+0.4 g
+50. 689. Td
+(landscape for hero feature card.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 668. Td
+(1. Sunday Night Chashu Ramen  \(Original\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 654. Td
+(Overhead shot of a wide, dark-glazed donburi bowl. Glossy chashu coins fan across the top, soft egg halved with) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 641. Td
+(bright orange yolk, scallions and nori in dramatic upright placement. Steam visible. NoodleBomb Original bottle out) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 628. Td
+(of focus in the background top-right corner. Warm tungsten lighting, late-evening kitchen mood.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 611. Td
+(2. Crispy Rice Salmon Bowl  \(Original\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 597. Td
+(Tight 3/4 shot of a single bowl. Golden-brown crispy rice cake on the bottom with visible char marks; salmon fillet) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 584. Td
+(glistening with NoodleBomb glaze on top; sliced avocado fan, scallion confetti, sesame seeds, lime wedge. Side) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 571. Td
+(glass of cold beer slightly out of focus. Daylight, clean modern ceramic bowl.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 554. Td
+(3. Charred Broccoli Crunch Bowl  \(Original\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 540. Td
+(Cast iron skillet straight from the stovetop, broccoli planks black-edged and steaming. Dark-toned bowl beside it,) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 527. Td
+(peanuts catching highlight. Hand reaching in with a fork. High contrast, dramatic side lighting, restaurant-kitchen) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 514. Td
+(feel.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 497. Td
+(4. Tokyo Heat Mapo Udon  \(Spicy Tokyo\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 483. Td
+(Top-down on thick udon noodles tangled in glossy red-orange mapo sauce. Cubes of silken tofu peeking through.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 470. Td
+(Sichuan peppercorns visible. Black ceramic bowl, chopsticks resting across. Dramatic red-tinted lighting.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 453. Td
+(5. Tokyo Heat Dumpling Dip  \(Spicy Tokyo\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 439. Td
+(Tight overhead on a small cobalt-blue ceramic dipping bowl filled with glossy dark sauce, scallion slices floating. A) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 426. Td
+(pair of perfectly pleated gyoza beside it, one being dipped mid-frame. Wood table, cinematic shallow depth.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 409. Td
+(6. Spicy Tokyo Smashburger  \(Spicy Tokyo\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 395. Td
+(Side-on hero shot of a double-stack smashburger, melted American cheese flowing over crispy lace-edged patties.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 382. Td
+(Dill pickles peeking out, bun lightly toasted. Splash of glossy Spicy Tokyo glaze on the patty surface visible.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 369. Td
+(Diner-counter aesthetic, warm light.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 352. Td
+(7. Citrus Shoyu Glazed Salmon  \(Citrus Shoyu\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 338. Td
+(Top-down on a single fillet plated over jasmine rice. Skin shatter-crisp, glaze pooling around the fish, scallions and) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 325. Td
+(sesame on top, lemon wedge to one side. Soft daylight on light-grey ceramic plate. Minimal styling.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 308. Td
+(8. Spring Onion Citrus Slaw  \(Citrus Shoyu\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 294. Td
+(Wide overhead of a generous mound of bright-green slaw in a wide white bowl. Threads of cabbage and carrot) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 281. Td
+(tangled with herbs, scattered sesame. A wooden serving spoon resting in. Spring sunlight, picnic-table mood.) Tj
+ET
+BT
+/F2 12 Tf
+13.7999999999999989 TL
+0.102 g
+50. 264. Td
+(9. Citrus Shoyu Tuna Poke  \(Citrus Shoyu\)) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 250. Td
+(Glossy poke bowl, top-down. Glistening cubes of bright red ahi piled center, ringed by avocado fan, cucumber) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 237. Td
+(matchsticks, edamame. Fried shallots scattered. Black bowl, white rice peeking through. Minimalist, clean lighting.) Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 8 of 9) Tj
+ET
+endstream
+endobj
+19 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/MediaBox [0 0 612. 792.]
+/Contents 20 0 R
+>>
+endobj
+20 0 obj
+<<
+/Length 2994
+>>
+stream
+1.5 w
+0.78 0.06 0.18 RG
+BT
+/F2 20 Tf
+23. TL
+0.784 0.063 0.18 rg
+50. 742. Td
+(Voice & Brand Compliance Audit) Tj
+ET
+0.78 0.06 0.18 RG
+1.5 w
+50. 720. m
+562. 720. l
+S
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 702. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 702. Td
+(All 9 new recipes drafted against BRAND_CANON.md \(2026-05-06\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 689. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 689. Td
+('Pour bold.' umbrella tagline retained in hero eyebrow on the live page.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 676. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 676. Td
+(Per-SKU anchors respected: each recipe attributed to a single SKU; no cross-flavor copy bleed.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 663. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 663. Td
+(Banned phrases checked: no 'finishing sauce', 'condiment', 'hot sauce', 'packet replacement', 'upgrade to instant',) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 650. Td
+('MSG-free', 'gluten free', 'noodlebomb.com' references in the new copy.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 637. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 637. Td
+(Citrus Shoyu spelled correctly throughout \(no 'yuzu-citrus'\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 624. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 624. Td
+(Voice: premium home-cook, restaurant-confident. No 'Hey foodies!' / no celebrity-chef cringe.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 611. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 611. Td
+(Lineup order on the page sorts by section, not strict canonical SKU order; per-SKU split is 5/5/5 across the 15) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 598. Td
+(cards.) Tj
+ET
+BT
+/F2 20 Tf
+23. TL
+0.784 0.063 0.18 rg
+50. 573. Td
+(Deploy Verification) Tj
+ET
+0.78 0.06 0.18 RG
+1.5 w
+50. 551. m
+562. 551. l
+S
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 533. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 533. Td
+(Push committed to main branch at 3b8824641feff0838793bd46448490c721046a18 \(2026-05-07\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 520. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 520. Td
+(File changed: recipes.html at repo root \(the file Netlify serves at /recipes per the redirect rule in netlify.toml\).) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 507. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 507. Td
+(Live verified: noodlebomb.co/recipes returns the new HTML with 4 sections \(Quick wins, Restaurant bowls,) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 494. Td
+(Beyond the bowl, Project recipes\) and all 15 cards.) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 481. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 481. Td
+(New title tag: 'Recipes — NoodleBomb'. Description: 'Fifteen ways to use NoodleBomb ramen sauce...') Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+50. 468. Td
+(•) Tj
+ET
+BT
+/F1 10 Tf
+11.5 TL
+0.102 g
+62. 468. Td
+(Hero subhead updated: 'Fifteen recipes built around the lineup...') Tj
+ET
+BT
+/F1 8 Tf
+9.1999999999999993 TL
+0.4 g
+50. 24. Td
+(NoodleBomb Recipe Library Expansion - 2026-05-07 - page 9 of 9) Tj
+ET
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R ]
+/Count 9
+>>
+endobj
+21 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+22 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+23 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+24 0 obj
+<<
+/Type /Font
+/BaseFont /Helvetica-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+25 0 obj
+<<
+/Type /Font
+/BaseFont /Courier
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+26 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+27 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-Oblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+28 0 obj
+<<
+/Type /Font
+/BaseFont /Courier-BoldOblique
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+29 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+30 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+31 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+32 0 obj
+<<
+/Type /Font
+/BaseFont /Times-BoldItalic
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+33 0 obj
+<<
+/Type /Font
+/BaseFont /ZapfDingbats
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+34 0 obj
+<<
+/Type /Font
+/BaseFont /Symbol
+/Subtype /Type1
+/FirstChar 32
+/LastChar 255
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 21 0 R
+/F2 22 0 R
+/F3 23 0 R
+/F4 24 0 R
+/F5 25 0 R
+/F6 26 0 R
+/F7 27 0 R
+/F8 28 0 R
+/F9 29 0 R
+/F10 30 0 R
+/F11 31 0 R
+/F12 32 0 R
+/F13 33 0 R
+/F14 34 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+35 0 obj
+<<
+/Producer (jsPDF 2.5.1)
+/CreationDate (D:20260507030741-07'00')
+>>
+endobj
+36 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+>>
+endobj
+xref
+0 37
+0000000000 65535 f 
+0000045206 00000 n 
+0000047081 00000 n 
+0000000015 00000 n 
+0000000120 00000 n 
+0000006090 00000 n 
+0000006195 00000 n 
+0000012531 00000 n 
+0000012636 00000 n 
+0000018740 00000 n 
+0000018846 00000 n 
+0000023676 00000 n 
+0000023783 00000 n 
+0000029816 00000 n 
+0000029923 00000 n 
+0000035914 00000 n 
+0000036021 00000 n 
+0000037092 00000 n 
+0000037199 00000 n 
+0000042052 00000 n 
+0000042159 00000 n 
+0000045316 00000 n 
+0000045442 00000 n 
+0000045573 00000 n 
+0000045707 00000 n 
+0000045845 00000 n 
+0000045969 00000 n 
+0000046098 00000 n 
+0000046230 00000 n 
+0000046366 00000 n 
+0000046494 00000 n 
+0000046621 00000 n 
+0000046750 00000 n 
+0000046883 00000 n 
+0000046985 00000 n 
+0000047334 00000 n 
+0000047420 00000 n 
+trailer
+<<
+/Size 37
+/Root 36 0 R
+/Info 35 0 R
+/ID [ <C25DDF882BF6CA8947852F64613F673F> <C25DDF882BF6CA8947852F64613F673F> ]
+>>
+startxref
+47524
+%%EOF
