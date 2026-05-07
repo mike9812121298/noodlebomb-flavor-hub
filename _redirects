@@ -32,23 +32,42 @@
 /next-drop.jsx      /404.html   404!
 /*.jsx              /404.html   404!
 
-# Wix-pattern URLs that may appear in old links — bounce to the live store
-/product-page/*  https://shop.noodlebomb.co/product-page/:splat  302!
-/cart-page       https://shop.noodlebomb.co/cart-page            302!
+# ─────────────────────────────────────────────────────────────────
+# COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
+# noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
+#
+# Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
+# rebrand the storefront domain later without redirect-cache pollution.
+# Update these to https://shop.noodlebomb.co/... after Shopify custom
+# domain is wired (see CANONICAL_URL_MAP.md).
+# ─────────────────────────────────────────────────────────────────
+/product/original-ramen   https://nu2vqa-ma.myshopify.com/products/original              302!
+/product/spicy-tokyo      https://nu2vqa-ma.myshopify.com/products/spicy-tokyo           302!
+/product/citrus-shoyu     https://nu2vqa-ma.myshopify.com/products/citrus-shoyu          302!
+/product/trio             https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio   302!
+/product/the-noodlebomb-trio  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
+# Catch-all for any other /product/* deep link (old emails, ads, social) — go to lineup
+/product/*                https://nu2vqa-ma.myshopify.com/collections/all                302!
 
-# Product deep-link rewrites — match netlify.toml. Customers hitting a
-# specific flavor's URL from a marketing email/ad/social land on the
-# homepage lineup instead of 404. 200 = rewrite (URL stays put).
-/product/*       /index.html                                     200
+# /shop and /shop/* — primary CTA target on the marketing site
+/shop                     https://nu2vqa-ma.myshopify.com/collections/all                302!
+/shop/*                   https://nu2vqa-ma.myshopify.com/:splat                         302!
 
+# Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
+# (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
+/product-page/*           https://nu2vqa-ma.myshopify.com/collections/all                302!
+/cart-page                https://nu2vqa-ma.myshopify.com/cart                           302!
+/category/*               https://nu2vqa-ma.myshopify.com/collections/:splat             302!
+/ramensauce               https://nu2vqa-ma.myshopify.com/products/original              302!
+/ramensauce-1             https://nu2vqa-ma.myshopify.com/products/citrus-shoyu          302!
+/ramensauce-2             https://nu2vqa-ma.myshopify.com/products/spicy-tokyo           302!
 
-# Pretty URLs for the new local cart/checkout pages
+# Pretty URLs for the local cart/checkout pages (kept for the optional
+# in-page cart drawer; primary CTAs go straight to Shopify).
 /cart            /cart.html                                      200
 /checkout        /checkout.html                                  200
 
-# Pretty URLs for the new structural pages (about / recipes / faq) added 2026-05-06.
-# Netlify normally serves /about as about.html automatically, but we add explicit
-# rewrites so the behavior is deterministic across hosts (Netlify, Cloudflare).
+# Pretty URLs for the structural pages (about / recipes / faq) added 2026-05-06.
 /about       /about.html        200
 /recipes     /recipes.html      200
 /faq         /faq.html          200

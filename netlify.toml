@@ -172,22 +172,103 @@
   status = 404
   force = true
 
-# Wix-pattern URLs that may appear in old links — bounce to the live store
+# ─────────────────────────────────────────────────────────────────
+# COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
+# noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
+# See CANONICAL_URL_MAP.md.
+#
+# Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
+# rebrand the storefront domain later without redirect-cache pollution.
+# ─────────────────────────────────────────────────────────────────
+
+[[redirects]]
+  from = "/product/original-ramen"
+  to = "https://nu2vqa-ma.myshopify.com/products/original"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/product/spicy-tokyo"
+  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/product/citrus-shoyu"
+  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/product/trio"
+  to = "https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/product/the-noodlebomb-trio"
+  to = "https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio"
+  status = 302
+  force = true
+
+# Catch-all for any other /product/* deep link — go to lineup
+[[redirects]]
+  from = "/product/*"
+  to = "https://nu2vqa-ma.myshopify.com/collections/all"
+  status = 302
+  force = true
+
+# /shop and /shop/* — primary CTA target
+[[redirects]]
+  from = "/shop"
+  to = "https://nu2vqa-ma.myshopify.com/collections/all"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/shop/*"
+  to = "https://nu2vqa-ma.myshopify.com/:splat"
+  status = 302
+  force = true
+
+# Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
 [[redirects]]
   from = "/product-page/*"
-  to = "https://shop.noodlebomb.co/product-page/:splat"
+  to = "https://nu2vqa-ma.myshopify.com/collections/all"
   status = 302
   force = true
 
 [[redirects]]
   from = "/cart-page"
-  to = "https://shop.noodlebomb.co/cart-page"
+  to = "https://nu2vqa-ma.myshopify.com/cart"
   status = 302
   force = true
 
-# Pretty URLs for the new local cart/checkout pages
-# (Netlify automatically serves cart.html for /cart, but force=false ensures
-#  it doesn't conflict with anything else and is explicit.)
+[[redirects]]
+  from = "/category/*"
+  to = "https://nu2vqa-ma.myshopify.com/collections/:splat"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/ramensauce"
+  to = "https://nu2vqa-ma.myshopify.com/products/original"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/ramensauce-1"
+  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/ramensauce-2"
+  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
+  status = 302
+  force = true
+
+# Pretty URLs for the local cart/checkout pages
 [[redirects]]
   from = "/cart"
   to = "/cart.html"
@@ -196,18 +277,6 @@
 [[redirects]]
   from = "/checkout"
   to = "/checkout.html"
-  status = 200
-
-
-# Product deep-link rewrites — direct links from emails / ads / social to a
-# specific flavor's page should resolve to the homepage (which renders the
-# full lineup) instead of 404ing. Status 200 is a rewrite (URL stays
-# /product/<slug>), not a 301, so canonical deep-links keep working as the
-# brand grows out true PDPs. Slugs are canonical per memory:
-# original-ramen, spicy-tokyo, citrus-shoyu (NOT yuzu-citrus).
-[[redirects]]
-  from = "/product/*"
-  to = "/index.html"
   status = 200
 
 [[headers]]
@@ -271,8 +340,6 @@
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Pretty-URL rewrites for the new structural pages added 2026-05-06.
-# Netlify normally pretty-URLs *.html, but explicit rewrites make the
-# behavior deterministic (and self-document the new routes).
 [[redirects]]
   from = "/about"
   to = "/about.html"
