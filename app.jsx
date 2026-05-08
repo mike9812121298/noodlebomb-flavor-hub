@@ -582,7 +582,7 @@ function PourAndCompare({ flavor = 'original' }) {
               { num: '7', unit: 'oz', label: 'per bottle' },
               { num: '14', unit: '', label: 'servings per bottle' },
               { num: '30', unit: 'sec', label: 'bowl to table' },
-              { num: '40', unit: '', label: 'test batches before launch' },
+              { num: '3', unit: '', label: 'flavors, hand-tuned' },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
                 <div className="display" style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1 }}>
@@ -635,7 +635,7 @@ function Origin() {
             }}
           >
             Three flavors.<br />
-            <span style={{ color: 'var(--muted)' }}>Forty rejected.</span>
+            <span style={{ color: 'var(--muted)' }}>Made by hand.</span>
           </h2>
         </Reveal>
 
@@ -811,9 +811,9 @@ function Testimonials() {
     <section id="reviews" style={{ background: 'var(--paper)', padding: '140px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
       <div style={{ maxWidth: 1300, margin: '0 auto' }}>
         <Reveal>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 56 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 56, flexWrap: 'wrap', gap: 12 }}>
             <span className="mono" style={{ color: 'var(--muted)' }}>Index 07 — What They’re Saying</span>
-            <span className="mono" style={{ color: 'var(--muted)' }}>From 18 months of recipe testing</span>
+            <span className="mono" style={{ color: 'var(--muted)' }}>Early taste-testers</span>
           </div>
         </Reveal>
         <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
@@ -1024,7 +1024,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                   the local cart enforces; if Wix has a special trio rule
                   Mike can confirm, restore the claim). */}
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
-                MOST POPULAR · ARRIVES IN 3–5 DAYS · 1,200+ SOLD THIS MONTH
+                BEST WAY TO TRY ALL THREE · ARRIVES IN 3–5 DAYS · FREE SHIPPING
               </div>
 
               <div style={{ marginTop: 8 }}>
