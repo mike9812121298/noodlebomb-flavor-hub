@@ -2,11 +2,18 @@
 // Reads from window.NB_CART (cart-store.js).
 const { useEffect, useState, useMemo } = React;
 
-const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const NB_SITE_URLS = {
+  original: 'https://noodlebomb.co/product-original.html',
+  citrus: 'https://noodlebomb.co/product-citrus.html',
+  spicy: 'https://noodlebomb.co/product-spicy.html',
+  trio: 'https://noodlebomb.co/#lineup',
+  cart: 'https://noodlebomb.co/cart.html',
+  shop: 'https://noodlebomb.co/#lineup'
+};
 const getCheckoutUrl = (items) => {
-  if (!items || items.length === 0) return WIX_URLS.shop;
-  if (items.length === 1) return WIX_URLS[items[0].slug] || WIX_URLS.shop;
-  return WIX_URLS.shop;
+  if (!items || items.length === 0) return NB_SITE_URLS.shop;
+  if (items.length === 1) return NB_SITE_URLS[items[0].slug] || NB_SITE_URLS.shop;
+  return NB_SITE_URLS.shop;
 };
 
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
@@ -339,8 +346,8 @@ function CartPage() {
             >{checkoutLoading ? 'Opening checkout…' : `Secure checkout — ${fmtUSD(subtotal)}`}</a>
             {items.length > 1 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 14px', justifyContent: 'center', paddingTop: 2 }}>
-                {items.map((it) => WIX_URLS[it.slug] && (
-                  <a key={it.slug} href={WIX_URLS[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.13em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                {items.map((it) => NB_SITE_URLS[it.slug] && (
+                  <a key={it.slug} href={NB_SITE_URLS[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.13em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
                     {it.name} →
                   </a>
                 ))}

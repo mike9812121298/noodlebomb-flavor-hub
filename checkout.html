@@ -56,6 +56,7 @@ a { color: inherit; }
 .nav-cart {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px;
   display: flex; align-items: center; justify-content: space-between;
+  gap: 18px;
   padding: 0 clamp(24px, 5.5vw, 80px);
   background: rgba(14,13,12,0.85); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
@@ -63,8 +64,24 @@ a { color: inherit; }
 .nav-cart .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
 .nav-cart .brand-mark { width: 18px; height: 18px; border-radius: 4px; background: var(--accent); color: var(--accent-ink); font-family: 'Inter Tight'; font-weight: 800; font-size: 11px; display: flex; align-items: center; justify-content: center; }
 .nav-cart .brand-name { font-family: 'Inter Tight'; font-weight: 700; font-size: 16px; letter-spacing: -0.04em; }
-.nav-cart-link { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-60); text-decoration: none; transition: color .2s; }
-.nav-cart-link:hover { color: var(--ink); }
+.nav-cart-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.nav-cart-link {
+  min-height: 42px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none; transition: color .2s, background .2s, border-color .2s, transform .2s;
+}
+.nav-cart-link:hover { color: var(--ink); border-color: var(--ink); background: rgba(240,235,227,0.05); transform: translateY(-1px); }
+.nav-cart-link.is-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: 0.12em; }
+@media (max-width: 760px) {
+  .nav-cart { height: auto; min-height: 72px; padding-top: 12px; padding-bottom: 12px; align-items: flex-start; }
+  .nav-cart-actions { gap: 6px; max-width: 58vw; }
+  .nav-cart-link { min-height: 38px; padding: 0 11px; font-size: 9px; }
+  .nav-cart-link.optional { display: none; }
+}
 
 main { padding-top: 96px; padding-bottom: 140px; min-height: 100vh; }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 clamp(24px, 5.5vw, 80px); }
@@ -241,11 +258,16 @@ input.field.error { border-color: var(--error); }
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
 <nav class="nav-cart">
-  <a class="brand" href="/">
+  <a class="brand" href="https://noodlebomb.co/">
     <div class="brand-mark">N</div>
     <span class="brand-name">noodlebomb</span>
   </a>
-  <a class="nav-cart-link" href="/cart.html">← Edit cart</a>
+  <div class="nav-cart-actions" aria-label="Checkout navigation">
+    <a class="nav-cart-link is-primary" href="https://noodlebomb.co/cart.html">Edit cart</a>
+    <a class="nav-cart-link optional" href="https://noodlebomb.co/#lineup">Shop sauces</a>
+    <a class="nav-cart-link optional" href="https://noodlebomb.co/recipes">Recipes</a>
+    <a class="nav-cart-link optional" href="https://noodlebomb.co/faq">FAQ</a>
+  </div>
 </nav>
 
 <main id="main-content">
@@ -255,6 +277,8 @@ input.field.error { border-color: var(--error); }
 </main>
 
 <script defer src="cart-store.js"></script>
+<script defer src="shopify-config.js"></script>
+<script defer src="shopify-checkout.js"></script>
 <script defer src="build/checkout.js"></script>
 </body>
 </html>

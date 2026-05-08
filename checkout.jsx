@@ -1,16 +1,16 @@
-// NoodleBomb checkout — editorial palette, Wix handoff.
+// NoodleBomb checkout - editorial palette, Shopify handoff.
 const { useEffect, useState, useMemo } = React;
 
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
 const EMAIL_KEY = 'nb_checkout_email';
 
-const WIX_URLS = {
-  original: 'https://shop.noodlebomb.co/ramensauce',
-  citrus:   'https://shop.noodlebomb.co/ramensauce-1',
-  spicy:    'https://shop.noodlebomb.co/ramensauce-2',
-  trio:     'https://shop.noodlebomb.co/product-page/the-noodlebomb-trio',
-  cart:     'https://shop.noodlebomb.co/cart-page',
-  shop:     'https://shop.noodlebomb.co/category/all-products'
+const NB_SITE_URLS = {
+  original: 'https://noodlebomb.co/product-original.html',
+  citrus: 'https://noodlebomb.co/product-citrus.html',
+  spicy: 'https://noodlebomb.co/product-spicy.html',
+  trio: 'https://noodlebomb.co/#lineup',
+  cart: 'https://noodlebomb.co/cart.html',
+  shop: 'https://noodlebomb.co/#lineup'
 };
 
 const PRODUCT_IMAGES = {
@@ -78,15 +78,13 @@ function CheckoutPage() {
     return isoDate(a) + ' – ' + isoDate(b);
   }, []);
 
-  // Per-item Wix product links — used for the multi-item handoff list and
-  // the per-row "Open in shop" actions in the redirect-confirm callout.
-  const wixLinks = items.map((it) => ({
+  const fallbackLinks = items.map((it) => ({
     slug: it.slug,
     name: it.name,
     qty: it.qty,
-    url: WIX_URLS[it.slug] || WIX_URLS.shop,
+    url: NB_SITE_URLS[it.slug] || NB_SITE_URLS.shop,
   }));
-  const wixUrl = wixLinks.length === 1 ? wixLinks[0].url : WIX_URLS.shop;
+  const fallbackUrl = fallbackLinks.length === 1 ? fallbackLinks[0].url : NB_SITE_URLS.shop;
   const emailValid = validEmail(email);
 
   const onEmailChange = (e) => {
@@ -100,7 +98,13 @@ function CheckoutPage() {
   const proceed = () => {
     if (!emailValid) { setEmailTouched(true); return; }
     setRedirecting(true);
-    window.open(wixUrl, '_blank', 'noopener,noreferrer');
+    if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
+      window.NB_SHOPIFY_CHECKOUT.createCheckoutUrl(items)
+        .then((url) => { window.location.href = url; })
+        .catch(() => { window.location.href = fallbackUrl; });
+      return;
+    }
+    window.location.href = fallbackUrl;
   };
 
   if (itemCount === 0) {
@@ -180,14 +184,14 @@ function CheckoutPage() {
             </div>
           </div>
 
-          {/* Wix handoff explainer */}
+          {/* Checkout handoff explainer */}
           <div className="handoff">
             <div className="ico"><Shield /></div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <h3>You'll finish on our secure store.</h3>
               <p>
-                Payment, shipping, and tax are handled on <strong>shop.noodlebomb.co</strong> — our Wix store.
-                When you click below, we'll open it in a new tab.
+                Payment, shipping, and tax are handled through secure checkout.
+                If checkout needs a backup, we'll keep you on a NoodleBomb product page.
               </p>
             </div>
           </div>
@@ -224,9 +228,9 @@ function CheckoutPage() {
 
           {redirecting && (
             <div className="redirect-confirm">
-              <strong>New tab opened.</strong>
-              If nothing happened, your browser may have blocked the popup —{' '}
-              <a href={wixUrl} target="_blank" rel="noopener noreferrer">click here</a> to open checkout manually.
+              <strong>Opening secure checkout.</strong>
+              If nothing happened, you can{' '}
+              <a href={fallbackUrl}>return to the NoodleBomb lineup</a> and keep shopping.
               <button onClick={() => { window.NB_CART && window.NB_CART.clear(); window.location.href = '/'; }}>
                 I finished my order — clear my cart
               </button>
