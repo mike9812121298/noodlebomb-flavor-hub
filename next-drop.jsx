@@ -9,14 +9,14 @@ function NextDrop() {
       bigNum: '04',
       accent: '#ebe7dd',           // parchment
       rim: '#e8f0ff',              // cool cyan-white rim
-      status: 'COMING SOON · FALL 2026',
-      eyebrow: 'VOL.04 · EST. FALL 2026',
+      status: 'COMING SOON · SUMMER 2026',
+      eyebrow: 'VOL.04 · EST. SUMMER 2026',
       name: 'Shoyu Reserve',
       oneliner: 'A deeper shoyu-style finish for rice, wings, noodles, vegetables, and late-night leftovers.',
       pills: ['Savory', 'Glossy', 'Long finish'],
       progress: 2,
       img: 'uploads/shoyu-reserve-preview-2026-05-08.png',
-      altOverride: 'NoodleBomb Shoyu Reserve preview bottle — Coming Fall 2026',
+      altOverride: 'NoodleBomb Shoyu Reserve preview bottle — Coming Summer 2026',
     },
   ];
 
