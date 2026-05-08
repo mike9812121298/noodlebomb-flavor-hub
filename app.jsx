@@ -56,7 +56,7 @@ const addAndOpenCart = (item, e) => {
 };
 
 const FLAVORS = {
-  original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#E84A3A', ink: '#0E0D0C',
+  original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#D4A24A', ink: '#0E0D0C',
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
@@ -64,7 +64,7 @@ const FLAVORS = {
     line1: 'Umami meets fire.',
     line2: 'Roasted chili, garlic, sesame.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
+  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#F28A2E', ink: '#0B0B0B',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
@@ -387,9 +387,9 @@ function UseItOn() {
   }, []);
 
   const items = [
-    { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png', lifestyle: 'uploads/range-original-clean-2026-05-07.jpg' },
+    { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#8A6424', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.68)', img: 'uploads/upload-original-v3.png', lifestyle: 'uploads/range-original-clean-2026-05-07.jpg' },
     { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Roasted chili. Garlic. Sesame.',   note: 'Bold heat for wings, fried rice, noodles, and anything that needs a kick.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png', lifestyle: 'uploads/range-spicy-clean-2026-05-07.jpg' },
-    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png', lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
+    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#C85A16', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)',    img: 'uploads/upload-citrus-v3.png', lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
   ];
   const panelCount = items.length;
 
@@ -967,13 +967,13 @@ function FlavorPicker({ flavor, setFlavor }) {
   const keys = Object.keys(FLAVORS);
   // Per-flavor card background tints (subtle warm tones layered over paper-2)
   const cardBg = {
-    original: 'linear-gradient(170deg, rgba(139,30,30,0.10) 0%, rgba(139,30,30,0.04) 100%)',
-    citrus:   'linear-gradient(170deg, rgba(201,162,39,0.10) 0%, rgba(201,162,39,0.04) 100%)',
+    original: 'linear-gradient(170deg, rgba(212,162,74,0.13) 0%, rgba(212,162,74,0.05) 100%)',
+    citrus:   'linear-gradient(170deg, rgba(242,138,46,0.13) 0%, rgba(242,138,46,0.05) 100%)',
     spicy:    'linear-gradient(170deg, rgba(194,65,12,0.12) 0%, rgba(194,65,12,0.04) 100%)',
   };
   const cardBorder = {
-    original: 'rgba(139,30,30,0.22)',
-    citrus:   'rgba(201,162,39,0.22)',
+    original: 'rgba(212,162,74,0.28)',
+    citrus:   'rgba(242,138,46,0.28)',
     spicy:    'rgba(194,65,12,0.25)',
   };
   return (
@@ -1857,9 +1857,7 @@ function App() {
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <TrustStrip />
-      <UseCaseMoments />
       <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
-      <UseItOn />
       <NextDrop />
       <MonthlyDrop />
       <PourAndCompare flavor={state.flavor} />
@@ -1867,6 +1865,8 @@ function App() {
       <Testimonials />
       <FlavorPicker flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <CitrusSpotlight />
+      <UseCaseMoments />
+      <UseItOn />
       <FAQ />
       <FinalCTA />
       {IS_DEV_MODE && <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />}
