@@ -78,9 +78,11 @@ const FLAVOR_IMAGES = {
 
 const FOOD_IMAGES = {
   ramen: 'uploads/nb-hero-trio-studio-v1.jpg',
-  stirfry: 'uploads/nb-recipe-stirfry.jpeg',
+  stirfry: 'uploads/usecase-noodles-v2.jpg',
   // Editorial wings — glossy, saucy, close crop
-  wings: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?w=1600&q=80&auto=format&fit=crop',
+  wings: 'uploads/usecase-wings-v2.jpg',
+  rice: 'uploads/usecase-rice-v2.jpg',
+  dumplings: 'uploads/usecase-dumplings-v2.jpg',
   // Editorial pulled pork — shredded on a bun, close crop (replaced slow-cooker shot)
   pulledpork: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=1600&q=80&auto=format&fit=crop'
 };
@@ -854,10 +856,10 @@ function Testimonials() {
 // ——————————————————————————— Use cases: quick motion cue for "goes on everything"
 function UseCaseMoments() {
   const cases = [
-    { title: 'Wings', copy: 'Toss hot wings with Spicy Tokyo for heat that still tastes like food.', img: FOOD_IMAGES.wings, tag: 'Toss' },
-    { title: 'Rice', copy: 'Drizzle Original over fried rice, salmon bowls, eggs, or leftovers.', img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=1400&q=80&auto=format&fit=crop', tag: 'Drizzle' },
-    { title: 'Noodles', copy: 'Stir into ramen, udon, soba, or the noodles already in your pantry.', img: FOOD_IMAGES.stirfry, tag: 'Stir' },
-    { title: 'Dumplings', copy: 'Use any flavor as a fast dip for gyoza, wontons, and potstickers.', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=1400&q=80&auto=format&fit=crop', tag: 'Dip' },
+    { title: 'Wings', copy: 'Toss hot wings with Spicy Tokyo for heat that still tastes like food.', img: FOOD_IMAGES.wings, tag: 'Toss', pos: '52% 56%' },
+    { title: 'Rice', copy: 'Drizzle Original over fried rice, salmon bowls, eggs, or leftovers.', img: FOOD_IMAGES.rice, tag: 'Drizzle', pos: '50% 48%' },
+    { title: 'Noodles', copy: 'Stir into ramen, udon, soba, or the noodles already in your pantry.', img: FOOD_IMAGES.stirfry, tag: 'Stir', pos: '52% 50%' },
+    { title: 'Dumplings', copy: 'Use any flavor as a fast dip for gyoza, wontons, and potstickers.', img: FOOD_IMAGES.dumplings, tag: 'Dip', pos: '48% 52%' },
   ];
   return (
     <section id="use-cases" style={{ background: 'var(--paper)', padding: '112px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
@@ -878,9 +880,9 @@ function UseCaseMoments() {
         <div className="use-case-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
           {cases.map((item, i) => (
             <Reveal key={item.title} delay={i + 2}>
-              <a className="use-case-card" href="#lineup" style={{ '--case-delay': `${i * 0.08}s` }}>
+              <a className="use-case-card" href="#lineup" style={{ '--case-delay': `${i * 0.08}s`, '--img-pos': item.pos }}>
                 <div className="use-case-media">
-                  <img src={item.img} alt={`${item.title} with NoodleBomb sauce`} loading="lazy" />
+                  <img src={item.img} alt={`${item.title} with NoodleBomb sauce`} loading="lazy" decoding="async" />
                   <span className="use-case-pour" aria-hidden="true" />
                 </div>
                 <div className="use-case-copy">
