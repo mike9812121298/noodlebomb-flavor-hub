@@ -76,7 +76,7 @@ const Footer = () => {
               <li>💰 100% money-back guarantee</li>
               <li>🍜 Small batch, handcrafted</li>
               <li>📦 Ships in 1–2 business days</li>
-              <li>🌿 No fillers, no shortcuts</li>
+              <li>🌿 Built for big flavor</li>
             </ul>
           </div>
         </div>

@@ -160,7 +160,7 @@ const Index = () => {
               variants={heroItemVariants}
               className="text-sm md:text-base text-foreground/50 max-w-md mb-6 leading-relaxed"
             >
-              NoodleBomb isn't just a condiment; it's the secret weapon for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
+              NoodleBomb is the ramen sauce built for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
             </motion.p>
 
             <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">

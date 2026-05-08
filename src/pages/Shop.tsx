@@ -52,8 +52,8 @@ const bundles = [
   {
     name: "The Trio Pack",
     tagline: "All three flavors in one clean lineup. Free shipping included.",
-    price: "$24.99",
-    originalPrice: "$29.97",
+    price: "$30.00",
+    originalPrice: "$35.97",
     spiceLevel: 3,
     color: "bg-primary text-primary-foreground",
   },
@@ -66,7 +66,7 @@ const Shop = () => (
         <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-4 block">Shop</span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">The Full Lineup</h1>
         <p className="text-foreground/70 mt-3 text-lg">
-          Four flavors. One obsession. Pick yours or grab the bundle.
+          Three flavors. One obsession. Pick yours or grab the bundle.
         </p>
         <p className="text-muted-foreground mt-1 text-sm">Free shipping on orders $40+ — limited small-batch inventory.</p>
       </motion.div>

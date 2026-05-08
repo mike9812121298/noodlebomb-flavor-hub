@@ -69,7 +69,7 @@ All redirects defined in `_redirects` and `netlify.toml`:
 | /checkout | /checkout.html | 200 (rewrite) |
 | /about, /recipes, /faq | /*.html | 200 (rewrite) |
 
-302 (not 301) on commerce redirects is intentional — lets us cut over to a custom Shopify domain (shop.noodlebomb.co or shop.noodlebomb.com) later without polluting Google's redirect cache for 6+ months.
+302 (not 301) on commerce redirects is intentional — lets us cut over to a custom Shopify domain such as shop.noodlebomb.co later without polluting Google's redirect cache for 6+ months.
 
 ## Where each tool plugs in
 

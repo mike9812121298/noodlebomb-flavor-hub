@@ -235,7 +235,7 @@ const ComingSoonDrop = () => {
           <DropCard
             name="NoodleBomb Soy"
             tagline="Premium Private Label Soy Sauce"
-            description="Naturally fermented. 35% less sodium. No fillers, no shortcuts. 16.9 oz of the real thing."
+            description="Naturally fermented. Lower sodium. Big soy depth. 16.9 oz of the real thing."
             status="preview"
             image={nbSoySauce}
             glowColor="hsl(var(--accent))"

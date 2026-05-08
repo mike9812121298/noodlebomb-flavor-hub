@@ -87,14 +87,14 @@ const About = () => {
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              NoodleBomb is what came out of that obsession. Four flavors, each one developed the same way — start with the feeling you want, work backward until the sauce earns it. Ashley wants every bowl to feel intentional. Not like a shortcut. Not like a condiment you drizzle on and forget. Like someone genuinely cared about what you were about to eat.
+              NoodleBomb is what came out of that obsession. Three flavors, each one developed the same way — start with the feeling you want, work backward until the sauce earns it. Ashley wants every bowl to feel intentional. Not like a shortcut. Not like a ramen sauce you drizzle on and forget. Like someone genuinely cared about what you were about to eat.
             </p>
           </div>
 
           {/* Values */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
             {[
-              { icon: Leaf, title: "Real Ingredients", desc: "No mystery fillers. No artificial anything. Just bold, clean flavor." },
+              { icon: Leaf, title: "Real Ingredients", desc: "Soy, garlic, sesame, kombu, mirin, and flavor-specific spice profiles. Just bold, clean flavor." },
               { icon: Flame, title: "Bold Flavor", desc: "Not watered-down sauce. Every bottle is built to hit hard." },
               { icon: Shield, title: "100% Guarantee", desc: "If you don't love it, we refund you. Full stop. No return needed." },
             ].map(({ icon: Icon, title, desc }) => (

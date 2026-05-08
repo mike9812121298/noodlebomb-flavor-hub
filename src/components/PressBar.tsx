@@ -5,7 +5,7 @@ const signals = [
   { icon: Flame, label: "Small Batch" },
   { icon: Sparkles, label: "Premium Ingredients" },
   { icon: HandMetal, label: "Japanese-Inspired" },
-  { icon: Leaf, label: "No Fillers" },
+  { icon: Leaf, label: "Real Ingredients" },
   { icon: ShieldCheck, label: "Handcrafted" },
 ];
 
