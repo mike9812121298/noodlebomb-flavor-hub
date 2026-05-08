@@ -13,7 +13,7 @@ const reviews = [
     image: reviewPhoto1,
   },
   {
-    quote: "I wasn't expecting this much punch from one sauce. Made my store-bought ramen restaurant-worthy in seconds.",
+    quote: "I wasn't expecting this much punch from one sauce. I used it on noodles, rice, and wings in the same week.",
     name: "Jessica M.",
     rating: 5,
     image: reviewPhoto2,
@@ -39,7 +39,7 @@ const SocialProof = () => (
       >
         <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Real People. Real Flavor.</span>
         <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
-          Loved by Ramen Fans Everywhere
+          Loved by Flavor Fans Everywhere
         </h2>
       </motion.div>
 

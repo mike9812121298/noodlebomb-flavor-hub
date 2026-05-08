@@ -33,7 +33,7 @@ const About = () => {
             <span className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">On Purpose.</span>
           </h1>
           <p className="text-muted-foreground text-xl max-w-2xl mx-auto">
-            NoodleBomb was born in the Pacific Northwest out of one simple obsession: great ramen flavor shouldn't require a restaurant.
+            NoodleBomb was born in the Pacific Northwest out of one simple obsession: bold, savory flavor should be easy to pour on almost anything.
           </p>
           <p className="mt-4 text-xs font-display font-bold uppercase tracking-[0.3em] text-primary/70">
             Bonney Lake, WA · Small Batch · Crafted to Finish
@@ -83,7 +83,7 @@ const About = () => {
             </p>
 
             <p className="text-muted-foreground leading-relaxed mb-5">
-              So she started making her own. The kitchen in her Pacific Northwest home became a testing ground — dark soy layered with roasted garlic, ginger dialed in, heat calibrated until it landed right. Batch after batch. Some were close. Some weren't. But each one got her closer to something real: a ramen sauce that carried the soul of what she'd eaten in Japan, built from scratch, without shortcuts.
+              So she started making her own. The kitchen in her Pacific Northwest home became a testing ground — soy, roasted garlic, sesame, ginger, and heat dialed in until the balance landed right. Batch after batch. Some were close. Some weren't. But each one got her closer to something real: a ramen sauce that carried the soul of what she'd eaten in Japan, built from scratch, without shortcuts.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">

@@ -4,9 +4,9 @@ import wholesaleHero from "@/assets/nb-atmosphere-wholesale-kitchen.png";
 import wholesaleTrio from "@/assets/nb-scene-trio-lineup.png";
 
 const products = [
-  { name: "Original", sku: "Gt-50001", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
-    { name: "Spicy Tokyo", sku: "Gt-50003", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
-        { name: "Citrus Shoyu", sku: "Gt-50002", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "18 months", support: "Full POS assets" },
+  { name: "Original", sku: "Gt-50001", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
+    { name: "Spicy Tokyo", sku: "Gt-50003", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
+        { name: "Citrus Shoyu", sku: "Gt-50002", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
         ];
 
         const specRows = [
@@ -49,7 +49,7 @@ const products = [
           <div className="absolute bottom-6 left-6 right-6">
             <p className="text-xs font-display font-bold uppercase tracking-[0.25em] text-primary/85 mb-2">The Full Lineup</p>
             <p className="font-display text-2xl md:text-3xl font-bold text-white tracking-tight">Original · Spicy Tokyo · Citrus Shoyu</p>
-            <p className="text-sm text-white/70 mt-2">$6.00 wholesale · 18-month shelf life · MOQ 12 units</p>
+            <p className="text-sm text-white/70 mt-2">$6.00 wholesale · shelf life on label · MOQ 12 units</p>
           </div>
         </div>
       </section>

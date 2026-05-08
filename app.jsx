@@ -457,7 +457,7 @@ function UseItOn() {
               {/* Bottle image */}
               <div style={{ flex: '1 1 46%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                 <div className="flavor-bottle-bob" style={{ width: '100%', height: '100%', maxWidth: 520, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <img src={it.lifestyle || it.img} alt={`NoodleBomb ${it.no} ${it.name} ramen sauce`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 4, filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
+                  <img src={it.lifestyle || it.img} alt={`NoodleBomb ${it.no} ${it.name} sauce`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', display: 'block', borderRadius: 4, filter: it.comingSoon ? 'drop-shadow(0 40px 60px rgba(0,0,0,0.45)) grayscale(0.3)' : 'drop-shadow(0 40px 60px rgba(0,0,0,0.45))', opacity: it.comingSoon ? 0.85 : 1 }} />
                   {it.comingSoon && (
                     <div style={{
                       position: 'absolute',
@@ -807,7 +807,7 @@ function Origin() {
 // replace bodies. Tag changed to "early taste-tester" as honest pre-launch framing.
 function Testimonials() {
   const quotes = [
-  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley R.', tag: 'early taste-tester' },
+  { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes quick meals feel finished. A total must-have in the kitchen.', name: 'Ashley R.', tag: 'early taste-tester' },
   { body: 'I wasn’t expecting this much punch from one sauce. I put it on noodles, leftover rice, and wings in the same week. I’m officially hooked.', name: 'Marcus', tag: 'early taste-tester' },
   { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades anything that needs a savory hit.', name: 'Priya', tag: 'early taste-tester' }];
 
@@ -1577,7 +1577,7 @@ function FAQ() {
   const [open, setOpen] = useState({});
   const toggle = (i) => setOpen((prev) => ({ ...prev, [i]: !prev[i] }));
   const items = [
-    { q: 'How long does a bottle last?', a: 'A 7 oz bottle is roughly 14 servings. Most people get 3–4 weeks of regular use out of one.' },
+    { q: 'How long does a bottle last?', a: 'It depends how you use it. The drizzle cap gives you control for finishing bowls, tossing wings, or mixing a quick marinade without over-pouring.' },
     { q: 'Does it need to be refrigerated?', a: 'Refrigerate after opening. Use within 6 months for peak flavor.' },
     { q: 'What can I put it on besides ramen?', a: 'Rice bowls, dumplings, stir-fry, eggs, roasted vegetables, wings, marinades. If it\u2019s savory, it probably works.' },
     { q: 'How spicy is Spicy Tokyo?', a: 'Medium heat — noticeable warmth, not a punishment. About a 5 out of 10.' },

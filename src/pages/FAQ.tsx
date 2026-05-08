@@ -8,7 +8,7 @@ const faqGroups = [
     items: [
       {
         q: "What is NoodleBomb?",
-        a: "NoodleBomb is a premium ramen sauce crafted in small batches in the Pacific Northwest. It's designed to transform any bowl of noodles into a restaurant-quality meal in under 10 minutes. We currently offer three SKUs: Original, Spicy Tokyo, and Citrus Shoyu.",
+        a: "NoodleBomb is a premium ramen sauce crafted in small batches in the Pacific Northwest. It's designed to turn noodles, rice, wings, dumplings, eggs, and quick meals into something bold in minutes. We currently offer three SKUs: Original, Spicy Tokyo, and Citrus Shoyu.",
       },
       {
         q: "How is NoodleBomb different from other sauces?",
@@ -50,7 +50,7 @@ const faqGroups = [
       },
       {
         q: "Does NoodleBomb contain preservatives?",
-        a: "We use a small amount of naturally-derived preservatives to maintain shelf stability. NoodleBomb has an 18-month shelf life from the production date. Once opened, refrigerate and use within 30 days for best flavor.",
+        a: "Check the back label for the current ingredient list. Store unopened bottles in a cool, dry place, then refrigerate after opening for best flavor.",
       },
       {
         q: "Is MSG in NoodleBomb?",

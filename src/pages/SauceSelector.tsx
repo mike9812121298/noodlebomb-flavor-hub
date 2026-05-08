@@ -58,7 +58,7 @@ const results: Record<string, SauceResult> = {
   spicy: {
     name: "Spicy Tokyo",
     tagline: "The Street Heat Legend",
-    description: "Bold dark soy, roasted chili, and sesame combine for that rich, layered spice.",
+    description: "Roasted chili, garlic, sesame, and deep umami combine for rich, layered spice.",
     spice: 3,
   },
   citrus: {

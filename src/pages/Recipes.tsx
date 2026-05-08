@@ -208,7 +208,7 @@ const recipes = [
     flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
     time: "10 min",
     serves: "2",
-    desc: "Sushi-grade tuna, two minutes of work, restaurant-bowl payoff.",
+    desc: "Sushi-grade tuna, two minutes of work, bright rice-bowl payoff.",
     steps: [
       "Cube 1/2 lb sushi-grade ahi tuna into 1/2-inch pieces.",
       "In a bowl, whisk 3 tbsp Citrus Shoyu, 1 tsp toasted sesame oil, and 1 tsp grated ginger.",
@@ -244,7 +244,7 @@ const Recipes = () => {
       meta.name = "description";
       document.head.appendChild(meta);
     }
-    meta.content = "Fifteen recipes built around NoodleBomb ramen sauce — weeknight bowls, restaurant-bowl projects, glazes, marinades, dips, and salads.";
+    meta.content = "Fifteen recipes built around NoodleBomb ramen sauce — noodles, rice bowls, wings, glazes, marinades, dips, and salads.";
   }, []);
 
   return (
