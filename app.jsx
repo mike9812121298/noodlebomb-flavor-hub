@@ -25,8 +25,8 @@ const SHOPIFY_VARIANT_IDS = {
 };
 const cartPermalink = (slug, qty = 1) => {
   const id = SHOPIFY_VARIANT_IDS[slug];
-  if (!id) return 'https://nu2vqa-ma.myshopify.com/cart?return_to=https://noodlebomb.co';
-  return `https://nu2vqa-ma.myshopify.com/cart/${id}:${qty}?return_to=https://noodlebomb.co`;
+  if (!id) return 'https://nu2vqa-ma.myshopify.com/cart';
+  return `https://nu2vqa-ma.myshopify.com/cart/add?id=${id}&quantity=${qty}&return_to=%2Fcart`;
 };
 
 // Legacy local-cart helper kept for the drawer's "View full cart" path; no

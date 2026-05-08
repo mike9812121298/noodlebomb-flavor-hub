@@ -12,11 +12,11 @@ const NB_SHOPIFY_VARIANT_IDS = {
   citrus:   '53998041071926',
   trio:     '53998042644790'
 };
-const NB_SHOPIFY_CART = 'https://nu2vqa-ma.myshopify.com/cart?return_to=https://noodlebomb.co';
+const NB_SHOPIFY_CART = 'https://nu2vqa-ma.myshopify.com/cart';
 const nbCartPermalink = (slug, qty = 1) => {
   const id = NB_SHOPIFY_VARIANT_IDS[slug];
   if (!id) return NB_SHOPIFY_CART;
-  return `https://nu2vqa-ma.myshopify.com/cart/${id}:${qty}?return_to=https://noodlebomb.co`;
+  return `https://nu2vqa-ma.myshopify.com/cart/add?id=${id}&quantity=${qty}&return_to=%2Fcart`;
 };
 
 // Returns the best Wix URL for a given cart item list — used as the last-resort
@@ -780,10 +780,11 @@ function Nav({ flavor, setFlavor, flavors }) {
               <a
                 href={(() => {
                   const lines = cartItems
-                    .map(it => NB_SHOPIFY_VARIANT_IDS[it.slug] && `${NB_SHOPIFY_VARIANT_IDS[it.slug]}:${Math.max(1, Math.floor(it.qty || 1))}`)
+                    .map((it, index) => NB_SHOPIFY_VARIANT_IDS[it.slug]
+                      && `items%5B${index}%5D%5Bid%5D=${NB_SHOPIFY_VARIANT_IDS[it.slug]}&items%5B${index}%5D%5Bquantity%5D=${Math.max(1, Math.floor(it.qty || 1))}`)
                     .filter(Boolean);
                   if (lines.length === 0) return NB_SHOPIFY_CART;
-                  return `https://nu2vqa-ma.myshopify.com/cart/${lines.join(',')}?return_to=https://noodlebomb.co`;
+                  return `https://nu2vqa-ma.myshopify.com/cart/add?${lines.join('&')}&return_to=%2Fcart`;
                 })()}
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
