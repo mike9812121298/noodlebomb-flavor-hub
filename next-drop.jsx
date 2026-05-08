@@ -12,8 +12,8 @@ function NextDrop() {
       status: 'COMING SOON · FALL 2026',
       eyebrow: 'VOL.04 · EST. FALL 2026',
       name: 'Shoyu Reserve',
-      oneliner: 'Single-origin shoyu. Barrel-aged. Quietly devastating.',
-      pills: ['Saline', 'Round', 'Long finish'],
+      oneliner: 'A deeper shoyu-style finish for rice, wings, noodles, vegetables, and late-night leftovers.',
+      pills: ['Savory', 'Glossy', 'Long finish'],
       progress: 2,
       img: 'uploads/nb-original-clean.png', // placeholder silhouette — applied via CSS filter (frosted/desaturated) so it doesn't read as Original. Real Shoyu Reserve render TBD.
       placeholderFilter: 'grayscale(0.95) brightness(0.5) contrast(1.2) blur(0.6px)',
@@ -51,12 +51,12 @@ function NextDrop() {
         <div style={{ marginTop: 80 }}>
           <Reveal delay={1}>
             <h2 className="nd-headline serif" style={{ fontFamily: 'Fraunces, "Cormorant Garamond", serif', fontWeight: 400, fontStyle: 'normal', letterSpacing: '-0.025em' }}>
-              One more on the way.
+              Shoyu Reserve is next.
             </h2>
           </Reveal>
           <Reveal delay={2}>
             <p className="nd-sub">
-              We’re already cooking on the next flavor. Get on the list and you’ll hear about it first.
+              A darker, deeper bottle is in development. Get on the list before the reserve opens.
             </p>
           </Reveal>
         </div>
@@ -104,6 +104,14 @@ function NextDrop() {
                   ))}
                 </div>
 
+                <form className="nd-inline-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+                  <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Alert" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="email" name="email" placeholder="your@email.com" aria-label="Email for Shoyu Reserve alert" required />
+                  <button type="submit">Reserve alert →</button>
+                </form>
+
                 {/* Progress strip */}
                 <div className="nd-progress">
                   <div className="nd-progress-head">
@@ -122,7 +130,7 @@ function NextDrop() {
                   </div>
                 </div>
 
-                <div className="nd-notify-caption">Notify me when this drops →</div>
+                <div className="nd-notify-caption">Get the first reserve alert →</div>
               </div>
             </Reveal>
           ))}
@@ -133,7 +141,7 @@ function NextDrop() {
           <div className="nd-notify">
             <div className="nd-notify-label">
               <span className="nd-pulse" />
-              GET NOTIFIED
+              RESERVE ALERT
             </div>
             <form className="nd-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
               <input type="hidden" name="_subject" value="NoodleBomb — Notify Me (Next Drop)" />
@@ -146,9 +154,9 @@ function NextDrop() {
                 aria-label="Email address"
                 required
               />
-              <button type="submit" className="nd-submit">Notify me →</button>
+              <button type="submit" className="nd-submit">Get the reserve alert →</button>
             </form>
-            <div className="nd-microcopy">~600 people on the list. No spam. One email when they ship.</div>
+            <div className="nd-microcopy">One clean email when the reserve opens. No noise.</div>
           </div>
         </Reveal>
       </div>

@@ -314,7 +314,7 @@ function Nav({ flavor, setFlavor, flavors }) {
     ['About', '/about'],
     ['Monthly Ramen Box', '/monthly-box'],
     ['FAQ', '/faq'],
-    ['Contact', 'mailto:hello@noodlebomb.co'],
+    ['Contact', '#open-contact'],
   ];
 
   const goToHash = (href) => {
@@ -345,6 +345,11 @@ function Nav({ flavor, setFlavor, flavors }) {
           const isHash = href.startsWith('#');
           return (
             <a key={label} href={href} onClick={(e) => {
+              if (href === '#open-contact') {
+                e.preventDefault();
+                if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY('contact');
+                return;
+              }
               if (!isHash) return; // real route — let browser navigate
               e.preventDefault();
               const el = document.querySelector(href);
@@ -470,7 +475,17 @@ function Nav({ flavor, setFlavor, flavors }) {
             <a
               key={label}
               href={href}
-              onClick={(e) => { if (!href.startsWith('#')) { setDrawerOpen(false); return; } e.preventDefault(); goToHash(href); }}
+              onClick={(e) => {
+                if (href === '#open-contact') {
+                  e.preventDefault();
+                  setDrawerOpen(false);
+                  if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY('contact');
+                  return;
+                }
+                if (!href.startsWith('#')) { setDrawerOpen(false); return; }
+                e.preventDefault();
+                goToHash(href);
+              }}
               className="display"
               style={{
                 fontSize: 32,

@@ -262,6 +262,63 @@ function FlavorBreakdown({ flavor }) {
 }
 
 // ——————————————————————————— Flavor scene atmospheres
+function FlavorBreakdownV2({ flavor }) {
+  const items = [
+    { key: 'original', use: 'Rice, eggs, noodles', note: 'Garlic-sesame depth when dinner needs a fast savory base.' },
+    { key: 'spicy', use: 'Wings, fried rice, grilled meat', note: 'Roasted chili heat that keeps the bite bold, not muddy.' },
+    { key: 'citrus', use: 'Dumplings, vegetables, seafood', note: 'Clean shoyu brightness that cuts through rich food.' },
+  ];
+  return (
+    <section id="ingredients" className="fbv2-section" style={{ background: 'var(--paper)', padding: 'clamp(96px, 11vw, 150px) clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', scrollMarginTop: 80 }}>
+      <div className="fbv2-shell" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, .9fr) minmax(280px, 420px) minmax(0, 1fr)', gap: 'clamp(28px, 5vw, 72px)', alignItems: 'center' }}>
+        <div className="fbv2-copy">
+          <Reveal>
+            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 02 - Flavor Map</div>
+          </Reveal>
+          <Reveal delay={1}>
+            <h2 className="display section-h2" style={{ margin: '0 0 22px', maxWidth: 500 }}>
+              Pick the flavor.<br /><span className="accent-fg">Pour it on<br />everything.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={2}>
+            <p style={{ color: 'var(--ink-60)', fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.65, maxWidth: 560, margin: 0 }}>
+              Three bottles, one job: make wings, rice, noodles, dumplings, eggs, vegetables, and leftovers taste finished.
+            </p>
+          </Reveal>
+        </div>
+
+        <Reveal delay={2}>
+          <div className="fbv2-bottle-stage">
+            <div className="fbv2-glow" aria-hidden="true" />
+            <div className="fbv2-sauce-ring" aria-hidden="true" />
+            <Bottle flavor={FLAVORS[flavor].tag} src={FLAVOR_IMAGES[flavor]} />
+          </div>
+        </Reveal>
+
+        <div className="fbv2-cards">
+          {items.map((item, i) => {
+            const f = FLAVORS[item.key];
+            const active = flavor === item.key;
+            return (
+              <Reveal key={item.key} delay={i + 2}>
+                <div className={`fbv2-card${active ? ' is-active' : ''}`} style={{ '--card-accent': f.color }}>
+                  <div className="fbv2-card-top">
+                    <span className="mono">{f.short}</span>
+                    <span className="fbv2-dot" />
+                  </div>
+                  <h3>{f.name}</h3>
+                  <p>{item.note}</p>
+                  <div className="fbv2-use">{item.use}</div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FlavorScene({ kind }) {
   // Stable random positions via key-based arrays
   if (kind === 'original') {
@@ -1093,12 +1150,12 @@ function FlavorPicker({ flavor, setFlavor }) {
                 Real studio FRONT shots composited canon order Original -> Spicy Tokyo -> Citrus Shoyu
                 on warm dark backdrop. Cache-bust filename forces fresh fetch past
                 prior strip-cut nb-hero-trio-canon-v1.jpg with wood-grain seams. */}
-            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: '#14110E', minWidth: 0, maxWidth: '100%' }}>
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: 'radial-gradient(circle at 50% 46%, rgba(232,74,58,0.18), transparent 52%), #14110E', minWidth: 0, maxWidth: '100%', padding: 'clamp(18px, 3vw, 36px)' }}>
               <img
                 src="uploads/nb-hero-trio-studio-v1.jpg"
                 alt="NoodleBomb Trio — Original (left), Spicy Tokyo (center), Citrus Shoyu (right)"
                 loading="lazy"
-                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', filter: 'drop-shadow(0 28px 50px rgba(0,0,0,0.45))' }}
               />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)', pointerEvents: 'none' }} />
             </div>
@@ -1257,7 +1314,7 @@ function CitrusSpotlight() {
               fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.18em',
               color: 'rgba(245,241,234,0.85)', textTransform: 'uppercase',
             }}>
-              No.03 · Citrus Shoyu · 7 fl oz · Bonney Lake, WA
+              No.02 · Citrus Shoyu · 7 fl oz · Bonney Lake, WA
             </figcaption>
           </figure>
         </Reveal>
@@ -1457,7 +1514,7 @@ function FinalCTA() {
           {[
           ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
-          ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', 'mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry%20-%20NoodleBomb'], ['Contact', 'mailto:hello@noodlebomb.co?subject=NoodleBomb%20Inquiry'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
+          ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
           map(([h, items]) =>
           <div key={h}>
               <div className="mono" style={{ marginBottom: 20 }}>{h}</div>
@@ -1712,7 +1769,17 @@ function App() {
   // Expose modal opener globally so footer/anchor clicks can trigger it
   useEffect(() => {
     window.NB_OPEN_INQUIRY = (kind) => setInquiry(kind);
-    return () => { delete window.NB_OPEN_INQUIRY; };
+    const onClick = (e) => {
+      const link = e.target.closest && e.target.closest('a[href="#open-contact"], a[href="#open-wholesale"]');
+      if (!link) return;
+      e.preventDefault();
+      setInquiry(link.getAttribute('href') === '#open-wholesale' ? 'wholesale' : 'contact');
+    };
+    document.addEventListener('click', onClick);
+    return () => {
+      document.removeEventListener('click', onClick);
+      delete window.NB_OPEN_INQUIRY;
+    };
   }, []);
 
   // Honor ?flavor=X on initial load — used by the empty-cart recommendations
@@ -1785,15 +1852,15 @@ function App() {
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <TrustStrip />
       <UseCaseMoments />
-      <FlavorBreakdown flavor={state.flavor} />
+      <FlavorBreakdownV2 flavor={state.flavor} />
       <UseItOn />
+      <NextDrop />
+      <MonthlyDrop />
       <PourAndCompare flavor={state.flavor} />
       <Origin />
       <Testimonials />
       <FlavorPicker flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <CitrusSpotlight />
-      <NextDrop />
-      <MonthlyDrop />
       <FAQ />
       <FinalCTA />
       {IS_DEV_MODE && <Tweaks state={state} set={set} open={tweaksOpen} setOpen={setTweaksOpen} />}

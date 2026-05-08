@@ -204,8 +204,8 @@ function MonthlyDrop() {
                 margin: '0 0 28px',
                 color: 'var(--ink)'
               }}>
-                A new ramen ritual.<br />
-                <span style={{ color: 'var(--muted)' }}>Every month.</span>
+                Ramen night,<br />
+                <span style={{ color: 'var(--muted)' }}>handled monthly.</span>
               </h2>
             </Reveal>
 
@@ -219,16 +219,16 @@ function MonthlyDrop() {
                 maxWidth: '52ch',
                 margin: '0 0 32px'
               }}>
-                One curated box. One sauce of the month, two noodle styles, a seasonal topping, and a recipe zine — designed by the founder, shipped on a set date each month. Cancel any time.
+                One curated NoodleBomb sauce, premium noodles, a seasonal topping, and a recipe card built for a fast dinner that still feels special. Cancel any time.
               </p>
             </Reveal>
 
             <Reveal delay={3}>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {[
-                  'Limited to 500 boxes per drop',
-                  'New flavor pairing every month',
-                  'Free shipping in the US',
+                  'Built for quick ramen nights and easy upgrades',
+                  'Sauce, noodles, topping, and a recipe card',
+                  'Premium option available for bigger pantry energy',
                   'Cancel anytime, no commitment'
                 ].map((line, i) => (
                   <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Inter', fontSize: 14, color: 'var(--ink)', letterSpacing: '-0.005em' }}>
@@ -241,10 +241,10 @@ function MonthlyDrop() {
 
             {/* Pricing block */}
             <Reveal delay={4}>
-              <div className="mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.22em', fontWeight: 600, marginBottom: 12 }}>THE NOODLEBOMB CLUB — MEMBERS ONLY</div>
+              <div className="mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.22em', fontWeight: 600, marginBottom: 12 }}>MONTHLY RAMEN BOX</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, marginBottom: 28, flexWrap: 'wrap' }}>
                 <span className="display" style={{ fontSize: 'clamp(48px, 5vw, 72px)', fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1, color: 'var(--ink)' }}>
-                  $29.99<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
+                  $44.99<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
                 </span>
                 <span style={{
                   display: 'inline-flex', alignItems: 'center',
@@ -252,9 +252,9 @@ function MonthlyDrop() {
                   padding: '5px 11px', borderRadius: 999,
                   fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
                   letterSpacing: '0.18em'
-                }}>FREE SHIPPING</span>
+                }}>PREMIUM $49</span>
               </div>
-              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>First box ships within 7 days of signup.</div>
+              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Join the list and we will email you before the next box opens.</div>
             </Reveal>
 
             {/* CTA — Monthly Box subscribe (formsubmit lead capture; replaces dead button reported by Kevin Malcolm 2026-04-25). Real Wix subscription product TBD — until then this captures the lead so Mike/Ashley can manually onboard before VOL.04 ships May 15. */}
@@ -264,11 +264,10 @@ function MonthlyDrop() {
                 method="POST"
                 style={{ marginBottom: 32, maxWidth: 480 }}
               >
-                <input type="hidden" name="_subject" value="NoodleBomb Monthly Box — Subscribe Request" />
+                <input type="hidden" name="_subject" value="NoodleBomb Monthly Ramen Box Interest" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="box_volume" value="VOL.04 — MAY 2026 DROP" />
-                <input type="hidden" name="ships" value="May 15, 2026" />
+                <input type="hidden" name="box" value="Monthly Ramen Box" />
                 <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
                 <div style={{ display: 'flex', alignItems: 'stretch', gap: 8, flexWrap: 'wrap' }}>
                   <input
@@ -305,25 +304,22 @@ function MonthlyDrop() {
                     onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(139,30,30,0.4)'; }}
                     onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
                   >
-                    Subscribe — ships May 15
+                    Join the box list
                   </button>
                 </div>
                 <div className="mono" style={{ marginTop: 10, fontSize: 10, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                  WE'LL EMAIL YOU TO LOCK IN VOL.04 BEFORE IT SHIPS · NO CHARGE YET
+                  WE'LL EMAIL YOU BEFORE THE NEXT BOX OPENS - NO CHARGE YET
                 </div>
               </form>
             </Reveal>
 
-            {/* Counter + progress */}
             <Reveal delay={6}>
-              <div style={{ maxWidth: 380 }}>
-                <div className="mono" style={{ fontSize: 11, color: 'var(--muted)', letterSpacing: '0.14em', marginBottom: 10, display: 'flex', justifyContent: 'space-between' }}>
-                  <span>JOINED THIS MONTH: 312 / 500</span>
-                  <span style={{ color: 'var(--accent)' }}>GOING FAST</span>
-                </div>
-                <div style={{ width: '100%', height: 3, background: 'rgba(245,241,234,0.1)', borderRadius: 999, overflow: 'hidden' }}>
-                  <div style={{ width: '62.4%', height: '100%', background: 'linear-gradient(90deg, var(--accent) 0%, #C8362E 100%)', borderRadius: 999, boxShadow: '0 0 12px rgba(139,30,30,0.6)' }} />
-                </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, maxWidth: 520 }}>
+                {['$44.99 monthly', '$49 premium', 'Cancel anytime'].map((line) => (
+                  <span key={line} className="mono" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 34, padding: '0 12px', border: '1px solid rgba(245,241,234,0.14)', borderRadius: 999, color: 'var(--ink)', fontSize: 10, letterSpacing: '0.14em' }}>
+                    {line}
+                  </span>
+                ))}
               </div>
             </Reveal>
 
