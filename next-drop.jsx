@@ -59,6 +59,15 @@ function NextDrop() {
               A darker, deeper bottle is in development. Get on the list before the reserve opens.
             </p>
           </Reveal>
+          <Reveal delay={2.5}>
+            <form className="nd-hero-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+              <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Priority Alert" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="email" name="email" placeholder="your@email.com" aria-label="Email for Shoyu Reserve priority alert" required />
+              <button type="submit">Reserve alert</button>
+            </form>
+          </Reveal>
         </div>
 
         {/* Cards */}

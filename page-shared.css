@@ -105,7 +105,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--line);
 }
-.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.nav-brand { display: flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--ink); }
 .nav-brand-mark {
   width: 18px; height: 18px; border-radius: 4px;
   background: var(--accent); color: var(--accent-ink);
@@ -154,6 +154,9 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 }
 .nav-drawer.open { display: flex; }
 .nav-drawer a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   color: var(--ink); text-decoration: none;
   font-family: 'Inter Tight', sans-serif; font-size: 22px; font-weight: 600;
   letter-spacing: -0.02em;

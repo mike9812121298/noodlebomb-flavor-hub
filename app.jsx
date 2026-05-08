@@ -303,7 +303,7 @@ function FlavorBreakdownV2({ flavor }) {
               <Reveal key={item.key} delay={i + 2}>
                 <div className={`fbv2-card${active ? ' is-active' : ''}`} style={{ '--card-accent': f.color }}>
                   <div className="fbv2-card-top">
-                    <span className="mono">{f.short}</span>
+                    <span className="mono">{`No.${String(i + 1).padStart(2, '0')}`}</span>
                     <span className="fbv2-dot" />
                   </div>
                   <h3>{f.name}</h3>
@@ -1234,7 +1234,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     e.currentTarget.style.background = '#E84A3A';
                   }}
                 >
-                  Buy the Trio — $29.99 · Save $6
+                  Buy the Trio - $29.99
                   <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
                 </a>
               </div>
