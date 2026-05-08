@@ -56,15 +56,15 @@ const addAndOpenCart = (item, e) => {
 };
 
 const FLAVORS = {
-  original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#D4A24A', ink: '#0E0D0C',
+  original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#D4A24A', ink: '#0E0D0C', rgb: '212, 162, 74', deep: '#8A6424',
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#E84A3A', ink: '#0E0D0C',
+  spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#E84A3A', ink: '#0E0D0C', rgb: '232, 74, 58', deep: '#8B1E1E',
     line1: 'Umami meets fire.',
     line2: 'Roasted chili, garlic, sesame.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#F28A2E', ink: '#0B0B0B',
+  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#F28A2E', ink: '#0B0B0B', rgb: '242, 138, 46', deep: '#C85A16',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
@@ -251,7 +251,7 @@ function FlavorBreakdown({ flavor }) {
             width: p >= ing.appearAt ? 10 : 8, height: p >= ing.appearAt ? 10 : 8, borderRadius: 999,
             background: p >= ing.appearAt ? 'var(--accent)' : 'rgba(240,235,227,0.28)',
             transition: 'background .4s, width .4s, height .4s',
-            boxShadow: p >= ing.appearAt ? '0 0 0 4px rgba(139,30,30,0.18)' : 'none'
+            boxShadow: p >= ing.appearAt ? '0 0 0 4px rgba(var(--accent-rgb),0.18)' : 'none'
           }} />
           )}
         </div>
@@ -1156,7 +1156,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                 Real studio FRONT shots composited canon order Original -> Spicy Tokyo -> Citrus Shoyu
                 on warm dark backdrop. Cache-bust filename forces fresh fetch past
                 prior strip-cut nb-hero-trio-canon-v1.jpg with wood-grain seams. */}
-            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: 'radial-gradient(circle at 50% 46%, rgba(232,74,58,0.18), transparent 52%), #14110E', minWidth: 0, maxWidth: '100%', padding: 'clamp(18px, 3vw, 36px)' }}>
+            <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: 'radial-gradient(circle at 50% 46%, rgba(var(--accent-rgb),0.18), transparent 52%), #14110E', minWidth: 0, maxWidth: '100%', padding: 'clamp(18px, 3vw, 36px)' }}>
               <img
                 src="uploads/nb-hero-trio-studio-v1.jpg"
                 alt="NoodleBomb Trio — Original (left), Spicy Tokyo (center), Citrus Shoyu (right)"
@@ -1190,7 +1190,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     whiteSpace: 'nowrap',
                     flexShrink: 0,
                   }}>
-                    <span style={{ width: 6, height: 6, borderRadius: 999, background: 'var(--accent)', display: 'inline-block', boxShadow: '0 0 0 2px rgba(139,30,30,0.18)' }} />
+                    <span style={{ width: 6, height: 6, borderRadius: 999, background: 'var(--accent)', display: 'inline-block', boxShadow: '0 0 0 2px rgba(var(--accent-rgb),0.18)' }} />
                     {label}
                   </span>
                 ))}
@@ -1213,7 +1213,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 12,
-                    background: '#E84A3A',
+                    background: 'var(--accent)',
                     color: '#0E0D0C',
                     border: 'none',
                     padding: '18px 32px',
@@ -1227,17 +1227,17 @@ function FlavorPicker({ flavor, setFlavor }) {
                     textTransform: 'uppercase',
                     transition: 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .35s, background .35s',
                     textDecoration: 'none',
-                    boxShadow: '0 12px 28px rgba(139,30,30,0.30)',
+                    boxShadow: '0 12px 28px var(--accent-glow)',
                   }}
                   onMouseOver={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 18px 40px rgba(139,30,30,0.45)';
-                    e.currentTarget.style.background = '#A02525';
+                    e.currentTarget.style.boxShadow = '0 18px 40px var(--accent-glow)';
+                    e.currentTarget.style.background = 'var(--accent-deep)';
                   }}
                   onMouseOut={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.30)';
-                    e.currentTarget.style.background = '#E84A3A';
+                    e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)';
+                    e.currentTarget.style.background = 'var(--accent)';
                   }}
                 >
                   Buy the Trio - $29.99
@@ -1828,6 +1828,10 @@ function App() {
     const f = FLAVORS[state.flavor];
     document.documentElement.style.setProperty('--accent', f.color);
     document.documentElement.style.setProperty('--accent-ink', f.ink);
+    document.documentElement.style.setProperty('--accent-rgb', f.rgb);
+    document.documentElement.style.setProperty('--accent-deep', f.deep);
+    document.documentElement.style.setProperty('--accent-soft', `rgba(${f.rgb}, 0.13)`);
+    document.documentElement.style.setProperty('--accent-glow', `rgba(${f.rgb}, 0.34)`);
   }, [state.flavor]);
 
   // Grain

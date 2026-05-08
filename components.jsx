@@ -621,7 +621,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                 letterSpacing: '0.16em', textTransform: 'uppercase',
                 transition: 'transform .2s, box-shadow .2s',
               }}
-              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
               onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
             >
               Add the Trio — $29.99
@@ -738,7 +738,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                     padding: '12px 14px',
                     border: '1px solid var(--accent)',
                     borderRadius: 6,
-                    background: 'rgba(139,30,30,0.08)',
+                    background: 'rgba(var(--accent-rgb),0.08)',
                     display: 'flex', alignItems: 'center', gap: 10,
                   }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -813,7 +813,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                   textDecoration: 'none',
                   transition: 'transform .2s, box-shadow .2s',
                 }}
-                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
               >
                 {`Checkout — ${fmtUSD(cartSubtotal)} →`}
@@ -915,10 +915,10 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
               textTransform: 'uppercase',
               textDecoration: 'none',
               transition: 'transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .35s',
-              boxShadow: '0 8px 24px rgba(139,30,30,0.4)',
+              boxShadow: '0 8px 24px var(--accent-glow)',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px rgba(139,30,30,0.55)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px rgba(139,30,30,0.4)'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px var(--accent-glow)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px var(--accent-glow)'; }}
           >
             Add Original — $11.99
             <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
