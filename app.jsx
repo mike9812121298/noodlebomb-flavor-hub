@@ -48,11 +48,11 @@ const FLAVORS = {
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  spicy: { name: 'Spicy Tokyo', tag: 'No.02 · Spicy Tokyo', short: 'No.02', color: '#E84A3A', ink: '#0E0D0C',
+  spicy: { name: 'Spicy Tokyo', tag: 'No.03 · Spicy Tokyo', short: 'No.03', color: '#E84A3A', ink: '#0E0D0C',
     line1: 'Umami meets fire.',
-    line2: 'Dark soy, roasted chili, sesame.',
+    line2: 'Roasted chili, garlic, sesame.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  citrus: { name: 'Citrus Shoyu', tag: 'No.03 · Citrus Shoyu', short: 'No.03', color: '#C9A227', ink: '#0B0B0B',
+  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#C9A227', ink: '#0B0B0B',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
@@ -90,13 +90,12 @@ function FlavorBreakdown({ flavor }) {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
-  // Three flavor cards, evenly spaced around the bottle and across scroll
-  // progress (0.05 / 0.50 / 0.95) so the last card lands right at section end
-  // and the headline ("Three flavors. One obsession.") matches the count.
+  // Three flavor cards, spaced so the final card has enough screen time before
+  // the sticky scene exits. This keeps "three flavors" honest on desktop.
   const ingredients = [
-  { label: 'Original', note: 'Turn up the flavor. Not the heat.', angle: -130, appearAt: 0.05, img: 'uploads/fb-umami.jpg' },
-  { label: 'Spicy Tokyo', note: 'Bold heat. Deep umami.', angle: -45, appearAt: 0.50, img: 'uploads/fb-heat.jpg' },
-  { label: 'Citrus Shoyu', note: 'Bright lift. Bold finish.', angle: 90, appearAt: 0.95, img: 'uploads/fb-brightness.jpg' }];
+  { label: 'Original', note: 'Garlic-sesame depth for noodles, rice, eggs, and stir-fry.', angle: -130, appearAt: 0.05, img: 'uploads/fb-umami.jpg' },
+  { label: 'Spicy Tokyo', note: 'Roasted chili heat for wings, fried rice, noodles, and grilled meat.', angle: -45, appearAt: 0.42, img: 'uploads/fb-heat.jpg' },
+  { label: 'Citrus Shoyu', note: 'Bright shoyu lift for dumplings, vegetables, seafood, and rich bowls.', angle: 90, appearAt: 0.78, img: 'uploads/fb-brightness.jpg' }];
 
 
   return (
@@ -107,7 +106,7 @@ function FlavorBreakdown({ flavor }) {
           Index 02 — Flavor Breakdown
         </div>
         <h2 className="display" style={{ margin: '0 0 48px', fontSize: 'clamp(40px, 11vw, 56px)', letterSpacing: '-0.04em', lineHeight: 0.95, fontWeight: 700 }}>
-          Three flavors.<br /><span className="accent-fg">One obsession.</span>
+          Three flavors.<br /><span className="accent-fg">Goes on everything.</span>
         </h2>
         {/* Stacked ingredient rows */}
         <div style={{ borderTop: '1px solid var(--line)', marginBottom: 48 }}>
@@ -154,7 +153,7 @@ function FlavorBreakdown({ flavor }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         // Keep scene fully visible until last ingredient lands at p=0.95,
         // then fade out in the final 5% so the next section enters cleanly.
-        opacity: p < 0.95 ? 1 : Math.max(0, Math.min(1, (1 - p) / 0.05)),
+        opacity: p < 0.98 ? 1 : Math.max(0, Math.min(1, (1 - p) / 0.02)),
         transition: 'opacity .25s linear',
       }}>
         {/* Atmospheric backgrounds — fade in/out per ingredient */}
@@ -191,7 +190,7 @@ function FlavorBreakdown({ flavor }) {
           transition: 'opacity .3s linear',
           pointerEvents: p > 0.18 ? 'none' : 'auto'
         }}>
-          Three flavors.<br /><span className="accent-fg">One obsession.</span>
+          Three flavors.<br /><span className="accent-fg">Goes on everything.</span>
         </h2>
 
         {/* Bottle center */}
@@ -312,7 +311,7 @@ function UseItOn() {
 
   const items = [
     { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#7A2626', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.65)', img: 'uploads/upload-original-v3.png', lifestyle: 'uploads/range-original-clean-2026-05-07.jpg' },
-    { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Dark soy. Roasted chili. Sesame.',   note: 'Heat layered over depth. Not hot for hot\u2019s sake.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png', lifestyle: 'uploads/range-spicy-clean-2026-05-07.jpg' },
+    { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Roasted chili. Garlic. Sesame.',   note: 'Bold heat for wings, fried rice, noodles, and anything that needs a kick.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png', lifestyle: 'uploads/range-spicy-clean-2026-05-07.jpg' },
     { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#9C7613', ink: '#0B0B0B', sub: 'rgba(11,11,11,0.60)',    img: 'uploads/upload-citrus-v3.png', lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
   ];
   const panelCount = items.length;
@@ -520,12 +519,12 @@ function PourAndCompare({ flavor = 'original' }) {
         <Reveal delay={1}>
           <h2 className="display section-h2" style={{ margin: '0 0 20px' }}>
             One bottle.<br />
-            <span style={{ color: 'var(--muted)' }}>Restaurant ramen.</span>
+            <span style={{ color: 'var(--muted)' }}>Everything savory.</span>
           </h2>
         </Reveal>
         <Reveal delay={1.5}>
           <p style={{ fontFamily: 'Inter Tight', fontSize: 'clamp(17px, 1.6vw, 20px)', lineHeight: 1.55, color: 'var(--ink-60)', maxWidth: 560, margin: '0 0 64px' }}>
-            NoodleBomb is a concentrated ramen tare — the flavor base that ramen shops spend hours building. You get it in 30 seconds.
+            NoodleBomb is a bold ramen sauce built to go wherever you want flavor: noodles, rice, wings, dumplings, eggs, vegetables, and whatever is already in the pan.
           </p>
         </Reveal>
 
@@ -533,9 +532,9 @@ function PourAndCompare({ flavor = 'original' }) {
         <Reveal delay={2}>
           <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(24px, 4vw, 48px)', marginBottom: 80 }}>
             {[
-              { step: '01', title: 'Cook your noodles', desc: 'Any noodles work — instant, fresh, dried. Boil and drain.' },
-              { step: '02', title: 'Add 1–2 tablespoons', desc: 'Pour NoodleBomb into the bowl. Add a splash of hot broth or pasta water.' },
-              { step: '03', title: 'Top and eat', desc: 'Egg, scallions, whatever you have. You just made real ramen.' },
+              { step: '01', title: 'Pick your base', desc: 'Noodles, rice, wings, eggs, dumplings, vegetables, grilled meat — anything savory works.' },
+              { step: '02', title: 'Drizzle, toss, or glaze', desc: 'Use a little to finish, or more when you want the sauce to carry the whole bite.' },
+              { step: '03', title: 'Eat it your way', desc: 'Hot bowl, cold leftovers, sheet-pan dinner, game-day wings. Same bottle, different cravings.' },
             ].map((s, i) => (
               <div key={i}>
                 <div className="display accent-fg" style={{ fontSize: 48, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 16, opacity: 0.7 }}>{s.step}</div>
@@ -565,7 +564,7 @@ function PourAndCompare({ flavor = 'original' }) {
               <div>
                 <div style={{ fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 20 }}>The NoodleBomb way</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  {['One bottle of NoodleBomb', '30 seconds', 'Restaurant-quality flavor'].map((item, i) => (
+                  {['One bottle of NoodleBomb', '30 seconds', 'Big savory flavor'].map((item, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: 'Inter Tight', fontSize: i === 0 ? 20 : 15, fontWeight: i === 0 ? 700 : 500, color: 'var(--ink)' }}>
                       <span style={{ color: 'var(--accent)', fontSize: 14 }}>✓</span>
                       {item}
@@ -726,7 +725,7 @@ function Origin() {
                 maxWidth: '36ch',
               }}
             >
-              "If you find a ramen sauce better than this one, I want to know about it."
+              "If you find a sauce that works harder than this one, I want to know about it."
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               <div
@@ -809,8 +808,8 @@ function Origin() {
 function Testimonials() {
   const quotes = [
   { body: 'NoodleBomb is a flavor explosion. The richness paired with the perfect spicy kick makes every bowl unforgettable. A total must-have for noodle lovers.', name: 'Ashley R.', tag: 'early taste-tester' },
-  { body: 'I wasn’t expecting this much punch from one sauce. Took my plain store-bought ramen and made it restaurant-worthy in seconds. I’m officially hooked.', name: 'Marcus', tag: 'early taste-tester' },
-  { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades any ramen.', name: 'Priya', tag: 'early taste-tester' }];
+  { body: 'I wasn’t expecting this much punch from one sauce. I put it on noodles, leftover rice, and wings in the same week. I’m officially hooked.', name: 'Marcus', tag: 'early taste-tester' },
+  { body: 'Perfect balance of garlic, heat, and umami. It seriously upgrades anything that needs a savory hit.', name: 'Priya', tag: 'early taste-tester' }];
 
   return (
     <section id="reviews" style={{ background: 'var(--paper)', padding: '140px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
@@ -1389,7 +1388,7 @@ function FinalCTA() {
               <span className="display" style={{ fontSize: 18, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
             </div>
             <p style={{ maxWidth: 320, color: 'var(--ink-60)', fontSize: 13, lineHeight: 1.6 }}>
-              Bold ramen sauce crafted in the Pacific Northwest. Small-batch bottled with real ingredients. Slow-brewed for depth, no apologies.
+              Bold ramen sauce crafted in the Pacific Northwest. Made for noodles, rice, wings, dumplings, eggs, vegetables, and every quick meal that needs a bigger finish.
             </p>
           </div>
           {[

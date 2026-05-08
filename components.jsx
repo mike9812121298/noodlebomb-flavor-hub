@@ -875,8 +875,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </h1>
         <div style={{ animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both' }}>
           <div style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
-            Bold ramen sauce. Small batch.<br />
-            <span style={{ color: 'var(--ink-60)' }}>Turns any noodles into shop-level ramen in seconds.</span>
+            Bold sauce. Small batch.<br />
+            <span style={{ color: 'var(--ink-60)' }}>Goes on noodles, rice, wings, dumplings, eggs, vegetables, and more.</span>
           </div>
         </div>
         <div className="hero-cta-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.7s both' }}>
