@@ -71,9 +71,9 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-clean.png',
-  citrus: 'uploads/nb-citrus-shoyu-clean.png',
-  spicy: 'uploads/upload-spicy-v3.png'
+  original: 'uploads/nb-original-front-normalized.png',
+  citrus: 'uploads/nb-citrus-front-normalized.png',
+  spicy: 'uploads/nb-spicy-front-normalized.png'
 };
 
 const FOOD_IMAGES = {
@@ -387,9 +387,9 @@ function UseItOn() {
   }, []);
 
   const items = [
-    { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#8A6424', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.68)', img: 'uploads/upload-original-v3.png', lifestyle: 'uploads/range-original-clean-2026-05-07.jpg' },
-    { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Roasted chili. Garlic. Sesame.',   note: 'Bold heat for wings, fried rice, noodles, and anything that needs a kick.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: 'uploads/upload-spicy-v3.png', lifestyle: 'uploads/range-spicy-clean-2026-05-07.jpg' },
-    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#C85A16', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)',    img: 'uploads/upload-citrus-v3.png', lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
+    { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#8A6424', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.68)', img: FLAVOR_IMAGES.original, lifestyle: 'uploads/range-original-clean-2026-05-07.jpg' },
+    { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Roasted chili. Garlic. Sesame.',   note: 'Bold heat for wings, fried rice, noodles, and anything that needs a kick.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: FLAVOR_IMAGES.spicy, lifestyle: 'uploads/range-spicy-clean-2026-05-07.jpg' },
+    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#C85A16', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)',    img: FLAVOR_IMAGES.citrus, lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
   ];
   const panelCount = items.length;
 
