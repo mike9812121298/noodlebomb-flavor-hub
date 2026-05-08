@@ -959,7 +959,7 @@
   #next-drop .nd-hero-form button:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 14px 34px rgba(232,240,255,0.24); }
 
   /* Cards */
-  #next-drop .nd-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 80px; margin: 64px auto 0; max-width: 860px; }
+  #next-drop .nd-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 80px; margin: 64px auto 0; max-width: 1120px; }
   @media (max-width: 900px) {
     #next-drop .nd-cards { grid-template-columns: 1fr; gap: 56px; }
   }
@@ -971,6 +971,28 @@
     cursor: pointer;
     transition: transform .25s cubic-bezier(.2,.7,.2,1), border-color .25s, background .25s;
     overflow: hidden;
+  }
+  #next-drop .nd-reserve-card {
+    display: grid;
+    grid-template-columns: minmax(310px, 0.95fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(30px, 5vw, 76px);
+    min-height: 650px;
+    padding: clamp(34px, 5vw, 72px);
+    background:
+      linear-gradient(115deg, transparent 0%, rgba(232,240,255,0.13) 44%, transparent 58%) -120% 0 / 70% 100% no-repeat,
+      radial-gradient(ellipse at 24% 52%, rgba(232,240,255,0.20), transparent 44%),
+      radial-gradient(circle at 86% 18%, rgba(212,162,74,0.16), transparent 32%),
+      linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.012) 72%);
+    box-shadow: 0 34px 100px rgba(0,0,0,0.46), inset 0 0 0 1px rgba(255,255,255,0.035);
+    animation: ndReserveSweep 8s ease-in-out infinite;
+  }
+  #next-drop .nd-reserve-card::after {
+    content: '';
+    position: absolute;
+    inset: 22px;
+    border: 1px solid rgba(232,240,255,0.12);
+    pointer-events: none;
   }
   #next-drop .nd-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.14); }
   #next-drop .nd-bignum {
@@ -992,6 +1014,7 @@
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
     letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
   }
+  #next-drop .nd-reserve-card .nd-status { position: absolute; left: clamp(28px, 4vw, 56px); top: clamp(26px, 4vw, 46px); z-index: 3; }
   #next-drop .nd-status .dot { width: 6px; height: 6px; border-radius: 50%; background: #0a0a0a; }
 
   /* Bottle silhouette stage */
@@ -1000,13 +1023,58 @@
     display: flex; align-items: center; justify-content: center;
     z-index: 1;
   }
+  #next-drop .nd-reserve-card .nd-bottle-stage {
+    grid-column: 1;
+    height: clamp(520px, 56vw, 640px);
+    min-height: 520px;
+    margin: 28px 0 0;
+  }
+  #next-drop .nd-bottle-stage::before {
+    content: '';
+    position: absolute;
+    width: min(78%, 360px);
+    height: 86%;
+    border: 1px solid rgba(232,240,255,0.10);
+    background: linear-gradient(180deg, rgba(232,240,255,0.10), rgba(212,162,74,0.055) 48%, rgba(0,0,0,0));
+    transform: skewY(-3deg);
+    opacity: 0.82;
+  }
+  #next-drop .nd-stage-lines {
+    position: absolute;
+    inset: 8% 6%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0.32;
+    pointer-events: none;
+  }
+  #next-drop .nd-stage-lines span {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232,240,255,0.55), transparent);
+    transform-origin: center;
+    animation: ndReserveLine 4.8s ease-in-out infinite;
+  }
+  #next-drop .nd-stage-lines span:nth-child(2) { animation-delay: .7s; opacity: 0.72; }
+  #next-drop .nd-stage-lines span:nth-child(3) { animation-delay: 1.4s; opacity: 0.5; }
   #next-drop .nd-bottle-wrap {
     position: relative; width: 176px; height: 100%;
     filter: drop-shadow(0 28px 48px rgba(0,0,0,0.46));
     opacity: 1;
     animation: floatY 6s ease-in-out infinite;
   }
+  #next-drop .nd-reserve-card .nd-bottle-wrap {
+    width: min(34vw, 360px);
+    filter: drop-shadow(0 34px 62px rgba(0,0,0,0.62)) drop-shadow(0 0 30px rgba(232,240,255,0.14));
+    animation: ndReserveFloat 5.8s ease-in-out infinite;
+    z-index: 2;
+  }
   #next-drop .nd-bottle-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  #next-drop .nd-reserve-card .nd-bottle-wrap img {
+    transform: scale(1.06);
+    transform-origin: center bottom;
+    mix-blend-mode: multiply;
+    filter: contrast(1.08) saturate(1.05);
+  }
   #next-drop .nd-rim {
     position: absolute; right: -2px; top: 5%; bottom: 5%;
     width: 6px;
@@ -1017,6 +1085,35 @@
     pointer-events: none;
   }
   #next-drop .nd-card:hover .nd-rim { opacity: 0.85; }
+  #next-drop .nd-reserve-card .nd-rim {
+    right: 14%;
+    top: 4%;
+    bottom: 4%;
+    width: 10px;
+    opacity: 0.76;
+    animation: ndReserveRim 2.8s ease-in-out infinite;
+  }
+  #next-drop .nd-stage-tag {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    z-index: 3;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    border: 1px solid rgba(232,240,255,0.28);
+    background: rgba(10,10,10,0.74);
+    color: rgba(245,241,234,0.90);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.32);
+    animation: ndStageTag 4s ease-in-out infinite;
+  }
+  #next-drop .nd-copy { position: relative; z-index: 2; max-width: 480px; }
+  #next-drop .nd-reserve-card .nd-name { font-size: clamp(46px, 6vw, 74px); }
+  #next-drop .nd-reserve-card .nd-oneliner { font-size: 17px; max-width: 42ch; }
   #next-drop .nd-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,241,234,0.72); margin-bottom: 10px; }
   #next-drop .nd-name { font-family: 'Fraunces', serif; font-weight: 400; font-size: 32px; letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 12px; }
   #next-drop .nd-oneliner { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.5; color: rgba(245,241,234,0.85); margin: 0 0 20px; max-width: 36ch; }
@@ -1086,6 +1183,27 @@
   }
   #next-drop .nd-card:hover .nd-notify-caption { opacity: 1; transform: none; }
 
+  @keyframes ndReserveSweep {
+    0%, 35% { background-position: -120% 0, center, center, center; }
+    62%, 100% { background-position: 220% 0, center, center, center; }
+  }
+  @keyframes ndReserveFloat {
+    0%, 100% { transform: translateY(0) rotate(-1.2deg) scale(1); }
+    50% { transform: translateY(-18px) rotate(1deg) scale(1.025); }
+  }
+  @keyframes ndReserveRim {
+    0%, 100% { opacity: 0.45; filter: blur(3px); }
+    50% { opacity: 0.95; filter: blur(2px); }
+  }
+  @keyframes ndReserveLine {
+    0%, 100% { transform: scaleX(0.52); opacity: 0.28; }
+    50% { transform: scaleX(1); opacity: 0.72; }
+  }
+  @keyframes ndStageTag {
+    0%, 100% { transform: translateX(-50%) translateY(0); border-color: rgba(232,240,255,0.24); }
+    50% { transform: translateX(-50%) translateY(-4px); border-color: rgba(232,240,255,0.56); }
+  }
+
   /* Notify bar */
   #next-drop .nd-notify {
     margin: 42px auto 0;
@@ -1147,14 +1265,47 @@
     #next-drop .nd-submit { width: 100%; min-height: 48px; flex: 0 0 auto; }
     #next-drop .nd-cards { margin-top: 34px; gap: 32px; }
     #next-drop .nd-card { padding: 24px 18px !important; }
+    #next-drop .nd-reserve-card {
+      display: block;
+      min-height: 0;
+      padding: 30px 18px 26px !important;
+      animation-duration: 10s;
+    }
+    #next-drop .nd-reserve-card::after { inset: 12px; }
+    #next-drop .nd-reserve-card .nd-status {
+      position: relative;
+      left: auto;
+      top: auto;
+      margin-bottom: 12px;
+    }
     #next-drop .nd-status { max-width: 100%; white-space: normal; line-height: 1.35; }
     #next-drop .nd-bottle-stage { height: 230px; margin: 14px 0 18px; }
     #next-drop .nd-bottle-wrap { width: 128px; }
+    #next-drop .nd-reserve-card .nd-bottle-stage {
+      height: clamp(390px, 108vw, 520px);
+      min-height: 390px;
+      margin: 8px 0 24px;
+    }
+    #next-drop .nd-reserve-card .nd-bottle-wrap { width: min(78vw, 270px); }
+    #next-drop .nd-reserve-card .nd-bottle-wrap img { transform: scale(1.08); }
+    #next-drop .nd-stage-tag { bottom: 8px; font-size: 9px; letter-spacing: 0.14em; }
+    #next-drop .nd-copy { max-width: none; }
+    #next-drop .nd-reserve-card .nd-name { font-size: clamp(42px, 13vw, 58px); }
+    #next-drop .nd-reserve-card .nd-oneliner { font-size: 16px; max-width: none; }
     #next-drop .nd-bignum { font-size: 190px; right: -40px; top: 120px; opacity: 0.28; }
     #next-drop .nd-name { font-size: 30px; }
     #next-drop .nd-pills { margin-bottom: 18px; }
     #next-drop .nd-progress-labels { font-size: 8px; letter-spacing: 0.06em; }
     #next-drop .nd-submit { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #next-drop .nd-reserve-card,
+    #next-drop .nd-reserve-card .nd-bottle-wrap,
+    #next-drop .nd-reserve-card .nd-rim,
+    #next-drop .nd-stage-lines span,
+    #next-drop .nd-stage-tag {
+      animation: none !important;
+    }
   }
   #next-drop .nd-eyebrow-row { display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,241,234,0.72); }
   #next-drop .nd-timestamp { position: absolute; top: 28px; right: clamp(24px, 5.5vw, 80px); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(245,241,234,0.74); }
@@ -1724,7 +1875,7 @@
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">Coming Soon</h2>
 <ul style="list-style:none;padding:0;margin:0 0 32px;opacity:0.85;">
-  <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> — Single-origin shoyu, barrel-aged. Fall 2026.</li>
+  <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> — A darker, deeper shoyu-style finish. Fall 2026.</li>
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
 <p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Three flavors, made by hand in the Pacific Northwest. Free shipping over $35.</p>

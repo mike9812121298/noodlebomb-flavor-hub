@@ -73,7 +73,7 @@ function NextDrop() {
           {cards.map((c, idx) => (
             <Reveal key={c.key} delay={idx + 2}>
               <div
-                className="nd-card"
+                className="nd-card nd-reserve-card"
                 style={{ '--nd-accent': c.accent, '--nd-rim': c.rim }}
               >
                 {/* Giant outlined numeral behind */}
@@ -87,6 +87,11 @@ function NextDrop() {
 
                 {/* Bottle silhouette */}
                 <div className="nd-bottle-stage">
+                  <div className="nd-stage-lines" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
                   <div className="nd-bottle-wrap">
                     <img
                       src={c.img}
@@ -96,9 +101,11 @@ function NextDrop() {
                     />
                     <div className="nd-rim" aria-hidden="true" />
                   </div>
+                  <div className="nd-stage-tag">Priority list open</div>
                 </div>
 
                 {/* Copy */}
+                <div className="nd-copy">
                 <div className="nd-eyebrow">{c.eyebrow}</div>
                 <h3 className="nd-name">{c.name}</h3>
                 <p className="nd-oneliner">{c.oneliner}</p>
@@ -138,6 +145,7 @@ function NextDrop() {
                 </div>
 
                 <div className="nd-notify-caption">Get the first reserve alert →</div>
+                </div>
               </div>
             </Reveal>
           ))}
