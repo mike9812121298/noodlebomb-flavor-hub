@@ -112,7 +112,7 @@ function CartPage() {
           </svg>
         </div>
         <h1>Your cart is <em>empty.</em></h1>
-        <p>Pick a sauce. Build the bowl.</p>
+        <p>Start with one bottle, or grab the Trio and taste the full range.</p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
           {/* One-click Trio shortcut — same pattern as the drawer empty state.
               Lets a returning visitor with empty localStorage land in a populated
@@ -161,7 +161,7 @@ function CartPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
         <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Fraunces', fontStyle: 'italic', fontWeight: 400 }}>cart.</span></h1>
       </div>
-      <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · final total at checkout on shop.noodlebomb.co</p>
+      <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · secure checkout opens on Shopify</p>
 
       <div className="layout">
         {/* Left column */}
@@ -201,7 +201,7 @@ function CartPage() {
             return (
               <div className="card" style={{
                 border: '1px solid var(--accent)',
-                background: 'linear-gradient(180deg, rgba(139,30,30,0.10) 0%, rgba(139,30,30,0.04) 100%)',
+                background: 'linear-gradient(180deg, rgba(232,74,58,0.12) 0%, rgba(232,74,58,0.04) 100%)',
                 padding: 22,
                 display: 'flex',
                 gap: 18,
@@ -243,7 +243,7 @@ function CartPage() {
                   whiteSpace: 'nowrap',
                   transition: 'transform .2s, box-shadow .2s',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(139,30,30,0.35)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(232,74,58,0.28)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
                 >
                   Add Trio →
@@ -314,7 +314,7 @@ function CartPage() {
         {/* Right column — summary */}
         <div className="card summary">
           <h2>Order summary</h2>
-          <p className="lede">Final total at checkout</p>
+          <p className="lede">Secure checkout handoff</p>
 
           <div className="row-line"><span>Subtotal ({itemCount})</span><span className="v">{fmtUSD(subtotal)}</span></div>
           <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free' : 'At checkout'}</span></div>
@@ -353,6 +353,7 @@ function CartPage() {
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
             <div className="trust-row"><Truck /> Free shipping over $35</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
+            <div className="trust-row"><Check /> Ships from Bonney Lake, WA</div>
           </div>
         </div>
       </div>

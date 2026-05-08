@@ -86,6 +86,25 @@
   }
   .pdp-cta:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(139,30,30,0.35); }
   .pdp-cta-2 { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
+  .pdp-buy-panel {
+    margin: 24px 0 18px; padding: 22px; border-radius: 12px;
+    background: linear-gradient(180deg, rgba(232,74,58,0.10), rgba(232,74,58,0.04));
+    border: 1px solid rgba(232,74,58,0.28);
+  }
+  .pdp-choice-note {
+    color: var(--ink-60); font-size: 13px; line-height: 1.55;
+    margin: 14px 0 0;
+  }
+  .pdp-proof-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+    margin: 16px 0 0;
+  }
+  .pdp-proof-row span {
+    min-height: 44px; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 10px 8px; border: 1px solid var(--line); border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase;
+    color: var(--ink-60); background: rgba(14,13,12,0.40);
+  }
   .pdp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .pdp-tag {
     font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -109,6 +128,37 @@
   .pdp-cross-card img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: var(--paper-3); border-radius: 6px; margin-bottom: 16px; }
   .pdp-cross-card h3 { font-family: 'Inter Tight', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 6px; }
   .pdp-cross-card .anchor-line { font-family: 'Fraunces', serif; font-style: italic; font-size: 15px; color: var(--ink-60); margin: 0; }
+  .best-with { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 26px; }
+  .best-with span {
+    min-height: 52px; display: flex; align-items: center; justify-content: center;
+    padding: 12px 10px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--paper-2); color: var(--ink); font-size: 13px; text-align: center;
+  }
+  .mobile-pdp-bar { display: none; }
+  @media (max-width: 720px) {
+    body { padding-bottom: 88px; }
+    .pdp-hero { padding-top: 32px; }
+    .pdp-gallery { position: static; }
+    .pdp-proof-row, .best-with { grid-template-columns: 1fr; }
+    .mobile-pdp-bar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      display: flex; gap: 12px; align-items: center; padding: 12px 16px;
+      background: rgba(14,13,12,0.96); border-top: 1px solid var(--line);
+      backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
+    }
+    .mobile-pdp-bar .mobile-pdp-price { flex: 1; min-width: 0; }
+    .mobile-pdp-bar small {
+      display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-40);
+    }
+    .mobile-pdp-bar strong { display: block; font-family: 'Inter Tight', sans-serif; font-size: 22px; color: var(--accent); }
+    .mobile-pdp-bar a {
+      min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
+      padding: 0 18px; border-radius: 999px; background: var(--accent); color: var(--accent-ink);
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; text-decoration: none;
+    }
+  }
 </style>
 
 </head>
@@ -168,13 +218,17 @@
           <h1 class="display"><em>Original.</em></h1>
           <p class="pdp-anchor">Turn up the flavor. Not the heat.</p>
           <p>Roasted garlic. Toasted sesame. Smooth soy.</p>
-          <div class="pdp-price">
-            <span class="amt">$11.99</span>
-            <span class="meta">7 fl oz &middot; ~14 servings</span>
-          </div>
-          <div class="pdp-cta-row">
-            <a class="pdp-cta" href="https://nu2vqa-ma.myshopify.com/cart/add?id=53998041596214&amp;quantity=1&amp;return_to=%2Fcart" rel="noopener">Add to cart &rarr;</a>
-            <a class="pdp-cta pdp-cta-2" href="/monthly-box">Or get the Monthly Ramen Box &rarr;</a>
+          <div class="pdp-buy-panel">
+            <div class="pdp-price">
+              <span class="amt">$11.99</span>
+              <span class="meta">7 fl oz &middot; ~14 servings</span>
+            </div>
+            <div class="pdp-cta-row">
+              <a class="pdp-cta" href="https://nu2vqa-ma.myshopify.com/cart/add?id=53998041596214&amp;quantity=1&amp;return_to=%2Fcart" rel="noopener">Add Original &rarr;</a>
+              <a class="pdp-cta pdp-cta-2" href="https://nu2vqa-ma.myshopify.com/cart/add?id=53998042644790&amp;quantity=1&amp;return_to=%2Fcart" rel="noopener">Try the Trio &rarr;</a>
+            </div>
+            <p class="pdp-choice-note">Start here if you want the most flexible everyday bottle. Get the Trio if you want to taste the full range.</p>
+            <div class="pdp-proof-row"><span>Ships from WA</span><span>Free ship $35+</span><span>30-day guarantee</span></div>
           </div>
           <div class="pdp-tags"><span class="pdp-tag">UMAMI</span><span class="pdp-tag">GARLIC</span><span class="pdp-tag">SESAME</span><span class="pdp-tag">MEDIUM-LIGHT HEAT</span></div>
           <dl class="pdp-spec-list">
@@ -198,6 +252,9 @@
       <p>The one that started it all. Built to turn up the savory without lighting your tongue on fire. Roasted garlic and toasted sesame oil layered over a smooth, salty soy base, balanced with kombu and mirin so it lifts a bowl of ramen instead of bullying it. Equal parts ramen tableside, rice bowl finisher, dumpling dip, and stir-fry weapon.</p>
       <p style="margin-top:24px;">A 7&nbsp;fl&nbsp;oz bottle is roughly 14 servings &mdash; most people get 3 to 4 weeks of regular use. The drizzle cap is built for control: a thin stream for finishing a bowl, a steady pour for marinades and stir-fry. Refrigerate after opening and use within 6 months for peak flavor. Don&rsquo;t leave it on the stovetop &mdash; heat dulls the top notes.</p>
       <p style="margin-top:24px;">Same hands mix every batch. Bonney Lake, WA. Small kitchen, no shortcuts. <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/about">Read the story &rarr;</a></p>
+      <div class="best-with" aria-label="Best with Original">
+        <span>Classic ramen</span><span>Rice bowls</span><span>Dumplings</span><span>Eggs</span><span>Stir-fry</span>
+      </div>
     </div>
   </section>
 
@@ -223,6 +280,10 @@
     </div>
   </section>
 </main>
+<div class="mobile-pdp-bar" aria-label="Mobile purchase bar">
+  <div class="mobile-pdp-price"><small>Original</small><strong>$11.99</strong></div>
+  <a href="https://nu2vqa-ma.myshopify.com/cart/add?id=53998041596214&amp;quantity=1&amp;return_to=%2Fcart" rel="noopener">Add &rarr;</a>
+</div>
 <footer class="page-footer">
   <div class="container">
     <div class="footer-newsletter">

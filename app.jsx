@@ -23,6 +23,11 @@ const SHOPIFY_VARIANT_IDS = {
   citrus:   '53998041071926',
   trio:     '53998042644790'
 };
+const PRODUCT_DETAIL_URLS = {
+  original: '/product-original.html',
+  spicy: '/product-spicy.html',
+  citrus: '/product-citrus.html'
+};
 const cartPermalink = (slug, qty = 1) => {
   const id = SHOPIFY_VARIANT_IDS[slug];
   if (!id) return 'https://nu2vqa-ma.myshopify.com/cart';
@@ -864,6 +869,35 @@ function FlavorPicker({ flavor, setFlavor }) {
             producing 6 duplicate bottles under "Pick one. Or all three."
             (Bug: noodlebomb.co · 2026-05-03) */}
 
+        <Reveal delay={2}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
+            gap: 12,
+            margin: '0 0 32px',
+            maxWidth: 980
+          }}>
+            {[
+              ['Start here', 'Original', 'Garlic, sesame, smooth soy.'],
+              ['Want heat', 'Spicy Tokyo', 'Roasted chili over deep umami.'],
+              ['Want lift', 'Citrus Shoyu', 'Bright shoyu for rich bowls.'],
+              ['Not sure', 'The Trio', 'All 3 bottles for $29.99.']
+            ].map(([kicker, title, copy]) => (
+              <div key={title} style={{
+                border: '1px solid var(--line)',
+                background: 'rgba(14,13,12,0.34)',
+                borderRadius: 10,
+                padding: 16,
+                minHeight: 112
+              }}>
+                <div className="mono" style={{ color: 'var(--accent)', fontSize: 10, letterSpacing: '0.14em', marginBottom: 8 }}>{kicker}</div>
+                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 20, letterSpacing: '-0.02em', marginBottom: 6 }}>{title}</div>
+                <div style={{ color: 'var(--ink-60)', fontSize: 13, lineHeight: 1.45 }}>{copy}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
         <div className="lineup-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 24 }}>
           {keys.map((k, i) => {
             const f = FLAVORS[k];
@@ -958,6 +992,25 @@ function FlavorPicker({ flavor, setFlavor }) {
                     >
                       Add to Cart
                       <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
+                    </a>
+                    <a
+                      href={PRODUCT_DETAIL_URLS[k]}
+                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: 44,
+                        marginTop: 10,
+                        color: 'var(--ink-60)',
+                        fontFamily: 'JetBrains Mono',
+                        fontSize: 10,
+                        letterSpacing: '0.16em',
+                        textTransform: 'uppercase',
+                        textDecoration: 'none'
+                      }}
+                    >
+                      Flavor details
                     </a>
                   </div>
                 </div>
