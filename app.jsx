@@ -71,15 +71,13 @@ function FlavorBreakdown({ flavor }) {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
-  // appearAt evenly spans 0.05 → 0.95 so the last ingredient lands just
-  // before the section ends — eliminates the ~40vh trailing dead zone
-  // that existed when the last appearAt was 0.82.
+  // Three flavor cards, evenly spaced around the bottle and across scroll
+  // progress (0.05 / 0.50 / 0.95) so the last card lands right at section end
+  // and the headline ("Three flavors. One obsession.") matches the count.
   const ingredients = [
-  { label: 'Umami', note: 'the backbone', angle: -140, appearAt: 0.05, img: 'uploads/fb-umami.jpg' },
-  { label: 'Roasted depth', note: 'the warmth', angle: -55, appearAt: 0.275, img: 'uploads/fb-roasted.jpg' },
-  { label: 'Brightness', note: 'the lift', angle: 40, appearAt: 0.50, img: 'uploads/fb-brightness.jpg' },
-  { label: 'Richness', note: 'the coat', angle: 135, appearAt: 0.725, img: 'uploads/fb-richness.jpg' },
-  { label: 'Heat', note: 'the whisper', angle: 270, appearAt: 0.95, img: 'uploads/fb-heat.jpg' }];
+  { label: 'Original', note: 'Turn up the flavor. Not the heat.', angle: -130, appearAt: 0.05, img: 'uploads/fb-umami.jpg' },
+  { label: 'Spicy Tokyo', note: 'Bold heat. Deep umami.', angle: -45, appearAt: 0.50, img: 'uploads/fb-heat.jpg' },
+  { label: 'Citrus Shoyu', note: 'Bright lift. Bold finish.', angle: 90, appearAt: 0.95, img: 'uploads/fb-brightness.jpg' }];
 
 
   return (
