@@ -262,7 +262,7 @@ function FlavorBreakdown({ flavor }) {
 }
 
 // ——————————————————————————— Flavor scene atmospheres
-function FlavorBreakdownV2({ flavor }) {
+function FlavorBreakdownV2({ flavor, setFlavor }) {
   const items = [
     { key: 'original', use: 'Rice, eggs, noodles', note: 'Garlic-sesame depth when dinner needs a fast savory base.' },
     { key: 'spicy', use: 'Wings, fried rice, grilled meat', note: 'Roasted chili heat that keeps the bite bold, not muddy.' },
@@ -301,7 +301,13 @@ function FlavorBreakdownV2({ flavor }) {
             const active = flavor === item.key;
             return (
               <Reveal key={item.key} delay={i + 2}>
-                <div className={`fbv2-card${active ? ' is-active' : ''}`} style={{ '--card-accent': f.color }}>
+                <button
+                  type="button"
+                  className={`fbv2-card${active ? ' is-active' : ''}`}
+                  style={{ '--card-accent': f.color }}
+                  aria-pressed={active}
+                  onClick={() => setFlavor(item.key)}
+                >
                   <div className="fbv2-card-top">
                     <span className="mono">{`No.${String(i + 1).padStart(2, '0')}`}</span>
                     <span className="fbv2-dot" />
@@ -309,7 +315,7 @@ function FlavorBreakdownV2({ flavor }) {
                   <h3>{f.name}</h3>
                   <p>{item.note}</p>
                   <div className="fbv2-use">{item.use}</div>
-                </div>
+                </button>
               </Reveal>
             );
           })}
@@ -1852,7 +1858,7 @@ function App() {
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <TrustStrip />
       <UseCaseMoments />
-      <FlavorBreakdownV2 flavor={state.flavor} />
+      <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <UseItOn />
       <NextDrop />
       <MonthlyDrop />

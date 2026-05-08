@@ -441,12 +441,22 @@
   @keyframes slowRotate { to { transform: rotate(352deg); } }
   .fbv2-cards { display: flex; flex-direction: column; gap: 14px; }
   .fbv2-card {
+    width: 100%;
+    text-align: left;
+    appearance: none;
+    -webkit-appearance: none;
     background: rgba(245,241,234,0.035);
     border: 1px solid rgba(245,241,234,0.09);
     color: var(--ink);
     padding: 22px;
     border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
     transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, background .35s, box-shadow .35s;
+  }
+  .fbv2-card:focus-visible {
+    outline: 2px solid var(--card-accent, var(--accent));
+    outline-offset: 4px;
   }
   .fbv2-card:hover, .fbv2-card.is-active {
     transform: translateX(-8px);
