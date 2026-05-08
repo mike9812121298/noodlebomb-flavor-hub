@@ -13,10 +13,24 @@ const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus":
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
-// Add to local NB_CART and open the slide-out cart drawer instead of navigating
-// to /cart.html. Modifier-click (cmd/ctrl/shift, middle button) preserves
-// browser-native navigation so right-click "Open in new tab" still works.
-// Buttons keep href="/cart.html" as the no-JS / accessibility fallback.
+// Shopify cart-permalink: skip the storefront homepage and land users directly
+// on the Shopify cart page with the item already added. return_to wires the
+// "Continue Shopping" link back to noodlebomb.co. Variant IDs match
+// shopify-config.js and were captured from products.json on 2026-05-08.
+const SHOPIFY_VARIANT_IDS = {
+  original: '53998041596214',
+  spicy:    '53998042120502',
+  citrus:   '53998041071926',
+  trio:     '53998042644790'
+};
+const cartPermalink = (slug, qty = 1) => {
+  const id = SHOPIFY_VARIANT_IDS[slug];
+  if (!id) return 'https://nu2vqa-ma.myshopify.com/cart?return_to=https://noodlebomb.co';
+  return `https://nu2vqa-ma.myshopify.com/cart/${id}:${qty}?return_to=https://noodlebomb.co`;
+};
+
+// Legacy local-cart helper kept for the drawer's "View full cart" path; no
+// longer wired to any Add-to-Cart button. Add-to-Cart goes direct to Shopify.
 const addAndOpenCart = (item, e) => {
   if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
   if (e) e.preventDefault();
@@ -745,8 +759,7 @@ function Origin() {
               Small batch · est. 2024
             </div>
             <a
-              href="/cart.html"
-              onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
+              href={cartPermalink('trio')}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -904,11 +917,8 @@ function FlavorPicker({ flavor, setFlavor }) {
                       <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>7 fl oz</span>
                     </div>
                     <a
-                      href="/cart.html"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addAndOpenCart({ slug: k, name: f.name, price: f.priceUsd }, e);
-                      }}
+                      href={cartPermalink(k)}
+                      onClick={(e) => e.stopPropagation()}
                       className="lineup-buy-btn"
                       style={{
                         display: 'flex',
@@ -1020,8 +1030,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               <div style={{ marginTop: 8 }}>
                 <a
                   className="btn trio-bundle-cta"
-                  href="/cart.html"
-                  onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
+                  href={cartPermalink('trio')}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -1186,8 +1195,7 @@ function CitrusSpotlight() {
               NEW · LIMITED FIRST RUN
             </div>
             <a
-              href="/cart.html"
-              onClick={(e) => addAndOpenCart({ slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 }, e)}
+              href={cartPermalink('citrus')}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 12,
                 padding: '16px 28px', borderRadius: 999,
@@ -1498,16 +1506,14 @@ function StickyCartBar({ flavor, flavors }) {
       </div>
       <div className="scb-right">
         <a
-          href="/cart.html"
+          href={cartPermalink('trio')}
           className="scb-trio"
           tabIndex={visible ? undefined : -1}
-          onClick={(e) => addAndOpenCart({ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd }, e)}
         >3-Pack — $29.99</a>
         <a
-          href="/cart.html"
+          href={cartPermalink(flavor)}
           className="scb-btn"
           tabIndex={visible ? undefined : -1}
-          onClick={(e) => addAndOpenCart({ slug: flavor, name: f.name, price: f.priceUsd }, e)}
         >Add to Cart →</a>
       </div>
     </div>

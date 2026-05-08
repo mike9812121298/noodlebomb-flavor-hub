@@ -1,8 +1,26 @@
-// Wix Stores deep links
+// Wix Stores deep links — legacy fallback only (Storefront API checkout
+// fallback path). Add-to-Cart buttons no longer route through Wix.
 const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
 
-// Returns the best Wix URL for a given cart item list.
-// Single unique product → its product page; anything else → the shop page.
+// Shopify cart-permalink — adds the variant to cart and lands on Shopify cart
+// page directly (skipping the storefront homepage). return_to wires the
+// "Continue Shopping" link back to noodlebomb.co. Variant IDs match
+// shopify-config.js and were captured from products.json on 2026-05-08.
+const NB_SHOPIFY_VARIANT_IDS = {
+  original: '53998041596214',
+  spicy:    '53998042120502',
+  citrus:   '53998041071926',
+  trio:     '53998042644790'
+};
+const NB_SHOPIFY_CART = 'https://nu2vqa-ma.myshopify.com/cart?return_to=https://noodlebomb.co';
+const nbCartPermalink = (slug, qty = 1) => {
+  const id = NB_SHOPIFY_VARIANT_IDS[slug];
+  if (!id) return NB_SHOPIFY_CART;
+  return `https://nu2vqa-ma.myshopify.com/cart/${id}:${qty}?return_to=https://noodlebomb.co`;
+};
+
+// Returns the best Wix URL for a given cart item list — used as the last-resort
+// fallback if both Storefront API and Shopify cart-permalink fail.
 const nbCheckoutUrl = (items) => {
   if (!items || items.length === 0) return NB_WIX.shop;
   if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
@@ -336,17 +354,11 @@ function Nav({ flavor, setFlavor, flavors }) {
         })}
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
-        {/* Cart icon opens the slide-out drawer; right-click + middle-click
-            still navigate to /cart.html (full cart page) for accessibility. */}
+        {/* Cart icon → Shopify cart (the single source of truth). Drawer is
+            still rendered for users who add via legacy/local code paths, but
+            the icon goes direct so users never bounce off a stale local cart. */}
         <a
-          href="/cart.html"
-          onClick={(e) => {
-            // Modifier-click or middle-click → let browser navigate normally
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-            e.preventDefault();
-            setDrawerOpen(false);
-            setCartDrawerOpen(true);
-          }}
+          href={NB_SHOPIFY_CART}
           aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
           style={{
             position: 'relative',
@@ -762,19 +774,17 @@ function Nav({ flavor, setFlavor, flavors }) {
                 </span>
               </div>
 
-              {/* Checkout CTA — Shopify when enabled, else Wix product/shop URL */}
+              {/* Checkout CTA — multi-line Shopify cart-permalink. Lands the
+                  user on Shopify cart with every line pre-loaded; Continue
+                  Shopping returns to noodlebomb.co via return_to. */}
               <a
-                href={nbCheckoutUrl(cartItems)}
-                aria-busy={checkoutLoading}
-                aria-disabled={checkoutLoading}
-                onClick={(e) => {
-                  if (checkoutLoading) { e.preventDefault(); return; }
-                  if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
-                    setCheckoutLoading(true);
-                    window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(cartItems, e, nbCheckoutUrl(cartItems))
-                      .finally(() => setCheckoutLoading(false));
-                  }
-                }}
+                href={(() => {
+                  const lines = cartItems
+                    .map(it => NB_SHOPIFY_VARIANT_IDS[it.slug] && `${NB_SHOPIFY_VARIANT_IDS[it.slug]}:${Math.max(1, Math.floor(it.qty || 1))}`)
+                    .filter(Boolean);
+                  if (lines.length === 0) return NB_SHOPIFY_CART;
+                  return `https://nu2vqa-ma.myshopify.com/cart/${lines.join(',')}?return_to=https://noodlebomb.co`;
+                })()}
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                   gap: 8, padding: '16px 24px', borderRadius: 999,
@@ -782,20 +792,18 @@ function Nav({ flavor, setFlavor, flavors }) {
                   fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
                   letterSpacing: '0.18em', textTransform: 'uppercase',
                   textDecoration: 'none',
-                  transition: 'transform .2s, box-shadow .2s, opacity .2s',
-                  opacity: checkoutLoading ? 0.7 : 1,
-                  pointerEvents: checkoutLoading ? 'none' : 'auto',
+                  transition: 'transform .2s, box-shadow .2s',
                 }}
-                onMouseOver={(e) => { if (!checkoutLoading) { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; } }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.35)'; }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                {checkoutLoading ? 'Opening checkout…' : `Checkout — ${fmtUSD(cartSubtotal)} →`}
+                {`Checkout — ${fmtUSD(cartSubtotal)} →`}
               </a>
               {/* Per-item shortcuts for multi-item carts */}
               {cartItems.length > 1 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', justifyContent: 'center' }}>
-                  {cartItems.map((it) => NB_WIX[it.slug] && (
-                    <a key={it.slug} href={NB_WIX[it.slug]} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                  {cartItems.map((it) => NB_SHOPIFY_VARIANT_IDS[it.slug] && (
+                    <a key={it.slug} href={nbCartPermalink(it.slug, Math.max(1, Math.floor(it.qty || 1)))} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
                       {it.name} →
                     </a>
                   ))}
@@ -804,7 +812,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
               {/* View full cart escape hatch */}
               <a
-                href="/cart.html"
+                href={NB_SHOPIFY_CART}
                 style={{
                   textAlign: 'center',
                   fontFamily: 'JetBrains Mono', fontSize: 10,
@@ -872,12 +880,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </div>
         <div className="hero-cta-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.7s both' }}>
           <a
-            href="/cart.html"
-            onClick={(e) => nbAddAndOpenCart({
-              slug: flavorKey,
-              name: flavorMeta?.name || flavorKey,
-              price: NB_BOTTLE_PRICE,
-            }, e)}
+            href={nbCartPermalink(flavorKey)}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -903,8 +906,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
           </a>
           <a
             className="btn btn-ghost"
-            href="/cart.html"
-            onClick={(e) => nbAddAndOpenCart({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd }, e)}
+            href={nbCartPermalink('trio')}
             style={{ textDecoration: 'none', display: 'inline-block', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', background: 'rgba(245,241,234,0.08)', borderColor: 'rgba(245,241,234,0.25)' }}
           >
             Try the 3-pack — save $6
