@@ -985,13 +985,13 @@
 
   /* Bottle silhouette stage */
   #next-drop .nd-bottle-stage {
-    position: relative; height: 250px; margin: 22px 0 24px;
+    position: relative; height: 320px; margin: 22px 0 24px;
     display: flex; align-items: center; justify-content: center;
     z-index: 1;
   }
   #next-drop .nd-bottle-wrap {
-    position: relative; width: 150px; height: 100%;
-    filter: brightness(0) saturate(0%);
+    position: relative; width: 176px; height: 100%;
+    filter: drop-shadow(0 28px 48px rgba(0,0,0,0.46));
     opacity: 1;
     animation: floatY 6s ease-in-out infinite;
   }
@@ -1133,12 +1133,12 @@
     #next-drop .nd-inline-form input,
     #next-drop .nd-inline-form button,
     #next-drop .nd-input,
-    #next-drop .nd-submit { width: 100%; min-height: 48px; }
+    #next-drop .nd-submit { width: 100%; min-height: 48px; flex: 0 0 auto; }
     #next-drop .nd-cards { margin-top: 34px; gap: 32px; }
     #next-drop .nd-card { padding: 24px 18px !important; }
     #next-drop .nd-status { max-width: 100%; white-space: normal; line-height: 1.35; }
-    #next-drop .nd-bottle-stage { height: 180px; margin: 14px 0 18px; }
-    #next-drop .nd-bottle-wrap { width: 112px; }
+    #next-drop .nd-bottle-stage { height: 230px; margin: 14px 0 18px; }
+    #next-drop .nd-bottle-wrap { width: 128px; }
     #next-drop .nd-bignum { font-size: 190px; right: -40px; top: 120px; opacity: 0.28; }
     #next-drop .nd-name { font-size: 30px; }
     #next-drop .nd-pills { margin-bottom: 18px; }

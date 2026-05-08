@@ -15,10 +15,8 @@ function NextDrop() {
       oneliner: 'A deeper shoyu-style finish for rice, wings, noodles, vegetables, and late-night leftovers.',
       pills: ['Savory', 'Glossy', 'Long finish'],
       progress: 2,
-      img: 'uploads/nb-original-clean.png', // placeholder silhouette — applied via CSS filter (frosted/desaturated) so it doesn't read as Original. Real Shoyu Reserve render TBD.
-      placeholderFilter: 'grayscale(0.95) brightness(0.5) contrast(1.2) blur(0.6px)',
-      placeholderOpacity: 0.65,
-      altOverride: 'Shoyu Reserve — Coming Fall 2026',
+      img: 'uploads/shoyu-reserve-preview-2026-05-08.png',
+      altOverride: 'NoodleBomb Shoyu Reserve preview bottle — Coming Fall 2026',
     },
   ];
 
