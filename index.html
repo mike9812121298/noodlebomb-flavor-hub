@@ -925,7 +925,7 @@
   #next-drop .nd-hero-form {
     position: relative; z-index: 2;
     display: flex; gap: 10px;
-    max-width: 560px;
+    max-width: 760px;
     margin: 28px auto 0;
     padding: 12px;
     border: 1px solid rgba(232,240,255,0.32);
@@ -943,6 +943,20 @@
     font-size: 15px;
     outline: none;
   }
+  #next-drop .nd-select {
+    min-height: 50px;
+    padding: 0 36px 0 14px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background: rgba(0,0,0,0.30);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer;
+  }
+  #next-drop .nd-select:focus { border-color: rgba(245,241,234,0.85); }
   #next-drop .nd-hero-form button {
     min-height: 50px;
     padding: 0 22px;
@@ -1148,6 +1162,7 @@
     font-size: 14px;
     outline: none;
   }
+  #next-drop .nd-inline-form .nd-select { flex: 0 0 150px; min-height: 46px; }
   #next-drop .nd-inline-form button {
     min-height: 46px;
     padding: 0 18px;
@@ -1236,6 +1251,12 @@
   }
   #next-drop .nd-input::placeholder { color: rgba(245,241,234,0.74); }
   #next-drop .nd-input:focus { border-color: rgba(245,241,234,0.85); }
+  #next-drop .nd-select-line {
+    min-height: 46px;
+    margin-left: 12px;
+    border-color: rgba(255,255,255,0.18);
+    background: rgba(0,0,0,0.18);
+  }
   #next-drop .nd-submit {
     background: #e8f0ff; color: #0a0a0a; border: 0;
     padding: 0 26px;
@@ -1258,10 +1279,13 @@
     #next-drop .nd-inline-form,
     #next-drop .nd-form { flex-direction: column; }
     #next-drop .nd-hero-form input,
+    #next-drop .nd-hero-form .nd-select,
     #next-drop .nd-hero-form button,
     #next-drop .nd-inline-form input,
+    #next-drop .nd-inline-form .nd-select,
     #next-drop .nd-inline-form button,
     #next-drop .nd-input,
+    #next-drop .nd-select-line,
     #next-drop .nd-submit { width: 100%; min-height: 48px; flex: 0 0 auto; }
     #next-drop .nd-cards { margin-top: 34px; gap: 32px; }
     #next-drop .nd-card { padding: 24px 18px !important; }
@@ -1297,6 +1321,7 @@
     #next-drop .nd-pills { margin-bottom: 18px; }
     #next-drop .nd-progress-labels { font-size: 8px; letter-spacing: 0.06em; }
     #next-drop .nd-submit { margin-left: 0; }
+    #next-drop .nd-select-line { margin-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     #next-drop .nd-reserve-card,

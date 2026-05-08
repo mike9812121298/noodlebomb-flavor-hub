@@ -54,16 +54,25 @@ function NextDrop() {
           </Reveal>
           <Reveal delay={2}>
             <p className="nd-sub">
-              A darker, deeper bottle is in development. Get on the list before the reserve opens.
+              A darker, deeper bottle is in development. Reserve your place for the first Shoyu Reserve run. No payment today.
             </p>
           </Reveal>
           <Reveal delay={2.5}>
             <form className="nd-hero-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
-              <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Priority Alert" />
+              <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Request" />
               <input type="hidden" name="_template" value="table" />
               <input type="hidden" name="_captcha" value="false" />
-              <input type="email" name="email" placeholder="your@email.com" aria-label="Email for Shoyu Reserve priority alert" required />
-              <button type="submit">Reserve alert</button>
+              <input type="hidden" name="product" value="Shoyu Reserve" />
+              <input type="hidden" name="intent" value="Reserve request" />
+              <input type="hidden" name="launch_window" value="Summer 2026" />
+              <input type="email" name="email" placeholder="your@email.com" aria-label="Email for Shoyu Reserve reservation" required />
+              <select className="nd-select" name="requested_bottles" aria-label="Requested Shoyu Reserve bottles" defaultValue="1 bottle">
+                <option>1 bottle</option>
+                <option>2 bottles</option>
+                <option>3 bottles</option>
+                <option>Case interest</option>
+              </select>
+              <button type="submit">Reserve Shoyu</button>
             </form>
           </Reveal>
         </div>
@@ -119,11 +128,20 @@ function NextDrop() {
                 </div>
 
                 <form className="nd-inline-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
-                  <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Alert" />
+                  <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Request" />
                   <input type="hidden" name="_template" value="table" />
                   <input type="hidden" name="_captcha" value="false" />
-                  <input type="email" name="email" placeholder="your@email.com" aria-label="Email for Shoyu Reserve alert" required />
-                  <button type="submit">Reserve alert →</button>
+                  <input type="hidden" name="product" value="Shoyu Reserve" />
+                  <input type="hidden" name="intent" value="Reserve request" />
+                  <input type="hidden" name="launch_window" value="Summer 2026" />
+                  <input type="email" name="email" placeholder="your@email.com" aria-label="Email for Shoyu Reserve reservation" required />
+                  <select className="nd-select" name="requested_bottles" aria-label="Requested Shoyu Reserve bottles" defaultValue="1 bottle">
+                    <option>1 bottle</option>
+                    <option>2 bottles</option>
+                    <option>3 bottles</option>
+                    <option>Case interest</option>
+                  </select>
+                  <button type="submit">Reserve yours →</button>
                 </form>
 
                 {/* Progress strip */}
@@ -144,7 +162,7 @@ function NextDrop() {
                   </div>
                 </div>
 
-                <div className="nd-notify-caption">Get the first reserve alert →</div>
+                <div className="nd-notify-caption">Reserve your spot for the first run →</div>
                 </div>
               </div>
             </Reveal>
@@ -156,22 +174,32 @@ function NextDrop() {
           <div className="nd-notify">
             <div className="nd-notify-label">
               <span className="nd-pulse" />
-              RESERVE ALERT
+              RESERVE LIST
             </div>
             <form className="nd-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
-              <input type="hidden" name="_subject" value="NoodleBomb — Notify Me (Next Drop)" />
+              <input type="hidden" name="_subject" value="NoodleBomb - Shoyu Reserve Request" />
               <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="product" value="Shoyu Reserve" />
+              <input type="hidden" name="intent" value="Reserve request" />
+              <input type="hidden" name="launch_window" value="Summer 2026" />
               <input
                 className="nd-input"
                 type="email"
                 name="email"
                 placeholder="your@email.com"
-                aria-label="Email address"
+                aria-label="Email for Shoyu Reserve reservation"
                 required
               />
-              <button type="submit" className="nd-submit">Get the reserve alert →</button>
+              <select className="nd-select nd-select-line" name="requested_bottles" aria-label="Requested Shoyu Reserve bottles" defaultValue="1 bottle">
+                <option>1 bottle</option>
+                <option>2 bottles</option>
+                <option>3 bottles</option>
+                <option>Case interest</option>
+              </select>
+              <button type="submit" className="nd-submit">Reserve Shoyu →</button>
             </form>
-            <div className="nd-microcopy">One clean email when the reserve opens. No noise.</div>
+            <div className="nd-microcopy">No payment today. We will email when Shoyu Reserve opens.</div>
           </div>
         </Reveal>
       </div>
