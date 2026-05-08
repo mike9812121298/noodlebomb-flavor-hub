@@ -15,10 +15,6 @@ const faqGroups = [
         a: "Most sauces are built around one flavor note. NoodleBomb is layered — umami-forward, balanced with depth from fermented ingredients, and finished to coat noodles rather than pool at the bottom. It's also versatile enough to work as a marinade, glaze, or stir-fry sauce.",
       },
       {
-        q: "Is NoodleBomb gluten-free?",
-        a: "No. NoodleBomb contains soy sauce and wheat-derived ingredients. It is not suitable for those with celiac disease or a gluten intolerance. See the Ingredients & Allergens section for the full allergen list.",
-      },
-      {
         q: "Does NoodleBomb contain MSG?",
         a: "Yes. Monosodium glutamate (MSG) is listed as an ingredient. We use it intentionally — it enhances the umami backbone of the sauce and is safe for the vast majority of people.",
       },

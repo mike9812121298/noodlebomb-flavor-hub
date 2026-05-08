@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" style="--accent: #8B1E1E; --accent-ink: #F5F1EA;">
+<html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="theme-color" content="#F5EFE3">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0E0D0C">
 <title>Your Cart — NoodleBomb</title>
 <meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. Free shipping over $35." />
 <meta name="robots" content="noindex" />
@@ -22,17 +22,17 @@
 
 <style>
 :root {
-  --ink: #0F0F0F;
-  --ink-60: rgba(15,15,15,0.74);
-  --ink-40: rgba(15,15,15,0.85);
-  --ink-20: rgba(15,15,15,0.30);
-  --paper: #F5EFE3;
-  --paper-2: #FBF7EC;
-  --paper-3: #EFE7D3;
-  --line: rgba(15,15,15,0.10);
-  --line-strong: rgba(15,15,15,0.18);
-  --accent: #8B1E1E;
-  --accent-ink: #FBF7EC;
+  --ink: #F0EBE3;
+  --ink-60: rgba(240,235,227,0.78);
+  --ink-40: rgba(240,235,227,0.70);
+  --ink-20: rgba(240,235,227,0.45);
+  --paper: #0E0D0C;
+  --paper-2: #17140F;
+  --paper-3: #1F1B15;
+  --line: rgba(240,235,227,0.08);
+  --line-strong: rgba(240,235,227,0.14);
+  --accent: #E84A3A;
+  --accent-ink: #0E0D0C;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
@@ -64,7 +64,7 @@ a { color: inherit; }
   height: 72px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(24px, 5.5vw, 80px);
-  background: rgba(245,239,227,0.88);
+  background: rgba(14,13,12,0.88);
   backdrop-filter: saturate(140%) blur(12px);
   -webkit-backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--line);
@@ -117,7 +117,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 .ship-bar { padding: 18px 22px; }
 .ship-bar .row { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 12px; font-size: 13px; }
 .ship-bar .accent { color: var(--accent); font-weight: 700; }
-.ship-bar .track { height: 4px; background: rgba(15,15,15,0.08); position: relative; overflow: hidden; border-radius: 2px; }
+.ship-bar .track { height: 4px; background: rgba(240,235,227,0.08); position: relative; overflow: hidden; border-radius: 2px; }
 .ship-bar .fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); transition: width .5s cubic-bezier(.2,.7,.2,1); }
 .ship-bar.unlocked { display: flex; gap: 12px; align-items: center; }
 .ship-bar.unlocked .icon { width: 32px; height: 32px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -142,7 +142,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   cursor: pointer; transition: color .2s, background .2s;
   font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center;
 }
-.qty button:hover:not(:disabled) { color: var(--ink); background: rgba(15,15,15,0.05); }
+.qty button:hover:not(:disabled) { color: var(--ink); background: rgba(240,235,227,0.08); }
 .qty button:disabled { opacity: 0.3; cursor: not-allowed; }
 .qty span { padding: 0 12px; min-width: 28px; text-align: center; font-family: 'Inter Tight'; font-weight: 600; font-size: 13px; }
 
@@ -170,7 +170,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   cursor: pointer; text-decoration: none;
   transition: background .25s, color .25s, transform .2s, box-shadow .25s;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(139,30,30,0.28); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(232,74,58,0.24); }
 .btn-secondary {
   background: var(--paper-2); color: var(--ink); border: 1px solid var(--line-strong);
 }
@@ -192,7 +192,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 }
 .empty-mark::before {
   content: ''; position: absolute; inset: -4px; border-radius: 999px;
-  background: radial-gradient(circle, rgba(139,30,30,0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(232,74,58,0.22) 0%, transparent 70%);
   z-index: -1; filter: blur(20px);
 }
 .empty h1 { font-family: 'Inter Tight'; font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.04em; font-weight: 700; line-height: 1.05; margin: 0 0 12px; }
@@ -222,7 +222,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
     display: flex; align-items: center; gap: 12px;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
     padding: 14px clamp(16px, 5vw, 28px);
-    background: rgba(245,239,227,0.96); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
+    background: rgba(14,13,12,0.96); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
     border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(15,15,15,0.06);
   }
   .sticky-mobile .total { flex: 1; }

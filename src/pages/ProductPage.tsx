@@ -129,7 +129,7 @@ const PRODUCTS: Record<string, ProductData> = {
       "Original, Spicy Tokyo, and Citrus Shoyu — the complete NoodleBomb lineup in one box. Free shipping over $35.",
     ingredients:
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
-    allergens: "Soy, Wheat (Gluten), Sesame.",
+    allergens: "Soy, Wheat, Sesame.",
   },
 };
 
