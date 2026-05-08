@@ -39,11 +39,11 @@ const addAndOpenCart = (item, e) => {
 };
 
 const FLAVORS = {
-  original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#8B1E1E', ink: '#F5F1EA',
+  original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#E84A3A', ink: '#0E0D0C',
     line1: 'The one that started it all.',
     line2: 'Roasted garlic, toasted sesame, smooth soy.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  spicy: { name: 'Spicy Tokyo', tag: 'No.02 · Spicy Tokyo', short: 'No.02', color: '#C2410C', ink: '#F5F1EA',
+  spicy: { name: 'Spicy Tokyo', tag: 'No.02 · Spicy Tokyo', short: 'No.02', color: '#E84A3A', ink: '#0E0D0C',
     line1: 'Umami meets fire.',
     line2: 'Dark soy, roasted chili, sesame.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
@@ -1035,7 +1035,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 12,
-                    background: '#8B1E1E',
+                    background: '#E84A3A',
                     color: '#F5F1EA',
                     border: 'none',
                     padding: '18px 32px',
@@ -1059,7 +1059,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                   onMouseOut={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = '0 12px 28px rgba(139,30,30,0.30)';
-                    e.currentTarget.style.background = '#8B1E1E';
+                    e.currentTarget.style.background = '#E84A3A';
                   }}
                 >
                   Buy the Trio — $29.99 · Save $6

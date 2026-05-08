@@ -10,8 +10,8 @@
   --paper-3: #1F1B15;
   --line: rgba(240,235,227,0.08);
   --line-strong: rgba(240,235,227,0.14);
-  --accent: #8B1E1E;
-  --accent-ink: #F5F1EA;
+  --accent: #E84A3A;
+  --accent-ink: #0E0D0C;
 }
 
 * { box-sizing: border-box; }
