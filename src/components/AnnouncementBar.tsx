@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const messages = [
   "Loved by Ramen Fans Everywhere",
-  "Free Shipping on Orders $40+",
+  "Free Shipping Over $35",
   "Bundle & Save Up to 20%",
   "4.9 Stars \u00B7 500+ Reviews",
 ];

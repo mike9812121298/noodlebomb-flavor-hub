@@ -72,7 +72,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-bold text-foreground mb-4 text-sm uppercase tracking-wider">Promise</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>🚚 Free shipping on every order</li>
+              <li>🚚 Free shipping over $35</li>
               <li>💰 100% money-back guarantee</li>
               <li>🍜 Small batch, handcrafted</li>
               <li>📦 Ships in 1–2 business days</li>

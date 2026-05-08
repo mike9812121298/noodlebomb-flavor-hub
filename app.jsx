@@ -1024,7 +1024,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                   the local cart enforces; if Wix has a special trio rule
                   Mike can confirm, restore the claim). */}
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
-                BEST WAY TO TRY ALL THREE · ARRIVES IN 3–5 DAYS · FREE SHIPPING
+                BEST WAY TO TRY ALL THREE · ARRIVES IN 3–5 DAYS · SMALL BATCH
               </div>
 
               <div style={{ marginTop: 8 }}>
@@ -1036,7 +1036,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     alignItems: 'center',
                     gap: 12,
                     background: '#E84A3A',
-                    color: '#F5F1EA',
+                    color: '#0E0D0C',
                     border: 'none',
                     padding: '18px 32px',
                     minHeight: 56,

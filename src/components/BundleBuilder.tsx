@@ -106,7 +106,7 @@ const BundleBuilder = () => {
         <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="flex justify-center gap-3 md:gap-4 mb-8">
           {[
             { min: 2, label: "The Dynamic Duo", sublabel: "2+ Bottles", pct: "10%" },
-            { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING", featured: true },
+            { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING OVER $35", featured: true },
             { min: 4, label: "The Kitchen Hero", sublabel: "4+ Bottles", pct: "20%" },
           ].map((tier) => {
             const active = totalItems >= tier.min;
@@ -163,7 +163,7 @@ const BundleBuilder = () => {
             )}
             {discount.pct > 0 && (
               <p className="text-sm font-display font-bold text-primary mt-1.5">
-                🎉 You've unlocked {discount.label} off + Free Shipping!
+                🎉 You've unlocked {discount.label} off + free shipping over $35!
               </p>
             )}
           </motion.div>
@@ -247,7 +247,7 @@ const BundleBuilder = () => {
               <span className="font-display text-2xl font-bold text-foreground block mb-2">${subtotal.toFixed(2)}</span>
             )}
             <div className="flex items-center justify-center gap-1.5 mb-3">
-              <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Included</span>
+              <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Over $35</span>
             </div>
             <motion.a
               href={getCheckoutUrl("variety-pack")}

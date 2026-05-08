@@ -219,7 +219,7 @@ const Index = () => {
             </motion.div>
 
             <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              {["Free Shipping $40+", "Small Batch Drops", "Premium Ingredients"].map((item, i) => (
+              {["Free Shipping Over $35", "Small Batch Drops", "Premium Ingredients"].map((item, i) => (
                 <span key={item} className="flex items-center gap-1.5 text-[10px] text-foreground/35 font-display uppercase tracking-[0.2em]">
                   {i > 0 && <span className="text-primary/30 mr-1.5">✦</span>}
                   {item}
@@ -303,7 +303,7 @@ const Index = () => {
         >
           {[
             { Icon: Star, label: "4.9 Stars · 500+ Reviews", iconClass: "text-amber-500" },
-            { Icon: Truck, label: "Free Shipping Over $40", iconClass: "" },
+            { Icon: Truck, label: "Free Shipping Over $35", iconClass: "" },
             { Icon: RotateCcw, label: "30-Day Guarantee", iconClass: "" },
             { Icon: Leaf, label: "Real Ingredients", iconClass: "" },
             { Icon: MapPin, label: "Crafted in the PNW", iconClass: "" },
@@ -498,7 +498,7 @@ const Index = () => {
               {[
                 { icon: "🔥", label: "New Flavor Every Month" },
                 { icon: "💰", label: "Members Save 15%" },
-                { icon: "🚚", label: "Free Shipping Always" },
+                { icon: "🚚", label: "Free Shipping Over $35" },
               ].map((pill) => (
                 <span
                   key={pill.label}

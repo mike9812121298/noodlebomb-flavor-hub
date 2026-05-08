@@ -51,7 +51,7 @@ const products = [
 const bundles = [
   {
     name: "The Trio Pack",
-    tagline: "All three flavors in one clean lineup. Free shipping included.",
+    tagline: "All three flavors in one clean lineup. Free shipping over $35.",
     price: "$30.00",
     originalPrice: "$35.97",
     spiceLevel: 3,
@@ -68,7 +68,7 @@ const Shop = () => (
         <p className="text-foreground/70 mt-3 text-lg">
           Three flavors. One obsession. Pick yours or grab the bundle.
         </p>
-        <p className="text-muted-foreground mt-1 text-sm">Free shipping on orders $40+ — limited small-batch inventory.</p>
+        <p className="text-muted-foreground mt-1 text-sm">Free shipping over $35 — limited small-batch inventory.</p>
       </motion.div>
 
       <div className="h-px bg-border mb-14" />
@@ -155,7 +155,7 @@ const Shop = () => (
                 </div>
                 <div className="flex items-center gap-1.5 mb-6">
                   <Truck className="h-4 w-4 text-primary" />
-                  <span className="text-xs text-foreground/60 font-display font-semibold uppercase tracking-wider">Free Shipping Included</span>
+                  <span className="text-xs text-foreground/60 font-display font-semibold uppercase tracking-wider">Free Shipping Over $35</span>
                 </div>
                 <Link
                   to="/ramen-box"                  className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.5)] hover:scale-[1.02] transition-all animate-pulse-glow"
@@ -182,7 +182,7 @@ const Shop = () => (
           Exclusive small-batch drops, chef recipes, and limited flavors — delivered monthly.
         </p>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-foreground/80 mb-4">
-          {["Limited Monthly Flavor Drop", "Members-Only Sauces", "Cancel or Skip Anytime", "Free Shipping"].map((item) => (
+          {["Limited Monthly Flavor Drop", "Members-Only Sauces", "Cancel or Skip Anytime", "Shipping Over $35"].map((item) => (
             <span key={item} className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-primary" />
               {item}

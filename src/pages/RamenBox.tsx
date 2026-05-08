@@ -54,7 +54,7 @@ const RamenBox = () => {
             {[
               { icon: Package, title: "Premium Ramen Packs", desc: "Hand-picked instant ramen from top Japanese, Korean, and Taiwanese brands. A new rotating selection every month." },
               { icon: Star, title: "A Bottle of NoodleBomb", desc: "Your choice of flavor — Original, Spicy Tokyo, Citrus Shoyu, or whatever's newest. Changes anytime." },
-              { icon: Truck, title: "Free Shipping", desc: "Every box ships free, every month. No minimums, no surprises on the invoice." },
+              { icon: Truck, title: "Shipping Over $35", desc: "Free shipping over $35. No surprises on the invoice." },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="bg-card rounded-2xl border border-border p-6 text-center">
                 <Icon className="w-10 h-10 text-primary mx-auto mb-4" />

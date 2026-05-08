@@ -126,7 +126,7 @@ const PRODUCTS: Record<string, ProductData> = {
     flavorHook: "One of Each. All the Flavor.",
     badge: "🎁 Best Value",
     description:
-      "Original, Spicy Tokyo, and Citrus Shoyu — the complete NoodleBomb lineup in one box. Free shipping included.",
+      "Original, Spicy Tokyo, and Citrus Shoyu — the complete NoodleBomb lineup in one box. Free shipping over $35.",
     ingredients:
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
     allergens: "Soy, Wheat (Gluten), Sesame.",
@@ -290,7 +290,7 @@ const ProductPage = () => {
                 </Link>
               </div>
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-3"><Truck className="h-3.5 w-3.5" />
-                Free shipping · Ships from WA</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
+                Free shipping over $35 · Ships from WA</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
               </p>
             </div>
 
@@ -298,7 +298,7 @@ const ProductPage = () => {
             <div className="flex flex-wrap gap-6 pt-2 border-t border-border/40">
               <div className="flex items-center gap-2 text-xs text-foreground/50">
                 <Truck className="h-4 w-4 text-primary/60" />
-                Free shipping on $40+
+                Free shipping over $35
               </div>
               <div className="flex items-center gap-2 text-xs text-foreground/50">
                 <ShieldCheck className="h-4 w-4 text-primary/60" />
