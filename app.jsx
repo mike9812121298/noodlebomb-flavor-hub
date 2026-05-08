@@ -33,6 +33,18 @@ const cartPermalink = (slug, qty = 1) => {
   if (!id) return 'https://nu2vqa-ma.myshopify.com/cart';
   return `https://nu2vqa-ma.myshopify.com/cart/add?id=${id}&quantity=${qty}&return_to=%2Fcart`;
 };
+const openCartWithFeedback = (e, label = 'Opening cart...') => {
+  if (!e || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+  const link = e.currentTarget;
+  const href = link.href;
+  e.preventDefault();
+  e.stopPropagation();
+  link.classList.add('is-buying');
+  link.setAttribute('aria-busy', 'true');
+  if (!link.dataset.originalText) link.dataset.originalText = link.textContent;
+  link.textContent = label;
+  window.setTimeout(() => { window.location.href = href; }, 180);
+};
 
 // Legacy local-cart helper kept for the drawer's "View full cart" path; no
 // longer wired to any Add-to-Cart button. Add-to-Cart goes direct to Shopify.
@@ -839,6 +851,52 @@ function Testimonials() {
 
 }
 
+// ——————————————————————————— Use cases: quick motion cue for "goes on everything"
+function UseCaseMoments() {
+  const cases = [
+    { title: 'Wings', copy: 'Toss hot wings with Spicy Tokyo for heat that still tastes like food.', img: FOOD_IMAGES.wings, tag: 'Toss' },
+    { title: 'Rice', copy: 'Drizzle Original over fried rice, salmon bowls, eggs, or leftovers.', img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=1400&q=80&auto=format&fit=crop', tag: 'Drizzle' },
+    { title: 'Noodles', copy: 'Stir into ramen, udon, soba, or the noodles already in your pantry.', img: FOOD_IMAGES.stirfry, tag: 'Stir' },
+    { title: 'Dumplings', copy: 'Use any flavor as a fast dip for gyoza, wontons, and potstickers.', img: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=1400&q=80&auto=format&fit=crop', tag: 'Dip' },
+  ];
+  return (
+    <section id="use-cases" style={{ background: 'var(--paper)', padding: '112px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
+      <div style={{ maxWidth: 1300, margin: '0 auto' }}>
+        <Reveal>
+          <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Use It On</div>
+        </Reveal>
+        <Reveal delay={1}>
+          <h2 className="display section-h2" style={{ margin: '0 0 20px', maxWidth: 920 }}>
+            Four fast ways<br /><span style={{ color: 'var(--muted)' }}>to pour bold.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={2}>
+          <p style={{ color: 'var(--ink-60)', maxWidth: 620, lineHeight: 1.65, margin: '0 0 36px', fontSize: 17 }}>
+            It is still a ramen sauce. It just refuses to stay there.
+          </p>
+        </Reveal>
+        <div className="use-case-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
+          {cases.map((item, i) => (
+            <Reveal key={item.title} delay={i + 2}>
+              <a className="use-case-card" href="#lineup" style={{ '--case-delay': `${i * 0.08}s` }}>
+                <div className="use-case-media">
+                  <img src={item.img} alt={`${item.title} with NoodleBomb sauce`} loading="lazy" />
+                  <span className="use-case-pour" aria-hidden="true" />
+                </div>
+                <div className="use-case-copy">
+                  <div className="mono">{item.tag}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ——————————————————————————— Flavor picker (changes accent color)
 function FlavorPicker({ flavor, setFlavor }) {
   const keys = Object.keys(FLAVORS);
@@ -906,6 +964,8 @@ function FlavorPicker({ flavor, setFlavor }) {
               const rect = el.getBoundingClientRect();
               const x = (e.clientX - rect.left) / rect.width - 0.5;
               const y = (e.clientY - rect.top) / rect.height - 0.5;
+              el.style.setProperty('--mx', `${(x + 0.5) * 100}%`);
+              el.style.setProperty('--my', `${(y + 0.5) * 100}%`);
               el.style.transform = `perspective(800px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(${active ? -6 : 0}px) scale(1.02)`;
             };
             const handleMouseLeave = (e) => {
@@ -914,7 +974,7 @@ function FlavorPicker({ flavor, setFlavor }) {
             return (
               <Reveal key={k} delay={i + 1}>
                 <div
-                  className="tilt-card"
+                  className={`tilt-card flavor-select-card ${active ? 'is-active' : ''}`}
                   onClick={() => setFlavor(k)}
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
@@ -951,7 +1011,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                     </div>
                     <a
                       href={cartPermalink(k)}
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => openCartWithFeedback(e, 'Opening cart...')}
                       className="lineup-buy-btn"
                       style={{
                         display: 'flex',
@@ -1083,6 +1143,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                 <a
                   className="btn trio-bundle-cta"
                   href={cartPermalink('trio')}
+                  onClick={(e) => openCartWithFeedback(e, 'Opening cart...')}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -1721,6 +1782,7 @@ function App() {
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <TrustStrip />
+      <UseCaseMoments />
       <FlavorBreakdown flavor={state.flavor} />
       <UseItOn />
       <PourAndCompare flavor={state.flavor} />
