@@ -66,11 +66,11 @@ function MonthlyDrop() {
             <Reveal delay={1}>
               <div className="md-photo-card">
                 <img
-                  src="uploads/monthly-subscription-box-2026-05-08.png"
-                  alt="NoodleBomb Monthly Subscription Box with noodles, sauces, and surprise extras"
+                  src="uploads/monthly-noodle-club-2026-05-08.png"
+                  alt="NoodleBomb Monthly Noodle Club box with noodles, sauces, and surprise extras"
                   loading="lazy"
                 />
-                <div className="md-photo-badge">Monthly subscription box</div>
+                <div className="md-photo-badge">Monthly Noodle Club</div>
                 <div className="md-photo-glow" aria-hidden="true" />
               </div>
             </Reveal>
