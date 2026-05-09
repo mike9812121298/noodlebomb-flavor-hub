@@ -261,19 +261,74 @@ function FlavorBreakdown({ flavor }) {
 
 // ——————————————————————————— Flavor scene atmospheres
 function FlavorBreakdownV2({ flavor, setFlavor }) {
-  const items = [
-    { key: 'original', use: 'Rice, eggs, noodles', note: 'Garlic-sesame depth when dinner needs a fast savory base.', signal: 'Warm gold, roasted garlic, toasted sesame.' },
-    { key: 'spicy', use: 'Wings, fried rice, grilled meat', note: 'Roasted chili heat that keeps the bite bold, not muddy.', signal: 'Red heat, faint smoke, chili edge.' },
-    { key: 'citrus', use: 'Dumplings, vegetables, seafood', note: 'Clean shoyu brightness that cuts through rich food.', signal: 'Orange lift, citrus spark, bright finish.' },
+  const useCases = [
+    { label: 'Wings', key: 'spicy', verb: 'Toss', reason: 'Roasted chili, garlic, and sesame cling to crispy edges without tasting flat.' },
+    { label: 'Rice', key: 'original', verb: 'Drizzle', reason: 'Garlic-sesame depth turns plain rice, bowls, and leftovers into dinner.' },
+    { label: 'Noodles', key: 'original', verb: 'Stir', reason: 'Smooth soy, garlic, and sesame build the fast savory base.' },
+    { label: 'Dumplings', key: 'citrus', verb: 'Dip', reason: 'Clean citrus lift cuts through rich fillings and fried edges.' },
+    { label: 'Eggs', key: 'original', verb: 'Finish', reason: 'A little roasted garlic and sesame makes breakfast taste intentional.' },
+    { label: 'Vegetables', key: 'citrus', verb: 'Glaze', reason: 'Bright shoyu keeps roasted or steamed vegetables lively.' },
+    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or finishing sauce.' },
+    { label: 'Leftovers', key: 'original', verb: 'Wake up', reason: 'Original is the easy reset when yesterday needs a second life.' },
   ];
-  const activeFlavor = FLAVORS[flavor] || FLAVORS.original;
-  const activeItem = items.find((item) => item.key === flavor) || items[0];
+  const flavorNotes = {
+    original: {
+      job: 'Best first bottle',
+      line: 'Garlic, sesame, and smooth soy for rice, eggs, noodles, and leftovers.',
+      signal: 'Warm gold, roasted garlic, toasted sesame.',
+      profile: [
+        ['Savory', 92],
+        ['Garlic', 78],
+        ['Heat', 18],
+        ['Bright', 32],
+      ]
+    },
+    spicy: {
+      job: 'Best when you want heat',
+      line: 'Roasted chili over garlic-sesame depth for wings, fried rice, and grilled chicken.',
+      signal: 'Red heat, faint smoke, chili edge.',
+      profile: [
+        ['Savory', 86],
+        ['Garlic', 72],
+        ['Heat', 88],
+        ['Bright', 24],
+      ]
+    },
+    citrus: {
+      job: 'Best when food needs lift',
+      line: 'Bright shoyu and citrus for dumplings, vegetables, seafood, and rich bowls.',
+      signal: 'Orange lift, citrus spark, bright finish.',
+      profile: [
+        ['Savory', 74],
+        ['Garlic', 42],
+        ['Heat', 14],
+        ['Bright', 92],
+      ]
+    }
+  };
+  const [selectedUse, setSelectedUse] = useState(useCases.find((item) => item.key === flavor)?.label || 'Rice');
+  const selected = useCases.find((item) => item.label === selectedUse) || useCases[0];
+  const activeKey = selected.key;
+  const activeFlavor = FLAVORS[activeKey] || FLAVORS.original;
+  const activeItem = flavorNotes[activeKey] || flavorNotes.original;
+
+  const chooseUse = (item) => {
+    setSelectedUse(item.label);
+    setFlavor(item.key);
+  };
+
+  useEffect(() => {
+    const current = useCases.find((item) => item.label === selectedUse);
+    if (current && current.key === flavor) return;
+    const match = useCases.find((item) => item.key === flavor);
+    if (match) setSelectedUse(match.label);
+  }, [flavor]);
 
   return (
     <section
       id="ingredients"
       className="fbv2-section"
-      data-flavor={flavor}
+      data-flavor={activeKey}
       style={{
         '--fbv2-rgb': activeFlavor.rgb,
         '--fbv2-accent': activeFlavor.color,
@@ -290,20 +345,41 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
         <span className="fbv2-mood fbv2-mood-b" />
         <span className="fbv2-mood fbv2-mood-c" />
       </div>
-      <div className="fbv2-shell" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, .9fr) minmax(280px, 420px) minmax(0, 1fr)', gap: 'clamp(28px, 5vw, 72px)', alignItems: 'center' }}>
+      <div className="fbv2-shell" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, .95fr) minmax(280px, 400px) minmax(0, .95fr)', gap: 'clamp(28px, 5vw, 72px)', alignItems: 'center' }}>
         <div className="fbv2-copy">
           <Reveal>
-            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 02 - Flavor Map</div>
+            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 02 - Flavor Finder</div>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="display section-h2" style={{ margin: '0 0 22px', maxWidth: 500 }}>
-              Pick the flavor.<br /><span className="accent-fg">Pour it on<br />everything.</span>
+              What are you<br /><span className="accent-fg">eating tonight?</span>
             </h2>
           </Reveal>
           <Reveal delay={2}>
             <p style={{ color: 'var(--ink-60)', fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.65, maxWidth: 560, margin: 0 }}>
-              Three bottles, one job: make wings, rice, noodles, dumplings, eggs, vegetables, and leftovers taste finished.
+              Pick the food first. NoodleBomb points you to the bottle that fits the job: toss, drizzle, dip, glaze, or wake up leftovers.
             </p>
+          </Reveal>
+          <Reveal delay={2}>
+            <div className="fbv2-use-grid" aria-label="Choose what you are eating">
+              {useCases.map((item) => {
+                const f = FLAVORS[item.key];
+                const active = item.label === selectedUse;
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className={`fbv2-use-chip${active ? ' is-active' : ''}`}
+                    style={{ '--chip-accent': f.color }}
+                    aria-pressed={active}
+                    onClick={() => chooseUse(item)}
+                  >
+                    <span>{item.verb}</span>
+                    {item.label}
+                  </button>
+                );
+              })}
+            </div>
           </Reveal>
         </div>
 
@@ -311,43 +387,38 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
           <div className="fbv2-bottle-stage">
             <div className="fbv2-glow" aria-hidden="true" />
             <div className="fbv2-sauce-ring" aria-hidden="true" />
-            <div key={`${flavor}-swipe`} className="fbv2-sauce-swipe" aria-hidden="true" />
-            <div key={`${flavor}-burst`} className="fbv2-flavor-burst" aria-hidden="true" />
-            <div key={flavor} className={`fbv2-bottle-swap is-${flavor}`}>
-              <Bottle flavor={activeFlavor.tag} src={FLAVOR_IMAGES[flavor]} />
+            <div key={`${activeKey}-${selectedUse}-swipe`} className="fbv2-sauce-swipe" aria-hidden="true" />
+            <div key={`${activeKey}-${selectedUse}-burst`} className="fbv2-flavor-burst" aria-hidden="true" />
+            <div key={`${activeKey}-${selectedUse}`} className={`fbv2-bottle-swap is-${activeKey}`}>
+              <Bottle flavor={activeFlavor.tag} src={FLAVOR_IMAGES[activeKey]} />
             </div>
-            <div key={`${flavor}-caption`} className="fbv2-stage-caption">
+            <div key={`${activeKey}-${selectedUse}-caption`} className="fbv2-stage-caption">
               <span>{activeFlavor.short}</span>
               {activeItem.signal}
             </div>
           </div>
         </Reveal>
 
-        <div className="fbv2-cards">
-          {items.map((item, i) => {
-            const f = FLAVORS[item.key];
-            const active = flavor === item.key;
-            return (
-              <Reveal key={item.key} delay={i + 2}>
-                <button
-                  type="button"
-                  className={`fbv2-card${active ? ' is-active' : ''}`}
-                  style={{ '--card-accent': f.color }}
-                  aria-pressed={active}
-                  onClick={() => setFlavor(item.key)}
-                >
-                  <div className="fbv2-card-top">
-                    <span className="mono">{`No.${String(i + 1).padStart(2, '0')}`}</span>
-                    <span className="fbv2-dot" />
-                  </div>
-                  <h3>{f.name}</h3>
-                  <p>{item.note}</p>
-                  <div className="fbv2-use">{item.use}</div>
-                  <div className="fbv2-signal">{item.signal}</div>
-                </button>
-              </Reveal>
-            );
-          })}
+        <div className="fbv2-panel">
+          <Reveal delay={2}>
+            <div className="fbv2-reco-label">Recommended for {selected.label}</div>
+            <h3>{activeFlavor.name}</h3>
+            <p>{selected.reason}</p>
+            <div className="fbv2-job">{activeItem.job}</div>
+            <div className="fbv2-profile" aria-label={`${activeFlavor.name} taste profile`}>
+              {activeItem.profile.map(([label, value]) => (
+                <div key={label} className="fbv2-profile-row">
+                  <span>{label}</span>
+                  <div className="fbv2-profile-track"><i style={{ width: `${value}%` }} /></div>
+                </div>
+              ))}
+            </div>
+            <div className="fbv2-actions">
+              <a className="fbv2-add" href={cartPermalink(activeKey)}>Add {activeFlavor.name} &rarr;</a>
+              <a className="fbv2-trio" href={cartPermalink('trio')}>Get all 3</a>
+            </div>
+            <div className="fbv2-panel-note">{activeItem.line}</div>
+          </Reveal>
         </div>
       </div>
     </section>
