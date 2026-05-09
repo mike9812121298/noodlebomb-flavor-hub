@@ -1713,6 +1713,241 @@ function FAQ() {
 }
 
 
+function BuildBundle() {
+  const products = [
+    {
+      slug: 'original',
+      name: 'Original',
+      eyebrow: 'Base charge',
+      role: 'Garlic, sesame, smooth soy depth.',
+      price: FLAVORS.original.priceUsd,
+      color: FLAVORS.original.color,
+      rgb: FLAVORS.original.rgb,
+      ink: FLAVORS.original.ink,
+      image: FLAVOR_IMAGES.original,
+      core: true
+    },
+    {
+      slug: 'spicy',
+      name: 'Spicy Tokyo',
+      eyebrow: 'Heat charge',
+      role: 'Roasted chili for wings, rice, noodles, and late-night food.',
+      price: FLAVORS.spicy.priceUsd,
+      color: FLAVORS.spicy.color,
+      rgb: FLAVORS.spicy.rgb,
+      ink: FLAVORS.spicy.ink,
+      image: FLAVOR_IMAGES.spicy,
+      core: true
+    },
+    {
+      slug: 'citrus',
+      name: 'Citrus Shoyu',
+      eyebrow: 'Bright charge',
+      role: 'Clean citrus lift for dumplings, vegetables, seafood, and rich bowls.',
+      price: FLAVORS.citrus.priceUsd,
+      color: FLAVORS.citrus.color,
+      rgb: FLAVORS.citrus.rgb,
+      ink: FLAVORS.citrus.ink,
+      image: FLAVOR_IMAGES.citrus,
+      core: true
+    },
+    {
+      slug: 'shoyu',
+      name: 'Shoyu Reserve',
+      eyebrow: 'Rare drop',
+      role: 'Premium soy sauce preorder. Expected Summer 2026.',
+      price: 9.99,
+      color: '#D7A84D',
+      rgb: '215, 168, 77',
+      ink: '#0E0D0C',
+      image: 'uploads/shoyu-reserve-preview-2026-05-08.png',
+      preorder: true
+    }
+  ];
+
+  const [selected, setSelected] = useState({
+    original: true,
+    spicy: true,
+    citrus: true,
+    shoyu: false
+  });
+  const [added, setAdded] = useState(false);
+
+  const selectedProducts = products.filter((p) => selected[p.slug]);
+  const coreProducts = products.filter((p) => p.core && selected[p.slug]);
+  const trioUnlocked = coreProducts.length === 3;
+  const selectedCount = selectedProducts.length;
+  const power = Math.round((selectedCount / products.length) * 100);
+  const compareTotal = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+  const cartTotal = trioUnlocked ? TRIO.priceUsd + (selected.shoyu ? 9.99 : 0) : compareTotal;
+  const savings = Math.max(0, compareTotal - cartTotal);
+  const activeProduct = [...products].reverse().find((p) => selected[p.slug]) || products[0];
+  const missingCore = products.find((p) => p.core && !selected[p.slug]);
+  const cartLines = trioUnlocked
+    ? [
+        { slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd },
+        ...(selected.shoyu ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99 }] : [])
+      ]
+    : selectedProducts.map((p) => ({ slug: p.slug, name: p.name, price: p.price }));
+
+  const level = selectedCount === 0
+    ? 'Level 0'
+    : selectedCount === 1
+      ? 'Level 1'
+      : selectedCount === 2
+        ? 'Level 2'
+        : trioUnlocked && selected.shoyu
+          ? 'Boss Level'
+          : trioUnlocked
+            ? 'Trio Level'
+            : 'Combo Level';
+  const statusLine = selectedCount === 0
+    ? 'Choose a bottle to start the meter.'
+    : trioUnlocked && selected.shoyu
+      ? 'Trio savings unlocked, Shoyu Reserve added.'
+      : trioUnlocked
+        ? 'Trio savings unlocked. Add Shoyu Reserve for the rare-drop bonus.'
+        : missingCore
+          ? `Add ${missingCore.name} to unlock the Trio price.`
+          : 'Keep building your flavor loadout.';
+
+  const toggle = (slug) => {
+    setAdded(false);
+    setSelected((current) => ({ ...current, [slug]: !current[slug] }));
+  };
+
+  const addBundle = (e) => {
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!selectedCount) return;
+    if (!window.NB_CART) {
+      window.location.href = cartPermalink(cartLines[0].slug);
+      return;
+    }
+    cartLines.forEach((line) => {
+      window.NB_CART.add({ slug: line.slug, name: line.name, price: line.price, qty: 1 });
+    });
+    setAdded(true);
+    window.dispatchEvent(new CustomEvent('nb-open-cart'));
+    window.setTimeout(() => setAdded(false), 1800);
+  };
+
+  const money = (n) => `$${n.toFixed(2)}`;
+  const fallbackSlug = cartLines[0] ? cartLines[0].slug : 'trio';
+
+  return (
+    <section
+      id="bundle-builder"
+      className="bundle-section"
+      style={{
+        '--bundle-color': activeProduct.color,
+        '--bundle-rgb': activeProduct.rgb,
+        '--bundle-ink': activeProduct.ink,
+        '--bundle-power': `${power}%`
+      }}
+    >
+      <div className="bundle-scanline" aria-hidden="true" />
+      <div className="bundle-shell">
+        <Reveal>
+          <div className="bundle-head">
+            <div className="mono bundle-kicker">Build a Bundle</div>
+            <h2 className="display">Power up your cart.</h2>
+            <p>
+              Pick your sauces like a loadout. The meter climbs as you add bottles, and the Trio price unlocks when Original, Spicy Tokyo, and Citrus Shoyu are all selected.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="bundle-arena">
+          <Reveal delay={1}>
+            <div className="bundle-product-grid" aria-label="Build a NoodleBomb bundle">
+              {products.map((product) => {
+                const isSelected = selected[product.slug];
+                return (
+                  <button
+                    key={product.slug}
+                    type="button"
+                    className={`bundle-card ${isSelected ? 'is-selected' : ''}`}
+                    onClick={() => toggle(product.slug)}
+                    aria-pressed={isSelected}
+                    style={{ '--card-color': product.color, '--card-rgb': product.rgb, '--card-ink': product.ink }}
+                  >
+                    <span className="bundle-card-glow" aria-hidden="true" />
+                    <span className="bundle-card-top">
+                      <span className="mono">{product.eyebrow}</span>
+                      <span className="bundle-check">{isSelected ? 'ON' : '+'}</span>
+                    </span>
+                    <span className="bundle-bottle-slot">
+                      <img src={product.image} alt={`${product.name} bottle`} loading="lazy" />
+                    </span>
+                    <span className="bundle-card-copy">
+                      <strong>{product.name}</strong>
+                      <span>{product.role}</span>
+                    </span>
+                    <span className="bundle-price">{money(product.price)}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
+
+          <Reveal delay={2}>
+            <div className="bundle-console" aria-live="polite">
+              <div className="bundle-level-row">
+                <span className="bundle-level">{level}</span>
+                <span className="bundle-percent">{power}%</span>
+              </div>
+              <div className="bundle-meter" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow={power} aria-label="Bundle power">
+                <div className="bundle-meter-fill" />
+                <div className="bundle-meter-sparks" />
+              </div>
+              <div className="bundle-status">{statusLine}</div>
+
+              <div className="bundle-loadout">
+                <div className="mono">Cart loadout</div>
+                {cartLines.length ? cartLines.map((line) => (
+                  <div className="bundle-loadout-line" key={line.slug}>
+                    <span>{line.name}</span>
+                    <strong>{money(line.price)}</strong>
+                  </div>
+                )) : (
+                  <div className="bundle-empty">No bottles selected.</div>
+                )}
+              </div>
+
+              <div className="bundle-total">
+                <div>
+                  <span>Total</span>
+                  <strong>{money(cartTotal)}</strong>
+                </div>
+                <div>
+                  <span>Savings</span>
+                  <strong>{savings > 0 ? money(savings) : '$0.00'}</strong>
+                </div>
+              </div>
+
+              <a
+                href={cartPermalink(fallbackSlug)}
+                className={`bundle-add ${selectedCount ? '' : 'is-disabled'} ${added ? 'is-added' : ''}`}
+                onClick={addBundle}
+                aria-disabled={!selectedCount}
+              >
+                {added ? 'Added to cart' : trioUnlocked ? `Add powered bundle - ${money(cartTotal)}` : `Add selected - ${money(cartTotal)}`}
+                <span aria-hidden="true">→</span>
+              </a>
+              <div className="bundle-note">Trio savings apply when all three core sauces are selected. Shoyu Reserve is a paid preorder item.</div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 function App() {
   const DEFAULTS = /*EDITMODE-BEGIN*/{
     "flavor": "original",
@@ -1833,6 +2068,7 @@ function App() {
       <TrustStrip />
       <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <NextDrop />
+      <BuildBundle />
       <MonthlyDrop />
       <PourAndCompare flavor={state.flavor} />
       <Origin />
