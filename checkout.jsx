@@ -2,16 +2,36 @@
 const { useEffect, useState, useMemo } = React;
 
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
+const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
 const EMAIL_KEY = 'nb_checkout_email';
 
 const NB_SITE_URLS = {
-  original: 'https://noodlebomb.co/product-original.html',
-  citrus: 'https://noodlebomb.co/product-citrus.html',
-  spicy: 'https://noodlebomb.co/product-spicy.html',
+  original: 'https://noodlebomb.co/original-ramen-sauce',
+  citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
+  spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
   shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
   trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/#lineup'
+};
+const SHOPIFY_VARIANT_IDS = {
+  original: '53998041596214',
+  citrus: '53998041071926',
+  spicy: '53998042120502',
+  trio: '53998042644790',
+  shoyu: '54006619636022'
+};
+const getShopifyCartPermalink = (items) => {
+  const lines = (items || [])
+    .map((it) => {
+      const id = SHOPIFY_VARIANT_IDS[it.slug];
+      const qty = Math.max(1, Math.floor(it.qty || 1));
+      return id ? `${id}:${qty}` : null;
+    })
+    .filter(Boolean);
+  return lines.length
+    ? `https://nu2vqa-ma.myshopify.com/cart/${lines.join(',')}`
+    : NB_SITE_URLS.shop;
 };
 
 const PRODUCT_IMAGES = {
@@ -65,8 +85,9 @@ function CheckoutPage() {
 
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
   const itemCount = items.reduce((s, i) => s + i.qty, 0);
-  const freeShipping = subtotal >= FREE_SHIPPING;
-  const remaining = Math.max(FREE_SHIPPING - subtotal, 0);
+  const hasTrio = hasFreeShippingTrio(items);
+  const freeShipping = hasTrio || subtotal >= FREE_SHIPPING;
+  const remaining = freeShipping ? 0 : Math.max(FREE_SHIPPING - subtotal, 0);
 
   // Empty cart redirect
   useEffect(() => {
@@ -87,7 +108,7 @@ function CheckoutPage() {
     qty: it.qty,
     url: NB_SITE_URLS[it.slug] || NB_SITE_URLS.shop,
   }));
-  const fallbackUrl = fallbackLinks.length === 1 ? fallbackLinks[0].url : NB_SITE_URLS.shop;
+  const fallbackUrl = getShopifyCartPermalink(items);
   const emailValid = validEmail(email);
 
   const onEmailChange = (e) => {
@@ -206,7 +227,7 @@ function CheckoutPage() {
           <p className="lede">Tax + shipping at next step</p>
 
           <div className="row-line"><span>Subtotal ({itemCount})</span><span className="v">{fmtUSD(subtotal)}</span></div>
-          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free' : 'At checkout'}</span></div>
+          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? (hasTrio ? 'Trio ships free' : 'Free') : 'At checkout'}</span></div>
           <div className="row-line"><span>Estimated tax</span><span className="v" style={{ color: 'var(--ink-40)', fontSize: 12 }}>At checkout</span></div>
           <div className="divider"></div>
           <div className="row-line total"><span className="label">Subtotal</span><span className="v">{fmtUSD(subtotal)}</span></div>
@@ -242,7 +263,7 @@ function CheckoutPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> Free shipping over $35</div>
+            <div className="trust-row"><Truck /> Trio ships free · singles ship free over $35</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

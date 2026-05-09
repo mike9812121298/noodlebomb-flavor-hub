@@ -3,21 +3,40 @@
 const { useEffect, useState, useMemo } = React;
 
 const NB_SITE_URLS = {
-  original: 'https://noodlebomb.co/product-original.html',
-  citrus: 'https://noodlebomb.co/product-citrus.html',
-  spicy: 'https://noodlebomb.co/product-spicy.html',
+  original: 'https://noodlebomb.co/original-ramen-sauce',
+  citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
+  spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
   shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
   trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/#lineup'
 };
+const SHOPIFY_VARIANT_IDS = {
+  original: '53998041596214',
+  citrus: '53998041071926',
+  spicy: '53998042120502',
+  trio: '53998042644790',
+  shoyu: '54006619636022'
+};
+const getShopifyCartPermalink = (items) => {
+  const lines = (items || [])
+    .map((it) => {
+      const id = SHOPIFY_VARIANT_IDS[it.slug];
+      const qty = Math.max(1, Math.floor(it.qty || 1));
+      return id ? `${id}:${qty}` : null;
+    })
+    .filter(Boolean);
+  return lines.length
+    ? `https://nu2vqa-ma.myshopify.com/cart/${lines.join(',')}`
+    : NB_SITE_URLS.shop;
+};
 const getCheckoutUrl = (items) => {
   if (!items || items.length === 0) return NB_SITE_URLS.shop;
-  if (items.length === 1) return NB_SITE_URLS[items[0].slug] || NB_SITE_URLS.shop;
-  return NB_SITE_URLS.shop;
+  return getShopifyCartPermalink(items);
 };
 
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
+const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
 
 // Trio bundle — single source of truth for slug/name/price within this file.
 // Mirrors app.jsx TRIO and components.jsx NB_TRIO. Keep all three in sync.
@@ -93,9 +112,10 @@ function CartPage() {
 
   const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
   const itemCount = items.reduce((s, i) => s + i.qty, 0);
-  const freeShipping = subtotal >= FREE_SHIPPING;
-  const remaining = Math.max(FREE_SHIPPING - subtotal, 0);
-  const progress = Math.min((subtotal / FREE_SHIPPING) * 100, 100);
+  const hasTrio = hasFreeShippingTrio(items);
+  const freeShipping = hasTrio || subtotal >= FREE_SHIPPING;
+  const remaining = freeShipping ? 0 : Math.max(FREE_SHIPPING - subtotal, 0);
+  const progress = freeShipping ? 100 : Math.min((subtotal / FREE_SHIPPING) * 100, 100);
 
   const delivery = useMemo(() => {
     const a = new Date(); a.setDate(a.getDate() + 5);
@@ -181,8 +201,8 @@ function CartPage() {
             <div className="card ship-bar unlocked">
               <div className="icon"><Truck /></div>
               <div>
-                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--ink)' }}>Free shipping unlocked</div>
-                <div style={{ color: 'var(--ink-40)', fontSize: 12, marginTop: 2 }}>Your order ships on us.</div>
+                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--ink)' }}>{hasTrio ? 'Trio ships free' : 'Free shipping unlocked'}</div>
+                <div style={{ color: 'var(--ink-40)', fontSize: 12, marginTop: 2 }}>{hasTrio ? 'The 3-pack qualifies automatically.' : 'Your order ships on us.'}</div>
               </div>
             </div>
           ) : (
@@ -234,7 +254,7 @@ function CartPage() {
                     Make it a Trio — get all 3 flavors
                   </div>
                   <div style={{ fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)', lineHeight: 1.5 }}>
-                    Add the bundle for $29.99 — unlocks free shipping and saves $5.98 vs. three singles.
+                    Add the bundle for $29.99 — ships free and saves $5.98 vs. three singles.
                   </div>
                 </div>
                 <button onClick={addTrio} aria-label="Add the Trio bundle to cart" style={{
@@ -296,9 +316,9 @@ function CartPage() {
           {recsToShow.length > 0 && (
             <div style={{ marginTop: 28 }}>
               <div className="mono" style={{ color: 'var(--ink-40)', marginBottom: 14 }}>You might also like</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(' + recsToShow.length + ', minmax(0, 1fr))', gap: 10 }}>
+              <div className="cart-recs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(' + recsToShow.length + ', minmax(0, 1fr))', gap: 10 }}>
                 {recsToShow.map((r) => (
-                  <div key={r.slug} className="card" style={{ padding: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div key={r.slug} className="card cart-rec-card" style={{ padding: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{ width: 48, height: 48, background: 'var(--paper-3)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4, flexShrink: 0 }}>
                       <img src={PRODUCT_IMAGES[r.slug]} alt={r.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                     </div>
@@ -306,7 +326,7 @@ function CartPage() {
                       <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.name}</div>
                       <div style={{ color: 'var(--accent)', fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, marginTop: 2 }}>{fmtUSD(r.price)}</div>
                     </div>
-                    <button onClick={() => addRec(r)} aria-label={'Add ' + r.name + ' to cart'} style={{
+                    <button className="cart-rec-add" onClick={() => addRec(r)} aria-label={'Add ' + r.name + ' to cart'} style={{
                       width: 32, height: 32, borderRadius: 999, background: 'var(--accent)', color: 'var(--accent-ink)',
                       border: 0, cursor: 'pointer', fontSize: 18, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
                       transition: 'transform .2s', flexShrink: 0
@@ -327,7 +347,7 @@ function CartPage() {
           <p className="lede">Secure checkout handoff</p>
 
           <div className="row-line"><span>Subtotal ({itemCount})</span><span className="v">{fmtUSD(subtotal)}</span></div>
-          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free' : 'At checkout'}</span></div>
+          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? (hasTrio ? 'Trio ships free' : 'Free') : 'At checkout'}</span></div>
           <div className="row-line"><span>Estimated tax</span><span className="v" style={{ color: 'var(--ink-40)', fontSize: 12 }}>At checkout</span></div>
           <div className="divider"></div>
           <div className="row-line total"><span className="label">Subtotal</span><span className="v">{fmtUSD(subtotal)}</span></div>
@@ -361,7 +381,7 @@ function CartPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> Free shipping over $35</div>
+            <div className="trust-row"><Truck /> Trio ships free · singles ship free over $35</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
             <div className="trust-row"><Check /> Ships from Bonney Lake, WA</div>
           </div>

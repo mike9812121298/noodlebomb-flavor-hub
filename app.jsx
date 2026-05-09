@@ -23,9 +23,9 @@ const SHOPIFY_VARIANT_IDS = {
   shoyu:    '54006619636022'
 };
 const PRODUCT_DETAIL_URLS = {
-  original: '/product-original.html',
-  spicy: '/product-spicy.html',
-  citrus: '/product-citrus.html'
+  original: '/original-ramen-sauce',
+  spicy: '/spicy-tokyo-ramen-sauce',
+  citrus: '/citrus-shoyu-ramen-sauce'
 };
 const cartPermalink = (slug, qty = 1) => {
   const n = Math.max(1, Math.floor(Number(qty) || 1));
@@ -1302,12 +1302,8 @@ function FlavorPicker({ flavor, setFlavor }) {
                 ))}
               </div>
 
-              {/* Microline — "SHIPS FREE" claim removed pending Wix backend
-                  verification (trio is $29.99, below the $35 free-ship line
-                  the local cart enforces; if Wix has a special trio rule
-                  Mike can confirm, restore the claim). */}
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
-                BEST WAY TO TRY ALL THREE · ARRIVES IN 3–5 DAYS · SMALL BATCH
+                TRIO SHIPS FREE · ARRIVES IN 3–5 DAYS · SMALL BATCH
               </div>
 
               <div style={{ marginTop: 8 }}>
@@ -1604,7 +1600,7 @@ function Tweaks({ state, set, open, setOpen }) {
 // ——————————————————————————— TrustStrip — 4-icon trust signals (under hero)
 function TrustStrip() {
   const items = [
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: 'Free shipping over $35' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: 'Trio ships free' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: 'Love it or your money back' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>, label: 'Ships in 1-2 days' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in USA' },
@@ -1626,35 +1622,57 @@ function TrustStrip() {
 // ——————————————————————————— StickyCartBar — fixed top-of-page bar after hero scroll
 function StickyCartBar({ flavor, flavors }) {
   const [visible, setVisible] = useState(false);
+  const [reserveVisible, setReserveVisible] = useState(false);
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.85);
+    const onScroll = () => {
+      setVisible(window.scrollY > window.innerHeight * 0.85);
+      const reserve = document.getElementById('next-drop');
+      if (!reserve) {
+        setReserveVisible(false);
+        return;
+      }
+      const rect = reserve.getBoundingClientRect();
+      setReserveVisible(rect.top < 90 && rect.bottom > 160);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
   const f = flavors[flavor] || flavors.original;
+  const isMobileViewport = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+  const showBar = visible && !(reserveVisible && isMobileViewport);
+  const barName = reserveVisible ? 'Shoyu Reserve' : `NoodleBomb ${f.name}`;
+  const barPrice = reserveVisible ? '— $9.99' : `— ${f.price}`;
+  const barHref = reserveVisible ? cartPermalink('shoyu') : cartPermalink(flavor);
+  const barCta = reserveVisible ? 'Preorder — $9.99' : 'Add to Cart →';
   return (
     <div
-      className={'sticky-cart-bar' + (visible ? ' visible' : '')}
-      aria-hidden={!visible}
-      inert={!visible ? '' : undefined}
+      className={'sticky-cart-bar' + (showBar ? ' visible' : '')}
+      aria-hidden={!showBar}
+      inert={!showBar ? '' : undefined}
     >
       <div className="scb-left">
-        <span className="scb-dot" style={{ background: f.color }} />
-        <span className="scb-name">NoodleBomb {f.name}</span>
-        <span className="scb-price">— {f.price}</span>
+        <span className="scb-dot" style={{ background: reserveVisible ? '#e8f0ff' : f.color }} />
+        <span className="scb-name">{barName}</span>
+        <span className="scb-price">{barPrice}</span>
       </div>
       <div className="scb-right">
+        {!reserveVisible && (
+          <a
+            href={cartPermalink('trio')}
+            className="scb-trio"
+            tabIndex={showBar ? undefined : -1}
+          >3-Pack — $29.99</a>
+        )}
         <a
-          href={cartPermalink('trio')}
-          className="scb-trio"
-          tabIndex={visible ? undefined : -1}
-        >3-Pack — $29.99</a>
-        <a
-          href={cartPermalink(flavor)}
+          href={barHref}
           className="scb-btn"
-          tabIndex={visible ? undefined : -1}
-        >Add to Cart →</a>
+          tabIndex={showBar ? undefined : -1}
+        >{barCta}</a>
       </div>
     </div>
   );

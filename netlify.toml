@@ -219,8 +219,8 @@
 
 [[redirects]]
   from = "/shoyu-reserve"
-  to = "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve"
-  status = 302
+  to = "/#next-drop"
+  status = 301
   force = true
 
 # Catch-all for any other /product/* deep link — go to lineup
@@ -366,6 +366,39 @@
   from = "/faq"
   to = "/faq.html"
   status = 200
+
+[[redirects]]
+  from = "/original-ramen-sauce"
+  to = "/product-original.html"
+  status = 200
+
+[[redirects]]
+  from = "/spicy-tokyo-ramen-sauce"
+  to = "/product-spicy.html"
+  status = 200
+
+[[redirects]]
+  from = "/citrus-shoyu-ramen-sauce"
+  to = "/product-citrus.html"
+  status = 200
+
+[[redirects]]
+  from = "/product-original.html"
+  to = "/original-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-spicy.html"
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-citrus.html"
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/monthly-box"

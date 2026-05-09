@@ -3,7 +3,6 @@
 // Restraint over hype. Apple keynote × SNKRS drop × A24 release poster.
 
 function NextDrop() {
-  const shoyuProductUrl = 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve';
   const shoyuCartUrl = '/cart?add=shoyu&qty=1';
 
   const cards = [
@@ -12,11 +11,11 @@ function NextDrop() {
       bigNum: '04',
       accent: '#ebe7dd',           // parchment
       rim: '#e8f0ff',              // cool cyan-white rim
-      status: 'PREORDER OPEN - SUMMER 2026',
-      eyebrow: 'VOL.04 - PAID PREORDER',
+      status: 'Paid preorder open — Summer 2026',
+      eyebrow: 'VOL. 04 / LIMITED PREORDER',
       name: 'Shoyu Reserve',
-      oneliner: 'A deeper shoyu-style finish for rice, wings, noodles, vegetables, and late-night leftovers.',
-      pills: ['Darker', 'Glossy', 'Long finish'],
+      oneliner: 'A bold, glossy shoyu-style sauce with deep soy richness, savory umami, and a long clean finish. Built for rice bowls, ramen, wings, grilled meat, vegetables, and late-night leftovers.',
+      pills: ['Darker', 'Glossy', 'Savory', 'Long Finish'],
       progress: 2,
       img: 'uploads/shoyu-reserve-preview-2026-05-08.png',
       altOverride: 'NoodleBomb Shoyu Reserve preview bottle — Coming Summer 2026',
@@ -43,7 +42,7 @@ function NextDrop() {
         <Reveal>
           <div className="nd-eyebrow-row">
             <span>WHAT’S NEXT</span>
-            <span>1 / PREORDER OPEN</span>
+            <a className="nd-top-preorder" href={shoyuCartUrl}>PREORDER — $9.99</a>
           </div>
         </Reveal>
         <div className="nd-divider" />
@@ -57,15 +56,16 @@ function NextDrop() {
           </Reveal>
           <Reveal delay={2}>
             <p className="nd-sub">
-              A darker, deeper bottle is coming Summer 2026. Preorder Shoyu Reserve now through Shopify checkout.
+              A darker, deeper soy-based finish sauce made for rice, noodles, wings, vegetables, and late-night leftovers.
             </p>
           </Reveal>
           <Reveal delay={2.5}>
             <div className="nd-hero-form nd-buy-row" role="group" aria-label="Shoyu Reserve preorder actions">
-              <a className="nd-buy-link" href={shoyuCartUrl}>Preorder Shoyu &rarr;</a>
-              <a className="nd-buy-secondary" href={shoyuProductUrl}>View product</a>
-              <span className="nd-buy-note">$9.99 paid preorder. Expected Summer 2026.</span>
+              <a className="nd-buy-link" href={shoyuCartUrl}>Preorder for $9.99 &rarr;</a>
+              <a className="nd-buy-secondary" href="#shoyu-reserve-details">See flavor details</a>
+              <span className="nd-buy-note">Paid preorder open now. Ships Summer 2026.</span>
             </div>
+            <p className="nd-preorder-note">You&rsquo;ll be charged today. Your bottle ships when Shoyu Reserve launches in Summer 2026.</p>
           </Reveal>
         </div>
 
@@ -121,7 +121,7 @@ function NextDrop() {
 
                 <div className="nd-inline-form nd-buy-row" role="group" aria-label="Shoyu Reserve preorder actions">
                   <a className="nd-buy-link" href={shoyuCartUrl}>Preorder for $9.99 &rarr;</a>
-                  <a className="nd-buy-secondary" href={shoyuProductUrl}>Details</a>
+                  <a className="nd-buy-secondary" href="#shoyu-reserve-details">What&rsquo;s inside?</a>
                 </div>
 
                 {/* Progress strip */}
@@ -148,6 +148,34 @@ function NextDrop() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={3}>
+          <section id="shoyu-reserve-details" className="nd-details" aria-labelledby="shoyu-reserve-details-title">
+            <div className="nd-details-kicker">Flavor details</div>
+            <h3 id="shoyu-reserve-details-title">What is Shoyu Reserve?</h3>
+            <p>
+              Shoyu Reserve is NoodleBomb&rsquo;s darker, deeper soy-forward sauce. It&rsquo;s thicker, richer, and more savory than a basic soy sauce, with a glossy finish that clings to food instead of disappearing into the bowl.
+            </p>
+            <p>
+              Use it as a finishing sauce, dipping sauce, marinade boost, or quick flavor upgrade when dinner needs more depth.
+            </p>
+            <dl className="nd-detail-list">
+              <div>
+                <dt>Best on:</dt>
+                <dd>Rice bowls, ramen, noodles, wings, grilled chicken, steak, vegetables, eggs, dumplings, and leftovers.</dd>
+              </div>
+              <div>
+                <dt>Flavor profile:</dt>
+                <dd>Deep soy, roasted umami, mild sweetness, glossy finish, savory depth.</dd>
+              </div>
+              <div>
+                <dt>Preorder notice:</dt>
+                <dd>This is a paid preorder. Your card will be charged today. Shoyu Reserve is expected to ship Summer 2026. If the launch date changes, we&rsquo;ll email preorder customers first.</dd>
+              </div>
+            </dl>
+            <a className="nd-buy-link nd-details-cta" href={shoyuCartUrl}>Preorder for $9.99 &rarr;</a>
+          </section>
+        </Reveal>
 
       </div>
     </section>

@@ -50,6 +50,16 @@
     return safeRead().reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
   }
 
+  function hasFreeShippingTrio(items) {
+    return (items || safeRead()).some(function (i) { return i.slug === 'trio' && (Number(i.qty) || 0) > 0; });
+  }
+
+  function qualifiesForFreeShipping(items) {
+    var list = items || safeRead();
+    var subtotal = list.reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
+    return subtotal >= 35 || hasFreeShippingTrio(list);
+  }
+
   function add(item) {
     if (!item || !item.slug) return;
     var items = safeRead();
@@ -126,6 +136,8 @@
       remove: remove,
       clear: clear,
       onChange: onChange,
+      hasFreeShippingTrio: hasFreeShippingTrio,
+      qualifiesForFreeShipping: qualifiesForFreeShipping,
       FREE_SHIPPING_THRESHOLD: 35
     };
     addFromUrl();

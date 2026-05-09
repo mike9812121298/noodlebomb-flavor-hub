@@ -48,7 +48,7 @@
 /product/the-noodlebomb-trio  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
 # Catch-all for any other /product/* deep link (old emails, ads, social) — go to lineup
 /product/shoyu-reserve    https://nu2vqa-ma.myshopify.com/products/shoyu-reserve         302!
-/shoyu-reserve            https://nu2vqa-ma.myshopify.com/products/shoyu-reserve         302!
+/shoyu-reserve            /#next-drop                                                    301!
 /product/*                https://nu2vqa-ma.myshopify.com/collections/all                302!
 
 # /shop and /shop/* — primary CTA target on the marketing site
@@ -73,6 +73,16 @@
 /about       /about.html        200
 /recipes     /recipes.html      200
 /faq         /faq.html          200
+
+# SEO-friendly product landing pages on the brand domain.
+/original-ramen-sauce      /product-original.html      200
+/spicy-tokyo-ramen-sauce   /product-spicy.html         200
+/citrus-shoyu-ramen-sauce  /product-citrus.html        200
+
+# Canonicalize the older static filenames to the search-friendly URLs.
+/product-original.html     /original-ramen-sauce       301!
+/product-spicy.html        /spicy-tokyo-ramen-sauce    301!
+/product-citrus.html       /citrus-shoyu-ramen-sauce   301!
 
 # Pretty URLs for new structural pages added 2026-05-07 launch pass.
 /monthly-box        /monthly-box.html        200

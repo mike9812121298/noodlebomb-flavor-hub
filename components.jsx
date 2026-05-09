@@ -291,9 +291,10 @@ function Nav({ flavor, setFlavor, flavors }) {
   // Cart drawer derived values
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
   const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
-  const cartFreeShipping = cartSubtotal >= cartFreeShipThreshold;
-  const cartShipRemaining = Math.max(cartFreeShipThreshold - cartSubtotal, 0);
-  const cartShipProgress = Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
+  const cartHasTrio = cartItems.some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
+  const cartFreeShipping = cartHasTrio || cartSubtotal >= cartFreeShipThreshold;
+  const cartShipRemaining = cartFreeShipping ? 0 : Math.max(cartFreeShipThreshold - cartSubtotal, 0);
+  const cartShipProgress = cartFreeShipping ? 100 : Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
   const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 
   // navLinks: tuples of [label, href]. Hrefs starting with '#' are
@@ -769,12 +770,12 @@ function Nav({ flavor, setFlavor, flavors }) {
               {/* Free shipping bar */}
               {cartFreeShipping ? (
                 <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
-                  ✓ Free shipping unlocked
+                  {cartHasTrio ? 'Trio ships free' : 'Free shipping unlocked'}
                 </div>
               ) : (
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--ink-60)', marginBottom: 6, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                    Add {fmtUSD(cartShipRemaining)} for free shipping
+                    Add {fmtUSD(cartShipRemaining)} for free shipping, or choose the Trio
                   </div>
                   <div style={{ height: 4, background: 'var(--paper-3)', borderRadius: 999, overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: cartShipProgress + '%', background: 'var(--accent)', borderRadius: 999, transition: 'width .3s' }} />
@@ -854,12 +855,12 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
   const scale = 1 + Math.min(y, 600) / 2400;
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <section className="hero-section" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
       {/* Background photo — full-bleed pour shot */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <img
-          src="uploads/nb-hero-editorial-v2.jpg"
-          alt="NoodleBomb trio — Original, Spicy Tokyo, Citrus Shoyu (editorial dark backdrop with steam, chilis, garlic, lemon)"
+          src="og-trio-counter.png"
+          alt="NoodleBomb trio on a ramen kitchen counter — Original, Spicy Tokyo, and Citrus Shoyu"
           loading="eager"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%', transform: `scale(${scale}) translateY(${-parY * 0.15}px)`, transition: 'transform 0.05s linear' }}
         />
@@ -876,14 +877,14 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       </div>
 
       {/* Main hero content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(24px, 5.5vw, 80px) clamp(64px, 8vh, 120px)', position: 'relative', zIndex: 2, maxWidth: 780 }}>
+      <div className="hero-copy-panel" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(24px, 5.5vw, 80px) clamp(64px, 8vh, 120px)', position: 'relative', zIndex: 2, maxWidth: 780 }}>
         <h1 className="display" style={{ margin: '0 0 24px', fontSize: 'clamp(56px, 10vw, 140px)', lineHeight: 0.9, letterSpacing: '-0.045em', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.2s both' }}>
           {headline.split('\n').map((line, i) => (
             <div key={i} style={{ opacity: i === 1 ? 0.6 : 1 }}>{line}</div>
           ))}
         </h1>
         <div style={{ animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both' }}>
-          <div style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
+          <div className="hero-subcopy" style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
             Bold sauce. Small batch.<br />
             <span style={{ color: 'var(--ink-60)' }}>Goes on noodles, rice, wings, dumplings, eggs, vegetables, and more.</span>
           </div>
@@ -923,8 +924,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
           </a>
         </div>
         {/* Trust line under CTAs */}
-        <div style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
-          Ships from Bonney Lake, WA · Free shipping over $35 · Money-back guarantee
+        <div className="hero-trust-line" style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
+          Ships from Bonney Lake, WA · Trio ships free · Money-back guarantee
         </div>
       </div>
 

@@ -254,6 +254,17 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 .sticky-mobile { display: none; }
 @media (max-width: 900px) {
   .summary { position: static; }
+  .cart-recs-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .cart-rec-card {
+    padding: 12px !important;
+  }
+  .cart-rec-add {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 20px !important;
+  }
   .sticky-mobile {
     display: flex; align-items: center; gap: 12px;
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
