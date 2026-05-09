@@ -264,12 +264,34 @@ function FlavorBreakdown({ flavor }) {
 // ——————————————————————————— Flavor scene atmospheres
 function FlavorBreakdownV2({ flavor, setFlavor }) {
   const items = [
-    { key: 'original', use: 'Rice, eggs, noodles', note: 'Garlic-sesame depth when dinner needs a fast savory base.' },
-    { key: 'spicy', use: 'Wings, fried rice, grilled meat', note: 'Roasted chili heat that keeps the bite bold, not muddy.' },
-    { key: 'citrus', use: 'Dumplings, vegetables, seafood', note: 'Clean shoyu brightness that cuts through rich food.' },
+    { key: 'original', use: 'Rice, eggs, noodles', note: 'Garlic-sesame depth when dinner needs a fast savory base.', signal: 'Warm gold, roasted garlic, toasted sesame.' },
+    { key: 'spicy', use: 'Wings, fried rice, grilled meat', note: 'Roasted chili heat that keeps the bite bold, not muddy.', signal: 'Red heat, faint smoke, chili edge.' },
+    { key: 'citrus', use: 'Dumplings, vegetables, seafood', note: 'Clean shoyu brightness that cuts through rich food.', signal: 'Orange lift, citrus spark, bright finish.' },
   ];
+  const activeFlavor = FLAVORS[flavor] || FLAVORS.original;
+  const activeItem = items.find((item) => item.key === flavor) || items[0];
+
   return (
-    <section id="ingredients" className="fbv2-section" style={{ background: 'var(--paper)', padding: 'clamp(96px, 11vw, 150px) clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', scrollMarginTop: 80 }}>
+    <section
+      id="ingredients"
+      className="fbv2-section"
+      data-flavor={flavor}
+      style={{
+        '--fbv2-rgb': activeFlavor.rgb,
+        '--fbv2-accent': activeFlavor.color,
+        '--fbv2-deep': activeFlavor.deep,
+        background: 'var(--paper)',
+        padding: 'clamp(96px, 11vw, 150px) clamp(24px, 5.5vw, 80px)',
+        borderTop: '1px solid var(--line)',
+        borderBottom: '1px solid var(--line)',
+        scrollMarginTop: 80
+      }}
+    >
+      <div className="fbv2-atmosphere" aria-hidden="true">
+        <span className="fbv2-mood fbv2-mood-a" />
+        <span className="fbv2-mood fbv2-mood-b" />
+        <span className="fbv2-mood fbv2-mood-c" />
+      </div>
       <div className="fbv2-shell" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, .9fr) minmax(280px, 420px) minmax(0, 1fr)', gap: 'clamp(28px, 5vw, 72px)', alignItems: 'center' }}>
         <div className="fbv2-copy">
           <Reveal>
@@ -291,7 +313,15 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
           <div className="fbv2-bottle-stage">
             <div className="fbv2-glow" aria-hidden="true" />
             <div className="fbv2-sauce-ring" aria-hidden="true" />
-            <Bottle flavor={FLAVORS[flavor].tag} src={FLAVOR_IMAGES[flavor]} />
+            <div key={`${flavor}-swipe`} className="fbv2-sauce-swipe" aria-hidden="true" />
+            <div key={`${flavor}-burst`} className="fbv2-flavor-burst" aria-hidden="true" />
+            <div key={flavor} className={`fbv2-bottle-swap is-${flavor}`}>
+              <Bottle flavor={activeFlavor.tag} src={FLAVOR_IMAGES[flavor]} />
+            </div>
+            <div key={`${flavor}-caption`} className="fbv2-stage-caption">
+              <span>{activeFlavor.short}</span>
+              {activeItem.signal}
+            </div>
           </div>
         </Reveal>
 
@@ -315,6 +345,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
                   <h3>{f.name}</h3>
                   <p>{item.note}</p>
                   <div className="fbv2-use">{item.use}</div>
+                  <div className="fbv2-signal">{item.signal}</div>
                 </button>
               </Reveal>
             );
