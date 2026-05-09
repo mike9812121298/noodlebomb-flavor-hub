@@ -25,7 +25,7 @@ function MonthlyDrop() {
       {/* Giant italic 04 watermark */}
       <div aria-hidden="true" style={{
         position: 'absolute',
-        right: '-3vw', bottom: '-8vw',
+        right: 0, bottom: '-8vw',
         fontFamily: 'Fraunces, "Cormorant Garamond", serif',
         fontStyle: 'italic',
         fontWeight: 300,
@@ -50,7 +50,7 @@ function MonthlyDrop() {
         opacity: 0.55,
         pointerEvents: 'none'
       }}>
-        SUBSCRIBE · SHIP · SLURP · REPEAT · SUBSCRIBE · SHIP · SLURP · REPEAT
+        CURATE - SAUCE - SLURP - REPEAT - CURATE - SAUCE - SLURP - REPEAT
       </div>
 
       <div style={{ maxWidth: 1300, margin: '0 auto', position: 'relative', zIndex: 2 }}>
@@ -59,54 +59,33 @@ function MonthlyDrop() {
           <div>
             <Reveal>
               <div className="mono" style={{ color: 'var(--muted)', marginBottom: 32, letterSpacing: '0.18em', fontSize: 11 }}>
-                VOL.04 — MAY 2026 DROP
+                MONTHLY BOX - LAUNCH LIST
               </div>
             </Reveal>
 
             <Reveal delay={1}>
-              <div className="md-stage">
-                <div className="md-box-shadow" />
-                <div className="md-box">
-                  {/* Box top face */}
-                  <div className="md-box-top">
-                    {/* Kraft texture noise */}
-                    <div className="md-kraft" />
-                    {/* Folded flap divider */}
-                    <div className="md-flap-line" />
-                    {/* Wax seal */}
-                    <div className="md-seal">
-                      <div className="md-seal-inner">
-                        <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: 28, color: '#F5C842', letterSpacing: '-0.04em', transform: 'translateY(-1px)' }}>N</span>
-                      </div>
-                      <svg className="md-seal-drips" viewBox="0 0 100 100" aria-hidden="true">
-                        <path d="M 22 28 Q 18 38 24 46 Q 28 38 22 28 Z" fill="#7A1A1A" />
-                        <path d="M 78 70 Q 84 78 80 88 Q 74 80 78 70 Z" fill="#7A1A1A" />
-                        <path d="M 88 30 Q 94 36 90 44 Q 84 38 88 30 Z" fill="#7A1A1A" />
-                      </svg>
-                    </div>
-                    {/* Embossed wordmark */}
-                    <div className="md-wordmark">noodlebomb</div>
-                    <div className="md-wordmark-sub">— monthly · vol.04 —</div>
-                  </div>
-                  {/* Box front face (depth) */}
-                  <div className="md-box-front" />
-                  {/* Box right face (depth) */}
-                  <div className="md-box-right" />
-                </div>
+              <div className="md-photo-card">
+                <img
+                  src="uploads/monthly-subscription-box-2026-05-08.png"
+                  alt="NoodleBomb Monthly Subscription Box with noodles, sauces, and surprise extras"
+                  loading="lazy"
+                />
+                <div className="md-photo-badge">Monthly subscription box</div>
+                <div className="md-photo-glow" aria-hidden="true" />
               </div>
             </Reveal>
 
             {/* What's inside thumbnails */}
             <Reveal delay={2}>
               <div className="mono" style={{ color: 'var(--muted)', marginTop: 32, marginBottom: 18, letterSpacing: '0.18em', fontSize: 11 }}>
-                WHAT'S INSIDE
+                BUILT LIKE A REAL RAMEN NIGHT
               </div>
             </Reveal>
             <Reveal delay={3}>
               <div className="md-inside-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
                 {[
                   {
-                    label: 'Spicy Tokyo', sub: 'sauce',
+                    label: 'NoodleBomb sauce', sub: 'premium',
                     bg: 'radial-gradient(circle at 32% 28%, #D14B2E 0%, #8B1E1E 55%, #4A0F0F 100%)',
                     pattern: null,
                     icon: (
@@ -117,7 +96,7 @@ function MonthlyDrop() {
                     )
                   },
                   {
-                    label: 'Hakata noodles', sub: 'pack',
+                    label: 'Instant noodles', sub: 'curated',
                     bg: 'radial-gradient(circle at 30% 30%, #F0E2C2 0%, #C9B284 60%, #9C8559 100%)',
                     pattern: (
                       <svg viewBox="0 0 64 64" width="100%" height="100%" preserveAspectRatio="none" style={{ position:'absolute', inset:0, opacity: 0.55, mixBlendMode: 'multiply' }}>
@@ -130,7 +109,7 @@ function MonthlyDrop() {
                     icon: null
                   },
                   {
-                    label: 'Chili crisp', sub: 'topping',
+                    label: 'Surprise extras', sub: 'snacks + toppings',
                     bg: 'radial-gradient(circle at 30% 30%, #E2641A 0%, #A8390C 55%, #4A1A0A 100%)',
                     pattern: (
                       <svg viewBox="0 0 64 64" width="100%" height="100%" style={{ position:'absolute', inset:0 }}>
@@ -145,7 +124,7 @@ function MonthlyDrop() {
                     icon: null
                   },
                   {
-                    label: 'Recipe zine', sub: 'card',
+                    label: 'Recipe card', sub: 'fast ideas',
                     bg: 'linear-gradient(135deg, #F5EBD3 0%, #E2D0A8 100%)',
                     pattern: (
                       <svg viewBox="0 0 64 64" width="100%" height="100%" style={{ position:'absolute', inset:0 }}>
@@ -189,7 +168,7 @@ function MonthlyDrop() {
           <div>
             <Reveal>
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 32 }}>
-                <span className="mono" style={{ color: 'var(--muted)', letterSpacing: '0.18em', fontSize: 11 }}>INDEX 10 — THE MONTHLY DROP</span>
+                <span className="mono" style={{ color: 'var(--muted)', letterSpacing: '0.18em', fontSize: 11 }}>INDEX 10 - MONTHLY RAMEN BOX</span>
               </div>
             </Reveal>
 
@@ -204,8 +183,8 @@ function MonthlyDrop() {
                 margin: '0 0 28px',
                 color: 'var(--ink)'
               }}>
-                Ramen night,<br />
-                <span style={{ color: 'var(--muted)' }}>handled monthly.</span>
+                A better ramen night,<br />
+                <span style={{ color: 'var(--muted)' }}>every month.</span>
               </h2>
             </Reveal>
 
@@ -219,17 +198,17 @@ function MonthlyDrop() {
                 maxWidth: '52ch',
                 margin: '0 0 32px'
               }}>
-                One curated NoodleBomb sauce, premium noodles, a seasonal topping, and a recipe card built for a fast dinner that still feels special. Cancel any time.
+                A monthly box built around NoodleBomb sauce: instant noodles, premium sauce, surprise extras, and a simple recipe card so dinner feels fun without turning into a project.
               </p>
             </Reveal>
 
             <Reveal delay={3}>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {[
-                  'Built for quick ramen nights and easy upgrades',
-                  'Sauce, noodles, topping, and a recipe card',
-                  'Premium option available for bigger pantry energy',
-                  'Cancel anytime, no commitment'
+                  'Choose Monthly or Premium Monthly before boxes open',
+                  'Built for ramen, rice bowls, wings, eggs, dumplings, and leftovers',
+                  'Great as a gift or pantry restock',
+                  'No charge today - we email before the first box ships'
                 ].map((line, i) => (
                   <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Inter', fontSize: 14, color: 'var(--ink)', letterSpacing: '-0.005em' }}>
                     <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--accent)', flexShrink: 0, boxShadow: '0 0 0 3px rgba(139,30,30,0.22)' }} />
@@ -254,22 +233,46 @@ function MonthlyDrop() {
                   letterSpacing: '0.18em'
                 }}>PREMIUM $49</span>
               </div>
-              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Join the list and we will email you before the next box opens.</div>
+              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Reserve your spot. We will email before the first paid box opens.</div>
             </Reveal>
 
-            {/* CTA — Monthly Box subscribe (formsubmit lead capture; replaces dead button reported by Kevin Malcolm 2026-04-25). Real Wix subscription product TBD — until then this captures the lead so Mike/Ashley can manually onboard before VOL.04 ships May 15. */}
+            {/* Monthly Box reservation capture until subscription checkout is ready. */}
             <Reveal delay={5}>
               <form
                 action="https://formsubmit.co/hello@noodlebomb.co"
                 method="POST"
-                style={{ marginBottom: 32, maxWidth: 480 }}
+                style={{ marginBottom: 32, maxWidth: 560 }}
               >
-                <input type="hidden" name="_subject" value="NoodleBomb Monthly Ramen Box Interest" />
+                <input type="hidden" name="_subject" value="NoodleBomb Monthly Ramen Box Reservation" />
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_captcha" value="false" />
                 <input type="hidden" name="box" value="Monthly Ramen Box" />
+                <input type="hidden" name="intent" value="Monthly box reservation" />
                 <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
                 <div style={{ display: 'flex', alignItems: 'stretch', gap: 8, flexWrap: 'wrap' }}>
+                  <select
+                    name="plan"
+                    aria-label="Monthly box plan"
+                    defaultValue="Monthly Ramen Box - $44.99/mo"
+                    style={{
+                      flex: '1 1 190px',
+                      minHeight: 49,
+                      padding: '0 14px',
+                      background: 'rgba(245,241,234,0.04)',
+                      border: '1px solid rgba(245,241,234,0.18)',
+                      borderRadius: 4,
+                      color: 'var(--ink)',
+                      fontFamily: 'JetBrains Mono',
+                      fontSize: 11,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      outline: 'none',
+                    }}
+                  >
+                    <option>Monthly Ramen Box - $44.99/mo</option>
+                    <option>Premium Monthly Box - $49/mo</option>
+                    <option>Gift this box</option>
+                  </select>
                   <input
                     type="email"
                     name="email"
@@ -304,18 +307,18 @@ function MonthlyDrop() {
                     onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(139,30,30,0.4)'; }}
                     onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
                   >
-                    Join the box list
+                    Reserve the box
                   </button>
                 </div>
                 <div className="mono" style={{ marginTop: 10, fontSize: 10, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                  WE'LL EMAIL YOU BEFORE THE NEXT BOX OPENS - NO CHARGE YET
+                  NO CHARGE TODAY - WE EMAIL BEFORE THE FIRST BOX OPENS
                 </div>
               </form>
             </Reveal>
 
             <Reveal delay={6}>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, maxWidth: 520 }}>
-                {['$44.99 monthly', '$49 premium', 'Cancel anytime'].map((line) => (
+                {['$44.99 monthly', '$49 premium', 'Giftable', 'Cancel anytime'].map((line) => (
                   <span key={line} className="mono" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 34, padding: '0 12px', border: '1px solid rgba(245,241,234,0.14)', borderRadius: 999, color: 'var(--ink)', fontSize: 10, letterSpacing: '0.14em' }}>
                     {line}
                   </span>
@@ -327,14 +330,14 @@ function MonthlyDrop() {
             <Reveal delay={6}>
               <div style={{ marginTop: 36, paddingTop: 24, borderTop: '1px solid rgba(245,241,234,0.08)' }}>
                 <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.18em', marginBottom: 14 }}>
-                  DROP TIMELINE
+                  HOW IT WORKS
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
                   {[
-                    { vol: '01', month: 'DEC', current: false },
-                    { vol: '02', month: 'JAN', current: false },
-                    { vol: '03', month: 'FEB', current: false },
-                    { vol: '04', month: 'MAY', current: true },
+                    { vol: '01', month: 'PICK', current: false },
+                    { vol: '02', month: 'EMAIL', current: false },
+                    { vol: '03', month: 'SHIP', current: false },
+                    { vol: '04', month: 'COOK', current: false },
                   ].map((d) => (
                     <div key={d.vol} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, minWidth: 64 }}>
                       <div style={{
@@ -385,7 +388,7 @@ function MonthlyDrop() {
                       </div>
                       {d.current && (
                         <div className="mono" style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                          CURRENT — SHIPS MAY 15
+                          NO CHARGE TODAY
                         </div>
                       )}
                     </div>
