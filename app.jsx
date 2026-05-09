@@ -1765,55 +1765,82 @@ function BuildBundle() {
     }
   ];
 
-  const [selected, setSelected] = useState({
-    original: true,
-    spicy: true,
-    citrus: true,
-    shoyu: false
+  const [quantities, setQuantities] = useState({
+    original: 1,
+    spicy: 1,
+    citrus: 1,
+    shoyu: 0
   });
   const [added, setAdded] = useState(false);
 
-  const selectedProducts = products.filter((p) => selected[p.slug]);
-  const coreProducts = products.filter((p) => p.core && selected[p.slug]);
-  const trioUnlocked = coreProducts.length === 3;
-  const selectedCount = selectedProducts.length;
-  const power = Math.round((selectedCount / products.length) * 100);
-  const compareTotal = selectedProducts.reduce((sum, p) => sum + p.price, 0);
-  const cartTotal = trioUnlocked ? TRIO.priceUsd + (selected.shoyu ? 9.99 : 0) : compareTotal;
+  const coreSlugs = ['original', 'spicy', 'citrus'];
+  const coreBottleCount = coreSlugs.reduce((sum, slug) => sum + quantities[slug], 0);
+  const totalBottles = products.reduce((sum, p) => sum + quantities[p.slug], 0);
+  const trioSets = Math.min(quantities.original, quantities.spicy, quantities.citrus);
+  const trioBottles = trioSets * 3;
+  const compareTotal = products.reduce((sum, p) => sum + quantities[p.slug] * p.price, 0);
+  const singles = coreSlugs
+    .map((slug) => {
+      const product = products.find((p) => p.slug === slug);
+      return { ...product, qty: Math.max(0, quantities[slug] - trioSets) };
+    })
+    .filter((p) => p.qty > 0);
+  const cartLines = [
+    ...(trioSets > 0 ? [{ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd, qty: trioSets }] : []),
+    ...singles.map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: p.qty })),
+    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99, qty: quantities.shoyu }] : [])
+  ];
+  const cartTotal = cartLines.reduce((sum, line) => sum + line.price * line.qty, 0);
   const savings = Math.max(0, compareTotal - cartTotal);
-  const activeProduct = [...products].reverse().find((p) => selected[p.slug]) || products[0];
-  const missingCore = products.find((p) => p.core && !selected[p.slug]);
-  const cartLines = trioUnlocked
-    ? [
-        { slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd },
-        ...(selected.shoyu ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99 }] : [])
-      ]
-    : selectedProducts.map((p) => ({ slug: p.slug, name: p.name, price: p.price }));
+  const activeProduct = [...products].reverse().find((p) => quantities[p.slug] > 0) || products[0];
+  const missingCore = products.find((p) => p.core && quantities[p.slug] === 0);
+  const nextComboSlug = coreSlugs.find((slug) => quantities[slug] === trioSets);
+  const nextComboProduct = products.find((p) => p.slug === nextComboSlug);
+  const power = Math.min(100, Math.round((totalBottles / 12) * 100));
 
-  const level = selectedCount === 0
+  const level = totalBottles === 0
     ? 'Level 0'
-    : selectedCount === 1
+    : totalBottles === 1
       ? 'Level 1'
-      : selectedCount === 2
+      : totalBottles === 2
         ? 'Level 2'
-        : trioUnlocked && selected.shoyu
+        : trioSets >= 3
           ? 'Boss Level'
-          : trioUnlocked
-            ? 'Trio Level'
-            : 'Combo Level';
-  const statusLine = selectedCount === 0
-    ? 'Choose a bottle to start the meter.'
-    : trioUnlocked && selected.shoyu
-      ? 'Trio savings unlocked, Shoyu Reserve added.'
-      : trioUnlocked
-        ? 'Trio savings unlocked. Add Shoyu Reserve for the rare-drop bonus.'
-        : missingCore
-          ? `Add ${missingCore.name} to unlock the Trio price.`
+          : trioSets === 2
+            ? 'Double Combo'
+            : trioSets === 1
+              ? 'Trio Combo'
+              : 'Combo Hunt';
+  const statusLine = totalBottles === 0
+    ? 'Tap + to start the meter.'
+    : trioSets > 0
+      ? `${trioSets} discounted Trio ${trioSets === 1 ? 'combo' : 'combos'} banked. ${nextComboProduct ? `Add ${nextComboProduct.name} to chase the next one.` : 'Keep stacking for the next combo.'}`
+      : missingCore
+        ? `Add ${missingCore.name} to get closer to Trio savings.`
+        : coreBottleCount >= 3
+          ? 'Balance the three core flavors to unlock Trio savings.'
           : 'Keep building your flavor loadout.';
+  const comboLine = trioSets > 0
+    ? `${trioSets} Trio ${trioSets === 1 ? 'combo' : 'combos'} = ${trioBottles} bottles at bundle price`
+    : missingCore
+      ? `Add ${missingCore.name} to unlock the first Trio combo`
+      : 'Match the three core flavors to unlock the first Trio combo';
+  const avgBottlePrice = totalBottles > 0 ? cartTotal / totalBottles : 0;
 
-  const toggle = (slug) => {
+  const updateQty = (slug, delta) => {
     setAdded(false);
-    setSelected((current) => ({ ...current, [slug]: !current[slug] }));
+    setQuantities((current) => ({
+      ...current,
+      [slug]: Math.max(0, Math.min(9, current[slug] + delta))
+    }));
+  };
+
+  const setFlavorQty = (slug, nextQty) => {
+    setAdded(false);
+    setQuantities((current) => ({
+      ...current,
+      [slug]: Math.max(0, Math.min(9, Math.floor(Number(nextQty) || 0)))
+    }));
   };
 
   const addBundle = (e) => {
@@ -1822,19 +1849,20 @@ function BuildBundle() {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (!selectedCount) return;
+    if (!totalBottles) return;
     if (!window.NB_CART) {
-      window.location.href = cartPermalink(cartLines[0].slug);
+      window.location.href = cartPermalink(fallbackSlug);
       return;
     }
     cartLines.forEach((line) => {
-      window.NB_CART.add({ slug: line.slug, name: line.name, price: line.price, qty: 1 });
+      window.NB_CART.add({ slug: line.slug, name: line.name, price: line.price, qty: line.qty });
     });
     setAdded(true);
     window.dispatchEvent(new CustomEvent('nb-open-cart'));
     window.setTimeout(() => setAdded(false), 1800);
   };
 
+  const maxedOut = (slug) => quantities[slug] >= 9;
   const money = (n) => `$${n.toFixed(2)}`;
   const fallbackSlug = cartLines[0] ? cartLines[0].slug : 'trio';
 
@@ -1856,7 +1884,7 @@ function BuildBundle() {
             <div className="mono bundle-kicker">Build a Bundle</div>
             <h2 className="display">Power up your cart.</h2>
             <p>
-              Pick your sauces like a loadout. The meter climbs as you add bottles, and the Trio price unlocks when Original, Spicy Tokyo, and Citrus Shoyu are all selected.
+              Tap + to stack bottles like a loadout. Complete Original + Spicy Tokyo + Citrus Shoyu sets become discounted Trios, and every bottle pushes the power meter higher.
             </p>
           </div>
         </Reveal>
@@ -1865,20 +1893,20 @@ function BuildBundle() {
           <Reveal delay={1}>
             <div className="bundle-product-grid" aria-label="Build a NoodleBomb bundle">
               {products.map((product) => {
-                const isSelected = selected[product.slug];
+                const qty = quantities[product.slug];
+                const isSelected = qty > 0;
                 return (
-                  <button
+                  <div
                     key={product.slug}
-                    type="button"
                     className={`bundle-card ${isSelected ? 'is-selected' : ''}`}
-                    onClick={() => toggle(product.slug)}
-                    aria-pressed={isSelected}
+                    role="group"
+                    aria-label={`${product.name} quantity`}
                     style={{ '--card-color': product.color, '--card-rgb': product.rgb, '--card-ink': product.ink }}
                   >
                     <span className="bundle-card-glow" aria-hidden="true" />
                     <span className="bundle-card-top">
                       <span className="mono">{product.eyebrow}</span>
-                      <span className="bundle-check">{isSelected ? 'ON' : '+'}</span>
+                      <span className="bundle-check">{qty ? `${qty}x` : '0'}</span>
                     </span>
                     <span className="bundle-bottle-slot">
                       <img src={product.image} alt={`${product.name} bottle`} loading="lazy" />
@@ -1888,7 +1916,33 @@ function BuildBundle() {
                       <span>{product.role}</span>
                     </span>
                     <span className="bundle-price">{money(product.price)}</span>
-                  </button>
+                    <span className="bundle-qty-controls">
+                      <button
+                        type="button"
+                        className="bundle-qty-btn"
+                        onClick={() => updateQty(product.slug, -1)}
+                        disabled={qty === 0}
+                        aria-label={`Remove one ${product.name}`}
+                      >-</button>
+                      <input
+                        className="bundle-qty-count"
+                        type="number"
+                        inputMode="numeric"
+                        min="0"
+                        max="9"
+                        value={qty}
+                        onChange={(e) => setFlavorQty(product.slug, e.target.value)}
+                        aria-label={`${product.name} bottle count`}
+                      />
+                      <button
+                        type="button"
+                        className="bundle-qty-btn"
+                        onClick={() => updateQty(product.slug, 1)}
+                        disabled={maxedOut(product.slug)}
+                        aria-label={`Add one ${product.name}`}
+                      >+</button>
+                    </span>
+                  </div>
                 );
               })}
             </div>
@@ -1905,13 +1959,14 @@ function BuildBundle() {
                 <div className="bundle-meter-sparks" />
               </div>
               <div className="bundle-status">{statusLine}</div>
+              <div className="bundle-combo-line">{comboLine}</div>
 
               <div className="bundle-loadout">
                 <div className="mono">Cart loadout</div>
                 {cartLines.length ? cartLines.map((line) => (
                   <div className="bundle-loadout-line" key={line.slug}>
-                    <span>{line.name}</span>
-                    <strong>{money(line.price)}</strong>
+                    <span>{line.qty}x {line.name}</span>
+                    <strong>{money(line.price * line.qty)}</strong>
                   </div>
                 )) : (
                   <div className="bundle-empty">No bottles selected.</div>
@@ -1927,18 +1982,26 @@ function BuildBundle() {
                   <span>Savings</span>
                   <strong>{savings > 0 ? money(savings) : '$0.00'}</strong>
                 </div>
+                <div>
+                  <span>Bottles</span>
+                  <strong>{totalBottles}</strong>
+                </div>
+                <div>
+                  <span>Avg / bottle</span>
+                  <strong>{totalBottles ? money(avgBottlePrice) : '$0.00'}</strong>
+                </div>
               </div>
 
               <a
                 href={cartPermalink(fallbackSlug)}
-                className={`bundle-add ${selectedCount ? '' : 'is-disabled'} ${added ? 'is-added' : ''}`}
+                className={`bundle-add ${totalBottles ? '' : 'is-disabled'} ${added ? 'is-added' : ''}`}
                 onClick={addBundle}
-                aria-disabled={!selectedCount}
+                aria-disabled={!totalBottles}
               >
-                {added ? 'Added to cart' : trioUnlocked ? `Add powered bundle - ${money(cartTotal)}` : `Add selected - ${money(cartTotal)}`}
+                {added ? 'Added to cart' : `Add ${totalBottles || 0} bottle${totalBottles === 1 ? '' : 's'} - ${money(cartTotal)}`}
                 <span aria-hidden="true">→</span>
               </a>
-              <div className="bundle-note">Trio savings apply when all three core sauces are selected. Shoyu Reserve is a paid preorder item.</div>
+              <div className="bundle-note">Every complete Original + Spicy Tokyo + Citrus Shoyu set is added as a discounted Trio. Shoyu Reserve is a paid preorder item.</div>
             </div>
           </Reveal>
         </div>

@@ -545,9 +545,8 @@
     background: rgba(245,241,234,0.045);
     color: var(--ink);
     text-align: left;
-    cursor: pointer;
     display: grid;
-    grid-template-rows: auto minmax(190px, 1fr) auto auto;
+    grid-template-rows: auto minmax(190px, 1fr) auto auto auto;
     gap: 14px;
     transition: transform .32s cubic-bezier(.2,.7,.2,1), border-color .32s, background .32s, box-shadow .32s;
   }
@@ -668,6 +667,75 @@
     font-size: 12px;
     color: var(--card-color);
   }
+  .bundle-qty-controls {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 46px minmax(44px, 1fr) 46px;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+    padding: 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(240,235,227,0.14);
+    background: rgba(7,6,5,0.62);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025);
+  }
+  .bundle-qty-btn {
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(240,235,227,0.16);
+    border-radius: 999px;
+    background: rgba(245,241,234,0.08);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform .22s cubic-bezier(.2,.7,.2,1), background .22s, color .22s, border-color .22s, opacity .22s;
+  }
+  .bundle-qty-btn:hover,
+  .bundle-qty-btn:focus-visible {
+    transform: translateY(-1px);
+    border-color: var(--card-color);
+    background: var(--card-color);
+    color: var(--card-ink);
+    outline: none;
+  }
+  .bundle-qty-btn:disabled {
+    cursor: default;
+    opacity: 0.34;
+    transform: none;
+    background: rgba(245,241,234,0.045);
+    color: rgba(240,235,227,0.50);
+  }
+  .bundle-qty-count {
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(245,241,234,0.10);
+    color: var(--card-color);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    outline: none;
+    appearance: textfield;
+  }
+  .bundle-qty-count::-webkit-outer-spin-button,
+  .bundle-qty-count::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  .bundle-qty-count:focus {
+    box-shadow: 0 0 0 2px rgba(var(--card-rgb),0.42);
+  }
   .bundle-console {
     position: sticky;
     top: 92px;
@@ -737,12 +805,25 @@
     animation: bundleSpark 1.2s linear infinite;
   }
   .bundle-status {
-    margin: 14px 0 22px;
+    margin: 14px 0 10px;
     min-height: 44px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 1.5;
     color: rgba(240,235,227,0.78);
+  }
+  .bundle-combo-line {
+    margin: 0 0 18px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--bundle-rgb),0.28);
+    background: rgba(var(--bundle-rgb),0.10);
+    color: var(--bundle-color);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   .bundle-loadout {
     display: grid;
@@ -860,7 +941,7 @@
   }
   @media (max-width: 900px) {
     .bundle-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .bundle-card { min-height: 390px; }
+    .bundle-card { min-height: 444px; }
   }
   @media (max-width: 560px) {
     .bundle-section { padding: 72px 16px 84px; }
@@ -869,9 +950,9 @@
     .bundle-head p { font-size: 15px; }
     .bundle-product-grid { gap: 10px; }
     .bundle-card {
-      min-height: 342px;
+      min-height: 404px;
       padding: 12px;
-      grid-template-rows: auto 162px auto auto;
+      grid-template-rows: auto 156px auto auto auto;
     }
     .bundle-card-top .mono { font-size: 9px; }
     .bundle-check { width: 34px; height: 26px; }
@@ -881,6 +962,9 @@
     .bundle-card-copy strong { font-size: 20px; }
     .bundle-card-copy span { font-size: 12px; line-height: 1.35; }
     .bundle-price { font-size: 11px; padding: 7px 10px; }
+    .bundle-qty-controls { grid-template-columns: 44px minmax(44px, 1fr) 44px; gap: 6px; padding: 6px; }
+    .bundle-qty-btn, .bundle-qty-count { width: 44px; height: 44px; min-height: 44px; }
+    .bundle-qty-count { width: 100%; font-size: 16px; }
     .bundle-console { padding: 18px; }
     .bundle-add { min-height: 54px; font-size: 12px; letter-spacing: 0.06em; }
   }
