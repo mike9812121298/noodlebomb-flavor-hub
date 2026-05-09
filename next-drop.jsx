@@ -149,20 +149,6 @@ function NextDrop() {
           ))}
         </div>
 
-        {/* Notify bar */}
-        <Reveal delay={4}>
-          <div className="nd-notify">
-            <div className="nd-notify-label">
-              <span className="nd-pulse" />
-              PREORDER OPEN
-            </div>
-            <div className="nd-form nd-buy-row" role="group" aria-label="Shoyu Reserve preorder actions">
-              <a className="nd-submit nd-buy-link" href={shoyuCartUrl}>Add preorder &rarr;</a>
-              <a className="nd-buy-secondary" href={shoyuProductUrl}>View product</a>
-            </div>
-            <div className="nd-microcopy">Checkout is handled by Shopify. Shoyu Reserve is expected Summer 2026.</div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
