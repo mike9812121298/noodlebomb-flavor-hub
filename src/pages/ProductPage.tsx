@@ -70,7 +70,7 @@ const PRODUCTS: Record<string, ProductData> = {
     flavorHook: "Deep umami that makes every bowl taste intentional.",
     badge: "⭐ Best Seller",
     description:
-      "Dark soy anchors a foundation of roasted garlic, warm ginger, and toasted sesame — then a slow medium heat moves through and settles. No sharp edges. It coats noodles instead of sitting on top, glazes protein without fighting the other flavors. Balanced enough for rice bowls, punchy enough for the wok. The one you reach for without thinking. The entry point that never gets old.",
+      "Smooth soy anchors a foundation of roasted garlic, warm ginger, and toasted sesame — then a slow medium heat moves through and settles. No sharp edges. It coats noodles instead of sitting on top, glazes protein without fighting the other flavors. Balanced enough for rice bowls, punchy enough for the wok. The one you reach for without thinking. The entry point that never gets old.",
     ingredients:
       "Water, light soy sauce (water, soybeans, wheat, salt, sugar, preservative), brown sugar, rice vinegar, lemon juice (water, lemon juice from concentrate, preservatives), mirin (water, rice, sugar, alcohol, salt), honey, sesame oil, beef bouillon (salt, oil, monosodium glutamate, starch, sugar, beef, milk ingredient, natural flavors, color, preservatives), garlic, mushroom seasoning (salt, maltodextrin, sugar, yeast extract, mushroom powder), gochujang (rice, water, sweetener, chili pepper, salt, soybeans, wheat, garlic, spices), sriracha (chili peppers, sugar, salt, garlic, vinegar, preservatives, xanthan gum), chili flakes, monosodium glutamate, ginger powder, xanthan gum.",
     allergens: "Soy, wheat, milk, sesame, sulphites.",

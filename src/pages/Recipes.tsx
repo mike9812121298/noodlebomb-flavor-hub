@@ -88,7 +88,7 @@ const recipes = [
     flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
     time: "12 min",
     serves: "1",
-    desc: "Dark soy, roasted chili, and sesame — cranked to maximum.",
+    desc: "Savory soy, roasted chili, and sesame — cranked to maximum.",
     steps: [
       "Cook noodles and drain. Slice 1 chicken thigh thin and sear in a hot pan with oil until golden.",
       "Add half a bottle of Spicy Tokyo to the pan off heat. Toss chicken to coat.",

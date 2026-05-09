@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" style="--accent: #D4A24A; --accent-ink: #0E0D0C; --accent-rgb: 212, 162, 74; --accent-deep: #8A6424; --accent-soft: rgba(212, 162, 74, 0.13); --accent-glow: rgba(212, 162, 74, 0.34);"><head>
+<!DOCTYPE html><html lang="en" data-flavor="original" style="--accent: #D4A24A; --accent-ink: #0E0D0C; --accent-rgb: 212, 162, 74; --accent-deep: #8A6424; --accent-soft: rgba(212, 162, 74, 0.13); --accent-glow: rgba(212, 162, 74, 0.34);"><head>
 
 
 
@@ -238,6 +238,63 @@
       var(--paper);
     transition: background .5s ease;
   }
+  html[data-flavor="original"] #main-content {
+    background:
+      linear-gradient(180deg, rgba(212,162,74,0.08), transparent 520px),
+      radial-gradient(ellipse at 76% 14%, rgba(212,162,74,0.12), transparent 34%),
+      radial-gradient(ellipse at 14% 42%, rgba(138,100,36,0.10), transparent 30%),
+      var(--paper);
+  }
+  html[data-flavor="spicy"] #main-content {
+    background:
+      linear-gradient(180deg, rgba(232,74,58,0.10), transparent 560px),
+      radial-gradient(ellipse at 74% 16%, rgba(232,74,58,0.14), transparent 34%),
+      radial-gradient(ellipse at 12% 44%, rgba(120,16,10,0.22), transparent 31%),
+      #0B0908;
+  }
+  html[data-flavor="citrus"] #main-content {
+    background:
+      linear-gradient(180deg, rgba(242,138,46,0.12), transparent 540px),
+      radial-gradient(ellipse at 78% 12%, rgba(255,204,72,0.16), transparent 32%),
+      radial-gradient(ellipse at 10% 44%, rgba(242,138,46,0.12), transparent 30%),
+      #100E0A;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: screen;
+    transition: opacity .55s ease, background .55s ease, transform .55s ease;
+  }
+  html[data-flavor="original"] body::after {
+    opacity: 0.09;
+    background:
+      linear-gradient(115deg, transparent 0 20%, rgba(245,205,126,0.24) 36%, transparent 54%),
+      repeating-linear-gradient(95deg, transparent 0 38px, rgba(212,162,74,0.08) 39px 40px);
+    animation: originalWarmDrift 12s ease-in-out infinite alternate;
+  }
+  html[data-flavor="spicy"] body::after {
+    opacity: 0.16;
+    background:
+      radial-gradient(ellipse at 14% 72%, rgba(68,28,20,0.30), transparent 36%),
+      linear-gradient(105deg, transparent 0 16%, rgba(232,74,58,0.16) 34%, transparent 58%),
+      repeating-linear-gradient(172deg, transparent 0 28px, rgba(232,74,58,0.07) 29px 31px);
+    animation: spicySmokeDrift 9s ease-in-out infinite alternate;
+  }
+  html[data-flavor="citrus"] body::after {
+    opacity: 0.13;
+    background:
+      linear-gradient(125deg, transparent 0 18%, rgba(255,213,86,0.22) 32%, rgba(242,138,46,0.16) 44%, transparent 62%),
+      repeating-linear-gradient(55deg, transparent 0 34px, rgba(255,205,74,0.08) 35px 36px);
+    animation: citrusZestDrift 10s ease-in-out infinite alternate;
+  }
+  body.flavor-shift #main-content { animation: pageFlavorKick .7s cubic-bezier(.16,1,.3,1) both; }
+  html[data-flavor="original"] .accent-fg { text-shadow: 0 0 22px rgba(212,162,74,0.16); }
+  html[data-flavor="spicy"] .accent-fg { text-shadow: 0 0 24px rgba(232,74,58,0.24); }
+  html[data-flavor="citrus"] .accent-fg { text-shadow: 0 0 24px rgba(255,205,74,0.20); }
 
   /* Skip-to-content — visible only on focus, lets keyboard users bypass
      the Nav and editorial sections to jump straight to main content.
@@ -303,6 +360,24 @@
   .accent-bg { background: var(--accent); color: var(--accent-ink); transition: background 0.6s ease; }
   .accent-fg { color: var(--accent); transition: color 0.6s ease; }
   .accent-stroke { stroke: var(--accent); transition: stroke 0.6s ease; }
+
+  @keyframes pageFlavorKick {
+    0% { filter: saturate(1) contrast(1); transform: translateZ(0); }
+    42% { filter: saturate(1.18) contrast(1.04); }
+    100% { filter: saturate(1) contrast(1); transform: translateZ(0); }
+  }
+  @keyframes originalWarmDrift {
+    from { transform: translate3d(-1.5%, 0, 0); }
+    to { transform: translate3d(1.5%, -1%, 0); }
+  }
+  @keyframes spicySmokeDrift {
+    from { transform: translate3d(-2%, 1%, 0) skewX(-1deg); }
+    to { transform: translate3d(2%, -1%, 0) skewX(1deg); }
+  }
+  @keyframes citrusZestDrift {
+    from { transform: translate3d(1%, -1%, 0); }
+    to { transform: translate3d(-1%, 1%, 0); }
+  }
 
   /* Reveal */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1); }
@@ -498,6 +573,7 @@
     filter: blur(8px);
   }
   .fbv2-shell { position: relative; z-index: 2; }
+  .fbv2-dynamic-copy { animation: fbv2CopySwitch .52s cubic-bezier(.16,1,.3,1) both; }
   .fbv2-bottle-swap {
     position: relative;
     z-index: 2;
@@ -526,6 +602,17 @@
     animation: ctaBreathe 5.8s ease-in-out infinite;
     transition: background .45s ease, transform .45s ease;
   }
+  .fbv2-section[data-flavor="original"] .fbv2-glow {
+    animation: originalStageGlow 6.4s ease-in-out infinite;
+  }
+  .fbv2-section[data-flavor="citrus"] .fbv2-glow {
+    transform: scale(1.08);
+    animation: citrusStageGlow 4.8s ease-in-out infinite;
+  }
+  .fbv2-section[data-flavor="spicy"] .fbv2-glow {
+    transform: scale(1.12);
+    animation: spicyStageGlow 3.8s ease-in-out infinite;
+  }
   .fbv2-sauce-ring {
     position: absolute;
     width: min(380px, 82%);
@@ -536,6 +623,20 @@
     animation: slowRotate 18s linear infinite;
     transition: border-color .45s ease, box-shadow .45s ease;
     box-shadow: inset 0 0 34px rgba(var(--fbv2-rgb), 0.07);
+  }
+  .fbv2-section[data-flavor="original"] .fbv2-sauce-ring {
+    animation-duration: 22s;
+    box-shadow: inset 0 0 34px rgba(212,162,74,0.10), 0 0 22px rgba(212,162,74,0.08);
+  }
+  .fbv2-section[data-flavor="citrus"] .fbv2-sauce-ring {
+    border-style: dashed;
+    animation-duration: 12s;
+    box-shadow: inset 0 0 34px rgba(255,205,74,0.12), 0 0 28px rgba(242,138,46,0.12);
+  }
+  .fbv2-section[data-flavor="spicy"] .fbv2-sauce-ring {
+    border-color: rgba(232,74,58,0.58);
+    animation-duration: 8s;
+    box-shadow: inset 0 0 40px rgba(232,74,58,0.12), 0 0 32px rgba(232,74,58,0.14);
   }
   .fbv2-sauce-swipe {
     position: absolute;
@@ -590,6 +691,22 @@
     0% { opacity: 0; transform: translateY(30px) rotateY(-18deg) rotate(-4deg) scale(0.88); }
     58% { opacity: 1; transform: translateY(-10px) rotateY(6deg) rotate(1.2deg) scale(1.035); }
     100% { opacity: 1; transform: translateY(0) rotateY(0deg) rotate(0deg) scale(1); }
+  }
+  @keyframes fbv2CopySwitch {
+    0% { opacity: 0; transform: translateY(12px) scale(0.985); filter: blur(5px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  @keyframes originalStageGlow {
+    0%, 100% { opacity: .86; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.04); }
+  }
+  @keyframes citrusStageGlow {
+    0%, 100% { opacity: .78; transform: scale(1.02) rotate(-1deg); }
+    50% { opacity: 1; transform: scale(1.13) rotate(1deg); }
+  }
+  @keyframes spicyStageGlow {
+    0%, 100% { opacity: .72; transform: scale(1.06) skewX(-1deg); }
+    50% { opacity: 1; transform: scale(1.16) skewX(1deg); }
   }
   @keyframes fbv2SauceSwipe {
     0% { opacity: 0; transform: rotate(-14deg) translateX(-38%) scaleX(0.45); }
@@ -960,7 +1077,7 @@
   .trust-line-track { animation: trust-line-scroll 32s linear infinite; }
   .trust-line-wrap:hover .trust-line-track { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
-    .marq-track, .trust-line-track, .hero-cta-row .btn-accent, .trio-bundle-cta, .use-case-card:hover .use-case-pour, .flavor-select-card.is-active, .fbv2-bottle-swap, .fbv2-sauce-swipe, .fbv2-flavor-burst, .fbv2-stage-caption, .fbv2-mood { animation: none !important; }
+    body::after, body.flavor-shift #main-content, .marq-track, .trust-line-track, .hero-cta-row .btn-accent, .trio-bundle-cta, .use-case-card:hover .use-case-pour, .flavor-select-card.is-active, .fbv2-dynamic-copy, .fbv2-bottle-swap, .fbv2-glow, .fbv2-sauce-ring, .fbv2-sauce-swipe, .fbv2-flavor-burst, .fbv2-stage-caption, .fbv2-mood { animation: none !important; }
     .btn:hover::after { animation: none !important; }
   }
 
@@ -2384,7 +2501,7 @@
   <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> - A darker, deeper shoyu-style finish. Paid preorder for Summer 2026. <a href="/cart?add=shoyu&amp;qty=1" style="color:#F5C842;">Preorder Shoyu Reserve &rarr;</a></li>
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
-<p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Three flavors, made by hand in the Pacific Northwest. Free shipping over $35.</p>
+<p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Built for noodles, rice, wings, dumplings, eggs, vegetables, and more. Free shipping over $35.</p>
 <p><a href="/shop" style="display:inline-block;color:#0E0D0C;background:#E84A3A;padding:14px 28px;text-decoration:none;font-weight:600;border-radius:999px;">Shop the Range →</a></p>
 </div></noscript></div></main>
 

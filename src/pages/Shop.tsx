@@ -66,7 +66,7 @@ const Shop = () => (
         <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-4 block">Shop</span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground">The Full Lineup</h1>
         <p className="text-foreground/70 mt-3 text-lg">
-          Three flavors. One obsession. Pick yours or grab the bundle.
+          Pick the bottle that fits dinner, or grab the full lineup.
         </p>
         <p className="text-muted-foreground mt-1 text-sm">Free shipping over $35 — limited small-batch inventory.</p>
       </motion.div>
@@ -147,7 +147,7 @@ const Shop = () => (
                   <span className="px-3 py-1 rounded-full bg-gradient-fire text-primary-foreground text-[10px] font-display font-bold uppercase tracking-wider">Best Value</span>
                 </div>
                 <p className="text-sm text-foreground/70 mb-2">{b.tagline}</p>
-                <p className="text-xs text-primary font-display font-semibold mb-4">Try all 3 flavors in one premium sampler bundle.</p>
+                <p className="text-xs text-primary font-display font-semibold mb-4">Try the full lineup in one premium sampler bundle.</p>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-base text-muted-foreground line-through">{b.originalPrice}</span>
                   <span className="font-display text-3xl font-bold text-primary">{b.price}</span>

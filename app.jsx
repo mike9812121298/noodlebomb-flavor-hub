@@ -102,8 +102,8 @@ function FlavorBreakdown({ flavor }) {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
-  // Three flavor cards, spaced so the final card has enough screen time before
-  // the sticky scene exits. This keeps "three flavors" honest on desktop.
+  // Flavor cards, spaced so the final card has enough screen time before
+  // the sticky scene exits.
   const ingredients = [
   { label: 'Original', note: 'Garlic-sesame depth for noodles, rice, eggs, and stir-fry.', angle: -130, appearAt: 0.05, img: 'uploads/fb-umami.jpg' },
   { label: 'Spicy Tokyo', note: 'Roasted chili heat for wings, fried rice, noodles, and grilled meat.', angle: -45, appearAt: 0.42, img: 'uploads/fb-heat.jpg' },
@@ -118,7 +118,7 @@ function FlavorBreakdown({ flavor }) {
           Index 02 — Flavor Breakdown
         </div>
         <h2 className="display" style={{ margin: '0 0 48px', fontSize: 'clamp(40px, 11vw, 56px)', letterSpacing: '-0.04em', lineHeight: 0.95, fontWeight: 700 }}>
-          Three flavors.<br /><span className="accent-fg">Goes on everything.</span>
+          Built for dinner.<br /><span className="accent-fg">Goes on everything.</span>
         </h2>
         {/* Stacked ingredient rows */}
         <div style={{ borderTop: '1px solid var(--line)', marginBottom: 48 }}>
@@ -202,7 +202,7 @@ function FlavorBreakdown({ flavor }) {
           transition: 'opacity .3s linear',
           pointerEvents: p > 0.18 ? 'none' : 'auto'
         }}>
-          Three flavors.<br /><span className="accent-fg">Goes on everything.</span>
+          Built for dinner.<br /><span className="accent-fg">Goes on everything.</span>
         </h2>
 
         {/* Bottle center */}
@@ -276,6 +276,8 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
       job: 'Best first bottle',
       line: 'Garlic, sesame, and smooth soy for rice, eggs, noodles, and leftovers.',
       signal: 'Warm gold, roasted garlic, toasted sesame.',
+      headline: ['The weeknight', 'save-button.'],
+      body: 'For rice, eggs, noodles, and leftovers. Original brings roasted garlic, toasted sesame, and smooth soy so plain food tastes finished fast.',
       profile: [
         ['Savory', 92],
         ['Garlic', 78],
@@ -287,6 +289,8 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
       job: 'Best when you want heat',
       line: 'Roasted chili over garlic-sesame depth for wings, fried rice, and grilled chicken.',
       signal: 'Red heat, faint smoke, chili edge.',
+      headline: ['Heat that still', 'tastes like food.'],
+      body: 'For wings, chicken, fried rice, and anything that needs a kick. Spicy Tokyo brings roasted chili, garlic, and sesame without burying the meal.',
       profile: [
         ['Savory', 86],
         ['Garlic', 72],
@@ -298,6 +302,8 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
       job: 'Best when food needs lift',
       line: 'Bright shoyu and citrus for dumplings, vegetables, seafood, and rich bowls.',
       signal: 'Orange lift, citrus spark, bright finish.',
+      headline: ['Brighten the', 'whole plate.'],
+      body: 'For dumplings, vegetables, seafood, and rich bowls. Citrus Shoyu cuts through heavy bites with orange-bright lift and a clean savory finish.',
       profile: [
         ['Savory', 74],
         ['Garlic', 42],
@@ -351,13 +357,13 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
             <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 02 - Flavor Finder</div>
           </Reveal>
           <Reveal delay={1}>
-            <h2 className="display section-h2" style={{ margin: '0 0 22px', maxWidth: 500 }}>
-              What are you<br /><span className="accent-fg">eating tonight?</span>
+            <h2 key={`${activeKey}-headline`} className="display section-h2 fbv2-dynamic-copy" style={{ margin: '0 0 22px', maxWidth: 500 }}>
+              {activeItem.headline[0]}<br /><span className="accent-fg">{activeItem.headline[1]}</span>
             </h2>
           </Reveal>
           <Reveal delay={2}>
-            <p style={{ color: 'var(--ink-60)', fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.65, maxWidth: 560, margin: 0 }}>
-              Pick the food first. NoodleBomb points you to the bottle that fits the job: toss, drizzle, dip, glaze, or wake up leftovers.
+            <p key={`${activeKey}-body`} className="fbv2-dynamic-copy" style={{ color: 'var(--ink-60)', fontSize: 'clamp(16px, 1.4vw, 19px)', lineHeight: 1.65, maxWidth: 560, margin: 0 }}>
+              {activeItem.body}
             </p>
           </Reveal>
           <Reveal delay={2}>
@@ -763,7 +769,7 @@ function PourAndCompare({ flavor = 'original' }) {
               { num: '7', unit: 'oz', label: 'per bottle' },
               { num: '14', unit: '', label: 'servings per bottle' },
               { num: '30', unit: 'sec', label: 'bowl to table' },
-              { num: '3', unit: '', label: 'flavors, hand-tuned' },
+              { num: '3', unit: '', label: 'ways to finish dinner' },
             ].map((s, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
                 <div className="display" style={{ fontSize: 'clamp(40px, 5vw, 64px)', fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1 }}>
@@ -783,7 +789,7 @@ function Origin() {
   const stats = [
     { num: '7', label: 'real ingredients per bottle' },
     { num: '14', label: 'servings per bottle' },
-    { num: '3', label: 'flavors, each hand-tuned' },
+    { num: '3', label: 'bottles for different cravings' },
     { num: '1', label: 'kitchen in Bonney Lake, WA' },
   ];
   return (
@@ -799,7 +805,7 @@ function Origin() {
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <Reveal>
           <div className="mono" style={{ color: 'var(--muted)', marginBottom: 28, letterSpacing: '0.18em' }}>
-            Index 06 — Made by hand
+            Index 06 — Made for dinner
           </div>
         </Reveal>
 
@@ -815,8 +821,8 @@ function Origin() {
               maxWidth: '14ch',
             }}
           >
-            Three flavors.<br />
-            <span style={{ color: 'var(--muted)' }}>Made by hand.</span>
+            Built for the food<br />
+            <span style={{ color: 'var(--muted)' }}>you actually make.</span>
           </h2>
         </Reveal>
 
@@ -874,7 +880,7 @@ function Origin() {
               style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
             />
             <figcaption style={{ position: 'absolute', left: 24, bottom: 16, fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.18em', color: 'rgba(245,241,234,0.85)', textTransform: 'uppercase' }}>
-              Small batch · Made by hand · Bonney Lake, WA
+              Small batch · Bonney Lake, WA · Goes on everything
             </figcaption>
           </figure>
         </Reveal>
@@ -1926,12 +1932,20 @@ function App() {
   // Accent color swap
   useEffect(() => {
     const f = FLAVORS[state.flavor];
+    const root = document.documentElement;
+    const body = document.body;
+    root.dataset.flavor = state.flavor;
+    body.dataset.flavor = state.flavor;
     document.documentElement.style.setProperty('--accent', f.color);
     document.documentElement.style.setProperty('--accent-ink', f.ink);
     document.documentElement.style.setProperty('--accent-rgb', f.rgb);
     document.documentElement.style.setProperty('--accent-deep', f.deep);
     document.documentElement.style.setProperty('--accent-soft', `rgba(${f.rgb}, 0.13)`);
     document.documentElement.style.setProperty('--accent-glow', `rgba(${f.rgb}, 0.34)`);
+    body.classList.remove('flavor-shift');
+    window.requestAnimationFrame(() => body.classList.add('flavor-shift'));
+    const timer = window.setTimeout(() => body.classList.remove('flavor-shift'), 760);
+    return () => window.clearTimeout(timer);
   }, [state.flavor]);
 
   // Grain

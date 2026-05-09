@@ -87,7 +87,7 @@ const About = () => {
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              NoodleBomb is what came out of that obsession. Three flavors, each one developed the same way — start with the feeling you want, work backward until the sauce earns it. Ashley wants every bowl to feel intentional. Not like a shortcut. Not like a ramen sauce you drizzle on and forget. Like someone genuinely cared about what you were about to eat.
+              NoodleBomb is what came out of that obsession. Each bottle is built around a different kind of craving — savory, spicy, or bright — and made to finish the food people actually eat: noodles, rice, wings, dumplings, eggs, vegetables, and leftovers. Ashley wants every bowl to feel intentional. Not like a shortcut. Not like a ramen sauce you drizzle on and forget. Like someone genuinely cared about what you were about to eat.
             </p>
           </div>
 
