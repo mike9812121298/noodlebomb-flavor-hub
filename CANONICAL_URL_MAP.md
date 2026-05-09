@@ -41,6 +41,7 @@
 | PDP — Spicy Tokyo | https://nu2vqa-ma.myshopify.com/products/spicy-tokyo | Shopify |
 | PDP — Citrus Shoyu | https://nu2vqa-ma.myshopify.com/products/citrus-shoyu | Shopify |
 | PDP — The NoodleBomb Trio | https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio | Shopify |
+| PDP - Shoyu Reserve preorder | https://nu2vqa-ma.myshopify.com/products/shoyu-reserve | Shopify |
 | Shopify cart | https://nu2vqa-ma.myshopify.com/cart | Shopify |
 | Checkout | https://nu2vqa-ma.myshopify.com/checkouts/* | Shopify hosted |
 | Monthly Box subs (legacy) | https://shop.noodlebomb.co/* | Wix (do not link) |
@@ -58,6 +59,8 @@ All redirects defined in `_redirects` and `netlify.toml`:
 | /product/citrus-shoyu | …/products/citrus-shoyu | 302 |
 | /product/trio | …/products/the-noodlebomb-trio | 302 |
 | /product/the-noodlebomb-trio | …/products/the-noodlebomb-trio | 302 |
+| /product/shoyu-reserve | .../products/shoyu-reserve | 302 |
+| /shoyu-reserve | .../products/shoyu-reserve | 302 |
 | /product/* (other) | …/collections/all | 302 |
 | /product-page/* | …/collections/all | 302 |
 | /cart-page | …/cart | 302 |

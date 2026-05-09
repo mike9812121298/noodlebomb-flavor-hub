@@ -1330,6 +1330,46 @@
     margin-left: 12px;
   }
   #next-drop .nd-submit:hover { background: #ffffff; transform: translateY(-2px); box-shadow: 0 14px 34px rgba(232,240,255,0.28); }
+  #next-drop .nd-buy-row { align-items: center; gap: 10px; }
+  #next-drop .nd-buy-link,
+  #next-drop .nd-buy-secondary {
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    transition: transform .2s, box-shadow .25s, background .25s, border-color .25s, color .25s;
+    white-space: nowrap;
+  }
+  #next-drop .nd-buy-link {
+    padding: 0 24px;
+    border: 0;
+    background: #e8f0ff;
+    color: #0a0a0a;
+    font-weight: 700;
+  }
+  #next-drop .nd-buy-link:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 14px 34px rgba(232,240,255,0.26); }
+  #next-drop .nd-buy-secondary {
+    padding: 0 18px;
+    border: 1px solid rgba(232,240,255,0.28);
+    background: rgba(0,0,0,0.22);
+    color: rgba(245,241,234,0.86);
+  }
+  #next-drop .nd-buy-secondary:hover { transform: translateY(-2px); border-color: rgba(232,240,255,0.58); color: #fff; background: rgba(232,240,255,0.08); }
+  #next-drop .nd-buy-note {
+    margin-left: auto;
+    color: rgba(245,241,234,0.72);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  #next-drop .nd-buy-row .nd-submit { margin-left: 0; }
   #next-drop .nd-microcopy { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,241,234,0.72); text-align: right; }
   @media (max-width: 900px) {
     #next-drop .nd-microcopy { text-align: left; }
@@ -1350,7 +1390,11 @@
     #next-drop .nd-inline-form button,
     #next-drop .nd-input,
     #next-drop .nd-select-line,
-    #next-drop .nd-submit { width: 100%; min-height: 48px; flex: 0 0 auto; }
+    #next-drop .nd-submit,
+    #next-drop .nd-buy-link,
+    #next-drop .nd-buy-secondary,
+    #next-drop .nd-buy-note { width: 100%; min-height: 48px; flex: 0 0 auto; }
+    #next-drop .nd-buy-note { min-height: 0; margin-left: 0; text-align: left; }
     #next-drop .nd-cards { margin-top: 34px; gap: 32px; }
     #next-drop .nd-card { padding: 24px 18px !important; }
     #next-drop .nd-reserve-card {
@@ -1964,7 +2008,7 @@
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">Coming Soon</h2>
 <ul style="list-style:none;padding:0;margin:0 0 32px;opacity:0.85;">
-  <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> — A darker, deeper shoyu-style finish. Summer 2026.</li>
+  <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> - A darker, deeper shoyu-style finish. Paid preorder for Summer 2026. <a href="https://nu2vqa-ma.myshopify.com/cart/add?id=54006619636022&amp;quantity=1&amp;return_to=%2Fcart" style="color:#F5C842;">Preorder Shoyu Reserve &rarr;</a></li>
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
 <p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Three flavors, made by hand in the Pacific Northwest. Free shipping over $35.</p>

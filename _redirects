@@ -47,6 +47,8 @@
 /product/trio             https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio   302!
 /product/the-noodlebomb-trio  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
 # Catch-all for any other /product/* deep link (old emails, ads, social) — go to lineup
+/product/shoyu-reserve    https://nu2vqa-ma.myshopify.com/products/shoyu-reserve         302!
+/shoyu-reserve            https://nu2vqa-ma.myshopify.com/products/shoyu-reserve         302!
 /product/*                https://nu2vqa-ma.myshopify.com/collections/all                302!
 
 # /shop and /shop/* — primary CTA target on the marketing site

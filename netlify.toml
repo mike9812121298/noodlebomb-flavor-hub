@@ -211,6 +211,18 @@
   status = 302
   force = true
 
+[[redirects]]
+  from = "/product/shoyu-reserve"
+  to = "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/shoyu-reserve"
+  to = "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve"
+  status = 302
+  force = true
+
 # Catch-all for any other /product/* deep link — go to lineup
 [[redirects]]
   from = "/product/*"
