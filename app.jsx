@@ -62,7 +62,7 @@ const FLAVORS = {
     line1: 'Umami meets fire.',
     line2: 'Roasted chili, garlic, sesame.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
-  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#F28A2E', ink: '#0B0B0B', rgb: '242, 138, 46', deep: '#C85A16',
+  citrus: { name: 'Citrus Shoyu', tag: 'No.02 · Citrus Shoyu', short: 'No.02', color: '#FF6A1A', ink: '#0B0B0B', rgb: '255, 106, 26', deep: '#B83A10',
     line1: 'Bright, tangy, refreshing.',
     line2: 'Shoyu base with a clean citrus lift.',
     price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' }
@@ -495,7 +495,7 @@ function UseItOn() {
   const items = [
     { key: 'original', name: 'Original',     no: 'No.01', tag: 'GARLIC & SESAME', line: 'The one that started it all.',      note: 'Roasted garlic. Toasted sesame. Smooth soy.',       bg: '#8A6424', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.68)', img: FLAVOR_IMAGES.original, lifestyle: 'uploads/range-original-clean-2026-05-07.jpg' },
     { key: 'spicy',    name: 'Spicy Tokyo',  no: 'No.03', tag: 'UMAMI MEETS FIRE', line: 'Roasted chili. Garlic. Sesame.',   note: 'Bold heat for wings, fried rice, noodles, and anything that needs a kick.', bg: '#B23A0C', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)', img: FLAVOR_IMAGES.spicy, lifestyle: 'uploads/range-spicy-clean-2026-05-07.jpg' },
-    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#C85A16', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)',    img: FLAVOR_IMAGES.citrus, lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
+    { key: 'citrus',   name: 'Citrus Shoyu', no: 'No.02', tag: 'BRIGHT & TANGY',   line: 'Shoyu base. Clean citrus lift.',     note: 'Bright citrus over clean shoyu. Cuts through richness.', bg: '#B83A10', ink: '#F5F1EA', sub: 'rgba(245,241,234,0.70)',    img: FLAVOR_IMAGES.citrus, lifestyle: 'uploads/range-citrus-clean-2026-05-07.jpg' },
   ];
   const panelCount = items.length;
 
