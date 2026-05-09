@@ -1940,8 +1940,8 @@ function App() {
     document.documentElement.style.setProperty('--accent-ink', f.ink);
     document.documentElement.style.setProperty('--accent-rgb', f.rgb);
     document.documentElement.style.setProperty('--accent-deep', f.deep);
-    document.documentElement.style.setProperty('--accent-soft', `rgba(${f.rgb}, 0.13)`);
-    document.documentElement.style.setProperty('--accent-glow', `rgba(${f.rgb}, 0.34)`);
+    document.documentElement.style.setProperty('--accent-soft', `rgba(${f.rgb}, 0.24)`);
+    document.documentElement.style.setProperty('--accent-glow', `rgba(${f.rgb}, 0.62)`);
     body.classList.remove('flavor-shift');
     window.requestAnimationFrame(() => body.classList.add('flavor-shift'));
     const timer = window.setTimeout(() => body.classList.remove('flavor-shift'), 760);
