@@ -46,7 +46,26 @@ html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink);
   transition: transform .2s cubic-bezier(.2,.7,.2,1);
 }
 .skip-to-content:focus { transform: translateY(0); outline: 2px solid var(--ink); outline-offset: 2px; }
-body { font-family: 'Inter', -apple-system, system-ui, sans-serif; font-weight: 400; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 78% 8%, rgba(232,74,58,0.16), transparent 28%),
+    radial-gradient(circle at 12% 82%, rgba(212,162,74,0.10), transparent 28%),
+    linear-gradient(180deg, #0E0D0C 0%, #100E0B 48%, #0E0D0C 100%);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.8'/></svg>");
+  z-index: 0;
+}
 .display { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
 .serif { font-family: 'Fraunces', serif; }
 .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
@@ -58,7 +77,7 @@ a { color: inherit; }
   display: flex; align-items: center; justify-content: space-between;
   gap: 18px;
   padding: 0 clamp(24px, 5.5vw, 80px);
-  background: rgba(14,13,12,0.85); backdrop-filter: blur(12px);
+  background: rgba(14,13,12,0.82); backdrop-filter: saturate(140%) blur(12px);
   border-bottom: 1px solid var(--line);
 }
 .nav-cart .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
@@ -83,7 +102,7 @@ a { color: inherit; }
   .nav-cart-link.optional { display: none; }
 }
 
-main { padding-top: 96px; padding-bottom: 140px; min-height: 100vh; }
+main { position: relative; z-index: 1; padding-top: 96px; padding-bottom: 140px; min-height: 100vh; }
 .container { max-width: 1180px; margin: 0 auto; padding: 0 clamp(24px, 5.5vw, 80px); }
 
 .crumb {
@@ -101,7 +120,12 @@ h1.page-title em { font-family: 'Fraunces'; font-style: italic; font-weight: 400
 .layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
 @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 
-.card { background: var(--paper-2); border: 1px solid var(--line); padding: 28px; }
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)), var(--paper-2);
+  border: 1px solid var(--line);
+  padding: 28px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.30), inset 0 0 0 1px rgba(255,255,255,0.025);
+}
 .card + .card { margin-top: 14px; }
 
 .section-h { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; }
@@ -258,15 +282,15 @@ input.field.error { border-color: var(--error); }
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
 <nav class="nav-cart">
-  <a class="brand" href="https://noodlebomb.co/">
+  <a class="brand" href="/">
     <div class="brand-mark">N</div>
     <span class="brand-name">noodlebomb</span>
   </a>
   <div class="nav-cart-actions" aria-label="Checkout navigation">
-    <a class="nav-cart-link is-primary" href="https://noodlebomb.co/cart.html">Edit cart</a>
-    <a class="nav-cart-link optional" href="https://noodlebomb.co/#lineup">Shop sauces</a>
-    <a class="nav-cart-link optional" href="https://noodlebomb.co/recipes">Recipes</a>
-    <a class="nav-cart-link optional" href="https://noodlebomb.co/faq">FAQ</a>
+    <a class="nav-cart-link is-primary" href="/cart.html">Edit cart</a>
+    <a class="nav-cart-link optional" href="/#lineup">Shop sauces</a>
+    <a class="nav-cart-link optional" href="/recipes">Recipes</a>
+    <a class="nav-cart-link optional" href="/faq">FAQ</a>
   </div>
 </nav>
 

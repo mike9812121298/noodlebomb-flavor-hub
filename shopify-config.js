@@ -70,7 +70,8 @@
       original: 'gid://shopify/ProductVariant/53998041596214',
       citrus:   'gid://shopify/ProductVariant/53998041071926',
       spicy:    'gid://shopify/ProductVariant/53998042120502',
-      trio:     'gid://shopify/ProductVariant/53998042644790'
+      trio:     'gid://shopify/ProductVariant/53998042644790',
+      shoyu:    'gid://shopify/ProductVariant/54006619636022'
     }
   };
 })();

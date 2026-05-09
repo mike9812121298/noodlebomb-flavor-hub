@@ -2,21 +2,19 @@
 // fallback path). Add-to-Cart buttons no longer route through Wix.
 const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
 
-// Shopify cart-permalink — adds the variant to cart and lands on Shopify cart
-// page directly (skipping the storefront homepage). return_to wires the
-// "Continue Shopping" link back to noodlebomb.co. Variant IDs match
-// shopify-config.js and were captured from products.json on 2026-05-08.
+// Branded cart permalink — adds via noodlebomb.co/cart so shoppers do not
+// land inside Shopify's default cart theme before final checkout.
 const NB_SHOPIFY_VARIANT_IDS = {
   original: '53998041596214',
   spicy:    '53998042120502',
   citrus:   '53998041071926',
-  trio:     '53998042644790'
+  trio:     '53998042644790',
+  shoyu:    '54006619636022'
 };
-const NB_SHOPIFY_CART = 'https://nu2vqa-ma.myshopify.com/cart';
+const NB_SHOPIFY_CART = '/cart.html';
 const nbCartPermalink = (slug, qty = 1) => {
-  const id = NB_SHOPIFY_VARIANT_IDS[slug];
-  if (!id) return NB_SHOPIFY_CART;
-  return `https://nu2vqa-ma.myshopify.com/cart/add?id=${id}&quantity=${qty}&return_to=%2Fcart`;
+  const n = Math.max(1, Math.floor(Number(qty) || 1));
+  return `/cart?add=${encodeURIComponent(slug)}&qty=${n}`;
 };
 
 // Returns the best Wix URL for a given cart item list — used as the last-resort
@@ -796,14 +794,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                   user on Shopify cart with every line pre-loaded; Continue
                   Shopping returns to noodlebomb.co via return_to. */}
               <a
-                href={(() => {
-                  const lines = cartItems
-                    .map((it, index) => NB_SHOPIFY_VARIANT_IDS[it.slug]
-                      && `items%5B${index}%5D%5Bid%5D=${NB_SHOPIFY_VARIANT_IDS[it.slug]}&items%5B${index}%5D%5Bquantity%5D=${Math.max(1, Math.floor(it.qty || 1))}`)
-                    .filter(Boolean);
-                  if (lines.length === 0) return NB_SHOPIFY_CART;
-                  return `https://nu2vqa-ma.myshopify.com/cart/add?${lines.join('&')}&return_to=%2Fcart`;
-                })()}
+                href="/checkout.html"
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                   gap: 8, padding: '16px 24px', borderRadius: 999,
@@ -821,7 +812,7 @@ function Nav({ flavor, setFlavor, flavors }) {
               {/* Per-item shortcuts for multi-item carts */}
               {cartItems.length > 1 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', justifyContent: 'center' }}>
-                  {cartItems.map((it) => NB_SHOPIFY_VARIANT_IDS[it.slug] && (
+                  {cartItems.map((it) => (
                     <a key={it.slug} href={nbCartPermalink(it.slug, Math.max(1, Math.floor(it.qty || 1)))} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
                       {it.name} →
                     </a>

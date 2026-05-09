@@ -8,6 +8,7 @@ const NB_SITE_URLS = {
   original: 'https://noodlebomb.co/product-original.html',
   citrus: 'https://noodlebomb.co/product-citrus.html',
   spicy: 'https://noodlebomb.co/product-spicy.html',
+  shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
   trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/#lineup'
@@ -17,6 +18,7 @@ const PRODUCT_IMAGES = {
   original: 'uploads/nb-original-clean.png',
   citrus:   'uploads/nb-citrus-shoyu-clean.png',
   spicy:    'uploads/nb-spicy-tokyo-clean.png',
+  shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png',
   trio:     'uploads/noodlebomb-trio.png'
 };
 
@@ -24,6 +26,7 @@ const PRODUCT_TAGS = {
   original: 'Garlic & Sesame',
   citrus:   'Citrus Shoyu',
   spicy:    'Spicy Tokyo',
+  shoyu:    'Shoyu Reserve preorder',
   trio:     '3-pack bundle'
 };
 

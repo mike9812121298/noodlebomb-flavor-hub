@@ -14,6 +14,13 @@
   var STORAGE_KEY = 'nb_cart_v2';
   var BUS = (typeof window !== 'undefined') ? new EventTarget() : null;
   var CHANGE = 'nb-cart-change';
+  var PRODUCT_CATALOG = {
+    original: { slug: 'original', name: 'Original', price: 11.99 },
+    citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 },
+    spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99 },
+    trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 },
+    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99 }
+  };
 
   function safeRead() {
     try {
@@ -62,6 +69,19 @@
     emitChange();
   }
 
+  function addFromUrl() {
+    if (typeof window === 'undefined' || !window.URLSearchParams) return;
+    var params = new URLSearchParams(window.location.search || '');
+    var slug = params.get('add');
+    if (!slug || !PRODUCT_CATALOG[slug]) return;
+    var qty = Math.max(1, Math.floor(Number(params.get('qty')) || 1));
+    add(Object.assign({}, PRODUCT_CATALOG[slug], { qty: qty }));
+    params.delete('add');
+    params.delete('qty');
+    var next = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + (window.location.hash || '');
+    window.history.replaceState({}, '', next);
+  }
+
   function setQty(slug, qty) {
     var items = safeRead();
     var n = Math.max(0, Math.floor(Number(qty) || 0));
@@ -108,5 +128,6 @@
       onChange: onChange,
       FREE_SHIPPING_THRESHOLD: 35
     };
+    addFromUrl();
   }
 })();

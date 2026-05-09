@@ -4,7 +4,7 @@
 
 function NextDrop() {
   const shoyuProductUrl = 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve';
-  const shoyuCartUrl = 'https://nu2vqa-ma.myshopify.com/cart/add?id=54006619636022&quantity=1&return_to=%2Fcart';
+  const shoyuCartUrl = '/cart?add=shoyu&qty=1';
 
   const cards = [
     {

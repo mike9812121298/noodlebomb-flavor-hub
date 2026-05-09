@@ -13,15 +13,14 @@ const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus":
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
-// Shopify cart-permalink: skip the storefront homepage and land users directly
-// on the Shopify cart page with the item already added. return_to wires the
-// "Continue Shopping" link back to noodlebomb.co. Variant IDs match
-// shopify-config.js and were captured from products.json on 2026-05-08.
+// Branded cart permalink: keep shoppers inside noodlebomb.co until the final
+// Shopify checkout handoff. /cart reads add/qty and stores the line locally.
 const SHOPIFY_VARIANT_IDS = {
   original: '53998041596214',
   spicy:    '53998042120502',
   citrus:   '53998041071926',
-  trio:     '53998042644790'
+  trio:     '53998042644790',
+  shoyu:    '54006619636022'
 };
 const PRODUCT_DETAIL_URLS = {
   original: '/product-original.html',
@@ -29,9 +28,8 @@ const PRODUCT_DETAIL_URLS = {
   citrus: '/product-citrus.html'
 };
 const cartPermalink = (slug, qty = 1) => {
-  const id = SHOPIFY_VARIANT_IDS[slug];
-  if (!id) return 'https://nu2vqa-ma.myshopify.com/cart';
-  return `https://nu2vqa-ma.myshopify.com/cart/add?id=${id}&quantity=${qty}&return_to=%2Fcart`;
+  const n = Math.max(1, Math.floor(Number(qty) || 1));
+  return `/cart?add=${encodeURIComponent(slug)}&qty=${n}`;
 };
 const openCartWithFeedback = (e, label = 'Opening cart...') => {
   if (!e || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
