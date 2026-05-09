@@ -24,9 +24,9 @@ const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD)
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-clean.png',
-  citrus:   'uploads/nb-citrus-shoyu-clean.png',
-  spicy:    'uploads/nb-spicy-tokyo-clean.png',
+  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
+  citrus:   'uploads/nb-citrus-front-cutout-2026-05-09.png',
+  spicy:    'uploads/nb-spicy-front-cutout-2026-05-09.png',
   shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png',
   trio:     'uploads/noodlebomb-trio.png'
 };

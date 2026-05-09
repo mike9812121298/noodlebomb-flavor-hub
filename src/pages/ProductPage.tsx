@@ -12,9 +12,9 @@ import {
 import SpiceLevel from "@/components/SpiceLevel";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
-import nbOriginal from "@/assets/nb-original-clean.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 // Designer / lifestyle creatives — per flavor gallery
 import originalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";

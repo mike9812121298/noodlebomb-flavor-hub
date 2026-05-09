@@ -2,9 +2,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Flame, ArrowRight, RotateCcw } from "lucide-react";
 import SpiceLevel from "@/components/SpiceLevel";
-import nbOriginal from "@/assets/nb-original-clean.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-tokyo-clean.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-shoyu-clean.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
 import { Link } from "react-router-dom";
 
 const questions = [

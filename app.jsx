@@ -69,9 +69,9 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-front-normalized.png',
-  citrus: 'uploads/nb-citrus-front-normalized.png',
-  spicy: 'uploads/nb-spicy-front-normalized.png'
+  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
+  citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png',
+  spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.png'
 };
 
 const FOOD_IMAGES = {
