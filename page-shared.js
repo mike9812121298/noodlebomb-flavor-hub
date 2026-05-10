@@ -1,4 +1,4 @@
-// NoodleBomb shared page interactions 0 about / recipes / faq
+// NoodleBomb shared page interactions - about / recipes / faq
 
 (function () {
   // Mobile drawer toggle
@@ -52,8 +52,8 @@
       '#next-drop .nd-bottle-stage{position:relative!important;}',
       '#next-drop a[href*="add=shoyu"]:not(.nd-image-preorder){display:none!important;}',
       '#next-drop .nd-notify-caption{display:none!important;}',
-      '#next-drop .nd-image-preorder{position:absolute!important;left:50%!important;right:auto!important;bottom:clamp(10px,2vw,18px)!important;top:auto!important;z-index:12!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:auto!important;max-width:calc(100% - 24px)!important;min-height:44px!important;padding:13px 18px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:999px!important;background:#f4efe7!important;color:#0e0d0c!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.13em!important;text-transform:uppercase!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 16px 34px rgba(0,0,0,.34)!important;transform:translateX(-50%)!important;}',
-      '@media (max-width:768px){.hero-section .nb-live-trio-hero{width:100%!important;height:100%!important;object-fit:cover!important;object-position:68% center!important;opacity:.96!important;}#next-drop .nd-image-preorder{bottom:8px!important;font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
+      '#next-drop .nd-image-preorder{position:static!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;z-index:12!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:fit-content!important;max-width:calc(100% - 24px)!important;min-height:44px!important;margin:14px auto 0!important;padding:13px 18px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:999px!important;background:#f4efe7!important;color:#0e0d0c!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.13em!important;text-transform:uppercase!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 16px 34px rgba(0,0,0,.34)!important;transform:none!important;}',
+      '@media (max-width:768px){.hero-section .nb-live-trio-hero{width:100%!important;height:100%!important;object-fit:cover!important;object-position:68% center!important;opacity:.96!important;}#next-drop .nd-image-preorder{font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -91,6 +91,10 @@
     cta.textContent = 'PREORDER FOR $9.99 \u2192';
     cta.removeAttribute('aria-hidden');
     cta.removeAttribute('tabindex');
+
+    if (cta.parentNode === stage) {
+      stage.insertAdjacentElement('afterend', cta);
+    }
 
     document.querySelectorAll('#next-drop a[href*="add=shoyu"]').forEach(function (link) {
       if (link === cta || link.classList.contains('nd-image-preorder')) return;
