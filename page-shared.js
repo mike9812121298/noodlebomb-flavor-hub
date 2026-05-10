@@ -10,7 +10,6 @@
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
     });
-    // Close on nav link click
     drawer.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
         drawer.classList.remove('open');
@@ -20,12 +19,6 @@
     });
   }
 
-  // FAQ accordion: clicking a button toggles its <details> wrapper. Native
-  // <details>/<summary> is used in markup so JS-disabled clients still work.
-  // No-op here; semantic HTML handles it.
-
-  // Buy-click feedback: give shoppers immediate confirmation before the
-  // browser hands off to Shopify cart URLs.
   document.querySelectorAll('.pdp-cta[href*="/cart/add"], .mobile-pdp-bar a[href*="/cart/add"]').forEach(function (link) {
     link.addEventListener('click', function (event) {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) return;
@@ -39,8 +32,6 @@
     });
   });
 
-  // Homepage production patch: keeps the current live build aligned with the
-  // latest launch direction while the source bundle deploy is pending.
   var patchStylesId = 'nb-live-homepage-patch';
   function ensureHomepagePatchStyles() {
     if (document.getElementById(patchStylesId)) return;
@@ -52,8 +43,8 @@
       '#next-drop .nd-bottle-stage{position:relative!important;}',
       '#next-drop a[href*="add=shoyu"]:not(.nd-image-preorder){display:none!important;}',
       '#next-drop .nd-notify-caption{display:none!important;}',
-      '#next-drop .nd-image-preorder{position:static!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;z-index:12!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:fit-content!important;max-width:calc(100% - 24px)!important;min-height:44px!important;margin:14px auto 0!important;padding:13px 18px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:999px!important;background:#f4efe7!important;color:#0e0d0c!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.13em!important;text-transform:uppercase!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 16px 34px rgba(0,0,0,.34)!important;transform:none!important;}',
-      '@media (max-width:768px){.hero-section .nb-live-trio-hero{width:100%!important;height:100%!important;object-fit:cover!important;object-position:68% center!important;opacity:.96!important;}#next-drop .nd-image-preorder{font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
+      '#next-drop .nd-image-preorder{position:absolute!important;left:50%!important;right:auto!important;bottom:clamp(6px,1.4vw,18px)!important;top:auto!important;z-index:12!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:fit-content!important;max-width:calc(100% - 24px)!important;min-height:44px!important;margin:0!important;padding:13px 18px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:999px!important;background:#f4efe7!important;color:#0e0d0c!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.13em!important;text-transform:uppercase!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 16px 34px rgba(0,0,0,.34)!important;transform:translateX(-50%)!important;}',
+      '@media (max-width:768px){.hero-section .nb-live-trio-hero{width:100%!important;height:100%!important;object-fit:cover!important;object-position:68% center!important;opacity:.96!important;}#next-drop .nd-image-preorder{bottom:6px!important;font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -74,16 +65,14 @@
     var stage = document.querySelector('#next-drop .nd-bottle-stage');
     if (!stage) return false;
 
-    var cta = stage.querySelector('.nd-image-preorder');
-    var tag = cta || stage.querySelector('.nd-stage-tag');
-    if (!tag) return false;
+    var cta = document.querySelector('#next-drop .nd-image-preorder') || stage.querySelector('.nd-stage-tag');
+    if (!cta) return false;
 
-    if (tag.tagName.toLowerCase() !== 'a') {
-      cta = document.createElement('a');
-      cta.className = tag.className;
-      tag.parentNode.replaceChild(cta, tag);
-    } else {
-      cta = tag;
+    if (cta.tagName.toLowerCase() !== 'a') {
+      var replacement = document.createElement('a');
+      replacement.className = cta.className;
+      cta.parentNode.replaceChild(replacement, cta);
+      cta = replacement;
     }
 
     cta.classList.add('nd-stage-tag', 'nd-image-preorder');
@@ -92,8 +81,8 @@
     cta.removeAttribute('aria-hidden');
     cta.removeAttribute('tabindex');
 
-    if (cta.parentNode === stage) {
-      stage.insertAdjacentElement('afterend', cta);
+    if (cta.parentNode !== stage) {
+      stage.appendChild(cta);
     }
 
     document.querySelectorAll('#next-drop a[href*="add=shoyu"]').forEach(function (link) {
