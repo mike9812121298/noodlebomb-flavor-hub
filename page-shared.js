@@ -1,4 +1,4 @@
-// NoodleBomb shared page interactions â€” about / recipes / faq
+// NoodleBomb shared page interactions 0 about / recipes / faq
 
 (function () {
   // Mobile drawer toggle
@@ -48,12 +48,12 @@
     style.id = patchStylesId;
     style.textContent = [
       '.hero-section>div:first-child{background:#070604!important;}',
-      '.hero-section .nb-live-trio-hero{position:absolute!important;inset:0!important;left:0!important;right:auto!important;top:0!important;bottom:auto!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;transform:none!important;transition:none!important;filter:none!important;}',
+      '.hero-section .nb-live-trio-hero{position:absolute!important;inset:0!important;left:0!important;right:auto!important;top:0!important;bottom:auto!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;transform:none!important;transition:none!important;filter:none!important;image-rendering:auto!important;}',
       '#next-drop .nd-bottle-stage{position:relative!important;}',
       '#next-drop a[href*="add=shoyu"]:not(.nd-image-preorder){display:none!important;}',
       '#next-drop .nd-notify-caption{display:none!important;}',
       '#next-drop .nd-image-preorder{position:absolute!important;left:50%!important;right:auto!important;bottom:clamp(10px,2vw,18px)!important;top:auto!important;z-index:12!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:auto!important;max-width:calc(100% - 24px)!important;min-height:44px!important;padding:13px 18px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:999px!important;background:#f4efe7!important;color:#0e0d0c!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.13em!important;text-transform:uppercase!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 16px 34px rgba(0,0,0,.34)!important;transform:translateX(-50%)!important;}',
-      '@media (max-width:768px){.hero-section .nb-live-trio-hero{width:100%!important;height:100%!important;object-fit:cover!important;object-position:66% center!important;opacity:.92!important;}#next-drop .nd-image-preorder{bottom:8px!important;font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
+      '@media (max-width:768px){.hero-section .nb-live-trio-hero{width:100%!important;height:100%!important;object-fit:cover!important;object-position:68% center!important;opacity:.96!important;}#next-drop .nd-image-preorder{bottom:8px!important;font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -63,8 +63,8 @@
       document.querySelector('.hero-section > div:first-child img');
     if (!heroImg) return false;
     heroImg.classList.add('nb-live-trio-hero');
-    heroImg.src = '/uploads/nb-front-hero-user-2026-05-09.svg';
-    heroImg.alt = 'NoodleBomb trio bottles with citrus, garlic, mushrooms, and chiles on a black background';
+    heroImg.src = '/uploads/nb-hero-pour.png';
+    heroImg.alt = 'NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background';
     heroImg.loading = 'eager';
     heroImg.decoding = 'async';
     return true;
