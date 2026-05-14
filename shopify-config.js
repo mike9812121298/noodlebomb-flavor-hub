@@ -6,9 +6,10 @@
  *   1. Confirm 4 products are created in the Shopify store and published
  *      to the Headless sales channel:
  *        - Original ($11.99)
- *        - Citrus Shoyu ($11.99)
  *        - Spicy Tokyo ($11.99)
+ *        - Citrus Shoyu ($11.99)
  *        - The NoodleBomb Trio ($29.99)
+ *        - Shoyu Reserve preorder ($9.99)
  *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:
  *        fetch('https://nu2vqa-ma.myshopify.com/api/2026-04/graphql.json', {
@@ -68,8 +69,8 @@
     // Captured from paid store via Storefront API 2026-05-06.
     variantIds: {
       original: 'gid://shopify/ProductVariant/53998041596214',
-      citrus:   'gid://shopify/ProductVariant/53998041071926',
       spicy:    'gid://shopify/ProductVariant/53998042120502',
+      citrus:   'gid://shopify/ProductVariant/53998041071926',
       trio:     'gid://shopify/ProductVariant/53998042644790',
       shoyu:    'gid://shopify/ProductVariant/54006619636022'
     }

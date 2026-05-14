@@ -8,7 +8,7 @@
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // the local cart (cart.html → checkout.html → Wix payment handoff).
-const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
 
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
@@ -70,8 +70,8 @@ const FLAVORS = {
 
 const FLAVOR_IMAGES = {
   original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png',
-  spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.png'
+  spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.png',
+  citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png'
 };
 
 const FOOD_IMAGES = {
@@ -1476,7 +1476,7 @@ function FinalCTA() {
             </p>
           </div>
           {[
-          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
+          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Shoyu Reserve', WIX_URLS.shoyu], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
           map(([h, items]) =>
@@ -1804,8 +1804,8 @@ function BuildBundle() {
     })
     .filter((p) => p.qty > 0);
   const cartLines = [
-    ...(trioSets > 0 ? [{ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd, qty: trioSets }] : []),
     ...singles.map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: p.qty })),
+    ...(trioSets > 0 ? [{ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd, qty: trioSets }] : []),
     ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99, qty: quantities.shoyu }] : [])
   ];
   const cartTotal = cartLines.reduce((sum, line) => sum + line.price * line.qty, 0);
