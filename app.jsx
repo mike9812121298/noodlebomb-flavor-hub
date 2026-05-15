@@ -69,9 +69,9 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.png',
-  citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png'
+  original: 'uploads/nb-original-front-equalized-2026-05-14.png',
+  spicy: 'uploads/nb-spicy-front-equalized-2026-05-14.png',
+  citrus: 'uploads/nb-citrus-front-equalized-2026-05-14.png'
 };
 
 const FOOD_IMAGES = {
@@ -1778,7 +1778,7 @@ function BuildBundle() {
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/shoyu-reserve-preview-2026-05-08.png',
+      image: 'uploads/shoyu-reserve-equalized-2026-05-14.png',
       preorder: true
     }
   ];
