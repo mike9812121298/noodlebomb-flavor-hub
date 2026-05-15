@@ -54,8 +54,8 @@
       document.querySelector('.hero-section > div:first-child img');
     if (!heroImg) return false;
     heroImg.classList.add('nb-live-trio-hero');
-    heroImg.src = '/uploads/nb-hero-pour.png';
-    heroImg.alt = 'NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background';
+    heroImg.src = '/og-trio-counter.png';
+    heroImg.alt = 'NoodleBomb sauce bottles in order: Original, Spicy Tokyo, and Citrus Shoyu';
     heroImg.loading = 'eager';
     heroImg.decoding = 'async';
     return true;

@@ -16,8 +16,8 @@ const NB_SITE_URLS = {
 };
 const SHOPIFY_VARIANT_IDS = {
   original: '53998041596214',
-  citrus: '53998041071926',
   spicy: '53998042120502',
+  citrus: '53998041071926',
   trio: '53998042644790',
   shoyu: '54006619636022'
 };
