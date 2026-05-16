@@ -1778,7 +1778,7 @@ function BuildBundle() {
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/shoyu-reserve-equalized-2026-05-14.png',
+      image: 'uploads/shoyu-reserve-7oz-front-2026-05-16.png',
       preorder: true
     }
   ];

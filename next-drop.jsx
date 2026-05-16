@@ -16,7 +16,7 @@ function NextDrop() {
       oneliner: 'A bold, glossy shoyu-style sauce with deep soy richness, savory umami, and a long clean finish. Built for rice bowls, ramen, wings, grilled meat, vegetables, and late-night leftovers.',
       pills: ['Darker', 'Glossy', 'Savory', 'Long Finish'],
       progress: 2,
-      img: 'uploads/shoyu-reserve-equalized-2026-05-14.png',
+      img: 'uploads/shoyu-reserve-7oz-front-2026-05-16.png',
       altOverride: 'NoodleBomb Shoyu Reserve preview bottle - Coming Summer 2026',
     },
   ];
