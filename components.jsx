@@ -309,6 +309,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   const navLinks = [
     ['Home', '/'],
     ['Shop Sauces', '/shop'],
+    ['Seasonings', '/seasonings'],
     ['Recipes', '/recipes'],
     ['About', '/about'],
     ['Monthly Ramen Box', '/monthly-box'],

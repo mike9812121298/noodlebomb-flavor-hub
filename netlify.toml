@@ -212,14 +212,32 @@
   force = true
 
 [[redirects]]
+  from = "/seasonings"
+  to = "/seasonings.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/product/fire-dust"
+  to = "/product-fire-dust.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/product/roasted-garlic-sesame"
+  to = "/product-roasted-garlic-sesame.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/product/shoyu-reserve"
-  to = "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve"
-  status = 302
+  to = "/product-shoyu-reserve.html"
+  status = 200
   force = true
 
 [[redirects]]
   from = "/shoyu-reserve"
-  to = "/#next-drop"
+  to = "/product/shoyu-reserve"
   status = 301
   force = true
 
@@ -383,6 +401,26 @@
   status = 200
 
 [[redirects]]
+  from = "/seasonings"
+  to = "/seasonings.html"
+  status = 200
+
+[[redirects]]
+  from = "/product/fire-dust"
+  to = "/product-fire-dust.html"
+  status = 200
+
+[[redirects]]
+  from = "/product/roasted-garlic-sesame"
+  to = "/product-roasted-garlic-sesame.html"
+  status = 200
+
+[[redirects]]
+  from = "/product/shoyu-reserve"
+  to = "/product-shoyu-reserve.html"
+  status = 200
+
+[[redirects]]
   from = "/product-original.html"
   to = "/original-ramen-sauce"
   status = 301
@@ -397,6 +435,24 @@
 [[redirects]]
   from = "/product-citrus.html"
   to = "/citrus-shoyu-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-fire-dust.html"
+  to = "/product/fire-dust"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-roasted-garlic-sesame.html"
+  to = "/product/roasted-garlic-sesame"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-shoyu-reserve.html"
+  to = "/product/shoyu-reserve"
   status = 301
   force = true
 

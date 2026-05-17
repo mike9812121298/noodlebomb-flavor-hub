@@ -8,7 +8,7 @@
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // the local cart (cart.html → checkout.html → Wix payment handoff).
-const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
 
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
@@ -25,7 +25,8 @@ const SHOPIFY_VARIANT_IDS = {
 const PRODUCT_DETAIL_URLS = {
   original: '/original-ramen-sauce',
   spicy: '/spicy-tokyo-ramen-sauce',
-  citrus: '/citrus-shoyu-ramen-sauce'
+  citrus: '/citrus-shoyu-ramen-sauce',
+  shoyu: '/product/shoyu-reserve'
 };
 const cartPermalink = (slug, qty = 1) => {
   const n = Math.max(1, Math.floor(Number(qty) || 1));
@@ -268,7 +269,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
     { label: 'Dumplings', key: 'citrus', verb: 'Dip', reason: 'Clean citrus lift cuts through rich fillings and fried edges.' },
     { label: 'Eggs', key: 'original', verb: 'Finish', reason: 'A little roasted garlic and sesame makes breakfast taste intentional.' },
     { label: 'Vegetables', key: 'citrus', verb: 'Glaze', reason: 'Bright shoyu keeps roasted or steamed vegetables lively.' },
-    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or finishing sauce.' },
+    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or final drizzle.' },
     { label: 'Leftovers', key: 'original', verb: 'Wake up', reason: 'Original is the easy reset when yesterday needs a second life.' },
   ];
   const flavorNotes = {
@@ -1476,7 +1477,7 @@ function FinalCTA() {
             </p>
           </div>
           {[
-          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Shoyu Reserve', WIX_URLS.shoyu], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
+          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['Seasonings', '/seasonings'], ['Fire Dust', '/product/fire-dust'], ['Roasted Garlic Sesame', '/product/roasted-garlic-sesame'], ['Shoyu Reserve', WIX_URLS.shoyu], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
           map(([h, items]) =>
@@ -1730,6 +1731,118 @@ function FAQ() {
   );
 }
 
+function SeasoningLaunchHome() {
+  const shakeFoods = ['Ramen', 'Eggs', 'Rice', 'Wings', 'Fries', 'Popcorn', 'Avocado Toast', 'Grilled Chicken', 'Roasted Veggies', 'Dumplings'];
+  const loadouts = [
+    { title: 'Heat Bundle', items: ['Spicy Tokyo Ramen Sauce', 'Fire Dust'] },
+    { title: 'Umami Bundle', items: ['Original Ramen Sauce', 'Roasted Garlic Sesame'] },
+    { title: 'Ramen Kit', items: ['All 4 drizzle flavors', 'Both dry blends'] },
+    { title: 'Shoyu Reserve Pair', items: ['Shoyu Reserve Ramen Sauce', 'Roasted Garlic Sesame'] }
+  ];
+
+  return (
+    <>
+      <section id="seasoning-launch" className="launch-section" style={{ background: '#0b0a09', scrollMarginTop: 80 }}>
+        <div className="container">
+          <div className="launch-hero-grid">
+            <Reveal>
+              <div>
+                <span className="launch-pill">NOW SHAKEABLE.</span>
+                <h2 className="display" style={{ fontSize: 'clamp(48px, 8.5vw, 112px)', lineHeight: 0.9, letterSpacing: '-0.06em', margin: '24px 0 20px' }}>Shake bold.</h2>
+                <p className="launch-lede">Introducing NoodleBomb dry blends.</p>
+                <p className="launch-copy">The same flavor philosophy that built the sauce line, now in a shake-on format with Fire Dust and Roasted Garlic Sesame.</p>
+                <div className="launch-actions">
+                  <a className="launch-btn primary" href="/seasonings">Explore seasonings</a>
+                  <a className="launch-btn" href="#seasoning-home-notify">Get notified</a>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <div className="launch-stage" aria-label="NoodleBomb dry blend launch preview">
+                <img className="placeholder-pre-2026-06-05" src="/uploads/nb-fire-dust-front-placeholder-2026-06-05.png" alt="NoodleBomb Fire Dust dry blend jar placeholder" loading="lazy" />
+                <img className="placeholder-pre-2026-06-05" src="/uploads/nb-roasted-garlic-sesame-front-placeholder-2026-06-05.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar placeholder" loading="lazy" />
+                <img className="placeholder-pre-2026-06-05" src="/uploads/nb-shoyu-reserve-front-placeholder-2026-06-05.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle placeholder" loading="lazy" />
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="launch-section" style={{ background: '#0f0d0b' }}>
+        <div className="container">
+          <div className="section-head">
+            <Reveal>
+              <div>
+                <span className="launch-pill">FROM SAUCE TO SEASONING</span>
+                <h2>Drizzle on. Shake on. Same flavor.</h2>
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <p>NoodleBomb started with ramen sauce for everyday food. The dry blends keep that same approach in a black-label jar: visible texture, bold aroma, and a format you can shake over anything savory.</p>
+            </Reveal>
+          </div>
+          <div className="format-strip">
+            <div className="format-panel light">
+              <div className="format-media"><img src="/uploads/nb-original-front-equalized-2026-05-14.png" alt="NoodleBomb Original ramen sauce bottle" loading="lazy" /></div>
+              <div><span className="launch-pill">Pour bold.</span><h3>Drizzle on.</h3><p>Original, Spicy Tokyo, Citrus Shoyu, and Shoyu Reserve. BOLD FLAVOR. EVERY BITE.</p></div>
+            </div>
+            <div className="format-panel dark">
+              <div className="format-media"><img className="placeholder-pre-2026-06-05" src="/uploads/nb-fire-dust-front-placeholder-2026-06-05.png" alt="NoodleBomb Fire Dust dry blend jar placeholder" loading="lazy" /></div>
+              <div><span className="launch-pill">Shake bold.</span><h3>Shake on.</h3><p>Fire Dust and Roasted Garlic Sesame. BOLD FLAVOR. EVERY BITE.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="usage-marquee" aria-label="What people shake this on">
+        <div className="usage-track">
+          {[...shakeFoods, ...shakeFoods].map((food, i) => <span key={`${food}-${i}`}>{food}</span>)}
+        </div>
+      </section>
+
+      <section className="launch-section" id="seasoning-home-notify" style={{ background: '#0b0a09' }}>
+        <div className="container">
+          <div className="section-head">
+            <Reveal>
+              <div>
+                <span className="launch-pill">BUILD YOUR FLAVOR LOADOUT</span>
+                <h2>Two delivery formats, one cart.</h2>
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <p>Fire Dust, Roasted Garlic Sesame, and Shoyu Reserve launch together. Sign up for the first shipment alert and launch discount.</p>
+            </Reveal>
+          </div>
+          <div className="loadout-grid">
+            {loadouts.map((loadout) => (
+              <div className="loadout-card" key={loadout.title}>
+                <div>
+                  <h3>{loadout.title}</h3>
+                  <ul>{loadout.items.map((item) => <li key={item}>{item}</li>)}</ul>
+                </div>
+                <a className="launch-btn" href="/seasonings#seasoning-notify">Get notified</a>
+              </div>
+            ))}
+          </div>
+          <div className="bundle-strip" style={{ '--product-rgb': '232, 74, 58', marginTop: 18 }}>
+            <div>
+              <span className="launch-pill">SMALL BATCH • BOLD FLAVOR • MADE FOR EVERYDAY</span>
+              <h2>Get the launch alert.</h2>
+              <p>No charge until shipping. We will flip the CTAs to cart links during the June launch window.</p>
+            </div>
+            <form className="notify-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" data-klaviyo-tag="seasoning-prelaunch">
+              <input type="hidden" name="_subject" value="NoodleBomb seasoning launch signup" />
+              <input type="hidden" name="launch_tag" value="seasoning-prelaunch" />
+              <input type="email" name="email" placeholder="your@email.co" required aria-label="Email address for launch notification" />
+              <button type="submit">Notify me</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 
 function BuildBundle() {
   const products = [
@@ -1773,12 +1886,12 @@ function BuildBundle() {
       slug: 'shoyu',
       name: 'Shoyu Reserve',
       eyebrow: 'Rare drop',
-      role: 'Premium soy sauce preorder. Expected Summer 2026.',
-      price: 9.99,
+      role: 'Slow-brewed depth. Bold finish.',
+      price: 11.99,
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/shoyu-reserve-7oz-front-cutout-2026-05-16.png',
+      image: 'uploads/nb-shoyu-reserve-front-placeholder-2026-06-05.png',
       preorder: true
     }
   ];
@@ -1927,7 +2040,7 @@ function BuildBundle() {
                       <span className="bundle-check">{qty ? `${qty}x` : '0'}</span>
                     </span>
                     <span className="bundle-bottle-slot">
-                      <img src={product.image} alt={`${product.name} bottle`} loading="lazy" />
+                      <img className={product.image.includes('placeholder-2026-06-05') ? 'placeholder-pre-2026-06-05' : undefined} src={product.image} alt={`${product.name} bottle`} loading="lazy" />
                     </span>
                     <span className="bundle-card-copy">
                       <strong>{product.name}</strong>
@@ -2019,7 +2132,7 @@ function BuildBundle() {
                 {added ? 'Added to cart' : `Add ${totalBottles || 0} bottle${totalBottles === 1 ? '' : 's'} - ${money(cartTotal)}`}
                 <span aria-hidden="true">→</span>
               </a>
-              <div className="bundle-note">Every complete Original + Spicy Tokyo + Citrus Shoyu set is added as a discounted Trio. Shoyu Reserve is a paid preorder item.</div>
+              <div className="bundle-note">Every complete Original + Spicy Tokyo + Citrus Shoyu set is added as a discounted Trio. New launch items flip to cart links during the June launch window.</div>
             </div>
           </Reveal>
         </div>
@@ -2147,6 +2260,7 @@ function App() {
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
       <TrustStrip />
+      <SeasoningLaunchHome />
       <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <NextDrop />
       <BuildBundle />
