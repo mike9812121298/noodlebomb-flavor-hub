@@ -1734,10 +1734,47 @@ function FAQ() {
 function SeasoningLaunchHome() {
   const shakeFoods = ['Ramen', 'Eggs', 'Rice', 'Wings', 'Fries', 'Popcorn', 'Avocado Toast', 'Grilled Chicken', 'Roasted Veggies', 'Dumplings'];
   const loadouts = [
-    { title: 'Heat Bundle', items: ['Spicy Tokyo Ramen Sauce', 'Fire Dust'] },
-    { title: 'Umami Bundle', items: ['Original Ramen Sauce', 'Roasted Garlic Sesame'] },
-    { title: 'Ramen Kit', items: ['All 4 drizzle flavors', 'Both dry blends'] },
-    { title: 'Shoyu Reserve Pair', items: ['Shoyu Reserve Ramen Sauce', 'Roasted Garlic Sesame'] }
+    {
+      title: 'Heat Stack',
+      tag: 'Spicy + crunchy',
+      copy: 'Pour Spicy Tokyo, shake Fire Dust, and turn noodles or wings into the bold path.',
+      accent: '232, 74, 58',
+      images: [
+        { src: '/uploads/nb-spicy-front-tight-2026-05-17.png', alt: 'NoodleBomb Spicy Tokyo Ramen Sauce bottle' },
+        { src: '/uploads/nb-fire-dust-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Fire Dust dry blend jar' }
+      ]
+    },
+    {
+      title: 'Umami Stack',
+      tag: 'Original + toasted',
+      copy: 'Start with Original, finish with Roasted Garlic Sesame, and make rice, eggs, or ramen feel full.',
+      accent: '205, 139, 55',
+      images: [
+        { src: '/uploads/nb-original-front-tight-2026-05-17.png', alt: 'NoodleBomb Original Ramen Sauce bottle' },
+        { src: '/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Roasted Garlic Sesame dry blend jar' }
+      ]
+    },
+    {
+      title: 'Bright Stack',
+      tag: 'Citrus + garlic',
+      copy: 'Citrus Shoyu brings the lift. Roasted Garlic Sesame brings the savory finish.',
+      accent: '236, 151, 45',
+      images: [
+        { src: '/uploads/nb-citrus-front-tight-2026-05-17.png', alt: 'NoodleBomb Citrus Shoyu Ramen Sauce bottle' },
+        { src: '/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Roasted Garlic Sesame dry blend jar' }
+      ]
+    },
+    {
+      title: 'Full Lineup',
+      tag: 'All 6 SKUs',
+      copy: 'Four pour-on flavors, two shake-on blends, one launch alert when the full set is ready.',
+      accent: '245, 239, 230',
+      images: [
+        { src: '/uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.png', alt: 'NoodleBomb Shoyu Reserve Ramen Sauce bottle' },
+        { src: '/uploads/nb-fire-dust-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Fire Dust dry blend jar' },
+        { src: '/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Roasted Garlic Sesame dry blend jar' }
+      ]
+    }
   ];
 
   return (
@@ -1807,28 +1844,56 @@ function SeasoningLaunchHome() {
         </div>
       </section>
 
-      <section className="launch-section" id="seasoning-home-notify" style={{ background: '#0b0a09' }}>
+      <section className="launch-section loadout-lab-section" id="seasoning-home-notify" style={{ background: '#0b0a09' }}>
         <div className="container">
-          <div className="section-head">
+          <div className="loadout-lab">
             <Reveal>
-              <div>
+              <div className="loadout-lab-copy">
                 <span className="launch-pill">BUILD YOUR FLAVOR LOADOUT</span>
-                <h2>Two delivery formats, one cart.</h2>
+                <h2>Pick a pour. Add a shake. Build your cart.</h2>
+                <p>Use the sauces for the big glossy hit, then add a dry blend for texture, aroma, and table-side crunch. Same NoodleBomb flavor idea, two ways to use it.</p>
+                <div className="loadout-steps" aria-label="Flavor loadout steps">
+                  <span><strong>01</strong> Pick sauce</span>
+                  <span><strong>02</strong> Add shake</span>
+                  <span><strong>03</strong> Get launch alert</span>
+                </div>
               </div>
             </Reveal>
             <Reveal delay={1}>
-              <p>Fire Dust, Roasted Garlic Sesame, and Shoyu Reserve launch together. Sign up for the first shipment alert and launch discount.</p>
+              <div className="loadout-cart-preview" aria-label="One cart preview">
+                <div className="loadout-cart-glow" />
+                <div className="cart-preview-rail">
+                  <span>Pour-on flavor</span>
+                  <strong>+</strong>
+                  <span>Shake-on flavor</span>
+                </div>
+                <div className="cart-preview-products">
+                  <img src="/uploads/nb-spicy-front-tight-2026-05-17.png" alt="Spicy Tokyo Ramen Sauce bottle" loading="lazy" />
+                  <img src="/uploads/nb-fire-dust-cutout-tight-2026-05-17.png" alt="Fire Dust dry blend jar" loading="lazy" />
+                  <img src="/uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.png" alt="Shoyu Reserve Ramen Sauce bottle" loading="lazy" />
+                </div>
+                <div className="cart-preview-total">
+                  <span>Launch lineup</span>
+                  <strong>$11.99 each</strong>
+                </div>
+              </div>
             </Reveal>
           </div>
-          <div className="loadout-grid">
+          <div className="loadout-stack-grid">
             {loadouts.map((loadout) => (
-              <div className="loadout-card" key={loadout.title}>
-                <div>
-                  <h3>{loadout.title}</h3>
-                  <ul>{loadout.items.map((item) => <li key={item}>{item}</li>)}</ul>
-                </div>
-                <a className="launch-btn" href="/seasonings#seasoning-notify">Get notified</a>
-              </div>
+              <a className="loadout-stack-card" style={{ '--stack-rgb': loadout.accent }} href="/seasonings#seasoning-notify" key={loadout.title}>
+                <span className="loadout-stack-tag">{loadout.tag}</span>
+                <span className="loadout-stack-media">
+                  {loadout.images.map((image, index) => (
+                    <img src={image.src} alt={image.alt} loading="lazy" key={`${loadout.title}-${index}`} />
+                  ))}
+                </span>
+                <span className="loadout-stack-copy">
+                  <strong>{loadout.title}</strong>
+                  <span>{loadout.copy}</span>
+                </span>
+                <span className="loadout-stack-cta">Get notified</span>
+              </a>
             ))}
           </div>
           <div className="bundle-strip" style={{ '--product-rgb': '232, 74, 58', marginTop: 18 }}>
