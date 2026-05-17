@@ -49,15 +49,15 @@
 # Catch-all for any other /product/* deep link (old emails, ads, social) — go to lineup
 /product/shoyu-reserve    https://nu2vqa-ma.myshopify.com/products/shoyu-reserve         302!
 /shoyu-reserve            /#next-drop                                                    301!
-/product/*                https://nu2vqa-ma.myshopify.com/collections/all                302!
+/product/*                https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 
 # /shop and /shop/* — primary CTA target on the marketing site
-/shop                     https://nu2vqa-ma.myshopify.com/collections/all                302!
+/shop                     https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 /shop/*                   https://nu2vqa-ma.myshopify.com/:splat                         302!
 
 # Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
 # (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
-/product-page/*           https://nu2vqa-ma.myshopify.com/collections/all                302!
+/product-page/*           https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 /cart-page                https://nu2vqa-ma.myshopify.com/cart                           302!
 /category/*               https://nu2vqa-ma.myshopify.com/collections/:splat             302!
 /ramensauce               https://nu2vqa-ma.myshopify.com/products/original              302!
