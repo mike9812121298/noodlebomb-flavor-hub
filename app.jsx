@@ -1761,7 +1761,7 @@ function SeasoningLaunchHome() {
               <div className="launch-stage" aria-label="NoodleBomb dry blend launch preview">
                 <img className="placeholder-pre-2026-06-05" src="/uploads/nb-fire-dust-front-placeholder-2026-06-05.png" alt="NoodleBomb Fire Dust dry blend jar placeholder" loading="lazy" />
                 <img className="placeholder-pre-2026-06-05" src="/uploads/nb-roasted-garlic-sesame-front-placeholder-2026-06-05.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar placeholder" loading="lazy" />
-                <img className="placeholder-pre-2026-06-05" src="/uploads/nb-shoyu-reserve-front-placeholder-2026-06-05.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle placeholder" loading="lazy" />
+                <img src="/uploads/nb-shoyu-reserve-front-upload-2026-05-17.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle" loading="lazy" />
               </div>
             </Reveal>
           </div>
@@ -1891,7 +1891,7 @@ function BuildBundle() {
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/nb-shoyu-reserve-front-placeholder-2026-06-05.png',
+      image: 'uploads/nb-shoyu-reserve-front-upload-2026-05-17.png',
       preorder: true
     }
   ];
@@ -1919,7 +1919,7 @@ function BuildBundle() {
   const cartLines = [
     ...singles.map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: p.qty })),
     ...(trioSets > 0 ? [{ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd, qty: trioSets }] : []),
-    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99, qty: quantities.shoyu }] : [])
+    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99, qty: quantities.shoyu }] : [])
   ];
   const cartTotal = cartLines.reduce((sum, line) => sum + line.price * line.qty, 0);
   const savings = Math.max(0, compareTotal - cartTotal);
