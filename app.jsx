@@ -8,7 +8,7 @@
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // the local cart (cart.html → checkout.html → Wix payment handoff).
-const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
 
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };

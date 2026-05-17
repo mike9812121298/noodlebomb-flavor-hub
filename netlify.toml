@@ -226,14 +226,14 @@
 # Catch-all for any other /product/* deep link — go to lineup
 [[redirects]]
   from = "/product/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all"
+  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
   status = 302
   force = true
 
 # /shop and /shop/* — primary CTA target
 [[redirects]]
   from = "/shop"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all"
+  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
   status = 302
   force = true
 
@@ -246,7 +246,7 @@
 # Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
 [[redirects]]
   from = "/product-page/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all"
+  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
   status = 302
   force = true
 
