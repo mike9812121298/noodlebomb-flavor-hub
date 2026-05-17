@@ -47,7 +47,7 @@ const PRODUCT_IMAGES = {
   spicy:    'uploads/nb-spicy-front-equalized-2026-05-14.png',
   citrus:   'uploads/nb-citrus-front-equalized-2026-05-14.png',
   trio:     'uploads/noodlebomb-trio.png',
-  shoyu:    'uploads/shoyu-reserve-7oz-front-2026-05-16.png'
+  shoyu:    'uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png'
 };
 
 const PRODUCT_LABELS = {
