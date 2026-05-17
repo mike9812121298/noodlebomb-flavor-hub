@@ -1404,7 +1404,7 @@ function FinalCTA() {
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="email" name="email" placeholder="Join the waitlist · your@email.com" required
+                <input type="email" name="email" placeholder="Join the waitlist · your@email.co" required
                   style={{ flex: 1, minWidth: 0, padding: '14px 16px', background: 'transparent', border: 'none', outline: 'none', color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em' }} />
                 <button type="submit" style={{ background: 'transparent', color: 'var(--accent-ink)', border: 'none', borderLeft: '1px solid rgba(245,241,234,0.25)', padding: '0 20px', fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter', fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', transition: 'background .2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(245,241,234,0.08)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>Notify me →</button>
               </form>
@@ -1459,7 +1459,7 @@ function FinalCTA() {
           <form className="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', gap: 0, border: '1px solid var(--line)', borderRadius: 4, overflow: 'hidden', background: '#100E0C' }}>
             <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup" />
             <input type="hidden" name="_template" value="table" />
-            <input type="email" name="email" placeholder="your@email.com" required
+            <input type="email" name="email" placeholder="your@email.co" required
               style={{ flex: 1, minWidth: 0, padding: '16px 18px', background: 'transparent', border: 'none', outline: 'none', color: 'var(--ink)', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em' }} />
             <button type="submit" className="btn" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', padding: '0 28px', fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em', transition: 'filter .2s' }} onMouseOver={(e) => e.currentTarget.style.filter = 'brightness(1.08)'} onMouseOut={(e) => e.currentTarget.style.filter = 'none'}>Subscribe</button>
           </form>
@@ -1759,8 +1759,8 @@ function SeasoningLaunchHome() {
             </Reveal>
             <Reveal delay={1}>
               <div className="launch-stage" aria-label="NoodleBomb dry blend launch preview">
-                <img className="placeholder-pre-2026-06-05" src="/uploads/nb-fire-dust-front-placeholder-2026-06-05.png" alt="NoodleBomb Fire Dust dry blend jar placeholder" loading="lazy" />
-                <img className="placeholder-pre-2026-06-05" src="/uploads/nb-roasted-garlic-sesame-front-placeholder-2026-06-05.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar placeholder" loading="lazy" />
+                <img src="/uploads/nb-fire-dust-upload-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" />
+                <img src="/uploads/nb-roasted-garlic-sesame-upload-2026-05-17.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar" loading="lazy" />
                 <img src="/uploads/nb-shoyu-reserve-front-upload-2026-05-17.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle" loading="lazy" />
               </div>
             </Reveal>
@@ -1787,7 +1787,7 @@ function SeasoningLaunchHome() {
               <div><span className="launch-pill">Pour bold.</span><h3>Drizzle on.</h3><p>Original, Spicy Tokyo, Citrus Shoyu, and Shoyu Reserve. BOLD FLAVOR. EVERY BITE.</p></div>
             </div>
             <div className="format-panel dark">
-              <div className="format-media"><img className="placeholder-pre-2026-06-05" src="/uploads/nb-fire-dust-front-placeholder-2026-06-05.png" alt="NoodleBomb Fire Dust dry blend jar placeholder" loading="lazy" /></div>
+              <div className="format-media"><img src="/uploads/nb-fire-dust-upload-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" /></div>
               <div><span className="launch-pill">Shake bold.</span><h3>Shake on.</h3><p>Fire Dust and Roasted Garlic Sesame. BOLD FLAVOR. EVERY BITE.</p></div>
             </div>
           </div>
