@@ -43,11 +43,11 @@ const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'tri
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-front-equalized-2026-05-14.png',
-  spicy:    'uploads/nb-spicy-front-equalized-2026-05-14.png',
-  citrus:   'uploads/nb-citrus-front-equalized-2026-05-14.png',
+  original: 'uploads/nb-original-front-tight-2026-05-17.png',
+  spicy:    'uploads/nb-spicy-front-tight-2026-05-17.png',
+  citrus:   'uploads/nb-citrus-front-tight-2026-05-17.png',
   trio:     'uploads/noodlebomb-trio.png',
-  shoyu:    'uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png'
+  shoyu:    'uploads/nb-shoyu-reserve-front-tight-2026-05-17.png'
 };
 
 const PRODUCT_LABELS = {

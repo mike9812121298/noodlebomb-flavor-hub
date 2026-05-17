@@ -70,9 +70,9 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-front-equalized-2026-05-14.png',
-  spicy: 'uploads/nb-spicy-front-equalized-2026-05-14.png',
-  citrus: 'uploads/nb-citrus-front-equalized-2026-05-14.png'
+  original: 'uploads/nb-original-front-tight-2026-05-17.png',
+  spicy: 'uploads/nb-spicy-front-tight-2026-05-17.png',
+  citrus: 'uploads/nb-citrus-front-tight-2026-05-17.png'
 };
 
 const FOOD_IMAGES = {
@@ -1761,7 +1761,7 @@ function SeasoningLaunchHome() {
               <div className="launch-stage" aria-label="NoodleBomb dry blend launch preview">
                 <img src="/uploads/nb-fire-dust-upload-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" />
                 <img src="/uploads/nb-roasted-garlic-sesame-upload-2026-05-17.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar" loading="lazy" />
-                <img src="/uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle" loading="lazy" />
+                <img src="/uploads/nb-shoyu-reserve-front-tight-2026-05-17.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle" loading="lazy" />
               </div>
             </Reveal>
           </div>
@@ -1898,7 +1898,7 @@ function BuildBundle() {
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png',
+      image: 'uploads/nb-shoyu-reserve-front-tight-2026-05-17.png',
       preorder: true
     }
   ];
