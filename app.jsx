@@ -1759,8 +1759,8 @@ function SeasoningLaunchHome() {
             </Reveal>
             <Reveal delay={1}>
               <div className="launch-stage" aria-label="NoodleBomb dry blend launch preview">
-                <img src="/uploads/nb-fire-dust-upload-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" />
-                <img src="/uploads/nb-roasted-garlic-sesame-upload-2026-05-17.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar" loading="lazy" />
+                <img src="/uploads/nb-fire-dust-cutout-tight-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" />
+                <img src="/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar" loading="lazy" />
                 <img src="/uploads/nb-shoyu-reserve-front-tight-2026-05-17.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle" loading="lazy" />
               </div>
             </Reveal>

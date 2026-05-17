@@ -169,13 +169,13 @@ body.launch-page {
   animation: nbFloat 6s ease-in-out infinite;
 }
 
-.launch-stage img[src*="nb-fire-dust-upload"],
-.launch-stage img[src*="nb-roasted-garlic-sesame-upload"] {
+.launch-stage img[src*="nb-fire-dust-cutout-tight"],
+.launch-stage img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
   height: min(680px, 68vh);
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 24px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .launch-stage img:nth-child(2) {
@@ -298,12 +298,11 @@ body.launch-page {
   transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
 }
 
-.sku-card-media img[src*="nb-fire-dust-upload"],
-.sku-card-media img[src*="nb-roasted-garlic-sesame-upload"] {
+.sku-card-media img[src*="nb-fire-dust-cutout-tight"],
+.sku-card-media img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
   width: min(90%, 360px);
-  object-fit: cover;
-  object-position: center;
-  border-radius: 20px;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .sku-card:hover .sku-card-media img {
@@ -475,13 +474,12 @@ body.launch-page {
   filter: drop-shadow(0 28px 44px rgba(0, 0, 0, 0.45));
 }
 
-.format-media img[src*="nb-fire-dust-upload"],
-.format-media img[src*="nb-roasted-garlic-sesame-upload"] {
+.format-media img[src*="nb-fire-dust-cutout-tight"],
+.format-media img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
   width: min(88%, 380px);
   height: min(430px, 48vh);
-  object-fit: cover;
-  object-position: center;
-  border-radius: 18px;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .format-panel h3 {
@@ -698,13 +696,12 @@ body.launch-page {
   filter: drop-shadow(0 32px 52px rgba(0, 0, 0, 0.58));
 }
 
-.pdp-launch-main-img img[src*="nb-fire-dust-upload"],
-.pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-upload"] {
+.pdp-launch-main-img img[src*="nb-fire-dust-cutout-tight"],
+.pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
   width: min(92%, 560px);
   height: min(690px, 70vh);
-  object-fit: cover;
-  object-position: center;
-  border-radius: 22px;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
 .pdp-launch-thumbs {
