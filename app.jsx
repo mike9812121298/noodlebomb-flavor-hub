@@ -355,7 +355,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
       <div className="fbv2-shell" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, .95fr) minmax(280px, 400px) minmax(0, .95fr)', gap: 'clamp(28px, 5vw, 72px)', alignItems: 'center' }}>
         <div className="fbv2-copy">
           <Reveal>
-            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 02 - Flavor Finder</div>
+            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 01 - Flavor Finder</div>
           </Reveal>
           <Reveal delay={1}>
             <h2 key={`${activeKey}-headline`} className="display section-h2 fbv2-dynamic-copy" style={{ margin: '0 0 22px', maxWidth: 500 }}>
@@ -2259,9 +2259,9 @@ function App() {
       <StickyCartBar flavor={state.flavor} flavors={FLAVORS} />
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
+      <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <TrustStrip />
       <SeasoningLaunchHome />
-      <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <NextDrop />
       <BuildBundle />
       <MonthlyDrop />
