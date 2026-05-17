@@ -652,6 +652,20 @@
     transform: translateY(-4px) scale(1.05);
     filter: drop-shadow(0 26px 42px rgba(0,0,0,0.66)) drop-shadow(0 0 24px rgba(var(--card-rgb),0.30));
   }
+  .bundle-card--shoyu .bundle-bottle-slot {
+    align-items: end;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .bundle-card--shoyu .bundle-bottle-slot img {
+    width: min(94%, 172px);
+    height: 252px;
+    object-position: center bottom;
+    transform: translateY(7px);
+  }
+  .bundle-card--shoyu.is-selected .bundle-bottle-slot img {
+    transform: translateY(-1px) scale(1.05);
+  }
   .bundle-card-copy {
     position: relative;
     z-index: 1;
@@ -664,6 +678,10 @@
     font-size: clamp(21px, 2vw, 28px);
     line-height: 1;
     letter-spacing: 0;
+  }
+  .bundle-card--shoyu .bundle-card-copy strong {
+    font-size: clamp(19px, 1.55vw, 24px);
+    white-space: nowrap;
   }
   .bundle-card-copy span {
     font-family: 'Inter', sans-serif;
@@ -975,8 +993,10 @@
     .bundle-check { width: 34px; height: 26px; }
     .bundle-bottle-slot { min-height: 162px; padding-top: 4px; }
     .bundle-bottle-slot img { height: 174px; width: min(84%, 112px); }
+    .bundle-card--shoyu .bundle-bottle-slot img { height: 186px; width: min(96%, 122px); transform: translateY(7px); }
     .bundle-card-copy { min-height: 104px; gap: 6px; }
     .bundle-card-copy strong { font-size: 20px; }
+    .bundle-card--shoyu .bundle-card-copy strong { font-size: 19px; }
     .bundle-card-copy span { font-size: 12px; line-height: 1.35; }
     .bundle-price { font-size: 11px; padding: 7px 10px; }
     .bundle-qty-controls { grid-template-columns: 44px minmax(44px, 1fr) 44px; gap: 6px; padding: 6px; }

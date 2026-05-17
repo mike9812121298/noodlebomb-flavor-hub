@@ -1778,7 +1778,7 @@ function BuildBundle() {
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/shoyu-reserve-7oz-front-2026-05-16.png',
+      image: 'uploads/shoyu-reserve-7oz-front-cutout-2026-05-16.png',
       preorder: true
     }
   ];
@@ -1916,7 +1916,7 @@ function BuildBundle() {
                 return (
                   <div
                     key={product.slug}
-                    className={`bundle-card ${isSelected ? 'is-selected' : ''}`}
+                    className={`bundle-card bundle-card--${product.slug} ${isSelected ? 'is-selected' : ''}`}
                     role="group"
                     aria-label={`${product.name} quantity`}
                     style={{ '--card-color': product.color, '--card-rgb': product.rgb, '--card-ink': product.ink }}
