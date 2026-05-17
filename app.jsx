@@ -1781,14 +1781,21 @@ function SeasoningLaunchHome() {
               <p>NoodleBomb started with ramen sauce for everyday food. The dry blends keep that same approach in a black-label jar: visible texture, bold aroma, and a format you can shake over anything savory.</p>
             </Reveal>
           </div>
-          <div className="format-strip">
-            <div className="format-panel light">
-              <div className="format-media"><img src="/uploads/nb-original-front-equalized-2026-05-14.png" alt="NoodleBomb Original ramen sauce bottle" loading="lazy" /></div>
-              <div><span className="launch-pill">Pour bold.</span><h3>Drizzle on.</h3><p>Original, Spicy Tokyo, Citrus Shoyu, and Shoyu Reserve. BOLD FLAVOR. EVERY BITE.</p></div>
-            </div>
-            <div className="format-panel dark">
-              <div className="format-media"><img src="/uploads/nb-fire-dust-upload-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" /></div>
-              <div><span className="launch-pill">Shake bold.</span><h3>Shake on.</h3><p>Fire Dust and Roasted Garlic Sesame. BOLD FLAVOR. EVERY BITE.</p></div>
+          <div className="format-composite" aria-label="Drizzle and shake comparison">
+            <figure className="format-composite-media">
+              <img src="/uploads/nb-drizzle-vs-shake-split-frame-2026-05-17.png" alt="Side-by-side comparison: NoodleBomb Original ramen sauce drizzling onto a steaming noodle bowl on the left, NoodleBomb Fire Dust dry blend shaking onto a matching noodle bowl on the right" loading="lazy" />
+            </figure>
+            <div className="format-composite-captions">
+              <div className="format-composite-caption light">
+                <span className="launch-pill">Pour bold.</span>
+                <h3>Drizzle on.</h3>
+                <p>Original, Spicy Tokyo, Citrus Shoyu, and Shoyu Reserve. BOLD FLAVOR. EVERY BITE.</p>
+              </div>
+              <div className="format-composite-caption dark">
+                <span className="launch-pill">Shake bold.</span>
+                <h3>Shake on.</h3>
+                <p>Fire Dust and Roasted Garlic Sesame. BOLD FLAVOR. EVERY BITE.</p>
+              </div>
             </div>
           </div>
         </div>
