@@ -7,17 +7,17 @@ const EMAIL_KEY = 'nb_checkout_email';
 
 const NB_SITE_URLS = {
   original: 'https://noodlebomb.co/original-ramen-sauce',
-  spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
   citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
-  trio: 'https://noodlebomb.co/#lineup',
+  spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
   shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
+  trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/#lineup'
 };
 const SHOPIFY_VARIANT_IDS = {
   original: '53998041596214',
-  spicy: '53998042120502',
   citrus: '53998041071926',
+  spicy: '53998042120502',
   trio: '53998042644790',
   shoyu: '54006619636022'
 };
@@ -35,11 +35,11 @@ const getShopifyCartPermalink = (items) => {
 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-front-tight-2026-05-17.png',
-  spicy:    'uploads/nb-spicy-front-tight-2026-05-17.png',
-  citrus:   'uploads/nb-citrus-front-tight-2026-05-17.png',
-  trio:     'uploads/noodlebomb-trio.png',
-  shoyu:    'uploads/nb-shoyu-reserve-front-tight-2026-05-17.png'
+  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
+  citrus:   'uploads/nb-citrus-front-cutout-2026-05-09.png',
+  spicy:    'uploads/nb-spicy-front-cutout-2026-05-09.png',
+  shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png',
+  trio:     'uploads/noodlebomb-trio.png'
 };
 
 const PRODUCT_TAGS = {

@@ -179,10 +179,10 @@ const Shop = () => (
         <span className="font-display text-sm font-semibold uppercase tracking-[0.3em] text-primary mb-4 block">Membership</span>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">Monthly Ramen Box</h2>
         <p className="text-foreground/70 mb-8 max-w-lg mx-auto">
-          Exclusive small-batch drops, chef recipes, and limited flavors — delivered monthly.
+          Premium ramen, quick recipe ideas, and a free full bottle of NoodleBomb sauce delivered monthly.
         </p>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-foreground/80 mb-4">
-          {["Limited Monthly Flavor Drop", "Members-Only Sauces", "Cancel or Skip Anytime", "Shipping Over $35"].map((item) => (
+          {["$29.99 or $39.99 monthly", "Free full bottle in every box", "Choose or rotate sauce flavor", "Cancel or Skip Anytime"].map((item) => (
             <span key={item} className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-primary" />
               {item}

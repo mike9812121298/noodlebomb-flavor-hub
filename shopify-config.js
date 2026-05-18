@@ -9,7 +9,7 @@
  *        - Spicy Tokyo ($11.99)
  *        - Citrus Shoyu ($11.99)
  *        - The NoodleBomb Trio ($29.99)
- *        - Shoyu Reserve preorder ($9.99)
+ *        - Shoyu Reserve ($9.99 preorder)
  *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:
  *        fetch('https://nu2vqa-ma.myshopify.com/api/2026-04/graphql.json', {

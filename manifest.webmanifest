@@ -1,0 +1,52 @@
+{
+  "name": "NoodleBomb",
+  "short_name": "NoodleBomb",
+  "description": "Shop NoodleBomb sauces, save flavor loadouts, subscribe to the ramen box, and get recipes.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E0D0C",
+  "theme_color": "#0E0D0C",
+  "categories": ["shopping", "food", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icons/noodlebomb-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/noodlebomb-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Build a Sauce Bundle",
+      "short_name": "Build",
+      "url": "/#bundle-builder",
+      "description": "Build and save a NoodleBomb sauce loadout."
+    },
+    {
+      "name": "Monthly Ramen Box",
+      "short_name": "Ramen Box",
+      "url": "/monthly-box",
+      "description": "Choose a monthly ramen box subscription."
+    },
+    {
+      "name": "Recipes",
+      "short_name": "Recipes",
+      "url": "/recipes",
+      "description": "Find quick ways to use NoodleBomb."
+    },
+    {
+      "name": "Cart",
+      "short_name": "Cart",
+      "url": "/cart",
+      "description": "Review your NoodleBomb cart."
+    }
+  ]
+}

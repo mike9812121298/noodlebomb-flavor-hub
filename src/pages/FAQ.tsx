@@ -97,7 +97,7 @@ const faqGroups = [
     items: [
       {
         q: "How does the subscription box work?",
-        a: "The Monthly Ramen Box is a recurring subscription that delivers a curated selection of premium instant ramen plus a bottle of NoodleBomb sauce every month. It's the easiest way to keep your pantry stocked and discover new noodle formats.",
+        a: "The Monthly Ramen Box is a paid recurring subscription with two options: $29.99/mo or $39.99/mo. Every box includes premium ramen plus a free full 7 oz bottle of NoodleBomb sauce.",
       },
       {
         q: "Can I pause or cancel my subscription?",

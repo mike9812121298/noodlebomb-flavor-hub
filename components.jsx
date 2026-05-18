@@ -1,6 +1,6 @@
 // Wix Stores deep links — legacy fallback only (Storefront API checkout
 // fallback path). Add-to-Cart buttons no longer route through Wix.
-const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
+const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
 
 // Branded cart permalink — adds via noodlebomb.co/cart so shoppers do not
 // land inside Shopify's default cart theme before final checkout.
@@ -309,7 +309,6 @@ function Nav({ flavor, setFlavor, flavors }) {
   const navLinks = [
     ['Home', '/'],
     ['Shop Sauces', '/shop'],
-    ['Seasonings', '/seasonings'],
     ['Recipes', '/recipes'],
     ['About', '/about'],
     ['Monthly Ramen Box', '/monthly-box'],
@@ -844,29 +843,23 @@ function Nav({ flavor, setFlavor, flavors }) {
   );
 }
 
-// ———————————————————————————————————————————— Hero with parallax
+// ———————————————————————————————————————————— Hero
 function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }) {
-  const [y, setY] = useState(0);
-  useEffect(() => {
-    const on = () => setY(window.scrollY);
-    window.addEventListener('scroll', on, { passive: true });
-    return () => window.removeEventListener('scroll', on);
-  }, []);
-  const parY = y * 0.25;
-  const scale = 1 + Math.min(y, 600) / 2400;
-
   return (
     <section className="hero-section" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-      {/* Background photo — full-bleed pour shot */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+      {/* Background photo — clean trio product shot. Keep it fixed in place while
+          scrolling; scroll-driven transforms made the first image visibly
+          jitter on mobile and some desktop browsers. */}
+      <div className="hero-bg-media" style={{ position: 'absolute', inset: 0, zIndex: 0, background: '#0a0705' }}>
         <img
-          src="og-trio-counter.png"
-          alt="NoodleBomb trio on a ramen kitchen counter — Original, Spicy Tokyo, and Citrus Shoyu"
+          className="hero-product-bg"
+          src="uploads/nb-hero-pour.png"
+          alt="NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background"
           loading="eager"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%', transform: `scale(${scale}) translateY(${-parY * 0.15}px)`, transition: 'transform 0.05s linear' }}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', transform: 'none' }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(14,13,12,0.35) 0%, rgba(14,13,12,0.15) 30%, rgba(14,13,12,0.5) 65%, rgba(14,13,12,0.92) 100%)', pointerEvents: 'none' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(14,13,12,0.7) 0%, rgba(14,13,12,0) 50%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,7,5,0.96) 0%, rgba(10,7,5,0.82) 27%, rgba(10,7,5,0.38) 57%, rgba(10,7,5,0.08) 100%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,7,5,0.28) 0%, rgba(10,7,5,0.06) 48%, rgba(10,7,5,0.82) 100%)', pointerEvents: 'none' }} />
         {/* Mobile-only right-side overlay so the bottle photo doesn't fight the headline */}
         <div className="hero-bg-overlay-mobile" aria-hidden="true" />
       </div>

@@ -8,10 +8,40 @@
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // the local cart (cart.html → checkout.html → Wix payment handoff).
-const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
+const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
 
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+const NB_SAVED_LOADOUTS_KEY = 'nb_saved_loadouts_v1';
+const NB_SAVED_LOADOUTS_EVENT = 'nb-saved-loadouts-change';
+
+const readSavedLoadouts = () => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(NB_SAVED_LOADOUTS_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
+  }
+};
+
+const writeSavedLoadouts = (loadouts) => {
+  if (typeof window === 'undefined') return;
+  window.localStorage.setItem(NB_SAVED_LOADOUTS_KEY, JSON.stringify(loadouts.slice(0, 12)));
+  window.dispatchEvent(new CustomEvent(NB_SAVED_LOADOUTS_EVENT));
+};
+
+const saveFlavorLoadout = (loadout) => {
+  const next = { ...loadout, id: `loadout-${Date.now()}`, savedAt: Date.now() };
+  const existing = readSavedLoadouts().filter((item) => JSON.stringify(item.quantities) !== JSON.stringify(loadout.quantities));
+  writeSavedLoadouts([next, ...existing]);
+  return next;
+};
+
+const deleteFlavorLoadout = (id) => {
+  writeSavedLoadouts(readSavedLoadouts().filter((item) => item.id !== id));
+};
 
 // Branded cart permalink: keep shoppers inside noodlebomb.co until the final
 // Shopify checkout handoff. /cart reads add/qty and stores the line locally.
@@ -25,8 +55,7 @@ const SHOPIFY_VARIANT_IDS = {
 const PRODUCT_DETAIL_URLS = {
   original: '/original-ramen-sauce',
   spicy: '/spicy-tokyo-ramen-sauce',
-  citrus: '/citrus-shoyu-ramen-sauce',
-  shoyu: '/product/shoyu-reserve'
+  citrus: '/citrus-shoyu-ramen-sauce'
 };
 const cartPermalink = (slug, qty = 1) => {
   const n = Math.max(1, Math.floor(Number(qty) || 1));
@@ -70,9 +99,9 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-front-tight-2026-05-17.png',
-  spicy: 'uploads/nb-spicy-front-tight-2026-05-17.png',
-  citrus: 'uploads/nb-citrus-front-tight-2026-05-17.png'
+  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
+  spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.png',
+  citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png'
 };
 
 const FOOD_IMAGES = {
@@ -269,7 +298,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
     { label: 'Dumplings', key: 'citrus', verb: 'Dip', reason: 'Clean citrus lift cuts through rich fillings and fried edges.' },
     { label: 'Eggs', key: 'original', verb: 'Finish', reason: 'A little roasted garlic and sesame makes breakfast taste intentional.' },
     { label: 'Vegetables', key: 'citrus', verb: 'Glaze', reason: 'Bright shoyu keeps roasted or steamed vegetables lively.' },
-    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or final drizzle.' },
+    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or finishing sauce.' },
     { label: 'Leftovers', key: 'original', verb: 'Wake up', reason: 'Original is the easy reset when yesterday needs a second life.' },
   ];
   const flavorNotes = {
@@ -355,7 +384,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
       <div className="fbv2-shell" style={{ maxWidth: 1300, margin: '0 auto', display: 'grid', gridTemplateColumns: 'minmax(0, .95fr) minmax(280px, 400px) minmax(0, .95fr)', gap: 'clamp(28px, 5vw, 72px)', alignItems: 'center' }}>
         <div className="fbv2-copy">
           <Reveal>
-            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 01 - Flavor Finder</div>
+            <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16, letterSpacing: '0.18em' }}>Index 02 - Flavor Finder</div>
           </Reveal>
           <Reveal delay={1}>
             <h2 key={`${activeKey}-headline`} className="display section-h2 fbv2-dynamic-copy" style={{ margin: '0 0 22px', maxWidth: 500 }}>
@@ -1404,7 +1433,7 @@ function FinalCTA() {
                 <input type="hidden" name="_template" value="table" />
                 <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input type="email" name="email" placeholder="Join the waitlist · your@email.co" required
+                <input type="email" name="email" placeholder="Join the waitlist · your@email.com" required
                   style={{ flex: 1, minWidth: 0, padding: '14px 16px', background: 'transparent', border: 'none', outline: 'none', color: 'var(--accent-ink)', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em' }} />
                 <button type="submit" style={{ background: 'transparent', color: 'var(--accent-ink)', border: 'none', borderLeft: '1px solid rgba(245,241,234,0.25)', padding: '0 20px', fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter', fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', transition: 'background .2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(245,241,234,0.08)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>Notify me →</button>
               </form>
@@ -1459,7 +1488,7 @@ function FinalCTA() {
           <form className="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', gap: 0, border: '1px solid var(--line)', borderRadius: 4, overflow: 'hidden', background: '#100E0C' }}>
             <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup" />
             <input type="hidden" name="_template" value="table" />
-            <input type="email" name="email" placeholder="your@email.co" required
+            <input type="email" name="email" placeholder="your@email.com" required
               style={{ flex: 1, minWidth: 0, padding: '16px 18px', background: 'transparent', border: 'none', outline: 'none', color: 'var(--ink)', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em' }} />
             <button type="submit" className="btn" style={{ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', padding: '0 28px', fontWeight: 600, cursor: 'pointer', fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em', transition: 'filter .2s' }} onMouseOver={(e) => e.currentTarget.style.filter = 'brightness(1.08)'} onMouseOut={(e) => e.currentTarget.style.filter = 'none'}>Subscribe</button>
           </form>
@@ -1477,7 +1506,7 @@ function FinalCTA() {
             </p>
           </div>
           {[
-          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['Seasonings', '/seasonings'], ['Fire Dust', '/product/fire-dust'], ['Roasted Garlic Sesame', '/product/roasted-garlic-sesame'], ['Shoyu Reserve', WIX_URLS.shoyu], ['The NoodleBomb Trio', WIX_URLS.trio], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
+          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Shoyu Reserve', WIX_URLS.shoyu], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
           ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '/about'], ['FAQ', '/faq'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
           map(([h, items]) =>
@@ -1621,6 +1650,66 @@ function TrustStrip() {
 }
 
 // ——————————————————————————— StickyCartBar — fixed top-of-page bar after hero scroll
+function MobileAppDock({ flavor, flavors }) {
+  const [cartCount, setCartCount] = useState(() => (window.NB_CART ? window.NB_CART.getItemCount() : 0));
+  const [savedCount, setSavedCount] = useState(() => readSavedLoadouts().length);
+
+  useEffect(() => {
+    const syncCart = () => setCartCount(window.NB_CART ? window.NB_CART.getItemCount() : 0);
+    const syncSaved = () => setSavedCount(readSavedLoadouts().length);
+    const unbindCart = window.NB_CART ? window.NB_CART.onChange(syncCart) : null;
+    window.addEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
+    window.addEventListener('storage', syncSaved);
+    syncCart();
+    syncSaved();
+    return () => {
+      if (unbindCart) unbindCart();
+      window.removeEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
+      window.removeEventListener('storage', syncSaved);
+    };
+  }, []);
+
+  const active = flavors[flavor] || flavors.original;
+  const goHash = (hash) => (event) => {
+    event.preventDefault();
+    const target = document.querySelector(hash);
+    if (target) {
+      const navOffset = window.matchMedia('(max-width: 768px)').matches ? 12 : 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - navOffset;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+    if (window.history && window.history.replaceState) window.history.replaceState(null, '', hash);
+  };
+  const openCart = () => window.dispatchEvent(new CustomEvent('nb-open-cart'));
+
+  return (
+    <nav className="nb-app-dock" aria-label="NoodleBomb mobile app navigation" style={{ '--dock-accent': active.color, '--dock-accent-rgb': active.rgb, '--dock-ink': active.ink }}>
+      <a href="#main-content" onClick={goHash('#main-content')} className="nb-app-dock-item">
+        <span className="nb-app-dock-icon" aria-hidden="true">N</span>
+        <span>Home</span>
+      </a>
+      <a href="#bundle-builder" onClick={goHash('#bundle-builder')} className="nb-app-dock-item">
+        <span className="nb-app-dock-icon" aria-hidden="true">+</span>
+        <span>Build</span>
+        {savedCount > 0 && <span className="nb-app-dock-badge">{savedCount}</span>}
+      </a>
+      <a href="#monthly" onClick={goHash('#monthly')} className="nb-app-dock-item">
+        <span className="nb-app-dock-icon" aria-hidden="true">$</span>
+        <span>Box</span>
+      </a>
+      <a href="/recipes" className="nb-app-dock-item">
+        <span className="nb-app-dock-icon" aria-hidden="true">R</span>
+        <span>Recipes</span>
+      </a>
+      <button type="button" onClick={openCart} className="nb-app-dock-item nb-app-dock-button">
+        <span className="nb-app-dock-icon" aria-hidden="true">C</span>
+        <span>Cart</span>
+        {cartCount > 0 && <span className="nb-app-dock-badge">{cartCount}</span>}
+      </button>
+    </nav>
+  );
+}
+
 function StickyCartBar({ flavor, flavors }) {
   const [visible, setVisible] = useState(false);
   const [reserveVisible, setReserveVisible] = useState(false);
@@ -1644,12 +1733,11 @@ function StickyCartBar({ flavor, flavors }) {
     };
   }, []);
   const f = flavors[flavor] || flavors.original;
-  const isMobileViewport = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
-  const showBar = visible && !(reserveVisible && isMobileViewport);
-  const barName = reserveVisible ? 'Shoyu Reserve' : `NoodleBomb ${f.name}`;
-  const barPrice = reserveVisible ? '— $9.99' : `— ${f.price}`;
-  const barHref = reserveVisible ? cartPermalink('shoyu') : cartPermalink(flavor);
-  const barCta = reserveVisible ? 'Preorder — $9.99' : 'Add to Cart →';
+  const showBar = visible && !reserveVisible;
+  const barName = `NoodleBomb ${f.name}`;
+  const barPrice = `— ${f.price}`;
+  const barHref = cartPermalink(flavor);
+  const barCta = 'Add to Cart →';
   return (
     <div
       className={'sticky-cart-bar' + (showBar ? ' visible' : '')}
@@ -1670,10 +1758,10 @@ function StickyCartBar({ flavor, flavors }) {
           >3-Pack — $29.99</a>
         )}
         <a
-          href={barHref}
+          href={reserveVisible ? '#shoyu-reserve-details' : barHref}
           className="scb-btn"
           tabIndex={showBar ? undefined : -1}
-        >{barCta}</a>
+        >{reserveVisible ? 'Flavor details' : barCta}</a>
       </div>
     </div>
   );
@@ -1731,190 +1819,6 @@ function FAQ() {
   );
 }
 
-function SeasoningLaunchHome() {
-  const shakeFoods = ['Ramen', 'Eggs', 'Rice', 'Wings', 'Fries', 'Popcorn', 'Avocado Toast', 'Grilled Chicken', 'Roasted Veggies', 'Dumplings'];
-  const loadouts = [
-    {
-      title: 'Heat Stack',
-      tag: 'Spicy + crunchy',
-      copy: 'Pour Spicy Tokyo, shake Fire Dust, and turn noodles or wings into the bold path.',
-      accent: '232, 74, 58',
-      images: [
-        { src: '/uploads/nb-spicy-front-tight-2026-05-17.png', alt: 'NoodleBomb Spicy Tokyo Ramen Sauce bottle' },
-        { src: '/uploads/nb-fire-dust-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Fire Dust dry blend jar' }
-      ]
-    },
-    {
-      title: 'Umami Stack',
-      tag: 'Original + toasted',
-      copy: 'Start with Original, finish with Roasted Garlic Sesame, and make rice, eggs, or ramen feel full.',
-      accent: '205, 139, 55',
-      images: [
-        { src: '/uploads/nb-original-front-tight-2026-05-17.png', alt: 'NoodleBomb Original Ramen Sauce bottle' },
-        { src: '/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Roasted Garlic Sesame dry blend jar' }
-      ]
-    },
-    {
-      title: 'Bright Stack',
-      tag: 'Citrus + garlic',
-      copy: 'Citrus Shoyu brings the lift. Roasted Garlic Sesame brings the savory finish.',
-      accent: '236, 151, 45',
-      images: [
-        { src: '/uploads/nb-citrus-front-tight-2026-05-17.png', alt: 'NoodleBomb Citrus Shoyu Ramen Sauce bottle' },
-        { src: '/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Roasted Garlic Sesame dry blend jar' }
-      ]
-    },
-    {
-      title: 'Full Lineup',
-      tag: 'All 6 SKUs',
-      copy: 'Four pour-on flavors, two shake-on blends, one launch alert when the full set is ready.',
-      accent: '245, 239, 230',
-      images: [
-        { src: '/uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.png', alt: 'NoodleBomb Shoyu Reserve Ramen Sauce bottle' },
-        { src: '/uploads/nb-fire-dust-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Fire Dust dry blend jar' },
-        { src: '/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png', alt: 'NoodleBomb Roasted Garlic Sesame dry blend jar' }
-      ]
-    }
-  ];
-
-  return (
-    <>
-      <section id="seasoning-launch" className="launch-section" style={{ background: '#0b0a09', scrollMarginTop: 80 }}>
-        <div className="container">
-          <div className="launch-hero-grid">
-            <Reveal>
-              <div>
-                <span className="launch-pill">NOW SHAKEABLE.</span>
-                <h2 className="display" style={{ fontSize: 'clamp(48px, 8.5vw, 112px)', lineHeight: 0.9, letterSpacing: '-0.06em', margin: '24px 0 20px' }}>Shake bold.</h2>
-                <p className="launch-lede">Introducing NoodleBomb dry blends.</p>
-                <p className="launch-copy">The same flavor philosophy that built the sauce line, now in a shake-on format with Fire Dust and Roasted Garlic Sesame.</p>
-                <div className="launch-actions">
-                  <a className="launch-btn primary" href="/seasonings">Explore seasonings</a>
-                  <a className="launch-btn" href="#seasoning-home-notify">Get notified</a>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={1}>
-              <div className="launch-stage" aria-label="NoodleBomb dry blend launch preview">
-                <img src="/uploads/nb-fire-dust-cutout-tight-2026-05-17.png" alt="NoodleBomb Fire Dust dry blend jar" loading="lazy" />
-                <img src="/uploads/nb-roasted-garlic-sesame-cutout-tight-2026-05-17.png" alt="NoodleBomb Roasted Garlic Sesame dry blend jar" loading="lazy" />
-                <img src="/uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.png" alt="NoodleBomb Shoyu Reserve ramen sauce bottle" loading="lazy" />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      <section className="launch-section" style={{ background: '#0f0d0b' }}>
-        <div className="container">
-          <div className="section-head">
-            <Reveal>
-              <div>
-                <span className="launch-pill">FROM SAUCE TO SEASONING</span>
-                <h2>Drizzle on. Shake on. Same flavor.</h2>
-              </div>
-            </Reveal>
-            <Reveal delay={1}>
-              <p>NoodleBomb started with ramen sauce for everyday food. The dry blends keep that same approach in a black-label jar: visible texture, bold aroma, and a format you can shake over anything savory.</p>
-            </Reveal>
-          </div>
-          <div className="format-composite" aria-label="Drizzle and shake comparison">
-            <figure className="format-composite-media">
-              <img src="/uploads/nb-drizzle-vs-shake-split-frame-2026-05-17.png" alt="Side-by-side comparison: NoodleBomb Original ramen sauce drizzling onto a steaming noodle bowl on the left, NoodleBomb Fire Dust dry blend shaking onto a matching noodle bowl on the right" loading="lazy" />
-            </figure>
-            <div className="format-composite-captions">
-              <div className="format-composite-caption light">
-                <span className="launch-pill">Pour bold.</span>
-                <h3>Drizzle on.</h3>
-                <p>Original, Spicy Tokyo, Citrus Shoyu, and Shoyu Reserve. BOLD FLAVOR. EVERY BITE.</p>
-              </div>
-              <div className="format-composite-caption dark">
-                <span className="launch-pill">Shake bold.</span>
-                <h3>Shake on.</h3>
-                <p>Fire Dust and Roasted Garlic Sesame. BOLD FLAVOR. EVERY BITE.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="usage-marquee" aria-label="What people shake this on">
-        <div className="usage-track">
-          {[...shakeFoods, ...shakeFoods].map((food, i) => <span key={`${food}-${i}`}>{food}</span>)}
-        </div>
-      </section>
-
-      <section className="launch-section loadout-lab-section" id="seasoning-home-notify" style={{ background: '#0b0a09' }}>
-        <div className="container">
-          <div className="loadout-lab">
-            <Reveal>
-              <div className="loadout-lab-copy">
-                <span className="launch-pill">BUILD YOUR FLAVOR LOADOUT</span>
-                <h2>Pick a pour. Add a shake. Build your cart.</h2>
-                <p>Use the sauces for the big glossy hit, then add a dry blend for texture, aroma, and table-side crunch. Same NoodleBomb flavor idea, two ways to use it.</p>
-                <div className="loadout-steps" aria-label="Flavor loadout steps">
-                  <span><strong>01</strong> Pick sauce</span>
-                  <span><strong>02</strong> Add shake</span>
-                  <span><strong>03</strong> Get launch alert</span>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={1}>
-              <div className="loadout-cart-preview" aria-label="One cart preview">
-                <div className="loadout-cart-glow" />
-                <div className="cart-preview-rail">
-                  <span>Pour-on flavor</span>
-                  <strong>+</strong>
-                  <span>Shake-on flavor</span>
-                </div>
-                <div className="cart-preview-products">
-                  <img src="/uploads/nb-spicy-front-tight-2026-05-17.png" alt="Spicy Tokyo Ramen Sauce bottle" loading="lazy" />
-                  <img src="/uploads/nb-fire-dust-cutout-tight-2026-05-17.png" alt="Fire Dust dry blend jar" loading="lazy" />
-                  <img src="/uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.png" alt="Shoyu Reserve Ramen Sauce bottle" loading="lazy" />
-                </div>
-                <div className="cart-preview-total">
-                  <span>Launch lineup</span>
-                  <strong>$11.99 each</strong>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-          <div className="loadout-stack-grid">
-            {loadouts.map((loadout) => (
-              <a className="loadout-stack-card" style={{ '--stack-rgb': loadout.accent }} href="/seasonings#seasoning-notify" key={loadout.title}>
-                <span className="loadout-stack-tag">{loadout.tag}</span>
-                <span className="loadout-stack-media">
-                  {loadout.images.map((image, index) => (
-                    <img src={image.src} alt={image.alt} loading="lazy" key={`${loadout.title}-${index}`} />
-                  ))}
-                </span>
-                <span className="loadout-stack-copy">
-                  <strong>{loadout.title}</strong>
-                  <span>{loadout.copy}</span>
-                </span>
-                <span className="loadout-stack-cta">Get notified</span>
-              </a>
-            ))}
-          </div>
-          <div className="bundle-strip" style={{ '--product-rgb': '232, 74, 58', marginTop: 18 }}>
-            <div>
-              <span className="launch-pill">SMALL BATCH • BOLD FLAVOR • MADE FOR EVERYDAY</span>
-              <h2>Get the launch alert.</h2>
-              <p>No charge until shipping. We will flip the CTAs to cart links during the June launch window.</p>
-            </div>
-            <form className="notify-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" data-klaviyo-tag="seasoning-prelaunch">
-              <input type="hidden" name="_subject" value="NoodleBomb seasoning launch signup" />
-              <input type="hidden" name="launch_tag" value="seasoning-prelaunch" />
-              <input type="email" name="email" placeholder="your@email.co" required aria-label="Email address for launch notification" />
-              <button type="submit">Notify me</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-
 
 function BuildBundle() {
   const products = [
@@ -1958,12 +1862,12 @@ function BuildBundle() {
       slug: 'shoyu',
       name: 'Shoyu Reserve',
       eyebrow: 'Rare drop',
-      role: 'Slow-brewed depth. Bold finish.',
-      price: 11.99,
+      role: 'Premium soy sauce preorder. Expected Summer 2026.',
+      price: 9.99,
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.png',
+      image: 'uploads/nb-shoyu-reserve-bottle-cutout-2026-05-16.png',
       preorder: true
     }
   ];
@@ -1975,6 +1879,18 @@ function BuildBundle() {
     shoyu: 0
   });
   const [added, setAdded] = useState(false);
+  const [savedLoadouts, setSavedLoadouts] = useState(readSavedLoadouts);
+  const [loadoutFlash, setLoadoutFlash] = useState(null);
+
+  useEffect(() => {
+    const syncSaved = () => setSavedLoadouts(readSavedLoadouts());
+    window.addEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
+    window.addEventListener('storage', syncSaved);
+    return () => {
+      window.removeEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
+      window.removeEventListener('storage', syncSaved);
+    };
+  }, []);
 
   const coreSlugs = ['original', 'spicy', 'citrus'];
   const coreBottleCount = coreSlugs.reduce((sum, slug) => sum + quantities[slug], 0);
@@ -1991,8 +1907,11 @@ function BuildBundle() {
   const cartLines = [
     ...singles.map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: p.qty })),
     ...(trioSets > 0 ? [{ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd, qty: trioSets }] : []),
-    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99, qty: quantities.shoyu }] : [])
+    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99, qty: quantities.shoyu }] : [])
   ];
+  const loadoutLines = products
+    .filter((p) => quantities[p.slug] > 0)
+    .map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: quantities[p.slug] }));
   const cartTotal = cartLines.reduce((sum, line) => sum + line.price * line.qty, 0);
   const savings = Math.max(0, compareTotal - cartTotal);
   const activeProduct = [...products].reverse().find((p) => quantities[p.slug] > 0) || products[0];
@@ -2065,6 +1984,50 @@ function BuildBundle() {
     window.setTimeout(() => setAdded(false), 1800);
   };
 
+  const showLoadoutMessage = (message) => {
+    setLoadoutFlash(message);
+    window.clearTimeout(window.__nbLoadoutFlashTimer);
+    window.__nbLoadoutFlashTimer = window.setTimeout(() => setLoadoutFlash(null), 1800);
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const settleMobileLayout = () => window.scrollTo(0, window.scrollY);
+      window.requestAnimationFrame(settleMobileLayout);
+      window.setTimeout(settleMobileLayout, 90);
+    }
+  };
+
+  const saveCurrentLoadout = () => {
+    if (!totalBottles) return;
+    const name = trioSets === 1 && totalBottles === 3 ? 'Trio restock' : `${totalBottles} bottle sauce shelf`;
+    saveFlavorLoadout({
+      name,
+      quantities,
+      totalBottles,
+      cartTotal,
+      savings,
+      lines: loadoutLines
+    });
+    setSavedLoadouts(readSavedLoadouts());
+    showLoadoutMessage('Saved to Sauce Shelf');
+  };
+
+  const loadSavedLoadout = (loadout) => {
+    setQuantities({
+      original: 0,
+      spicy: 0,
+      citrus: 0,
+      shoyu: 0,
+      ...(loadout.quantities || {})
+    });
+    setAdded(false);
+    showLoadoutMessage('Loadout loaded');
+  };
+
+  const removeSavedLoadout = (id) => {
+    deleteFlavorLoadout(id);
+    setSavedLoadouts(readSavedLoadouts());
+    showLoadoutMessage('Loadout removed');
+  };
+
   const maxedOut = (slug) => quantities[slug] >= 9;
   const money = (n) => `$${n.toFixed(2)}`;
   const fallbackSlug = cartLines[0] ? cartLines[0].slug : 'trio';
@@ -2112,7 +2075,7 @@ function BuildBundle() {
                       <span className="bundle-check">{qty ? `${qty}x` : '0'}</span>
                     </span>
                     <span className="bundle-bottle-slot">
-                      <img className={product.image.includes('placeholder-2026-06-05') ? 'placeholder-pre-2026-06-05' : undefined} src={product.image} alt={`${product.name} bottle`} loading="lazy" />
+                      <img src={product.image} alt={`${product.name} bottle`} loading="lazy" />
                     </span>
                     <span className="bundle-card-copy">
                       <strong>{product.name}</strong>
@@ -2204,7 +2167,42 @@ function BuildBundle() {
                 {added ? 'Added to cart' : `Add ${totalBottles || 0} bottle${totalBottles === 1 ? '' : 's'} - ${money(cartTotal)}`}
                 <span aria-hidden="true">→</span>
               </a>
-              <div className="bundle-note">Every complete Original + Spicy Tokyo + Citrus Shoyu set is added as a discounted Trio. New launch items flip to cart links during the June launch window.</div>
+              <div className="bundle-note">Every complete Original + Spicy Tokyo + Citrus Shoyu set is added as a discounted Trio. Shoyu Reserve is a paid preorder item.</div>
+              <div className="bundle-shelf">
+                <div className="bundle-shelf-head">
+                  <div>
+                    <span className="mono">My Sauce Shelf</span>
+                    <strong>Save this mix for later</strong>
+                  </div>
+                  <button
+                    type="button"
+                    className="bundle-save-loadout"
+                    onClick={saveCurrentLoadout}
+                    disabled={!totalBottles}
+                  >
+                    Save
+                  </button>
+                </div>
+                {savedLoadouts.length ? (
+                  <div className="bundle-saved-list" aria-label="Saved sauce loadouts">
+                    {savedLoadouts.slice(0, 3).map((loadout) => (
+                      <div className="bundle-saved-loadout" key={loadout.id}>
+                        <div>
+                          <strong>{loadout.name || `${loadout.totalBottles || 0} bottle loadout`}</strong>
+                          <span>{(loadout.lines || []).map((line) => `${line.qty}x ${line.name}`).join(' / ') || 'Saved flavor mix'}</span>
+                        </div>
+                        <div className="bundle-loadout-actions">
+                          <button type="button" onClick={() => loadSavedLoadout(loadout)}>Load</button>
+                          <button type="button" onClick={() => removeSavedLoadout(loadout.id)} aria-label={`Delete ${loadout.name || 'saved loadout'}`}>Delete</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bundle-shelf-empty">Save a combo once and it stays one tap away on this device.</div>
+                )}
+                {loadoutFlash && <div className="bundle-shelf-flash">{loadoutFlash}</div>}
+              </div>
             </div>
           </Reveal>
         </div>
@@ -2330,10 +2328,10 @@ function App() {
       {IS_DEV_MODE && state.spam && <div className="spam-banner">⚡ LIMITED TIME!!! 50% OFF — HURRY — ONLY 3 LEFT!!! ⚡</div>}
       <StickyCartBar flavor={state.flavor} flavors={FLAVORS} />
       <Nav flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} flavors={FLAVORS} />
+      <MobileAppDock flavor={state.flavor} flavors={FLAVORS} />
       <Hero headline={headline} bottleSrc={FLAVOR_IMAGES[state.flavor]} flavorKey={state.flavor} flavorMeta={FLAVORS[state.flavor]} />
-      <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <TrustStrip />
-      <SeasoningLaunchHome />
+      <FlavorBreakdownV2 flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
       <NextDrop />
       <BuildBundle />
       <MonthlyDrop />

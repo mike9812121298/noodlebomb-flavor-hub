@@ -26,3 +26,7 @@ build/
 *.njsproj
 *.sln
 *.sw?
+
+# large media + audit artifacts (use CDN, not git)
+uploads/
+audit_screens/

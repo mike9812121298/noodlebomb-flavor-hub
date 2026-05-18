@@ -1,4 +1,4 @@
-// NoodleBomb shared page interactions - about / recipes / faq
+// NoodleBomb shared page interactions — about / recipes / faq
 
 (function () {
   // Mobile drawer toggle
@@ -10,6 +10,7 @@
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
     });
+    // Close on nav link click
     drawer.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
         drawer.classList.remove('open');
@@ -19,6 +20,12 @@
     });
   }
 
+  // FAQ accordion: clicking a button toggles its <details> wrapper. Native
+  // <details>/<summary> is used in markup so JS-disabled clients still work.
+  // No-op here; semantic HTML handles it.
+
+  // Buy-click feedback: give shoppers immediate confirmation before the
+  // browser hands off to Shopify cart URLs.
   document.querySelectorAll('.pdp-cta[href*="/cart/add"], .mobile-pdp-bar a[href*="/cart/add"]').forEach(function (link) {
     link.addEventListener('click', function (event) {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) return;
@@ -32,6 +39,21 @@
     });
   });
 
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js').catch(function () {});
+    });
+  }
+
+  if (!document.querySelector('link[rel="manifest"]')) {
+    var manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    manifestLink.href = '/manifest.webmanifest';
+    document.head.appendChild(manifestLink);
+  }
+
+  // Homepage production patch: keeps the current live build aligned with the
+  // latest launch direction while the source bundle deploy is pending.
   var patchStylesId = 'nb-live-homepage-patch';
   function ensureHomepagePatchStyles() {
     if (document.getElementById(patchStylesId)) return;
@@ -54,8 +76,8 @@
       document.querySelector('.hero-section > div:first-child img');
     if (!heroImg) return false;
     heroImg.classList.add('nb-live-trio-hero');
-    heroImg.src = '/og-trio-counter.png';
-    heroImg.alt = 'NoodleBomb sauce bottles in order: Original, Spicy Tokyo, and Citrus Shoyu';
+    heroImg.src = '/uploads/nb-hero-pour.png';
+    heroImg.alt = 'NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background';
     heroImg.loading = 'eager';
     heroImg.decoding = 'async';
     return true;

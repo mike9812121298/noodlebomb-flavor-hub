@@ -78,7 +78,7 @@
   "name": "NoodleBomb Original Ramen Sauce",
   "description": "Bold umami tare base \u2014 big savory flavor for noodles, rice, wings, dumplings, and more. Garlic and sesame, smooth soy.",
   "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/uploads/nb-original-front-tight-2026-05-17.png",
+  "image": "https://noodlebomb.co/uploads/nb-original-front-cutout-2026-05-09.png",
   "offers": {
     "@type": "Offer",
     "url": "https://noodlebomb.co/original-ramen-sauce",
@@ -97,7 +97,7 @@
   "name": "NoodleBomb Spicy Tokyo Ramen Sauce",
   "description": "Roasted chili, garlic, sesame \u2014 heat layered over depth.",
   "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/uploads/nb-spicy-front-tight-2026-05-17.png",
+  "image": "https://noodlebomb.co/uploads/nb-spicy-front-cutout-2026-05-09.png",
   "offers": {
     "@type": "Offer",
     "url": "https://noodlebomb.co/spicy-tokyo-ramen-sauce",
@@ -116,7 +116,7 @@
   "name": "NoodleBomb Citrus Shoyu Ramen Sauce",
   "description": "Bright shoyu base with clean citrus lift. Cuts through richness.",
   "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/uploads/nb-citrus-front-tight-2026-05-17.png",
+  "image": "https://noodlebomb.co/uploads/nb-citrus-front-cutout-2026-05-09.png",
   "offers": {
     "@type": "Offer",
     "url": "https://noodlebomb.co/citrus-shoyu-ramen-sauce",
@@ -192,6 +192,7 @@
 <!-- SEO: Favicon variations -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+<link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#0E0D0C">
 <meta name="color-scheme" content="dark">
 
@@ -203,12 +204,11 @@
      during HTML parse instead of waiting to discover them in the body.
      Hero bottle = the default LCP candidate (state.flavor defaults to
      'original' on first paint). -->
-<link rel="preload" as="image" href="uploads/nb-original-front-tight-2026-05-17.png" fetchpriority="high">
+<link rel="preload" as="image" href="uploads/nb-original-front-cutout-2026-05-09.png" fetchpriority="high">
 <link rel="preload" as="script" href="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous">
 <link rel="preload" as="script" href="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/page-shared.css">
-<link rel="stylesheet" href="/seasoning-line.css">
 
 <!-- Lenis smooth scroll — DISABLED 2026-05-03 because it set `overflow:hidden auto`
      on <html>, which broke `position: sticky` on FlavorBreakdown + Range sections
@@ -950,6 +950,124 @@
     line-height: 1.45;
     color: rgba(240,235,227,0.58);
   }
+  .bundle-shelf {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--bundle-rgb),0.26);
+    background: rgba(245,241,234,0.045);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025);
+  }
+  .bundle-shelf-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .bundle-shelf-head > div {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+  .bundle-shelf-head .mono {
+    color: var(--bundle-color);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+  .bundle-shelf-head strong {
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .bundle-save-loadout,
+  .bundle-loadout-actions button {
+    border: 1px solid rgba(var(--bundle-rgb),0.42);
+    background: rgba(var(--bundle-rgb),0.12);
+    color: var(--bundle-color);
+    border-radius: 999px;
+    min-height: 38px;
+    padding: 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .22s ease, background .22s ease, border-color .22s ease;
+  }
+  .bundle-save-loadout:hover,
+  .bundle-save-loadout:focus-visible,
+  .bundle-loadout-actions button:hover,
+  .bundle-loadout-actions button:focus-visible {
+    transform: translateY(-1px);
+    background: rgba(var(--bundle-rgb),0.20);
+    border-color: rgba(var(--bundle-rgb),0.70);
+    outline: none;
+  }
+  .bundle-save-loadout:disabled {
+    cursor: default;
+    opacity: 0.42;
+    transform: none;
+  }
+  .bundle-saved-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .bundle-saved-loadout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(240,235,227,0.10);
+    background: rgba(0,0,0,0.24);
+  }
+  .bundle-saved-loadout > div:first-child {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+  }
+  .bundle-saved-loadout strong {
+    font-family: 'Inter Tight', sans-serif;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .bundle-saved-loadout span,
+  .bundle-shelf-empty,
+  .bundle-shelf-flash {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(240,235,227,0.62);
+  }
+  .bundle-loadout-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .bundle-loadout-actions button:last-child {
+    color: rgba(240,235,227,0.68);
+    border-color: rgba(240,235,227,0.16);
+    background: transparent;
+  }
+  .bundle-shelf-empty {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px dashed rgba(240,235,227,0.16);
+  }
+  .bundle-shelf-flash {
+    margin-top: 10px;
+    color: var(--bundle-color);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
   @keyframes bundleScan {
     from { background-position: 0 0; }
     to { background-position: 0 120px; }
@@ -994,16 +1112,18 @@
     .bundle-check { width: 34px; height: 26px; }
     .bundle-bottle-slot { min-height: 162px; padding-top: 4px; }
     .bundle-bottle-slot img { height: 174px; width: min(84%, 112px); }
-    .bundle-card--shoyu .bundle-bottle-slot img { height: 186px; width: min(96%, 122px); transform: translateY(7px); }
     .bundle-card-copy { min-height: 104px; gap: 6px; }
     .bundle-card-copy strong { font-size: 20px; }
-    .bundle-card--shoyu .bundle-card-copy strong { font-size: 19px; }
     .bundle-card-copy span { font-size: 12px; line-height: 1.35; }
     .bundle-price { font-size: 11px; padding: 7px 10px; }
     .bundle-qty-controls { grid-template-columns: 44px minmax(44px, 1fr) 44px; gap: 6px; padding: 6px; }
     .bundle-qty-btn, .bundle-qty-count { width: 44px; height: 44px; min-height: 44px; }
     .bundle-qty-count { width: 100%; font-size: 16px; }
-    .bundle-console { padding: 18px; }
+    .bundle-console {
+      width: calc(100% - clamp(16px, 8vw, 31px));
+      margin-left: clamp(16px, 8vw, 31px);
+      padding: 18px;
+    }
     .bundle-add { min-height: 54px; font-size: 12px; letter-spacing: 0.06em; }
   }
 
@@ -1901,6 +2021,9 @@
   .hero-bottle-wrap {
     opacity: 1;
   }
+  .hero-product-bg {
+    filter: none;
+  }
   .bottle-float {
     animation: floatY 5s ease-in-out infinite;
   }
@@ -2253,14 +2376,14 @@
     animation: floatY 6s ease-in-out infinite;
   }
   #next-drop .nd-reserve-card .nd-bottle-wrap {
-    width: min(24vw, 252px);
+    width: min(34vw, 360px);
     filter: drop-shadow(0 34px 62px rgba(0,0,0,0.62)) drop-shadow(0 0 30px rgba(232,240,255,0.14));
     animation: ndReserveFloat 5.8s ease-in-out infinite;
     z-index: 2;
   }
   #next-drop .nd-bottle-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
   #next-drop .nd-reserve-card .nd-bottle-wrap img {
-    transform: scale(1);
+    transform: scale(1.06);
     transform-origin: center bottom;
     mix-blend-mode: multiply;
     filter: contrast(1.08) saturate(1.05);
@@ -2300,6 +2423,23 @@
     white-space: nowrap;
     box-shadow: 0 14px 34px rgba(0,0,0,0.32);
     animation: ndStageTag 4s ease-in-out infinite;
+  }
+  #next-drop .nd-image-preorder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border-color: rgba(232,240,255,0.82);
+    background: #e8f0ff;
+    color: #0a0a0a;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 16px 38px rgba(232,240,255,0.22), 0 14px 34px rgba(0,0,0,0.32);
+  }
+  #next-drop .nd-image-preorder:hover {
+    transform: translateX(-50%) translateY(-2px);
+    background: #fff;
   }
   #next-drop .nd-copy { position: relative; z-index: 2; max-width: 480px; }
   #next-drop .nd-reserve-card .nd-name { font-size: clamp(46px, 6vw, 74px); }
@@ -2596,8 +2736,8 @@
       min-height: 390px;
       margin: 8px 0 24px;
     }
-    #next-drop .nd-reserve-card .nd-bottle-wrap { width: min(55vw, 189px); }
-    #next-drop .nd-reserve-card .nd-bottle-wrap img { transform: scale(1); }
+    #next-drop .nd-reserve-card .nd-bottle-wrap { width: min(78vw, 270px); }
+    #next-drop .nd-reserve-card .nd-bottle-wrap img { transform: scale(1.08); }
     #next-drop .nd-stage-tag { bottom: 8px; font-size: 9px; letter-spacing: 0.14em; }
     #next-drop .nd-copy { max-width: none; }
     #next-drop .nd-reserve-card .nd-name { font-size: clamp(42px, 13vw, 58px); }
@@ -3109,6 +3249,15 @@
     .hero-section {
       min-height: 100svh !important;
     }
+    .hero-product-bg {
+      width: 100% !important;
+      height: 100% !important;
+      right: auto !important;
+      top: auto !important;
+      object-fit: cover !important;
+      object-position: 66% center !important;
+      opacity: 0.92;
+    }
     .hero-copy-panel {
       padding: 0 24px 76px !important;
       max-width: none !important;
@@ -3183,6 +3332,141 @@
     .footer-contact a { margin-left: 0 !important; }
   }
 
+  .nb-app-dock {
+    display: none;
+  }
+  aside[aria-label="Shopping cart"][aria-hidden="true"] {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding-bottom: calc(90px + env(safe-area-inset-bottom));
+    }
+    .nb-app-dock {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(10px + env(safe-area-inset-bottom));
+      z-index: 96;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      padding: 6px;
+      border: 1px solid rgba(245,241,234,0.16);
+      border-radius: 22px;
+      background: rgba(14,13,12,0.94);
+      -webkit-backdrop-filter: saturate(180%) blur(18px);
+      backdrop-filter: saturate(180%) blur(18px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.42);
+    }
+    .nb-app-dock-item {
+      position: relative;
+      display: flex;
+      min-width: 0;
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      border: 0;
+      border-radius: 16px;
+      background: transparent;
+      color: rgba(245,241,234,0.68);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .nb-app-dock-button {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nb-app-dock-item:hover,
+    .nb-app-dock-item:focus-visible {
+      background: rgba(var(--dock-accent-rgb),0.13);
+      color: var(--ink);
+      outline: none;
+      transform: translateY(-1px);
+    }
+    .nb-app-dock-icon {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(var(--dock-accent-rgb),0.40);
+      background: rgba(var(--dock-accent-rgb),0.13);
+      color: var(--dock-accent);
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .nb-app-dock-badge {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      min-width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--dock-accent, var(--accent));
+      color: var(--dock-ink, var(--accent-ink));
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 800;
+      box-shadow: 0 0 0 2px rgba(14,13,12,0.92);
+    }
+    .sticky-cart-bar {
+      top: auto !important;
+      bottom: calc(86px + env(safe-area-inset-bottom)) !important;
+      height: auto !important;
+      min-height: 58px !important;
+      border-top: 1px solid rgba(245,241,234,0.14) !important;
+      border-bottom: 0 !important;
+      padding: 8px 14px !important;
+      transform: translateY(160%) !important;
+      z-index: 95 !important;
+    }
+    .sticky-cart-bar.visible {
+      transform: translateY(0) !important;
+    }
+    .sticky-cart-bar .scb-left {
+      min-width: 0;
+    }
+    .sticky-cart-bar .scb-name {
+      max-width: 42vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .sticky-cart-bar .scb-btn {
+      min-height: 42px;
+      padding: 0 14px;
+      white-space: nowrap;
+    }
+    .bundle-saved-loadout {
+      grid-template-columns: 1fr;
+    }
+    .bundle-loadout-actions {
+      justify-content: stretch;
+    }
+    .bundle-loadout-actions button {
+      flex: 1 1 0;
+    }
+  }
+
 </style>
 </head>
 <body class="grain">
@@ -3193,7 +3477,6 @@
   <div class="nav-links">
     <a href="/" aria-current="page">Home</a>
     <a href="/shop">Shop Sauces</a>
-    <a href="/seasonings">Seasonings</a>
     <a href="/recipes">Recipes</a>
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
@@ -3208,7 +3491,6 @@
 <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
     <a href="/" aria-current="page">Home</a>
     <a href="/shop">Shop Sauces</a>
-    <a href="/seasonings">Seasonings</a>
     <a href="/recipes">Recipes</a>
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
@@ -3231,7 +3513,7 @@
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">Coming Soon</h2>
 <ul style="list-style:none;padding:0;margin:0 0 32px;opacity:0.85;">
-  <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> - A darker, deeper shoyu-style finish. Paid preorder for Summer 2026. <a href="/cart?add=shoyu&amp;qty=1" style="color:#F5C842;">Preorder for $9.99 &rarr;</a></li>
+  <li style="margin:0 0 8px;"><strong>Shoyu Reserve</strong> - A darker, deeper shoyu-style finish. Paid preorder for Summer 2026.</li>
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
 <p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Built for noodles, rice, wings, dumplings, eggs, vegetables, and more. Trio ships free.</p>
@@ -3293,7 +3575,7 @@
         <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1">
-        <input type="email" name="email" placeholder="your@email.co" required aria-label="Email address">
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
         <button type="submit">Subscribe</button>
       </form>
     </div>

@@ -59,7 +59,7 @@ function MonthlyDrop() {
           <div>
             <Reveal>
               <div className="mono" style={{ color: 'var(--muted)', marginBottom: 32, letterSpacing: '0.18em', fontSize: 11 }}>
-                MONTHLY BOX - LAUNCH LIST
+                MONTHLY BOX - SUBSCRIPTION
               </div>
             </Reveal>
 
@@ -85,7 +85,7 @@ function MonthlyDrop() {
               <div className="md-inside-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
                 {[
                   {
-                    label: 'NoodleBomb sauce', sub: 'premium',
+                    label: 'NoodleBomb sauce', sub: 'free full bottle',
                     bg: 'radial-gradient(circle at 32% 28%, #D14B2E 0%, #8B1E1E 55%, #4A0F0F 100%)',
                     pattern: null,
                     icon: (
@@ -198,17 +198,17 @@ function MonthlyDrop() {
                 maxWidth: '52ch',
                 margin: '0 0 32px'
               }}>
-                A monthly box built around NoodleBomb sauce: instant noodles, premium sauce, surprise extras, and a simple recipe card so dinner feels fun without turning into a project.
+                A monthly box built around NoodleBomb sauce: premium instant ramen, surprise extras, quick recipe ideas, and a free full bottle of sauce every month.
               </p>
             </Reveal>
 
             <Reveal delay={3}>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {[
-                  'Choose Monthly or Premium Monthly before boxes open',
+                  'Choose Monthly for $29.99 or Premium for $39.99',
                   'Built for ramen, rice bowls, wings, eggs, dumplings, and leftovers',
-                  'Great as a gift or pantry restock',
-                  'No charge today - we email before the first box ships'
+                  'Every box includes a free full 7 oz bottle of sauce',
+                  'Billed monthly with skip or cancel anytime'
                 ].map((line, i) => (
                   <li key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, fontFamily: 'Inter', fontSize: 14, color: 'var(--ink)', letterSpacing: '-0.005em' }}>
                     <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--accent)', flexShrink: 0, boxShadow: '0 0 0 3px rgba(139,30,30,0.22)' }} />
@@ -223,7 +223,7 @@ function MonthlyDrop() {
               <div className="mono" style={{ color: 'var(--accent)', fontSize: 11, letterSpacing: '0.22em', fontWeight: 600, marginBottom: 12 }}>MONTHLY RAMEN BOX</div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, marginBottom: 28, flexWrap: 'wrap' }}>
                 <span className="display" style={{ fontSize: 'clamp(48px, 5vw, 72px)', fontWeight: 600, letterSpacing: '-0.04em', lineHeight: 1, color: 'var(--ink)' }}>
-                  $44.99<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
+                  $29.99<span style={{ fontSize: '0.45em', color: 'var(--muted)', fontWeight: 400, marginLeft: 4 }}>/ mo</span>
                 </span>
                 <span style={{
                   display: 'inline-flex', alignItems: 'center',
@@ -231,94 +231,57 @@ function MonthlyDrop() {
                   padding: '5px 11px', borderRadius: 999,
                   fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
                   letterSpacing: '0.18em'
-                }}>PREMIUM $49</span>
+                }}>PREMIUM $39.99</span>
               </div>
-              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Reserve your spot. We will email before the first paid box opens.</div>
+              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Paid monthly subscription. Every box includes a free full bottle of sauce.</div>
             </Reveal>
 
-            {/* Monthly Box reservation capture until subscription checkout is ready. */}
+            {/* Monthly Box subscription links. */}
             <Reveal delay={5}>
-              <form
-                action="https://formsubmit.co/hello@noodlebomb.co"
-                method="POST"
-                style={{ marginBottom: 32, maxWidth: 560 }}
-              >
-                <input type="hidden" name="_subject" value="NoodleBomb Monthly Ramen Box Reservation" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="box" value="Monthly Ramen Box" />
-                <input type="hidden" name="intent" value="Monthly box reservation" />
-                <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
-                <div style={{ display: 'flex', alignItems: 'stretch', gap: 8, flexWrap: 'wrap' }}>
-                  <select
-                    name="plan"
-                    aria-label="Monthly box plan"
-                    defaultValue="Monthly Ramen Box - $44.99/mo"
-                    style={{
-                      flex: '1 1 190px',
-                      minHeight: 49,
-                      padding: '0 14px',
-                      background: 'rgba(245,241,234,0.04)',
-                      border: '1px solid rgba(245,241,234,0.18)',
-                      borderRadius: 4,
-                      color: 'var(--ink)',
-                      fontFamily: 'JetBrains Mono',
-                      fontSize: 11,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      outline: 'none',
-                    }}
-                  >
-                    <option>Monthly Ramen Box - $44.99/mo</option>
-                    <option>Premium Monthly Box - $49/mo</option>
-                    <option>Gift this box</option>
-                  </select>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="your@email.com"
-                    required
-                    aria-label="Email address for Monthly Box subscription"
-                    autoComplete="email"
-                    style={{
-                      flex: '1 1 220px',
-                      minHeight: 49,
-                      padding: '0 16px',
-                      background: 'rgba(245,241,234,0.04)',
-                      border: '1px solid rgba(245,241,234,0.18)',
-                      borderRadius: 4,
-                      color: 'var(--ink)',
-                      fontFamily: 'Inter',
-                      fontSize: 14,
-                      outline: 'none',
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    className="btn"
-                    style={{
-                      background: 'var(--accent)', color: 'var(--accent-ink)',
-                      border: 'none', padding: '16px 26px',
-                      fontWeight: 600, borderRadius: 4, cursor: 'pointer',
-                      fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em',
-                      transition: 'transform .2s, filter .2s, box-shadow .2s',
-                      flex: '0 0 auto',
-                    }}
-                    onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.filter = 'brightness(1.08)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(139,30,30,0.4)'; }}
-                    onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.filter = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
-                  >
-                    Reserve the box
-                  </button>
+              <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap', marginBottom: 32, maxWidth: 620 }}>
+                <a
+                  href="https://shop.noodlebomb.co/product-page/monthly-ramen-box"
+                  target="_blank"
+                  rel="noopener"
+                  className="btn"
+                  style={{
+                    background: 'var(--accent)', color: 'var(--accent-ink)',
+                    border: 'none', padding: '16px 24px',
+                    fontWeight: 600, borderRadius: 4,
+                    fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em',
+                    textDecoration: 'none',
+                    flex: '1 1 220px',
+                    textAlign: 'center'
+                  }}
+                >
+                  Subscribe - $29.99/mo
+                </a>
+                <a
+                  href="https://shop.noodlebomb.co/product-page/premium-ramen-box"
+                  target="_blank"
+                  rel="noopener"
+                  className="btn"
+                  style={{
+                    background: 'rgba(245,241,234,0.04)', color: 'var(--ink)',
+                    border: '1px solid rgba(245,241,234,0.18)', padding: '16px 24px',
+                    fontWeight: 600, borderRadius: 4,
+                    fontFamily: 'Inter', fontSize: 14, letterSpacing: '-0.005em',
+                    textDecoration: 'none',
+                    flex: '1 1 220px',
+                    textAlign: 'center'
+                  }}
+                >
+                  Premium - $39.99/mo
+                </a>
+                <div className="mono" style={{ flexBasis: '100%', marginTop: 2, fontSize: 10, color: 'var(--muted)', letterSpacing: '0.14em' }}>
+                  PAID MONTHLY - FREE FULL SAUCE BOTTLE INCLUDED
                 </div>
-                <div className="mono" style={{ marginTop: 10, fontSize: 10, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                  NO CHARGE TODAY - WE EMAIL BEFORE THE FIRST BOX OPENS
-                </div>
-              </form>
+              </div>
             </Reveal>
 
             <Reveal delay={6}>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, maxWidth: 520 }}>
-                {['$44.99 monthly', '$49 premium', 'Giftable', 'Cancel anytime'].map((line) => (
+                {['$29.99 monthly', '$39.99 premium', 'Free full bottle', 'Cancel anytime'].map((line) => (
                   <span key={line} className="mono" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 34, padding: '0 12px', border: '1px solid rgba(245,241,234,0.14)', borderRadius: 999, color: 'var(--ink)', fontSize: 10, letterSpacing: '0.14em' }}>
                     {line}
                   </span>
@@ -335,7 +298,7 @@ function MonthlyDrop() {
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
                   {[
                     { vol: '01', month: 'PICK', current: false },
-                    { vol: '02', month: 'EMAIL', current: false },
+                    { vol: '02', month: 'BILL', current: false },
                     { vol: '03', month: 'SHIP', current: false },
                     { vol: '04', month: 'COOK', current: false },
                   ].map((d) => (
@@ -388,7 +351,7 @@ function MonthlyDrop() {
                       </div>
                       {d.current && (
                         <div className="mono" style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: '0.14em' }}>
-                          NO CHARGE TODAY
+                          FREE SAUCE INSIDE
                         </div>
                       )}
                     </div>
