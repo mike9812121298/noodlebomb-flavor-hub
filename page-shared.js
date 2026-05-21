@@ -99,7 +99,7 @@
 
     cta.classList.add('nd-stage-tag', 'nd-image-preorder');
     cta.href = '/cart?add=shoyu&qty=1';
-    cta.textContent = 'PREORDER FOR $9.99 \u2192';
+    cta.textContent = 'SHOP SHOYU - $11.99 \u2192';
     cta.removeAttribute('aria-hidden');
     cta.removeAttribute('tabindex');
 

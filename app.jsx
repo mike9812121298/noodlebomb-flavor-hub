@@ -53,9 +53,9 @@ const SHOPIFY_VARIANT_IDS = {
   shoyu:    '54006619636022'
 };
 const PRODUCT_DETAIL_URLS = {
-  original: '/original-ramen-sauce',
-  spicy: '/spicy-tokyo-ramen-sauce',
-  citrus: '/citrus-shoyu-ramen-sauce'
+  original: '/product/original-ramen',
+  spicy: '/product/spicy-tokyo',
+  citrus: '/product/citrus-shoyu'
 };
 const cartPermalink = (slug, qty = 1) => {
   const n = Math.max(1, Math.floor(Number(qty) || 1));
