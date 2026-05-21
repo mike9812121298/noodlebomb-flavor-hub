@@ -6,14 +6,14 @@ const plans = [
   {
     name: "Monthly Box",
     price: "$29.99",
-    href: "https://shop.noodlebomb.co/product-page/monthly-ramen-box",
+    href: "/contact",
     desc: "Curated ramen packs, a fast recipe idea, and a free full bottle of NoodleBomb sauce every month.",
     features: ["Premium instant ramen selection", "Free full 7 oz bottle of sauce", "Choose or rotate your sauce flavor", "Billed monthly, cancel anytime"],
   },
   {
     name: "Premium Box",
     price: "$39.99",
-    href: "https://shop.noodlebomb.co/product-page/premium-ramen-box",
+    href: "/contact",
     desc: "A bigger pantry box with more ramen discovery, surprise extras, and a free full bottle of NoodleBomb sauce every month.",
     features: ["Larger premium ramen selection", "Free full 7 oz bottle of sauce", "Surprise extras and special drops", "Billed monthly, cancel anytime"],
   },
@@ -103,11 +103,9 @@ const RamenBox = () => {
                 </ul>
                 <a
                   href={plan.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="w-full inline-flex justify-center px-6 py-4 rounded-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-display font-bold uppercase tracking-wider shadow-lg hover:shadow-orange-500/40 transition-all duration-300"
                 >
-                  Subscribe {plan.price}/mo
+                  Join the Waitlist
                 </a>
               </div>
             ))}

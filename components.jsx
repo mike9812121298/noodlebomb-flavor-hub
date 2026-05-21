@@ -1,6 +1,5 @@
-// Wix Stores deep links — legacy fallback only (Storefront API checkout
-// fallback path). Add-to-Cart buttons no longer route through Wix.
-const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+// Canonical local product links for Storefront API checkout fallback.
+const NB_PRODUCT_URLS = {"original": "/product/original-ramen", "spicy": "/product/spicy-tokyo", "citrus": "/product/citrus-shoyu", "trio": "/product/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "/cart.html", "shop": "/#lineup"};
 
 // Branded cart permalink — adds via noodlebomb.co/cart so shoppers do not
 // land inside Shopify's default cart theme before final checkout.
@@ -17,12 +16,12 @@ const nbCartPermalink = (slug, qty = 1) => {
   return `/cart?add=${encodeURIComponent(slug)}&qty=${n}`;
 };
 
-// Returns the best Wix URL for a given cart item list — used as the last-resort
+// Returns the best local URL for a given cart item list — used as the last-resort
 // fallback if both Storefront API and Shopify cart-permalink fail.
 const nbCheckoutUrl = (items) => {
-  if (!items || items.length === 0) return NB_WIX.shop;
-  if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
-  return NB_WIX.shop;
+  if (!items || items.length === 0) return NB_PRODUCT_URLS.shop;
+  if (items.length === 1) return NB_PRODUCT_URLS[items[0].slug] || NB_PRODUCT_URLS.shop;
+  return NB_PRODUCT_URLS.shop;
 };
 
 // Single-bottle and trio prices (must match app.jsx FLAVORS).
@@ -504,9 +503,7 @@ function Nav({ flavor, setFlavor, flavors }) {
           ))}
         </div>
         <a
-          href={NB_WIX.shop}
-          target="_blank"
-          rel="noopener"
+          href={NB_PRODUCT_URLS.shop}
           onClick={() => setDrawerOpen(false)}
           style={{
             display: 'inline-flex',

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { getCheckoutUrl } from "@/lib/wix-checkout";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, ShoppingCart, Flame } from "lucide-react";
@@ -249,10 +248,9 @@ const BundleBuilder = () => {
             <div className="flex items-center justify-center gap-1.5 mb-3">
               <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Over $35</span>
             </div>
-            <motion.a
-              href={getCheckoutUrl("variety-pack")}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button
+              type="button"
+              onClick={handleAddToCart}
               animate={{
                 boxShadow: [
                   "0 0 20px hsl(4 85% 50% / 0.3)",
@@ -264,7 +262,7 @@ const BundleBuilder = () => {
               className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:scale-[1.02] transition-transform"
             >
               <ShoppingCart className="h-4 w-4" /> Order The Trio
-            </motion.a>
+            </motion.button>
           </motion.div>
         )}
       </div>

@@ -15,7 +15,7 @@ import {
   Flame,
 } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
-import { getCheckoutUrl, WIX_STORE_BASE } from "@/lib/wix-checkout";
+import { createShopifyCheckoutUrl } from "@/lib/shopify";
 import EmberParticles from "@/components/EmberParticles";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
@@ -43,6 +43,8 @@ const Checkout = () => {
   const [emailTouched, setEmailTouched] = useState(false);
   const [marketing, setMarketing] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const [step] = useState<1 | 2 | 3>(2);
 
   // Restore stashed email on mount
@@ -87,17 +89,25 @@ const Checkout = () => {
     return `${fmt(start)} – ${fmt(end)}`;
   }, []);
 
-  const wixCheckoutUrl =
-    items.length === 1 ? getCheckoutUrl(items[0]?.slug) : WIX_STORE_BASE;
-
-  const handleProceed = () => {
+  const handleProceed = async () => {
     if (!emailValid) {
       setEmailTouched(true);
       return;
     }
     setRedirecting(true);
-    // Open the Wix store in a new tab so the cart isn't lost if they bounce back
-    window.open(wixCheckoutUrl, "_blank", "noopener,noreferrer");
+    setCheckoutError(null);
+    try {
+      const url = await createShopifyCheckoutUrl(items);
+      setCheckoutUrl(url);
+      window.location.href = url;
+    } catch (error) {
+      setRedirecting(false);
+      setCheckoutError(
+        error instanceof Error
+          ? error.message
+          : "Shopify did not return a checkout URL.",
+      );
+    }
   };
 
   const amountToFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
@@ -296,7 +306,7 @@ const Checkout = () => {
               </div>
             </motion.div>
 
-            {/* Wix handoff explainer */}
+            {/* Shopify handoff explainer */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -312,15 +322,12 @@ const Checkout = () => {
                     You'll finish on our secure store.
                   </p>
                   <p className="text-foreground/70 leading-relaxed">
-                    Payment, shipping, and tax are handled on{" "}
+                    Payment, shipping, and tax are handled by{" "}
                     <span className="text-primary font-semibold">
-                      shop.noodlebomb.co
+                      Shopify secure checkout
                     </span>
-                    . When you click below, we'll open it in a new tab —{" "}
-                    {items.length > 1
-                      ? `add your ${itemCount} items there to complete the order. `
-                      : ""}
-                    Your cart here stays saved.
+                    . Your current cart carries into checkout for Shop Pay,
+                    cards, Apple Pay, or Google Pay.
                   </p>
                 </div>
               </div>
@@ -432,15 +439,12 @@ const Checkout = () => {
                     <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="font-bold text-foreground">
-                        New tab opened.
+                        Opening checkout.
                       </p>
                       <p className="mt-1 leading-relaxed">
-                        If nothing happened, your browser may have blocked the
-                        popup —{" "}
+                        If checkout does not open, {" "}
                         <a
-                          href={wixCheckoutUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href={checkoutUrl || "/cart"}
                           className="text-primary hover:underline font-semibold"
                         >
                           click here
@@ -459,6 +463,12 @@ const Checkout = () => {
                     </div>
                   </div>
                 </motion.div>
+              )}
+
+              {checkoutError && (
+                <div className="mt-4 px-4 py-3 rounded-xl bg-destructive/10 border border-destructive/30 text-xs text-destructive font-display">
+                  {checkoutError}
+                </div>
               )}
 
               {/* Trust signals */}
