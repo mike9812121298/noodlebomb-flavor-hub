@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform, AnimatePresence, Variants } from "fram
 import { useScrollReveal, useScrollRevealChildren } from "@/hooks/use-scroll-reveal";
 import { ArrowRight, Zap, Star, ShoppingCart, Truck, RotateCcw, Leaf, MapPin } from "lucide-react";
 import nbLogo from "@/assets/nb-logo.png";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-production-front-2026-05.jpeg";
+import nbSpicyTokyo from "@/assets/nb-spicy-production-front-2026-05.jpeg";
+import nbCitrusShoyu from "@/assets/nb-citrus-production-front-2026-05.jpeg";
 import heroSceneTrioCounter from "@/assets/nb-hero-scene-trio-counter.png";
 import heroScenePourOriginal from "@/assets/nb-hero-scene-pour-original-v2.jpg";
 import heroOriginalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";

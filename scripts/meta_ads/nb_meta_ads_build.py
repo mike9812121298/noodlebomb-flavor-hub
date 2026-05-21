@@ -102,7 +102,7 @@ PRODUCTS = [
         "name": "Original Ramen Sauce",
         "path": "/product/original-ramen",
         "price": "$11.99",
-        "image": "nb-original-front-studio-v1.jpg",
+        "image": "nb-original-production-front-2026-05.jpeg",
         "headline": "Restaurant Ramen, At Home",
         "primary_text": (
             "One spoonful turns instant noodles into the bowl you'd order "
@@ -115,7 +115,7 @@ PRODUCTS = [
         "name": "Spicy Tokyo Ramen Sauce",
         "path": "/product/spicy-tokyo",
         "price": "$11.99",
-        "image": "nb-spicy-front-studio-v1.jpg",
+        "image": "nb-spicy-production-front-2026-05.jpeg",
         "headline": "Tokyo Heat in One Pour",
         "primary_text": (
             "Crave the spicy ramen bowl from your favorite Tokyo shop? "
@@ -129,7 +129,7 @@ PRODUCTS = [
         "name": "Citrus Shoyu Ramen Sauce",
         "path": "/product/citrus-shoyu",
         "price": "$11.99",
-        "image": "nb-citrus-front-studio-v1.jpg",
+        "image": "nb-citrus-production-front-2026-05.jpeg",
         "headline": "Bright, Citrusy, Crave-Worthy",
         "primary_text": (
             "Citrus-bright shoyu that wakes up any bowl of noodles. "
@@ -142,7 +142,7 @@ PRODUCTS = [
         "name": "The NoodleBomb Trio",
         "path": "/",
         "price": "$29.99",
-        "image": "nb-hero-trio-studio-v1.jpg",
+        "image": "nb-production-trio-hero-2026-05.jpg",
         "headline": "All 3 Flavors. One Box.",
         "primary_text": (
             "Can't pick a favorite? The NoodleBomb Trio has Original, "

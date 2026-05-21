@@ -21,9 +21,9 @@ import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import { createShopifyCheckoutUrl, fetchShopifyProductBySlug, formatShopifyPrice } from "@/lib/shopify";
 import { trackAddToCart, trackViewContent } from "@/lib/meta-pixel";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-production-front-2026-05.jpeg";
+import nbSpicyTokyo from "@/assets/nb-spicy-production-front-2026-05.jpeg";
+import nbCitrusShoyu from "@/assets/nb-citrus-production-front-2026-05.jpeg";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 // Designer / lifestyle creatives — per flavor gallery
 import originalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";

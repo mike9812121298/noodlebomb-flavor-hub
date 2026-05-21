@@ -35,11 +35,11 @@ const getShopifyCartPermalink = (items) => {
 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  citrus:   'uploads/nb-citrus-front-cutout-2026-05-09.png',
-  spicy:    'uploads/nb-spicy-front-cutout-2026-05-09.png',
+  original: 'uploads/nb-original-production-front-2026-05.jpeg',
+  citrus:   'uploads/nb-citrus-production-front-2026-05.jpeg',
+  spicy:    'uploads/nb-spicy-production-front-2026-05.jpeg',
   shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png',
-  trio:     'uploads/noodlebomb-trio.png'
+  trio:     'uploads/nb-production-trio-hero-2026-05.jpg'
 };
 
 const PRODUCT_TAGS = {

@@ -43,10 +43,10 @@ const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'tri
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  spicy:    'uploads/nb-spicy-front-cutout-2026-05-09.png',
-  citrus:   'uploads/nb-citrus-front-cutout-2026-05-09.png',
-  trio:     'uploads/noodlebomb-trio.png',
+  original: 'uploads/nb-original-production-front-2026-05.jpeg',
+  spicy:    'uploads/nb-spicy-production-front-2026-05.jpeg',
+  citrus:   'uploads/nb-citrus-production-front-2026-05.jpeg',
+  trio:     'uploads/nb-production-trio-hero-2026-05.jpg',
   shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png'
 };
 
@@ -243,7 +243,7 @@ function CartPage() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   padding: 4,
                 }}>
-                  <img src="uploads/noodlebomb-trio.png" alt="The NoodleBomb Trio" loading="lazy"
+                  <img src="uploads/nb-production-trio-hero-2026-05.jpg" alt="The NoodleBomb Trio" loading="lazy"
                     style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
