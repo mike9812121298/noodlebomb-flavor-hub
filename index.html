@@ -10,6 +10,24 @@
 <!-- GA4 — Disabled until live property ID is provisioned via Shopify's Google & YouTube channel + manual install (see CANONICAL_URL_MAP.md). Empty stub keeps gtag() calls safe if any are inlined elsewhere. -->
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}</script>
 
+<!-- Klaviyo Active on Site -->
+<script async src="https://static.klaviyo.com/onsite/js/XSwJ9H/klaviyo.js"></script>
+
+<!-- Meta Pixel: React-side PageView. Shopify checkout events are handled by Shopify-side pixel apps. -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3750419675236656');
+fbq('track', 'PageView');
+window.__nbMetaPageViewed = true;
+</script>
+
 <!-- SEO: Description -->
 <meta name="description" content="NoodleBomb makes small-batch ramen sauce for noodles, rice bowls, wings, dumplings, eggs, and marinades. Shop Original, Spicy Tokyo, and Citrus Shoyu." />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -3523,8 +3541,7 @@
 <!-- cart-store.js sets window.NB_CART. Deferred — runs before the build/*.js
      bundles in document order, so window.NB_CART is ready when they evaluate. -->
 <script defer src="cart-store.js"></script>
-<!-- Shopify config + checkout client. Feature-flagged in shopify-config.js;
-     when enabled:false, these are inert and the Wix flow remains live. -->
+<!-- Shopify config + checkout client. Feature-flagged in shopify-config.js. -->
 <script defer src="shopify-config.js"></script>
 <script defer src="shopify-checkout.js"></script>
 <!-- Pre-compiled JSX bundles (esbuild via `npm run build:static`).

@@ -174,29 +174,28 @@
 
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
-# noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
+# noodlebomb.co = brand front. Shopify owns checkout and catalog source data.
 # See CANONICAL_URL_MAP.md.
 #
-# Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
-# rebrand the storefront domain later without redirect-cache pollution.
+# Per-flavor customer PDPs stay on noodlebomb.co; checkout hands off to Shopify.
 # ─────────────────────────────────────────────────────────────────
 
 [[redirects]]
   from = "/product/original-ramen"
-  to = "https://nu2vqa-ma.myshopify.com/products/original"
-  status = 302
+  to = "/product-original.html"
+  status = 200
   force = true
 
 [[redirects]]
   from = "/product/spicy-tokyo"
-  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
-  status = 302
+  to = "/product-spicy.html"
+  status = 200
   force = true
 
 [[redirects]]
   from = "/product/citrus-shoyu"
-  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
-  status = 302
+  to = "/product-citrus.html"
+  status = 200
   force = true
 
 [[redirects]]
@@ -261,7 +260,7 @@
   status = 302
   force = true
 
-# Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
+# Legacy product-page URLs from old marketing bounce to Shopify.
 [[redirects]]
   from = "/product-page/*"
   to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"

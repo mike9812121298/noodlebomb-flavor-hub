@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart, ChevronDown, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getCheckoutUrl } from "@/lib/wix-checkout";
 import SpiceLevel from "@/components/SpiceLevel";
 
 const ingredientData: Record<string, { ingredients: string; allergens: string }> = {
@@ -198,15 +197,13 @@ const ProductCard = ({
             </span>
             </div>
               <div className="text-center">
-                <a
-                  href={getCheckoutUrl(buyUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to={productPath}
                   className="flex items-center gap-2 bg-gradient-fire px-5 py-2.5 rounded-full text-sm font-display font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_30px_hsl(var(--flame)/0.4)] hover:scale-105"
                 >
                   <ShoppingCart className="h-4 w-4" />
-                  Order Now
-                </a>
+                  View Product
+                </Link>
                 <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">
                   Free shipping over $35 · Ships from WA
                 </p>

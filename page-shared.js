@@ -1,6 +1,68 @@
 // NoodleBomb shared page interactions — about / recipes / faq
 
 (function () {
+  var META_PIXEL_ID = '3750419675236656';
+  var KLAVIYO_ACCOUNT_ID = 'XSwJ9H';
+
+  function loadScriptOnce(id, src) {
+    if (document.getElementById(id)) return;
+    var script = document.createElement('script');
+    script.id = id;
+    script.async = true;
+    script.src = src;
+    document.head.appendChild(script);
+  }
+
+  if (!window.fbq) {
+    (function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = true;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', META_PIXEL_ID);
+  }
+  if (window.fbq && !window.__nbMetaPageViewed) {
+    window.fbq('track', 'PageView');
+    window.__nbMetaPageViewed = true;
+  }
+  loadScriptOnce('nb-klaviyo-onsite', 'https://static.klaviyo.com/onsite/js/' + KLAVIYO_ACCOUNT_ID + '/klaviyo.js');
+
+  var path = window.location.pathname;
+  var productMatch = path.match(/^\/product\/([^/]+)/);
+  if (window.fbq && productMatch) {
+    window.fbq('track', 'ViewContent', {
+      content_name: document.title.replace(/\s*\|\s*NoodleBomb.*$/, ''),
+      content_ids: [productMatch[1]],
+      content_type: 'product',
+      currency: 'USD'
+    });
+  }
+
+  document.addEventListener('click', function (event) {
+    var target = event.target;
+    var link = target && target.closest ? target.closest('a[href*="/cart?add="]') : null;
+    if (!link || !window.fbq) return;
+    var addMatch = link.href.match(/[?&]add=([^&]+)/);
+    var slug = addMatch ? decodeURIComponent(addMatch[1]) : 'product';
+    window.fbq('track', 'AddToCart', {
+      content_name: link.textContent.trim(),
+      content_ids: [slug],
+      content_type: 'product',
+      currency: 'USD'
+    });
+  }, true);
+
   // Mobile drawer toggle
   var burger = document.getElementById('nav-burger');
   var drawer = document.getElementById('nav-drawer');

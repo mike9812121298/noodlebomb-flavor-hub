@@ -3,7 +3,7 @@
  * Status: PAID store wired. Variant GIDs captured 2026-05-06.
  *
  * To go live with Shopify checkout:
- *   1. Confirm 4 products are created in the Shopify store and published
+ *   1. Confirm 5 products are created in the Shopify store and published
  *      to the Headless sales channel:
  *        - Original ($11.99)
  *        - Spicy Tokyo ($11.99)
@@ -37,7 +37,7 @@
  * Acceptable risk for these scopes. The private `shpat_...` token must
  * NEVER ship in client-side code — that one CAN read sensitive data.
  *
- * The Wix flow remains the fallback when enabled is false OR if the
+ * Local cart links remain the fallback when enabled is false OR if the
  * Shopify API call errors at runtime.
  */
 (function () {

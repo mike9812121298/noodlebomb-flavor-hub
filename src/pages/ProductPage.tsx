@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getCheckoutUrl } from "@/lib/wix-checkout";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingCart,
@@ -12,6 +11,9 @@ import {
 import SpiceLevel from "@/components/SpiceLevel";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
+import { useQuery } from "@tanstack/react-query";
+import { createShopifyCheckoutUrl, fetchShopifyProductBySlug, formatShopifyPrice } from "@/lib/shopify";
+import { trackAddToCart, trackViewContent } from "@/lib/meta-pixel";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
@@ -131,6 +133,23 @@ const PRODUCTS: Record<string, ProductData> = {
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
     allergens: "Soy, Wheat, Sesame.",
   },
+  "shoyu-reserve": {
+    slug: "shoyu-reserve",
+    name: "Shoyu Reserve",
+    tagline: "Slow-Brewed Shoyu Depth",
+    price: 11.99,
+    displayPrice: "$11.99",
+    subscribePrice: null,
+    displaySubscribePrice: null,
+    image: nbCitrusShoyu,
+    spiceLevel: 1,
+    pairsWellWith: ["Ramen", "Rice", "Dumplings"],
+    flavorHook: "Deep shoyu flavor for bowls, marinades, and finishing.",
+    description:
+      "Slow-brewed shoyu depth in the same 7 fl oz NoodleBomb bottle. Built for ramen, rice, dumplings, wings, and quick marinades.",
+    ingredients: "See bottle label for current ingredients.",
+    allergens: "Soy, wheat.",
+  },
 };
 
 type Gallery = { hero?: string; gallery: string[]; lifestyle: string[] };
@@ -160,8 +179,21 @@ const ProductPage = () => {
   const { toast } = useToast();
   const [showDetails, setShowDetails] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
 
   const product = slug ? PRODUCTS[slug] : null;
+  const { data: shopifyProduct } = useQuery({
+    queryKey: ["shopify-product", slug],
+    queryFn: () => fetchShopifyProductBySlug(slug || ""),
+    enabled: Boolean(slug),
+    staleTime: 1000 * 60 * 10,
+  });
+
+  useEffect(() => {
+    if (product) {
+      trackViewContent(product.name, product.slug, product.price);
+    }
+  }, [product]);
 
   if (!product) {
     return (
@@ -176,7 +208,7 @@ const ProductPage = () => {
     );
   }
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     addItem({
       slug: product.slug,
       name: product.name,
@@ -184,12 +216,27 @@ const ProductPage = () => {
       purchaseType: "one-time",
     });
     setAddedToCart(true);
+    setRedirecting(true);
+    trackAddToCart(product.name, product.slug, product.price);
     toast({
       title: "Added to cart!",
-      description: `${product.name} added.`,
+      description: "Opening secure Shopify checkout.",
     });
-    setTimeout(() => setAddedToCart(false), 2000);
+    try {
+      const checkoutUrl = await createShopifyCheckoutUrl([{ slug: product.slug, quantity: 1 }]);
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      setRedirecting(false);
+      toast({
+        title: "Checkout needs a quick retry",
+        description: error instanceof Error ? error.message : "Shopify did not return a checkout URL.",
+        variant: "destructive",
+      });
+      setTimeout(() => setAddedToCart(false), 2000);
+    }
   };
+  const productImage = shopifyProduct?.featuredImage?.url || product.image;
+  const displayPrice = formatShopifyPrice(shopifyProduct, product.displayPrice);
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-20 md:pb-0">
@@ -221,8 +268,8 @@ const ProductPage = () => {
               </div>
             )}
             <img
-              src={product.image}
-              alt={product.name}
+              src={productImage}
+              alt={shopifyProduct?.featuredImage?.altText || product.name}
               className="h-full w-auto object-contain transition-transform duration-500 hover:scale-105"
             />
           </motion.div>
@@ -247,7 +294,7 @@ const ProductPage = () => {
             </div>
 
             <p className="text-foreground/80 text-base leading-relaxed">
-              {product.description}
+              {shopifyProduct?.description || product.description}
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
@@ -268,20 +315,20 @@ const ProductPage = () => {
             <div className="pt-2">
               <div className="flex items-end gap-2 mb-4">
                 <span className="font-display text-4xl font-bold text-primary">
-                  ${product.price.toFixed(2)}
+                  {displayPrice}
                 </span>
               </div>
 
               <div className="flex gap-3">
-                <a
-                  href={getCheckoutUrl(slug)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  disabled={redirecting}
                   className="flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground bg-gradient-fire hover:shadow-[0_0_40px_hsl(var(--flame)/0.45)] hover:scale-[1.02] transition-all"
                 >
                   <ShoppingCart className="h-4 w-4" />
-                  Order Now
-                </a>
+                  {redirecting ? "Opening Checkout..." : addedToCart ? "Added" : "Order Now"}
+                </button>
                 <Link
                   to="/cart"
                   className="px-5 py-4 rounded-full border border-border hover:border-primary/50 hover:bg-primary/5 transition-all font-display text-sm font-bold uppercase tracking-wider text-foreground/70 whitespace-nowrap"

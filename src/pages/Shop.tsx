@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import ComingSoonDrop from "@/components/ComingSoonDrop";
+import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchShopifyProducts, formatShopifyPrice, SHOPIFY_HANDLES } from "@/lib/shopify";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
@@ -59,7 +62,22 @@ const bundles = [
   },
 ];
 
-const Shop = () => (
+function productSlugFromUrl(buyUrl: string) {
+  return buyUrl.split("/product/")[1] || buyUrl;
+}
+
+const Shop = () => {
+  const { data: shopifyProducts = [] } = useQuery({
+    queryKey: ["shopify-products"],
+    queryFn: fetchShopifyProducts,
+    staleTime: 1000 * 60 * 10,
+  });
+  const shopifyByHandle = useMemo(
+    () => new Map(shopifyProducts.map((product) => [product.handle, product])),
+    [shopifyProducts],
+  );
+
+  return (
   <div className="min-h-screen bg-background pt-24 pb-20 md:pb-0">
     <div className="container py-16">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
@@ -78,7 +96,13 @@ const Shop = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {products.map((p, i) => (
             <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-              <ProductCard {...p} />
+              <ProductCard
+                {...p}
+                price={formatShopifyPrice(
+                  shopifyByHandle.get(SHOPIFY_HANDLES[productSlugFromUrl(p.buyUrl)]),
+                  p.price,
+                )}
+              />
             </motion.div>
           ))}
         </div>
@@ -211,6 +235,7 @@ const Shop = () => (
       </Link>
     </div>
   </div>
-);
+  );
+};
 
 export default Shop;

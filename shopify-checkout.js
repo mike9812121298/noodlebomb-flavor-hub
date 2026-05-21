@@ -111,7 +111,7 @@
       return true;
     }).catch(function (err) {
       if (window.console && console.error) console.error('Shopify checkout failed:', err);
-      // Fall back to the existing href / Wix URL so the user is never stranded.
+      // Fall back to the existing href so the user is never stranded.
       if (fallbackUrl) window.location.href = fallbackUrl;
       return false;
     });
