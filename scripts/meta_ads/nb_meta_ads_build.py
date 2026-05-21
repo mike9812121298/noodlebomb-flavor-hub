@@ -11,7 +11,8 @@ Audience-split (A/B) structure:
     - 2 ad sets sharing that creative:
         "Broad"    — Advantage+ broad audience, Meta picks the buyers
         "Interest" — interest-targeted audience (ramen / cooking / etc.)
-  => 8 ad sets, 4 creatives, 8 ads. Broad vs. Interest is the A/B variable.
+  => 8 ad sets, 8 creatives, 8 ads. Creatives split only so each ad set gets
+     its own UTM content value; Broad vs. Interest is the A/B variable.
 
 Interest ad sets resolve their interest ids at build time via Meta's
 targeting search API, so no brittle hardcoded ids.
@@ -38,12 +39,21 @@ ENVIRONMENT VARIABLES (required for --execute)
                       optimizes for purchases (OUTCOME_SALES); if absent
                       it falls back to link-click traffic (OUTCOME_TRAFFIC).
   META_API_VERSION    (optional) Graph API version, default v21.0.
+
+If those vars are not already set, the script also reads:
+  C:/Users/12534/.openclaw/secrets/meta_noodlebomb.env
 """
 import argparse
 import json
 import os
 import sys
 from pathlib import Path
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 
 try:
     import requests
@@ -59,6 +69,8 @@ GRAPH = f"https://graph.facebook.com/{API_VERSION}"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 UPLOADS = REPO_ROOT / "uploads"
 SITE = "https://noodlebomb.co"
+META_ENV_FILE_WINDOWS = Path("C:/Users/12534/.openclaw/secrets/meta_noodlebomb.env")
+META_ENV_FILE_WSL = Path("/mnt/c/Users/12534/.openclaw/secrets/meta_noodlebomb.env")
 
 CAMPAIGN_NAME = "NoodleBomb — Ramen Sauce | Audience A/B"
 DEFAULT_DAILY_BUDGET_USD = 20.0  # per ad set
@@ -88,7 +100,7 @@ PRODUCTS = [
     {
         "key": "original",
         "name": "Original Ramen Sauce",
-        "path": "/original-ramen-sauce",
+        "path": "/product/original-ramen",
         "price": "$11.99",
         "image": "nb-original-front-studio-v1.jpg",
         "headline": "Restaurant Ramen, At Home",
@@ -101,7 +113,7 @@ PRODUCTS = [
     {
         "key": "spicy",
         "name": "Spicy Tokyo Ramen Sauce",
-        "path": "/spicy-tokyo-ramen-sauce",
+        "path": "/product/spicy-tokyo",
         "price": "$11.99",
         "image": "nb-spicy-front-studio-v1.jpg",
         "headline": "Tokyo Heat in One Pour",
@@ -115,12 +127,12 @@ PRODUCTS = [
     {
         "key": "citrus",
         "name": "Citrus Shoyu Ramen Sauce",
-        "path": "/citrus-shoyu-ramen-sauce",
+        "path": "/product/citrus-shoyu",
         "price": "$11.99",
         "image": "nb-citrus-front-studio-v1.jpg",
         "headline": "Bright, Citrusy, Crave-Worthy",
         "primary_text": (
-            "Yuzu-bright shoyu that wakes up any bowl of noodles. "
+            "Citrus-bright shoyu that wakes up any bowl of noodles. "
             "NoodleBomb Citrus Shoyu — balanced, zesty, ridiculously good."
         ),
         "description": "Citrus Shoyu Ramen Sauce — $11.99",
@@ -170,12 +182,13 @@ def make_interest_targeting(interests):
 # --------------------------------------------------------------------------
 # Plan
 # --------------------------------------------------------------------------
-def product_url(product):
+def product_url(product, audience):
     sep = "&" if "?" in product["path"] else "?"
     return (
         f"{SITE}{product['path']}{sep}"
-        f"utm_source=facebook&utm_medium=paid"
-        f"&utm_campaign=nb-ramen-sauce&utm_content={product['key']}"
+        "utm_source=facebook&utm_medium=cpc"
+        "&utm_campaign=nb_launch_2026-05"
+        f"&utm_content={audience}&utm_term={product['key']}"
     )
 
 
@@ -187,18 +200,19 @@ def build_plan(daily_budget_usd, use_conversions):
     for p in PRODUCTS:
         adsets = []
         for variant in VARIANTS:
+            audience = variant.lower()
             adsets.append({
                 "variant": variant,
-                "audience": variant.lower(),
+                "audience": audience,
                 "adset_name": f"NB | {p['name']} | {variant}",
                 "ad_name": f"NB | {p['name']} | {variant} Ad",
+                "creative_name": f"NB Creative | {p['name']} | {variant}",
+                "url": product_url(p, audience),
                 "daily_budget_cents": budget_cents,
                 "optimization_goal": optimization_goal,
             })
         items.append({
             "product": p,
-            "creative_name": f"NB Creative | {p['name']}",
-            "url": product_url(p),
             "image_path": UPLOADS / p["image"],
             "adsets": adsets,
         })
@@ -225,7 +239,7 @@ def print_plan(plan):
     mode = "purchase conversions (pixel)" if plan["use_conversions"] else "link-click traffic (no pixel)"
     print(f"  Optimization  : {mode}")
     n_adsets = total_adsets(plan)
-    print(f"  Products      : {len(plan['items'])}  (1 creative each)")
+    print(f"  Products      : {len(plan['items'])}  (2 UTM-specific creatives each)")
     print(f"  Ad sets       : {n_adsets}  (Broad + Interest per product)")
     print(f"  Budget        : ${plan['daily_budget_usd']:.2f}/day per ad set")
     total = plan["daily_budget_usd"] * n_adsets
@@ -241,7 +255,6 @@ def print_plan(plan):
         if not exists:
             missing.append(item["image_path"])
         print(f"  ▸ {p['name']}")
-        print(f"      url      : {item['url']}")
         print(f"      image    : uploads/{p['image']}  [{flag}]")
         print(f"      headline : {p['headline']}")
         print(f"      body     : {p['primary_text']}")
@@ -249,6 +262,7 @@ def print_plan(plan):
             aud = ("Advantage+ broad audience" if a["audience"] == "broad"
                    else "interest-targeted audience")
             print(f"      • {a['variant']:8s} ad set — {aud}")
+            print(f"          url  {a['url']}")
             print(f"          goal {a['optimization_goal']}  "
                   f"budget ${a['daily_budget_cents'] / 100:.2f}/day")
     print("=" * 70)
@@ -314,7 +328,7 @@ class MetaClient:
         return resolved
 
     def upload_image(self, image_path):
-        with open(image_path, "rb") as fh:
+        with open(image_path.as_posix(), "rb") as fh:
             body = self._post(f"{self.account}/adimages",
                               data={}, files={"filename": (image_path.name, fh)})
         images = body.get("images") or {}
@@ -415,16 +429,16 @@ def execute(plan, client):
             image_hash = client.upload_image(item["image_path"])
             print(f"    image_hash: {image_hash}")
 
-            print(f"  creating shared ad creative...")
-            creative_id = client.create_creative(
-                item["creative_name"], item["url"], p["headline"],
-                p["primary_text"], p["description"], image_hash)
-            created.append(("creative", creative_id))
-            print(f"    creative id: {creative_id}")
-
             for a in item["adsets"]:
                 targeting = (broad_targeting if a["audience"] == "broad"
                              else interest_targeting)
+                print(f"  [{a['variant']}] creating ad creative...")
+                creative_id = client.create_creative(
+                    a["creative_name"], a["url"], p["headline"],
+                    p["primary_text"], p["description"], image_hash)
+                created.append(("creative", creative_id))
+                print(f"    creative id: {creative_id}")
+
                 print(f"  [{a['variant']}] creating ad set (PAUSED)...")
                 adset_id = client.create_adset(
                     campaign_id, a["adset_name"], a["daily_budget_cents"],
@@ -456,6 +470,26 @@ def execute(plan, client):
 # --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
+def load_env_file_if_present():
+    for env_path in (META_ENV_FILE_WINDOWS, META_ENV_FILE_WSL):
+        if not env_path.exists():
+            continue
+        for raw in env_path.read_text(encoding="utf-8-sig").splitlines():
+            line = raw.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+        if not os.environ.get("META_ACCESS_TOKEN"):
+            os.environ["META_ACCESS_TOKEN"] = os.environ.get("META_NOODLEBOMB_TOKEN", "")
+        if not os.environ.get("META_PIXEL_ID"):
+            os.environ["META_PIXEL_ID"] = os.environ.get("META_PIXEL_ID_NOODLEBOMB", "")
+        if not os.environ.get("META_AD_ACCOUNT_ID"):
+            os.environ["META_AD_ACCOUNT_ID"] = os.environ.get("META_NOODLEBOMB_AD_ACCOUNT_ID", "")
+        return env_path.as_posix()
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Build NoodleBomb Meta ad campaigns, Broad vs. Interest "
@@ -474,6 +508,7 @@ def main():
     if args.budget <= 0:
         sys.exit("--budget must be greater than 0")
 
+    loaded_env = load_env_file_if_present()
     creds = load_credentials()
     use_conversions = bool(creds["META_PIXEL_ID"])
     plan = build_plan(args.budget, use_conversions)
@@ -484,6 +519,8 @@ def main():
         print("Interest ids are resolved live at --execute time via the "
               "Meta targeting search API.")
         print("Credentials check:")
+        if loaded_env:
+            print(f"  env file            : {loaded_env}")
         for key in ("META_ACCESS_TOKEN", "META_AD_ACCOUNT_ID", "META_PAGE_ID"):
             print(f"  {key:20s}: {'set' if creds[key] else 'MISSING (required for --execute)'}")
         print(f"  {'META_PIXEL_ID':20s}: "

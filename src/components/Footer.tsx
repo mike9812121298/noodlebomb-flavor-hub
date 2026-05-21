@@ -38,10 +38,10 @@ const Footer = () => {
             <h4 className="font-display font-bold text-foreground mb-4 text-sm uppercase tracking-wider">Shop</h4>
             <ul className="space-y-2">
               {[
-                { label: "Original", href: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce" },
-                { label: "Spicy Tokyo", href: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce" },
-                { label: "Citrus Shoyu", href: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce" },
-                { label: "Variety 3-Pack", href: "https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack" },
+                { label: "Original", href: "https://noodlebomb.co/product/original-ramen" },
+                { label: "Spicy Tokyo", href: "https://noodlebomb.co/product/spicy-tokyo" },
+                { label: "Citrus Shoyu", href: "https://noodlebomb.co/product/citrus-shoyu" },
+                { label: "Variety 3-Pack", href: "https://noodlebomb.co/product/trio" },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <a href={href} target="_blank" rel="noopener noreferrer"

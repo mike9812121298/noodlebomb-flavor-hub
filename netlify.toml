@@ -36,7 +36,7 @@
   force = true
 
 # /dist/ is a stale Vite build (different homepage, sitemap with broken
-# paths and a "yuzu" reference banned per commit a577290).
+# paths and an old flavor reference banned per commit a577290).
 [[redirects]]
   from = "/dist/*"
   to = "/404.html"
@@ -386,17 +386,17 @@
   status = 200
 
 [[redirects]]
-  from = "/original-ramen-sauce"
+  from = "/product/original-ramen"
   to = "/product-original.html"
   status = 200
 
 [[redirects]]
-  from = "/spicy-tokyo-ramen-sauce"
+  from = "/product/spicy-tokyo"
   to = "/product-spicy.html"
   status = 200
 
 [[redirects]]
-  from = "/citrus-shoyu-ramen-sauce"
+  from = "/product/citrus-shoyu"
   to = "/product-citrus.html"
   status = 200
 
@@ -422,19 +422,19 @@
 
 [[redirects]]
   from = "/product-original.html"
-  to = "/original-ramen-sauce"
+  to = "/product/original-ramen"
   status = 301
   force = true
 
 [[redirects]]
   from = "/product-spicy.html"
-  to = "/spicy-tokyo-ramen-sauce"
+  to = "/product/spicy-tokyo"
   status = 301
   force = true
 
 [[redirects]]
   from = "/product-citrus.html"
-  to = "/citrus-shoyu-ramen-sauce"
+  to = "/product/citrus-shoyu"
   status = 301
   force = true
 
@@ -453,6 +453,24 @@
 [[redirects]]
   from = "/product-shoyu-reserve.html"
   to = "/product/shoyu-reserve"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/original-ramen-sauce"
+  to = "/product/original-ramen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/spicy-tokyo-ramen-sauce"
+  to = "/product/spicy-tokyo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/citrus-shoyu-ramen-sauce"
+  to = "/product/citrus-shoyu"
   status = 301
   force = true
 

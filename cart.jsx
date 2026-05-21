@@ -3,9 +3,9 @@
 const { useEffect, useState, useMemo } = React;
 
 const NB_SITE_URLS = {
-  original: 'https://noodlebomb.co/original-ramen-sauce',
-  citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
-  spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
+  original: 'https://noodlebomb.co/product/original-ramen',
+  citrus: 'https://noodlebomb.co/product/citrus-shoyu',
+  spicy: 'https://noodlebomb.co/product/spicy-tokyo',
   shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
   trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',

@@ -91,7 +91,7 @@ function NextDrop() {
                     />
                     <div className="nd-rim" aria-hidden="true" />
                   </div>
-                  <a className="nd-stage-tag nd-image-preorder" href={shoyuCartUrl}>PREORDER FOR $9.99 &rarr;</a>
+                  <a className="nd-stage-tag nd-image-preorder" href={shoyuCartUrl}>SHOP SHOYU - $11.99 &rarr;</a>
                 </div>
 
                 <div className="nd-copy">

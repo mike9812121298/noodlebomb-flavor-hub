@@ -8,7 +8,7 @@ const recipes = [
   {
     name: "Classic NoodleBomb Ramen Bowl",
     flavor: "Original",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/original-ramen",
     time: "10 min",
     serves: "1",
     desc: "The one that started it all. Simple, bold, unforgettable.",
@@ -22,7 +22,7 @@ const recipes = [
   {
     name: "5-Minute Garlic Noodles",
     flavor: "Original",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/original-ramen",
     time: "5 min",
     serves: "1",
     desc: "The fastest weeknight bowl in your rotation.",
@@ -35,7 +35,7 @@ const recipes = [
   {
     name: "Sunday Night Chashu Ramen",
     flavor: "Original",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/original-ramen",
     time: "2 hr 30 min",
     serves: "4",
     desc: "Project-night ramen — the kind you set music to and finish with a beer.",
@@ -52,7 +52,7 @@ const recipes = [
   {
     name: "Crispy Rice Salmon Bowl",
     flavor: "Original",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/original-ramen",
     time: "25 min",
     serves: "2",
     desc: "Crackly rice on the bottom, glazed salmon on top, NoodleBomb pulling it all together.",
@@ -67,7 +67,7 @@ const recipes = [
   {
     name: "Charred Broccoli Crunch Bowl",
     flavor: "Original",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/original-ramen",
     time: "15 min",
     serves: "2",
     desc: "Pantry-rescue dinner: one head of broccoli, one bottle, one ripping-hot pan.",
@@ -85,7 +85,7 @@ const recipes = [
   {
     name: "Spicy Tokyo Fire Ramen",
     flavor: "Spicy Tokyo",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/spicy-tokyo",
     time: "12 min",
     serves: "1",
     desc: "Savory soy, roasted chili, and sesame — cranked to maximum.",
@@ -98,7 +98,7 @@ const recipes = [
   {
     name: "Spicy Tokyo Steak Marinade",
     flavor: "Spicy Tokyo",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/spicy-tokyo",
     time: "20 min + marinate",
     serves: "2",
     desc: "The chili-oil infusion penetrates deep. Worth every minute of wait.",
@@ -111,7 +111,7 @@ const recipes = [
   {
     name: "Tokyo Heat Mapo Udon",
     flavor: "Spicy Tokyo",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/spicy-tokyo",
     time: "20 min",
     serves: "2",
     desc: "Sichuan heat meets Tokyo umami in a tangled bowl of fat udon noodles.",
@@ -127,7 +127,7 @@ const recipes = [
   {
     name: "Tokyo Heat Dumpling Dip",
     flavor: "Spicy Tokyo",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/spicy-tokyo",
     time: "3 min",
     serves: "4",
     desc: "Three-ingredient dip that ruins every other dumpling sauce forever.",
@@ -142,7 +142,7 @@ const recipes = [
   {
     name: "Spicy Tokyo Smashburger",
     flavor: "Spicy Tokyo",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/spicy-tokyo",
     time: "15 min",
     serves: "2",
     desc: "The umami-bomb burger that turns Tuesday night into a chef-table moment.",
@@ -160,7 +160,7 @@ const recipes = [
   {
     name: "Citrus Shoyu Cold Noodle Salad",
     flavor: "Citrus Shoyu",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/citrus-shoyu",
     time: "15 min",
     serves: "2",
     desc: "Bright, tangy, and perfect for summer.",
@@ -173,7 +173,7 @@ const recipes = [
   {
     name: "Citrus Shoyu Glazed Salmon",
     flavor: "Citrus Shoyu",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/citrus-shoyu",
     time: "20 min",
     serves: "2",
     desc: "Restaurant-bowl finish in twenty weeknight minutes.",
@@ -189,7 +189,7 @@ const recipes = [
   {
     name: "Spring Onion Citrus Slaw",
     flavor: "Citrus Shoyu",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/citrus-shoyu",
     time: "10 min",
     serves: "4",
     desc: "The side that steals every taco-night and grilled-fish dinner.",
@@ -205,7 +205,7 @@ const recipes = [
   {
     name: "Citrus Shoyu Tuna Poke",
     flavor: "Citrus Shoyu",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/citrus-shoyu",
     time: "10 min",
     serves: "2",
     desc: "Sushi-grade tuna, two minutes of work, bright rice-bowl payoff.",
@@ -223,7 +223,7 @@ const recipes = [
   {
     name: "NoodleBomb Wing Glaze",
     flavor: "Any flavor",
-    flavorLink: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce",
+    flavorLink: "https://noodlebomb.co/product/original-ramen",
     time: "45 min",
     serves: "4",
     desc: "The TikTok-worthy wing recipe everyone asks about.",
