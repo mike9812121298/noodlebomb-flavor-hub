@@ -12,6 +12,10 @@
   publish = "."
   ignore = "/bin/false"
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Block repo internals from being served. publish = "." means every file at
 # the root gets deployed, including /src/ (dormant Vite tree), /node_modules/,
 # /supabase/config.toml, package.json, and lockfiles. robots.txt only deters

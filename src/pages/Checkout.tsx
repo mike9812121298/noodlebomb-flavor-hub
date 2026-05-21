@@ -295,6 +295,11 @@ const Checkout = () => {
                           <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
                             ${item.price.toFixed(2)} each
                           </span>
+                          {isSubscription && item.cadenceDays && (
+                            <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
+                              Every {item.cadenceDays} days
+                            </span>
+                          )}
                         </div>
                       </div>
                       <span className="font-display font-bold text-foreground text-sm tabular-nums whitespace-nowrap">

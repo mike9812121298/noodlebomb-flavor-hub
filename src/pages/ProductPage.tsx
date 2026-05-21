@@ -9,6 +9,13 @@ import {
   Truck,
 } from "lucide-react";
 import SpiceLevel from "@/components/SpiceLevel";
+import SubscribeAndSaveToggle from "@/components/SubscribeAndSaveToggle";
+import {
+  getSellingPlanId,
+  hasSellingPlanIds,
+  type PurchaseChoice,
+  type SubscribeCadence,
+} from "@/lib/shopify-selling-plans";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
 import { useQuery } from "@tanstack/react-query";
@@ -180,6 +187,8 @@ const ProductPage = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const [redirecting, setRedirecting] = useState(false);
+  const [purchaseChoice, setPurchaseChoice] = useState<PurchaseChoice>("one-time");
+  const [subscribeCadence, setSubscribeCadence] = useState<SubscribeCadence>(30);
 
   const product = slug ? PRODUCTS[slug] : null;
   const { data: shopifyProduct } = useQuery({
@@ -209,21 +218,30 @@ const ProductPage = () => {
   }
 
   const handleAddToCart = async () => {
+    const subscriptionReady = hasSellingPlanIds();
+    const isSubscribe = purchaseChoice === "subscribe" && subscriptionReady;
+    const sellingPlanId = isSubscribe ? getSellingPlanId(subscribeCadence) : undefined;
+    const cartPrice = isSubscribe ? Number((product.price * 0.9).toFixed(2)) : product.price;
+
     addItem({
       slug: product.slug,
       name: product.name,
-      price: product.price,
-      purchaseType: "one-time",
+      price: cartPrice,
+      purchaseType: isSubscribe ? "subscribe" : "one-time",
+      sellingPlanId,
+      cadenceDays: isSubscribe ? subscribeCadence : undefined,
     });
     setAddedToCart(true);
     setRedirecting(true);
-    trackAddToCart(product.name, product.slug, product.price);
+    trackAddToCart(product.name, product.slug, cartPrice);
     toast({
       title: "Added to cart!",
       description: "Opening secure Shopify checkout.",
     });
     try {
-      const checkoutUrl = await createShopifyCheckoutUrl([{ slug: product.slug, quantity: 1 }]);
+      const checkoutUrl = await createShopifyCheckoutUrl([
+        { slug: product.slug, quantity: 1, sellingPlanId },
+      ]);
       window.location.href = checkoutUrl;
     } catch (error) {
       setRedirecting(false);
@@ -237,6 +255,7 @@ const ProductPage = () => {
   };
   const productImage = shopifyProduct?.featuredImage?.url || product.image;
   const displayPrice = formatShopifyPrice(shopifyProduct, product.displayPrice);
+  const numericPrice = Number(shopifyProduct?.price.amount || product.price);
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-20 md:pb-0">
@@ -319,7 +338,15 @@ const ProductPage = () => {
                 </span>
               </div>
 
-              <div className="flex gap-3">
+              <SubscribeAndSaveToggle
+                price={numericPrice}
+                choice={purchaseChoice}
+                cadence={subscribeCadence}
+                onChoiceChange={setPurchaseChoice}
+                onCadenceChange={setSubscribeCadence}
+              />
+
+              <div className="flex gap-3 mt-4">
                 <button
                   type="button"
                   onClick={handleAddToCart}

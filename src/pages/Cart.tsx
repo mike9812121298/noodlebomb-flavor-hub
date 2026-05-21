@@ -307,7 +307,7 @@ const Cart = () => {
                             {isSubscription ? (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-display font-bold uppercase tracking-wider text-primary">
                                 <Repeat className="h-2.5 w-2.5" />
-                                Subscription · Save 15%
+                                Subscription · Save 10%
                               </span>
                             ) : (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-border/60 text-[10px] font-display font-semibold uppercase tracking-wider text-foreground/55">
@@ -317,6 +317,11 @@ const Cart = () => {
                             <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
                               ${item.price.toFixed(2)} each
                             </span>
+                            {isSubscription && item.cadenceDays && (
+                              <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
+                                Every {item.cadenceDays} days
+                              </span>
+                            )}
                           </div>
                         </div>
                         <button
