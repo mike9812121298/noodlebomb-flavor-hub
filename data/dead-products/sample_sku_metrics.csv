@@ -1,0 +1,10 @@
+sku,product,category,flavor,channel,status,inventory_on_hand,inventory_age_days,unit_cost,price,gross_margin_pct,sessions_30d,orders_30d,revenue_30d,units_sold_30d,ad_spend_30d,support_mentions_30d,refunds_30d,last_sale_days_ago,related_hero_sku,change_marker,notes
+O6-FRQP-NOFV,Original Ramen Sauce,sauce,Original,shopify,active,106,34,3.20,11.99,0.73,980,43,515.57,43,122,2,0,1,,,
+3N-TLTK-P1X9,Spicy Tokyo Ramen Sauce,sauce,Spicy Tokyo,shopify,active,44,38,3.35,11.99,0.72,760,29,347.71,29,138,3,0,2,,image update,watch conversion after image change
+B6-QMUI-2AZE,Citrus Shoyu Ramen Sauce,sauce,Citrus Shoyu,shopify,active,45,41,3.30,11.99,0.72,610,25,299.75,25,110,2,0,3,,,
+NB-SOY-7OZ,Shoyu Reserve 7oz,soy sauce,Shoyu Reserve,shopify,draft,82,146,4.20,11.99,0.65,420,3,35.97,3,92,8,0,19,O6-FRQP-NOFV,new listing,high curiosity but weak purchase
+NB-TRIO-7OZ,NoodleBomb Trio Bundle,bundle,Mixed,shopify,active,38,52,9.30,31.99,0.71,335,17,543.83,17,64,2,0,4,O6-FRQP-NOFV,,
+NB-FDUST-2OZ,Fire Dust Seasoning,seasoning,Fire Dust,shopify,draft,72,188,1.85,9.99,0.76,76,1,9.99,1,0,1,0,64,3N-TLTK-P1X9,photo placeholder,better as spicy add-on
+NB-RGS-2OZ,Roasted Garlic Sesame Seasoning,seasoning,Garlic Sesame,shopify,draft,68,205,1.90,9.99,0.75,52,0,0,0,0,0,0,142,O6-FRQP-NOFV,,no signal yet
+NB-OLD-MINI,Old Mini Bottle Test,sauce,Original,shopify,archived,58,310,2.10,6.99,0.7,18,0,0,0,0,0,0,211,O6-FRQP-NOFV,old packaging,legacy sample SKU
+NB-WHOLESALE-SAMPLER,Wholesale Sample Pack,sampler,Mixed,shopify,active,26,82,7.50,19.99,0.62,210,4,79.96,4,18,9,0,12,NB-TRIO-7OZ,retail outreach,support asks about case pack

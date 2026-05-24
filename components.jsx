@@ -1,5 +1,5 @@
 // Canonical local product links for Storefront API checkout fallback.
-const NB_PRODUCT_URLS = {"original": "/product/original-ramen", "spicy": "/product/spicy-tokyo", "citrus": "/product/citrus-shoyu", "trio": "/product/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "/cart.html", "shop": "/#lineup"};
+var NB_PRODUCT_URLS = {"original": "/product/original-ramen", "spicy": "/product/spicy-tokyo", "citrus": "/product/citrus-shoyu", "trio": "/product/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "/cart.html", "shop": "/#lineup"};
 
 // Branded cart permalink — adds via noodlebomb.co/cart so shoppers do not
 // land inside Shopify's default cart theme before final checkout.

@@ -145,14 +145,22 @@ async function getVariantId(slug: string) {
   return product?.variantId || FALLBACK_VARIANT_IDS[slug];
 }
 
-export async function createShopifyCheckoutUrl(items: Array<Pick<CartItem, "slug" | "quantity">>) {
+export async function createShopifyCheckoutUrl(
+  items: Array<Pick<CartItem, "slug" | "quantity" | "sellingPlanId">>,
+) {
   const lines = await Promise.all(
     items
       .filter((item) => item.quantity > 0)
-      .map(async (item) => ({
-        merchandiseId: await getVariantId(item.slug),
-        quantity: item.quantity,
-      })),
+      .map(async (item) => {
+        const line: { merchandiseId: string | undefined; quantity: number; sellingPlanId?: string } = {
+          merchandiseId: await getVariantId(item.slug),
+          quantity: item.quantity,
+        };
+        if (item.sellingPlanId) {
+          line.sellingPlanId = item.sellingPlanId;
+        }
+        return line;
+      }),
   );
   const validLines = lines.filter((line) => line.merchandiseId);
   if (!validLines.length) throw new Error("No Shopify variants found for checkout");

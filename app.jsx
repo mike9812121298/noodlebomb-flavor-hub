@@ -8,7 +8,7 @@
 // Canonical local product links for footer and browse links.
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // Purchases flow through the local cart and Shopify checkout.
-const NB_PRODUCT_URLS = {"original": "/product/original-ramen", "spicy": "/product/spicy-tokyo", "citrus": "/product/citrus-shoyu", "trio": "/product/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "/cart.html", "shop": "/#lineup"};
+var NB_PRODUCT_URLS = {"original": "/product/original-ramen", "spicy": "/product/spicy-tokyo", "citrus": "/product/citrus-shoyu", "trio": "/product/the-noodlebomb-trio", "shoyu": "/product/shoyu-reserve", "cart": "/cart.html", "shop": "/#lineup"};
 
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
@@ -99,13 +99,13 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.png',
-  citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png'
+  original: 'uploads/nb-original-production-front-2026-05.jpeg',
+  spicy: 'uploads/nb-spicy-production-front-2026-05.jpeg',
+  citrus: 'uploads/nb-citrus-production-front-2026-05.jpeg'
 };
 
 const FOOD_IMAGES = {
-  ramen: 'uploads/nb-hero-trio-studio-v1.jpg',
+  ramen: 'uploads/nb-production-trio-hero-2026-05.jpg',
   stirfry: 'uploads/usecase-noodles-v2.jpg',
   // Editorial wings — glossy, saucy, close crop
   wings: 'uploads/usecase-wings-v2.jpg',
@@ -1294,7 +1294,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                 prior strip-cut nb-hero-trio-canon-v1.jpg with wood-grain seams. */}
             <div className="trio-bundle-photo" style={{ position: 'relative', overflow: 'hidden', background: 'radial-gradient(circle at 50% 46%, rgba(var(--accent-rgb),0.18), transparent 52%), #14110E', minWidth: 0, maxWidth: '100%', padding: 'clamp(18px, 3vw, 36px)' }}>
               <img
-                src="uploads/nb-hero-trio-studio-v1.jpg"
+                src="uploads/nb-production-trio-hero-2026-05.jpg"
                 alt="NoodleBomb Trio — Original (left), Spicy Tokyo (center), Citrus Shoyu (right)"
                 loading="lazy"
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center', filter: 'drop-shadow(0 28px 50px rgba(0,0,0,0.45))' }}
@@ -1867,7 +1867,7 @@ function BuildBundle() {
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/nb-shoyu-reserve-bottle-cutout-2026-05-16.png',
+      image: 'uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png',
       preorder: true
     }
   ];

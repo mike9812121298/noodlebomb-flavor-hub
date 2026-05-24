@@ -6,6 +6,8 @@ export interface CartItem {
   price: number;
   quantity: number;
   purchaseType: "one-time" | "subscribe";
+  sellingPlanId?: string;
+  cadenceDays?: 30 | 45 | 60;
 }
 
 const CART_KEY = "nb_cart_v1";
@@ -30,11 +32,16 @@ export function useCart() {
     (item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
       setItems((prev) => {
         const existing = prev.find(
-          (i) => i.slug === item.slug && i.purchaseType === item.purchaseType
+          (i) =>
+            i.slug === item.slug &&
+            i.purchaseType === item.purchaseType &&
+            i.sellingPlanId === item.sellingPlanId
         );
         if (existing) {
           return prev.map((i) =>
-            i.slug === item.slug && i.purchaseType === item.purchaseType
+            i.slug === item.slug &&
+            i.purchaseType === item.purchaseType &&
+            i.sellingPlanId === item.sellingPlanId
               ? { ...i, quantity: i.quantity + (item.quantity ?? 1) }
               : i
           );
