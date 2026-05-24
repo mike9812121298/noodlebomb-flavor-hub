@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "recipes:generate": "node scripts/recipe-content-engine.mjs",
     "retail:predict": "node scripts/retail-sell-through-predictor.mjs",
+    "shelf:analyze": "py -3 scripts/shelf_impact_analyzer.py",
     "research:flavor": "node scripts/market_research/flavor-review-analyzer.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
