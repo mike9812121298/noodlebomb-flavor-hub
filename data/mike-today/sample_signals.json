@@ -1,0 +1,76 @@
+{
+  "signals": [
+    {
+      "source": "sample",
+      "title": "Fix Spicy Tokyo PDP after image update",
+      "type": "fire",
+      "category": "Conversion",
+      "impact": 84,
+      "impact_label": "$84/day recovered",
+      "confidence": 86,
+      "effort_minutes": 45,
+      "blockers": ["Need PDP click-through check", "Need Add to Cart smoke test"],
+      "next_action": "Open Spicy Tokyo PDP on mobile, compare old/new image, and verify price, shipping, and Add to Cart."
+    },
+    {
+      "source": "sample",
+      "title": "Revive Shoyu Reserve before spending more traffic",
+      "type": "bottleneck",
+      "category": "Catalog",
+      "impact": 344,
+      "impact_label": "$344 inventory value plus wasted ad spend",
+      "confidence": 78,
+      "effort_minutes": 75,
+      "blockers": ["Need final product photography", "Need clearer soy sauce use cases"],
+      "next_action": "Replace draft/placeholder PDP copy with 3 concrete use cases and pause cold spend until conversion improves."
+    },
+    {
+      "source": "sample",
+      "title": "Pitch West Coast Asian Grocery first",
+      "type": "opportunity",
+      "category": "Wholesale",
+      "impact": 436,
+      "impact_label": "36 weekly units predicted",
+      "confidence": 70,
+      "effort_minutes": 90,
+      "blockers": ["Need buyer contact", "Need wholesale one-sheet"],
+      "next_action": "Send the Spicy Tokyo, Original, Shoyu Reserve, Citrus Shoyu first-case pitch."
+    },
+    {
+      "source": "sample",
+      "title": "Add stronger Citrus Shoyu shelf cue before retail samples",
+      "type": "bottleneck",
+      "category": "Packaging",
+      "impact": 250,
+      "impact_label": "Retail conversion protection",
+      "confidence": 74,
+      "effort_minutes": 120,
+      "blockers": ["Needs designer pass"],
+      "next_action": "Increase citrus color cue and flavor-name contrast before printing new retail labels."
+    },
+    {
+      "source": "sample",
+      "title": "Bundle Fire Dust with Spicy Tokyo instead of leaving it alone",
+      "type": "roi",
+      "category": "AOV",
+      "impact": 133,
+      "impact_label": "$133 trapped inventory value",
+      "confidence": 72,
+      "effort_minutes": 35,
+      "blockers": ["Need bundle offer in Shopify"],
+      "next_action": "Create a spicy add-on offer next to Spicy Tokyo and cap it to the existing stock."
+    },
+    {
+      "source": "sample",
+      "title": "Archive old mini bottle test SKU",
+      "type": "fire",
+      "category": "Catalog cleanup",
+      "impact": 122,
+      "impact_label": "$122 trapped stock, zero demand",
+      "confidence": 88,
+      "effort_minutes": 20,
+      "blockers": [],
+      "next_action": "Remove from active catalog surfaces and keep only as internal audit history."
+    }
+  ]
+}

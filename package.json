@@ -17,6 +17,9 @@
     "revenue:watch:sample": "node scripts/revenue-watchdog.mjs --input data/revenue-watchdog/sample_daily_metrics.csv --date 2026-05-23 --sample",
     "catalog:dead-products": "node scripts/dead-product-detector.mjs",
     "catalog:dead-products:sample": "node scripts/dead-product-detector.mjs --input data/dead-products/sample_sku_metrics.csv --sample",
+    "ops:today": "node scripts/mike-today-engine.mjs",
+    "ops:today:sample": "node scripts/mike-today-engine.mjs --sample",
+    "ops:morning": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run-morning-ceo-brief.ps1",
     "research:flavor": "node scripts/market_research/flavor-review-analyzer.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
