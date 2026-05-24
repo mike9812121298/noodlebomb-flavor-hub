@@ -11,6 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "recipes:generate": "node scripts/recipe-content-engine.mjs",
+    "retail:predict": "node scripts/retail-sell-through-predictor.mjs",
     "research:flavor": "node scripts/market_research/flavor-review-analyzer.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
