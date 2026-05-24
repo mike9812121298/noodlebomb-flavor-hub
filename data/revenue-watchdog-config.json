@@ -1,0 +1,37 @@
+{
+  "brand": "NoodleBomb",
+  "trailingDays": 7,
+  "minBaselineDays": 5,
+  "dimensions": ["channel", "product", "sku", "flavor", "landing_page", "campaign"],
+  "scopes": [
+    { "id": "business", "label": "Business total", "dimensions": [] },
+    { "id": "channel", "label": "Channel", "dimensions": ["channel"] },
+    { "id": "product", "label": "Product", "dimensions": ["product"] },
+    { "id": "sku", "label": "SKU", "dimensions": ["sku"] },
+    { "id": "flavor", "label": "Flavor", "dimensions": ["flavor"] },
+    { "id": "landing_page", "label": "Landing page", "dimensions": ["landing_page"] },
+    { "id": "campaign", "label": "Campaign", "dimensions": ["campaign"] },
+    { "id": "product_by_channel", "label": "Product by channel", "dimensions": ["channel", "product"] }
+  ],
+  "thresholds": {
+    "minimumBaselineRevenue": 25,
+    "minimumBaselineOrders": 1,
+    "p0RevenueDropPct": -40,
+    "p1RevenueDropPct": -25,
+    "watchRevenueDropPct": -15,
+    "conversionDropPct": -25,
+    "sessionsDropPct": -30,
+    "aovDropPct": -20,
+    "adSpendDropPct": -35,
+    "refundSpikePct": 60,
+    "lowInventoryUnits": 12
+  },
+  "outputs": {
+    "directory": "tmp/revenue-watchdog",
+    "maxAnomalies": 40
+  },
+  "notification": {
+    "slackWebhookEnv": "REVENUE_WATCHDOG_SLACK_WEBHOOK",
+    "postOnlyP0P1": true
+  }
+}
