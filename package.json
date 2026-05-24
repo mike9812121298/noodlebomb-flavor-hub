@@ -10,6 +10,7 @@
     "build:static": "esbuild app.jsx components.jsx monthly-drop.jsx next-drop.jsx cart.jsx checkout.jsx --jsx-factory=React.createElement --jsx-fragment=React.Fragment --loader:.jsx=jsx --target=es2018 --outdir=build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "research:flavor": "node scripts/market_research/flavor-review-analyzer.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },
