@@ -76,6 +76,7 @@
 # Pretty URLs for the structural pages (about / recipes / faq) added 2026-05-06.
 /about       /about.html        200
 /recipes     /recipes.html      200
+/recipes/*   /recipes.html      200
 /faq         /faq.html          200
 
 # SEO-friendly product landing pages on the brand domain.

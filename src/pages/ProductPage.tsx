@@ -10,8 +10,10 @@ import {
   Truck,
 } from "lucide-react";
 import SpiceLevel from "@/components/SpiceLevel";
+import RelatedRecipes from "@/components/RelatedRecipes";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
+import { PRODUCT_TO_SHOPIFY_HANDLE } from "@/lib/relatedRecipes";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
@@ -130,6 +132,24 @@ const PRODUCTS: Record<string, ProductData> = {
     ingredients:
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
     allergens: "Soy, Wheat, Sesame.",
+  },
+  "shoyu-reserve": {
+    slug: "shoyu-reserve",
+    name: "Shoyu Reserve Ramen Sauce",
+    tagline: "Slow-Brewed Depth",
+    price: 11.99,
+    displayPrice: "$11.99",
+    subscribePrice: null,
+    displaySubscribePrice: null,
+    image: nbOriginal,
+    spiceLevel: 1,
+    pairsWellWith: ["Ramen", "Rice", "Eggs"],
+    flavorHook: "Deep shoyu built for bowls, rice, and eggs.",
+    badge: "Reserve",
+    description:
+      "A deeper shoyu path for bowls, rice, eggs, and noodles. Smooth savory depth with the same pour-bold NoodleBomb finish.",
+    ingredients: "Shoyu Reserve ingredient statement pending final production label.",
+    allergens: "Soy, wheat.",
   },
 };
 
@@ -352,6 +372,10 @@ const ProductPage = () => {
             </div>
           </motion.div>
         </div>
+
+        {slug && PRODUCT_TO_SHOPIFY_HANDLE[slug] && (
+          <RelatedRecipes shopifyHandle={PRODUCT_TO_SHOPIFY_HANDLE[slug]} />
+        )}
 
         {/* Designer Gallery + Lifestyle Strip */}
         {(() => {

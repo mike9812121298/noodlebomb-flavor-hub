@@ -45,6 +45,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/recipes" element={<Recipes />} />
+          <Route path="/recipes/:recipeSlug" element={<Recipes />} />
           <Route path="/sauce-selector" element={<SauceSelector />} />
           <Route path="/sauce-finder" element={<Navigate to="/sauce-selector" replace />} />
           <Route path="/ramen-box" element={<RamenBox />} />
