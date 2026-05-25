@@ -334,6 +334,70 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 .inline-form button { background: var(--accent); color: var(--accent-ink); border: 0; padding: 0 24px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; transition: filter .2s; }
 .inline-form button:hover { filter: brightness(1.1); }
 
+.related-recipes {
+  padding: clamp(48px, 7vw, 80px) 0;
+  border-top: 1px solid var(--line);
+}
+.related-recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+.related-recipe-card {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 14px;
+  min-height: 92px;
+  padding: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: border-color .2s, transform .2s, background .2s;
+}
+.related-recipe-card:hover {
+  border-color: var(--line-strong);
+  background: var(--paper-3);
+  transform: translateY(-2px);
+}
+.related-recipe-thumb {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(var(--accent-rgb, 212, 162, 74), .36), transparent 36%),
+    linear-gradient(135deg, var(--paper-3), rgba(var(--accent-rgb, 212, 162, 74), .16));
+  border: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--accent);
+}
+.related-recipe-copy { min-width: 0; }
+.related-recipe-kicker {
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-40);
+}
+.related-recipe-card strong {
+  display: block;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
 /* ── Footer ────────────────────────────────────── */
 .page-footer {
   background: #080706; color: var(--ink);
@@ -377,6 +441,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   .nav-burger { display: flex; }
   .page-section .pillar-grid { grid-template-columns: 1fr; gap: 16px; }
   .recipe-grid { grid-template-columns: 1fr; gap: 16px; }
+  .related-recipes-grid { grid-template-columns: 1fr; }
   .footer-newsletter { grid-template-columns: 1fr; gap: 24px; }
   .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 0 16px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }

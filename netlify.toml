@@ -381,6 +381,11 @@
   status = 200
 
 [[redirects]]
+  from = "/recipes/*"
+  to = "/recipes.html"
+  status = 200
+
+[[redirects]]
   from = "/faq"
   to = "/faq.html"
   status = 200
