@@ -61,7 +61,7 @@ const recipes = [
       "Heat 2 tbsp neutral oil in a non-stick pan. Press 2 cups cooked short-grain rice flat into the pan and let it crisp 6-8 minutes without stirring.",
       "Sear salmon skin-side down in a separate pan for 4 minutes, flip, glaze with another spoon of NoodleBomb, finish 2 more minutes.",
       "Slide the crispy rice onto plates, browned-side up. Top with salmon.",
-      "Drizzle with extra NoodleBomb, scatter sliced scallions and toasted sesame seeds, finish with avocado and a wedge of lime.",
+      "Pour on extra NoodleBomb, scatter sliced scallions and toasted sesame seeds, finish with avocado and a wedge of lime.",
     ],
   },
   {
@@ -92,7 +92,7 @@ const recipes = [
     steps: [
       "Cook noodles and drain. Slice 1 chicken thigh thin and sear in a hot pan with oil until golden.",
       "Add half a bottle of Spicy Tokyo to the pan off heat. Toss chicken to coat.",
-      "Pour sauce and chicken over noodles. Top with crispy garlic, chili oil drizzle, and nori.",
+      "Pour sauce and chicken over noodles. Top with crispy garlic, chili oil, and nori.",
     ],
   },
   {
@@ -121,7 +121,7 @@ const recipes = [
       "Pour in 1 cup chicken stock and 4 tbsp Spicy Tokyo. Bring to a boil.",
       "Slide in 1 block silken tofu cut into cubes. Simmer 3 minutes without stirring (let the tofu hold shape).",
       "Cook 2 portions thick udon, drain, divide into bowls.",
-      "Spoon mapo over noodles. Finish with toasted Sichuan peppercorns, scallions, and a drizzle of chili oil.",
+      "Spoon mapo over noodles. Finish with toasted Sichuan peppercorns, scallions, and chili oil.",
     ],
   },
   {
@@ -167,7 +167,7 @@ const recipes = [
     steps: [
       "Cook soba noodles, rinse under cold water, and chill.",
       "Toss with half a bottle of Citrus Shoyu, sliced cucumber, shredded purple cabbage, and edamame.",
-      "Top with sesame seeds and a drizzle of rice vinegar. Serve cold.",
+      "Top with sesame seeds and a splash of rice vinegar. Serve cold.",
     ],
   },
   {

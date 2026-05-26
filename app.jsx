@@ -293,12 +293,12 @@ function FlavorBreakdown({ flavor }) {
 function FlavorBreakdownV2({ flavor, setFlavor }) {
   const useCases = [
     { label: 'Wings', key: 'spicy', verb: 'Toss', reason: 'Roasted chili, garlic, and sesame cling to crispy edges without tasting flat.' },
-    { label: 'Rice', key: 'original', verb: 'Drizzle', reason: 'Garlic-sesame depth turns plain rice, bowls, and leftovers into dinner.' },
+    { label: 'Rice', key: 'original', verb: 'Pour', reason: 'Garlic-sesame depth turns plain rice, bowls, and leftovers into dinner.' },
     { label: 'Noodles', key: 'original', verb: 'Stir', reason: 'Smooth soy, garlic, and sesame build the fast savory base.' },
     { label: 'Dumplings', key: 'citrus', verb: 'Dip', reason: 'Clean citrus lift cuts through rich fillings and fried edges.' },
     { label: 'Eggs', key: 'original', verb: 'Finish', reason: 'A little roasted garlic and sesame makes breakfast taste intentional.' },
     { label: 'Vegetables', key: 'citrus', verb: 'Glaze', reason: 'Bright shoyu keeps roasted or steamed vegetables lively.' },
-    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or finishing sauce.' },
+    { label: 'Chicken', key: 'spicy', verb: 'Brush', reason: 'Chili heat and savory depth work as a quick glaze or final layer.' },
     { label: 'Leftovers', key: 'original', verb: 'Wake up', reason: 'Original is the easy reset when yesterday needs a second life.' },
   ];
   const flavorNotes = {
@@ -746,7 +746,7 @@ function PourAndCompare({ flavor = 'original' }) {
           <div className="pour-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(24px, 4vw, 48px)', marginBottom: 80 }}>
             {[
               { step: '01', title: 'Pick your base', desc: 'Noodles, rice, wings, eggs, dumplings, vegetables, grilled meat — anything savory works.' },
-              { step: '02', title: 'Drizzle, toss, or glaze', desc: 'Use a little to finish, or more when you want the sauce to carry the whole bite.' },
+              { step: '02', title: 'Pour, toss, or glaze', desc: 'Use a little to finish, or more when you want the sauce to carry the whole bite.' },
               { step: '03', title: 'Eat it your way', desc: 'Hot bowl, cold leftovers, sheet-pan dinner, game-day wings. Same bottle, different cravings.' },
             ].map((s, i) => (
               <div key={i}>
@@ -1056,7 +1056,7 @@ function Testimonials() {
 function UseCaseMoments() {
   const cases = [
     { title: 'Wings', copy: 'Toss hot wings with Spicy Tokyo for heat that still tastes like food.', img: FOOD_IMAGES.wings, tag: 'Toss', pos: '52% 56%' },
-    { title: 'Rice', copy: 'Drizzle Original over fried rice, salmon bowls, eggs, or leftovers.', img: FOOD_IMAGES.rice, tag: 'Drizzle', pos: '50% 48%' },
+    { title: 'Rice', copy: 'Pour Original over fried rice, salmon bowls, eggs, or leftovers.', img: FOOD_IMAGES.rice, tag: 'Pour', pos: '50% 48%' },
     { title: 'Noodles', copy: 'Stir into ramen, udon, soba, or the noodles already in your pantry.', img: FOOD_IMAGES.stirfry, tag: 'Stir', pos: '52% 50%' },
     { title: 'Dumplings', copy: 'Use any flavor as a fast dip for gyoza, wontons, and potstickers.', img: FOOD_IMAGES.dumplings, tag: 'Dip', pos: '48% 52%' },
   ];
@@ -1303,13 +1303,13 @@ function FlavorPicker({ flavor, setFlavor }) {
             </div>
             {/* Copy */}
             <div className="trio-bundle-copy" style={{ padding: 'clamp(32px, 4vw, 56px)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
-              <span className="mono" style={{ color: 'var(--accent)', fontSize: 12, fontWeight: 600, letterSpacing: '0.18em' }}>BUNDLE · SAVE $5.98</span>
+              <span className="mono" style={{ color: 'var(--accent)', fontSize: 12, fontWeight: 600, letterSpacing: '0.18em' }}>BUNDLE - SAVE $5.98</span>
               <h3 className="display" style={{ fontSize: 'clamp(36px, 4vw, 52px)', letterSpacing: '-0.03em', lineHeight: 1.02, margin: 0, fontWeight: 700 }}>
-                The 3-Pack Variety<br />
+                Try All 3 Flavors<br />
                 <span style={{ color: 'var(--muted)' }}>— $29.99.</span>
               </h3>
               <div style={{ fontFamily: 'Inter', fontSize: 15, color: 'var(--ink-60)', lineHeight: 1.55, maxWidth: '42ch' }}>
-                One of each: Original, Spicy Tokyo, Citrus Shoyu. Enough to find your favorite — and a backup.
+                One of each: Original, Spicy Tokyo, Citrus Shoyu. $29.99 vs $35.97 singles, so new buyers save $5.98 and start with the full line.
               </div>
 
               {/* Included chips */}
@@ -1333,7 +1333,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               </div>
 
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
-                TRIO SHIPS FREE · ARRIVES IN 3–5 DAYS · SMALL BATCH
+                TRIO SHIPS FREE - GIFT-READY - BEST FOR NEW BUYERS
               </div>
 
               <div style={{ marginTop: 8 }}>
@@ -1772,7 +1772,7 @@ function FAQ() {
   const [open, setOpen] = useState({});
   const toggle = (i) => setOpen((prev) => ({ ...prev, [i]: !prev[i] }));
   const items = [
-    { q: 'How long does a bottle last?', a: 'It depends how you use it. The drizzle cap gives you control for finishing bowls, tossing wings, or mixing a quick marinade without over-pouring.' },
+    { q: 'How long does a bottle last?', a: 'It depends how you use it. The pour cap gives you control for bowls, wings, or mixing a quick marinade without over-pouring.' },
     { q: 'Does it need to be refrigerated?', a: 'Refrigerate after opening. Use within 6 months for peak flavor.' },
     { q: 'What can I put it on besides ramen?', a: 'Rice bowls, dumplings, stir-fry, eggs, roasted vegetables, wings, marinades. If it\u2019s savory, it probably works.' },
     { q: 'How spicy is Spicy Tokyo?', a: 'Medium heat — noticeable warmth, not a punishment. About a 5 out of 10.' },
@@ -2217,7 +2217,7 @@ function App() {
     "flavor": "original",
     "grain": true,
     "spam": false,
-    "headline": "POUR IT ON\nEVERYTHING"
+    "headline": "TRY ALL 3\nFLAVORS"
   } /*EDITMODE-END*/;
 
   const [state, setState] = useState(DEFAULTS);

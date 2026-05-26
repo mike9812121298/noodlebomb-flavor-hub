@@ -67,7 +67,7 @@ const faqGroups = [
     items: [
       {
         q: "How do I use NoodleBomb sauce?",
-        a: "Cook your noodles as normal, drain, then pour NoodleBomb directly over the hot noodles and toss to coat. It also works as a stir-fry sauce, wing glaze, rice bowl drizzle, dumpling dipping sauce, or marinade for steak and seafood.",
+        a: "Cook your noodles as normal, drain, then pour NoodleBomb directly over the hot noodles and toss to coat. It also works as a stir-fry sauce, wing glaze, rice bowl pour, dumpling dipping sauce, or marinade for steak and seafood.",
       },
       {
         q: "How much sauce should I use per serving?",

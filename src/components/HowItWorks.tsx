@@ -10,8 +10,8 @@ const steps = [
   },
   {
     icon: Utensils,
-    title: "Drizzle on Anything",
-    desc: "Ramen, wings, steak, rice, eggs — one drizzle transforms every dish.",
+    title: "Pour on Anything",
+    desc: "Ramen, wings, steak, rice, eggs — one pour transforms every dish.",
     color: "group-hover:text-accent group-hover:drop-shadow-[0_0_12px_hsl(var(--accent)/0.5)]",
   },
   {

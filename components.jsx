@@ -728,9 +728,20 @@ function Nav({ flavor, setFlavor, flavors }) {
                   Earlier impression than the /cart.html upsell card; same logic. */}
               {(() => {
                 const hasTrio = cartItems.some((i) => i.slug === 'trio');
-                if (hasTrio || cartFreeShipping || cartItems.length === 0) return null;
-                const addTrio = () => {
-                  if (window.NB_CART) window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
+                const singleSlugs = ['original', 'spicy', 'citrus'];
+                const singleCount = cartItems
+                  .filter((i) => singleSlugs.includes(i.slug))
+                  .reduce((sum, i) => sum + (Number(i.qty) || 0), 0);
+                if (hasTrio || singleCount < 1 || singleCount > 2) return null;
+                const swapToTrio = () => {
+                  if (window.NB_CART) {
+                    singleSlugs.forEach((slug) => window.NB_CART.remove(slug));
+                    window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
+                  }
+                  const detail = { fromSingleCount: singleCount, savings: 5.98, destination: 'trio' };
+                  try { window.dispatchEvent(new CustomEvent('nb_cart_upgrade_to_trio', { detail })); } catch (_) {}
+                  try { window.fbq && window.fbq('trackCustom', 'UpgradeToTrioPrompt', detail); } catch (_) {}
+                  try { window.dataLayer && window.dataLayer.push({ event: 'upgrade_to_trio_prompt', ...detail }); } catch (_) {}
                 };
                 return (
                   <div style={{
@@ -742,15 +753,15 @@ function Nav({ flavor, setFlavor, flavors }) {
                   }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 700, marginBottom: 2 }}>
-                        Save $5.98
+                        Cart slot 1: Trio
                       </div>
                       <div style={{ fontFamily: 'Inter Tight', fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>
-                        Make it a Trio — all 3 flavors
+                        Save $5.98 with all 3 flavors
                       </div>
                     </div>
                     <button
-                      onClick={addTrio}
-                      aria-label="Add The NoodleBomb Trio bundle"
+                      onClick={swapToTrio}
+                      aria-label="Swap singles for The NoodleBomb Trio bundle"
                       style={{
                         flexShrink: 0,
                         padding: '8px 14px', borderRadius: 999,
@@ -761,7 +772,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                         whiteSpace: 'nowrap',
                       }}
                     >
-                      + $29.99
+                      Swap
                     </button>
                   </div>
                 );
@@ -853,8 +864,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       <div className="hero-bg-media" style={{ position: 'absolute', inset: 0, zIndex: 0, background: '#0a0705' }}>
         <img
           className="hero-product-bg"
-          src="uploads/nb-hero-pour.png"
-          alt="NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background"
+          src="uploads/nb-hero-trio-studio-v1.jpg"
+          alt="NoodleBomb Trio with Original, Spicy Tokyo, and Citrus Shoyu bottles"
           loading="eager"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', transform: 'none' }}
         />
@@ -864,10 +875,10 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         <div className="hero-bg-overlay-mobile" aria-hidden="true" />
       </div>
 
-      {/* Top meta strip — IN STOCK / Vol.01 · First Run */}
+      {/* Top meta strip */}
       <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 clamp(24px, 5.5vw, 80px)', marginTop: 88, gap: 16, flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
-        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>IN STOCK</span>
-        <span className="mono" style={{ color: 'var(--ink-40)' }}>Vol.01 · First Run</span>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>TRIO BUNDLE</span>
+        <span className="mono" style={{ color: 'var(--ink-40)' }}>$29.99 vs $35.97 singles</span>
       </div>
 
       {/* Main hero content */}
@@ -879,13 +890,13 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </h1>
         <div style={{ animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both' }}>
           <div className="hero-subcopy" style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
-            Bold sauce. Small batch.<br />
-            <span style={{ color: 'var(--ink-60)' }}>Goes on noodles, rice, wings, dumplings, eggs, vegetables, and more.</span>
+            Try All 3 Flavors for $29.99.<br />
+            <span style={{ color: 'var(--ink-60)' }}>Save $5.98 vs singles. Best for new buyers and perfect for the ramen lover in your life.</span>
           </div>
         </div>
         <div className="hero-cta-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.7s both' }}>
           <a
-            href={nbCartPermalink(flavorKey)}
+            href={nbCartPermalink('trio')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -906,20 +917,20 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px var(--accent-glow)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px var(--accent-glow)'; }}
           >
-            Add Original — $11.99
+            Get the Trio - $29.99
             <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
           </a>
           <a
             className="btn btn-ghost"
-            href={nbCartPermalink('trio')}
+            href="#lineup"
             style={{ textDecoration: 'none', display: 'inline-block', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', background: 'rgba(245,241,234,0.08)', borderColor: 'rgba(245,241,234,0.25)' }}
           >
-            Try the 3-pack — save $6
+            Build your own - singles $11.99
           </a>
         </div>
         {/* Trust line under CTAs */}
         <div className="hero-trust-line" style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
-          Ships from Bonney Lake, WA · Trio ships free · Money-back guarantee
+          Trio ships free - gift-ready - ships from Bonney Lake, WA
         </div>
       </div>
 

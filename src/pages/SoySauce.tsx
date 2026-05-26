@@ -19,7 +19,7 @@ const recipes = [
   { title: "Soy-Glazed Salmon", desc: "Brush on skin side. Sear 4 minutes. Done.", emoji: "🍣" },
   { title: "Fried Rice", desc: "High heat. Two tablespoons. Toss fast. Don't steam it.", emoji: "🍳" },
   { title: "Teriyaki Base", desc: "3 tbsp soy + 2 tbsp mirin + 1 tbsp sugar. Reduce.", emoji: "🍖" },
-  { title: "Finishing Drizzle", desc: "Over ramen, soft-boiled eggs, avocado toast. Last second.", emoji: "🍜" },
+  { title: "Final Pour", desc: "Over ramen, soft-boiled eggs, avocado toast. Last second.", emoji: "🍜" },
 ];
 
 const pairings = [
@@ -28,7 +28,7 @@ const pairings = [
   { item: "Stir-fry", note: "Add in the last 60 seconds. High heat concentrates the umami — don't add too early." },
   { item: "Marinades", note: "1 part soy, 1 part sake or mirin, 1 clove garlic. Minimum 2 hours, overnight is better." },
   { item: "Glazes", note: "Reduce 3:1 with sugar over medium heat until syrupy. Brush on proteins last 5 min of cook." },
-  { item: "Finishing Drizzle", note: "A few drops over ramen, roasted vegetables, or eggs. No cooking needed — raw flavor at full strength." },
+  { item: "Final Pour", note: "A few drops over ramen, roasted vegetables, or eggs. No cooking needed — raw flavor at full strength." },
 ];
 
 const BUY_URL = "/contact";  // Soy sauce is in development — point to waitlist signup
