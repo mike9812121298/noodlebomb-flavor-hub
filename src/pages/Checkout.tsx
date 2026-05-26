@@ -286,6 +286,11 @@ const Checkout = () => {
                             ${item.price.toFixed(2)} each
                           </span>
                         </div>
+                        {item.giftNote && (
+                          <p className="mt-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2 text-xs text-foreground/65">
+                            Gift note: {item.giftNote}
+                          </p>
+                        )}
                       </div>
                       <span className="font-display font-bold text-foreground text-sm tabular-nums whitespace-nowrap">
                         ${lineTotal.toFixed(2)}

@@ -1,390 +1,246 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, AnimatePresence, Variants } from "framer-motion";
-import { useScrollReveal, useScrollRevealChildren } from "@/hooks/use-scroll-reveal";
-import { ArrowRight, Zap, Star, ShoppingCart, Truck, RotateCcw, Leaf, MapPin } from "lucide-react";
+import { motion, useScroll } from "framer-motion";
+import { ArrowRight, Check, Gift, ShoppingCart, Sparkles, Truck } from "lucide-react";
 import nbLogo from "@/assets/nb-logo.png";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
 import heroSceneTrioCounter from "@/assets/nb-hero-scene-trio-counter.png";
-import heroScenePourOriginal from "@/assets/nb-hero-scene-pour-original-v2.jpg";
-import heroOriginalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";
-import heroSpicyBoldFlavor from "@/assets/nb-hero-spicy-bold-flavor.png";
-import heroSceneChefAlley from "@/assets/nb-hero-scene-chef-alley.png";
-import sceneChefKitchenOriginal from "@/assets/nb-scene-chef-kitchen-original.png";
-import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.png";
+import trioFlatlayChopsticks from "@/assets/nb-scene-trio-flatlay-chopsticks.jpg";
 import sceneOriginalSteamingBowl from "@/assets/nb-scene-original-steaming-bowl.png";
 import sceneSpicyWokAction from "@/assets/nb-scene-spicy-wok-action.png";
-import atmosphereIngredientFlatlay from "@/assets/nb-atmosphere-ingredient-flatlay.png";
+import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.png";
 import PressBar from "@/components/PressBar";
-import ReviewsSection from "@/components/ReviewsSection";
-import TestimonialSection from "@/components/TestimonialSection";
-import BundleBuilder from "@/components/BundleBuilder";
-import SpiceLevel from "@/components/SpiceLevel";
-import FlavorWorldCard from "@/components/FlavorWorldCard";
-import EmberParticles from "@/components/EmberParticles";
-import HeroParticles from "@/components/HeroParticles";
-import FlavorScene from "@/components/FlavorScene";
 
+const TRIO_PRICE = 29.99;
+const SINGLES_TOTAL = 35.97;
+const TRIO_SAVINGS = SINGLES_TOTAL - TRIO_PRICE;
 
-const sauceImages: Record<string, string> = {
-  "Original": nbOriginal,
-  "Spicy Tokyo": nbSpicyTokyo,
-  "Citrus Shoyu": nbCitrusShoyu,
-};
-
-const sauces = [
-  { name: "Original", tagline: "Umami, Perfected", spice: 1, price: "$11.99", desc: "Smooth soy, roasted garlic, ginger, and sesame — savory depth that settles clean. Coats noodles, glazes proteins. The one you reach for without thinking.", bestFor: "Ramen, rice bowls, grilled proteins", badge: null, buyUrl: "/product/original-ramen", ctaLabel: "Shop Original", comingSoon: false, proTip: "Stir a tablespoon into your fried rice at the very last second for that perfect caramelized finish.", theme: "original" as const },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", spice: 3, price: "$11.99", desc: "Chili-forward from the first drop. Savory soy underneath, a burn that settles in the back of your throat. Hot, layered, and deeply addictive.", bestFor: "Ramen, wings, spicy noodles", badge: "🔥 Most Popular", buyUrl: "/product/spicy-tokyo", ctaLabel: "Shop Spicy Tokyo", comingSoon: false, proTip: "Use it as a 10-minute marinade for flank steak. The chili-oil infusion penetrates deep for a serious kick.", theme: "spicy-tokyo" as const },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", spice: 1, price: "$11.99", desc: "Bright citrus over a clean shoyu base — tangy, bright, mild heat. The one that opens up seafood and makes cold noodle bowls sing.", bestFor: "Light ramen, sushi, fish, citrus-forward dishes", badge: null, buyUrl: "/product/citrus-shoyu", ctaLabel: "Shop Citrus Shoyu", comingSoon: false, proTip: "Drizzle over grilled shrimp or a fresh cucumber salad. The citrus notes pop best with cold dishes.", theme: "citrus-shoyu" as const },
+const flavors = [
+  {
+    name: "Original",
+    slug: "original-ramen",
+    image: nbOriginal,
+    descriptor: "Savory garlic and sesame depth",
+    useCases: "Ramen, rice bowls, eggs",
+    heat: "Mild",
+    color: "border-amber-400/35 bg-amber-400/10",
+  },
+  {
+    name: "Spicy Tokyo",
+    slug: "spicy-tokyo",
+    image: nbSpicyTokyo,
+    descriptor: "Bold heat. Deep umami.",
+    useCases: "Noodles, wings, steak",
+    heat: "Hot",
+    color: "border-red-500/35 bg-red-500/10",
+  },
+  {
+    name: "Citrus Shoyu",
+    slug: "citrus-shoyu",
+    image: nbCitrusShoyu,
+    descriptor: "Bright lift. Bold finish.",
+    useCases: "Seafood, cold noodles, dumplings",
+    heat: "Mild",
+    color: "border-lime-400/35 bg-lime-400/10",
+  },
 ];
 
-const heroSauces = [
-  { name: "Original", tagline: "Umami, Perfected", image: nbOriginal, spice: 1, desc: "Smooth soy, roasted garlic, ginger, and sesame — savory depth that coats and clings. The one that goes with everything." },
-  { name: "Spicy Tokyo", tagline: "The Street Heat Legend", image: nbSpicyTokyo, spice: 3, desc: "Chili-forward heat over savory soy and sesame. The burn arrives fast and lingers. Intensity without apology." },
-  { name: "Citrus Shoyu", tagline: "The Bright Side of Bold", image: nbCitrusShoyu, spice: 1, desc: "Bright citrus over clean shoyu — tangy, bright, mild heat. The light sauce with serious edge." },
-] as const;
+const TrioFlavorComparison = () => {
+  const [activeFlavor, setActiveFlavor] = useState(flavors[0].name);
 
-// Cinematic hero rotator — 5 slides, mix of atmosphere shots and designer creatives
-const heroSlides = [
-  { name: "Trio Lineup", caption: "POUR BOLD.", image: heroSceneTrioCounter, flavor: "Original" as const },
-  { name: "Pour Action", caption: "SAUCE THAT HITS", image: heroScenePourOriginal, flavor: "Original" as const },
-  { name: "Original — Bold. Timeless.", caption: "BOLD FLAVOR. NEXT LEVEL RAMEN.", image: heroOriginalBoldTimeless, flavor: "Original" as const },
-  { name: "Spicy Tokyo — Bold Flavor", caption: "BOLD HEAT. DEEP UMAMI. NEXT LEVEL FLAVOR.", image: heroSpicyBoldFlavor, flavor: "Spicy Tokyo" as const },
-  { name: "Founder Alley", caption: "ONE SAUCE. ENDLESS POSSIBILITIES.", image: heroSceneChefAlley, flavor: "Original" as const },
-] as const;
+  return (
+    <section className="py-24 border-y border-border/40 bg-card/20">
+      <div className="container">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <span className="mb-3 block font-display text-[10px] font-semibold uppercase tracking-[0.35em] text-primary/70">
+            Flavor Comparison
+          </span>
+          <h2 className="font-display text-3xl font-bold text-foreground md:text-5xl">
+            Pick a favorite, or get all 3.
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-foreground/60">
+            New buyers do best with the Trio: Original for savory depth, Spicy Tokyo for heat, and Citrus Shoyu for bright lift.
+          </p>
+        </div>
 
-// Stagger container for hero content
-const heroContainerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.15,
-    },
-  },
-};
+        <div className="grid gap-5 md:grid-cols-3">
+          {flavors.map((flavor) => {
+            const selected = activeFlavor === flavor.name;
+            return (
+              <button
+                key={flavor.name}
+                type="button"
+                onClick={() => setActiveFlavor(flavor.name)}
+                className={`rounded-2xl border p-5 text-left transition-all ${selected ? `${flavor.color} shadow-[0_0_32px_hsl(var(--primary)/0.16)]` : "border-border bg-background/60 hover:border-primary/30"}`}
+              >
+                <div className="mb-5 flex h-48 items-end justify-center rounded-xl bg-secondary/40 p-5">
+                  <img src={flavor.image} alt={flavor.name} className="h-full w-auto object-contain" />
+                </div>
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <h3 className="font-display text-xl font-bold text-foreground">{flavor.name}</h3>
+                  {selected && (
+                    <span className="rounded-full bg-primary px-2.5 py-1 font-display text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+                      Selected
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm font-semibold text-foreground/80">{flavor.descriptor}</p>
+                <div className="mt-5 space-y-2 text-xs text-foreground/60">
+                  <p><span className="font-display font-bold uppercase tracking-wider text-foreground/45">Best on:</span> {flavor.useCases}</p>
+                  <p><span className="font-display font-bold uppercase tracking-wider text-foreground/45">Heat:</span> {flavor.heat}</p>
+                </div>
+              </button>
+            );
+          })}
+        </div>
 
-const heroItemVariants: Variants = {
-  hidden: { opacity: 0, y: 22 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
-  },
-};
-
-// Stagger for CTA buttons (tighter, 50ms apart)
-const ctaContainerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.6,
-    },
-  },
-};
-
-const ctaItemVariants: Variants = {
-  hidden: { opacity: 0, y: 14, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
-  },
+        <div className="mt-10 flex flex-col items-center justify-between gap-5 rounded-2xl border border-primary/25 bg-primary/5 p-6 md:flex-row">
+          <div>
+            <p className="font-display text-xl font-bold text-foreground">Get all 3 for $29.99.</p>
+            <p className="mt-1 text-sm text-foreground/60">Singles total $35.97. The Trio saves ${TRIO_SAVINGS.toFixed(2)} and makes the first order easy.</p>
+          </div>
+          <Link
+            to="/product/variety-pack"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-fire px-8 py-3.5 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-fire transition-transform hover:scale-[1.02]"
+          >
+            Get all 3 for $29.99 <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 const Index = () => {
-  const heroRef = useRef<HTMLElement>(null);
-  const [activeSlide, setActiveSlide] = useState(0);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const { scrollYProgress: pageScrollProgress } = useScroll();
-
-  const bottleY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-
-  const sauceHeaderRef = useScrollReveal();
-  const sauceGridRef = useScrollRevealChildren({ staggerMs: 80 });
-  const ctaRef = useScrollReveal();
-
-  const nextSlide = useCallback(() => {
-    setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(nextSlide, 4000);
-    return () => clearInterval(timer);
-  }, [nextSlide]);
-
+  const { scrollYProgress } = useScroll();
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Scroll progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[3px] z-[200] origin-left"
-        style={{ scaleX: pageScrollProgress, background: "linear-gradient(90deg, hsl(var(--flame)), hsl(var(--primary)), hsl(40 100% 55%))" }}
+        className="fixed left-0 right-0 top-0 z-[200] h-[3px] origin-left"
+        style={{ scaleX: scrollYProgress, background: "linear-gradient(90deg, hsl(var(--flame)), hsl(var(--primary)), hsl(40 100% 55%))" }}
       />
-      {/* Hero */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Immersive flavor world background */}
-        <FlavorScene activeFlavor={heroSlides[activeSlide].flavor} />
-        {/* Content-readability overlay */}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_80%_at_50%_100%,hsl(0_0%_0%/0.5),transparent_60%)]" />
 
-        <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center pt-28 pb-20 lg:pt-32 lg:pb-24">  {/* Hero left — stagger all content on load */}
-          <motion.div
-            className="max-w-xl"
-            variants={heroContainerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1
-              variants={heroItemVariants}
-              className="font-display text-[3.5rem] md:text-[5.5rem] font-bold tracking-[-0.04em] mb-5 leading-[1.02]"
-            >
-              <span className="text-foreground">The Sauce That</span><br />
-              <span className="text-gradient-fire animate-text-glow drop-shadow-[0_0_40px_hsl(var(--flame)/0.3)]">Builds the Bowl.</span>
-            </motion.h1>
+      <section className="relative min-h-screen overflow-hidden pt-24">
+        <div className="absolute inset-0">
+          <img src={heroSceneTrioCounter} alt="NoodleBomb Trio lineup" className="h-full w-full object-cover opacity-45" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/88 to-background/55" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+        </div>
 
-            <motion.p
-              variants={heroItemVariants}
-              className="text-lg md:text-xl text-foreground/70 max-w-md mb-6 leading-relaxed"
-            >
-              Pacific Northwest-crafted ramen sauce. Bold. Clean. No shortcuts.
-            </motion.p>
+        <div className="container relative z-10 grid min-h-[calc(100vh-6rem)] grid-cols-1 items-center gap-10 py-14 lg:grid-cols-[1fr_0.95fr]">
+          <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} className="max-w-2xl">
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 font-display text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+              <Gift className="h-3.5 w-3.5" /> Best for new buyers
+            </span>
+            <h1 className="font-display text-[3.3rem] font-bold leading-[0.98] tracking-[-0.03em] text-foreground md:text-[5.7rem]">
+              Try All 3 Flavors.
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-foreground/70 md:text-xl">
+              Start with the Trio: Original, Spicy Tokyo, and Citrus Shoyu in one gift-ready box for $29.99.
+            </p>
 
-            <motion.p
-              variants={heroItemVariants}
-              className="text-sm md:text-base text-foreground/50 max-w-md mb-6 leading-relaxed"
-            >
-              NoodleBomb is the ramen sauce built for the 15-minute masterpiece. Whether it's the roar of the wok or the quiet drizzle over a midnight bowl of ramen, we bring the soul of the kitchen to your table.
-            </motion.p>
-
-            <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
-              <div className="flex items-center gap-2">
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500 drop-shadow-[0_0_4px_hsl(40_100%_50%/0.4)]" />
-                  ))}
+            <div className="mt-7 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
+              {[
+                { label: "Trio price", value: "$29.99" },
+                { label: "Singles total", value: "$35.97" },
+                { label: "You save", value: `$${TRIO_SAVINGS.toFixed(2)}` },
+              ].map((item) => (
+                <div key={item.label} className="rounded-xl border border-border/60 bg-background/70 p-4 backdrop-blur">
+                  <p className="font-display text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/45">{item.label}</p>
+                  <p className="mt-1 font-display text-2xl font-bold text-primary">{item.value}</p>
                 </div>
-                <span className="text-xs text-foreground/50 font-display font-semibold uppercase tracking-wider">4.9 Stars</span>
-              </div>
-              <div className="h-3 w-px bg-border/60" />
-              <span className="text-xs text-foreground/50 font-display font-semibold uppercase tracking-[0.15em]">7 fl oz • From $11.99</span>
-            </motion.div>
-
-            {/* CTA buttons — stagger 50ms apart */}
-            <motion.div
-              className="flex flex-col sm:flex-row items-start gap-3 mb-8"
-              variants={ctaContainerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.a
-                variants={ctaItemVariants}
-                href="/shop"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="group bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-[0.12em] text-primary-foreground transition-shadow flex items-center gap-2.5 shadow-[0_0_40px_hsl(var(--flame)/0.45)] animate-pulse-glow btn-shimmer"
-              >
-                Shop the Collection
-              </motion.a>
-              <motion.div variants={ctaItemVariants}>
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 border border-border/60 px-7 py-4 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/60 transition-all hover:border-primary/50 hover:text-primary/80 hover:bg-primary/5"
-                >
-                  Learn Our Story <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            <motion.div variants={heroItemVariants} className="flex items-center gap-1.5 mb-6">
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500 drop-shadow-[0_0_4px_hsl(40_100%_50%/0.4)]" />
-                ))}
-              </div>
-              <span className="text-xs font-display font-semibold text-foreground/50 tracking-wide">4.9 Stars (500+ Reviews)</span>
-            </motion.div>
-
-            <motion.div variants={heroItemVariants} className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/5 animate-scarcity-pulse">
-                <Zap className="h-3.5 w-3.5 text-primary" />
-                <span className="text-xs font-display font-semibold text-primary tracking-wide">Only 142 bottles left in this batch</span>
-              </span>
-            </motion.div>
-
-            <motion.div variants={heroItemVariants} className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              {["Free Shipping Over $35", "Small Batch Drops", "Premium Ingredients"].map((item, i) => (
-                <span key={item} className="flex items-center gap-1.5 text-[10px] text-foreground/35 font-display uppercase tracking-[0.2em]">
-                  {i > 0 && <span className="text-primary/30 mr-1.5">✦</span>}
-                  {item}
-                </span>
               ))}
-            </motion.div>
+            </div>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/product/variety-pack"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-fire px-10 py-4 font-display text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[0_0_40px_hsl(var(--flame)/0.45)] transition-transform hover:scale-[1.02]"
+              >
+                <ShoppingCart className="h-4 w-4" /> Get the Trio
+              </Link>
+              <Link
+                to="#build-your-own"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border/70 px-8 py-4 font-display text-xs font-bold uppercase tracking-[0.16em] text-foreground/70 transition-colors hover:border-primary/45 hover:text-primary"
+              >
+                Build your own <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-display font-semibold uppercase tracking-[0.18em] text-foreground/45">
+              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5" /> Free shipping over $35</span>
+              <span className="inline-flex items-center gap-1.5"><Gift className="h-3.5 w-3.5" /> Perfect for the ramen lover in your life</span>
+            </div>
           </motion.div>
 
-          <motion.div
-            style={{ y: bottleY }}
-            className="relative flex flex-col items-center lg:items-end"
-          >
-            <EmberParticles count={14} />
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,hsl(4_85%_50%/0.14)_0%,hsl(25_100%_50%/0.07)_30%,transparent_70%)] blur-2xl" />
-            </div>
-
-            {/* Cinematic Hero Rotator — 5 slides, atmospheric scenes + designer creatives */}
-            <div className="relative z-10 w-full max-w-[560px] flex flex-col items-center">
-              <div className="relative aspect-[4/3] w-full mx-auto flex items-center justify-center overflow-hidden rounded-3xl border border-border bg-card shadow-lg">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeSlide}
-                    src={heroSlides[activeSlide].image}
-                    alt={heroSlides[activeSlide].name}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-                  />
-                </AnimatePresence>
-                {/* Bottom gradient for caption legibility */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+          <motion.div initial={{ opacity: 0, y: 28, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.65, delay: 0.12 }} className="relative">
+            <div className="rounded-3xl border border-primary/25 bg-card/80 p-5 shadow-[0_0_70px_hsl(var(--primary)/0.16)] backdrop-blur">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-secondary/30">
+                <img src={heroSceneTrioCounter} alt="NoodleBomb Trio bundle" className="absolute inset-0 h-full w-full object-cover" />
               </div>
-
-              {/* Slide caption */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSlide}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35 }}
-                  className="text-center mt-4 px-4"
-                >
-                  <p className="text-xs md:text-sm font-display font-bold uppercase tracking-[0.18em] text-primary/85">{heroSlides[activeSlide].caption}</p>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Dots */}
-              <div className="flex items-center gap-2.5 mt-6">
-                {heroSlides.map((slide, i) => (
-                  <motion.button
-                    key={slide.name}
-                    onClick={() => setActiveSlide(i)}
-                    whileTap={{ scale: 0.7 }}
-                    whileHover={{ scale: 1.4 }}
-                    transition={{ type: "spring", stiffness: 500, damping: 15 }}
-                    className={`h-2 rounded-full transition-all duration-300 ${i === activeSlide ? "w-8 bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]" : "w-2 bg-foreground/20 hover:bg-foreground/40"}`}
-                    aria-label={`View ${slide.name}`}
-                  />
-                ))}
+              <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-display text-2xl font-bold text-foreground">NoodleBomb Trio</p>
+                  <p className="text-sm text-foreground/55">Best for first orders and gifting.</p>
+                </div>
+                <div className="text-left sm:text-right">
+                  <p className="font-display text-3xl font-bold text-primary">$29.99</p>
+                  <p className="text-xs text-foreground/45 line-through">$35.97 singles</p>
+                </div>
               </div>
             </div>
-
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
           </motion.div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       </section>
 
-      {/* Trust Bar */}
       <div className="border-y border-border/40 py-4">
-        <motion.div
-          className="container flex flex-wrap items-center justify-center gap-6 md:gap-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-20px" }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } } }}
-        >
-          {[
-            { Icon: Star, label: "4.9 Stars · 500+ Reviews", iconClass: "text-amber-500" },
-            { Icon: Truck, label: "Free Shipping Over $35", iconClass: "" },
-            { Icon: RotateCcw, label: "30-Day Guarantee", iconClass: "" },
-            { Icon: Leaf, label: "Real Ingredients", iconClass: "" },
-            { Icon: MapPin, label: "Crafted in the PNW", iconClass: "" },
-          ].map(({ Icon, label, iconClass }) => (
-            <motion.span
-              key={label}
-              className="flex items-center gap-2 text-xs tracking-widest uppercase text-muted-foreground cursor-default"
-              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } } }}
-              whileHover={{ y: -2, transition: { duration: 0.15 } }}
-            >
-              <Icon className={`h-3.5 w-3.5 ${iconClass}`} />{label}
-            </motion.span>
+        <div className="container flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-widest text-muted-foreground md:gap-10">
+          {["Small batch crafted in USA", "Gift-ready Trio", "Fast checkout", "Free shipping over $35"].map((item) => (
+            <span key={item} className="inline-flex items-center gap-2">
+              <Check className="h-3.5 w-3.5 text-primary" /> {item}
+            </span>
           ))}
-        </motion.div>
+        </div>
       </div>
 
-      <div className="section-divider-animated" />
       <PressBar />
 
-      {/* Sauce Lineup */}
-      <section id="products" className="py-32">
-        <div className="section-divider-animated mb-32" />
+      <section id="build-your-own" className="py-24">
         <div className="container">
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-20">
-            <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Our Sauces</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">Our Sauces. Your New Obsession.</h2>
-            <p className="text-foreground/50 mt-3 text-sm max-w-md mx-auto">Small-batch crafted. Premium ingredients. Bold, unforgettable flavor.</p>
-          </motion.div>
-          <div ref={sauceGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {sauces.map((sauce) => (
-              <div key={sauce.name} data-reveal className="scroll-reveal">
-                <FlavorWorldCard
-                  name={sauce.name}
-                  tagline={sauce.tagline}
-                  desc={sauce.desc}
-                  price={sauce.price}
-                  spice={sauce.spice}
-                  bestFor={sauce.bestFor}
-                  image={sauceImages[sauce.name] ?? ""}
-                  buyUrl={sauce.buyUrl ?? ""}
-                  ctaLabel={sauce.ctaLabel}
-                  proTip={sauce.proTip}
-                  badge={sauce.badge}
-                  comingSoon={sauce.comingSoon}
-                  theme={sauce.theme}
-                />
-              </div>
-            ))}
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <span className="mb-3 block font-display text-[10px] font-semibold uppercase tracking-[0.35em] text-primary/70">
+              Build your own
+            </span>
+            <h2 className="font-display text-3xl font-bold text-foreground md:text-5xl">
+              Singles if you already know your flavor.
+            </h2>
+            <p className="mt-4 text-sm text-foreground/60">
+              New to NoodleBomb? The Trio is still the easiest start and saves $5.98.
+            </p>
           </div>
-        </div>
-      </section>
 
-
-      {/* Made for Everything — versatility 4-up */}
-      <section className="py-24">
-        <div className="container">
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Made for Everything</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">One Sauce. Endless Possibilities.</h2>
-            <p className="text-foreground/50 mt-3 text-sm max-w-md mx-auto">Ramen · Rice · Stir Fry · Dumplings. Drizzle, dip, marinate, finish.</p>
-          </motion.div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            {[
-              { img: atmosphereRamenOverhead, label: "Ramen", caption: "Deepens the broth, coats every noodle." },
-              { img: sceneOriginalSteamingBowl, label: "Rice Bowls", caption: "Adds umami-packed kick to any grain bowl." },
-              { img: sceneSpicyWokAction, label: "Stir Fry", caption: "Turn up the heat on any dish." },
-              { img: atmosphereIngredientFlatlay, label: "Dumplings & More", caption: "Dip, drizzle, or use as a marinade." },
-            ].map((item) => (
+          <div className="grid gap-6 md:grid-cols-3">
+            {flavors.map((flavor) => (
               <motion.div
-                key={item.label}
+                key={flavor.name}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5 }}
-                className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-card"
+                className="rounded-2xl border border-border bg-card p-5"
               >
-                <img src={item.img} alt={item.label} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <p className="font-display text-base md:text-lg font-bold text-white tracking-tight mb-1">{item.label}</p>
-                  <p className="text-xs text-white/75 leading-snug">{item.caption}</p>
+                <div className="mb-5 flex h-56 items-end justify-center rounded-xl bg-secondary/40 p-5">
+                  <img src={flavor.image} alt={flavor.name} className="h-full w-auto object-contain" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-foreground">{flavor.name}</h3>
+                <p className="mt-2 text-sm text-foreground/60">{flavor.descriptor}</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="font-display text-2xl font-bold text-primary">$11.99</span>
+                  <Link to={`/product/${flavor.slug}`} className="rounded-full border border-border px-5 py-2.5 font-display text-xs font-bold uppercase tracking-wider text-foreground/70 transition-colors hover:border-primary/45 hover:text-primary">
+                    View single
+                  </Link>
                 </div>
               </motion.div>
             ))}
@@ -392,199 +248,55 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Brand story teaser */}
-      <section className="py-20">
+      <TrioFlavorComparison />
+
+      <section className="py-24">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }} className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-card">
-              <img src={sceneChefKitchenOriginal} alt="Ashley in the kitchen with NoodleBomb Original" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }}>
-              <span className="font-display text-[10px] font-semibold uppercase tracking-[0.4em] text-primary/70 mb-3 block">Our Story</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-5 leading-tight">Bold. Timeless.<br /><span className="text-gradient-fire">Crafted to Finish.</span></h2>
-              <p className="text-foreground/70 leading-relaxed mb-4">Stop settling for flat flavor. NoodleBomb brings rich savory depth to noodles, rice, dumplings, sushi, stir fry, marinades, and more. One bottle. Endless possibilities.</p>
-              <p className="text-foreground/55 leading-relaxed text-sm mb-6">Small batch, made in Bonney Lake, WA. Real ingredients. No shortcuts. Built batch-by-batch in a Pacific Northwest kitchen until every drop earned its place.</p>
-              <Link to="/about" className="inline-flex items-center gap-2 border border-border/60 px-7 py-3.5 rounded-full font-display text-xs font-semibold uppercase tracking-[0.15em] text-foreground/70 hover:border-primary/40 hover:text-primary transition-all">
-                Read Ashley's Story <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              { img: atmosphereRamenOverhead, label: "Ramen night", caption: "Set out all three and let everyone choose their bowl." },
+              { img: sceneOriginalSteamingBowl, label: "Weeknight bowls", caption: "Original carries the savory center." },
+              { img: sceneSpicyWokAction, label: "Heat lovers", caption: "Spicy Tokyo brings the bold option to the table." },
+            ].map((item) => (
+              <div key={item.label} className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-card">
+                <img src={item.img} alt={item.label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <p className="font-display text-xl font-bold text-white">{item.label}</p>
+                  <p className="mt-1 text-sm leading-snug text-white/75">{item.caption}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <ReviewsSection />
-
-      <BundleBuilder />
-
-      <TestimonialSection />
-
-      {/* Founder Strip */}
-      <section className="py-20 px-6">
-        <div className="container max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-            className="relative bg-gradient-to-br from-zinc-900 to-black border border-white/8 rounded-3xl px-10 py-12 text-center overflow-hidden"
-          >
-            {/* Subtle radial glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,hsl(4_85%_50%/0.06),transparent_70%)] pointer-events-none" />
-
-            {/* Avatar */}
-            <div className="relative z-10 w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_hsl(var(--flame)/0.4)]">
-              <span className="font-display text-xl font-black text-white">A</span>
-            </div>
-
-            {/* Quote */}
-            <blockquote className="relative z-10 font-display text-xl md:text-2xl font-semibold text-white/90 leading-snug max-w-2xl mx-auto mb-6">
-              &ldquo;I came back from Japan knowing exactly what was missing from every sauce on American shelves. So I made it myself — in my kitchen, batch after batch, until it felt right.&rdquo;
-            </blockquote>
-
-            {/* Attribution */}
-            <p className="relative z-10 text-xs font-display font-semibold uppercase tracking-[0.3em] text-primary/70">
-              Ashley &mdash; Founder of NoodleBomb &middot; Pacific Northwest
+      <section className="py-28">
+        <div className="container">
+          <div className="mx-auto max-w-3xl rounded-3xl border border-primary/25 bg-gradient-to-br from-card to-card/60 p-10 text-center md:p-14">
+            <img src={nbLogo} alt="NoodleBomb" className="mx-auto mb-7 h-14 w-auto" />
+            <Sparkles className="mx-auto mb-4 h-6 w-6 text-primary" />
+            <h2 className="font-display text-3xl font-bold text-foreground md:text-5xl">
+              Start with the Trio.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-foreground/60">
+              It is the best first order, the easiest gift, and the cleanest way to find your favorite flavor.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Subscription */}
-      <section className="py-28 border-t border-white/5">
-        <div className="container max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
-            className="bg-gradient-to-br from-card to-card/60 border border-primary/20 rounded-2xl px-8 py-14 text-center"
-          >
-            {/* Eyebrow */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="text-xs tracking-[0.3em] uppercase text-amber-400/80 mb-5"
-            >The NoodleBomb Club</motion.p>
-
-            {/* Headline */}
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.05 }}
-              className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight"
-            >Never Run Out.<br />Never Pay Full Price.</motion.h2>
-
-            {/* Sub-headline */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.1 }}
-              className="text-foreground/60 text-base mb-8 max-w-md mx-auto"
-            >Join the NoodleBomb Club — a new flavor experience delivered monthly. Cancel anytime.</motion.p>
-
-            {/* Benefit Pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: 0.15 }}
-              className="flex flex-wrap justify-center gap-3 mb-10"
-            >
-              {[
-                { icon: "🔥", label: "New Flavor Every Month" },
-                { icon: "💰", label: "Members Save 15%" },
-                { icon: "🚚", label: "Free Shipping Over $35" },
-              ].map((pill) => (
-                <span
-                  key={pill.label}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-display font-semibold text-foreground/80 tracking-wide"
-                >
-                  <span>{pill.icon}</span> {pill.label}
-                </span>
-              ))}
-            </motion.div>
-
-            {/* CTA */}
-            <motion.a
-              href="/ramen-box"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              animate={{
-                boxShadow: [
-                  "0 0 0px rgba(220,38,38,0)",
-                  "0 0 20px rgba(220,38,38,0.45)",
-                  "0 0 0px rgba(220,38,38,0)",
-                ],
-              }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-              className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_38px_hsl(var(--flame)/0.4)] btn-shimmer"
-            >
-              Start My Subscription →
-            </motion.a>
-
-            {/* Urgency micro-copy */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.25 }}
-              className="mt-4 text-xs text-foreground/40 font-display tracking-wide"
-            >Join 200+ subscribers already on the list.</motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-32">
-        <div className="section-divider-animated mb-32" />
-        <div className="container text-center">
-          <div
-            ref={ctaRef}
-            className="scroll-reveal-scale max-w-2xl mx-auto card-premium rounded-3xl p-16"
-          >
-            <motion.img
-              src={nbLogo}
-              alt="NoodleBomb"
-              className="h-14 w-auto mx-auto mb-8 drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)]"
-              whileHover={{ scale: 1.08, rotate: -4 }}
-              transition={{ type: "spring", stiffness: 300, damping: 12 }}
-            />
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4"
-            >Ready to Blow Up Your Meals?</motion.h2>
-            <p className="text-foreground/50 mb-10 text-sm">Join thousands upgrading their cooking in seconds.</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="rounded-full"
-              >
-              <Link to="/shop" className="inline-flex items-center gap-2 bg-gradient-fire px-12 py-5 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground transition-shadow shadow-[0_0_38px_hsl(var(--flame)/0.4)] animate-pulse-glow btn-shimmer">
-                Try the Variety Pack
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <Link to="/product/variety-pack" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-fire px-10 py-4 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-fire transition-transform hover:scale-[1.02]">
+                Buy the Trio - $29.99
               </Link>
-              </motion.div>
-              <Link to="/sauce-selector" className="inline-flex items-center gap-2 border border-border/60 px-8 py-5 rounded-full font-display text-sm font-semibold uppercase tracking-[0.15em] text-foreground/50 hover:border-primary/40 hover:text-primary/70 transition-all">
-                Find Your Sauce <ArrowRight className="h-4 w-4" />
+              <Link to="/shop" className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-8 py-4 font-display text-xs font-bold uppercase tracking-wider text-foreground/70 hover:border-primary/45 hover:text-primary">
+                See all products <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mobile sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-background/95 backdrop-blur border-t border-border p-3">
-        <Link to="/shop" className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_30px_hsl(var(--flame)/0.35)]">
-          <ShoppingCart className="h-4 w-4" /> Shop the Collection
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur md:hidden">
+        <Link to="/product/variety-pack" className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-fire px-6 py-3.5 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-[0_0_30px_hsl(var(--flame)/0.35)]">
+          <ShoppingCart className="h-4 w-4" /> Get the Trio
         </Link>
       </div>
     </div>

@@ -36,6 +36,13 @@ const FREE_SHIPPING_THRESHOLD = 40;
 
 const RECOMMENDATIONS = [
   {
+    slug: "variety-pack",
+    name: "NoodleBomb Trio",
+    tagline: "Try all 3 flavors",
+    price: 29.99,
+    image: nbLineupTrio,
+  },
+  {
     slug: "original-ramen",
     name: "Original",
     tagline: "Umami, Perfected",
@@ -58,14 +65,28 @@ const RECOMMENDATIONS = [
   },
 ];
 
+const SINGLE_SLUGS = ["original-ramen", "spicy-tokyo", "citrus-shoyu"];
+const TRIO_ITEM = {
+  slug: "variety-pack",
+  name: "NoodleBomb Trio",
+  price: 29.99,
+  purchaseType: "one-time" as const,
+  quantity: 1,
+};
+
 const Cart = () => {
   const navigate = useNavigate();
-  const { items, removeItem, updateQuantity, addItem, subtotal, itemCount, freeShipping } = useCart();
+  const { items, removeItem, updateQuantity, addItem, clearCart, subtotal, itemCount, freeShipping } = useCart();
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
 
   const amountToFreeShipping = Math.max(FREE_SHIPPING_THRESHOLD - subtotal, 0);
   const shippingProgress = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+  const singleCartQuantity = items
+    .filter((item) => SINGLE_SLUGS.includes(item.slug))
+    .reduce((total, item) => total + item.quantity, 0);
+  const hasTrio = items.some((item) => ["variety-pack", "trio", "sampler"].includes(item.slug));
+  const showTrioUpgradePrompt = !hasTrio && singleCartQuantity >= 1 && singleCartQuantity <= 2;
 
   const estimatedDelivery = useMemo(() => {
     const start = new Date();
@@ -80,6 +101,36 @@ const Cart = () => {
   const handleDiscount = () => {
     if (!discountCode.trim()) return;
     setDiscountApplied(true);
+  };
+
+  const handleSwapToTrio = () => {
+    clearCart();
+    addItem(TRIO_ITEM);
+    window.dispatchEvent(
+      new CustomEvent("nb_cart_upgrade_to_trio", {
+        detail: {
+          source: "cart_slot_1",
+          singleCount: singleCartQuantity,
+          previousSubtotal: subtotal,
+          trioPrice: TRIO_ITEM.price,
+        },
+      }),
+    );
+    const trackedWindow = window as Window & {
+      fbq?: (event: string, name: string, params?: Record<string, unknown>) => void;
+      dataLayer?: Array<Record<string, unknown>>;
+    };
+    trackedWindow.fbq?.("trackCustom", "UpgradeToTrioPrompt", {
+      source: "cart_slot_1",
+      value: TRIO_ITEM.price,
+      currency: "USD",
+    });
+    trackedWindow.dataLayer?.push({
+      event: "upgrade_to_trio_prompt",
+      source: "cart_slot_1",
+      value: TRIO_ITEM.price,
+      currency: "USD",
+    });
   };
 
   const recsToShow = RECOMMENDATIONS.filter(
@@ -267,6 +318,41 @@ const Cart = () => {
               )}
             </motion.div>
 
+            {showTrioUpgradePrompt && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                data-testid="cart-trio-upgrade-prompt"
+                className="rounded-2xl border border-primary/30 bg-primary/10 p-5"
+              >
+                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-fire shadow-fire">
+                      <Sparkles className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-primary">
+                        Cart slot 1: Trio
+                      </p>
+                      <h2 className="mt-1 font-display text-xl font-bold text-foreground">
+                        Add one more flavor and save $5.98 by upgrading to Trio.
+                      </h2>
+                      <p className="mt-1 text-sm text-foreground/65">
+                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $29.99.
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleSwapToTrio}
+                    className="inline-flex items-center justify-center rounded-full bg-gradient-fire px-7 py-3 font-display text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-fire transition-transform hover:scale-[1.02]"
+                  >
+                    Swap to Trio
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
             {/* Cart items */}
             <AnimatePresence mode="popLayout">
               {items.map((item) => {
@@ -318,6 +404,11 @@ const Cart = () => {
                               ${item.price.toFixed(2)} each
                             </span>
                           </div>
+                          {item.giftNote && (
+                            <p className="mt-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2 text-xs text-foreground/65">
+                              Gift note: {item.giftNote}
+                            </p>
+                          )}
                         </div>
                         <button
                           onClick={() => removeItem(item.slug, item.purchaseType)}

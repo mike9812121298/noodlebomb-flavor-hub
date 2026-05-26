@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getCheckoutUrl } from "@/lib/wix-checkout";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ShoppingCart,
@@ -116,8 +115,8 @@ const PRODUCTS: Record<string, ProductData> = {
   },
   "variety-pack": {
     slug: "variety-pack",
-    name: "Variety 3-Pack",
-    tagline: "The Full Flavor Hit",
+    name: "NoodleBomb Trio",
+    tagline: "Try All 3 Flavors",
     price: 29.99,
     displayPrice: "$29.99",
     subscribePrice: null,
@@ -125,10 +124,10 @@ const PRODUCTS: Record<string, ProductData> = {
     image: nbLineupTrio,
     spiceLevel: 2,
     pairsWellWith: ["Everything"],
-    flavorHook: "One of Each. All the Flavor.",
-    badge: "🎁 Best Value",
+    flavorHook: "Best for new buyers - start with all 3.",
+    badge: "Best Value",
     description:
-      "Original, Spicy Tokyo, and Citrus Shoyu — the complete NoodleBomb lineup in one box. Free shipping over $35.",
+      "Original, Spicy Tokyo, and Citrus Shoyu in one gift-ready box. Singles total $35.97; the Trio is $29.99.",
     ingredients:
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
     allergens: "Soy, Wheat, Sesame.",
@@ -180,8 +179,13 @@ const ProductPage = () => {
   const { toast } = useToast();
   const [showDetails, setShowDetails] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [giftOptionsOpen, setGiftOptionsOpen] = useState(false);
+  const [giftNote, setGiftNote] = useState("");
 
   const product = slug ? PRODUCTS[slug] : null;
+  const isTrio = product?.slug === "variety-pack";
+  const isSingle = ["original-ramen", "spicy-tokyo", "citrus-shoyu"].includes(product?.slug || "");
+  const trioSavings = 35.97 - 29.99;
 
   if (!product) {
     return (
@@ -202,6 +206,7 @@ const ProductPage = () => {
       name: product.name,
       price: product.price,
       purchaseType: "one-time",
+      giftNote: isTrio && giftOptionsOpen && giftNote.trim() ? giftNote.trim() : undefined,
     });
     setAddedToCart(true);
     toast({
@@ -282,6 +287,61 @@ const ProductPage = () => {
               )}
             </div>
 
+            {isSingle && (
+              <div className="rounded-2xl border border-primary/25 bg-primary/5 p-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="font-display text-sm font-bold uppercase tracking-[0.18em] text-primary">
+                      Upgrade path
+                    </p>
+                    <h2 className="mt-1 font-display text-xl font-bold text-foreground">
+                      Customers who buy {product.name.replace(" Ramen Sauce", "")} also buy the Trio.
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/65">
+                      Upgrade to all 3 flavors for $29.99 and save ${trioSavings.toFixed(2)} versus buying singles.
+                    </p>
+                  </div>
+                  <Link
+                    to="/product/variety-pack"
+                    className="inline-flex items-center justify-center rounded-full bg-gradient-fire px-6 py-3 font-display text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-fire transition-transform hover:scale-[1.02]"
+                  >
+                    Upgrade to Trio
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {isTrio && (
+              <div className="rounded-2xl border border-primary/25 bg-primary/5 p-5">
+                <label className="flex cursor-pointer items-start gap-3">
+                  <input
+                    type="checkbox"
+                    checked={giftOptionsOpen}
+                    onChange={(event) => setGiftOptionsOpen(event.target.checked)}
+                    className="mt-1 h-4 w-4 accent-[hsl(var(--flame))]"
+                  />
+                  <span>
+                    <span className="block font-display text-sm font-bold uppercase tracking-[0.18em] text-primary">
+                      Gift options
+                    </span>
+                    <span className="mt-1 block text-sm text-foreground/65">
+                      Add a free gift note. Perfect for the ramen lover in your life.
+                    </span>
+                  </span>
+                </label>
+                {giftOptionsOpen && (
+                  <textarea
+                    value={giftNote}
+                    onChange={(event) => setGiftNote(event.target.value)}
+                    maxLength={180}
+                    rows={3}
+                    placeholder="Add your gift note"
+                    className="mt-4 w-full rounded-xl border border-border bg-background/70 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 focus:border-primary/50 focus:outline-none"
+                  />
+                )}
+              </div>
+            )}
+
 
 
             {/* Price + CTA */}
@@ -293,15 +353,14 @@ const ProductPage = () => {
               </div>
 
               <div className="flex gap-3">
-                <a
-                  href={getCheckoutUrl(slug)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
                   className="flex-1 flex items-center justify-center gap-2 px-8 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground bg-gradient-fire hover:shadow-[0_0_40px_hsl(var(--flame)/0.45)] hover:scale-[1.02] transition-all"
                 >
                   <ShoppingCart className="h-4 w-4" />
-                  Order Now
-                </a>
+                  {addedToCart ? "Added" : isTrio ? "Add Trio to Cart" : "Add to Cart"}
+                </button>
                 <Link
                   to="/cart"
                   className="px-5 py-4 rounded-full border border-border hover:border-primary/50 hover:bg-primary/5 transition-all font-display text-sm font-bold uppercase tracking-wider text-foreground/70 whitespace-nowrap"
