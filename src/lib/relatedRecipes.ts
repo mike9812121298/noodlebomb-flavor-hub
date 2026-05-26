@@ -3,10 +3,10 @@ export interface RelatedRecipe {
   title: string;
 }
 
-const STORE_DOMAIN = "nu2vqa-ma.myshopify.com";
-const API_VERSION = "2026-04";
-const STOREFRONT_TOKEN = "f59fc9587d70903d22d0b8cc53e882b7";
-const CACHE_TTL_MS = 5 * 60 * 1000;
+const STORE_DOMAIN = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN || "nu2vqa-ma.myshopify.com";
+const API_VERSION = import.meta.env.VITE_SHOPIFY_API_VERSION || "2026-04";
+const STOREFRONT_TOKEN =
+  import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN || "f59fc9587d70903d22d0b8cc53e882b7";
 
 const TITLE_OVERRIDES: Record<string, string> = {
   "original-chicken-ramen": "Original Chicken Ramen",
@@ -56,6 +56,10 @@ function toRecipes(handles: string[]): RelatedRecipe[] {
   return handles.slice(0, 3).map((slug) => ({ slug, title: titleFromRecipeSlug(slug) }));
 }
 
+export function getFallbackRelatedRecipes(handle: string) {
+  return toRecipes(FALLBACK_RELATED_RECIPES[handle] ?? []);
+}
+
 function parseMetafieldValue(value: string | null | undefined) {
   if (!value) return [];
   try {
@@ -63,34 +67,6 @@ function parseMetafieldValue(value: string | null | undefined) {
     return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string").slice(0, 3) : [];
   } catch {
     return [];
-  }
-}
-
-function cacheKey(handle: string) {
-  return `nb_related_recipes:${handle}`;
-}
-
-export function getFallbackRelatedRecipes(handle: string) {
-  return toRecipes(FALLBACK_RELATED_RECIPES[handle] ?? []);
-}
-
-export function getCachedRelatedRecipes(handle: string) {
-  try {
-    const cached = JSON.parse(window.localStorage.getItem(cacheKey(handle)) ?? "null") as
-      | { savedAt: number; handles: string[] }
-      | null;
-    if (!cached || Date.now() - cached.savedAt > CACHE_TTL_MS) return null;
-    return toRecipes(cached.handles);
-  } catch {
-    return null;
-  }
-}
-
-function writeCachedRelatedRecipes(handle: string, handles: string[]) {
-  try {
-    window.localStorage.setItem(cacheKey(handle), JSON.stringify({ savedAt: Date.now(), handles }));
-  } catch {
-    // Cache is optional; fallback recipes keep the PDP complete.
   }
 }
 
@@ -111,6 +87,5 @@ export async function fetchRelatedRecipes(handle: string) {
   if (!response.ok) throw new Error(`Storefront API ${response.status}`);
   const payload = await response.json();
   const handles = parseMetafieldValue(payload?.data?.product?.metafield?.value);
-  if (handles.length) writeCachedRelatedRecipes(handle, handles);
   return toRecipes(handles);
 }

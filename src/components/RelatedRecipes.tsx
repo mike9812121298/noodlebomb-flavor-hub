@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChefHat } from "lucide-react";
-import {
-  fetchRelatedRecipes,
-  getCachedRelatedRecipes,
-  getFallbackRelatedRecipes,
-  RelatedRecipe,
-} from "@/lib/relatedRecipes";
+import { fetchRelatedRecipes, getFallbackRelatedRecipes, type RelatedRecipe } from "@/lib/relatedRecipes";
 
 interface RelatedRecipesProps {
   shopifyHandle: string;
@@ -16,16 +11,13 @@ const RelatedRecipes = ({ shopifyHandle }: RelatedRecipesProps) => {
   const [recipes, setRecipes] = useState<RelatedRecipe[]>(() => getFallbackRelatedRecipes(shopifyHandle));
 
   useEffect(() => {
-    const cached = getCachedRelatedRecipes(shopifyHandle);
-    if (cached?.length) setRecipes(cached);
-
     let active = true;
     fetchRelatedRecipes(shopifyHandle)
       .then((nextRecipes) => {
         if (active && nextRecipes.length) setRecipes(nextRecipes);
       })
       .catch(() => {
-        // Static fallback keeps the section complete if Shopify is unavailable.
+        if (active) setRecipes(getFallbackRelatedRecipes(shopifyHandle));
       });
 
     return () => {
