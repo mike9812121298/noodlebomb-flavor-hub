@@ -50,9 +50,9 @@ const products = [
 
 const bundles = [
   {
-    name: "The Trio Pack",
+    name: "NoodleBomb Trio",
     tagline: "All three flavors in one clean lineup. Free shipping over $35.",
-    price: "$30.00",
+    price: "$29.99",
     originalPrice: "$35.97",
     spiceLevel: 3,
     color: "bg-primary text-primary-foreground",
@@ -151,14 +151,14 @@ const Shop = () => (
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-base text-muted-foreground line-through">{b.originalPrice}</span>
                   <span className="font-display text-3xl font-bold text-primary">{b.price}</span>
-                  <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">Save $4.98</span>
+                  <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">Save $5.98</span>
                 </div>
                 <div className="flex items-center gap-1.5 mb-6">
                   <Truck className="h-4 w-4 text-primary" />
                   <span className="text-xs text-foreground/60 font-display font-semibold uppercase tracking-wider">Free Shipping Over $35</span>
                 </div>
                 <Link
-                  to="/ramen-box"                  className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.5)] hover:scale-[1.02] transition-all animate-pulse-glow"
+                  to="/product/variety-pack"                  className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.5)] hover:scale-[1.02] transition-all animate-pulse-glow"
                 >
                   Add Bundle to Cart
                 </Link>

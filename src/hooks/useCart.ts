@@ -6,6 +6,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   purchaseType: "one-time" | "subscribe";
+  giftNote?: string;
 }
 
 const CART_KEY = "nb_cart_v1";
@@ -35,7 +36,7 @@ export function useCart() {
         if (existing) {
           return prev.map((i) =>
             i.slug === item.slug && i.purchaseType === item.purchaseType
-              ? { ...i, quantity: i.quantity + (item.quantity ?? 1) }
+              ? { ...i, quantity: i.quantity + (item.quantity ?? 1), giftNote: item.giftNote ?? i.giftNote }
               : i
           );
         }
