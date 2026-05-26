@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NoodleBomb Retail Outreach CRM</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Local operator tool</p>
+          <h1>Retail Outreach CRM</h1>
+          <p class="subhead">Track stores, buyers, samples, follow-ups, and the next action without touching the public site.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="ghost" id="exportCsvButton" type="button">Export CSV</button>
+          <button class="ghost" id="backupJsonButton" type="button">Backup JSON</button>
+          <label class="file-button">
+            Import CSV
+            <input id="importCsvInput" type="file" accept=".csv,text/csv" />
+          </label>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="CRM summary">
+        <article>
+          <span id="totalStores">0</span>
+          <p>Total stores</p>
+        </article>
+        <article>
+          <span id="dueSoon">0</span>
+          <p>Due in 7 days</p>
+        </article>
+        <article>
+          <span id="samplesCold">0</span>
+          <p>Samples cold</p>
+        </article>
+        <article>
+          <span id="reorderDue">0</span>
+          <p>Reorders due</p>
+        </article>
+        <article>
+          <span id="tierAStores">0</span>
+          <p>Tier A stores</p>
+        </article>
+      </section>
+
+      <section class="automation-grid" aria-label="Automation dashboard">
+        <article class="panel automation-panel">
+          <div class="panel-heading compact-heading">
+            <div>
+              <p class="eyebrow">Sample tracking</p>
+              <h2>Samples gone cold</h2>
+            </div>
+          </div>
+          <div class="automation-list" id="coldSamplesList"></div>
+        </article>
+
+        <article class="panel automation-panel">
+          <div class="panel-heading compact-heading">
+            <div>
+              <p class="eyebrow">Reorder tracking</p>
+              <h2>Reorder nudges</h2>
+            </div>
+          </div>
+          <div class="automation-list" id="reorderList"></div>
+        </article>
+      </section>
+
+      <section class="panel draft-panel" id="draftPanel" aria-labelledby="draftTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Draft only</p>
+            <h2 id="draftTitle">Outreach email</h2>
+            <p class="muted" id="draftMeta">Review and approve per recipient before sending.</p>
+          </div>
+          <button class="text-button" id="closeDraftButton" type="button">Close draft</button>
+        </div>
+        <label>
+          Subject
+          <input id="draftSubject" readonly />
+        </label>
+        <label class="wide">
+          Body
+          <textarea id="draftBody" rows="10" readonly></textarea>
+        </label>
+        <div class="form-actions">
+          <button class="primary" id="copyDraftButton" type="button">Copy draft</button>
+          <a class="ghost mailto-button" id="draftMailto" href="#">Open email draft</a>
+        </div>
+      </section>
+
+      <section class="panel form-panel" aria-labelledby="entryTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Add or update</p>
+            <h2 id="entryTitle">Store record</h2>
+          </div>
+          <button class="text-button" id="resetFormButton" type="button">New blank record</button>
+        </div>
+
+        <form id="crmForm">
+          <input type="hidden" id="recordId" />
+          <div class="form-grid">
+            <label>
+              Store
+              <input id="store" name="store" required autocomplete="organization" placeholder="Market of Choice" />
+            </label>
+            <label>
+              Contact
+              <input id="contact" name="contact" autocomplete="name" placeholder="Buyer name" />
+            </label>
+            <label>
+              Title
+              <input id="title" name="title" placeholder="Grocery buyer" />
+            </label>
+            <label>
+              Email
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="buyer@store.com" />
+            </label>
+            <label>
+              Phone
+              <input id="phone" name="phone" autocomplete="tel" placeholder="Optional" />
+            </label>
+            <label>
+              Category
+              <select id="category" name="category"></select>
+            </label>
+            <label>
+              Region
+              <input id="region" name="region" placeholder="PNW, West Coast, Canada" />
+            </label>
+            <label>
+              Employee count
+              <input id="employeeCount" name="employeeCount" inputmode="numeric" placeholder="Approximate" />
+            </label>
+            <label>
+              Store count
+              <input id="storeCount" name="storeCount" inputmode="numeric" placeholder="1, 5, 25" />
+            </label>
+            <label>
+              Adjacent brands
+              <input id="adjacentBrands" name="adjacentBrands" placeholder="Brands or shelf context" />
+            </label>
+            <label>
+              Outreach stage
+              <select id="status" name="status"></select>
+            </label>
+            <label>
+              Outreach date
+              <input id="outreachDate" name="outreachDate" type="date" />
+            </label>
+            <label>
+              Sample sent
+              <select id="sampleSent" name="sampleSent">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </label>
+            <label>
+              Sample date
+              <input id="sampleDate" name="sampleDate" type="date" />
+            </label>
+            <label>
+              +7d sample follow-up
+              <input id="sampleFollowUpDate" name="sampleFollowUpDate" type="date" readonly />
+            </label>
+            <label>
+              +14d second follow-up
+              <input id="sampleSecondFollowUpDate" name="sampleSecondFollowUpDate" type="date" readonly />
+            </label>
+            <label>
+              Follow-up status
+              <select id="followUpStatus" name="followUpStatus"></select>
+            </label>
+            <label>
+              First order date
+              <input id="firstOrderDate" name="firstOrderDate" type="date" />
+            </label>
+            <label>
+              +30d reorder
+              <input id="reorder30Date" name="reorder30Date" type="date" readonly />
+            </label>
+            <label>
+              +60d reorder
+              <input id="reorder60Date" name="reorder60Date" type="date" readonly />
+            </label>
+            <label>
+              +90d reorder
+              <input id="reorder90Date" name="reorder90Date" type="date" readonly />
+            </label>
+            <label>
+              Next action
+              <input id="nextAction" name="nextAction" placeholder="Send sample, call buyer, send sell sheet" />
+            </label>
+            <label>
+              Next action date
+              <input id="nextActionDate" name="nextActionDate" type="date" />
+            </label>
+            <label>
+              Store tier
+              <input id="tier" name="tier" readonly />
+            </label>
+            <label>
+              Priority
+              <select id="priority" name="priority">
+                <option>High</option>
+                <option selected>Medium</option>
+                <option>Low</option>
+              </select>
+            </label>
+            <label>
+              Source
+              <input id="source" name="source" placeholder="Apollo, manual, referral, trade show" />
+            </label>
+            <label>
+              DNC
+              <select id="dnc" name="dnc">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </label>
+            <label class="wide">
+              Notes
+              <textarea id="notes" name="notes" rows="4" placeholder="Buyer notes, stocking clues, sample feedback, objections"></textarea>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button class="primary" type="submit">Save store</button>
+            <button class="danger ghost" id="deleteCurrentButton" type="button">Delete current</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="pipelineTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Pipeline</p>
+            <h2 id="pipelineTitle">Stores</h2>
+          </div>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="Search store, buyer, notes" />
+            <select id="categoryFilter"></select>
+            <select id="statusFilter"></select>
+            <select id="sampleFilter">
+              <option value="">All samples</option>
+              <option value="Yes">Samples sent</option>
+              <option value="No">No sample yet</option>
+            </select>
+            <select id="tierFilter"></select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Store</th>
+                <th>Contact</th>
+                <th>Category</th>
+                <th>Outreach</th>
+                <th>Sample</th>
+                <th>Follow-up</th>
+                <th>Next action</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="crmRows"></tbody>
+          </table>
+        </div>
+        <p class="empty" id="emptyState">No stores yet. Add the first one above or import a CSV.</p>
+      </section>
+
+      <section class="panel utility-panel">
+        <div>
+          <p class="eyebrow">Local data</p>
+          <h2>Storage and restore</h2>
+          <p>This CRM saves only in this browser's localStorage. Export CSV or backup JSON before clearing browser data.</p>
+        </div>
+        <div class="hero-actions">
+          <label class="file-button">
+            Restore JSON
+            <input id="restoreJsonInput" type="file" accept=".json,application/json" />
+          </label>
+          <button class="danger ghost" id="clearAllButton" type="button">Clear all local records</button>
+        </div>
+      </section>
+    </main>
+
+    <template id="rowTemplate">
+      <tr>
+        <td data-label="Store"></td>
+        <td data-label="Contact"></td>
+        <td data-label="Category"></td>
+        <td data-label="Outreach"></td>
+        <td data-label="Sample"></td>
+        <td data-label="Follow-up"></td>
+        <td data-label="Next action"></td>
+        <td data-label="Actions" class="row-actions"></td>
+      </tr>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
