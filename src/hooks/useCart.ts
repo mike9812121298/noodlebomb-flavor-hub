@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { trackMetaAddToCart } from "@/lib/meta-pixel";
 
 export interface CartItem {
   slug: string;
@@ -29,6 +30,12 @@ export function useCart() {
 
   const addItem = useCallback(
     (item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
+      trackMetaAddToCart({
+        slug: item.slug,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity ?? 1,
+      });
       setItems((prev) => {
         const existing = prev.find(
           (i) => i.slug === item.slug && i.purchaseType === item.purchaseType

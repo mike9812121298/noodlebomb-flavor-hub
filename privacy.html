@@ -9,7 +9,17 @@
 <meta name="description" content="How NoodleBomb collects, stores, and uses customer information. Bonney Lake, WA." />
 <meta name="robots" content="noindex,follow" />
 <link rel="canonical" href="https://noodlebomb.co/privacy" />
-<meta property="og:title" content="Privacy Policy &mdash; NoodleBomb" />
+<!-- Meta Pixel: browser funnel events for the storefront. Purchase remains on Shopify Customer Events. -->
+<script>
+  (function () {
+    var pixelId = "%VITE_FACEBOOK_PIXEL_ID%";
+    if (!pixelId || pixelId.indexOf("%") === 0) pixelId = "976149235141968";
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', pixelId);
+    fbq('track', 'PageView');
+  })();
+</script>
+<script defer src="/meta-pixel-events.js"></script><meta property="og:title" content="Privacy Policy &mdash; NoodleBomb" />
 <meta property="og:description" content="How NoodleBomb collects, stores, and uses customer information. Bonney Lake, WA." />
 <meta property="og:image" content="https://noodlebomb.co/uploads/nb-trio-package-studio-v2.jpg" />
 <meta property="og:url" content="https://noodlebomb.co/privacy" />
@@ -57,7 +67,7 @@
     <div class="container">
       <div class="eyebrow">Privacy Policy</div>
       <h1 class="display">Privacy Policy</h1>
-      <p class="lede">Last updated 2026-05-07. Short version: we collect what we need to ship you sauce, we don’t sell your data, and we keep it tight.</p>
+      <p class="lede">Last updated 2026-05-07. Short version: we collect what we need to ship you sauce, we donâ€™t sell your data, and we keep it tight.</p>
     </div>
   </section>
   <section class="page-section">

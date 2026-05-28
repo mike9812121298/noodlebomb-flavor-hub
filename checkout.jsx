@@ -122,6 +122,9 @@ function CheckoutPage() {
   const proceed = () => {
     if (!emailValid) { setEmailTouched(true); return; }
     setRedirecting(true);
+    try {
+      if (window.NB_META_PIXEL) window.NB_META_PIXEL.trackInitiateCheckout(items, subtotal);
+    } catch (_) { /* ignore analytics errors */ }
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       window.NB_SHOPIFY_CHECKOUT.createCheckoutUrl(items)
         .then((url) => { window.location.href = url; })

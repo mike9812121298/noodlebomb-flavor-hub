@@ -5,12 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
-<title>Your Cart — NoodleBomb</title>
+<title>Your Cart â€” NoodleBomb</title>
 <meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. Free shipping over $35." />
 <meta name="robots" content="noindex" />
 <link rel="canonical" href="https://noodlebomb.co/cart" />
 
-<!-- Fonts -->
+<!-- Meta Pixel: browser funnel events for the storefront. Purchase remains on Shopify Customer Events. -->
+<script>
+  (function () {
+    var pixelId = "%VITE_FACEBOOK_PIXEL_ID%";
+    if (!pixelId || pixelId.indexOf("%") === 0) pixelId = "976149235141968";
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', pixelId);
+    fbq('track', 'PageView');
+  })();
+</script>
+<script defer src="/meta-pixel-events.js"></script><!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://unpkg.com" crossorigin="">

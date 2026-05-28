@@ -62,9 +62,19 @@
 
   function add(item) {
     if (!item || !item.slug) return;
+    var qty = item.qty || 1;
+    try {
+      if (window.NB_META_PIXEL) {
+        window.NB_META_PIXEL.trackAddToCart({
+          slug: item.slug,
+          name: item.name || item.slug,
+          price: Number(item.price) || 0,
+          qty: qty
+        });
+      }
+    } catch (e) { /* ignore analytics errors */ }
     var items = safeRead();
     var existing = items.find(function (i) { return i.slug === item.slug; });
-    var qty = item.qty || 1;
     if (existing) {
       existing.qty += qty;
     } else {

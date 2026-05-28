@@ -98,6 +98,9 @@ function CartPage() {
 
   const onCheckoutClick = (e) => {
     if (checkoutLoading) { e.preventDefault(); return; }
+    try {
+      if (window.NB_META_PIXEL) window.NB_META_PIXEL.trackInitiateCheckout(items, subtotal);
+    } catch (_) { /* ignore analytics errors */ }
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       setCheckoutLoading(true);
       window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items))
