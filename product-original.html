@@ -9,7 +9,17 @@
 <meta name="description" content="Buy NoodleBomb Original ramen sauce: roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, small-batch in Bonney Lake, WA.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://noodlebomb.co/original-ramen-sauce">
-<meta property="og:type" content="product">
+<!-- Meta Pixel: browser funnel events for the storefront. Purchase remains on Shopify Customer Events. -->
+<script>
+  (function () {
+    var pixelId = "%VITE_FACEBOOK_PIXEL_ID%";
+    if (!pixelId || pixelId.indexOf("%") === 0) pixelId = "976149235141968";
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', pixelId);
+    fbq('track', 'PageView');
+  })();
+</script>
+<script defer src="/meta-pixel-events.js"></script><meta property="og:type" content="product">
 <meta property="og:title" content="Original Ramen Sauce | NoodleBomb">
 <meta property="og:description" content="Roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, made in Bonney Lake, WA.">
 <meta property="og:image" content="https://noodlebomb.co/uploads/nb-original-front-tight-2026-05-17.png">
@@ -59,7 +69,7 @@
 }</script>
 
 <style>
-  /* PDP-specific layout — works on top of /page-shared.css */
+  /* PDP-specific layout â€” works on top of /page-shared.css */
   .pdp-hero { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 64px); }
   .pdp-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
   @media (max-width: 880px) { .pdp-grid { grid-template-columns: 1fr; } }

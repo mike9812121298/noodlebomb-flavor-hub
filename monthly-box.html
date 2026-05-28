@@ -9,7 +9,17 @@
 <meta name="description" content="Subscribe to the NoodleBomb Monthly Ramen Box: premium instant ramen, recipe ideas, and a free full bottle of NoodleBomb sauce every month. Plans start at $29.99/mo." />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 <link rel="canonical" href="https://noodlebomb.co/monthly-box" />
-<meta property="og:title" content="Monthly Ramen Box | NoodleBomb" />
+<!-- Meta Pixel: browser funnel events for the storefront. Purchase remains on Shopify Customer Events. -->
+<script>
+  (function () {
+    var pixelId = "%VITE_FACEBOOK_PIXEL_ID%";
+    if (!pixelId || pixelId.indexOf("%") === 0) pixelId = "976149235141968";
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', pixelId);
+    fbq('track', 'PageView');
+  })();
+</script>
+<script defer src="/meta-pixel-events.js"></script><meta property="og:title" content="Monthly Ramen Box | NoodleBomb" />
 <meta property="og:description" content="Premium instant ramen, recipe ideas, and a free full bottle of NoodleBomb sauce every month. Choose $29.99/mo or $39.99/mo." />
 <meta property="og:image" content="https://noodlebomb.co/uploads/monthly-noodle-club-2026-05-08.png" />
 <meta property="og:url" content="https://noodlebomb.co/monthly-box" />

@@ -14,6 +14,7 @@ import AnnouncementBar from "./components/AnnouncementBar";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import EmailCapture from "./components/EmailCapture";
+import MetaPixelPageViewTracker from "./components/MetaPixelPageViewTracker";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import Recipes from "./pages/Recipes";
@@ -38,6 +39,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
       <ScrollToTop />
+        <MetaPixelPageViewTracker />
         <AnnouncementBar />
         <Navbar />
         <EmailCapture />
