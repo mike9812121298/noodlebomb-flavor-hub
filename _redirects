@@ -78,6 +78,7 @@
 /recipes     /recipes.html      200
 /recipes/*   /recipes.html      200
 /faq         /faq.html          200
+/rewards     /rewards.html      200
 
 # SEO-friendly product landing pages on the brand domain.
 /original-ramen-sauce      /product-original.html      200

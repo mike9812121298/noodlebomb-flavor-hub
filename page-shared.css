@@ -449,3 +449,52 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 @media (max-width: 480px) {
   .footer-cols { grid-template-columns: 1fr; gap: 28px; }
 }
+
+/* ── Rewards promotion (nav link + PDP earn chip) ──────────────────── */
+.nav-links a.nav-rewards {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--accent); opacity: 1; font-weight: 500;
+}
+.nav-links a.nav-rewards::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); display: inline-block; flex: none;
+}
+.nav-links a.nav-rewards:hover { filter: brightness(1.12); }
+.nav-drawer a.nav-rewards { color: var(--accent); }
+
+/* "Earn N points" chip shown under the price on product pages. */
+.pdp-points {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin: 0 0 18px; padding: 9px 15px;
+  background: rgba(var(--accent-rgb, 232, 74, 58), 0.09);
+  border: 1px solid rgba(var(--accent-rgb, 232, 74, 58), 0.34);
+  border-radius: 999px; cursor: pointer;
+  font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: -0.005em; color: var(--ink);
+  transition: transform .2s, border-color .2s, background .2s, box-shadow .2s;
+}
+.pdp-points strong { font-family: 'Inter Tight', sans-serif; font-weight: 700; color: var(--accent); }
+.pdp-points .pdp-points-join {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent); opacity: 0.92;
+}
+.pdp-points .pdp-points-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none;
+  box-shadow: 0 0 0 0 rgba(var(--accent-rgb, 232, 74, 58), 0.5);
+  animation: nbPointsPulse 2.4s ease-out infinite;
+}
+.pdp-points:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--accent-rgb, 232, 74, 58), 0.6);
+  background: rgba(var(--accent-rgb, 232, 74, 58), 0.14);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+.pdp-points:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@keyframes nbPointsPulse {
+  0% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb, 232, 74, 58), 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(var(--accent-rgb, 232, 74, 58), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--accent-rgb, 232, 74, 58), 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pdp-points .pdp-points-dot { animation: none; }
+}

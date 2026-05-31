@@ -3564,6 +3564,39 @@
 })();
 </script>
 
+<!-- Rewards promo band — opens the same Smile panel as the floating launcher.
+     Numbers are filled from /rewards-config.js (data-nb); the inline values are
+     the verified no-JS fallback. -->
+<style>
+  .nbrb { border-top: 1px solid var(--line); background: linear-gradient(180deg, var(--paper-2), var(--paper)); }
+  .nbrb-inner { max-width: 1300px; margin: 0 auto; padding: clamp(40px, 6vw, 76px) clamp(24px, 5.5vw, 80px); display: flex; align-items: center; gap: clamp(22px, 3vw, 44px); flex-wrap: wrap; }
+  .nbrb-seal { flex: none; width: 58px; height: 58px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-family: 'Inter Tight', sans-serif; font-weight: 800; font-size: 25px; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.42); }
+  .nbrb-copy { flex: 1 1 360px; min-width: 0; }
+  .nbrb-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .nbrb-h { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -0.03em; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.04; margin: 0 0 10px; color: var(--ink); }
+  .nbrb-sub { font-size: 15px; line-height: 1.6; color: var(--ink-60); margin: 0; max-width: 640px; }
+  .nbrb-actions { display: flex; flex-direction: column; gap: 10px; flex: none; }
+  .nbrb-join { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: var(--accent-ink); border: 0; cursor: pointer; padding: 15px 28px; border-radius: 999px; font-family: 'Inter Tight', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; transition: transform .2s, box-shadow .2s; }
+  .nbrb-join:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.42); }
+  .nbrb-link { text-align: center; color: var(--ink); opacity: 0.78; text-decoration: none; font-size: 13px; font-family: 'Inter', sans-serif; padding: 6px; }
+  .nbrb-link:hover { opacity: 1; }
+  @media (max-width: 820px) { .nbrb-actions { flex-direction: row; width: 100%; } .nbrb-join { flex: 1; } }
+</style>
+<section class="nbrb" aria-label="NoodleBomb Rewards">
+  <div class="nbrb-inner">
+    <div class="nbrb-seal" aria-hidden="true">N</div>
+    <div class="nbrb-copy">
+      <div class="nbrb-eyebrow">NoodleBomb Rewards</div>
+      <h2 class="nbrb-h">Join NoodleBomb Rewards &mdash; earn on every order.</h2>
+      <p class="nbrb-sub">Free to join. Collect <span data-nb="earnRate">5</span> points on every $1, get <span data-nb="signup">250</span> points the moment you sign up, and turn them into money off your next bottle.</p>
+    </div>
+    <div class="nbrb-actions">
+      <button type="button" class="nbrb-join nb-rewards-cta">Join free &rarr;</button>
+      <a class="nbrb-link" href="/rewards">How it works &rarr;</a>
+    </div>
+  </div>
+</section>
+
 <footer class="page-footer">
   <div class="container">
     <div class="footer-newsletter">
@@ -3601,6 +3634,7 @@
     </div>
   </div>
 </footer>
+<script src="/rewards-config.js" defer></script>
 <script src="/page-shared.js" defer></script>
 
 </body></html>

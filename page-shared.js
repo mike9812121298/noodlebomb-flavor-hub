@@ -130,3 +130,151 @@
   window.addEventListener('resize', applyHomepagePatch);
   applyHomepagePatch();
 })();
+
+// ── Smile.io rewards launcher (headless Smile UI) ───────────────────────────
+// NoodleBomb's live site is a static/custom storefront that only uses Shopify at
+// checkout, so the Shopify theme-app-embed Smile launcher never loads for real
+// customers. This mounts Smile's official headless SDK instead.
+//
+// Verified against dev.smile.io (May 2026): the launcher loads from
+// https://js.smile.io/v1/smile-ui.js and is started with
+// SmileUI.initialize({ publishableKey }). The publishable key (pub_…) is a
+// DIFFERENT credential from the Shopify channel_ key and is the only identifier
+// initialize() accepts; the legacy channel-key path (Storefront.js) was retired
+// 2025-12-31. The pub_ key is "safe to expose publicly" per Smile.
+//
+// No on-site customer login exists, so Smile runs in GUEST mode (no
+// customerToken). Points still attribute when the shopper completes the Shopify
+// checkout with their email. This same block is inlined on cart.html and
+// checkout.html, which do not load page-shared.js.
+(function () {
+  if (window.__nbSmileLauncherLoaded) return;
+  window.__nbSmileLauncherLoaded = true;
+
+  var KEY = 'pub_2d27941cfeaca289';
+  if (!KEY || KEY.indexOf('pub_') !== 0) return;
+
+  function initSmile() {
+    if (window.SmileUI && typeof window.SmileUI.initialize === 'function') {
+      window.SmileUI.initialize({ publishableKey: KEY });
+    }
+  }
+
+  // Load the Smile UI SDK from Smile's CDN (never bundled/self-hosted).
+  if (!document.getElementById('smile-ui-sdk')) {
+    var s = document.createElement('script');
+    s.id = 'smile-ui-sdk';
+    s.async = true;
+    s.src = 'https://js.smile.io/v1/smile-ui.js';
+    document.head.appendChild(s);
+  }
+
+  if (window.SmileUI && window.SmileUI.initialize) {
+    initSmile();
+  } else {
+    document.addEventListener('smile-ui-loaded', initSmile, { once: true });
+  }
+})();
+
+// ── NoodleBomb Rewards promotion layer ──────────────────────────────────────
+// Promotes the (already-embedded) Smile program across the site: a "Rewards"
+// nav link, the Join CTAs, and computed "Earn X points" labels on product
+// pages. Every CTA opens the same Smile panel the floating launcher opens, via
+// Smile's public SmileUI.openPanel() API. All point values are read from the
+// single source of truth in /rewards-config.js (window.NB_REWARDS); this file
+// contains no hard-coded rewards numbers.
+(function () {
+  if (window.__nbRewardsPromoLoaded) return;
+  window.__nbRewardsPromoLoaded = true;
+
+  // Open the Smile rewards panel (same panel as the floating launcher). The
+  // Smile SDK boots asynchronously, so retry briefly until SmileUI is ready.
+  function openRewards(deepLink) {
+    var tries = 0;
+    (function attempt() {
+      var ui = window.SmileUI;
+      if (ui && typeof ui.openPanel === 'function') {
+        try {
+          if (deepLink && typeof ui.intent === 'function') ui.intent(deepLink);
+          else ui.openPanel();
+          return;
+        } catch (e) { /* fall through to retry */ }
+      }
+      if (tries++ < 30) window.setTimeout(attempt, 200);
+    })();
+  }
+  window.nbOpenRewards = openRewards;
+
+  // Any element marked data-nb-open-rewards (or .nb-rewards-cta) opens the panel.
+  document.addEventListener('click', function (event) {
+    var trigger = event.target.closest('[data-nb-open-rewards], .nb-rewards-cta');
+    if (!trigger) return;
+    event.preventDefault();
+    openRewards(trigger.getAttribute('data-nb-deep-link') || undefined);
+  });
+
+  // Inject the "Rewards" nav link into the shared header + mobile drawer. The
+  // static pages each carry their own copy of the nav markup, so adding it once
+  // here keeps the link consistent everywhere without editing every file.
+  function addNavLink(container, isDrawer) {
+    if (!container || container.querySelector('a[href="/rewards"]')) return;
+    var link = document.createElement('a');
+    link.href = '/rewards';
+    link.className = 'nav-rewards';
+    link.textContent = 'Rewards';
+    if (location.pathname.replace(/\/$/, '') === '/rewards') link.setAttribute('aria-current', 'page');
+    if (isDrawer) {
+      var cta = container.querySelector('.drawer-cta');
+      if (cta) container.insertBefore(link, cta); else container.appendChild(link);
+    } else {
+      var faq = container.querySelector('a[href="/faq"]');
+      if (faq) container.insertBefore(link, faq); else container.appendChild(link);
+    }
+  }
+  addNavLink(document.querySelector('nav .nav-links'), false);
+  addNavLink(document.getElementById('nav-drawer'), true);
+
+  var R = window.NB_REWARDS;
+
+  // Fill any [data-nb] node with its verified value so on-page copy stays locked
+  // to /rewards-config.js. The static markup already holds the same numbers as a
+  // no-JS fallback; this just guarantees they can never drift from the source.
+  if (R) {
+    var values = {
+      earnRate: R.earnRate,
+      signup: R.earn.signup.points,
+      facebook: R.earn.facebook.points,
+      birthday: R.earn.birthday.points,
+      redeemPer: R.redeem.pointsPerDollar,
+      redeemMin: R.redeem.minPoints,
+      referral: R.referral.friendReward,
+      referralMin: R.referral.friendMinOrder
+    };
+    document.querySelectorAll('[data-nb]').forEach(function (el) {
+      var v = values[el.getAttribute('data-nb')];
+      if (v != null) el.textContent = String(v);
+    });
+  }
+
+  // Product pages: show "Earn N points" near the price, computed from the actual
+  // displayed price x the configured earn rate. Clicking it opens the panel.
+  // Two price markups exist across the PDPs: .pdp-price (with .amt) on the main
+  // sauce pages, and .pdp-price-line (with <strong>) on the jar/reserve pages.
+  if (R && typeof R.pointsForPrice === 'function') {
+    document.querySelectorAll('.pdp-price, .pdp-price-line').forEach(function (priceEl) {
+      var host = priceEl.parentNode;
+      if (!host || host.querySelector('.pdp-points')) return;
+      var valueNode = priceEl.querySelector('.amt') || priceEl.querySelector('strong');
+      var points = R.pointsForPrice(valueNode ? valueNode.textContent : priceEl.textContent);
+      if (!points) return;
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'pdp-points nb-rewards-cta';
+      chip.setAttribute('aria-label', 'Earn ' + points + ' NoodleBomb points on this bottle — join Rewards');
+      chip.innerHTML = '<span class="pdp-points-dot" aria-hidden="true"></span>Earn <strong>' +
+        points + '</strong> points &middot; <span class="pdp-points-join">join Rewards</span>';
+      if (priceEl.insertAdjacentElement) priceEl.insertAdjacentElement('afterend', chip);
+      else host.insertBefore(chip, priceEl.nextSibling);
+    });
+  }
+})();
