@@ -498,3 +498,13 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 @media (prefers-reduced-motion: reduce) {
   .pdp-points .pdp-points-dot { animation: none; }
 }
+
+/* Mobile: lift the Smile rewards launcher above the fixed Add-to-Cart bar /
+   app-dock so it never covers the primary CTA. JS in page-shared.js also sets
+   this inline (!important) to beat Smile's injected styles; this is the backup.
+   Desktop keeps Smile's default bottom placement. */
+@media (max-width: 768px) {
+  .smile-launcher-frame-container {
+    bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
