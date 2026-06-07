@@ -1,7 +1,7 @@
 // NoodleBomb checkout - editorial palette, Shopify handoff.
 const { useEffect, useState, useMemo } = React;
 
-const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
+const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 29.99;
 const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
 const EMAIL_KEY = 'nb_checkout_email';
 
@@ -35,10 +35,10 @@ const getShopifyCartPermalink = (items) => {
 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  citrus:   'uploads/nb-citrus-front-cutout-2026-05-09.png',
-  spicy:    'uploads/nb-spicy-front-cutout-2026-05-09.png',
-  shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png',
+  original: 'uploads/nb-original-cart-thumb-2026-06-06.webp',
+  citrus:   'uploads/nb-citrus-cart-thumb-2026-06-06.webp',
+  spicy:    'uploads/nb-spicy-cart-thumb-2026-06-06.webp',
+  shoyu:    'uploads/shoyu-reserve-cart-thumb-2026-06-06.webp',
   trio:     'uploads/noodlebomb-trio.png'
 };
 
@@ -53,6 +53,8 @@ const PRODUCT_TAGS = {
 const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 const isoDate = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const lineKey = (item, index) => `${item.slug}-${index}-${JSON.stringify(item.attributes || [])}`;
+const bottleMix = (item) => (item.attributes || []).find((attr) => attr.key === 'Bottle mix')?.value;
 
 // Icons
 const Mail = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>;
@@ -192,14 +194,19 @@ function CheckoutPage() {
               <a href="/cart.html" className="mono" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Edit</a>
             </div>
             <div>
-              {items.map((item) => (
-                <div key={item.slug} className="review-row">
+              {items.map((item, index) => (
+                <div key={lineKey(item, index)} className="review-row">
                   <div className="img">
                     <img src={PRODUCT_IMAGES[item.slug] || PRODUCT_IMAGES.original} alt={item.name} />
                     <span className="qty-bubble">{item.qty}</span>
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p className="name">{item.name}</p>
+                    {bottleMix(item) && (
+                      <div className="meta" style={{ marginTop: 4, color: 'var(--accent)' }}>
+                        Mix: {bottleMix(item)}
+                      </div>
+                    )}
                     <div className="meta">{PRODUCT_TAGS[item.slug] || ''} · {fmtUSD(item.price)} each</div>
                   </div>
                   <div className="price">{fmtUSD(item.price * item.qty)}</div>
@@ -227,7 +234,7 @@ function CheckoutPage() {
           <p className="lede">Tax + shipping at next step</p>
 
           <div className="row-line"><span>Subtotal ({itemCount})</span><span className="v">{fmtUSD(subtotal)}</span></div>
-          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? (hasTrio ? 'Trio ships free' : 'Free') : 'At checkout'}</span></div>
+          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free (US)' : 'At checkout'}</span></div>
           <div className="row-line"><span>Estimated tax</span><span className="v" style={{ color: 'var(--ink-40)', fontSize: 12 }}>At checkout</span></div>
           <div className="divider"></div>
           <div className="row-line total"><span className="label">Subtotal</span><span className="v">{fmtUSD(subtotal)}</span></div>
@@ -263,7 +270,7 @@ function CheckoutPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> Trio ships free · singles ship free over $35</div>
+            <div className="trust-row"><Truck /> FREE US shipping at $29.99+ subtotal</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

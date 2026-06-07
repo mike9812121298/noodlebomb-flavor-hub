@@ -290,12 +290,14 @@ function Nav({ flavor, setFlavor, flavors }) {
 
   // Cart drawer derived values
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
-  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
+  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 29.99;
   const cartHasTrio = cartItems.some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
   const cartFreeShipping = cartHasTrio || cartSubtotal >= cartFreeShipThreshold;
   const cartShipRemaining = cartFreeShipping ? 0 : Math.max(cartFreeShipThreshold - cartSubtotal, 0);
   const cartShipProgress = cartFreeShipping ? 100 : Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
   const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
+  const cartLineKey = (item, index) => `${item.slug}-${index}-${JSON.stringify(item.attributes || [])}`;
+  const cartBottleMix = (item) => (item.attributes || []).find((attr) => attr.key === 'Bottle mix')?.value;
 
   // navLinks: tuples of [label, href]. Hrefs starting with '#' are
   // smooth-scrolled in-page; hrefs starting with '/' are real-page nav.
@@ -310,6 +312,7 @@ function Nav({ flavor, setFlavor, flavors }) {
     ['Home', '/'],
     ['Shop Sauces', '/shop'],
     ['Recipes', '/recipes'],
+    ['Where to Buy', '/#stores'],
     ['About', '/about'],
     ['Monthly Ramen Box', '/monthly-box'],
     ['FAQ', '/faq'],
@@ -649,8 +652,8 @@ function Nav({ flavor, setFlavor, flavors }) {
           <>
             {/* Items — scrollable */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '8px 24px' }}>
-              {cartItems.map((item) => (
-                <div key={item.slug} style={{
+              {cartItems.map((item, index) => (
+                <div key={cartLineKey(item, index)} style={{
                   padding: '14px 0',
                   borderBottom: '1px solid var(--line)',
                   display: 'flex', alignItems: 'flex-start', gap: 12,
@@ -662,12 +665,17 @@ function Nav({ flavor, setFlavor, flavors }) {
                     <div style={{ fontSize: 11, color: 'var(--ink-40)', marginTop: 4, fontFamily: 'JetBrains Mono', letterSpacing: '0.08em' }}>
                       {fmtUSD(item.price)} each
                     </div>
+                    {cartBottleMix(item) && (
+                      <div style={{ fontSize: 11, color: 'var(--accent)', marginTop: 4, fontFamily: 'JetBrains Mono', letterSpacing: '0.08em', lineHeight: 1.4 }}>
+                        Mix: {cartBottleMix(item)}
+                      </div>
+                    )}
                     {/* Inline qty stepper — minus/plus buttons let users adjust
                         without navigating to /cart.html. Disabled minus at 1
                         prevents accidental remove (use the explicit Remove btn). */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: 8, border: '1px solid var(--line-strong)', borderRadius: 999, width: 'fit-content' }}>
                       <button
-                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty - 1)}
+                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty - 1, item.attributes)}
                         disabled={item.qty <= 1}
                         aria-label={`Decrease ${item.name} quantity`}
                         style={{
@@ -681,7 +689,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                       >−</button>
                       <span style={{ minWidth: 22, textAlign: 'center', fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 12, color: 'var(--ink)' }}>{item.qty}</span>
                       <button
-                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty + 1)}
+                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty + 1, item.attributes)}
                         aria-label={`Increase ${item.name} quantity`}
                         style={{
                           width: 26, height: 26, padding: 0,
@@ -698,7 +706,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                       {fmtUSD(item.price * item.qty)}
                     </div>
                     <button
-                      onClick={() => window.NB_CART && window.NB_CART.remove(item.slug)}
+                      onClick={() => window.NB_CART && window.NB_CART.remove(item.slug, item.attributes)}
                       aria-label={`Remove ${item.name}`}
                       style={{
                         background: 'transparent', border: 0,
@@ -756,7 +764,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                         Cart slot 1: Trio
                       </div>
                       <div style={{ fontFamily: 'Inter Tight', fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>
-                        Save $5.98 with all 3 flavors
+                        Add bottle 3 + unlock Trio savings
                       </div>
                     </div>
                     <button
@@ -781,12 +789,12 @@ function Nav({ flavor, setFlavor, flavors }) {
               {/* Free shipping bar */}
               {cartFreeShipping ? (
                 <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
-                  {cartHasTrio ? 'Trio ships free' : 'Free shipping unlocked'}
+                  ✓ FREE shipping unlocked
                 </div>
               ) : (
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--ink-60)', marginBottom: 6, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                    Add {fmtUSD(cartShipRemaining)} for free shipping, or choose the Trio
+                    You're {fmtUSD(cartShipRemaining)} away from FREE US shipping
                   </div>
                   <div style={{ height: 4, background: 'var(--paper-3)', borderRadius: 999, overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: cartShipProgress + '%', background: 'var(--accent)', borderRadius: 999, transition: 'width .3s' }} />
@@ -864,8 +872,8 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       <div className="hero-bg-media" style={{ position: 'absolute', inset: 0, zIndex: 0, background: '#0a0705' }}>
         <img
           className="hero-product-bg"
-          src="uploads/nb-hero-trio-studio-v1.jpg"
-          alt="NoodleBomb Trio with Original, Spicy Tokyo, and Citrus Shoyu bottles"
+          src="uploads/nb-hero-pour-page.webp"
+          alt="NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background"
           loading="eager"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', transform: 'none' }}
         />
@@ -930,7 +938,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </div>
         {/* Trust line under CTAs */}
         <div className="hero-trust-line" style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
-          Trio ships free - gift-ready - ships from Bonney Lake, WA
+          3+ bottles ship FREE (US) - gift-ready - ships from Bonney Lake, WA
         </div>
       </div>
 

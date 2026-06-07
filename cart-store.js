@@ -2,7 +2,7 @@
  * Shared between index.html, cart.html, and checkout.html.
  * Exposes a single global: window.NB_CART
  *
- * Item shape: { slug, name, price, qty }
+ * Item shape: { slug, name, price, qty, attributes? }
  *   slug   — internal product key (matches Wix deep-link map keys)
  *   name   — display label
  *   price  — number, USD
@@ -19,7 +19,7 @@
     spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99 },
     citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 },
     trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 },
-    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99 }
+    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99 }
   };
 
   function safeRead() {
@@ -50,6 +50,22 @@
     return safeRead().reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
   }
 
+  function normalizeAttributes(attributes) {
+    if (!Array.isArray(attributes)) return [];
+    return attributes
+      .filter(function (a) { return a && a.key && a.value; })
+      .map(function (a) {
+        return {
+          key: String(a.key),
+          value: String(a.value)
+        };
+      });
+  }
+
+  function attributesKey(attributes) {
+    return JSON.stringify(normalizeAttributes(attributes));
+  }
+
   function hasFreeShippingTrio(items) {
     return (items || safeRead()).some(function (i) { return i.slug === 'trio' && (Number(i.qty) || 0) > 0; });
   }
@@ -57,23 +73,29 @@
   function qualifiesForFreeShipping(items) {
     var list = items || safeRead();
     var subtotal = list.reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
-    return subtotal >= 35 || hasFreeShippingTrio(list);
+    return subtotal >= 29.99 || hasFreeShippingTrio(list);
   }
 
   function add(item) {
     if (!item || !item.slug) return;
     var items = safeRead();
-    var existing = items.find(function (i) { return i.slug === item.slug; });
+    var normalizedAttributes = normalizeAttributes(item.attributes);
+    var incomingAttributesKey = attributesKey(normalizedAttributes);
+    var existing = items.find(function (i) {
+      return i.slug === item.slug && attributesKey(i.attributes) === incomingAttributesKey;
+    });
     var qty = item.qty || 1;
     if (existing) {
       existing.qty += qty;
     } else {
-      items.push({
+      var nextItem = {
         slug: item.slug,
         name: item.name || item.slug,
         price: Number(item.price) || 0,
         qty: qty
-      });
+      };
+      if (normalizedAttributes.length) nextItem.attributes = normalizedAttributes;
+      items.push(nextItem);
     }
     safeWrite(items);
     emitChange();
@@ -92,20 +114,36 @@
     window.history.replaceState({}, '', next);
   }
 
-  function setQty(slug, qty) {
+  function sameAttributes(a, b) {
+    return attributesKey(a) === attributesKey(b);
+  }
+
+  function setQty(slug, qty, attributes) {
     var items = safeRead();
     var n = Math.max(0, Math.floor(Number(qty) || 0));
+    var hasAttributes = arguments.length >= 3;
     if (n === 0) {
-      items = items.filter(function (i) { return i.slug !== slug; });
+      items = items.filter(function (i) {
+        return hasAttributes
+          ? !(i.slug === slug && sameAttributes(i.attributes, attributes))
+          : i.slug !== slug;
+      });
     } else {
-      var found = items.find(function (i) { return i.slug === slug; });
+      var found = items.find(function (i) {
+        return hasAttributes
+          ? i.slug === slug && sameAttributes(i.attributes, attributes)
+          : i.slug === slug;
+      });
       if (found) found.qty = n;
     }
     safeWrite(items);
     emitChange();
   }
 
-  function remove(slug) { setQty(slug, 0); }
+  function remove(slug, attributes) {
+    if (arguments.length >= 2) setQty(slug, 0, attributes);
+    else setQty(slug, 0);
+  }
 
   function clear() {
     safeWrite([]);
@@ -138,7 +176,7 @@
       onChange: onChange,
       hasFreeShippingTrio: hasFreeShippingTrio,
       qualifiesForFreeShipping: qualifiesForFreeShipping,
-      FREE_SHIPPING_THRESHOLD: 35
+      FREE_SHIPPING_THRESHOLD: 29.99
     };
     addFromUrl();
   }

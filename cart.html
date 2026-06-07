@@ -5,16 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
-<title>Your Cart — NoodleBomb</title>
-<meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. Free shipping over $35." />
+<title>Your Cart | NoodleBomb</title>
+<meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. FREE US shipping at $29.99+ subtotal." />
 <meta name="robots" content="noindex" />
 <link rel="canonical" href="https://noodlebomb.co/cart" />
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="preconnect" href="https://unpkg.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600&amp;family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
 <!-- React + Babel (same CDNs as index.html) -->
 <script defer src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
@@ -69,7 +65,7 @@ body::before {
   z-index: 0;
 }
 .display { font-family: 'Inter Tight', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
-.serif { font-family: 'Fraunces', serif; }
+.serif { font-family: 'Inter Tight', sans-serif; font-weight: 800; letter-spacing: -0.045em; }
 .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 a { color: inherit; }
@@ -232,7 +228,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   z-index: -1; filter: blur(20px);
 }
 .empty h1 { font-family: 'Inter Tight'; font-size: clamp(36px, 5vw, 56px); letter-spacing: -0.04em; font-weight: 700; line-height: 1.05; margin: 0 0 12px; }
-.empty h1 em { font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent); }
+.empty h1 em { font-family: 'Inter Tight'; font-style: normal; font-weight: 800; color: var(--accent); }
 .empty p { color: var(--ink-60); margin: 0 0 28px; font-size: 16px; }
 .empty .recommendations { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 80px; text-align: left; }
 @media (max-width: 700px) { .empty .recommendations { grid-template-columns: 1fr; } }
@@ -311,5 +307,36 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 <script defer src="shopify-config.js"></script>
 <script defer src="shopify-checkout.js"></script>
 <script defer src="build/cart.js"></script>
+<!-- Smile.io rewards launcher (headless Smile UI). cart.html does not load
+     page-shared.js, so the launcher is inlined here. Guest mode (no on-site
+     login); pub_ key is safe to expose. See page-shared.js for the canonical copy. -->
+<script>
+(function () {
+  if (window.__nbSmileLauncherLoaded) return;
+  window.__nbSmileLauncherLoaded = true;
+  var KEY = 'pub_2d27941cfeaca289';
+  if (KEY.indexOf('pub_') !== 0) return;
+  function initSmile() {
+    if (window.SmileUI && typeof window.SmileUI.initialize === 'function') {
+      window.SmileUI.initialize({ publishableKey: KEY });
+    }
+  }
+  function loadSmileSdk() {
+    if (document.getElementById('smile-ui-sdk')) return;
+    var s = document.createElement('script');
+    s.id = 'smile-ui-sdk'; s.async = true;
+    s.src = 'https://js.smile.io/v1/smile-ui.js';
+    document.head.appendChild(s);
+  }
+  window.NBLoadSmileLauncher = loadSmileSdk;
+  window.addEventListener('pointerdown', loadSmileSdk, { once: true, passive: true });
+  window.addEventListener('keydown', loadSmileSdk, { once: true });
+  window.addEventListener('load', function () {
+    window.setTimeout(loadSmileSdk, 12000);
+  }, { once: true });
+  if (window.SmileUI && window.SmileUI.initialize) initSmile();
+  else document.addEventListener('smile-ui-loaded', initSmile, { once: true });
+})();
+</script>
 </body>
 </html>

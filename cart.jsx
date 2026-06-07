@@ -35,7 +35,7 @@ const getCheckoutUrl = (items) => {
   return getShopifyCartPermalink(items);
 };
 
-const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 35;
+const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 29.99;
 const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
 
 // Trio bundle — single source of truth for slug/name/price within this file.
@@ -43,11 +43,11 @@ const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'tri
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.png',
-  spicy:    'uploads/nb-spicy-front-cutout-2026-05-09.png',
-  citrus:   'uploads/nb-citrus-front-cutout-2026-05-09.png',
+  original: 'uploads/nb-original-cart-thumb-2026-06-06.webp',
+  spicy:    'uploads/nb-spicy-cart-thumb-2026-06-06.webp',
+  citrus:   'uploads/nb-citrus-cart-thumb-2026-06-06.webp',
   trio:     'uploads/noodlebomb-trio.png',
-  shoyu:    'uploads/shoyu-reserve-preview-2026-05-08.png'
+  shoyu:    'uploads/shoyu-reserve-cart-thumb-2026-06-06.webp'
 };
 
 const PRODUCT_LABELS = {
@@ -66,6 +66,8 @@ const RECS = [
 
 const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
 const isoDate = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+const lineKey = (item, index) => `${item.slug}-${index}-${JSON.stringify(item.attributes || [])}`;
+const bottleMix = (item) => (item.attributes || []).find((attr) => attr.key === 'Bottle mix')?.value;
 
 // ── Reusable icons ──
 const Truck = (props) => (
@@ -125,8 +127,8 @@ function CartPage() {
 
   const recsToShow = RECS.filter((r) => !items.some((i) => i.slug === r.slug)).slice(0, 3);
 
-  const setQty = (slug, qty) => window.NB_CART && window.NB_CART.setQty(slug, qty);
-  const remove = (slug) => window.NB_CART && window.NB_CART.remove(slug);
+  const setQty = (item, qty) => window.NB_CART && window.NB_CART.setQty(item.slug, qty, item.attributes);
+  const remove = (item) => window.NB_CART && window.NB_CART.remove(item.slug, item.attributes);
   const addRec = (rec) => window.NB_CART && window.NB_CART.add({ slug: rec.slug, name: rec.name, price: rec.price });
 
   // ── Empty state ──
@@ -189,7 +191,7 @@ function CartPage() {
       <a className="crumb" href="/#lineup">← Continue shopping</a>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
-        <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Fraunces', fontStyle: 'italic', fontWeight: 400 }}>cart.</span></h1>
+        <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Inter Tight', fontStyle: 'normal', fontWeight: 800 }}>cart.</span></h1>
       </div>
       <p className="page-meta">{itemCount} {itemCount === 1 ? 'item' : 'items'} · secure checkout opens on Shopify</p>
 
@@ -201,14 +203,14 @@ function CartPage() {
             <div className="card ship-bar unlocked">
               <div className="icon"><Truck /></div>
               <div>
-                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--ink)' }}>{hasTrio ? 'Trio ships free' : 'Free shipping unlocked'}</div>
-                <div style={{ color: 'var(--ink-40)', fontSize: 12, marginTop: 2 }}>{hasTrio ? 'The 3-pack qualifies automatically.' : 'Your order ships on us.'}</div>
+                <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--ink)' }}>✓ FREE shipping unlocked</div>
+                <div style={{ color: 'var(--ink-40)', fontSize: 12, marginTop: 2 }}>US orders at $29.99+ subtotal ship on us.</div>
               </div>
             </div>
           ) : (
             <div className="card ship-bar">
               <div className="row">
-                <span style={{ color: 'var(--ink-60)' }}>Add <span className="accent">{fmtUSD(remaining)}</span> more for <span style={{ color: 'var(--ink)' }}>free shipping</span></span>
+                <span style={{ color: 'var(--ink-60)' }}>You're <span className="accent">{fmtUSD(remaining)}</span> away from <span style={{ color: 'var(--ink)' }}>FREE US shipping</span></span>
                 <Truck />
               </div>
               <div className="track"><div className="fill" style={{ width: progress + '%' }} /></div>
@@ -218,7 +220,7 @@ function CartPage() {
           {/* Smart Trio upsell — only when cart has items, no trio yet, and user
               hasn't crossed the free-shipping line. Adding the trio flips the
               order over $35 (assuming any starting subtotal > $5) and saves
-              the user $5.98 vs buying the same 3 flavors as singles. */}
+              the user $5.98 vs buying 3 bottles as singles. */}
           {(() => {
             const hasTrio = items.some((i) => i.slug === 'trio');
             const singleSlugs = ['original', 'spicy', 'citrus'];
@@ -260,10 +262,10 @@ function CartPage() {
                     CART SLOT 1: TRIO
                   </div>
                   <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 16, color: 'var(--ink)', marginBottom: 4 }}>
-                    Add one more flavor + save $5.98 by upgrading to Trio
+                    Add bottle 3 + unlock Trio savings
                   </div>
                   <div style={{ fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)', lineHeight: 1.5 }}>
-                    Swap your singles for all 3 flavors at $29.99 instead of $35.97.
+                    Any 3 bottles qualify for the $29.99 Trio price.
                   </div>
                 </div>
                 <button onClick={swapToTrio} aria-label="Swap singles for the Trio bundle" style={{
@@ -292,8 +294,8 @@ function CartPage() {
           })()}
 
           {/* Items */}
-          {items.map((item) => (
-            <div key={item.slug} className="card line-item">
+          {items.map((item, index) => (
+            <div key={lineKey(item, index)} className="card line-item">
               <div className="line-item-img">
                 <img src={PRODUCT_IMAGES[item.slug] || PRODUCT_IMAGES.original} alt={item.name} />
               </div>
@@ -304,14 +306,19 @@ function CartPage() {
                     <div className="line-item-meta">
                       {(PRODUCT_LABELS[item.slug] && PRODUCT_LABELS[item.slug].tagline) || ''} · {fmtUSD(item.price)} each
                     </div>
+                    {bottleMix(item) && (
+                      <div className="line-item-meta" style={{ marginTop: 4, color: 'var(--accent)' }}>
+                        Mix: {bottleMix(item)}
+                      </div>
+                    )}
                   </div>
-                  <button className="icon-btn" onClick={() => remove(item.slug)} aria-label={'Remove ' + item.name}><Trash /></button>
+                  <button className="icon-btn" onClick={() => remove(item)} aria-label={'Remove ' + item.name}><Trash /></button>
                 </div>
                 <div style={{ marginTop: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div className="qty">
-                    <button onClick={() => setQty(item.slug, item.qty - 1)} disabled={item.qty <= 1} aria-label="Decrease">−</button>
+                    <button onClick={() => setQty(item, item.qty - 1)} disabled={item.qty <= 1} aria-label="Decrease">−</button>
                     <span>{item.qty}</span>
-                    <button onClick={() => setQty(item.slug, item.qty + 1)} aria-label="Increase">+</button>
+                    <button onClick={() => setQty(item, item.qty + 1)} aria-label="Increase">+</button>
                   </div>
                   <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 22, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
                     {fmtUSD(item.price * item.qty)}
@@ -356,7 +363,7 @@ function CartPage() {
           <p className="lede">Secure checkout handoff</p>
 
           <div className="row-line"><span>Subtotal ({itemCount})</span><span className="v">{fmtUSD(subtotal)}</span></div>
-          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? (hasTrio ? 'Trio ships free' : 'Free') : 'At checkout'}</span></div>
+          <div className="row-line"><span>Shipping</span><span className="v" style={freeShipping ? { color: 'var(--accent)', fontFamily: 'JetBrains Mono', fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 } : { color: 'var(--ink-40)', fontSize: 12 }}>{freeShipping ? 'Free (US)' : 'At checkout'}</span></div>
           <div className="row-line"><span>Estimated tax</span><span className="v" style={{ color: 'var(--ink-40)', fontSize: 12 }}>At checkout</span></div>
           <div className="divider"></div>
           <div className="row-line total"><span className="label">Subtotal</span><span className="v">{fmtUSD(subtotal)}</span></div>
@@ -390,7 +397,7 @@ function CartPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> Trio ships free · singles ship free over $35</div>
+            <div className="trust-row"><Truck /> FREE US shipping at $29.99+ subtotal</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
             <div className="trust-row"><Check /> Ships from Bonney Lake, WA</div>
           </div>
