@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
 <meta charset="utf-8">
@@ -36,6 +36,228 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/page-shared.css">
+<!--
+================================================================================
+SEO PATCH — RECIPES.HTML (2026-05-06)
+================================================================================
+
+INSTRUCTIONS:
+  1. In recipes.html, in the <head>, ADD the BreadcrumbList + ItemList +
+     6 Recipe JSON-LDs below right before </head>.
+  2. ADD og:image:alt and twitter:image / twitter:image:alt next to the
+     existing og: tags (the file currently has twitter:card but no
+     twitter:image — Twitter will fall back to og:image, but explicit is
+     better).
+================================================================================
+-->
+
+<!-- ADD next to existing og: tags -->
+<meta property="og:image:alt" content="Bowls of ramen and rice topped with NoodleBomb sauce — recipe lineup" />
+<meta name="twitter:image" content="https://noodlebomb.co/og-trio-counter.png" />
+<meta name="twitter:image:alt" content="NoodleBomb trio lineup on a ramen counter" />
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://noodlebomb.co/" },
+    { "@type": "ListItem", "position": 2, "name": "Recipes", "item": "https://noodlebomb.co/recipes" }
+  ]
+}
+</script>
+
+<!-- ItemList of recipe cards on the page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "NoodleBomb Quick Recipes",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "The Restaurant-Style Ramen" },
+    { "@type": "ListItem", "position": 2, "name": "Citrus Shoyu Salmon Bowl" },
+    { "@type": "ListItem", "position": 3, "name": "Spicy Tokyo Wing Toss" },
+    { "@type": "ListItem", "position": 4, "name": "Soy-Butter Eggs" },
+    { "@type": "ListItem", "position": 5, "name": "Charred Brassicas" },
+    { "@type": "ListItem", "position": 6, "name": "Spicy Tokyo Stir-Fry" }
+  ]
+}
+</script>
+
+<!-- Recipe 1 — Restaurant-Style Ramen -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Restaurant-Style Ramen with NoodleBomb",
+  "description": "Five-minute restaurant-style ramen using NoodleBomb Original or Spicy Tokyo as the tare base.",
+  "author": { "@type": "Organization", "name": "NoodleBomb" },
+  "datePublished": "2026-05-06",
+  "image": "https://noodlebomb.co/og-trio-counter.png",
+  "recipeCategory": "Main Course",
+  "recipeCuisine": "Japanese",
+  "recipeYield": "1 bowl",
+  "totalTime": "PT5M",
+  "prepTime": "PT2M",
+  "cookTime": "PT3M",
+  "recipeIngredient": [
+    "1 portion fresh or instant ramen noodles",
+    "1.5 tbsp NoodleBomb Original or Spicy Tokyo ramen sauce",
+    "1.5 cups hot broth or hot water",
+    "1 soft-boiled egg",
+    "Sliced scallions",
+    "Toasted sesame seeds"
+  ],
+  "recipeInstructions": [
+    { "@type": "HowToStep", "text": "Cook ramen noodles per package directions and drain." },
+    { "@type": "HowToStep", "text": "Add 1.5 tbsp of NoodleBomb sauce to the serving bowl." },
+    { "@type": "HowToStep", "text": "Pour 1.5 cups of hot broth or hot water over the sauce and stir." },
+    { "@type": "HowToStep", "text": "Add the noodles. Top with soft-boiled egg, scallions, and toasted sesame." }
+  ]
+}
+</script>
+
+<!-- Recipe 2 — Citrus Shoyu Salmon Bowl -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Citrus Shoyu Salmon Bowl",
+  "description": "Broiled salmon glazed with NoodleBomb Citrus Shoyu over short-grain rice with quick-pickled cucumber.",
+  "author": { "@type": "Organization", "name": "NoodleBomb" },
+  "datePublished": "2026-05-06",
+  "image": "https://noodlebomb.co/og-trio-counter.png",
+  "recipeCategory": "Main Course",
+  "recipeCuisine": "Japanese",
+  "recipeYield": "2 bowls",
+  "totalTime": "PT7M",
+  "recipeIngredient": [
+    "1 salmon fillet (8-10 oz)",
+    "2 tbsp NoodleBomb Citrus Shoyu",
+    "1 cup cooked short-grain rice",
+    "Quick-pickled cucumber"
+  ],
+  "recipeInstructions": [
+    { "@type": "HowToStep", "text": "Brush 2 tbsp of Citrus Shoyu over the salmon fillet." },
+    { "@type": "HowToStep", "text": "Broil 6 minutes until just cooked through." },
+    { "@type": "HowToStep", "text": "Plate over short-grain rice with quick-pickled cucumber and a final drizzle of sauce." }
+  ]
+}
+</script>
+
+<!-- Recipe 3 — Spicy Tokyo Wing Toss -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Spicy Tokyo Wing Toss",
+  "description": "Crispy wings tossed in NoodleBomb Spicy Tokyo with honey and lime — game-day approved.",
+  "author": { "@type": "Organization", "name": "NoodleBomb" },
+  "datePublished": "2026-05-06",
+  "image": "https://noodlebomb.co/og-trio-counter.png",
+  "recipeCategory": "Appetizer",
+  "recipeCuisine": "Japanese",
+  "recipeYield": "Serves 2",
+  "totalTime": "PT8M",
+  "recipeIngredient": [
+    "1 lb chicken wings",
+    "3 tbsp NoodleBomb Spicy Tokyo",
+    "1 tsp honey",
+    "1 squeeze of lime juice"
+  ],
+  "recipeInstructions": [
+    { "@type": "HowToStep", "text": "Bake or air-fry wings until crispy." },
+    { "@type": "HowToStep", "text": "In a bowl, combine 3 tbsp Spicy Tokyo with honey and lime." },
+    { "@type": "HowToStep", "text": "Toss the hot wings in the sauce and serve immediately." }
+  ]
+}
+</script>
+
+<!-- Recipe 4 — Soy-Butter Eggs -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Soy-Butter Eggs",
+  "description": "Three-minute breakfast: soft-scrambled eggs folded with NoodleBomb Original on toasted shokupan or rice.",
+  "author": { "@type": "Organization", "name": "NoodleBomb" },
+  "datePublished": "2026-05-06",
+  "image": "https://noodlebomb.co/og-trio-counter.png",
+  "recipeCategory": "Breakfast",
+  "recipeCuisine": "Japanese",
+  "recipeYield": "1 serving",
+  "totalTime": "PT3M",
+  "recipeIngredient": [
+    "2 eggs",
+    "1 knob butter",
+    "1 tsp NoodleBomb Original",
+    "Toasted shokupan or rice for serving"
+  ],
+  "recipeInstructions": [
+    { "@type": "HowToStep", "text": "Soft-scramble two eggs in a knob of butter." },
+    { "@type": "HowToStep", "text": "Off heat, fold in 1 tsp Original." },
+    { "@type": "HowToStep", "text": "Serve on toasted shokupan or rice." }
+  ]
+}
+</script>
+
+<!-- Recipe 5 — Charred Brassicas -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Charred Brassicas with Citrus Shoyu",
+  "description": "Roasted broccolini or bok choy tossed with NoodleBomb Citrus Shoyu and sesame oil.",
+  "author": { "@type": "Organization", "name": "NoodleBomb" },
+  "datePublished": "2026-05-06",
+  "image": "https://noodlebomb.co/og-trio-counter.png",
+  "recipeCategory": "Side Dish",
+  "recipeCuisine": "Japanese",
+  "recipeYield": "Serves 2-4",
+  "totalTime": "PT10M",
+  "recipeIngredient": [
+    "1 lb broccolini or bok choy",
+    "2 tbsp NoodleBomb Citrus Shoyu",
+    "1 tsp sesame oil"
+  ],
+  "recipeInstructions": [
+    { "@type": "HowToStep", "text": "Roast brassicas at 450°F until charred." },
+    { "@type": "HowToStep", "text": "Off the sheet pan, toss with 2 tbsp Citrus Shoyu and a hit of sesame oil." }
+  ]
+}
+</script>
+
+<!-- Recipe 6 — Spicy Tokyo Stir-Fry -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Recipe",
+  "name": "Spicy Tokyo Stir-Fry",
+  "description": "Six-minute weeknight stir-fry: caramelize NoodleBomb Spicy Tokyo in a hot pan with seared protein and noodles.",
+  "author": { "@type": "Organization", "name": "NoodleBomb" },
+  "datePublished": "2026-05-06",
+  "image": "https://noodlebomb.co/og-trio-counter.png",
+  "recipeCategory": "Main Course",
+  "recipeCuisine": "Japanese",
+  "recipeYield": "Serves 2",
+  "totalTime": "PT6M",
+  "recipeIngredient": [
+    "8 oz protein of choice",
+    "Aromatics (garlic, scallion)",
+    "Neutral oil",
+    "2 tbsp NoodleBomb Spicy Tokyo",
+    "Cooked noodles"
+  ],
+  "recipeInstructions": [
+    { "@type": "HowToStep", "text": "Heat pan with neutral oil. Sear protein and aromatics." },
+    { "@type": "HowToStep", "text": "Push to one side, splash 2 tbsp Spicy Tokyo into the empty side." },
+    { "@type": "HowToStep", "text": "Let it caramelize 20 seconds." },
+    { "@type": "HowToStep", "text": "Toss everything together with cooked noodles." }
+  ]
+}
+</script>
+
 </head>
 <body class="grain">
 <a href="#main" class="skip-to-content">Skip to main content</a>

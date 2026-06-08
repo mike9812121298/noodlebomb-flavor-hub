@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-flavor="original" style="--accent: #D4A24A; --accent-ink: #0E0D0C; --accent-rgb: 212, 162, 74; --accent-deep: #8A6424; --accent-soft: rgba(212, 162, 74, 0.24); --accent-glow: rgba(212, 162, 74, 0.62);"><head>
+﻿<!DOCTYPE html><html lang="en" data-flavor="original" style="--accent: #D4A24A; --accent-ink: #0E0D0C; --accent-rgb: 212, 162, 74; --accent-deep: #8A6424; --accent-soft: rgba(212, 162, 74, 0.24); --accent-glow: rgba(212, 162, 74, 0.62);"><head>
 
 
 
@@ -83,94 +83,15 @@
 }
 </script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "NoodleBomb Original Ramen Sauce",
-  "description": "Bold umami tare base \u2014 big savory flavor for noodles, rice, wings, dumplings, and more. Garlic and sesame, smooth soy.",
-  "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/uploads/nb-original-front-cutout-2026-05-09.png",
-  "offers": {
-    "@type": "Offer",
-    "url": "https://noodlebomb.co/original-ramen-sauce",
-    "priceCurrency": "USD",
-    "price": "11.99",
-    "availability": "https://schema.org/InStock",
-    "seller": { "@type": "Organization", "name": "NoodleBomb" }
-  }
-}
-</script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "NoodleBomb Spicy Tokyo Ramen Sauce",
-  "description": "Roasted chili, garlic, sesame \u2014 heat layered over depth.",
-  "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/uploads/nb-spicy-front-cutout-2026-05-09.png",
-  "offers": {
-    "@type": "Offer",
-    "url": "https://noodlebomb.co/spicy-tokyo-ramen-sauce",
-    "priceCurrency": "USD",
-    "price": "11.99",
-    "availability": "https://schema.org/InStock",
-    "seller": { "@type": "Organization", "name": "NoodleBomb" }
-  }
-}
-</script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "NoodleBomb Citrus Shoyu Ramen Sauce",
-  "description": "Bright shoyu base with clean citrus lift. Cuts through richness.",
-  "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/uploads/nb-citrus-front-cutout-2026-05-09.png",
-  "offers": {
-    "@type": "Offer",
-    "url": "https://noodlebomb.co/citrus-shoyu-ramen-sauce",
-    "priceCurrency": "USD",
-    "price": "11.99",
-    "availability": "https://schema.org/InStock",
-    "seller": { "@type": "Organization", "name": "NoodleBomb" }
-  }
-}
-</script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "NoodleBomb Trio \u2014 3-Pack Variety",
-  "description": "One of each: Original, Spicy Tokyo, Citrus Shoyu. Small-batch ramen sauce, made in Bonney Lake, WA.",
-  "brand": { "@type": "Brand", "name": "NoodleBomb" },
-  "image": "https://noodlebomb.co/og-trio-counter.png",
-  "offers": {
-    "@type": "Offer",
-    "url": "https://noodlebomb.co/shop",
-    "priceCurrency": "USD",
-    "price": "29.99",
-    "availability": "https://schema.org/InStock",
-    "seller": { "@type": "Organization", "name": "NoodleBomb" }
-  }
-}
-</script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-    "@type": "ListItem",
-    "position": 1,
-    "name": "Home",
-    "item": "https://noodlebomb.co/"
-  }]
-}
-</script>
+
+
+
+
+
 
 <!-- SEO: LocalBusiness schema for Bonney Lake brand -->
 <script type="application/ld+json">
@@ -3480,6 +3401,261 @@
   }
 
 </style>
+<!--
+================================================================================
+SEO PATCH — INDEX.HTML JSON-LD UPGRADES (2026-05-06)
+================================================================================
+
+INSTRUCTIONS FOR APPLYING (manual or sed):
+  1. Open index.html in repo root.
+  2. REPLACE each existing Product JSON-LD <script> with the matching block below
+     (Original / Citrus Shoyu / Spicy Tokyo / Trio). Each one adds:
+         - "sku" (Mike's SKUs from BRAND_CANON.md)
+         - "gtin13" (confirmed UPCs from memory)
+         - "priceValidUntil" (1 year out)
+         - "itemCondition" (NewCondition)
+         - "hasMerchantReturnPolicy"
+         - "shippingDetails" (free shipping at $35)
+         - offers.url points to the slug-deep-link instead of "#range"
+  3. REPLACE the existing BreadcrumbList block with the expanded one below.
+  4. ADD the WebSite + SearchAction block (NEW — currently missing).
+  5. The ItemList of all 4 products is also new and helps Google surface
+     the catalog as a single rich result.
+  6. Replace placeholder "GA_MEASUREMENT_ID" with the real GA4 ID once
+     Mike creates the property (this is a known TODO, not new).
+================================================================================
+-->
+
+<!-- WebSite + SearchAction (NEW — required for sitelinks search box) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://noodlebomb.co/#website",
+  "url": "https://noodlebomb.co/",
+  "name": "NoodleBomb",
+  "description": "Premium small-batch ramen sauce. Pour bold.",
+  "publisher": { "@id": "https://noodlebomb.co/#business" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://noodlebomb.co/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Product 1 of 4 — Original Ramen Sauce (REPLACE existing Product LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://noodlebomb.co/product/original-ramen#product",
+  "name": "NoodleBomb Original Ramen Sauce",
+  "description": "Bold umami tare base — restaurant-level ramen flavor in seconds. Garlic and sesame, smooth soy.",
+  "sku": "Gt-50001",
+  "gtin13": "0198715152555",
+  "brand": { "@type": "Brand", "name": "NoodleBomb" },
+  "image": [
+    "https://noodlebomb.co/uploads/upload-original-v3.png",
+    "https://noodlebomb.co/uploads/nb-original-clean.png"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://noodlebomb.co/product/original-ramen",
+    "priceCurrency": "USD",
+    "price": "11.99",
+    "priceValidUntil": "2027-05-06",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "NoodleBomb" },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": { "@type": "MonetaryAmount", "value": "6.00", "currency": "USD" },
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+      }
+    }
+  }
+}
+</script>
+
+<!-- Product 2 of 4 — Citrus Shoyu Ramen Sauce (REPLACE existing) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://noodlebomb.co/product/citrus-shoyu#product",
+  "name": "NoodleBomb Citrus Shoyu Ramen Sauce",
+  "description": "Bright shoyu base with clean citrus lift. Cuts through richness.",
+  "sku": "Gt-50002",
+  "gtin13": "0199874424767",
+  "brand": { "@type": "Brand", "name": "NoodleBomb" },
+  "image": [
+    "https://noodlebomb.co/uploads/upload-citrus-v3.png",
+    "https://noodlebomb.co/uploads/nb-citrus-shoyu-clean.png"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://noodlebomb.co/product/citrus-shoyu",
+    "priceCurrency": "USD",
+    "price": "11.99",
+    "priceValidUntil": "2027-05-06",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "NoodleBomb" },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": { "@type": "MonetaryAmount", "value": "6.00", "currency": "USD" },
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+      }
+    }
+  }
+}
+</script>
+
+<!-- Product 3 of 4 — Spicy Tokyo Ramen Sauce (REPLACE existing) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://noodlebomb.co/product/spicy-tokyo#product",
+  "name": "NoodleBomb Spicy Tokyo Ramen Sauce",
+  "description": "Dark soy, roasted chili, sesame — heat layered over depth.",
+  "sku": "Gt-50003",
+  "gtin13": "0199874582078",
+  "brand": { "@type": "Brand", "name": "NoodleBomb" },
+  "image": [
+    "https://noodlebomb.co/uploads/upload-spicy-v3.png",
+    "https://noodlebomb.co/uploads/nb-spicy-tokyo-clean.png"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://noodlebomb.co/product/spicy-tokyo",
+    "priceCurrency": "USD",
+    "price": "11.99",
+    "priceValidUntil": "2027-05-06",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "NoodleBomb" },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": { "@type": "MonetaryAmount", "value": "6.00", "currency": "USD" },
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+      }
+    }
+  }
+}
+</script>
+
+<!-- Product 4 of 4 — NoodleBomb Trio (REPLACE existing) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://noodlebomb.co/product/variety-pack#product",
+  "name": "NoodleBomb Trio — 3-Pack Variety",
+  "description": "One of each: Original, Spicy Tokyo, Citrus Shoyu. Small-batch ramen sauce, made in Bonney Lake, WA.",
+  "sku": "Gt-50000-TRIO",
+  "brand": { "@type": "Brand", "name": "NoodleBomb" },
+  "image": [
+    "https://noodlebomb.co/uploads/noodlebomb-trio.png"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://noodlebomb.co/product/variety-pack",
+    "priceCurrency": "USD",
+    "price": "29.99",
+    "priceValidUntil": "2027-05-06",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "NoodleBomb" },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": { "@type": "MonetaryAmount", "value": "0.00", "currency": "USD" },
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+        "transitTime": { "@type": "QuantitativeValue", "minValue": 3, "maxValue": 5, "unitCode": "DAY" }
+      }
+    }
+  }
+}
+</script>
+
+<!-- Catalog ItemList (NEW — exposes lineup as a structured catalog) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "NoodleBomb Ramen Sauce Lineup",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "url": "https://noodlebomb.co/product/original-ramen" },
+    { "@type": "ListItem", "position": 2, "url": "https://noodlebomb.co/product/spicy-tokyo" },
+    { "@type": "ListItem", "position": 3, "url": "https://noodlebomb.co/product/citrus-shoyu" },
+    { "@type": "ListItem", "position": 4, "url": "https://noodlebomb.co/product/variety-pack" }
+  ]
+}
+</script>
+
+<!-- BreadcrumbList — replace existing -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://noodlebomb.co/" },
+    { "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://noodlebomb.co/#lineup" }
+  ]
+}
+</script>
+
 </head>
 <body class="grain">
 <a href="#main-content" class="skip-to-content">Skip to main content</a>

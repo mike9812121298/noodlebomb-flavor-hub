@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
 <meta charset="utf-8">
@@ -36,6 +36,62 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/page-shared.css">
+<!--
+================================================================================
+SEO PATCH — ABOUT.HTML (2026-05-06)
+================================================================================
+Add the og:image:alt + twitter:image tags + BreadcrumbList + AboutPage LD
+right before </head>.
+================================================================================
+-->
+
+<!-- ADD next to existing og: tags -->
+<meta property="og:image:alt" content="NoodleBomb trio lineup — Original, Spicy Tokyo, Citrus Shoyu" />
+<meta name="twitter:image" content="https://noodlebomb.co/og-trio-counter.png" />
+<meta name="twitter:image:alt" content="NoodleBomb trio lineup on a ramen counter" />
+
+<!-- BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://noodlebomb.co/" },
+    { "@type": "ListItem", "position": 2, "name": "About", "item": "https://noodlebomb.co/about" }
+  ]
+}
+</script>
+
+<!-- AboutPage with founder Person LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About NoodleBomb",
+  "url": "https://noodlebomb.co/about",
+  "description": "NoodleBomb is a small-batch ramen sauce hand-bottled in Bonney Lake, WA. Three flavors. Premium ingredients. Pour bold.",
+  "mainEntity": {
+    "@type": "Organization",
+    "@id": "https://noodlebomb.co/#business",
+    "name": "NoodleBomb",
+    "founder": {
+      "@type": "Person",
+      "name": "Ashley March",
+      "jobTitle": "Founder",
+      "worksFor": { "@type": "Organization", "name": "NoodleBomb" }
+    },
+    "foundingDate": "2024",
+    "foundingLocation": { "@type": "Place", "name": "Bonney Lake, WA" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bonney Lake",
+      "addressRegion": "WA",
+      "addressCountry": "US"
+    }
+  }
+}
+</script>
+
 </head>
 <body class="grain">
 <a href="#main" class="skip-to-content">Skip to main content</a>
