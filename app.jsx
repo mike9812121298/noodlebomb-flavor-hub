@@ -104,6 +104,17 @@ const FLAVOR_IMAGES = {
   citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.png'
 };
 
+// Soy Sauce reserve line — second product group on the lineup (DTC demand test, 2026-06-09).
+// Distinct Shopify variants so sales track independently. Both $11.99 (Shopify source of truth).
+const SOY_SAUCES = [
+  { slug: 'shoyu', name: 'Shoyu Reserve', tag: 'Reserve \u00b7 Soy Sauce', color: '#D7A84D', rgb: '215, 168, 77',
+    line: 'Slow-brewed shoyu depth, bold and clean. The reserve bottle.',
+    price: '$11.99', size: '7 fl oz', image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', detail: '/product/shoyu-reserve' },
+  { slug: 'shoyuspicy', name: 'Spicy Shoyu', tag: 'Reserve \u00b7 Spicy Soy', color: '#B2221A', rgb: '178, 34, 25',
+    line: 'The reserve bottle, turned up \u2014 slow-brewed depth with real heat.',
+    price: '$11.99', size: '7 fl oz', image: 'uploads/nb-shoyu-spicy-front-cutout-v1-2026-06-07.webp', detail: '/spicy-shoyu-ramen-sauce' }
+];
+
 const FOOD_IMAGES = {
   ramen: 'uploads/nb-hero-trio-studio-v1.jpg',
   stirfry: 'uploads/usecase-noodles-v2.jpg',
@@ -1118,7 +1129,7 @@ function FlavorPicker({ flavor, setFlavor }) {
         <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 08 — The Lineup</div></Reveal>
         <Reveal delay={1}>
           <h2 className="display section-h2" style={{ margin: '0 0 32px', maxWidth: 900 }}>
-            Three sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or all three.</span>
+            Three ramen sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or all three.</span>
           </h2>
         </Reveal>
 
@@ -1277,6 +1288,56 @@ function FlavorPicker({ flavor, setFlavor }) {
               </Reveal>);
 
           })}
+        </div>
+
+        {/* Soy Sauces — reserve line, second product group (DTC demand test 2026-06-09) */}
+        <div style={{ marginTop: 72 }}>
+          <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 08b — The Soy Sauces</div></Reveal>
+          <Reveal delay={1}>
+            <h3 className="display section-h2" style={{ margin: '0 0 12px', maxWidth: 900, fontSize: 'clamp(28px, 3.4vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1 }}>
+              Two soy sauces.<br /><span style={{ color: 'var(--muted)' }}>Slow-brewed. Pour bold.</span>
+            </h3>
+          </Reveal>
+          <Reveal delay={2}>
+            <p style={{ color: 'var(--ink-60)', fontFamily: 'Inter', fontSize: 14, maxWidth: '52ch', margin: '0 0 28px', lineHeight: 1.55 }}>
+              The reserve line — premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.
+            </p>
+          </Reveal>
+          <div className="soy-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 24, maxWidth: 760 }}>
+            {SOY_SAUCES.map((s, i) => (
+              <Reveal key={s.slug} delay={i + 1}>
+                <div className="tilt-card" style={{ background: `linear-gradient(170deg, rgba(${s.rgb},0.10) 0%, rgba(${s.rgb},0.03) 100%)`, border: `1px solid rgba(${s.rgb},0.28)`, padding: 32 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, gap: 8 }}>
+                    <span className="mono" style={{ color: 'var(--ink-40)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0, flex: 1 }}>{s.tag}</span>
+                    <div style={{ width: 8, height: 8, borderRadius: 999, background: s.color, flexShrink: 0 }} />
+                  </div>
+                  <div style={{ height: 340, display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ width: 200, height: '100%' }}>
+                      <Bottle flavor={s.tag} accent={s.color} src={s.image} />
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 24 }}>
+                    <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95 }}>{s.name}.</h3>
+                    <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{s.line}</div>
+                    <div style={{ marginTop: 12, fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>In Stock</div>
+                  </div>
+                  <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 16 }}>
+                      <div className="serif" style={{ fontSize: 22, fontStyle: 'italic' }}>{s.price}</div>
+                      <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>{s.size}</span>
+                    </div>
+                    <a href={cartPermalink(s.slug)} onClick={(e) => openCartWithFeedback(e, 'Opening cart...')} className="lineup-buy-btn" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%', minHeight: 48, padding: '14px 20px', borderRadius: 999, background: '#0B0A09', border: '1px solid #0B0A09', color: '#F5F1EA', fontFamily: 'Inter', fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', textDecoration: 'none', cursor: 'pointer' }}>
+                      Add to Cart
+                      <span style={{ fontSize: 14, lineHeight: 1 }}>→</span>
+                    </a>
+                    <a href={s.detail} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 44, marginTop: 10, color: 'var(--ink-60)', fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', textDecoration: 'none' }}>
+                      Bottle details
+                    </a>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         {/* Trio cta — editorial bundle moment */}
@@ -1861,14 +1922,14 @@ function BuildBundle() {
     {
       slug: 'shoyu',
       name: 'Shoyu Reserve',
-      eyebrow: 'Rare drop',
-      role: 'Premium soy sauce preorder. Expected Summer 2026.',
-      price: 9.99,
+      eyebrow: 'Reserve',
+      role: 'Slow-brewed premium soy sauce. In stock now.',
+      price: 11.99,
       color: '#D7A84D',
       rgb: '215, 168, 77',
       ink: '#0E0D0C',
-      image: 'uploads/nb-shoyu-reserve-bottle-cutout-2026-05-16.png',
-      preorder: true
+      image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+      preorder: false
     }
   ];
 
@@ -1907,7 +1968,7 @@ function BuildBundle() {
   const cartLines = [
     ...singles.map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: p.qty })),
     ...(trioSets > 0 ? [{ slug: TRIO.slug, name: TRIO.name, price: TRIO.priceUsd, qty: trioSets }] : []),
-    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99, qty: quantities.shoyu }] : [])
+    ...(quantities.shoyu > 0 ? [{ slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99, qty: quantities.shoyu }] : [])
   ];
   const loadoutLines = products
     .filter((p) => quantities[p.slug] > 0)

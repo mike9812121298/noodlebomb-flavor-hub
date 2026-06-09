@@ -10,21 +10,21 @@ function NextDrop() {
       bigNum: '04',
       accent: '#ebe7dd',
       rim: '#e8f0ff',
-      status: 'Paid preorder open - Summer 2026',
-      eyebrow: 'VOL. 04 / LIMITED PREORDER',
+      status: 'In stock now - ships in 1-2 days',
+      eyebrow: 'VOL. 04 / NOW AVAILABLE',
       name: 'Shoyu Reserve',
       oneliner: 'A bold, glossy shoyu-style sauce with deep soy richness, savory umami, and a long clean finish. Built for rice bowls, ramen, wings, grilled meat, vegetables, and late-night leftovers.',
       pills: ['Darker', 'Glossy', 'Savory', 'Long Finish'],
       progress: 2,
-      img: 'uploads/shoyu-reserve-preview-2026-05-08.png',
-      altOverride: 'NoodleBomb Shoyu Reserve preview bottle - Coming Summer 2026',
+      img: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+      altOverride: 'NoodleBomb Shoyu Reserve premium soy sauce bottle - in stock now',
     },
   ];
 
   const stages = ['Recipe', 'Sourcing', 'Sampling', 'Packaging'];
 
   // Repeated enough that one copy is wider than the vertical rail.
-  const railSeg = 'DEVELOPMENT / SAMPLING / SOON / ';
+  const railSeg = 'IN STOCK / SLOW-BREWED / POUR BOLD / ';
   const railText = railSeg.repeat(20);
 
   return (
@@ -46,7 +46,7 @@ function NextDrop() {
         <div style={{ marginTop: 80 }}>
           <Reveal delay={1}>
             <h2 className="nd-headline serif" style={{ fontFamily: 'Fraunces, "Cormorant Garamond", serif', fontWeight: 400, fontStyle: 'normal', letterSpacing: '-0.025em' }}>
-              Shoyu Reserve is next.
+              Shoyu Reserve is here.
             </h2>
           </Reveal>
           <Reveal delay={2}>
@@ -56,9 +56,9 @@ function NextDrop() {
           </Reveal>
           <Reveal delay={2.5}>
             <div className="nd-hero-form nd-buy-row" role="group" aria-label="Shoyu Reserve preorder status">
-              <span className="nd-buy-note">Paid preorder open now. Ships Summer 2026.</span>
+              <span className="nd-buy-note">In stock now. Ships from Bonney Lake, WA in 1-2 days.</span>
             </div>
-            <p className="nd-preorder-note">You&rsquo;ll be charged today. Your bottle ships when Shoyu Reserve launches in Summer 2026.</p>
+            <p className="nd-preorder-note">Small-batch premium soy sauce. $11.99 per 7 fl oz bottle.</p>
           </Reveal>
         </div>
 
@@ -91,7 +91,7 @@ function NextDrop() {
                     />
                     <div className="nd-rim" aria-hidden="true" />
                   </div>
-                  <a className="nd-stage-tag nd-image-preorder" href={shoyuCartUrl}>PREORDER FOR $9.99 &rarr;</a>
+                  <a className="nd-stage-tag nd-image-preorder" href={shoyuCartUrl}>ADD TO CART · $11.99 &rarr;</a>
                 </div>
 
                 <div className="nd-copy">
@@ -109,22 +109,12 @@ function NextDrop() {
 
                   <div className="nd-progress">
                     <div className="nd-progress-head">
-                      <span>DEVELOPMENT</span>
-                      <span>{c.progress} / 4</span>
-                    </div>
-                    <div className="nd-progress-bars">
-                      {stages.map((_, i) => (
-                        <div key={i} className={`nd-bar ${i < c.progress ? 'on' : ''}`} />
-                      ))}
-                    </div>
-                    <div className="nd-progress-labels">
-                      {stages.map((s, i) => (
-                        <span key={s} className={i < c.progress ? 'on' : ''}>{s}</span>
-                      ))}
+                      <span>SMALL BATCH</span>
+                      <span>7 FL OZ · $11.99</span>
                     </div>
                   </div>
 
-                  <div className="nd-notify-caption">Paid preorder open now.</div>
+                  <div className="nd-notify-caption">In stock now.</div>
                 </div>
               </div>
             </Reveal>

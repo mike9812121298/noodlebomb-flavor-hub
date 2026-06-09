@@ -19,7 +19,8 @@
     spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99 },
     citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 },
     trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 },
-    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99 }
+    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99 },
+    shoyuspicy: { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 11.99 }
   };
 
   function safeRead() {
