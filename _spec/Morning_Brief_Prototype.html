@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Brief — 2026-06-10</title>
+<!--
+  Morning_Brief_Prototype.html — LAYOUT CONTRACT for Mission Control Phase 1.
+  generate_brief.py must reproduce this structure exactly: same ids, same
+  class names, same design tokens, same fonts. Elements with data-field
+  attributes are filled by the renderer; .mc-store-panel, .mc-alert,
+  .mc-insight-item, .mc-action-item and .mc-spark span are cloned per item.
+  body[data-mode] is "ai" or "fallback"; .mc-store-panel[data-state] is
+  "ok" or "failed". The brief is self-contained: no external requests.
+-->
+<style>
+  /* ── Design tokens ──────────────────────────────────────────────── */
+  :root {
+    --mc-bg:           #0E1116;
+    --mc-panel:        #161B22;
+    --mc-panel-edge:   #232A33;
+    --mc-text:         #E6EDF3;
+    --mc-text-dim:     #8B949E;
+    --mc-accent:       #F5A623;   /* mission-control amber */
+    --mc-good:         #3FB950;
+    --mc-bad:          #F85149;
+    --mc-warn:         #D29922;
+    --mc-info:         #58A6FF;
+    --mc-gt40:         #4FB3D9;   /* GT40 Marine store accent */
+    --mc-noodle:       #E8543F;   /* NoodleBomb store accent */
+    --mc-font-display: "Segoe UI", "Inter", -apple-system, sans-serif;
+    --mc-font-mono:    "Cascadia Code", "Consolas", "SF Mono", monospace;
+    --mc-radius:       10px;
+    --mc-gap:          16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--mc-bg);
+    color: var(--mc-text);
+    font-family: var(--mc-font-display);
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 28px clamp(16px, 5vw, 56px);
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ─────────────────────────────────────────────────────── */
+  #mc-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 18px;
+               border-bottom: 2px solid var(--mc-accent); padding-bottom: 14px; }
+  .mc-brand { font-family: var(--mc-font-mono); font-size: 13px; letter-spacing: 3px;
+              color: var(--mc-accent); }
+  .mc-title { font-size: 26px; font-weight: 650; width: 100%; }
+  .mc-meta  { font-family: var(--mc-font-mono); font-size: 12px; color: var(--mc-text-dim); }
+  .mc-badge { font-family: var(--mc-font-mono); font-size: 11px; letter-spacing: 1px;
+              padding: 3px 10px; border-radius: 999px; border: 1px solid; margin-left: auto; }
+  body[data-mode="ai"]       .mc-badge { color: var(--mc-good); border-color: var(--mc-good); }
+  body[data-mode="fallback"] .mc-badge { color: var(--mc-warn); border-color: var(--mc-warn); }
+  body[data-mode="ai"]       .mc-badge::after { content: "AI PASS ✓"; }
+  body[data-mode="fallback"] .mc-badge::after { content: "FALLBACK — NO AI PASS"; }
+
+  section { margin-top: 26px; }
+  h2 { font-family: var(--mc-font-mono); font-size: 12px; font-weight: 600;
+       letter-spacing: 2.5px; text-transform: uppercase; color: var(--mc-text-dim);
+       margin-bottom: 12px; }
+
+  /* ── Alerts ─────────────────────────────────────────────────────── */
+  #mc-alerts .mc-alert { display: flex; gap: 12px; align-items: baseline;
+      background: var(--mc-panel); border: 1px solid var(--mc-panel-edge);
+      border-left: 4px solid; border-radius: var(--mc-radius);
+      padding: 10px 14px; margin-bottom: 8px; }
+  .mc-alert[data-severity="critical"] { border-left-color: var(--mc-bad); }
+  .mc-alert[data-severity="warn"]     { border-left-color: var(--mc-warn); }
+  .mc-alert[data-severity="info"]     { border-left-color: var(--mc-info); }
+  .mc-alert .mc-sev { font-family: var(--mc-font-mono); font-size: 11px; letter-spacing: 1px;
+                      text-transform: uppercase; min-width: 70px; }
+  .mc-alert[data-severity="critical"] .mc-sev { color: var(--mc-bad); }
+  .mc-alert[data-severity="warn"]     .mc-sev { color: var(--mc-warn); }
+  .mc-alert[data-severity="info"]     .mc-sev { color: var(--mc-info); }
+  #mc-alerts .mc-quiet { color: var(--mc-text-dim); font-style: italic; }
+
+  /* ── KPI store panels ───────────────────────────────────────────── */
+  #mc-kpis .mc-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                          gap: var(--mc-gap); }
+  .mc-store-panel { background: var(--mc-panel); border: 1px solid var(--mc-panel-edge);
+                    border-top: 3px solid var(--mc-text-dim); border-radius: var(--mc-radius);
+                    padding: 16px 18px; }
+  .mc-store-panel[data-store="shopify_gt40"]       { border-top-color: var(--mc-gt40); }
+  .mc-store-panel[data-store="shopify_noodlebomb"] { border-top-color: var(--mc-noodle); }
+  .mc-store-panel[data-state="failed"] { opacity: 0.75; border-style: dashed; }
+  .mc-store-name { font-size: 17px; font-weight: 650; margin-bottom: 12px; }
+  .mc-store-panel[data-state="failed"] .mc-store-name::after {
+      content: " — COLLECTION FAILED"; color: var(--mc-bad);
+      font-family: var(--mc-font-mono); font-size: 11px; letter-spacing: 1px; }
+  .mc-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .mc-metric .mc-label { font-family: var(--mc-font-mono); font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--mc-text-dim); }
+  .mc-metric .mc-value { font-family: var(--mc-font-mono); font-size: 22px; font-weight: 600; }
+  .mc-delta { font-family: var(--mc-font-mono); font-size: 12px; }
+  .mc-delta[data-dir="up"]   { color: var(--mc-good); }
+  .mc-delta[data-dir="down"] { color: var(--mc-bad); }
+  .mc-delta[data-dir="flat"] { color: var(--mc-text-dim); }
+
+  /* ── 14-day spark bars ──────────────────────────────────────────── */
+  .mc-spark { display: flex; align-items: flex-end; gap: 3px; height: 42px; margin-top: 14px; }
+  .mc-spark span { flex: 1; background: var(--mc-panel-edge); border-radius: 2px 2px 0 0;
+                   min-height: 2px; }
+  .mc-spark span:last-child { background: var(--mc-accent); }
+  .mc-spark-caption { font-family: var(--mc-font-mono); font-size: 10px;
+                      color: var(--mc-text-dim); margin-top: 4px; }
+
+  /* ── Insights ───────────────────────────────────────────────────── */
+  #mc-insights .mc-panel { background: var(--mc-panel); border: 1px solid var(--mc-panel-edge);
+                           border-radius: var(--mc-radius); padding: 18px 20px; }
+  .mc-headline { font-size: 19px; font-weight: 650; margin-bottom: 12px;
+                 border-left: 4px solid var(--mc-accent); padding-left: 12px; }
+  .mc-insight-list, .mc-action-list { list-style: none; }
+  .mc-insight-item { padding: 5px 0 5px 22px; position: relative; }
+  .mc-insight-item::before { content: "▸"; color: var(--mc-accent); position: absolute; left: 4px; }
+  .mc-actions-title { font-family: var(--mc-font-mono); font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--mc-text-dim); margin: 14px 0 6px; }
+  .mc-action-item { padding: 5px 0 5px 22px; position: relative; }
+  .mc-action-item::before { content: "→"; color: var(--mc-good); position: absolute; left: 2px; }
+
+  /* ── Footer ─────────────────────────────────────────────────────── */
+  #mc-footer { margin-top: 34px; border-top: 1px solid var(--mc-panel-edge); padding-top: 12px;
+               font-family: var(--mc-font-mono); font-size: 11px; color: var(--mc-text-dim);
+               display: flex; flex-wrap: wrap; gap: 6px 24px; }
+</style>
+</head>
+<body data-mode="ai">
+
+  <header id="mc-header">
+    <span class="mc-brand">MISSION CONTROL</span>
+    <span class="mc-meta">brief for <span data-field="brief-date">2026-06-10</span></span>
+    <span class="mc-badge" data-field="mode-badge"></span>
+    <h1 class="mc-title">Morning Brief — <span data-field="brief-date-long">Wednesday, June 10, 2026</span></h1>
+  </header>
+
+  <section id="mc-alerts">
+    <h2>Alerts</h2>
+    <!-- one .mc-alert per fired alert; if none, render exactly one .mc-quiet line instead -->
+    <div class="mc-alert" data-severity="critical" data-rule="revenue_drop_30_vs_avg7">
+      <span class="mc-sev">critical</span>
+      <span class="mc-alert-msg" data-field="alert-message">NoodleBomb revenue $312.40 is -41.2% vs 7-day avg $531.18</span>
+    </div>
+    <div class="mc-alert" data-severity="info" data-rule="revenue_spike_50_vs_avg7">
+      <span class="mc-sev">info</span>
+      <span class="mc-alert-msg" data-field="alert-message">GT40 Marine revenue $2,180.00 is +63.5% vs 7-day avg — find out why and do it again</span>
+    </div>
+    <!-- <p class="mc-quiet">No alerts fired — quiet night.</p> -->
+  </section>
+
+  <section id="mc-kpis">
+    <h2>Yesterday by store</h2>
+    <div class="mc-kpi-grid">
+
+      <article class="mc-store-panel" data-store="shopify_gt40" data-state="ok">
+        <div class="mc-store-name" data-field="store-label">GT40 Marine</div>
+        <div class="mc-metrics">
+          <div class="mc-metric">
+            <div class="mc-label">Revenue</div>
+            <div class="mc-value" data-field="revenue">$2,180.00</div>
+            <div class="mc-delta" data-dir="up" data-field="revenue-delta7">+63.5% vs 7d</div>
+          </div>
+          <div class="mc-metric">
+            <div class="mc-label">Orders</div>
+            <div class="mc-value" data-field="orders">9</div>
+            <div class="mc-delta" data-dir="up" data-field="orders-delta7">+28.6% vs 7d</div>
+          </div>
+          <div class="mc-metric">
+            <div class="mc-label">AOV</div>
+            <div class="mc-value" data-field="aov">$242.22</div>
+            <div class="mc-delta" data-dir="up" data-field="aov-delta7">+27.1% vs 7d</div>
+          </div>
+        </div>
+        <div class="mc-spark" data-field="spark14" aria-label="14-day revenue">
+          <span style="height:34%"></span><span style="height:41%"></span><span style="height:22%"></span>
+          <span style="height:55%"></span><span style="height:38%"></span><span style="height:12%"></span>
+          <span style="height:47%"></span><span style="height:30%"></span><span style="height:44%"></span>
+          <span style="height:26%"></span><span style="height:51%"></span><span style="height:36%"></span>
+          <span style="height:42%"></span><span style="height:100%"></span>
+        </div>
+        <div class="mc-spark-caption">revenue, last 14 days</div>
+      </article>
+
+      <article class="mc-store-panel" data-store="shopify_noodlebomb" data-state="ok">
+        <div class="mc-store-name" data-field="store-label">NoodleBomb</div>
+        <div class="mc-metrics">
+          <div class="mc-metric">
+            <div class="mc-label">Revenue</div>
+            <div class="mc-value" data-field="revenue">$312.40</div>
+            <div class="mc-delta" data-dir="down" data-field="revenue-delta7">-41.2% vs 7d</div>
+          </div>
+          <div class="mc-metric">
+            <div class="mc-label">Orders</div>
+            <div class="mc-value" data-field="orders">11</div>
+            <div class="mc-delta" data-dir="down" data-field="orders-delta7">-21.4% vs 7d</div>
+          </div>
+          <div class="mc-metric">
+            <div class="mc-label">AOV</div>
+            <div class="mc-value" data-field="aov">$28.40</div>
+            <div class="mc-delta" data-dir="down" data-field="aov-delta7">-25.2% vs 7d</div>
+          </div>
+        </div>
+        <div class="mc-spark" data-field="spark14" aria-label="14-day revenue">
+          <span style="height:62%"></span><span style="height:70%"></span><span style="height:55%"></span>
+          <span style="height:81%"></span><span style="height:66%"></span><span style="height:90%"></span>
+          <span style="height:74%"></span><span style="height:100%"></span><span style="height:68%"></span>
+          <span style="height:59%"></span><span style="height:72%"></span><span style="height:64%"></span>
+          <span style="height:58%"></span><span style="height:31%"></span>
+        </div>
+        <div class="mc-spark-caption">revenue, last 14 days</div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="mc-insights">
+    <h2>Analysis</h2>
+    <div class="mc-panel">
+      <div class="mc-headline" data-field="headline">GT40's best day in two weeks masks a real NoodleBomb slide — AOV is the problem, not traffic.</div>
+      <ul class="mc-insight-list">
+        <li class="mc-insight-item" data-field="insight">GT40 Marine did $2,180.00 on 9 orders (+63.5% vs 7-day avg) — the spike is AOV-driven ($242.22, +27.1%), suggesting a big-ticket part order rather than broad demand.</li>
+        <li class="mc-insight-item" data-field="insight">NoodleBomb revenue fell to $312.40 (-41.2% vs 7-day avg) while orders only dipped -21.4% — the divergence is AOV at $28.40, down -25.2%, pointing at a shift from trio packs to single bottles.</li>
+        <li class="mc-insight-item" data-field="insight">Combined revenue $2,492.40 is +24.7% vs the 7-day average, but the mix shifted hard toward GT40 (87% of revenue vs a 28-day norm of 64%).</li>
+      </ul>
+      <div class="mc-actions-title">Actions</div>
+      <ol class="mc-action-list">
+        <li class="mc-action-item" data-field="action">Check yesterday's NoodleBomb orders for trio-pack share; if it cratered, surface the trio bundle on the storefront grid today.</li>
+        <li class="mc-action-item" data-field="action">Identify the GT40 big-ticket order and make sure fulfillment lead time is communicated before it becomes a support ticket.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer id="mc-footer">
+    <span data-field="generated-at">generated 2026-06-11T03:01:58-07:00</span>
+    <span data-field="data-freshness">shopify_gt40 ✓ 03:01:42 · shopify_noodlebomb ✓ 03:01:49</span>
+    <span data-field="engine-version">mission_control v2 / phase 1</span>
+    <span data-field="claude-model">reasoning: claude-opus-4-8</span>
+  </footer>
+
+</body>
+</html>
