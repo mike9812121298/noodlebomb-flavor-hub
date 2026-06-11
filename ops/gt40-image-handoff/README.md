@@ -1,9 +1,9 @@
 # GT40 Marine image handoff
 
 Asset inventory pulled from the live https://gt40marine.com (Netlify-hosted Next.js
-storefront) so missing images in the GT40 app repo (`mike9812121298/gt40marine-website`)
+storefront) so missing images in the GT40 app (`mike9812121298/pwclab-testflight`)
 can be filled in. This session was scoped to `noodlebomb-flavor-hub` only, so the
-artifacts are staged here for pickup by a session running in the GT40 repo.
+artifacts are staged here for pickup by a session running in the app repo.
 
 ## Contents
 
