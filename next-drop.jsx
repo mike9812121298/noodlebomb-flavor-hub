@@ -1,5 +1,5 @@
 // THE NEXT DROP - Index 09
-// Shoyu Reserve preorder section.
+// Shoyu Reserve live product section.
 
 function NextDrop() {
   const shoyuCartUrl = '/cart?add=shoyu&qty=1';
@@ -17,7 +17,7 @@ function NextDrop() {
       pills: ['Darker', 'Glossy', 'Savory', 'Long Finish'],
       progress: 2,
       img: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
-      altOverride: 'NoodleBomb Shoyu Reserve premium soy sauce bottle - in stock now',
+      altOverride: 'NoodleBomb Shoyu Reserve soy sauce bottle - in stock now',
     },
   ];
 
@@ -55,10 +55,10 @@ function NextDrop() {
             </p>
           </Reveal>
           <Reveal delay={2.5}>
-            <div className="nd-hero-form nd-buy-row" role="group" aria-label="Shoyu Reserve preorder status">
+            <div className="nd-hero-form nd-buy-row" role="group" aria-label="Shoyu Reserve stock status">
               <span className="nd-buy-note">In stock now. Ships from Bonney Lake, WA in 1-2 days.</span>
             </div>
-            <p className="nd-preorder-note">Small-batch premium soy sauce. $11.99 per 7 fl oz bottle.</p>
+            <p className="nd-preorder-note">Bold soy sauce. $11.99 per 7 fl oz bottle.</p>
           </Reveal>
         </div>
 
