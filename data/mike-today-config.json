@@ -1,0 +1,25 @@
+{
+  "brand": "NoodleBomb",
+  "outputLimit": 5,
+  "weights": {
+    "fire": 1.35,
+    "opportunity": 1.12,
+    "bottleneck": 1.18,
+    "roi": 1.22
+  },
+  "effortMinutes": {
+    "quick": 20,
+    "medium": 60,
+    "deep": 180
+  },
+  "inputs": {
+    "revenueWatchdog": "tmp/revenue-watchdog/revenue-watchdog.json",
+    "deadProductDetector": "tmp/dead-product-detector/dead-product-detector.json",
+    "shelfImpact": "tmp/shelf-impact-analyzer/shelf-impact.json",
+    "retailSellThrough": "tmp/retail-sell-through-predictor/retail-sell-through.json",
+    "manualSignals": "data/mike-today/manual_signals.json"
+  },
+  "outputs": {
+    "directory": "tmp/mike-today"
+  }
+}

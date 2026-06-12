@@ -1,0 +1,29 @@
+{
+  "brand": "NoodleBomb",
+  "groupBy": ["sku"],
+  "thresholds": {
+    "highTrafficSessions30d": 250,
+    "lowTrafficSessions30d": 60,
+    "healthyConversionRate": 0.025,
+    "weakConversionRate": 0.012,
+    "deadConversionRate": 0.004,
+    "highInventoryUnits": 40,
+    "agedInventoryDays": 120,
+    "veryAgedInventoryDays": 240,
+    "adWasteSpend30d": 75,
+    "supportNoiseMentions30d": 5,
+    "lastSaleStaleDays": 45,
+    "lastSaleDeadDays": 120,
+    "minimumRevenue30d": 35
+  },
+  "actionLabels": {
+    "revive": "Revive",
+    "bundle": "Bundle",
+    "liquidate": "Liquidate",
+    "archive": "Archive"
+  },
+  "outputs": {
+    "directory": "tmp/dead-product-detector",
+    "maxRows": 80
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "reddit": {
+    "subreddits": ["ramen", "InstantRamen", "hotsauce"],
+    "queries": [
+      "ramen sauce",
+      "ramen chili oil",
+      "soy sauce ramen",
+      "spicy ramen sauce",
+      "instant ramen upgrade",
+      "noodle sauce",
+      "bottle leaking sauce",
+      "too salty sauce",
+      "not spicy enough"
+    ],
+    "sort": "relevance",
+    "time": "year",
+    "limitPerQuery": 25
+  },
+  "localReviewInputs": [
+    "data/review-inputs"
+  ],
+  "competitorUrls": []
+}

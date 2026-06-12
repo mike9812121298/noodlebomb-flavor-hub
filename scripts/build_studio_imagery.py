@@ -1,17 +1,17 @@
 """Rebuild NoodleBomb bottle imagery from 9 studio shots.
 
 Outputs (under uploads/):
-  nb-hero-trio-studio-v1.jpg      1500x800 — canon-order trio on warm dark backdrop
-  nb-original-front-studio-v1.jpg 1024x1024 — bottle on clean white
-  nb-spicy-front-studio-v1.jpg    1024x1024
-  nb-citrus-front-studio-v1.jpg   1024x1024
-  nb-original-clean.png           transparent PNG (overwrites old) — bottle isolated
-  nb-spicy-tokyo-clean.png        transparent PNG (overwrites old)
-  nb-citrus-shoyu-clean.png       transparent PNG (overwrites old)
-  noodlebomb-trio.png             1200x800 — canon-order trio on warm dark (overwrites old)
-  nb-trio-flatlay.png             same hero composite (overwrites old wrong-order)
-  trio_kitchen_counter_warm.png   same hero composite (overwrites old)
-  trio_kitchen_lifestyle_action.png same hero composite (overwrites old)
+  nb-production-trio-hero-2026-05.jpg      1500x800 — canon-order trio on warm dark backdrop
+  nb-original-legacy-studio-front.jpg 1024x1024 — bottle on clean white
+  nb-spicy-legacy-studio-front.jpg    1024x1024
+  nb-citrus-legacy-studio-front.jpg   1024x1024
+  nb-original-legacy-isolated.png           transparent PNG (overwrites old) — bottle isolated
+  nb-spicy-legacy-isolated.png        transparent PNG (overwrites old)
+  nb-citrus-legacy-isolated.png       transparent PNG (overwrites old)
+  nb-production-trio-hero-2026-05.jpg             1200x800 — canon-order trio on warm dark (overwrites old)
+  nb-legacy-trio-flatlay.png             same hero composite (overwrites old wrong-order)
+  nb-legacy-trio-counter-warm.png   same hero composite (overwrites old)
+  nb-legacy-trio-kitchen-action.png same hero composite (overwrites old)
 """
 from PIL import Image, ImageFilter, ImageDraw
 from pathlib import Path
@@ -194,21 +194,21 @@ def main():
                                  orig_iso, spicy_iso, citrus_iso,
                                  shadow=True, bottle_height_frac=0.80)
     hero_jpg = hero.convert("RGB")
-    hero_jpg.save(OUT / "nb-hero-trio-studio-v1.jpg", "JPEG", quality=92, optimize=True)
-    print(f"  -> uploads/nb-hero-trio-studio-v1.jpg ({(OUT/'nb-hero-trio-studio-v1.jpg').stat().st_size/1024:.1f}KB)")
+    hero_jpg.save(OUT / "nb-production-trio-hero-2026-05.jpg", "JPEG", quality=92, optimize=True)
+    print(f"  -> uploads/nb-production-trio-hero-2026-05.jpg ({(OUT/'nb-production-trio-hero-2026-05.jpg').stat().st_size/1024:.1f}KB)")
 
-    # ---- noodlebomb-trio.png — 1200x800 dark backdrop (overwrites old wrong-design) ----
-    print("Building noodlebomb-trio.png (1200x800, dark)...")
+    # ---- nb-production-trio-hero-2026-05.jpg — 1200x800 dark backdrop (overwrites old wrong-design) ----
+    print("Building nb-production-trio-hero-2026-05.jpg (1200x800, dark)...")
     trio_dark = build_trio_composite(1200, 800, DARK_BG,
                                       orig_iso, spicy_iso, citrus_iso,
                                       shadow=True, bottle_height_frac=0.82)
-    trio_dark.convert("RGB").save(OUT / "noodlebomb-trio.png", "PNG", optimize=True)
-    print(f"  -> uploads/noodlebomb-trio.png")
+    trio_dark.convert("RGB").save(OUT / "nb-production-trio-hero-2026-05.jpg", "PNG", optimize=True)
+    print(f"  -> uploads/nb-production-trio-hero-2026-05.jpg")
 
     # ---- Other trio replacements: all use the canon hero composite ----
     print("Replacing wrong-order trio files with hero composite...")
-    for name in ["nb-trio-flatlay.png", "trio_kitchen_counter_warm.png",
-                 "trio_kitchen_lifestyle_action.png"]:
+    for name in ["nb-legacy-trio-flatlay.png", "nb-legacy-trio-counter-warm.png",
+                 "nb-legacy-trio-kitchen-action.png"]:
         # 1500x800 same composite, light cream backdrop for variety where needed?
         # Spec says replace with canon-order. Keep dark to match site's dark hero frame.
         hero.convert("RGB").save(OUT / name, "PNG", optimize=True)
@@ -216,19 +216,19 @@ def main():
 
     # ---- Individual SKU PDP shots — clean white BG, 1024x1024 ----
     print("Building individual SKU PDP shots (1024x1024 white)...")
-    for iso, name in [(orig_iso, "nb-original-front-studio-v1.jpg"),
-                       (spicy_iso, "nb-spicy-front-studio-v1.jpg"),
-                       (citrus_iso, "nb-citrus-front-studio-v1.jpg")]:
+    for iso, name in [(orig_iso, "nb-original-legacy-studio-front.jpg"),
+                       (spicy_iso, "nb-spicy-legacy-studio-front.jpg"),
+                       (citrus_iso, "nb-citrus-legacy-studio-front.jpg")]:
         canvas = fit_to_canvas(iso, 1024, 1024, bg_rgb=(255, 255, 255),
                                 bottle_height_frac=0.86, shadow=True)
         canvas.convert("RGB").save(OUT / name, "JPEG", quality=94, optimize=True)
         print(f"  -> uploads/{name}")
 
-    # ---- Transparent clean PNGs (replace existing nb-*-clean.png) ----
-    print("Building transparent clean PNGs (replaces old label designs)...")
-    for iso, name in [(orig_iso, "nb-original-clean.png"),
-                       (spicy_iso, "nb-spicy-tokyo-clean.png"),
-                       (citrus_iso, "nb-citrus-shoyu-clean.png")]:
+    # ---- Transparent isolated PNGs for legacy audit/reference work ----
+    print("Building transparent isolated PNGs for legacy reference...")
+    for iso, name in [(orig_iso, "nb-original-legacy-isolated.png"),
+                       (spicy_iso, "nb-spicy-legacy-isolated.png"),
+                       (citrus_iso, "nb-citrus-legacy-isolated.png")]:
         # Match aspect of original-ish (~600x1450 — tall portrait)
         # Compute target so bottle fits naturally with same padding
         iw, ih = iso.size

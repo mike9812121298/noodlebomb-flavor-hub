@@ -19,10 +19,10 @@ const NB_ASSETS = [
   '/icons/noodlebomb-icon-192.png',
   '/icons/noodlebomb-icon-512.png',
   '/uploads/nb-hero-pour.png',
-  '/uploads/nb-original-front-cutout-2026-05-09.png',
-  '/uploads/nb-spicy-front-cutout-2026-05-09.png',
-  '/uploads/nb-citrus-front-cutout-2026-05-09.png',
-  '/uploads/nb-shoyu-reserve-bottle-cutout-2026-05-16.png',
+  '/uploads/nb-original-production-front-2026-05.jpeg',
+  '/uploads/nb-spicy-production-front-2026-05.jpeg',
+  '/uploads/nb-citrus-production-front-2026-05.jpeg',
+  '/uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png',
   '/uploads/monthly-subscription-box-2026-05-08.png'
 ];
 

@@ -17,9 +17,9 @@ import {
 import { useCart } from "@/hooks/useCart";
 import { createShopifyCheckoutUrl } from "@/lib/shopify";
 import EmberParticles from "@/components/EmberParticles";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-production-front-2026-05.jpeg";
+import nbSpicyTokyo from "@/assets/nb-spicy-production-front-2026-05.jpeg";
+import nbCitrusShoyu from "@/assets/nb-citrus-production-front-2026-05.jpeg";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 
 const PRODUCT_IMAGES: Record<string, string> = {
@@ -295,6 +295,11 @@ const Checkout = () => {
                           <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
                             ${item.price.toFixed(2)} each
                           </span>
+                          {isSubscription && item.cadenceDays && (
+                            <span className="text-[10px] font-display uppercase tracking-wider text-foreground/40">
+                              Every {item.cadenceDays} days
+                            </span>
+                          )}
                         </div>
                       </div>
                       <span className="font-display font-bold text-foreground text-sm tabular-nums whitespace-nowrap">

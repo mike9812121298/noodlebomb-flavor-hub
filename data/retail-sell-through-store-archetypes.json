@@ -1,0 +1,82 @@
+[
+  {
+    "id": "pnw-specialty-grocery",
+    "name": "PNW Specialty Grocery",
+    "retailerType": "specialty_grocery",
+    "region": "PNW",
+    "trafficTier": "medium",
+    "shelfContext": "premium pantry and local maker endcap",
+    "demographics": ["local", "foodie", "premium", "asian_snacking"],
+    "notes": "Best early wholesale target: local story plus premium condiment discovery."
+  },
+  {
+    "id": "pnw-coop-natural",
+    "name": "PNW Co-op / Natural Market",
+    "retailerType": "coop_natural",
+    "region": "PNW",
+    "trafficTier": "medium",
+    "shelfContext": "natural grocery sauce set",
+    "demographics": ["local", "natural", "family", "premium"],
+    "notes": "Lead with local, clean-use cases, recipe cards, and balanced flavor."
+  },
+  {
+    "id": "west-coast-asian-grocery",
+    "name": "West Coast Asian Grocery",
+    "retailerType": "asian_grocery",
+    "region": "West Coast",
+    "trafficTier": "high",
+    "shelfContext": "ramen, noodle, dumpling, and sauce aisle",
+    "demographics": ["asian_snacking", "heat_seeking", "foodie", "college"],
+    "notes": "Highest ramen-context velocity; spicy and shoyu language matters."
+  },
+  {
+    "id": "premium-pantry-boutique",
+    "name": "Premium Pantry Boutique",
+    "retailerType": "premium_pantry",
+    "region": "Urban",
+    "trafficTier": "low",
+    "shelfContext": "giftable pantry wall",
+    "demographics": ["premium", "foodie", "gift", "low_spice"],
+    "notes": "Lower velocity, higher story value; merchandising needs use-case cards."
+  },
+  {
+    "id": "butcher-bbq-specialty",
+    "name": "Butcher / BBQ Specialty",
+    "retailerType": "butcher_bbq",
+    "region": "Mountain / South",
+    "trafficTier": "medium",
+    "shelfContext": "marinade, wing, and grill sauce set",
+    "demographics": ["heat_seeking", "grilling", "family"],
+    "notes": "Sell as wings, steak marinade, pork chop glaze, not ramen-only."
+  },
+  {
+    "id": "college-urban-market",
+    "name": "College / Urban Market",
+    "retailerType": "urban_market",
+    "region": "Urban",
+    "trafficTier": "high",
+    "shelfContext": "grab-and-go noodles and quick meal aisle",
+    "demographics": ["college", "heat_seeking", "convenience", "asian_snacking"],
+    "notes": "Fast-meal storytelling and spicy demand should drive reorder speed."
+  },
+  {
+    "id": "suburban-gourmet-market",
+    "name": "Suburban Gourmet Market",
+    "retailerType": "specialty_grocery",
+    "region": "Suburban",
+    "trafficTier": "medium",
+    "shelfContext": "family dinner and premium condiment aisle",
+    "demographics": ["family", "premium", "low_spice"],
+    "notes": "Original and Citrus need to carry the first case; Spicy is secondary."
+  },
+  {
+    "id": "canada-asian-specialty",
+    "name": "Canada Asian Specialty",
+    "retailerType": "asian_grocery",
+    "region": "Canada",
+    "trafficTier": "medium",
+    "shelfContext": "noodle, dumpling, and shoyu aisle",
+    "demographics": ["asian_snacking", "foodie", "cold_weather"],
+    "notes": "Strong ramen and shoyu context; watch import/logistics timing."
+  }
+]

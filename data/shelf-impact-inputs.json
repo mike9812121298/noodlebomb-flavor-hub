@@ -1,0 +1,68 @@
+{
+  "brand": "NoodleBomb",
+  "brandImages": [
+    {
+      "id": "original",
+      "name": "Original",
+      "path": "uploads/nb-original-production-front-2026-05.jpeg",
+      "role": "daily driver umami"
+    },
+    {
+      "id": "spicy-tokyo",
+      "name": "Spicy Tokyo",
+      "path": "uploads/nb-spicy-production-front-2026-05.jpeg",
+      "role": "heat-forward"
+    },
+    {
+      "id": "citrus-shoyu",
+      "name": "Citrus Shoyu",
+      "path": "uploads/nb-citrus-production-front-2026-05.jpeg",
+      "role": "bright citrus"
+    },
+    {
+      "id": "shoyu-reserve",
+      "name": "Shoyu Reserve",
+      "path": "uploads/nb-shoyu-reserve-front-cutout-clean-2026-05-17.png",
+      "role": "premium shoyu"
+    }
+  ],
+  "competitorImageDirectory": "data/shelf-impact-competitors",
+  "virtualCompetitors": [
+    {
+      "name": "Red Chili Crisp Benchmark",
+      "category": "chili crisp / spicy sauce",
+      "colors": ["#b91c1c", "#facc15", "#111111", "#ffffff"]
+    },
+    {
+      "name": "Cream Premium Pantry Benchmark",
+      "category": "premium sauce",
+      "colors": ["#f5ead7", "#111111", "#b45309", "#ffffff"]
+    },
+    {
+      "name": "Yellow Honey Heat Benchmark",
+      "category": "sweet heat",
+      "colors": ["#fbbf24", "#dc2626", "#111827", "#ffffff"]
+    },
+    {
+      "name": "Black Soy Sauce Benchmark",
+      "category": "soy / shoyu",
+      "colors": ["#111111", "#f8fafc", "#dc2626", "#6b3f20"]
+    },
+    {
+      "name": "Green Citrus Sauce Benchmark",
+      "category": "citrus / herb",
+      "colors": ["#15803d", "#fef08a", "#ffffff", "#111827"]
+    },
+    {
+      "name": "White Minimal Sauce Benchmark",
+      "category": "modern pantry",
+      "colors": ["#ffffff", "#111111", "#e5e7eb", "#ef4444"]
+    }
+  ],
+  "shelf": {
+    "background": "#181310",
+    "slotWidth": 150,
+    "slotHeight": 245,
+    "distanceBlurRadius": 2.2
+  }
+}

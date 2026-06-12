@@ -4,9 +4,9 @@ import ComingSoonDrop from "@/components/ComingSoonDrop";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchShopifyProducts, formatShopifyPrice, SHOPIFY_HANDLES } from "@/lib/shopify";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-production-front-2026-05.jpeg";
+import nbSpicyTokyo from "@/assets/nb-spicy-production-front-2026-05.jpeg";
+import nbCitrusShoyu from "@/assets/nb-citrus-production-front-2026-05.jpeg";
 import { Link } from "react-router-dom";
 import { Truck, Lock, Flame, Check } from "lucide-react";
 
