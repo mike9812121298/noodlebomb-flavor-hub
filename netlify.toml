@@ -254,6 +254,24 @@
   status = 302
   force = true
 
+# GSC recipe capture pages.
+[[redirects]]
+  from = "/garlic-bomb-ramen"
+  to = "/garlic-bomb-ramen.html"
+  status = 200
+
+[[redirects]]
+  from = "/post/garlic-bomb-chicken-ramen-recipe"
+  to = "/garlic-bomb-ramen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/recipes/garlic-bomb-ramen"
+  to = "/garlic-bomb-ramen"
+  status = 301
+  force = true
+
 # /shop and /shop/* — primary CTA target
 [[redirects]]
   from = "/shop"
