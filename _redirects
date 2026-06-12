@@ -55,6 +55,11 @@
 /shoyu-reserve            /product/shoyu-reserve                                         301!
 /product/*                https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 
+# GSC recipe capture pages.
+/garlic-bomb-ramen        /garlic-bomb-ramen.html        200
+/post/garlic-bomb-chicken-ramen-recipe  /garlic-bomb-ramen  301!
+/recipes/garlic-bomb-ramen  /garlic-bomb-ramen  301!
+
 # /shop and /shop/* — primary CTA target on the marketing site
 /shop                     https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 /shop/*                   https://nu2vqa-ma.myshopify.com/:splat                         302!
