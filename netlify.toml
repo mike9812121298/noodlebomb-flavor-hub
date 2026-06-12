@@ -269,6 +269,30 @@
 
 # Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
 [[redirects]]
+  from = "/ramen-box"
+  to = "/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodlebomb-original-ramen-sauce"
+  to = "/original-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodle-bomb-spicy-tokyo-ramen-sauce"
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodle-bomb-citrus-shoyu-ramen-sauce"
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/product-page/noodlebomb-variety-3-pack"
   to = "/ramen-sauce-trio"
   status = 301

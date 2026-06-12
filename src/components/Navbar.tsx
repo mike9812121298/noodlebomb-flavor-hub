@@ -6,7 +6,7 @@ import { useCart } from "@/hooks/useCart";
 
 const navItems = [
   { label: "Shop", path: "/shop" },
-  { label: "Ramen Box", path: "/ramen-box" },
+  { label: "Ramen Box", href: "/monthly-box" },
   { label: "Recipes", path: "/recipes" },
   { label: "Sauce Finder", path: "/sauce-selector" },
   { label: "About", path: "/about" },
@@ -48,17 +48,31 @@ const Navbar = () => {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`font-display text-sm font-medium uppercase tracking-widest transition-colors hover:text-primary ${
-                location.pathname === item.path
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              }`}
-            >
-              {item.label}
-            </Link>
+            "href" in item ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`font-display text-sm font-medium uppercase tracking-widest transition-colors hover:text-primary ${
+                  location.pathname === item.href
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`font-display text-sm font-medium uppercase tracking-widest transition-colors hover:text-primary ${
+                  location.pathname === item.path
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
           ))}
 
           {/* Cart icon */}
@@ -114,14 +128,25 @@ const Navbar = () => {
           >
             <div className="container py-6 flex flex-col gap-4">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setOpen(false)}
-                  className="font-display text-lg font-medium uppercase tracking-wider text-foreground hover:text-primary transition-colors"
-                >
-                  {item.label}
-                </Link>
+                "href" in item ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="font-display text-lg font-medium uppercase tracking-wider text-foreground hover:text-primary transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setOpen(false)}
+                    className="font-display text-lg font-medium uppercase tracking-wider text-foreground hover:text-primary transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
               <Link
                 to="/shop"

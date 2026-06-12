@@ -61,6 +61,10 @@
 
 # Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
 # (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
+/ramen-box                /monthly-box 301!
+/product-page/noodlebomb-original-ramen-sauce /original-ramen-sauce 301!
+/product-page/noodle-bomb-spicy-tokyo-ramen-sauce /spicy-tokyo-ramen-sauce 301!
+/product-page/noodle-bomb-citrus-shoyu-ramen-sauce /citrus-shoyu-ramen-sauce 301!
 /product-page/noodlebomb-variety-3-pack /ramen-sauce-trio 301!
 /product-page/monthl      /monthly-box 301!
 /product-page/monthly-ramen-box /monthly-box 301!

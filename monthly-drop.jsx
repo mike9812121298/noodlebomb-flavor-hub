@@ -240,9 +240,7 @@ function MonthlyDrop() {
             <Reveal delay={5}>
               <div style={{ display: 'flex', alignItems: 'stretch', gap: 10, flexWrap: 'wrap', marginBottom: 32, maxWidth: 620 }}>
                 <a
-                  href="https://shop.noodlebomb.co/product-page/monthly-ramen-box"
-                  target="_blank"
-                  rel="noopener"
+                  href="/monthly-box"
                   className="btn"
                   style={{
                     background: 'var(--accent)', color: 'var(--accent-ink)',
@@ -257,9 +255,7 @@ function MonthlyDrop() {
                   Subscribe - $29.99/mo
                 </a>
                 <a
-                  href="https://shop.noodlebomb.co/product-page/premium-ramen-box"
-                  target="_blank"
-                  rel="noopener"
+                  href="/monthly-box"
                   className="btn"
                   style={{
                     background: 'rgba(245,241,234,0.04)', color: 'var(--ink)',

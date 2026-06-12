@@ -113,9 +113,9 @@ const Shop = () => (
               </span>
             </div>
             <Link
-              to="/ramen-box"              className="bg-gradient-fire px-8 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_35px_hsl(var(--flame)/0.45)] hover:scale-105 transition-all"
+              to="/product/variety-pack"              className="bg-gradient-fire px-8 py-3 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_35px_hsl(var(--flame)/0.45)] hover:scale-105 transition-all"
             >
-              Add Both
+              Shop the Trio
             </Link>
           </div>
         </motion.div>
@@ -193,12 +193,12 @@ const Shop = () => (
           <Lock className="h-3 w-3" />
           Production capped each month.
         </p>
-        <Link
-          to="/ramen-box"
+        <a
+          href="/monthly-box"
           className="inline-flex items-center gap-2 bg-gradient-fire px-10 py-4 rounded-full font-display text-base font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_45px_hsl(var(--flame)/0.55)] hover:scale-105 transition-all animate-pulse-glow"
         >
           Explore Membership Plans
-        </Link>
+        </a>
       </motion.div>
     </div>
 
