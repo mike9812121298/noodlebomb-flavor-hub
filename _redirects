@@ -61,6 +61,10 @@
 
 # Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
 # (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
+/product-page/noodlebomb-variety-3-pack  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
+/product-page/the-noodlebomb-trio  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
+/product-page/monthl  /monthly-box  302!
+/product-page/monthly-ramen-box  /monthly-box  302!
 /product-page/*           https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 /cart-page                https://nu2vqa-ma.myshopify.com/cart                           302!
 /category/*               https://nu2vqa-ma.myshopify.com/collections/:splat             302!
