@@ -1300,7 +1300,7 @@ function FlavorPicker({ flavor, setFlavor }) {
           </Reveal>
           <Reveal delay={2}>
             <p style={{ color: 'var(--ink-60)', fontFamily: 'Inter', fontSize: 14, maxWidth: '52ch', margin: '0 0 28px', lineHeight: 1.55 }}>
-              The reserve line — premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.
+              The reserve line — soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.
             </p>
           </Reveal>
           <div className="soy-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 24, maxWidth: 760 }}>
@@ -1527,7 +1527,7 @@ function FinalCTA() {
         <div className="marq-track">
           {Array.from({ length: 2 }).map((_, j) =>
           <React.Fragment key={j}>
-              {['SMALL BATCH', '•', 'PREMIUM INGREDIENTS', '•', 'SLOW-BREWED FOR DEPTH', '•', 'POUR IT ON EVERYTHING', '•', 'MADE IN BONNEY LAKE WA', '•'].map((s, i) =>
+              {['SMALL BATCH', '•', 'BOLD FLAVOR', '•', 'SLOW-BREWED FOR DEPTH', '•', 'POUR IT ON EVERYTHING', '•', 'MADE IN BONNEY LAKE WA', '•'].map((s, i) =>
             <span key={i} className="display" style={{ fontSize: 96, letterSpacing: '-0.05em', color: 'var(--ink)', opacity: 0.18 }}>{s}</span>
             )}
             </React.Fragment>
@@ -1923,7 +1923,7 @@ function BuildBundle() {
       slug: 'shoyu',
       name: 'Shoyu Reserve',
       eyebrow: 'Reserve',
-      role: 'Slow-brewed premium soy sauce. In stock now.',
+      role: 'Slow-brewed soy sauce. In stock now.',
       price: 11.99,
       color: '#D7A84D',
       rgb: '215, 168, 77',
