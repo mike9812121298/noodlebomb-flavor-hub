@@ -41,7 +41,7 @@ const Footer = () => {
                 { label: "Original", href: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce" },
                 { label: "Spicy Tokyo", href: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce" },
                 { label: "Citrus Shoyu", href: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce" },
-                { label: "Variety 3-Pack", href: "https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack" },
+                { label: "Ramen Sauce Trio", href: "/ramen-sauce-trio" },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <a href={href} target="_blank" rel="noopener noreferrer"
