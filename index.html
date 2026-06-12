@@ -3415,7 +3415,7 @@ INSTRUCTIONS FOR APPLYING (manual or sed):
          - "priceValidUntil" (1 year out)
          - "itemCondition" (NewCondition)
          - "hasMerchantReturnPolicy"
-         - "shippingDetails" (free shipping at $35)
+         - "shippingDetails" (free shipping at $29.99+)
          - offers.url points to the slug-deep-link instead of "#range"
   3. REPLACE the existing BreadcrumbList block with the expanded one below.
   4. ADD the WebSite + SearchAction block (NEW — currently missing).
@@ -3434,7 +3434,7 @@ INSTRUCTIONS FOR APPLYING (manual or sed):
   "@id": "https://noodlebomb.co/#website",
   "url": "https://noodlebomb.co/",
   "name": "NoodleBomb",
-  "description": "Premium small-batch ramen sauce. Pour bold.",
+  "description": "Small-batch ramen sauce. Bold flavor. Pour bold.",
   "publisher": { "@id": "https://noodlebomb.co/#business" },
   "potentialAction": {
     "@type": "SearchAction",
@@ -3590,17 +3590,17 @@ INSTRUCTIONS FOR APPLYING (manual or sed):
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "@id": "https://noodlebomb.co/product/variety-pack#product",
+  "@id": "https://noodlebomb.co/ramen-sauce-trio#product",
   "name": "NoodleBomb Trio — 3-Pack Variety",
   "description": "One of each: Original, Spicy Tokyo, Citrus Shoyu. Small-batch ramen sauce, made in Bonney Lake, WA.",
-  "sku": "Gt-50000-TRIO",
+  "sku": "NB-TRIO-3PK",
   "brand": { "@type": "Brand", "name": "NoodleBomb" },
   "image": [
     "https://noodlebomb.co/uploads/noodlebomb-trio.png"
   ],
   "offers": {
     "@type": "Offer",
-    "url": "https://noodlebomb.co/product/variety-pack",
+    "url": "https://noodlebomb.co/ramen-sauce-trio",
     "priceCurrency": "USD",
     "price": "29.99",
     "priceValidUntil": "2027-05-06",
@@ -3639,7 +3639,7 @@ INSTRUCTIONS FOR APPLYING (manual or sed):
     { "@type": "ListItem", "position": 1, "url": "https://noodlebomb.co/product/original-ramen" },
     { "@type": "ListItem", "position": 2, "url": "https://noodlebomb.co/product/spicy-tokyo" },
     { "@type": "ListItem", "position": 3, "url": "https://noodlebomb.co/product/citrus-shoyu" },
-    { "@type": "ListItem", "position": 4, "url": "https://noodlebomb.co/product/variety-pack" }
+    { "@type": "ListItem", "position": 4, "url": "https://noodlebomb.co/ramen-sauce-trio" }
   ]
 }
 </script>
@@ -3701,7 +3701,7 @@ INSTRUCTIONS FOR APPLYING (manual or sed):
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">Soy Sauces</h2>
 <ul style="list-style:none;padding:0;margin:0 0 32px;">
-  <li style="margin:0 0 14px;"><strong>NoodleBomb Shoyu Reserve</strong> — Slow-brewed premium soy sauce. Bold, clean finish. $11.99 / 7 fl oz. <a href="/cart?add=shoyu&amp;qty=1" style="color:#F5C842;">Shop Shoyu Reserve →</a></li>
+  <li style="margin:0 0 14px;"><strong>NoodleBomb Shoyu Reserve</strong> — Slow-brewed soy sauce. Bold, clean finish. $11.99 / 7 fl oz. <a href="/cart?add=shoyu&amp;qty=1" style="color:#F5C842;">Shop Shoyu Reserve →</a></li>
   <li style="margin:0 0 14px;"><strong>NoodleBomb Spicy Shoyu</strong> — The reserve bottle, turned up with real heat. $11.99 / 7 fl oz. <a href="/cart?add=shoyuspicy&amp;qty=1" style="color:#F5C842;">Shop Spicy Shoyu →</a></li>
 </ul>
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>

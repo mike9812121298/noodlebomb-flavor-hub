@@ -38,13 +38,13 @@ const Footer = () => {
             <h4 className="font-display font-bold text-foreground mb-4 text-sm uppercase tracking-wider">Shop</h4>
             <ul className="space-y-2">
               {[
-                { label: "Original", href: "https://www.noodlebomb.co/product-page/noodlebomb-original-ramen-sauce" },
-                { label: "Spicy Tokyo", href: "https://www.noodlebomb.co/product-page/noodle-bomb-spicy-tokyo-ramen-sauce" },
-                { label: "Citrus Shoyu", href: "https://www.noodlebomb.co/product-page/noodle-bomb-citrus-shoyu-ramen-sauce" },
-                { label: "Variety 3-Pack", href: "https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack" },
+                { label: "Original", href: "/original-ramen-sauce" },
+                { label: "Spicy Tokyo", href: "/spicy-tokyo-ramen-sauce" },
+                { label: "Citrus Shoyu", href: "/citrus-shoyu-ramen-sauce" },
+                { label: "Ramen Sauce Trio", href: "/ramen-sauce-trio" },
               ].map(({ label, href }) => (
                 <li key={label}>
-                  <a href={href} target="_blank" rel="noopener noreferrer"
+                  <a href={href}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors">{label}</a>
                 </li>
               ))}
@@ -59,10 +59,14 @@ const Footer = () => {
                 { label: "Recipes", to: "/recipes" },
                 { label: "Our Story", to: "/about" },
                 { label: "FAQ", to: "/faq" },
-                { label: "Monthly Ramen Box", to: "/ramen-box" },
-              ].map(({ label, to }) => (
-                <li key={label}>
-                  <Link to={to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{label}</Link>
+                { label: "Monthly Ramen Box", href: "/monthly-box" },
+              ].map((item) => (
+                <li key={item.label}>
+                  {"href" in item ? (
+                    <a href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{item.label}</a>
+                  ) : (
+                    <Link to={item.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{item.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -72,7 +76,7 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-bold text-foreground mb-4 text-sm uppercase tracking-wider">Promise</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>🚚 Free shipping over $35</li>
+              <li>🚚 Free shipping $29.99+</li>
               <li>💰 100% money-back guarantee</li>
               <li>🍜 Small batch, handcrafted</li>
               <li>📦 Ships in 1–2 business days</li>

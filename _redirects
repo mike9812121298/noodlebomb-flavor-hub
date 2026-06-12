@@ -61,7 +61,20 @@
 
 # Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
 # (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
+/ramen-box                /monthly-box 301!
+# GSC still sees old www Wix URLs; send branded/product demand to canonical SEO pages in one hop.
+https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack https://noodlebomb.co/ramen-sauce-trio 301!
+https://www.noodlebomb.co/post/garlic-bomb-chicken-ramen-recipe https://noodlebomb.co/garlic-bomb-chicken-ramen 301!
+https://www.noodlebomb.co/product-page/monthl https://noodlebomb.co/monthly-box 301!
+https://www.noodlebomb.co/product-page/monthly-ramen-box https://noodlebomb.co/monthly-box 301!
+/product-page/noodlebomb-original-ramen-sauce /original-ramen-sauce 301!
+/product-page/noodle-bomb-spicy-tokyo-ramen-sauce /spicy-tokyo-ramen-sauce 301!
+/product-page/noodle-bomb-citrus-shoyu-ramen-sauce /citrus-shoyu-ramen-sauce 301!
+/product-page/noodlebomb-variety-3-pack /ramen-sauce-trio 301!
+/product-page/monthl      /monthly-box 301!
+/product-page/monthly-ramen-box /monthly-box 301!
 /product-page/*           https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
+/post/garlic-bomb-chicken-ramen-recipe /garlic-bomb-chicken-ramen 301!
 /cart-page                https://nu2vqa-ma.myshopify.com/cart                           302!
 /category/*               https://nu2vqa-ma.myshopify.com/collections/:splat             302!
 /ramensauce               https://nu2vqa-ma.myshopify.com/products/original              302!
@@ -78,6 +91,10 @@
 /recipes     /recipes.html      200
 /recipes/*   /recipes.html      200
 /faq         /faq.html          200
+/best-ramen-sauce /best-ramen-sauce.html 200
+/instant-ramen-upgrade /instant-ramen-upgrade.html 200
+/ramen-spice-bomb /ramen-spice-bomb.html 200
+/garlic-bomb-chicken-ramen /garlic-bomb-chicken-ramen.html 200
 
 # SEO-friendly product landing pages on the brand domain.
 /original-ramen-sauce      /product-original.html      200
@@ -93,6 +110,10 @@
 /product-original.html     /original-ramen-sauce       301!
 /product-spicy.html        /spicy-tokyo-ramen-sauce    301!
 /product-citrus.html       /citrus-shoyu-ramen-sauce   301!
+/best-ramen-sauce.html     /best-ramen-sauce           301!
+/instant-ramen-upgrade.html /instant-ramen-upgrade      301!
+/ramen-spice-bomb.html     /ramen-spice-bomb           301!
+/garlic-bomb-chicken-ramen.html /garlic-bomb-chicken-ramen 301!
 /product-spicy-shoyu.html  /spicy-shoyu-ramen-sauce    301!
 /product-fire-dust.html    /product/fire-dust          301!
 /product-roasted-garlic-sesame.html /product/roasted-garlic-sesame 301!

@@ -269,6 +269,78 @@
 
 # Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
 [[redirects]]
+  from = "/ramen-box"
+  to = "/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack"
+  to = "https://noodlebomb.co/ramen-sauce-trio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.noodlebomb.co/post/garlic-bomb-chicken-ramen-recipe"
+  to = "https://noodlebomb.co/garlic-bomb-chicken-ramen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.noodlebomb.co/product-page/monthl"
+  to = "https://noodlebomb.co/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.noodlebomb.co/product-page/monthly-ramen-box"
+  to = "https://noodlebomb.co/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodlebomb-original-ramen-sauce"
+  to = "/original-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodle-bomb-spicy-tokyo-ramen-sauce"
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodle-bomb-citrus-shoyu-ramen-sauce"
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/noodlebomb-variety-3-pack"
+  to = "/ramen-sauce-trio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/monthl"
+  to = "/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/monthly-ramen-box"
+  to = "/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/post/garlic-bomb-chicken-ramen-recipe"
+  to = "/garlic-bomb-chicken-ramen"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/product-page/*"
   to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
   status = 302
@@ -397,6 +469,26 @@
   status = 200
 
 [[redirects]]
+  from = "/best-ramen-sauce"
+  to = "/best-ramen-sauce.html"
+  status = 200
+
+[[redirects]]
+  from = "/instant-ramen-upgrade"
+  to = "/instant-ramen-upgrade.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-spice-bomb"
+  to = "/ramen-spice-bomb.html"
+  status = 200
+
+[[redirects]]
+  from = "/garlic-bomb-chicken-ramen"
+  to = "/garlic-bomb-chicken-ramen.html"
+  status = 200
+
+[[redirects]]
   from = "/original-ramen-sauce"
   to = "/product-original.html"
   status = 200
@@ -446,6 +538,30 @@
 [[redirects]]
   from = "/product-citrus.html"
   to = "/citrus-shoyu-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/best-ramen-sauce.html"
+  to = "/best-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/instant-ramen-upgrade.html"
+  to = "/instant-ramen-upgrade"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ramen-spice-bomb.html"
+  to = "/ramen-spice-bomb"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/garlic-bomb-chicken-ramen.html"
+  to = "/garlic-bomb-chicken-ramen"
   status = 301
   force = true
 

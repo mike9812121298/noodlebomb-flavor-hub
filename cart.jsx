@@ -220,7 +220,7 @@ function CartPage() {
 
           {/* Smart Trio upsell — only when cart has items, no trio yet, and user
               hasn't crossed the free-shipping line. Adding the trio flips the
-              order over $35 (assuming any starting subtotal > $5) and saves
+              order to the $29.99 free-shipping threshold and saves
               the user $5.98 vs buying the same 3 flavors as singles. */}
           {(() => {
             const hasTrio = items.some((i) => i.slug === 'trio');
@@ -393,7 +393,7 @@ function CartPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> Trio ships free · singles ship free over $35</div>
+            <div className="trust-row"><Truck /> Free US shipping at $29.99+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
             <div className="trust-row"><Check /> Ships from Bonney Lake, WA</div>
           </div>

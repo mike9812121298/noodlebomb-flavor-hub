@@ -37,7 +37,7 @@ const faqGroups = [
       },
       {
         q: "Do you offer free shipping?",
-        a: "Yes — every order ships free, no minimum purchase required.",
+        a: "Yes — US orders ship free at $29.99+. The Trio reaches the threshold by itself.",
       },
     ],
   },

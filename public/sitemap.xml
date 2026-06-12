@@ -43,9 +43,33 @@
         <priority>0.95</priority>
     </url>
     <url>
-        <loc>https://noodlebomb.co/product/variety-pack</loc>
-        <lastmod>2026-05-06</lastmod>
+        <loc>https://noodlebomb.co/ramen-sauce-trio</loc>
+        <lastmod>2026-06-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+    <url>
+        <loc>https://noodlebomb.co/best-ramen-sauce</loc>
+        <lastmod>2026-06-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://noodlebomb.co/instant-ramen-upgrade</loc>
+        <lastmod>2026-06-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://noodlebomb.co/ramen-spice-bomb</loc>
+        <lastmod>2026-06-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://noodlebomb.co/garlic-bomb-chicken-ramen</loc>
+        <lastmod>2026-06-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
     </url>
 </urlset>

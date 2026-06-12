@@ -208,7 +208,7 @@ const ProductCard = ({
                   Order Now
                 </a>
                 <p className="text-[11px] font-display text-muted-foreground mt-2 tracking-wide">
-                  Free shipping over $35 · Ships from WA
+                  Free shipping $29.99+ · Ships from WA
                 </p>
               </div>
             </div>
