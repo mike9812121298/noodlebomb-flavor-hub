@@ -25,6 +25,12 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://noodlebomb.co/ramen-sauce-trio</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://noodlebomb.co/seasonings</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
