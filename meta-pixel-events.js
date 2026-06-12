@@ -7,6 +7,8 @@
     spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99, paths: ['product-spicy.html', 'spicy-tokyo-ramen-sauce'] },
     citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99, paths: ['product-citrus.html', 'citrus-shoyu-ramen-sauce'] },
     shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99, paths: ['product-shoyu-reserve.html', 'shoyu-reserve'] },
+    fire: { slug: 'fire', name: 'Fire Dust', price: 11.99, paths: ['product-fire-dust.html', 'product/fire-dust'] },
+    garlic: { slug: 'garlic', name: 'Roasted Garlic Sesame', price: 11.99, paths: ['product-roasted-garlic-sesame.html', 'product/roasted-garlic-sesame'] },
     trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99, paths: ['the-noodlebomb-trio', 'variety-pack'] }
   };
 
