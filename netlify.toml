@@ -287,6 +287,12 @@
   force = true
 
 [[redirects]]
+  from = "/post/garlic-bomb-chicken-ramen-recipe"
+  to = "/garlic-bomb-chicken-ramen"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/product-page/*"
   to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
   status = 302
@@ -425,6 +431,11 @@
   status = 200
 
 [[redirects]]
+  from = "/garlic-bomb-chicken-ramen"
+  to = "/garlic-bomb-chicken-ramen.html"
+  status = 200
+
+[[redirects]]
   from = "/original-ramen-sauce"
   to = "/product-original.html"
   status = 200
@@ -486,6 +497,12 @@
 [[redirects]]
   from = "/instant-ramen-upgrade.html"
   to = "/instant-ramen-upgrade"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/garlic-bomb-chicken-ramen.html"
+  to = "/garlic-bomb-chicken-ramen"
   status = 301
   force = true
 
