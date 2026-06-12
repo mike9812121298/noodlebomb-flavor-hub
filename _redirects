@@ -82,6 +82,7 @@
 # SEO-friendly product landing pages on the brand domain.
 /original-ramen-sauce      /product-original.html      200
 /spicy-tokyo-ramen-sauce   /product-spicy.html         200
+/spicy-ramen-sauce         /spicy-ramen-sauce.html     200
 /citrus-shoyu-ramen-sauce  /product-citrus.html        200
 /spicy-shoyu-ramen-sauce   /product-spicy-shoyu.html   200
 /seasonings                /seasonings.html            200
@@ -92,6 +93,7 @@
 # Canonicalize the older static filenames to the search-friendly URLs.
 /product-original.html     /original-ramen-sauce       301!
 /product-spicy.html        /spicy-tokyo-ramen-sauce    301!
+/spicy-ramen-sauce.html    /spicy-ramen-sauce          301!
 /product-citrus.html       /citrus-shoyu-ramen-sauce   301!
 /product-spicy-shoyu.html  /spicy-shoyu-ramen-sauce    301!
 /product-fire-dust.html    /product/fire-dust          301!
