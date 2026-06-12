@@ -6,7 +6,7 @@
     original: { slug: 'original', name: 'Original', price: 11.99, paths: ['product-original.html', 'original-ramen-sauce'] },
     spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99, paths: ['product-spicy.html', 'spicy-tokyo-ramen-sauce'] },
     citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99, paths: ['product-citrus.html', 'citrus-shoyu-ramen-sauce'] },
-    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 9.99, paths: ['product-shoyu-reserve.html', 'shoyu-reserve'] },
+    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99, paths: ['product-shoyu-reserve.html', 'shoyu-reserve'] },
     trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99, paths: ['the-noodlebomb-trio', 'variety-pack'] }
   };
 
