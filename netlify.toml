@@ -269,6 +269,24 @@
 
 # Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
 [[redirects]]
+  from = "/product-page/noodlebomb-variety-3-pack"
+  to = "/ramen-sauce-trio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/monthl"
+  to = "/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product-page/monthly-ramen-box"
+  to = "/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/product-page/*"
   to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
   status = 302
