@@ -65,6 +65,10 @@ All redirects defined in `_redirects` and `netlify.toml`:
 | https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack | https://noodlebomb.co/ramen-sauce-trio | 301 |
 | /post/garlic-bomb-chicken-ramen-recipe | /garlic-bomb-chicken-ramen | 301 |
 | https://www.noodlebomb.co/post/garlic-bomb-chicken-ramen-recipe | https://noodlebomb.co/garlic-bomb-chicken-ramen | 301 |
+| /product-page/monthl | /monthly-box | 301 |
+| https://www.noodlebomb.co/product-page/monthl | https://noodlebomb.co/monthly-box | 301 |
+| /product-page/monthly-ramen-box | /monthly-box | 301 |
+| https://www.noodlebomb.co/product-page/monthly-ramen-box | https://noodlebomb.co/monthly-box | 301 |
 | /product/* (other) | …/collections/all | 302 |
 | /product-page/* | …/collections/all | 302 |
 | /cart-page | …/cart | 302 |

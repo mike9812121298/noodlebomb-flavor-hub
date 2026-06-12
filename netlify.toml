@@ -287,6 +287,18 @@
   force = true
 
 [[redirects]]
+  from = "https://www.noodlebomb.co/product-page/monthl"
+  to = "https://noodlebomb.co/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.noodlebomb.co/product-page/monthly-ramen-box"
+  to = "https://noodlebomb.co/monthly-box"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/product-page/noodlebomb-original-ramen-sauce"
   to = "/original-ramen-sauce"
   status = 301

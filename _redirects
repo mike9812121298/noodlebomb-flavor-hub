@@ -65,6 +65,8 @@
 # GSC still sees old www Wix URLs; send branded/product demand to canonical SEO pages in one hop.
 https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack https://noodlebomb.co/ramen-sauce-trio 301!
 https://www.noodlebomb.co/post/garlic-bomb-chicken-ramen-recipe https://noodlebomb.co/garlic-bomb-chicken-ramen 301!
+https://www.noodlebomb.co/product-page/monthl https://noodlebomb.co/monthly-box 301!
+https://www.noodlebomb.co/product-page/monthly-ramen-box https://noodlebomb.co/monthly-box 301!
 /product-page/noodlebomb-original-ramen-sauce /original-ramen-sauce 301!
 /product-page/noodle-bomb-spicy-tokyo-ramen-sauce /spicy-tokyo-ramen-sauce 301!
 /product-page/noodle-bomb-citrus-shoyu-ramen-sauce /citrus-shoyu-ramen-sauce 301!
