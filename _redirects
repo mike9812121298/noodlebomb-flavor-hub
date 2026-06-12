@@ -93,6 +93,7 @@ https://www.noodlebomb.co/product-page/monthly-ramen-box https://noodlebomb.co/m
 /faq         /faq.html          200
 /best-ramen-sauce /best-ramen-sauce.html 200
 /instant-ramen-upgrade /instant-ramen-upgrade.html 200
+/ramen-spice-bomb /ramen-spice-bomb.html 200
 /garlic-bomb-chicken-ramen /garlic-bomb-chicken-ramen.html 200
 
 # SEO-friendly product landing pages on the brand domain.
@@ -111,6 +112,7 @@ https://www.noodlebomb.co/product-page/monthly-ramen-box https://noodlebomb.co/m
 /product-citrus.html       /citrus-shoyu-ramen-sauce   301!
 /best-ramen-sauce.html     /best-ramen-sauce           301!
 /instant-ramen-upgrade.html /instant-ramen-upgrade      301!
+/ramen-spice-bomb.html     /ramen-spice-bomb           301!
 /garlic-bomb-chicken-ramen.html /garlic-bomb-chicken-ramen 301!
 /product-spicy-shoyu.html  /spicy-shoyu-ramen-sauce    301!
 /product-fire-dust.html    /product/fire-dust          301!

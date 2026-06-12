@@ -479,6 +479,11 @@
   status = 200
 
 [[redirects]]
+  from = "/ramen-spice-bomb"
+  to = "/ramen-spice-bomb.html"
+  status = 200
+
+[[redirects]]
   from = "/garlic-bomb-chicken-ramen"
   to = "/garlic-bomb-chicken-ramen.html"
   status = 200
@@ -545,6 +550,12 @@
 [[redirects]]
   from = "/instant-ramen-upgrade.html"
   to = "/instant-ramen-upgrade"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ramen-spice-bomb.html"
+  to = "/ramen-spice-bomb"
   status = 301
   force = true
 
