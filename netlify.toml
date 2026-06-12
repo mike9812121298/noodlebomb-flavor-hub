@@ -8,7 +8,9 @@
   # Compiles repo-root *.jsx → build/*.js via esbuild, replacing the prior
   # Babel-in-browser setup (~770KB shipped to every visitor, gone). Netlify
   # auto-runs `npm install` first to fetch esbuild from devDeps.
-  command = "npm run build:static"
+  # build:pwclab additionally emits the standalone PWC Lab app to /pwclab/
+  # (vite bundle + product images), served as a directory of the same deploy.
+  command = "npm run build:static && npm run build:pwclab"
   publish = "."
   ignore = "/bin/false"
 

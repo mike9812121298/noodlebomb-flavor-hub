@@ -13,6 +13,7 @@
 /bun.lock*          /404.html   404!
 /tsconfig*.json     /404.html   404!
 /vite.config.ts     /404.html   404!
+/vite.pwclab.config.ts /404.html 404!
 /vitest.config.ts   /404.html   404!
 /postcss.config.js  /404.html   404!
 /tailwind.config.ts /404.html   404!
@@ -31,6 +32,11 @@
 /monthly-drop.jsx   /404.html   404!
 /next-drop.jsx      /404.html   404!
 /*.jsx              /404.html   404!
+
+# PWC Lab dev entry (references blocked /src/) — the built app lives at
+# /pwclab/ (see netlify.toml build). Block both the file and its pretty URL.
+/pwclab-dev.html    /404.html   404!
+/pwclab-dev         /404.html   404!
 
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
