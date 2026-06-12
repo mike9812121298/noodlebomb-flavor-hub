@@ -275,6 +275,18 @@
   force = true
 
 [[redirects]]
+  from = "https://www.noodlebomb.co/product-page/noodlebomb-variety-3-pack"
+  to = "https://noodlebomb.co/ramen-sauce-trio"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.noodlebomb.co/post/garlic-bomb-chicken-ramen-recipe"
+  to = "https://noodlebomb.co/garlic-bomb-chicken-ramen"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/product-page/noodlebomb-original-ramen-sauce"
   to = "/original-ramen-sauce"
   status = 301
