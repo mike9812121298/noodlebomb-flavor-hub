@@ -16,13 +16,13 @@ export default defineConfig({
   },
   server: {
     port: 8081,
-    open: "/pwclab.html",
+    open: "/pwclab-dev.html",
   },
   build: {
     outDir: "pwclab",
     emptyOutDir: true,
     rollupOptions: {
-      input: path.resolve(__dirname, "pwclab.html"),
+      input: path.resolve(__dirname, "pwclab-dev.html"),
     },
   },
 });

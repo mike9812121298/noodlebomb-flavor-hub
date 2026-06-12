@@ -3,7 +3,7 @@
 // images at /pwclab/assets/* which live in public/pwclab/assets.
 import { cpSync, renameSync, existsSync } from "node:fs";
 
-renameSync("pwclab/pwclab.html", "pwclab/index.html");
+renameSync("pwclab/pwclab-dev.html", "pwclab/index.html");
 
 if (existsSync("public/pwclab/assets")) {
   cpSync("public/pwclab/assets", "pwclab/assets", { recursive: true });

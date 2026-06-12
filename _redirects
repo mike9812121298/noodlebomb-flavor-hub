@@ -33,8 +33,10 @@
 /next-drop.jsx      /404.html   404!
 /*.jsx              /404.html   404!
 
-# PWC Lab dev entry — the built app lives at /pwclab/ (see netlify.toml build)
-/pwclab.html        /pwclab/    301!
+# PWC Lab dev entry (references blocked /src/) — the built app lives at
+# /pwclab/ (see netlify.toml build). Block both the file and its pretty URL.
+/pwclab-dev.html    /404.html   404!
+/pwclab-dev         /404.html   404!
 
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
