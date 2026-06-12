@@ -25,6 +25,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://noodlebomb.co/ramen-sauce</loc>
+        <lastmod>2026-06-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.96</priority>
+    </url>
+    <url>
         <loc>https://noodlebomb.co/product/original-ramen</loc>
         <lastmod>2026-05-06</lastmod>
         <changefreq>weekly</changefreq>
