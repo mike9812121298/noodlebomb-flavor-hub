@@ -51,7 +51,7 @@ const products = [
 const bundles = [
   {
     name: "NoodleBomb Trio",
-    tagline: "All three flavors in one clean lineup. Free shipping over $35.",
+    tagline: "All three flavors in one clean lineup. Free shipping $29.99+.",
     price: "$29.99",
     originalPrice: "$35.97",
     spiceLevel: 3,
@@ -68,7 +68,7 @@ const Shop = () => (
         <p className="text-foreground/70 mt-3 text-lg">
           Pick the bottle that fits dinner, or grab the full lineup.
         </p>
-        <p className="text-muted-foreground mt-1 text-sm">Free shipping over $35 — limited small-batch inventory.</p>
+        <p className="text-muted-foreground mt-1 text-sm">Free shipping $29.99+ — limited small-batch inventory.</p>
       </motion.div>
 
       <div className="h-px bg-border mb-14" />
@@ -155,7 +155,7 @@ const Shop = () => (
                 </div>
                 <div className="flex items-center gap-1.5 mb-6">
                   <Truck className="h-4 w-4 text-primary" />
-                  <span className="text-xs text-foreground/60 font-display font-semibold uppercase tracking-wider">Free Shipping Over $35</span>
+                  <span className="text-xs text-foreground/60 font-display font-semibold uppercase tracking-wider">Free Shipping $29.99+</span>
                 </div>
                 <Link
                   to="/product/variety-pack"                  className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-3.5 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.5)] hover:scale-[1.02] transition-all animate-pulse-glow"

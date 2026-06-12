@@ -270,7 +270,7 @@ function CheckoutPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> Trio ships free · singles ship free over $35</div>
+            <div className="trust-row"><Truck /> Free US shipping at $29.99+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

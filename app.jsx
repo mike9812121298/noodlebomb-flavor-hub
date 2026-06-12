@@ -1507,7 +1507,7 @@ function FinalCTA() {
               <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
                 {Array.from({ length: 4 }).map((_, j) => (
                   <span key={j} style={{ paddingRight: 32 }}>
-                    PREMIUM INGREDIENTS · SMALL BATCH · MADE IN BONNEY LAKE, WA · FREE SHIPPING OVER $35 ·
+                    BOLD SAUCE · SMALL BATCH · MADE IN BONNEY LAKE, WA · FREE SHIPPING $29.99+ ·
                   </span>
                 ))}
               </div>

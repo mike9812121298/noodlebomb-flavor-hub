@@ -638,7 +638,7 @@ const Cart = () => {
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-foreground/55">
                   <Truck className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" />
-                  <span>Free shipping over $35 · Ships from Pacific NW</span>
+                  <span>Free shipping $29.99+ · Ships from Pacific NW</span>
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-foreground/55">
                   <Repeat className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" />
