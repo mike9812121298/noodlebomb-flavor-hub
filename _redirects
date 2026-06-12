@@ -78,6 +78,7 @@
 /recipes     /recipes.html      200
 /recipes/*   /recipes.html      200
 /faq         /faq.html          200
+/noodle-sauce /noodle-sauce.html 200
 
 # SEO-friendly product landing pages on the brand domain.
 /original-ramen-sauce      /product-original.html      200
@@ -94,6 +95,7 @@
 /product-spicy.html        /spicy-tokyo-ramen-sauce    301!
 /product-citrus.html       /citrus-shoyu-ramen-sauce   301!
 /product-spicy-shoyu.html  /spicy-shoyu-ramen-sauce    301!
+/noodle-sauce.html         /noodle-sauce               301!
 /product-fire-dust.html    /product/fire-dust          301!
 /product-roasted-garlic-sesame.html /product/roasted-garlic-sesame 301!
 /product-shoyu-reserve.html /product/shoyu-reserve     301!
