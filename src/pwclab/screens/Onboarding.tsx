@@ -151,7 +151,9 @@ function deriveStage(count: number) {
 }
 
 function StepBuild({ onContinue }: { onContinue: () => void }) {
-  const [parts, setParts] = useState(() => onboardingParts.map((p) => ({ ...p })));
+  const [parts, setParts] = useState(() =>
+    onboardingParts.map((p) => ({ name: p.name as string, tag: p.tag as string, checked: p.checked as boolean }))
+  );
   const checkedCount = parts.filter((p) => p.checked).length;
   const toggle = (i: number) =>
     setParts((prev) => prev.map((p, idx) => (idx === i ? { ...p, checked: !p.checked } : p)));
