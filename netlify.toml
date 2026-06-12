@@ -402,6 +402,11 @@
   status = 200
 
 [[redirects]]
+  from = "/instant-ramen-upgrade"
+  to = "/instant-ramen-upgrade.html"
+  status = 200
+
+[[redirects]]
   from = "/original-ramen-sauce"
   to = "/product-original.html"
   status = 200
@@ -457,6 +462,12 @@
 [[redirects]]
   from = "/best-ramen-sauce.html"
   to = "/best-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/instant-ramen-upgrade.html"
+  to = "/instant-ramen-upgrade"
   status = 301
   force = true
 
