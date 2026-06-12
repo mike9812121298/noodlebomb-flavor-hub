@@ -80,6 +80,9 @@
 /faq         /faq.html          200
 
 # SEO-friendly product landing pages on the brand domain.
+/ramen-sauce               /ramen-sauce.html          200
+/ramen-sauces              /ramen-sauce               301!
+/ramen-sauce.html          /ramen-sauce               301!
 /original-ramen-sauce      /product-original.html      200
 /spicy-tokyo-ramen-sauce   /product-spicy.html         200
 /citrus-shoyu-ramen-sauce  /product-citrus.html        200
