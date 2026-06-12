@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -29,8 +29,16 @@ import SoySauce from "./pages/SoySauce";
 import NotFound from "./pages/NotFound";
 import Wholesale from "./pages/Wholesale";
 import Contact from "./pages/Contact";
+import PwcLabApp from "./pwclab/PwcLabApp";
 
 const queryClient = new QueryClient();
+
+// PWC Lab runs as a standalone app at /pwclab — no storefront chrome.
+const SiteChrome = ({ children }: { children: ReactNode }) => {
+  const { pathname } = useLocation();
+  if (pathname.startsWith("/pwclab")) return null;
+  return <>{children}</>;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -40,10 +48,13 @@ const App = () => (
       <BrowserRouter>
       <ScrollToTop />
         <MetaPixelPageViewTracker />
-        <AnnouncementBar />
-        <Navbar />
-        <EmailCapture />
+        <SiteChrome>
+          <AnnouncementBar />
+          <Navbar />
+          <EmailCapture />
+        </SiteChrome>
         <Routes>
+          <Route path="/pwclab/*" element={<PwcLabApp />} />
           <Route path="/" element={<Index />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/recipes" element={<Recipes />} />
@@ -61,7 +72,9 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
+        <SiteChrome>
+          <Footer />
+        </SiteChrome>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
