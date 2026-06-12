@@ -397,6 +397,11 @@
   status = 200
 
 [[redirects]]
+  from = "/best-ramen-sauce"
+  to = "/best-ramen-sauce.html"
+  status = 200
+
+[[redirects]]
   from = "/original-ramen-sauce"
   to = "/product-original.html"
   status = 200
@@ -446,6 +451,12 @@
 [[redirects]]
   from = "/product-citrus.html"
   to = "/citrus-shoyu-ramen-sauce"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/best-ramen-sauce.html"
+  to = "/best-ramen-sauce"
   status = 301
   force = true
 
