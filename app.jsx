@@ -8,7 +8,7 @@
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links — purchases now flow through
 // the local cart (cart.html → checkout.html → Wix payment handoff).
-const WIX_URLS = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const WIX_URLS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
 
 // Trio bundle price — used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
@@ -83,6 +83,22 @@ const addAndOpenCart = (item, e) => {
   window.dispatchEvent(new CustomEvent('nb-open-cart'));
 };
 
+// Flavor Finder: add the recommended bottle to the cart (canonical NB_CART.add),
+// then continue to that bottle's product page so the shopper lands on it with the
+// bottle already in their cart — no second add. Falls back to the /cart permalink
+// (which adds via the URL) for modifier/middle-clicks or if the cart store is absent.
+const addFlavorAndViewProduct = (key, e) => {
+  if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+  if (e) e.preventDefault();
+  const f = FLAVORS[key];
+  if (window.NB_CART && f) {
+    window.NB_CART.add({ slug: key, name: f.name, price: f.priceUsd, qty: 1 });
+    window.location.href = PRODUCT_DETAIL_URLS[key] || cartPermalink(key);
+  } else {
+    window.location.href = cartPermalink(key);
+  }
+};
+
 const FLAVORS = {
   original: { name: 'Original', tag: 'No.01 · Garlic & Sesame', short: 'No.01', color: '#D4A24A', ink: '#0E0D0C', rgb: '212, 162, 74', deep: '#8A6424',
     line1: 'The one that started it all.',
@@ -103,6 +119,12 @@ const FLAVOR_IMAGES = {
   spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.webp',
   citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.webp'
 };
+
+// Soy Sauce reserve line — second product group on the lineup (DTC, 2026-06-09). Distinct Shopify variants; both $11.99.
+const SOY_SAUCES = [
+  { slug: 'shoyu', name: 'Shoyu Reserve', tag: 'Reserve · Soy Sauce', color: '#D7A84D', rgb: '215, 168, 77', line1: 'Slow-brewed shoyu depth.', line2: 'Bold, clean finish.', price: '$11.99', image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', detail: '/product/shoyu-reserve' },
+  { slug: 'shoyuspicy', name: 'Spicy Shoyu', tag: 'Reserve · Spicy Soy', color: '#B2221A', rgb: '178, 34, 25', line1: 'The reserve bottle, turned up.', line2: 'Slow-brewed depth with real heat.', price: '$11.99', image: 'uploads/nb-shoyu-spicy-front-cutout-v1-2026-06-07.webp', detail: '/spicy-shoyu-ramen-sauce' }
+];
 
 const FOOD_IMAGES = {
   ramen: 'uploads/nb-hero-pour-page.webp',
@@ -992,11 +1014,11 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
               ))}
             </div>
             <div className="fbv2-actions">
-              <a className="fbv2-add" href={cartPermalink(activeKey)}>Add {activeFlavor.name} &rarr;</a>
+              <a className="fbv2-add" href={cartPermalink(activeKey)} onClick={(e) => addFlavorAndViewProduct(activeKey, e)}>Add {activeFlavor.name} &rarr;</a>
               <a className="fbv2-trio" href={cartPermalink('trio')}>Get all 3</a>
             </div>
             <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.12em', marginTop: 10 }}>
-              3+ bottles ship FREE (US)
+              $3.50 flat US ship · FREE on all 5
             </div>
             <div className="fbv2-panel-note">{activeItem.line}</div>
           </Reveal>
@@ -1550,7 +1572,7 @@ function Origin() {
               <span style={{ fontSize: 16 }}>→</span>
             </a>
             <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.14em' }}>
-              3+ bottles ship FREE (US)
+              $3.50 flat US ship · FREE on all 5
             </div>
           </div>
         </Reveal>
@@ -1592,52 +1614,6 @@ function Testimonials() {
 
 }
 
-// ——————————————————————————— Use cases: quick motion cue for "goes on everything"
-function UseCaseMoments() {
-  const cases = [
-    { title: 'Wings', copy: 'Toss hot wings with Spicy Tokyo for heat that still tastes like food.', img: FOOD_IMAGES.wings, tag: 'Toss', pos: '52% 56%' },
-    { title: 'Rice', copy: 'Pour Original over fried rice, salmon bowls, eggs, or leftovers.', img: FOOD_IMAGES.rice, tag: 'Pour', pos: '50% 48%' },
-    { title: 'Noodles', copy: 'Stir into ramen, udon, soba, or the noodles already in your pantry.', img: FOOD_IMAGES.stirfry, tag: 'Stir', pos: '52% 50%' },
-    { title: 'Dumplings', copy: 'Use any flavor as a fast dip for gyoza, wontons, and potstickers.', img: FOOD_IMAGES.dumplings, tag: 'Dip', pos: '48% 52%' },
-  ];
-  return (
-    <section id="use-cases" style={{ background: 'var(--paper)', padding: '112px clamp(24px, 5.5vw, 80px)', borderTop: '1px solid var(--line)', scrollMarginTop: 80 }}>
-      <div style={{ maxWidth: 1300, margin: '0 auto' }}>
-        <Reveal>
-          <div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Use It On</div>
-        </Reveal>
-        <Reveal delay={1}>
-          <h2 className="display section-h2" style={{ margin: '0 0 20px', maxWidth: 920 }}>
-            Four fast ways<br /><span style={{ color: 'var(--muted)' }}>to pour bold.</span>
-          </h2>
-        </Reveal>
-        <Reveal delay={2}>
-          <p style={{ color: 'var(--ink-60)', maxWidth: 620, lineHeight: 1.65, margin: '0 0 36px', fontSize: 17 }}>
-            It is still a ramen sauce. It just refuses to stay there.
-          </p>
-        </Reveal>
-        <div className="use-case-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
-          {cases.map((item, i) => (
-            <Reveal key={item.title} delay={i + 2}>
-              <a className="use-case-card" href="#lineup" style={{ '--case-delay': `${i * 0.08}s`, '--img-pos': item.pos }}>
-                <div className="use-case-media">
-                  <img src={item.img} alt={`${item.title} with NoodleBomb sauce`} loading="lazy" decoding="async" />
-                  <span className="use-case-pour" aria-hidden="true" />
-                </div>
-                <div className="use-case-copy">
-                  <div className="mono">{item.tag}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </div>
-              </a>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ——————————————————————————— Flavor picker (changes accent color)
 function FlavorPicker({ flavor, setFlavor }) {
   const keys = Object.keys(FLAVORS);
@@ -1658,7 +1634,7 @@ function FlavorPicker({ flavor, setFlavor }) {
         <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 08 — The Lineup</div></Reveal>
         <Reveal delay={1}>
           <h2 className="display section-h2" style={{ margin: '0 0 32px', maxWidth: 900 }}>
-            Three sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or all three.</span>
+            Three ramen sauces.<br /><span style={{ color: 'var(--muted)' }}>Pick one. Or all three.</span>
           </h2>
         </Reveal>
 
@@ -1794,7 +1770,7 @@ function FlavorPicker({ flavor, setFlavor }) {
                       <span style={{ fontSize: 14, lineHeight: 1, transition: 'transform 0.28s' }}>→</span>
                     </a>
                     <div className="mono" style={{ color: 'var(--ink-40)', fontSize: 9, letterSpacing: '0.14em', marginTop: 10 }}>
-                      3+ bottles ship FREE (US)
+                      $3.50 flat US ship · FREE on all 5
                     </div>
                     <a
                       href={PRODUCT_DETAIL_URLS[k]}
@@ -1820,6 +1796,57 @@ function FlavorPicker({ flavor, setFlavor }) {
               </Reveal>);
 
           })}
+        </div>
+
+        {/* Soy Sauces — reserve line, second product group (DTC, 2026-06-09) */}
+        <div style={{ marginTop: 72 }}>
+          <Reveal><div className="mono" style={{ color: 'var(--muted)', marginBottom: 16 }}>Index 08b — The Soy Sauces</div></Reveal>
+          <Reveal delay={1}>
+            <h2 className="display section-h2" style={{ margin: '0 0 12px', maxWidth: 900, fontSize: 'clamp(28px, 3.4vw, 40px)', letterSpacing: '-0.03em', lineHeight: 1 }}>
+              Two soy sauces.<br /><span style={{ color: 'var(--muted)' }}>Slow-brewed. Pour bold.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={2}>
+            <p style={{ color: 'var(--ink-60)', fontFamily: 'Inter', fontSize: 14, maxWidth: '52ch', margin: '0 0 28px', lineHeight: 1.55 }}>
+              The reserve line — premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.
+            </p>
+          </Reveal>
+          <div className="soy-grid lineup-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 24, maxWidth: 760 }}>
+            {SOY_SAUCES.map((s, i) => (
+              <Reveal key={s.slug} delay={i + 1}>
+                <div className="tilt-card" style={{ background: `linear-gradient(170deg, rgba(${s.rgb},0.10) 0%, rgba(${s.rgb},0.03) 100%)`, border: `1px solid rgba(${s.rgb},0.28)`, padding: 32 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, gap: 8 }}>
+                    <span className="mono" style={{ color: 'var(--ink-40)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0, flex: 1 }}>{s.tag}</span>
+                    <div style={{ width: 8, height: 8, borderRadius: 999, background: s.color, flexShrink: 0 }} />
+                  </div>
+                  <div style={{ height: 340, display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ width: 200, height: '100%' }}>
+                      <Bottle flavor={s.tag} accent={s.color} src={s.image} />
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 24 }}>
+                    <h3 className="display" style={{ fontSize: 'clamp(24px, 3.4vw, 32px)', letterSpacing: '-0.04em', fontWeight: 700, margin: 0, lineHeight: 0.95 }}>{s.name}.</h3>
+                    <div style={{ fontFamily: 'Inter', fontSize: 14, color: 'var(--ink-60)', marginTop: 8, lineHeight: 1.5 }}>{s.line1} {s.line2}</div>
+                    <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span style={{ fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)' }}>In Stock</span>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--line)' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 16 }}>
+                      <div className="serif" style={{ fontSize: 22, fontStyle: 'normal' }}>{s.price}</div>
+                      <span className="mono" style={{ color: 'var(--ink-40)', fontSize: 10 }}>7 fl oz</span>
+                    </div>
+                    <a href={cartPermalink(s.slug)} onClick={(e) => openCartWithFeedback(e, 'Opening cart...')} className="lineup-buy-btn" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%', minHeight: 48, padding: '14px 20px', borderRadius: 999, background: '#0B0A09', border: '1px solid #0B0A09', color: '#F5F1EA', fontFamily: 'Inter', fontSize: 12, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', textDecoration: 'none', cursor: 'pointer' }}>
+                      Add to Cart
+                      <span style={{ fontSize: 14, lineHeight: 1 }}>→</span>
+                    </a>
+                    <div className="mono" style={{ color: 'var(--ink-40)', fontSize: 9, letterSpacing: '0.14em', marginTop: 10 }}>$3.50 flat US ship · FREE on all 5</div>
+                    <a href={s.detail} onClick={(e) => e.stopPropagation()} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 44, marginTop: 10, color: 'var(--ink-60)', fontFamily: 'JetBrains Mono', fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', textDecoration: 'none' }}>Bottle details</a>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         {/* Trio cta — editorial bundle moment */}
@@ -1876,7 +1903,7 @@ function FlavorPicker({ flavor, setFlavor }) {
               </div>
 
               <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.14em', marginTop: -4 }}>
-                3+ BOTTLES SHIP FREE (US) - GIFT-READY - BEST FOR NEW BUYERS
+                $3.50 FLAT US SHIP · FREE ON ALL 5 BOTTLES · GIFT-READY
               </div>
 
               <div style={{ marginTop: 8 }}>
@@ -1989,7 +2016,7 @@ function FinalCTA() {
               <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
                 {Array.from({ length: 4 }).map((_, j) => (
                   <span key={j} style={{ paddingRight: 32 }}>
-                    PREMIUM INGREDIENTS · SMALL BATCH · MADE IN BONNEY LAKE, WA · FREE US SHIPPING AT $29.99+ SUBTOTAL ·
+                    PREMIUM INGREDIENTS · SMALL BATCH · MADE IN BONNEY LAKE, WA · $3.50 FLAT US SHIPPING · FREE ON ALL 5 BOTTLES ·
                   </span>
                 ))}
               </div>
@@ -2049,7 +2076,7 @@ function FinalCTA() {
             </p>
           </div>
           {[
-          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Shoyu Reserve', WIX_URLS.shoyu], ['Monthly Box', '#monthly'], ['The Next Drop →', '#next-drop']]],
+          ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Shoyu Reserve', WIX_URLS.shoyu], ['Monthly Box', '#monthly']]],
           ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
           ['Company', [['About', '/about'], ['Where to Buy', '/#stores'], ['FAQ', '/faq'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
           map(([h, items]) =>
@@ -2173,7 +2200,7 @@ function Tweaks({ state, set, open, setOpen }) {
 // ——————————————————————————— TrustStrip — 4-icon trust signals (under hero)
 function TrustStrip() {
   const items = [
-    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: '3+ bottles ship FREE (US)' },
+    { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: '$3.50 flat US ship · FREE on all 5' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: 'Love it or your money back' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>, label: 'Ships in 1-2 days' },
     { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in USA' },
@@ -2219,12 +2246,11 @@ const NBG_COLORS = {
 const nbgColor = (key) => NBG_COLORS[key] || NBG_COLORS['--nbg-chili'];
 
 // Brand flavors — orders pick one at random (drives the toast theater).
-const NBG_IMG = 'https://nu2vqa-ma.myshopify.com/cdn/shop/files/';
 const NBG_FLAVORS = [
-  { name: 'Original',     tag: 'Garlic & Sesame', color: '--nbg-sesame', img: NBG_IMG + 'nb-original-clean.png?width=240',     weight: 4 },
-  { name: 'Spicy Tokyo',  tag: 'Roasted Chili',   color: '--nbg-chili',  img: NBG_IMG + 'nb-spicy-tokyo-clean.png?width=240',  weight: 4 },
-  { name: 'Citrus Shoyu', tag: 'Bright Shoyu',    color: '--nbg-citrus', img: NBG_IMG + 'nb-citrus-shoyu-clean.png?width=240', weight: 3 },
-  { name: 'Shoyu Reserve', tag: 'Slow-brewed depth', color: '--nbg-gold', img: '/uploads/nb-shoyu-reserve-front-no-shadow-tight-2026-05-17.webp', weight: 1 },
+  { name: 'Original',     tag: 'Garlic & Sesame', color: '--nbg-sesame', img: '/uploads/nb-original-front-cutout-v2-2026-06-07.webp',     weight: 4 },
+  { name: 'Spicy Tokyo',  tag: 'Roasted Chili',   color: '--nbg-chili',  img: '/uploads/nb-spicy-front-cutout-v2-2026-06-07.webp',        weight: 4 },
+  { name: 'Citrus Shoyu', tag: 'Bright Shoyu',    color: '--nbg-citrus', img: '/uploads/nb-citrus-front-cutout-v2-2026-06-07.webp',       weight: 3 },
+  { name: 'Shoyu Reserve', tag: 'Slow-brewed depth', color: '--nbg-gold', img: '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', weight: 1 },
   { name: 'The Trio',     tag: 'One of each',     color: '--nbg-cream',  img: '/uploads/og-trio-counter-page.webp',     weight: 2 },
 ];
 const NBG_FLAVOR_POOL = [];
@@ -3336,17 +3362,9 @@ function MobileAppDock({ flavor, flavors }) {
 
 function StickyCartBar({ flavor, flavors }) {
   const [visible, setVisible] = useState(false);
-  const [reserveVisible, setReserveVisible] = useState(false);
   useEffect(() => {
     const onScroll = () => {
       setVisible(window.scrollY > window.innerHeight * 0.85);
-      const reserve = document.getElementById('next-drop');
-      if (!reserve) {
-        setReserveVisible(false);
-        return;
-      }
-      const rect = reserve.getBoundingClientRect();
-      setReserveVisible(rect.top < 90 && rect.bottom > 160);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
@@ -3357,7 +3375,7 @@ function StickyCartBar({ flavor, flavors }) {
     };
   }, []);
   const f = flavors[flavor] || flavors.original;
-  const showBar = visible && !reserveVisible;
+  const showBar = visible;
   const barName = `NoodleBomb ${f.name}`;
   const barPrice = `— ${f.price}`;
   const barHref = cartPermalink(flavor);
@@ -3369,23 +3387,21 @@ function StickyCartBar({ flavor, flavors }) {
       inert={!showBar ? '' : undefined}
     >
       <div className="scb-left">
-        <span className="scb-dot" style={{ background: reserveVisible ? '#e8f0ff' : f.color }} />
+        <span className="scb-dot" style={{ background: f.color }} />
         <span className="scb-name">{barName}</span>
         <span className="scb-price">{barPrice}</span>
       </div>
       <div className="scb-right">
-        {!reserveVisible && (
-          <a
-            href={cartPermalink('trio')}
-            className="scb-trio"
-            tabIndex={showBar ? undefined : -1}
-          >3-Pack — $29.99</a>
-        )}
         <a
-          href={reserveVisible ? '#shoyu-reserve-details' : barHref}
+          href={cartPermalink('trio')}
+          className="scb-trio"
+          tabIndex={showBar ? undefined : -1}
+        >3-Pack — $29.99</a>
+        <a
+          href={barHref}
           className="scb-btn"
           tabIndex={showBar ? undefined : -1}
-        >{reserveVisible ? 'Flavor details' : barCta}</a>
+        >{barCta}</a>
       </div>
     </div>
   );
@@ -3481,13 +3497,39 @@ function BuildBundle() {
       ink: FLAVORS.citrus.ink,
       image: FLAVOR_IMAGES.citrus,
       core: true
+    },
+    {
+      slug: 'shoyu',
+      name: 'Shoyu Reserve',
+      eyebrow: 'Reserve soy',
+      role: 'Slow-brewed premium soy sauce. Bold, clean finish.',
+      price: 11.99,
+      color: '#D7A84D',
+      rgb: '215, 168, 77',
+      ink: '#0E0D0C',
+      image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+      core: false
+    },
+    {
+      slug: 'shoyuspicy',
+      name: 'Spicy Shoyu',
+      eyebrow: 'Reserve spicy',
+      role: 'The reserve bottle, turned up \u2014 slow-brewed depth with real heat.',
+      price: 11.99,
+      color: '#B2221A',
+      rgb: '178, 34, 25',
+      ink: '#F5F1EA',
+      image: 'uploads/nb-shoyu-spicy-front-cutout-v1-2026-06-07.webp',
+      core: false
     }
   ];
 
   const [quantities, setQuantities] = useState({
     original: 1,
     spicy: 1,
-    citrus: 1
+    citrus: 1,
+    shoyu: 0,
+    shoyuspicy: 0
   });
   const [added, setAdded] = useState(false);
   const [savedLoadouts, setSavedLoadouts] = useState(readSavedLoadouts);
@@ -3631,7 +3673,9 @@ function BuildBundle() {
     setQuantities({
       original: Math.max(0, Math.min(9, Math.floor(Number(saved.original) || 0))),
       spicy: Math.max(0, Math.min(9, Math.floor(Number(saved.spicy) || 0))),
-      citrus: Math.max(0, Math.min(9, Math.floor(Number(saved.citrus) || 0)))
+      citrus: Math.max(0, Math.min(9, Math.floor(Number(saved.citrus) || 0))),
+      shoyu: Math.max(0, Math.min(9, Math.floor(Number(saved.shoyu) || 0))),
+      shoyuspicy: Math.max(0, Math.min(9, Math.floor(Number(saved.shoyuspicy) || 0)))
     });
     setAdded(false);
     showLoadoutMessage('Loadout loaded');
@@ -3669,7 +3713,7 @@ function BuildBundle() {
             </p>
             <div className="bundle-savings-banner">
               <strong>Any 3 bottles = Trio pricing</strong>
-              <span>Mix flavors. Save automatically. 3+ bottles ship FREE (US).</span>
+              <span>Mix flavors. Save automatically. $3.50 flat US ship · FREE on all 5.</span>
             </div>
           </div>
         </Reveal>
@@ -3786,7 +3830,7 @@ function BuildBundle() {
                 {added ? 'Added to cart' : `Add ${totalBottles || 0} bottle${totalBottles === 1 ? '' : 's'} - ${money(cartTotal)}`}
                 <span aria-hidden="true">→</span>
               </a>
-              <div className="bundle-note">Any 3 bottles unlock Trio savings and FREE US shipping. Pick the flavors you actually want.</div>
+              <div className="bundle-note">Any 3 bottles unlock Trio savings. $3.50 flat US shipping \u2014 FREE when you grab all 5 (both Shoyu + 3 core). Priority $12 at checkout.</div>
               <div className="bundle-shelf">
                 <div className="bundle-shelf-head">
                   <div>
@@ -3830,6 +3874,273 @@ function BuildBundle() {
   );
 }
 
+
+// THE DROP — Index 09. Spotlight-stage reserve section announcing the expanded
+// line: Shoyu Reserve + the new Spicy Shoyu and Fire Dust. Ported from the
+// "Reserve Section Final" design handoff. A spotlight auto-sweeps across the
+// three bottles on a 4s timer; hovering/clicking a bottle or its card takes the
+// light and pauses the sweep. Uses the production webp cutouts from /uploads.
+const TDROP_MONO = "'Space Mono', 'JetBrains Mono', monospace";
+const TDROP_DISP = "'Inter Tight', system-ui, sans-serif";
+const TDROP_SERIF = "'Spectral', Georgia, serif";
+const TDROP_PRODUCTS = [
+  {
+    key: 'classic', slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99,
+    glowRgb: '224,178,76', h: 252, glowInset: '2% -34% 4%',
+    glowBg: 'radial-gradient(46% 44% at 50% 42%, rgba(224,178,76,0.30), rgba(224,178,76,0) 70%)',
+    img: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+    alt: 'NoodleBomb Shoyu Reserve bottle',
+  },
+  {
+    key: 'spicy', slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 11.99,
+    glowRgb: '232,74,58', h: 252, glowInset: '2% -34% 4%',
+    glowBg: 'radial-gradient(46% 44% at 50% 42%, rgba(232,74,58,0.28), rgba(232,74,58,0) 70%)',
+    img: 'uploads/nb-shoyu-spicy-front-cutout-v1-2026-06-07.webp',
+    alt: 'NoodleBomb Spicy Shoyu bottle',
+  },
+  {
+    key: 'firedust', slug: 'firedust', name: 'Fire Dust', price: 10.99,
+    glowRgb: '232,74,58', h: 206, glowInset: '6% -26% 4%',
+    glowBg: 'radial-gradient(50% 46% at 50% 48%, rgba(232,74,58,0.30), rgba(232,74,58,0) 70%)',
+    img: 'uploads/nb-fire-dust-front-cutout-2026-06-10.webp',
+    alt: 'NoodleBomb Fire Dust seasoning topper',
+  },
+];
+
+const TDROP_CSS = `
+.tdrop *{box-sizing:border-box;}
+@keyframes tdropSway{0%,100%{transform:rotate(-1.6deg);}50%{transform:rotate(1.6deg);}}
+@keyframes tdropFloat{0%{transform:translateY(0);}100%{transform:translateY(-14px);}}
+@keyframes tdropMote{0%{opacity:0;transform:translateY(26px);}25%{opacity:0.9;}100%{opacity:0;transform:translateY(-150px);}}
+.tdrop-slot{transition:opacity 500ms ease, filter 500ms ease, transform 500ms cubic-bezier(.2,.7,.2,1);transform-origin:bottom center;cursor:pointer;}
+.tdrop-card{transition:transform 180ms cubic-bezier(.2,.7,.2,1), box-shadow 180ms ease, border-color 180ms ease;}
+.tdrop-card--gold:hover{transform:translateY(-3px);box-shadow:0 32px 52px -20px rgba(0,0,0,0.75);border-color:rgba(224,178,76,0.3);}
+.tdrop-card--chili:hover{transform:translateY(-3px);box-shadow:0 32px 52px -20px rgba(0,0,0,0.75);border-color:rgba(232,74,58,0.35);}
+.tdrop-card--hero{transition:transform 180ms cubic-bezier(.2,.7,.2,1), box-shadow 180ms ease;}
+.tdrop-card--hero:hover{transform:translateY(-3px);box-shadow:0 38px 60px -22px rgba(0,0,0,0.8), 0 0 80px -20px rgba(232,74,58,0.65);}
+.tdrop-btn{transition:background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, transform 120ms ease;}
+.tdrop-btn:active{transform:scale(0.99) translateY(1px);}
+.tdrop-btn--gold:hover{background:#1E170F;border-color:rgba(224,178,76,0.4);}
+.tdrop-btn--chiliDark:hover{background:#1E170F;border-color:rgba(232,74,58,0.45);}
+.tdrop-btn--chili:hover{background:linear-gradient(180deg,#F05545,#d4453a);box-shadow:0 0 56px -8px rgba(232,74,58,0.75);}
+.tdrop-btn--cta:hover{background:linear-gradient(180deg,#EBC066,#D4A848);box-shadow:0 0 58px -10px rgba(224,178,76,0.7);}
+@media (prefers-reduced-motion: reduce){.tdrop *{animation:none!important;}}
+@media (max-width:760px){
+  .tdrop-wrap{padding:64px 20px 80px!important;}
+  .tdrop-header{flex-direction:column;align-items:flex-start!important;}
+  .tdrop-h{font-size:clamp(32px,9vw,46px)!important;}
+  .tdrop-specimens{grid-template-columns:1fr!important;}
+  .tdrop-kanji{font-size:220px!important;}
+  .tdrop-stage{min-height:300px!important;}
+  .tdrop-strip{flex-direction:column;align-items:flex-start!important;}
+  .tdrop-strip .tdrop-btn{margin-left:0!important;}
+}
+`;
+
+function TheDropBottle({ p, anim }) {
+  return (
+    <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', animation: anim, transformOrigin: 'bottom center' }}>
+      <div aria-hidden="true" style={{ position: 'absolute', inset: p.glowInset, background: p.glowBg, filter: 'blur(14px)' }} />
+      <img src={p.img} alt={p.alt} loading="lazy" decoding="async"
+        style={{ position: 'relative', zIndex: 1, height: p.h, width: 'auto', display: 'block', filter: 'drop-shadow(0 20px 20px rgba(0,0,0,0.5))' }} />
+    </div>
+  );
+}
+
+function TheDropMeter({ label, pct, kind }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <span style={{ font: `700 10px ${TDROP_MONO}`, letterSpacing: '0.14em', color: 'rgba(240,235,227,0.5)', width: 42 }}>{label}</span>
+      <div style={{ flex: 1, height: 4, borderRadius: 999, background: '#261D14', overflow: 'hidden' }}>
+        <i style={{ display: 'block', height: '100%', width: pct, background: kind === 'heat' ? 'linear-gradient(90deg,#b5352a,#E84A3A)' : 'linear-gradient(90deg,#8E6B2E,#E0B24C)' }} />
+      </div>
+    </div>
+  );
+}
+
+function TheDrop() {
+  const [sweep, setSweep] = useState(1);
+  const [paused, setPaused] = useState(false);
+  const pausedRef = useRef(false);
+  useEffect(() => { pausedRef.current = paused; }, [paused]);
+
+  // One 4s auto-sweep; pauses permanently once the shopper takes control.
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!pausedRef.current) setSweep((s) => (s + 1) % 3);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Load the two display fonts this section needs but the site doesn't ship globally.
+  useEffect(() => {
+    if (typeof document === 'undefined' || document.getElementById('tdrop-fonts')) return;
+    const link = document.createElement('link');
+    link.id = 'tdrop-fonts';
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Spectral:ital,wght@1,500;1,600&display=swap';
+    document.head.appendChild(link);
+  }, []);
+
+  const focus = (i) => () => { setSweep(i); setPaused(true); };
+  const addOne = (p) => (e) => addAndOpenCart({ slug: p.slug, name: p.name, price: p.price, qty: 1 }, e);
+  const addDrop = (e) => {
+    if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
+    if (e) e.preventDefault();
+    if (!window.NB_CART) { window.location.href = '/cart?add=shoyu&qty=1'; return; }
+    TDROP_PRODUCTS.forEach((p) => window.NB_CART.add({ slug: p.slug, name: p.name, price: p.price, qty: 1 }));
+    window.dispatchEvent(new CustomEvent('nb-open-cart'));
+  };
+
+  const active = TDROP_PRODUCTS[sweep];
+  const conePos = [16.6, 50, 83.3][sweep];
+
+  const fleckDefs = [
+    { left: '12%', bottom: '34%', size: 5, color: 'rgba(232,74,58,0.55)', dur: 4.2, delay: 0 },
+    { left: '22%', bottom: '58%', size: 3, color: 'rgba(224,178,76,0.5)', dur: 5.1, delay: 0.8 },
+    { left: '38%', bottom: '72%', size: 4, color: 'rgba(232,74,58,0.4)', dur: 4.6, delay: 1.6 },
+    { left: '57%', bottom: '66%', size: 3, color: 'rgba(224,178,76,0.45)', dur: 5.4, delay: 0.4 },
+    { left: '70%', bottom: '48%', size: 5, color: 'rgba(232,74,58,0.5)', dur: 4.0, delay: 1.2 },
+    { left: '84%', bottom: '62%', size: 3, color: 'rgba(224,178,76,0.4)', dur: 5.8, delay: 2.0 },
+    { left: '90%', bottom: '30%', size: 4, color: 'rgba(232,74,58,0.45)', dur: 4.8, delay: 0.6 },
+  ];
+
+  return (
+    <section id="the-drop" className="tdrop tdrop-wrap" aria-label="The Drop — new releases"
+      style={{
+        fontFamily: TDROP_DISP, color: '#F0EBE3',
+        backgroundColor: '#0E0D0C',
+        backgroundImage: 'radial-gradient(58% 44% at 50% -6%, rgba(224,178,76,0.20), rgba(224,178,76,0) 70%), repeating-linear-gradient(90deg, rgba(240,235,227,0.012) 0 1px, transparent 1px 7px)',
+        padding: '96px 48px 110px',
+      }}>
+      <style>{TDROP_CSS}</style>
+      <div className="tdrop-inner" style={{ maxWidth: 1200, margin: '0 auto' }}>
+
+        {/* section header */}
+        <div className="tdrop-header" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap', marginBottom: 18 }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18, flexWrap: 'wrap' }}>
+              <span style={{ font: `700 12px ${TDROP_MONO}`, letterSpacing: '0.22em', color: '#E0B24C' }}>INDEX 09 — NEW DROP</span>
+              <span style={{ font: `700 10px ${TDROP_MONO}`, letterSpacing: '0.14em', color: '#1A0806', background: 'linear-gradient(180deg,#E84A3A,#c93c2e)', padding: '5px 12px', borderRadius: 999 }}>JUST DROPPED</span>
+            </div>
+            <h2 className="tdrop-h" style={{ font: `800 clamp(40px,5vw,64px)/0.95 ${TDROP_DISP}`, letterSpacing: '-0.03em', margin: 0, background: 'linear-gradient(180deg,#FAF5EA 0%,#EBDDBE 38%,#C9A24E 58%,#F0E6CF 78%,#A8843C 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Heat joins the reserve.</h2>
+            <h2 className="tdrop-h" style={{ font: `800 clamp(40px,5vw,64px)/0.95 ${TDROP_DISP}`, letterSpacing: '-0.03em', margin: 0, color: '#C9A24E' }}>The line just got bigger.</h2>
+          </div>
+          <p style={{ font: `400 16px/1.6 ${TDROP_DISP}`, color: 'rgba(240,235,227,0.6)', maxWidth: 360, margin: '0 0 6px' }}>Same slow-brewed depth, now with a fire under it. Spicy Shoyu leads the drop. Fire Dust finishes the bowl.</p>
+        </div>
+
+        {/* the stage — spotlight shelf */}
+        <div className="tdrop-stage" style={{ position: 'relative', marginTop: 44, minHeight: 404 }}>
+          <span className="tdrop-kanji" aria-hidden="true" style={{ position: 'absolute', zIndex: 0, bottom: -30, left: '50%', transform: 'translateX(-50%)', font: `600 380px/1 ${TDROP_SERIF}`, color: 'rgba(232,74,58,0.05)', pointerEvents: 'none', userSelect: 'none' }}>辛</span>
+
+          {/* floating flecks */}
+          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+            {fleckDefs.map((f, i) => (
+              <span key={i} style={{ position: 'absolute', left: f.left, bottom: f.bottom, width: f.size, height: f.size, borderRadius: '50%', background: f.color, boxShadow: `0 0 ${f.size * 2}px ${f.color}`, animation: `tdropFloat ${f.dur}s ease-in-out ${f.delay}s infinite alternate` }} />
+            ))}
+          </div>
+
+          {/* spotlight cone + dust motes (colored by active product) */}
+          <div aria-hidden="true" style={{ position: 'absolute', zIndex: 1, top: -24, bottom: 0, left: `${conePos}%`, width: '42%', transform: 'translateX(-50%)', background: `radial-gradient(50% 86% at 50% 0%, rgba(${active.glowRgb},0.26), rgba(${active.glowRgb},0.05) 60%, transparent 78%)`, transition: 'left 600ms cubic-bezier(.2,.7,.2,1), background 600ms ease', pointerEvents: 'none' }}>
+            {[0, 1, 2, 3].map((i) => (
+              <span key={i} style={{ position: 'absolute', bottom: 46, left: `${32 + i * 12}%`, width: i % 2 ? 3 : 4, height: i % 2 ? 3 : 4, borderRadius: '50%', background: `rgba(${active.glowRgb},0.7)`, boxShadow: `0 0 8px rgba(${active.glowRgb},0.7)`, animation: `tdropMote ${3.6 + i * 0.9}s linear ${i * 1.1}s infinite` }} />
+            ))}
+          </div>
+
+          {/* product row */}
+          <div style={{ position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignItems: 'end', minHeight: 404, paddingBottom: 16 }}>
+            {TDROP_PRODUCTS.map((p, i) => {
+              const isActive = i === sweep;
+              const transform = isActive ? 'scale(1.1)' : `scale(0.94) rotate(${i < sweep ? '-3.5deg' : '3.5deg'})`;
+              return (
+                <div key={p.key} className="tdrop-slot" onMouseEnter={focus(i)} onClick={focus(i)} role="button" tabIndex={0}
+                  aria-label={`Spotlight ${p.name}`}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); focus(i)(); } }}
+                  style={{ display: 'flex', justifyContent: 'center', opacity: isActive ? 1 : 0.38, filter: isActive ? 'none' : 'saturate(0.5) brightness(0.7)', transform }}>
+                  <TheDropBottle p={p} anim={isActive ? 'tdropSway 4s ease-in-out infinite' : 'none'} />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* shelf line */}
+          <div aria-hidden="true" style={{ position: 'absolute', left: '4%', right: '4%', bottom: 14, height: 2, background: 'linear-gradient(90deg,transparent,rgba(224,178,76,0.35) 18%,rgba(232,74,58,0.45) 50%,rgba(224,178,76,0.35) 82%,transparent)', boxShadow: '0 0 30px rgba(232,74,58,0.3)' }} />
+          {/* floor marks */}
+          <div aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, bottom: -8, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+            {['01', '02', '03'].map((n) => (
+              <span key={n} style={{ textAlign: 'center', font: `700 10px ${TDROP_MONO}`, letterSpacing: '0.3em', color: 'rgba(240,235,227,0.22)' }}>{n}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* specimen cards */}
+        <div className="tdrop-specimens" style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr 1fr', gap: 20, marginTop: 34, alignItems: 'start' }}>
+
+          {/* NO.01 — Shoyu Reserve */}
+          <div className="tdrop-card tdrop-card--gold" onMouseEnter={focus(0)}
+            style={{ border: '1px solid rgba(240,235,227,0.10)', borderRadius: 14, background: 'linear-gradient(180deg,#1A140D,#120E09)', boxShadow: '0 24px 40px -20px rgba(0,0,0,0.6)', padding: '22px 24px' }}>
+            <span style={{ font: `700 11px ${TDROP_MONO}`, letterSpacing: '0.18em', color: '#C9A24E' }}>NO.01 · THE ORIGINAL</span>
+            <h3 style={{ font: `800 22px/1 ${TDROP_DISP}`, letterSpacing: '-0.02em', margin: '9px 0 5px', color: '#F0EBE3' }}>Shoyu Reserve.</h3>
+            <p style={{ font: `400 13.5px/1.5 ${TDROP_DISP}`, color: 'rgba(240,235,227,0.6)', margin: '0 0 14px' }}>Slow-brewed depth. Bold, clean finish.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+              <TheDropMeter label="UMAMI" pct="92%" kind="umami" />
+              <TheDropMeter label="HEAT" pct="7%" kind="heat" />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ font: `500 italic 21px ${TDROP_SERIF}`, color: '#F0EBE3' }}>$11.99</span>
+              <button onClick={addOne(TDROP_PRODUCTS[0])} className="tdrop-btn tdrop-btn--gold" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 18px', border: '1px solid rgba(240,235,227,0.14)', borderRadius: 999, background: '#14100B', color: '#F0EBE3', font: `700 11px ${TDROP_DISP}`, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer' }}>Add →</button>
+            </div>
+          </div>
+
+          {/* NO.02 hero — Spicy Shoyu */}
+          <div className="tdrop-card tdrop-card--hero" onMouseEnter={focus(1)}
+            style={{ position: 'relative', border: '1px solid rgba(232,74,58,0.45)', borderRadius: 14, background: 'linear-gradient(180deg,#1E120E,#140C0A)', boxShadow: '0 30px 50px -22px rgba(0,0,0,0.7), 0 0 60px -24px rgba(232,74,58,0.5)', padding: '24px 26px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ font: `700 11px ${TDROP_MONO}`, letterSpacing: '0.18em', color: '#E84A3A' }}>NO.02 · WANT HEAT</span>
+              <span aria-hidden="true" style={{ font: `700 22px/1 ${TDROP_SERIF}`, color: 'rgba(232,74,58,0.6)' }}>辛</span>
+            </div>
+            <h3 style={{ font: `800 26px/1 ${TDROP_DISP}`, letterSpacing: '-0.02em', margin: '10px 0 5px', color: '#F0EBE3' }}>Spicy Shoyu.</h3>
+            <p style={{ font: `400 14px/1.5 ${TDROP_DISP}`, color: 'rgba(240,235,227,0.62)', margin: '0 0 14px' }}>The reserve bottle, turned up. Real chili, same slow-brewed base.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+              <TheDropMeter label="UMAMI" pct="88%" kind="umami" />
+              <TheDropMeter label="HEAT" pct="74%" kind="heat" />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ font: `500 italic 23px ${TDROP_SERIF}`, color: '#F0EBE3' }}>$11.99</span>
+              <span style={{ font: `700 10px ${TDROP_MONO}`, letterSpacing: '0.14em', color: 'rgba(240,235,227,0.4)' }}>7 FL OZ</span>
+              <button onClick={addOne(TDROP_PRODUCTS[1])} className="tdrop-btn tdrop-btn--chili" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '13px 22px', border: 'none', borderRadius: 999, background: 'linear-gradient(180deg,#E84A3A,#c93c2e)', color: '#fff', font: `700 12px ${TDROP_DISP}`, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer', boxShadow: '0 0 40px -10px rgba(232,74,58,0.6)' }}>Add →</button>
+            </div>
+          </div>
+
+          {/* NO.03 — Fire Dust */}
+          <div className="tdrop-card tdrop-card--chili" onMouseEnter={focus(2)}
+            style={{ border: '1px solid rgba(240,235,227,0.10)', borderRadius: 14, background: 'linear-gradient(180deg,#1A140D,#120E09)', boxShadow: '0 24px 40px -20px rgba(0,0,0,0.6)', padding: '22px 24px' }}>
+            <span style={{ font: `700 11px ${TDROP_MONO}`, letterSpacing: '0.18em', color: '#E84A3A' }}>NO.03 · THE TOPPER</span>
+            <h3 style={{ font: `800 22px/1 ${TDROP_DISP}`, letterSpacing: '-0.02em', margin: '9px 0 5px', color: '#F0EBE3' }}>Fire Dust.</h3>
+            <p style={{ font: `400 13.5px/1.5 ${TDROP_DISP}`, color: 'rgba(240,235,227,0.6)', margin: '0 0 14px' }}>Gochugaru, toasted sesame, shiitake. Dust every bowl.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+              <TheDropMeter label="UMAMI" pct="80%" kind="umami" />
+              <TheDropMeter label="HEAT" pct="62%" kind="heat" />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ font: `500 italic 21px ${TDROP_SERIF}`, color: '#F0EBE3' }}>$10.99</span>
+              <span style={{ font: `700 10px ${TDROP_MONO}`, letterSpacing: '0.14em', color: 'rgba(240,235,227,0.4)' }}>3.2 OZ</span>
+              <button onClick={addOne(TDROP_PRODUCTS[2])} className="tdrop-btn tdrop-btn--chiliDark" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 18px', border: '1px solid rgba(240,235,227,0.14)', borderRadius: 999, background: '#14100B', color: '#F0EBE3', font: `700 11px ${TDROP_DISP}`, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer' }}>Add →</button>
+            </div>
+          </div>
+        </div>
+
+        {/* full-drop bundle strip */}
+        <div className="tdrop-strip" style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', border: '1px solid rgba(201,162,78,0.35)', borderRadius: 14, padding: '18px 26px', background: 'linear-gradient(90deg,rgba(224,178,76,0.10),rgba(20,16,11,0.3))' }}>
+          <span style={{ font: `700 12px ${TDROP_MONO}`, letterSpacing: '0.2em', color: '#E0B24C' }}>GET THE FULL DROP</span>
+          <span style={{ font: `400 14px ${TDROP_DISP}`, color: 'rgba(240,235,227,0.65)' }}>Both sauces + Fire Dust — <span style={{ color: '#F0EBE3', fontWeight: 600 }}>$29.99</span> <span style={{ textDecoration: 'line-through', color: 'rgba(240,235,227,0.4)' }}>$34.97</span> · ships free.</span>
+          <button onClick={addDrop} className="tdrop-btn tdrop-btn--cta" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 9, padding: '13px 26px', border: 'none', borderRadius: 999, background: 'linear-gradient(180deg,#E0B24C,#C99A3F)', color: '#1A1206', font: `700 12px ${TDROP_DISP}`, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer', boxShadow: '0 0 44px -12px rgba(224,178,76,0.55)' }}>Add the drop →</button>
+        </div>
+
+      </div>
+    </section>
+  );
+}
 
 function App() {
   const DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -4010,9 +4321,8 @@ function App() {
           <MonthlyDrop />
           <Testimonials />
           <FlavorPicker flavor={state.flavor} setFlavor={(k) => set({ flavor: k })} />
-          <UseCaseMoments />
           <UseItOn />
-          <NextDrop />
+          <TheDrop />
           <FAQ />
           <FinalCTA />
         </>
