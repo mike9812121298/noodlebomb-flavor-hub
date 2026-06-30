@@ -169,8 +169,8 @@ body.launch-page {
   animation: nbFloat 6s ease-in-out infinite;
 }
 
-.launch-stage img[src*="nb-fire-dust-cutout-tight"],
-.launch-stage img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+.launch-stage img[src*="nb-fire-dust-cutout"],
+.launch-stage img[src*="nb-roasted-garlic-sesame-cutout"] {
   height: min(680px, 68vh);
   width: auto;
   max-width: 100%;
@@ -298,8 +298,8 @@ body.launch-page {
   transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
 }
 
-.sku-card-media img[src*="nb-fire-dust-cutout-tight"],
-.sku-card-media img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+.sku-card-media img[src*="nb-fire-dust-cutout"],
+.sku-card-media img[src*="nb-roasted-garlic-sesame-cutout"] {
   width: min(90%, 360px);
   object-fit: contain;
   object-position: center bottom;
@@ -474,8 +474,8 @@ body.launch-page {
   filter: drop-shadow(0 28px 44px rgba(0, 0, 0, 0.45));
 }
 
-.format-media img[src*="nb-fire-dust-cutout-tight"],
-.format-media img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+.format-media img[src*="nb-fire-dust-cutout"],
+.format-media img[src*="nb-roasted-garlic-sesame-cutout"] {
   width: min(88%, 380px);
   height: min(430px, 48vh);
   object-fit: contain;
@@ -1010,8 +1010,8 @@ body.launch-page {
   filter: drop-shadow(0 32px 52px rgba(0, 0, 0, 0.58));
 }
 
-.pdp-launch-main-img img[src*="nb-fire-dust-cutout-tight"],
-.pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+.pdp-launch-main-img img[src*="nb-fire-dust-cutout"],
+.pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-cutout"] {
   width: min(92%, 560px);
   height: min(690px, 70vh);
   object-fit: contain;
