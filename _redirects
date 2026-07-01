@@ -46,18 +46,22 @@
 /product/citrus-shoyu     https://nu2vqa-ma.myshopify.com/products/citrus-shoyu          302!
 /product/trio             https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio   302!
 /product/the-noodlebomb-trio  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
-# June 2026 launch pages stay on the brand domain for pre-launch education.
+# June 2026 launch pages stay on the brand domain; canonical slugs live at
+# the root (/fire-dust, /roasted-garlic-sesame, /shoyu-reserve) per live
+# behavior verified 2026-07-01. Old /product/* forms 301 to the new slugs.
 /seasonings               /seasonings.html                                             200
-/product/fire-dust        /product-fire-dust.html                                      200
-/product/roasted-garlic-sesame  /product-roasted-garlic-sesame.html                    200
-/product/shoyu-reserve    /product-shoyu-reserve.html                                  200
-# Catch-all for any other /product/* deep link (old emails, ads, social) — go to lineup
-/shoyu-reserve            /product/shoyu-reserve                                         301!
-/product/*                https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
+/product/fire-dust        /fire-dust                                                   301!
+/product/roasted-garlic-sesame  /roasted-garlic-sesame                                 301!
+/product/shoyu-reserve    /shoyu-reserve                                               301!
+/fire-dust                /product-fire-dust.html                                      200
+/roasted-garlic-sesame    /product-roasted-garlic-sesame.html                          200
+/shoyu-reserve            /product-shoyu-reserve.html                                  200
+# No /product/* catch-all: unknown /product/* paths 404 (matches live).
 
-# /shop and /shop/* — primary CTA target on the marketing site
-/shop                     https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
-/shop/*                   https://nu2vqa-ma.myshopify.com/:splat                         302!
+# /shop is a local storefront page (live 2026-07-01); old Shopify-style
+# deep links under /shop/* bounce to it carrying the path in ?s=.
+/shop                     /shop.html                                                   200
+/shop/*                   /shop?s=:splat                                               301!
 
 # Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
 # (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
@@ -84,21 +88,23 @@
 /original-ramen-sauce      /product-original.html      200
 /spicy-tokyo-ramen-sauce   /product-spicy.html         200
 /citrus-shoyu-ramen-sauce  /product-citrus.html        200
-/seasonings                /seasonings.html            200
-/product/fire-dust         /product-fire-dust.html     200
-/product/roasted-garlic-sesame  /product-roasted-garlic-sesame.html  200
-/product/shoyu-reserve     /product-shoyu-reserve.html 200
+/spicy-shoyu-ramen-sauce   /product-spicy-shoyu.html   200
+/ramen-sauce-trio          /ramen-sauce-trio.html      200
 
 # Canonicalize the older static filenames to the search-friendly URLs.
+# (The seasoning-line PDP .html files are NOT canonicalized — live serves
+# them 200 at both URLs as of 2026-07-01.)
 /product-original.html     /original-ramen-sauce       301!
 /product-spicy.html        /spicy-tokyo-ramen-sauce    301!
 /product-citrus.html       /citrus-shoyu-ramen-sauce   301!
-/product-fire-dust.html    /product/fire-dust          301!
-/product-roasted-garlic-sesame.html /product/roasted-garlic-sesame 301!
-/product-shoyu-reserve.html /product/shoyu-reserve     301!
+/product-spicy-shoyu.html  /spicy-shoyu-ramen-sauce    301!
 
 # Pretty URLs for new structural pages added 2026-05-07 launch pass.
 /monthly-box        /monthly-box.html        200
 /privacy            /privacy.html            200
 /terms              /terms.html              200
 /shipping-returns   /shipping-returns.html   200
+/wholesale          /wholesale.html          200
+# The recipe/use-case SEO pages (sauce-for-*, ramen-sauce-for-*,
+# what-is-shoyu, …) rely on Netlify/Cloudflare default pretty-URL
+# resolution of /<slug> -> /<slug>.html — no explicit rules needed.
