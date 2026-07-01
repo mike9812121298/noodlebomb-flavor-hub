@@ -5,6 +5,7 @@
 
 # Block repo internals — robots.txt only deters crawlers, this returns 404
 /src/*              /404.html   404!
+/public/*           /404.html   404!
 /node_modules/*     /404.html   404!
 /supabase/*         /404.html   404!
 /dist/*             /404.html   404!
