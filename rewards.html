@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C; --accent-rgb: 232, 74, 58;">
+<html lang="en" style="--accent:#D4A24A;--accent-ink:#0E0D0C;--accent-rgb:212, 162, 74;--muted:#D5B985;--line:rgba(212,162,74,0.14);--line-strong:rgba(212,162,74,0.26);">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
-<title>NoodleBomb Rewards | Earn Points on Every Order</title>
-<meta name="description" content="Join NoodleBomb Rewards — it's free. Get 250 points to start, earn 5 points on every $1, and turn them into money off your next bottle. Refer a friend, give $5 and get $5." />
+<title>NoodleBomb Flavor Club | Earn Bomb Points on Every Order</title>
+<meta name="description" content="Join the NoodleBomb Flavor Club free. Get 250 Bomb Points to start, earn 5 points on every $1, and turn them into money off your next bottle. Refer a friend, give $5 and get $5." />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 <link rel="canonical" href="https://noodlebomb.co/rewards" />
-<meta property="og:title" content="NoodleBomb Rewards | Earn Points on Every Order" />
-<meta property="og:description" content="Join free, earn points on every order, and turn them into money off the sauce you already love." />
+<meta property="og:title" content="NoodleBomb Flavor Club | Earn Bomb Points" />
+<meta property="og:description" content="Join free, stack Bomb Points on every order, and turn them into money off the sauce you already love." />
 <meta property="og:image" content="https://noodlebomb.co/uploads/nb-trio-package-studio-v2.jpg" />
 <meta property="og:url" content="https://noodlebomb.co/rewards" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="NoodleBomb" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="NoodleBomb Rewards" />
-<meta name="twitter:description" content="Join free, earn points on every order, turn them into money off." />
+<meta name="twitter:title" content="NoodleBomb Flavor Club" />
+<meta name="twitter:description" content="Join free, earn Bomb Points on every order, turn them into sauce money." />
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-trio-package-studio-v2.jpg" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="/page-shared.css">
 <style>
-  /* ── Rewards landing — premium layer on /page-shared.css ── */
+  /* Rewards landing - premium layer on /page-shared.css */
   .rw-hero { padding: clamp(68px, 11vw, 150px) 0 clamp(48px, 7vw, 88px); border-bottom: 1px solid var(--line); }
   .rw-hero-grid { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: clamp(36px, 5vw, 76px); align-items: center; }
   .rw-hero h1.display { font-size: clamp(46px, 8vw, 108px); }
@@ -129,6 +138,127 @@
     .rw-ladder li { grid-template-columns: 92px 1fr auto; gap: 12px; padding: 14px 16px; }
   }
 </style>
+<style>
+  body.grain {
+    background:
+      radial-gradient(circle at 16% 12%, rgba(212,162,74,0.14), transparent 26%),
+      radial-gradient(circle at 84% 18%, rgba(213,185,133,0.1), transparent 28%),
+      linear-gradient(180deg, #11100d 0%, #0d0c0a 100%);
+  }
+  .rw-hero {
+    background:
+      radial-gradient(circle at 12% 18%, rgba(212,162,74,0.12), transparent 24%),
+      radial-gradient(circle at 88% 16%, rgba(213,185,133,0.08), transparent 24%);
+  }
+  .rw-hero h1.display em,
+  .page-cta h2.display em { color: var(--accent); opacity: 1; }
+  .rw-hero .lede {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(19px, 2.3vw, 24px);
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: var(--ink-80);
+  }
+  .rw-actions .btn,
+  .page-cta .btn {
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    min-height: 48px;
+    padding: 0 24px;
+  }
+  .rw-join { background: var(--accent); color: var(--accent-ink); border: 1px solid transparent; }
+  .rw-join:hover { box-shadow: 0 16px 38px rgba(212,162,74,0.24); }
+  .rw-actions .btn-ghost {
+    border-color: var(--line-strong);
+    background: rgba(255,255,255,0.02);
+    color: var(--ink);
+  }
+  .rw-actions .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .rw-cta-note { letter-spacing: 0.18em; }
+  .rw-hero .eyebrow,
+  .page-section .eyebrow,
+  .page-cta .eyebrow { letter-spacing: 0.18em; }
+  .rw-hero .display,
+  .page-section h2.serif,
+  .page-cta h2.display { letter-spacing: -0.05em; }
+  .rw-card {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)),
+      linear-gradient(152deg, #181510 0%, #12100c 100%);
+    color: var(--ink);
+    border-radius: 8px;
+    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.34);
+    border: 1px solid var(--line-strong);
+  }
+  .rw-card::after {
+    opacity: 1;
+    mix-blend-mode: normal;
+    background-image: none;
+    background:
+      linear-gradient(135deg, rgba(212,162,74,0.14), transparent 42%),
+      radial-gradient(circle at 82% 20%, rgba(213,185,133,0.1), transparent 28%);
+  }
+  .rw-card-mark { color: var(--accent-ink); }
+  .rw-card-label,
+  .rw-card-stat span { color: var(--muted); }
+  .rw-seal {
+    background: radial-gradient(circle at 32% 28%, #ead3a3, var(--accent) 62%, #b7852d);
+    color: var(--accent-ink);
+    box-shadow: 0 14px 30px rgba(212,162,74,0.2), inset 0 2px 6px rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+  .rw-seal .u { opacity: 0.72; }
+  .rw-card-copy p { color: var(--ink-60); line-height: 1.6; }
+  .rw-card-foot { border-top-color: var(--line); }
+  .rw-card-stat b { color: var(--ink); }
+  .rw-step,
+  .rw-earn-card,
+  .rw-ladder li,
+  .rw-referral,
+  .rw-redeem-rule { border-radius: 8px; }
+  .rw-earn-card:hover { box-shadow: 0 18px 30px rgba(0,0,0,0.16); }
+  .rw-redeem-rule {
+    background:
+      linear-gradient(180deg, rgba(212,162,74,0.08), rgba(212,162,74,0.02)),
+      var(--paper-2);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  .rw-redeem-rule .big em {
+    font-family: 'Inter Tight', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+  }
+  .rw-referral {
+    background:
+      linear-gradient(180deg, rgba(212,162,74,0.06), rgba(212,162,74,0)),
+      var(--paper-2);
+  }
+  .page-section > .container > p[style] { color: var(--ink-60); }
+  .faq-item { border-color: var(--line); }
+  .faq-item[open] { background: rgba(212,162,74,0.04); }
+  .page-cta {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-bottom: none;
+  }
+  .page-cta p { color: rgba(14,13,12,0.76); }
+  .page-cta .btn-accent {
+    background: var(--accent-ink);
+    color: var(--accent);
+    border-radius: 999px;
+  }
+  .page-cta .btn-accent:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.28); }
+  @media (max-width: 480px) {
+    .rw-actions .btn,
+    .page-cta .btn { width: 100%; justify-content: center; }
+  }
+</style>
 </head>
 <body class="grain">
 <a href="#main" class="skip-to-content">Skip to main content</a>
@@ -168,39 +298,39 @@
     <div class="container">
       <div class="rw-hero-grid">
         <div>
-          <div class="eyebrow">NoodleBomb Rewards</div>
-          <h1 class="display">Good taste,&nbsp;<em>rewarded.</em></h1>
-          <p class="lede">Join free, earn points on every order, and turn them into money off the sauce you already keep on the counter.</p>
+          <div class="eyebrow">NoodleBomb Flavor Club</div>
+          <h1 class="display">Flavor pays&nbsp;<em>you back.</em></h1>
+          <p class="lede">Join free, stack Bomb Points every time you order, and cash them in for money off the sauce you already keep on the counter.</p>
           <div class="rw-actions">
-            <button type="button" class="btn rw-join nb-rewards-cta">Join NoodleBomb Rewards &rarr;</button>
+            <button type="button" class="btn rw-join nb-rewards-cta">Join the Flavor Club &rarr;</button>
             <a class="btn btn-ghost" href="#earn">See ways to earn</a>
           </div>
-          <p class="rw-cta-note">Free to join &middot; <b><span data-nb="signup">250</span> points</b> the moment you do</p>
+          <p class="rw-cta-note">Free to join &middot; <b><span data-nb="signup">250</span> Bomb Points</b> the moment you do</p>
         </div>
 
         <!-- Membership card (parchment) -->
-        <aside class="rw-card" aria-label="NoodleBomb Rewards membership">
+        <aside class="rw-card" aria-label="NoodleBomb Flavor Club membership">
           <div class="rw-card-head">
             <div class="rw-card-brand">
               <span class="rw-card-mark">N</span>
-              <span class="rw-card-name">NoodleBomb Rewards</span>
+              <span class="rw-card-name">Flavor Club</span>
             </div>
-            <span class="rw-card-label">Member</span>
+            <span class="rw-card-label">Bowl crew</span>
           </div>
           <div class="rw-card-body">
             <div class="rw-seal">
               <div>
                 <div class="n"><span data-nb="signup">250</span></div>
-                <div class="u">points</div>
+                <div class="u">Bomb Points</div>
               </div>
             </div>
             <div class="rw-card-copy">
-              <h3>Welcome bonus</h3>
-              <p>We drop <span data-nb="signup">250</span> points in your account the moment you join &mdash; before you've spent a cent.</p>
+              <h3>Starter stash</h3>
+              <p>We drop <span data-nb="signup">250</span> Bomb Points in your account the moment you join &mdash; your first flavor head start.</p>
             </div>
           </div>
           <div class="rw-card-foot">
-            <div class="rw-card-stat"><b><span data-nb="earnRate">5</span> pts / $1</b><span>Every order</span></div>
+            <div class="rw-card-stat"><b><span data-nb="earnRate">5</span> pts / $1</b><span>Every sauce run</span></div>
             <div class="rw-card-stat"><b><span data-nb="redeemPer">100</span> pts = $1</b><span>Money off</span></div>
             <div class="rw-card-stat"><b>No expiry</b><span>Points keep</span></div>
           </div>
@@ -214,7 +344,7 @@
   <section class="page-section">
     <div class="container">
       <div class="eyebrow">How it works</div>
-      <h2 class="serif">Three steps. No catch.</h2>
+      <h2 class="serif">Sauce in. Bomb Points out.</h2>
       <div class="rw-steps">
         <div class="rw-step">
           <div class="rw-step-n">01 / Join</div>
@@ -223,13 +353,13 @@
         </div>
         <div class="rw-step">
           <div class="rw-step-n">02 / Earn</div>
-          <h3>Rack up points</h3>
-          <p>Collect <span data-nb="earnRate">5</span> points for every $1 you spend &mdash; plus bonus points for sharing and your birthday.</p>
+          <h3>Stack Bomb Points</h3>
+          <p>Collect <span data-nb="earnRate">5</span> Bomb Points for every $1 you spend &mdash; plus bonus drops for sharing and your birthday.</p>
         </div>
         <div class="rw-step">
           <div class="rw-step-n">03 / Redeem</div>
           <h3>Cash them in</h3>
-          <p>Trade points for money off at checkout. <span data-nb="redeemPer">100</span> points is $1 &mdash; yours to spend whenever.</p>
+          <p>Trade Bomb Points for money off at checkout. <span data-nb="redeemPer">100</span> points is $1 &mdash; yours to spend whenever.</p>
         </div>
       </div>
     </div>
@@ -239,12 +369,12 @@
   <section class="page-section" id="earn">
     <div class="container">
       <div class="eyebrow">Ways to earn</div>
-      <h2 class="serif">Points add up fast.</h2>
+      <h2 class="serif">Bomb Points stack fast.</h2>
       <div class="rw-earn">
         <div class="rw-earn-card">
           <div class="rw-earn-value"><span data-nb="signup">250</span><small>One time</small></div>
           <h3>Create an account</h3>
-          <p>Join the program and the points land in your account right away.</p>
+          <p>Join the club and your starter stash lands right away.</p>
         </div>
         <div class="rw-earn-card">
           <div class="rw-earn-value"><span data-nb="earnRate">5</span><small>Per $1 spent</small></div>
@@ -254,12 +384,12 @@
         <div class="rw-earn-card">
           <div class="rw-earn-value"><span data-nb="facebook">100</span><small>Per share</small></div>
           <h3>Share on Facebook</h3>
-          <p>Tell your people about the sauce and pick up points for it.</p>
+          <p>Tell your people about the sauce and pick up Bomb Points for it.</p>
         </div>
         <div class="rw-earn-card">
           <div class="rw-earn-value"><span data-nb="birthday">250</span><small>Once a year</small></div>
           <h3>Celebrate your birthday</h3>
-          <p>Add your birthday and we'll mark the day with a points gift.</p>
+          <p>Add your birthday and we'll mark the day with a Bomb Points gift.</p>
         </div>
       </div>
     </div>
@@ -269,7 +399,7 @@
   <section class="page-section">
     <div class="container">
       <div class="eyebrow">Ways to redeem</div>
-      <h2 class="serif">Your points are real money.</h2>
+      <h2 class="serif">Bomb Points turn into sauce money.</h2>
       <div class="rw-redeem-grid">
         <div class="rw-redeem-rule">
           <div class="big"><span data-nb="redeemPer">100</span> points <em>=</em> $1</div>
@@ -314,24 +444,24 @@
       <h2 class="serif">Questions, answered.</h2>
       <div class="faq-list">
         <details class="faq-item">
-          <summary class="faq-q">How do I earn points?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
-          <div class="faq-a"><p>You earn <strong><span data-nb="earnRate">5</span> points for every $1</strong> on every order. You also get <strong><span data-nb="signup">250</span> points</strong> for joining, <strong><span data-nb="facebook">100</span></strong> for sharing on Facebook, and <strong><span data-nb="birthday">250</span></strong> on your birthday.</p></div>
+          <summary class="faq-q">How do I earn Bomb Points?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
+          <div class="faq-a"><p>You earn <strong><span data-nb="earnRate">5</span> Bomb Points for every $1</strong> on every order. You also get <strong><span data-nb="signup">250</span> Bomb Points</strong> for joining, <strong><span data-nb="facebook">100</span></strong> for sharing on Facebook, and <strong><span data-nb="birthday">250</span></strong> on your birthday.</p></div>
         </details>
         <details class="faq-item">
-          <summary class="faq-q">What are my points worth?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
-          <div class="faq-a"><p><strong><span data-nb="redeemPer">100</span> points = $1</strong> off. Redeem from <span data-nb="redeemMin">100</span> points up — so 500 points is $5 off, 1,000 is $10, and so on.</p></div>
+          <summary class="faq-q">What are Bomb Points worth?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
+          <div class="faq-a"><p><strong><span data-nb="redeemPer">100</span> points = $1</strong> off. Redeem from <span data-nb="redeemMin">100</span> points up - so 500 points is $5 off, 1,000 is $10, and so on.</p></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">How do I redeem?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
-          <div class="faq-a"><p>Open the Rewards panel (the tab at the corner of any page, or the button below), choose how many points to spend, and you'll get a discount code. Apply it at checkout — that simple.</p></div>
+          <div class="faq-a"><p>Open the Rewards panel (the tab at the corner of any page, or the button below), choose how many Bomb Points to spend, and you'll get a discount code. Apply it at checkout - that simple.</p></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Do my points expire?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
-          <div class="faq-a"><p>No. Your points stay in your account until you're ready to use them.</p></div>
+          <div class="faq-a"><p>No. Your Bomb Points stay in your account until you're ready to use them.</p></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Is it free, and how do I join?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
-          <div class="faq-a"><p>Completely free. Hit <strong>Join NoodleBomb Rewards</strong>, sign up with your email, and your <span data-nb="signup">250</span> welcome points are waiting. Earn on every order you place with that email.</p></div>
+          <div class="faq-a"><p>Completely free. Hit <strong>Join the Flavor Club</strong>, sign up with your email, and your <span data-nb="signup">250</span> welcome Bomb Points are waiting. Earn on every order you place with that email.</p></div>
         </details>
       </div>
     </div>
@@ -340,9 +470,9 @@
   <!-- Final CTA -->
   <section class="page-cta">
     <div class="container">
-      <h2 class="display">Join the&nbsp;<em>club.</em></h2>
-      <p>Free to join. <span data-nb="signup">250</span> points to start. Money off the sauce you already love.</p>
-      <button type="button" class="btn btn-accent nb-rewards-cta">Join NoodleBomb Rewards &rarr;</button>
+      <h2 class="display">Join the&nbsp;<em>Flavor Club.</em></h2>
+      <p>Free to join. <span data-nb="signup">250</span> Bomb Points to start. Money off the sauce you already love.</p>
+      <button type="button" class="btn btn-accent nb-rewards-cta">Join the Flavor Club &rarr;</button>
     </div>
   </section>
 </main>

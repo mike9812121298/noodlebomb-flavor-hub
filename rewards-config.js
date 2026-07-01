@@ -25,6 +25,8 @@
   var NB_REWARDS = {
     publishableKey: 'pub_2d27941cfeaca289',
     programName: 'NoodleBomb Rewards',
+    marketingName: 'NoodleBomb Flavor Club',
+    pointsDisplayName: 'Bomb Points',
     pointsSingular: 'point',
     pointsPlural: 'points',
 

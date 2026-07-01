@@ -51,10 +51,18 @@
       var it = items[i];
       var variantId = variantIdFor(it.slug);
       if (!variantId) continue; // skip unmapped items
-      lines.push({
+      var line = {
         merchandiseId: variantId,
         quantity: Math.max(1, Math.floor(it.qty || 1))
-      });
+      };
+      if (Array.isArray(it.attributes) && it.attributes.length) {
+        line.attributes = it.attributes
+          .filter(function (a) { return a && a.key && a.value; })
+          .map(function (a) {
+            return { key: String(a.key), value: String(a.value) };
+          });
+      }
+      lines.push(line);
     }
     return lines;
   }
