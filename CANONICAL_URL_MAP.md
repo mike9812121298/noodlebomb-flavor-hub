@@ -1,21 +1,23 @@
-# NoodleBomb Canonical URL Map (locked 2026-05-07)
+# NoodleBomb Canonical URL Map (updated 2026-07-01; originally locked 2026-05-07)
 
 **Source of truth.** If you're confused about where something lives, this file decides.
 
-## Architecture (Forever Fix)
+## Architecture
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│  noodlebomb.co  (Netlify, React/Vite static)                       │
-│  Brand front: hero, recipes, about, FAQ, story, social.            │
-│  All "Buy" / "Shop" / "Add to Cart" CTAs route to Shopify.         │
+│  noodlebomb.co  (Netlify — static HTML + esbuild React layer)      │
+│  Brand front AND product catalog: homepage, local PDPs             │
+│  (/original-ramen-sauce, /shoyu-reserve, …), /shop lineup page,    │
+│  ~35 recipe/use-case SEO pages, local cart (localStorage).         │
+│  GA4 G-34HRPRKYCQ · Smile.io rewards ("Flavor Club").              │
 └──────────────────────────┬─────────────────────────────────────────┘
-                           │ 302 redirects
+                           │ Storefront-API cartCreate → hosted checkout
                            ▼
 ┌────────────────────────────────────────────────────────────────────┐
 │  nu2vqa-ma.myshopify.com  (Shopify Basic, paid)                    │
-│  Cash register: PDPs, cart, checkout, orders, payments, tax,       │
-│  shipping, Klaviyo, Judge.me reviews, Shopify Email, GA4, ads.     │
+│  Cash register: checkout, orders, payments, tax, shipping.         │
+│  Legacy per-flavor deep links still 302 here (old ads/emails).     │
 │  Custom domain target: shop.noodlebomb.co (when Wix is migrated).  │
 └────────────────────────────────────────────────────────────────────┘
 
@@ -27,50 +29,57 @@
 └────────────────────────────────────────────────────────────────────┘
 ```
 
+Since the 2026-05-07 "forever fix", PDPs and the shop lineup have moved
+BACK onto the brand domain (local static pages); Shopify remains the
+checkout. Browsing happens on noodlebomb.co, paying happens on Shopify.
+
 ## Canonical URL Table
 
 | What | Canonical URL | Hosted on |
 |------|---------------|-----------|
-| Homepage | https://noodlebomb.co/ | Netlify (React) |
-| About | https://noodlebomb.co/about | Netlify |
-| Recipes | https://noodlebomb.co/recipes | Netlify |
-| FAQ | https://noodlebomb.co/faq | Netlify |
-| Cart (drawer fallback) | https://noodlebomb.co/cart | Netlify |
-| Shop (lineup) | https://nu2vqa-ma.myshopify.com/collections/all | Shopify |
-| PDP — Original | https://nu2vqa-ma.myshopify.com/products/original | Shopify |
-| PDP — Spicy Tokyo | https://nu2vqa-ma.myshopify.com/products/spicy-tokyo | Shopify |
-| PDP — Citrus Shoyu | https://nu2vqa-ma.myshopify.com/products/citrus-shoyu | Shopify |
-| PDP — The NoodleBomb Trio | https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio | Shopify |
-| PDP - Shoyu Reserve preorder | https://nu2vqa-ma.myshopify.com/products/shoyu-reserve | Shopify |
-| Shopify cart | https://nu2vqa-ma.myshopify.com/cart | Shopify |
-| Checkout | https://nu2vqa-ma.myshopify.com/checkouts/* | Shopify hosted |
+| Homepage | https://noodlebomb.co/ | Netlify |
+| Shop (lineup) | https://noodlebomb.co/shop | Netlify (shop.html) |
+| PDP — Original | https://noodlebomb.co/original-ramen-sauce | Netlify |
+| PDP — Spicy Tokyo | https://noodlebomb.co/spicy-tokyo-ramen-sauce | Netlify |
+| PDP — Citrus Shoyu | https://noodlebomb.co/citrus-shoyu-ramen-sauce | Netlify |
+| PDP — Spicy Shoyu | https://noodlebomb.co/spicy-shoyu-ramen-sauce | Netlify |
+| PDP — Shoyu Reserve | https://noodlebomb.co/shoyu-reserve | Netlify |
+| PDP — Fire Dust | https://noodlebomb.co/fire-dust | Netlify |
+| PDP — Roasted Garlic Sesame | https://noodlebomb.co/roasted-garlic-sesame | Netlify |
+| Trio bundle page | https://noodlebomb.co/ramen-sauce-trio | Netlify |
+| Seasonings line | https://noodlebomb.co/seasonings | Netlify |
+| About / Recipes / FAQ | https://noodlebomb.co/{about,recipes,faq} | Netlify |
+| Monthly Box | https://noodlebomb.co/monthly-box | Netlify |
+| Rewards | https://noodlebomb.co/rewards | Netlify |
+| Wholesale | https://noodlebomb.co/wholesale | Netlify |
+| Cart | https://noodlebomb.co/cart | Netlify |
+| Checkout handoff | https://noodlebomb.co/checkout → Shopify | Netlify → Shopify |
+| Shopify checkout | https://nu2vqa-ma.myshopify.com/checkouts/* | Shopify hosted |
 | Monthly Box subs (legacy) | https://shop.noodlebomb.co/* | Wix (do not link) |
 
 ## Redirect Map (noodlebomb.co)
 
-All redirects defined in `_redirects` and `netlify.toml`:
+Behavior verified against production 2026-07-01; defined in `_redirects`
+and `netlify.toml` (keep both in parity — Netlify reads `_redirects` first).
 
 | From | To | Code |
 |------|----|----|
-| /shop | https://nu2vqa-ma.myshopify.com/collections/all | 302 |
-| /shop/* | https://nu2vqa-ma.myshopify.com/:splat | 302 |
-| /product/original-ramen | …/products/original | 302 |
-| /product/spicy-tokyo | …/products/spicy-tokyo | 302 |
-| /product/citrus-shoyu | …/products/citrus-shoyu | 302 |
-| /product/trio | …/products/the-noodlebomb-trio | 302 |
-| /product/the-noodlebomb-trio | …/products/the-noodlebomb-trio | 302 |
-| /product/shoyu-reserve | .../products/shoyu-reserve | 302 |
-| /shoyu-reserve | .../products/shoyu-reserve | 302 |
-| /product/* (other) | …/collections/all | 302 |
-| /product-page/* | …/collections/all | 302 |
-| /cart-page | …/cart | 302 |
-| /category/* | …/collections/:splat | 302 |
-| /ramensauce | …/products/original | 302 |
-| /ramensauce-1 | …/products/citrus-shoyu | 302 |
-| /ramensauce-2 | …/products/spicy-tokyo | 302 |
-| /cart | /cart.html | 200 (rewrite) |
-| /checkout | /checkout.html | 200 (rewrite) |
-| /about, /recipes, /faq | /*.html | 200 (rewrite) |
+| /shop | /shop.html | 200 (rewrite) |
+| /shop/* | /shop?s=:splat | 301 |
+| /product/original-ramen | …/products/original (Shopify) | 302 |
+| /product/spicy-tokyo | …/products/spicy-tokyo (Shopify) | 302 |
+| /product/citrus-shoyu | …/products/citrus-shoyu (Shopify) | 302 |
+| /product/trio, /product/the-noodlebomb-trio | …/products/the-noodlebomb-trio | 302 |
+| /product/{fire-dust,roasted-garlic-sesame,shoyu-reserve} | root slugs | 301 |
+| /product/* (other) | 404 | 404 |
+| /product-page/* | …/collections/all (Shopify) | 302 |
+| /cart-page | …/cart (Shopify) | 302 |
+| /category/* | …/collections/:splat (Shopify) | 302 |
+| /ramensauce, /ramensauce-1, /ramensauce-2 | Shopify PDPs | 302 |
+| /product-{original,spicy,citrus,spicy-shoyu}.html | pretty URLs | 301 |
+| /cart, /checkout | /cart.html, /checkout.html | 200 (rewrite) |
+| /about, /recipes, /faq, /monthly-box, /privacy, /terms, /shipping-returns, /rewards, /wholesale, /seasonings, product slugs | /*.html | 200 (rewrite) |
+| /src/*, /public/*, /node_modules/*, config files | /404.html | 404 |
 
 302 (not 301) on commerce redirects is intentional — lets us cut over to a custom Shopify domain such as shop.noodlebomb.co later without polluting Google's redirect cache for 6+ months.
 
