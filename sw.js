@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v22-auditfix-20260630';
+const NB_CACHE = 'noodlebomb-app-shell-v23-audit-20260701';
 const NB_ASSETS = [
   '/',
   '/index.html',
