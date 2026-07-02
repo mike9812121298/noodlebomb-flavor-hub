@@ -143,7 +143,7 @@
     var normalizedAttributes = normalizeAttributes(item.attributes);
     var incomingAttributesKey = attributesKey(normalizedAttributes);
     var existing = items.find(function (i) {
-      return i.slug === item.slug && attributesKey(i.attributes) === incomingAttributesKey;
+      return i.slug === item.slug && (i.sellingPlanId || '') === (item.sellingPlanId || '') && attributesKey(i.attributes) === incomingAttributesKey;
     });
     var qty = item.qty || 1;
     if (existing) {
@@ -157,6 +157,10 @@
         qty: qty
       };
       if (normalizedAttributes.length) nextItem.attributes = normalizedAttributes;
+      /* Subscribe & Save (prepped 2026-07-02): pass a Shopify SellingPlan gid
+         to check out as a subscription line. UI lands once selling plans
+         exist in Shopify; plumbing is live end-to-end. */
+      if (typeof item.sellingPlanId === 'string' && item.sellingPlanId) nextItem.sellingPlanId = item.sellingPlanId;
       items.push(nextItem);
     }
     safeWrite(items);

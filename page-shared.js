@@ -584,3 +584,49 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
+
+/* \u2500\u2500\u2500\u2500\u2500 Klaviyo-ready email capture (2026-07-02) \u2500\u2500\u2500\u2500\u2500
+   TO GO LIVE: set companyId (Klaviyo public API key, 6-7 chars) and listId
+   below. While either is empty this is a NO-OP and every footer/email form
+   keeps posting to its existing formsubmit.co action. Once set, submissions
+   from any form with an email input are intercepted and sent to Klaviyo's
+   client subscribe API instead (double-opt-in per list settings), with
+   formsubmit kept as the failure fallback. One flip point, every page. */
+(function () {
+  var NB_KLAVIYO = { companyId: '', listId: '' };
+  if (!NB_KLAVIYO.companyId || !NB_KLAVIYO.listId) return;
+  function subscribe(email) {
+    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(NB_KLAVIYO.companyId), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', revision: '2024-10-15' },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: { profile: { data: { type: 'profile', attributes: { email: email } } } },
+          relationships: { list: { data: { type: 'list', id: NB_KLAVIYO.listId } } }
+        }
+      })
+    }).then(function (res) { if (!res.ok) throw new Error('Klaviyo HTTP ' + res.status); });
+  }
+  function init() {
+    document.querySelectorAll('form[action*="formsubmit.co"]').forEach(function (form) {
+      var emailInput = form.querySelector('input[type=email]');
+      if (!emailInput) return;
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var email = String(emailInput.value || '').trim();
+        if (!email) return;
+        var btn = form.querySelector('button[type=submit], input[type=submit]');
+        if (btn) btn.disabled = true;
+        subscribe(email).then(function () {
+          form.innerHTML = '<p style="font:600 14px \'Inter Tight\',sans-serif;color:#D4A24A;margin:0;">You\u2019re in. Watch your inbox.</p>';
+        }).catch(function () {
+          if (btn) btn.disabled = false;
+          form.submit(); // native submit skips listeners; falls back to formsubmit
+        });
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();

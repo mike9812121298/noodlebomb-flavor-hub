@@ -55,6 +55,9 @@
         merchandiseId: variantId,
         quantity: Math.max(1, Math.floor(it.qty || 1))
       };
+      if (typeof it.sellingPlanId === 'string' && /^gid:\/\/shopify\/SellingPlan\/\d+$/.test(it.sellingPlanId)) {
+        line.sellingPlanId = it.sellingPlanId;
+      }
       if (Array.isArray(it.attributes) && it.attributes.length) {
         line.attributes = it.attributes
           .filter(function (a) { return a && a.key && a.value; })
