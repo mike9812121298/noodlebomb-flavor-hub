@@ -800,14 +800,6 @@
     transform: translateX(-110%);
     animation: bundleMeterShine 1.7s ease-in-out infinite;
   }
-  .bundle-meter-sparks {
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.62) 0 1px, transparent 1.5px);
-    background-size: 27px 9px;
-    opacity: 0.38;
-    animation: bundleSpark 1.2s linear infinite;
-  }
   .bundle-status {
     margin: 14px 0 10px;
     min-height: 44px;
@@ -929,10 +921,6 @@
   @keyframes bundleMeterShine {
     0% { transform: translateX(-115%); }
     55%, 100% { transform: translateX(115%); }
-  }
-  @keyframes bundleSpark {
-    from { background-position: 0 0; }
-    to { background-position: 27px 0; }
   }
   @keyframes bundleButtonPop {
     0% { transform: scale(1); }
@@ -1679,7 +1667,7 @@
   .trust-line-track { animation: trust-line-scroll 32s linear infinite; }
   .trust-line-wrap:hover .trust-line-track { animation-play-state: paused; }
   @media (prefers-reduced-motion: reduce) {
-    body::after, body.flavor-shift #main-content, .marq-track, .trust-line-track, .hero-cta-row .btn-accent, .trio-bundle-cta, .use-case-card:hover .use-case-pour, .flavor-select-card.is-active, .fbv2-dynamic-copy, .fbv2-bottle-swap, .fbv2-glow, .fbv2-sauce-ring, .fbv2-sauce-swipe, .fbv2-flavor-burst, .fbv2-stage-caption, .fbv2-mood, .bundle-scanline, .bundle-card.is-selected .bundle-card-glow, .bundle-meter-fill::after, .bundle-meter-sparks, .bundle-add.is-added { animation: none !important; }
+    body::after, body.flavor-shift #main-content, .marq-track, .trust-line-track, .hero-cta-row .btn-accent, .trio-bundle-cta, .use-case-card:hover .use-case-pour, .flavor-select-card.is-active, .fbv2-dynamic-copy, .fbv2-bottle-swap, .fbv2-glow, .fbv2-sauce-ring, .fbv2-sauce-swipe, .fbv2-flavor-burst, .fbv2-stage-caption, .fbv2-mood, .bundle-scanline, .bundle-card.is-selected .bundle-card-glow, .bundle-meter-fill::after, .bundle-add.is-added { animation: none !important; }
     .btn:hover::after { animation: none !important; }
   }
 
@@ -1772,12 +1760,6 @@
   .tweaks .toggle.on::after { left: 16px; }
 
   /* Anti-pattern spam mode (intentionally ugly) */
-  .spam-banner {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 9998;
-    background: #ff1f1f; color: #fff200; font-family: 'Impact', sans-serif; font-size: 18px;
-    padding: 10px; text-align: center; letter-spacing: 2px;
-    animation: blink 0.6s steps(2) infinite;
-  }
   @keyframes blink { 50% { background: #fff200; color: #ff1f1f; } }
 
   /* Sticky Add-to-Cart bar — slides in once the user scrolls past the hero. */
@@ -3823,6 +3805,34 @@
   .nbrb-link { text-align: center; color: var(--ink); opacity: 0.78; text-decoration: none; font-size: 13px; font-family: 'Inter', sans-serif; padding: 6px; }
   .nbrb-link:hover { opacity: 1; }
   @media (max-width: 820px) { .nbrb-actions { flex-direction: row; width: 100%; } .nbrb-join { flex: 1; } }
+
+  /* Mobile compositing diet (2026-07-02): iOS Safari was crashing the tab
+     under layer-memory pressure. Below 769px, decorative blend-mode grain/
+     glow layers are dropped and backdrop blurs replaced with near-opaque
+     fills. Desktop is unchanged. */
+  @media (max-width: 768px) {
+    body::after,
+    .grain::before,
+    .ask-grain,
+    .md-grain,
+    .md-kraft,
+    .scene-grain::after,
+    .scene-citrus .sun-core,
+    .scene-spicy .smear,
+    .hero-bg-media::before,
+    .bundle-scanline,
+    .nbg-grain { display: none !important; }
+    .sticky-cart-bar,
+    .nav.scrolled,
+    .nb-app-dock,
+    .md-photo-badge {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .nav.scrolled { background: rgba(8,7,6,0.97) !important; }
+    .sticky-cart-bar { background: linear-gradient(90deg, rgba(var(--accent-rgb),0.18), rgba(8,7,6,0.97) 44%, rgba(var(--accent-rgb),0.12)) !important; }
+    .nb-app-dock { background: rgba(8,7,6,0.97) !important; }
+  }
 </style>
 <section class="nbrb" aria-label="NoodleBomb Flavor Club">
   <div class="nbrb-inner">
