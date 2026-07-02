@@ -116,7 +116,7 @@ const FLAVOR_IMAGES = {
   shoyu: "uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp"
 };
 const SOY_SAUCES = [
-  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$11.99", image: "uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp", detail: "/shoyu-reserve" },
+  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$11.99", image: "uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp", detail: "/shoyu-reserve" },
   { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "The reserve bottle, turned up.", line2: "Slow-brewed depth with real heat.", price: "$11.99", image: "uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp", detail: "/spicy-shoyu-ramen-sauce" }
 ];
 const FOOD_IMAGES = {
