@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v28-diet-20260702';
+const NB_CACHE = 'noodlebomb-app-shell-v29-bundle5-20260702';
 const NB_ASSETS = [
   '/',
   '/index.html',
@@ -24,6 +24,10 @@ const NB_ASSETS = [
   '/uploads/nb-spicy-front-cutout-2026-05-09.webp',
   '/uploads/nb-citrus-front-cutout-2026-05-09.webp',
   '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+  '/uploads/nb-shoyu-reserve-front-cutout-tight-2026-07-02.webp',
+  '/uploads/nb-shoyu-spicy-front-cutout-tight-2026-07-02.webp',
+  '/uploads/nb-fire-dust-cutout-2026-06-22.webp',
+  '/uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp',
   '/uploads/monthly-subscription-box-2026-05-08.webp'
 ];
 

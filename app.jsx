@@ -2743,18 +2743,61 @@ function BuildBundle() {
       color: "#D7A84D",
       rgb: "215, 168, 77",
       ink: "#0E0D0C",
-      image: "uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp",
+      image: "uploads/nb-shoyu-reserve-front-cutout-tight-2026-07-02.webp",
       core: false
+    },
+    {
+      slug: "shoyuspicy",
+      name: "Spicy Shoyu",
+      eyebrow: "Reserve spicy",
+      role: "The reserve bottle, turned up \u2014 slow-brewed depth with real heat.",
+      price: 12.99,
+      color: "#B2221A",
+      rgb: "178, 34, 25",
+      ink: "#F5F1EA",
+      image: "uploads/nb-shoyu-spicy-front-cutout-tight-2026-07-02.webp",
+      core: false
+    },
+    {
+      slug: "firedust",
+      name: "Fire Dust",
+      eyebrow: "Add-on",
+      role: "Korean chili garlic crunch. Shake it over ramen, wings, and rice.",
+      price: 10.99,
+      color: "#E84A3A",
+      rgb: "232, 74, 58",
+      ink: "#1A0806",
+      image: "uploads/nb-fire-dust-cutout-2026-06-22.webp",
+      core: false,
+      jar: true
+    },
+    {
+      slug: "rgs",
+      name: "Roasted Garlic Sesame",
+      eyebrow: "Add-on",
+      role: "Toasted garlic and sesame crunch for every bowl.",
+      price: 10.99,
+      color: "#C9A24E",
+      rgb: "201, 162, 78",
+      ink: "#0E0D0C",
+      image: "uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp",
+      core: false,
+      jar: true
     }
   ];
   const [quantities, setQuantities] = useState({
     original: 1,
     spicy: 1,
     citrus: 1,
-    shoyu: 0
+    shoyu: 0,
+    shoyuspicy: 0,
+    firedust: 0,
+    rgs: 0
   });
   const [added, setAdded] = useState(false);
-  const totalBottles = products.reduce((sum, p) => sum + quantities[p.slug], 0);
+  const totalBottles = products.reduce((sum, p) => sum + (p.jar ? 0 : quantities[p.slug]), 0);
+  const jarCount = products.reduce((sum, p) => sum + (p.jar ? quantities[p.slug] : 0), 0);
+  const totalItems = totalBottles + jarCount;
   const trioSets = Math.floor(totalBottles / 3);
   const trioBottles = trioSets * 3;
   const compareTotal = products.reduce((sum, p) => sum + quantities[p.slug] * p.price, 0);
@@ -2762,7 +2805,7 @@ function BuildBundle() {
   const discountedMix = [];
   const singles = products.map((product) => {
     const qty = quantities[product.slug];
-    const discountedQty = Math.min(qty, discountedSlots);
+    const discountedQty = product.jar ? 0 : Math.min(qty, discountedSlots);
     discountedSlots -= discountedQty;
     if (discountedQty > 0) discountedMix.push(`${discountedQty}x ${product.name}`);
     return { ...product, qty: Math.max(0, qty - discountedQty) };
@@ -2790,7 +2833,8 @@ function BuildBundle() {
   const level = totalBottles === 0 ? "Empty" : totalBottles === 1 ? "1 bottle" : totalBottles === 2 ? "2 bottles" : trioSets >= 3 ? "Full pantry" : trioSets === 2 ? "Two trios" : trioSets === 1 ? "Trio" : "Building";
   const statusLine = totalBottles === 0 ? "Tap + to add bottles." : trioSets > 0 ? `${trioSets} trio${trioSets === 1 ? "" : "s"} at trio pricing. Add ${bottlesToNextTrio} more bottle${bottlesToNextTrio === 1 ? "" : "s"} for the next trio.` : `Add ${bottlesToNextTrio} more bottle${bottlesToNextTrio === 1 ? "" : "s"} for trio pricing.`;
   const comboLine = trioSets > 0 ? `${trioSets} trio${trioSets === 1 ? "" : "s"} \u2014 ${trioBottles} bottles at trio pricing` : "Any three bottles ship at the trio price.";
-  const avgBottlePrice = totalBottles > 0 ? cartTotal / totalBottles : 0;
+  const jarTotal = products.reduce((sum, p) => sum + (p.jar ? quantities[p.slug] * p.price : 0), 0);
+  const avgBottlePrice = totalBottles > 0 ? (cartTotal - jarTotal) / totalBottles : 0;
   const updateQty = (slug, delta) => {
     setAdded(false);
     setQuantities((current) => ({
@@ -2811,7 +2855,7 @@ function BuildBundle() {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (!totalBottles) return;
+    if (!totalItems) return;
     if (!window.NB_CART) {
       window.location.href = cartPermalink(fallbackSlug);
       return;
@@ -2853,7 +2897,7 @@ function BuildBundle() {
         },
         /* @__PURE__ */ React.createElement("span", { className: "bundle-card-glow", "aria-hidden": "true" }),
         /* @__PURE__ */ React.createElement("span", { className: "bundle-card-top" }, /* @__PURE__ */ React.createElement("span", { className: "mono" }, product.eyebrow), /* @__PURE__ */ React.createElement("span", { className: "bundle-check" }, qty ? `${qty}x` : "0")),
-        /* @__PURE__ */ React.createElement("span", { className: "bundle-bottle-slot" }, /* @__PURE__ */ React.createElement("img", { src: product.image, alt: `${product.name} bottle`, loading: "lazy" })),
+        /* @__PURE__ */ React.createElement("span", { className: "bundle-bottle-slot" }, /* @__PURE__ */ React.createElement("img", { src: product.image, alt: `${product.name} ${product.jar ? "jar" : "bottle"}`, loading: "lazy" })),
         /* @__PURE__ */ React.createElement("span", { className: "bundle-card-copy" }, /* @__PURE__ */ React.createElement("strong", null, product.name), /* @__PURE__ */ React.createElement("span", null, product.role)),
         /* @__PURE__ */ React.createElement("span", { className: "bundle-price" }, money(product.price)),
         /* @__PURE__ */ React.createElement("span", { className: "bundle-qty-controls" }, /* @__PURE__ */ React.createElement(
@@ -2876,7 +2920,7 @@ function BuildBundle() {
             max: "9",
             value: qty,
             onChange: (e) => setFlavorQty(product.slug, e.target.value),
-            "aria-label": `${product.name} bottle count`
+            "aria-label": `${product.name} ${product.jar ? "jar" : "bottle"} count`
           }
         ), /* @__PURE__ */ React.createElement(
           "button",
@@ -2890,17 +2934,17 @@ function BuildBundle() {
           "+"
         ))
       );
-    }))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("div", { className: "bundle-console", "aria-live": "polite" }, /* @__PURE__ */ React.createElement("div", { className: "bundle-level-row" }, /* @__PURE__ */ React.createElement("span", { className: "bundle-level" }, level), /* @__PURE__ */ React.createElement("span", { className: "bundle-percent" }, power, "%")), /* @__PURE__ */ React.createElement("div", { className: "bundle-meter", role: "meter", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": power, "aria-label": "Bundle progress" }, /* @__PURE__ */ React.createElement("div", { className: "bundle-meter-fill" })), /* @__PURE__ */ React.createElement("div", { className: "bundle-status" }, statusLine), /* @__PURE__ */ React.createElement("div", { className: "bundle-combo-line" }, comboLine), /* @__PURE__ */ React.createElement("div", { className: "bundle-loadout" }, /* @__PURE__ */ React.createElement("div", { className: "mono" }, "In your cart"), cartLines.length ? cartLines.map((line) => /* @__PURE__ */ React.createElement("div", { className: "bundle-loadout-line", key: line.slug }, /* @__PURE__ */ React.createElement("span", null, line.qty, "x ", line.name), /* @__PURE__ */ React.createElement("strong", null, money(line.price * line.qty)))) : /* @__PURE__ */ React.createElement("div", { className: "bundle-empty" }, "No bottles selected.")), /* @__PURE__ */ React.createElement("div", { className: "bundle-total" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Total"), /* @__PURE__ */ React.createElement("strong", null, money(cartTotal))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Savings"), /* @__PURE__ */ React.createElement("strong", null, savings > 0 ? money(savings) : "$0.00")), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Bottles"), /* @__PURE__ */ React.createElement("strong", null, totalBottles)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Avg / bottle"), /* @__PURE__ */ React.createElement("strong", null, totalBottles ? money(avgBottlePrice) : "$0.00"))), /* @__PURE__ */ React.createElement(
+    }))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("div", { className: "bundle-console", "aria-live": "polite" }, /* @__PURE__ */ React.createElement("div", { className: "bundle-level-row" }, /* @__PURE__ */ React.createElement("span", { className: "bundle-level" }, level), /* @__PURE__ */ React.createElement("span", { className: "bundle-percent" }, power, "%")), /* @__PURE__ */ React.createElement("div", { className: "bundle-meter", role: "meter", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": power, "aria-label": "Bundle progress" }, /* @__PURE__ */ React.createElement("div", { className: "bundle-meter-fill" })), /* @__PURE__ */ React.createElement("div", { className: "bundle-status" }, statusLine), /* @__PURE__ */ React.createElement("div", { className: "bundle-combo-line" }, comboLine), /* @__PURE__ */ React.createElement("div", { className: "bundle-loadout" }, /* @__PURE__ */ React.createElement("div", { className: "mono" }, "In your cart"), cartLines.length ? cartLines.map((line) => /* @__PURE__ */ React.createElement("div", { className: "bundle-loadout-line", key: line.slug }, /* @__PURE__ */ React.createElement("span", null, line.qty, "x ", line.name), /* @__PURE__ */ React.createElement("strong", null, money(line.price * line.qty)))) : /* @__PURE__ */ React.createElement("div", { className: "bundle-empty" }, "No bottles selected.")), /* @__PURE__ */ React.createElement("div", { className: "bundle-total" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Total"), /* @__PURE__ */ React.createElement("strong", null, money(cartTotal))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Savings"), /* @__PURE__ */ React.createElement("strong", null, savings > 0 ? money(savings) : "$0.00")), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Bottles"), /* @__PURE__ */ React.createElement("strong", null, totalBottles)), jarCount > 0 && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Add-ons"), /* @__PURE__ */ React.createElement("strong", null, jarCount)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", null, "Avg / bottle"), /* @__PURE__ */ React.createElement("strong", null, totalBottles ? money(avgBottlePrice) : "$0.00"))), /* @__PURE__ */ React.createElement(
       "a",
       {
         href: cartPermalink(fallbackSlug),
-        className: `bundle-add ${totalBottles ? "" : "is-disabled"} ${added ? "is-added" : ""}`,
+        className: `bundle-add ${totalItems ? "" : "is-disabled"} ${added ? "is-added" : ""}`,
         onClick: addBundle,
-        "aria-disabled": !totalBottles
+        "aria-disabled": !totalItems
       },
-      added ? "Added to cart" : `Add ${totalBottles || 0} bottle${totalBottles === 1 ? "" : "s"} - ${money(cartTotal)}`,
+      added ? "Added to cart" : `Add ${jarCount > 0 ? `${totalItems || 0} item${totalItems === 1 ? "" : "s"}` : `${totalBottles || 0} bottle${totalBottles === 1 ? "" : "s"}`} - ${money(cartTotal)}`,
       /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true" }, "\u2192")
-    ), /* @__PURE__ */ React.createElement("div", { className: "bundle-note" }, "Any 3 bottles ship at the trio price. $3.50 flat US shipping \\u2014 FREE on $32.99+ US orders. Priority $12 at checkout.")))))
+    ), /* @__PURE__ */ React.createElement("div", { className: "bundle-note" }, "Any 3 bottles ship at the trio price. $3.50 flat US shipping \u2014 FREE on $32.99+ US orders. Priority $12 at checkout.")))))
   );
 }
 const TDROP_MONO = "'Space Mono', 'JetBrains Mono', monospace";
