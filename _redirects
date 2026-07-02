@@ -21,6 +21,7 @@
 /components.json    /404.html   404!
 /.env*              /404.html   404!
 /.gitignore         /404.html   404!
+/GO-LIVE-CHECKLIST.md /404.html  404!
 # Netlify's wildcard `/*.jsx` does NOT override existing static files at
 # the publish root — verified 2026-04-30 (/app.jsx still returned 200).
 # Enumerate each known source file explicitly. Wildcard kept last as

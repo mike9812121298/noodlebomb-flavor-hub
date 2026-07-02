@@ -186,6 +186,13 @@
   status = 404
   force = true
 
+# Internal ops docs (owner checklist) — not for the public site.
+[[redirects]]
+  from = "/GO-LIVE-CHECKLIST.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
 # noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
