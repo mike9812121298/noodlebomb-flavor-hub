@@ -1,78 +1,154 @@
-// Reconstructed 2026-07-01 from the live compiled bundle (/build/components.js on noodlebomb.co).
-// The original JSX source lives only in the deploy tree; this file is the compiled
-// equivalent (plain JS, no JSX sugar) and re-builds byte-stable through esbuild.
-const NB_WIX = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical" };
+// Wix Stores deep links — legacy fallback only (Storefront API checkout
+// fallback path). Add-to-Cart buttons no longer route through Wix.
+const NB_WIX = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
+
+// Branded cart permalink — adds via noodlebomb.co/cart so shoppers do not
+// land inside Shopify's default cart theme before final checkout.
 const NB_SHOPIFY_VARIANT_IDS = {
-  original: "53998041596214",
-  spicy: "53998042120502",
-  citrus: "53998041071926",
-  trio: "53998042644790",
-  shoyu: "54006619636022"
+  original: '53998041596214',
+  spicy:    '53998042120502',
+  citrus:   '53998041071926',
+  trio:     '53998042644790',
+  shoyu:    '54006619636022'
 };
-const NB_SHOPIFY_CART = "/cart.html";
+const NB_SHOPIFY_CART = '/cart.html';
 const nbCartPermalink = (slug, qty = 1) => {
   const n = Math.max(1, Math.floor(Number(qty) || 1));
   return `/cart?add=${encodeURIComponent(slug)}&qty=${n}`;
 };
+
+// Returns the best Wix URL for a given cart item list — used as the last-resort
+// fallback if both Storefront API and Shopify cart-permalink fail.
 const nbCheckoutUrl = (items) => {
   if (!items || items.length === 0) return NB_WIX.shop;
   if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
   return NB_WIX.shop;
 };
+
+// Single-bottle and trio prices (must match app.jsx FLAVORS).
 const NB_BOTTLE_PRICE = 11.99;
-const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 29.99 };
-const NB_FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper", image: "uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp" };
+const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+// Fire Dust seasoning topper — cart-drawer "Power up your cart" one-tap upsell.
+// Mirrors cart.jsx FIRE_DUST; slug/price already in cart-store.js PRODUCT_CATALOG.
+const NB_FIRE_DUST = { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch · 3.2 oz topper', image: 'uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp' };
+
+// Add to local NB_CART and open the slide-out cart drawer (handled by Nav).
+// Modifier-click preserves browser-native navigation; href="/cart.html" stays
+// as the no-JS / accessibility fallback.
 const nbAddAndOpenCart = (item, e) => {
   if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) return;
   if (e) e.preventDefault();
   if (window.NB_CART) window.NB_CART.add(item);
-  window.dispatchEvent(new CustomEvent("nb-open-cart"));
+  window.dispatchEvent(new CustomEvent('nb-open-cart'));
 };
+
+// NoodleBomb — shared components
 const { useEffect, useRef, useState, useMemo, useLayoutEffect } = React;
-function Reveal({ children, delay = 0, as: Tag = "div", className = "", style }) {
+
+// ———————————————————————————————————————————— Reveal on scroll
+function Reveal({ children, delay = 0, as: Tag = 'div', className = '', style }) {
   const ref = useRef(null);
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const el = ref.current; if (!el) return;
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          el.classList.add("in");
-          io.unobserve(el);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+      entries.forEach(e => { if (e.isIntersecting) { el.classList.add('in'); io.unobserve(el); } });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
     io.observe(el);
     return () => io.disconnect();
   }, []);
-  const d = ["", "d1", "d2", "d3", "d4", "d5", "d5"][delay] || "d5";
-  return /* @__PURE__ */ React.createElement(Tag, { ref, className: `reveal ${d} ${className}`, style }, children);
+  const d = ['', 'd1', 'd2', 'd3', 'd4', 'd5', 'd5'][delay] || 'd5';
+  return <Tag ref={ref} className={`reveal ${d} ${className}`} style={style}>{children}</Tag>;
 }
-function Bottle({ label = "NOODLEBOMB", flavor = "ORIGINAL No.01", accent = "var(--accent)", tilt = 0, dripping = false, src = null, loading = "lazy" }) {
+
+// ———————————————————————————————————————————— Bottle (real photo or SVG fallback)
+// `loading` defaults to "lazy" — bottle is used in Hero (passes "eager"),
+// FlavorBreakdown, PourAndCompare, and the Lineup cards. Only the Hero bottle
+// is above the fold on initial paint, so the rest stays out of the critical path.
+function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var(--accent)', tilt = 0, dripping = false, src = null, loading = 'lazy' }) {
   if (src) {
-    return /* @__PURE__ */ React.createElement("div", { className: "bottle", style: { transform: `rotate(${tilt}deg)`, transition: "transform 0.8s cubic-bezier(.2,.7,.2,1)", width: "100%", height: "100%" } }, /* @__PURE__ */ React.createElement("img", { src, alt: `NoodleBomb ${flavor} ramen sauce bottle`, loading, decoding: "async", style: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center bottom", display: "block" } }));
+    return (
+      <div className="bottle" style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.8s cubic-bezier(.2,.7,.2,1)', width: '100%', height: '100%' }}>
+        <img src={src} alt={`NoodleBomb ${flavor} ramen sauce bottle`} loading={loading} decoding="async" style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'center bottom', display: 'block' }} />
+      </div>
+    );
   }
-  return /* @__PURE__ */ React.createElement("div", { className: "bottle", style: { transform: `rotate(${tilt}deg)`, transition: "transform 0.8s cubic-bezier(.2,.7,.2,1)" } }, /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 200 420", preserveAspectRatio: "xMidYMid meet" }, /* @__PURE__ */ React.createElement("rect", { x: "78", y: "10", width: "44", height: "42", rx: "3", fill: "#141414" }), /* @__PURE__ */ React.createElement("rect", { x: "78", y: "10", width: "44", height: "8", rx: "3", fill: "#2a2a2a" }), /* @__PURE__ */ React.createElement("rect", { x: "86", y: "52", width: "28", height: "22", fill: "#141414" }), /* @__PURE__ */ React.createElement("path", { d: "M70 74 Q100 74 130 74 L158 112 Q170 130 170 156 L170 372 Q170 398 146 402 L54 402 Q30 398 30 372 L30 156 Q30 130 42 112 Z", fill: accent }), /* @__PURE__ */ React.createElement("rect", { x: "44", y: "170", width: "112", height: "176", fill: "#F5F1EA" }), /* @__PURE__ */ React.createElement("rect", { x: "44", y: "170", width: "112", height: "22", fill: "#0B0B0B" }), /* @__PURE__ */ React.createElement("text", { x: "100", y: "186", textAnchor: "middle", fontFamily: "JetBrains Mono", fontSize: "9", fill: "#F5F1EA", letterSpacing: "2" }, flavor), /* @__PURE__ */ React.createElement("text", { x: "100", y: "240", textAnchor: "middle", fontFamily: "Inter Tight", fontWeight: "900", fontSize: "26", fill: "#0B0B0B", letterSpacing: "-1.2" }, label.split("").slice(0, 6).join("")), /* @__PURE__ */ React.createElement("text", { x: "100", y: "262", textAnchor: "middle", fontFamily: "Inter Tight", fontWeight: "900", fontSize: "26", fill: "#0B0B0B", letterSpacing: "-1.2" }, label.split("").slice(6).join("")), /* @__PURE__ */ React.createElement("line", { x1: "60", y1: "282", x2: "140", y2: "282", stroke: "#0B0B0B", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("text", { x: "100", y: "302", textAnchor: "middle", fontFamily: "JetBrains Mono", fontSize: "7", fill: "#6B6258", letterSpacing: "1.5" }, "SMALL BATCH \xB7 150ML"), /* @__PURE__ */ React.createElement("text", { x: "100", y: "318", textAnchor: "middle", fontFamily: "JetBrains Mono", fontSize: "7", fill: "#6B6258", letterSpacing: "1.5" }, "BREWED \xB7 AGED \xB7 BOTTLED"), /* @__PURE__ */ React.createElement("circle", { cx: "100", cy: "340", r: "7", fill: "none", stroke: "#0B0B0B", strokeWidth: "1" }), /* @__PURE__ */ React.createElement("text", { x: "100", y: "344", textAnchor: "middle", fontFamily: "Inter Tight", fontWeight: "800", fontSize: "9", fill: "#0B0B0B" }, "01"), /* @__PURE__ */ React.createElement("rect", { x: "42", y: "160", width: "14", height: "200", fill: "rgba(255,255,255,0.18)" }), /* @__PURE__ */ React.createElement("rect", { x: "150", y: "160", width: "6", height: "220", fill: "rgba(0,0,0,0.18)" }), /* @__PURE__ */ React.createElement("defs", null, /* @__PURE__ */ React.createElement("clipPath", { id: "btl" }, /* @__PURE__ */ React.createElement("path", { d: "M70 74 Q100 74 130 74 L158 112 Q170 130 170 156 L170 372 Q170 398 146 402 L54 402 Q30 398 30 372 L30 156 Q30 130 42 112 Z" }))), /* @__PURE__ */ React.createElement("g", { clipPath: "url(#btl)" }, /* @__PURE__ */ React.createElement("rect", { className: "shine", x: "-60", y: "0", width: "40", height: "420", fill: "rgba(255,255,255,0.22)", transform: "skewX(-12)" })), dripping && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("ellipse", { className: "drip", cx: "100", cy: "60", rx: "5", ry: "8", fill: accent }), /* @__PURE__ */ React.createElement("ellipse", { className: "drip d2", cx: "100", cy: "60", rx: "4", ry: "7", fill: accent }))));
+  return (
+    <div className="bottle" style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.8s cubic-bezier(.2,.7,.2,1)' }}>
+      <svg viewBox="0 0 200 420" preserveAspectRatio="xMidYMid meet">
+        {/* cap */}
+        <rect x="78" y="10" width="44" height="42" rx="3" fill="#141414" />
+        <rect x="78" y="10" width="44" height="8" rx="3" fill="#2a2a2a" />
+        {/* neck */}
+        <rect x="86" y="52" width="28" height="22" fill="#141414" />
+        {/* shoulder curve */}
+        <path d="M70 74 Q100 74 130 74 L158 112 Q170 130 170 156 L170 372 Q170 398 146 402 L54 402 Q30 398 30 372 L30 156 Q30 130 42 112 Z" fill={accent} />
+        {/* label */}
+        <rect x="44" y="170" width="112" height="176" fill="#F5F1EA" />
+        <rect x="44" y="170" width="112" height="22" fill="#0B0B0B" />
+        <text x="100" y="186" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="9" fill="#F5F1EA" letterSpacing="2">{flavor}</text>
+        <text x="100" y="240" textAnchor="middle" fontFamily="Inter Tight" fontWeight="900" fontSize="26" fill="#0B0B0B" letterSpacing="-1.2">{label.split('').slice(0,6).join('')}</text>
+        <text x="100" y="262" textAnchor="middle" fontFamily="Inter Tight" fontWeight="900" fontSize="26" fill="#0B0B0B" letterSpacing="-1.2">{label.split('').slice(6).join('')}</text>
+        <line x1="60" y1="282" x2="140" y2="282" stroke="#0B0B0B" strokeWidth="1" />
+        <text x="100" y="302" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7" fill="#6B6258" letterSpacing="1.5">SMALL BATCH · 150ML</text>
+        <text x="100" y="318" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7" fill="#6B6258" letterSpacing="1.5">BREWED · AGED · BOTTLED</text>
+        <circle cx="100" cy="340" r="7" fill="none" stroke="#0B0B0B" strokeWidth="1" />
+        <text x="100" y="344" textAnchor="middle" fontFamily="Inter Tight" fontWeight="800" fontSize="9" fill="#0B0B0B">01</text>
+        {/* highlight */}
+        <rect x="42" y="160" width="14" height="200" fill="rgba(255,255,255,0.18)" />
+        <rect x="150" y="160" width="6" height="220" fill="rgba(0,0,0,0.18)" />
+        {/* shine sweep */}
+        <defs>
+          <clipPath id="btl">
+            <path d="M70 74 Q100 74 130 74 L158 112 Q170 130 170 156 L170 372 Q170 398 146 402 L54 402 Q30 398 30 372 L30 156 Q30 130 42 112 Z" />
+          </clipPath>
+        </defs>
+        <g clipPath="url(#btl)">
+          <rect className="shine" x="-60" y="0" width="40" height="420" fill="rgba(255,255,255,0.22)" transform="skewX(-12)" />
+        </g>
+        {dripping && (
+          <>
+            <ellipse className="drip" cx="100" cy="60" rx="5" ry="8" fill={accent} />
+            <ellipse className="drip d2" cx="100" cy="60" rx="4" ry="7" fill={accent} />
+          </>
+        )}
+      </svg>
+    </div>
+  );
 }
-function FoodShot({ src, alt = "", style }) {
-  if (src) return /* @__PURE__ */ React.createElement("div", { style: { position: "relative", width: "100%", height: "100%", overflow: "hidden", ...style } }, /* @__PURE__ */ React.createElement("img", { src, alt, loading: "lazy", style: { width: "100%", height: "100%", objectFit: "cover", display: "block" } }));
+
+// ———————————————————————————————————————————— Placeholder food/product shot
+function FoodShot({ src, alt = '', style }) {
+  if (src) return (
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', ...style }}>
+      <img src={src} alt={alt} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+    </div>
+  );
   return null;
 }
-function Shot({ label, aspect = "4/5", tag, style, children }) {
-  return /* @__PURE__ */ React.createElement("div", { className: "shot", style: { aspectRatio: aspect, width: "100%", ...style } }, children, tag && /* @__PURE__ */ React.createElement("div", { className: "corner" }, tag), /* @__PURE__ */ React.createElement("div", { className: "cap" }, "[ ", label, " ]"));
+
+// ———————————————————————————————————————————— Placeholder food/product shot (legacy)
+function Shot({ label, aspect = '4/5', tag, style, children }) {
+  return (
+    <div className="shot" style={{ aspectRatio: aspect, width: '100%', ...style }}>
+      {children}
+      {tag && <div className="corner">{tag}</div>}
+      <div className="cap">[ {label} ]</div>
+    </div>
+  );
 }
+
+// ———————————————————————————————————————————— Navbar
 function Nav({ flavor, setFlavor, flavors }) {
   const [solid, setSolid] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(() => window.NB_CART ? window.NB_CART.getItemCount() : 0);
-  const [cartItems, setCartItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
+  const [cartCount, setCartCount] = useState(() => (window.NB_CART ? window.NB_CART.getItemCount() : 0));
+  const [cartItems, setCartItems] = useState(() => (window.NB_CART ? window.NB_CART.getItems() : []));
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   useEffect(() => {
     const on = () => setSolid(window.scrollY > 40);
-    window.addEventListener("scroll", on, { passive: true });
-    on();
-    return () => window.removeEventListener("scroll", on);
+    window.addEventListener('scroll', on, { passive: true }); on();
+    return () => window.removeEventListener('scroll', on);
   }, []);
   useEffect(() => {
     if (!window.NB_CART) return;
@@ -83,36 +159,49 @@ function Nav({ flavor, setFlavor, flavors }) {
       setCartItems(window.NB_CART.getItems());
     });
   }, []);
+  // Listen for global "open cart" event — fired by Add-to-Cart buttons
+  // across app.jsx and components.jsx so the drawer becomes the universal
+  // post-add-to-cart UX without coupling those buttons to Nav state.
+  // Also closes the mobile menu drawer if open (mutually exclusive).
   useEffect(() => {
     const open = () => {
       setDrawerOpen(false);
       setCartDrawerOpen(true);
     };
-    window.addEventListener("nb-open-cart", open);
-    return () => window.removeEventListener("nb-open-cart", open);
+    window.addEventListener('nb-open-cart', open);
+    return () => window.removeEventListener('nb-open-cart', open);
   }, []);
+
+  // a11y: focus management for cart drawer (per follow-up flagged in 91af087).
+  // On open: save the element that triggered the open, then move focus to the
+  // close button. On close: return focus to the triggering element.
   const cartDrawerRef = useRef(null);
   const cartDrawerCloseBtnRef = useRef(null);
   const cartTriggerRef = useRef(null);
   useEffect(() => {
     if (cartDrawerOpen) {
       cartTriggerRef.current = document.activeElement;
+      // Wait briefly for the slide-in animation to start so focus lands on
+      // a visible element rather than mid-transform.
       const t = setTimeout(() => {
         if (cartDrawerCloseBtnRef.current) cartDrawerCloseBtnRef.current.focus();
       }, 100);
       return () => clearTimeout(t);
     } else {
       const trigger = cartTriggerRef.current;
-      if (trigger && document.contains(trigger) && typeof trigger.focus === "function") {
+      if (trigger && document.contains(trigger) && typeof trigger.focus === 'function') {
         trigger.focus();
       }
       cartTriggerRef.current = null;
     }
   }, [cartDrawerOpen]);
+
+  // a11y: focus trap inside cart drawer — Tab/Shift-Tab cycle within the drawer
+  // while it's open so keyboard users can't tab into the inert page behind.
   useEffect(() => {
     if (!cartDrawerOpen) return;
     const trap = (e) => {
-      if (e.key !== "Tab") return;
+      if (e.key !== 'Tab') return;
       const drawer = cartDrawerRef.current;
       if (!drawer) return;
       const focusables = drawer.querySelectorAll(
@@ -129,9 +218,13 @@ function Nav({ flavor, setFlavor, flavors }) {
         first.focus();
       }
     };
-    window.addEventListener("keydown", trap);
-    return () => window.removeEventListener("keydown", trap);
+    window.addEventListener('keydown', trap);
+    return () => window.removeEventListener('keydown', trap);
   }, [cartDrawerOpen]);
+
+  // a11y: same focus pattern for the mobile menu drawer (drawerOpen).
+  // No explicit close button — the menu closes on link-click, outside-click,
+  // or Escape. Initial focus goes to the first nav link.
   const menuDrawerRef = useRef(null);
   const menuTriggerRef = useRef(null);
   useEffect(() => {
@@ -148,7 +241,7 @@ function Nav({ flavor, setFlavor, flavors }) {
       return () => clearTimeout(t);
     } else {
       const trigger = menuTriggerRef.current;
-      if (trigger && document.contains(trigger) && typeof trigger.focus === "function") {
+      if (trigger && document.contains(trigger) && typeof trigger.focus === 'function') {
         trigger.focus();
       }
       menuTriggerRef.current = null;
@@ -157,7 +250,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   useEffect(() => {
     if (!drawerOpen) return;
     const trap = (e) => {
-      if (e.key !== "Tab") return;
+      if (e.key !== 'Tab') return;
       const drawer = menuDrawerRef.current;
       if (!drawer) return;
       const focusables = drawer.querySelectorAll(
@@ -174,844 +267,902 @@ function Nav({ flavor, setFlavor, flavors }) {
         first.focus();
       }
     };
-    window.addEventListener("keydown", trap);
-    return () => window.removeEventListener("keydown", trap);
+    window.addEventListener('keydown', trap);
+    return () => window.removeEventListener('keydown', trap);
   }, [drawerOpen]);
+  // Lock body scroll when either drawer is open
   useEffect(() => {
     const anyOpen = drawerOpen || cartDrawerOpen;
     if (anyOpen) {
       const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
     }
   }, [drawerOpen, cartDrawerOpen]);
+  // Close drawers on Escape
   useEffect(() => {
     if (!drawerOpen && !cartDrawerOpen) return;
     const onKey = (e) => {
-      if (e.key !== "Escape") return;
+      if (e.key !== 'Escape') return;
       setDrawerOpen(false);
       setCartDrawerOpen(false);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [drawerOpen, cartDrawerOpen]);
+
+  // Cart drawer derived values
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
-  const cartHasTrio = cartItems.some((i) => i.slug === "trio" && (Number(i.qty) || 0) > 0);
-  const cartBottleCount = cartItems.reduce((n, i) => n + (i.slug === "trio" ? 3 : 1) * (Number(i.qty) || 0), 0);
-  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 29.99;
-  const cartFreeShipping = cartSubtotal >= cartFreeShippingThreshold;
-  const cartShipRemaining = cartFreeShipping ? 0 : Math.max(cartFreeShippingThreshold - cartSubtotal, 0);
-  const cartShipProgress = cartFreeShipping ? 100 : Math.min(cartSubtotal / cartFreeShippingThreshold * 100, 100);
-  const fmtUSD = (n) => "$" + (Number(n) || 0).toFixed(2);
+  const cartHasTrio = cartItems.some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
+  const cartBottleCount = cartItems.reduce((n, i) => n + ((i.slug === 'trio' ? 3 : 1) * (Number(i.qty) || 0)), 0);
+  const cartHasBothShoyu = cartItems.some((i) => i.slug === 'shoyu' && (Number(i.qty) || 0) > 0) && cartItems.some((i) => i.slug === 'shoyuspicy' && (Number(i.qty) || 0) > 0);
+  const cartFreeShipping = cartBottleCount >= 5 && cartHasBothShoyu;
+  const cartShipRemaining = cartFreeShipping ? 0 : Math.max(5 - cartBottleCount, 0);
+  const cartShipProgress = cartFreeShipping ? 100 : Math.min((cartBottleCount / 5) * 100, 100);
+  const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
   const cartLineKey = (item, index) => `${item.slug}-${index}-${JSON.stringify(item.attributes || [])}`;
-  const cartBottleMix = (item) => {
-    var _a;
-    return (_a = (item.attributes || []).find((attr) => attr.key === "Bottle mix")) == null ? void 0 : _a.value;
-  };
+  const cartBottleMix = (item) => (item.attributes || []).find((attr) => attr.key === 'Bottle mix')?.value;
+
+  // navLinks: tuples of [label, href]. Hrefs starting with '#' are
+  // smooth-scrolled in-page; hrefs starting with '/' are real-page nav.
+  // /about, /recipes, /faq are static HTML pages added 2026-05-06 to fix
+  // the launch audit — those routes used to 404 because the prior nav
+  // was hash-only against the one-page index.html.
+  // Canonical 7-item nav (locked 2026-05-07 pre-launch). Hash hrefs scroll
+  // in-page; '/'-prefixed hrefs are real routes; mailto: opens the user's
+  // mail client. Order MUST match the static-page nav in about/faq/recipes/
+  // monthly-box so the brand experience is identical across entry points.
   const navLinks = [
-    ["Home", "/"],
-    ["Shop Sauces", "/shop"],
-    ["Recipes", "/recipes"],
-    ["Where to Buy", "/#stores"],
-    ["About", "/about"],
-    ["Monthly Ramen Box", "/monthly-box"],
-    ["FAQ", "/faq"],
-    ["Contact", "#open-contact"]
+    ['Home', '/'],
+    ['Shop Sauces', '/shop'],
+    ['Recipes', '/recipes'],
+    ['Where to Buy', '/#stores'],
+    ['About', '/about'],
+    ['Monthly Ramen Box', '/monthly-box'],
+    ['FAQ', '/faq'],
+    ['Contact', '#open-contact'],
   ];
+
   const goToHash = (href) => {
     setDrawerOpen(false);
     setTimeout(() => {
       const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
   };
-  return /* @__PURE__ */ React.createElement("nav", { className: `nav ${solid ? "scrolled" : ""}`, style: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 100,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "0 clamp(24px, 5.5vw, 80px)"
-  } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } }, /* @__PURE__ */ React.createElement("div", { style: {
-    width: 18,
-    height: 18,
-    borderRadius: 4,
-    background: "var(--accent)",
-    transition: "background .6s",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "var(--accent-ink)",
-    fontFamily: "Inter Tight",
-    fontWeight: 800,
-    fontSize: 11
-  } }, "N"), /* @__PURE__ */ React.createElement("span", { className: "display", style: { fontSize: 16, letterSpacing: "-0.04em", fontWeight: 700 } }, "noodlebomb")), /* @__PURE__ */ React.createElement("div", { className: "nav-links", style: { display: "flex", gap: 32 } }, navLinks.map(([label, href]) => {
-    const isHash = href.startsWith("#");
-    return /* @__PURE__ */ React.createElement("a", { key: label, href, onClick: (e) => {
-      if (href === "#open-contact") {
-        e.preventDefault();
-        if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY("contact");
-        return;
-      }
-      if (!isHash) return;
-      e.preventDefault();
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } }, label);
-  })), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "center" } }, /* @__PURE__ */ React.createElement(
-    "a",
-    {
-      href: NB_SHOPIFY_CART,
-      "aria-label": `Cart \u2014 ${cartCount} item${cartCount === 1 ? "" : "s"}`,
-      style: {
-        position: "relative",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: 36,
-        height: 36,
-        borderRadius: 4,
-        color: "var(--ink)",
-        textDecoration: "none",
-        transition: "background .2s, color .2s",
-        cursor: "pointer"
-      },
-      onMouseOver: (e) => {
-        e.currentTarget.style.background = "rgba(240,235,227,0.06)";
-      },
-      onMouseOut: (e) => {
-        e.currentTarget.style.background = "transparent";
-      }
-    },
-    /* @__PURE__ */ React.createElement("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.6", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("circle", { cx: "9", cy: "21", r: "1" }), /* @__PURE__ */ React.createElement("circle", { cx: "20", cy: "21", r: "1" }), /* @__PURE__ */ React.createElement("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })),
-    cartCount > 0 && /* @__PURE__ */ React.createElement("span", { style: {
-      position: "absolute",
-      top: 2,
-      right: 2,
-      minWidth: 16,
-      height: 16,
-      padding: "0 4px",
-      borderRadius: 999,
-      background: "var(--accent)",
-      color: "var(--accent-ink)",
-      fontFamily: "JetBrains Mono, monospace",
-      fontSize: 10,
-      fontWeight: 700,
-      lineHeight: "16px",
-      textAlign: "center",
-      transition: "background .6s"
-    } }, cartCount > 9 ? "9+" : cartCount)
-  ), /* @__PURE__ */ React.createElement(
-    "button",
-    {
-      className: "nav-hamburger",
-      "aria-label": drawerOpen ? "Close menu" : "Open menu",
-      "aria-expanded": drawerOpen,
-      onClick: () => {
-        if (!drawerOpen) setCartDrawerOpen(false);
-        setDrawerOpen(!drawerOpen);
-      },
-      style: {
-        display: "none",
-        width: 44,
-        height: 44,
-        background: "transparent",
-        border: 0,
-        color: "var(--ink)",
-        cursor: "pointer",
-        padding: 0,
-        alignItems: "center",
-        justifyContent: "center",
-        flexShrink: 0
-      }
-    },
-    /* @__PURE__ */ React.createElement("svg", { width: "22", height: "22", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.6", strokeLinecap: "round", "aria-hidden": "true" }, drawerOpen ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" })) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("line", { x1: "3", y1: "7", x2: "21", y2: "7" }), /* @__PURE__ */ React.createElement("line", { x1: "3", y1: "13", x2: "21", y2: "13" }), /* @__PURE__ */ React.createElement("line", { x1: "3", y1: "19", x2: "21", y2: "19" })))
-  )), /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      ref: menuDrawerRef,
-      className: "nav-drawer",
-      role: "dialog",
-      "aria-modal": "true",
-      "aria-label": "Site navigation",
-      "aria-hidden": !drawerOpen,
-      tabIndex: drawerOpen ? 0 : -1,
-      style: {
-        position: "fixed",
-        inset: 0,
-        zIndex: 99,
-        background: "rgba(8,7,6,0.97)",
-        backdropFilter: "blur(8px)",
-        opacity: drawerOpen ? 1 : 0,
-        pointerEvents: drawerOpen ? "auto" : "none",
-        transition: "opacity .3s cubic-bezier(.2,.7,.2,1)",
-        display: "flex",
-        flexDirection: "column",
-        padding: "88px 32px 32px"
-      }
-    },
-    /* @__PURE__ */ React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", gap: 24, paddingTop: 16 } }, navLinks.map(([label, href]) => /* @__PURE__ */ React.createElement(
-      "a",
-      {
-        key: label,
-        href,
-        onClick: (e) => {
-          if (href === "#open-contact") {
-            e.preventDefault();
-            setDrawerOpen(false);
-            if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY("contact");
-            return;
-          }
-          if (!href.startsWith("#")) {
-            setDrawerOpen(false);
-            return;
-          }
-          e.preventDefault();
-          goToHash(href);
-        },
-        className: "display",
-        style: {
-          fontSize: 32,
-          fontWeight: 700,
-          letterSpacing: "-0.03em",
-          color: "var(--ink)",
-          textDecoration: "none",
-          paddingBlock: 8,
-          borderBottom: "1px solid rgba(240,235,227,0.08)",
-          transform: drawerOpen ? "translateY(0)" : "translateY(8px)",
-          opacity: drawerOpen ? 1 : 0,
-          transition: "transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s"
-        }
-      },
-      label
-    ))),
-    /* @__PURE__ */ React.createElement(
-      "a",
-      {
-        href: NB_WIX.shop,
-        target: "_blank",
-        rel: "noopener",
-        onClick: () => setDrawerOpen(false),
-        style: {
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 10,
-          padding: "18px 24px",
-          borderRadius: 999,
-          background: "var(--accent)",
-          color: "var(--accent-ink)",
-          fontFamily: "Inter",
-          fontWeight: 600,
-          fontSize: 14,
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          textDecoration: "none",
-          marginTop: 24
-        }
-      },
-      "Shop the Range",
-      /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16 } }, "\u2192")
-    )
-  ), /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      onClick: () => setCartDrawerOpen(false),
-      "aria-hidden": "true",
-      style: {
-        position: "fixed",
-        inset: 0,
-        zIndex: 105,
-        background: "rgba(8,7,6,0.55)",
-        backdropFilter: "blur(2px)",
-        opacity: cartDrawerOpen ? 1 : 0,
-        pointerEvents: cartDrawerOpen ? "auto" : "none",
-        transition: "opacity .3s cubic-bezier(.2,.7,.2,1)"
-      }
-    }
-  ), /* @__PURE__ */ React.createElement(
-    "aside",
-    {
-      ref: cartDrawerRef,
-      role: "dialog",
-      "aria-modal": "true",
-      "aria-label": "Shopping cart",
-      "aria-hidden": !cartDrawerOpen,
-      tabIndex: cartDrawerOpen ? 0 : -1,
-      style: {
-        position: "fixed",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        width: "min(420px, 100vw)",
-        background: "var(--paper-2)",
-        borderLeft: "1px solid var(--line)",
-        zIndex: 110,
-        transform: `translateX(${cartDrawerOpen ? "0" : "100%"})`,
-        transition: "transform .35s cubic-bezier(.2,.7,.2,1)",
-        display: "flex",
-        flexDirection: "column",
-        boxShadow: cartDrawerOpen ? "-24px 0 60px rgba(0,0,0,0.4)" : "none"
-      }
-    },
-    /* @__PURE__ */ React.createElement("div", { style: {
-      padding: "20px 24px",
-      borderBottom: "1px solid var(--line)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    } }, /* @__PURE__ */ React.createElement("h2", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 16, letterSpacing: "-0.02em", margin: 0, color: "var(--ink)" } }, "Your cart", cartCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink-40)", fontWeight: 500, marginLeft: 6 } }, "\xB7 ", cartCount, " ", cartCount === 1 ? "item" : "items")), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        ref: cartDrawerCloseBtnRef,
-        onClick: () => setCartDrawerOpen(false),
-        "aria-label": "Close cart",
-        style: {
-          background: "transparent",
-          border: 0,
-          color: "var(--ink-60)",
-          cursor: "pointer",
-          padding: 0,
-          display: "inline-flex",
-          width: 44,
-          height: 44,
-          alignItems: "center",
-          justifyContent: "center"
-        }
-      },
-      /* @__PURE__ */ React.createElement("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
-    )),
-    cartItems.length === 0 ? /* @__PURE__ */ React.createElement("div", { style: { flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, padding: 32, textAlign: "center" } }, /* @__PURE__ */ React.createElement("svg", { width: "32", height: "32", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round", style: { color: "var(--ink-40)" }, "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("circle", { cx: "9", cy: "21", r: "1" }), /* @__PURE__ */ React.createElement("circle", { cx: "20", cy: "21", r: "1" }), /* @__PURE__ */ React.createElement("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "Inter Tight", fontSize: 16, color: "var(--ink)", margin: 0 } }, "Your cart is empty."), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: "Inter", fontSize: 13, color: "var(--ink-60)", margin: 0, maxWidth: 240 } }, "Pick a sauce. Build the bowl."), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => {
-          if (window.NB_CART) window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
-        },
-        style: {
-          marginTop: 12,
-          padding: "14px 24px",
-          borderRadius: 999,
-          minHeight: 48,
-          background: "var(--accent)",
-          color: "var(--accent-ink)",
-          border: 0,
-          cursor: "pointer",
-          fontFamily: "Inter",
-          fontSize: 12,
-          fontWeight: 700,
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          transition: "transform .2s, box-shadow .2s"
-        },
-        onMouseOver: (e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 12px 28px var(--accent-glow)";
-        },
-        onMouseOut: (e) => {
-          e.currentTarget.style.transform = "";
-          e.currentTarget.style.boxShadow = "none";
-        }
-      },
-      "Add the Trio \u2014 $29.99"
-    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $5.98"), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => setCartDrawerOpen(false),
-        style: {
-          marginTop: 4,
-          padding: "10px 20px",
-          minHeight: 44,
-          background: "transparent",
-          color: "var(--ink-60)",
-          border: "1px solid var(--line-strong)",
-          borderRadius: 999,
-          cursor: "pointer",
-          fontFamily: "Inter",
-          fontSize: 11,
-          fontWeight: 500,
-          letterSpacing: "0.16em",
-          textTransform: "uppercase"
-        }
-      },
-      "or keep shopping \u2192"
-    )) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "8px 24px" } }, cartItems.map((item, index) => /* @__PURE__ */ React.createElement("div", { key: cartLineKey(item, index), style: {
-      padding: "14px 0",
-      borderBottom: "1px solid var(--line)",
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 12
-    } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 600, fontSize: 14, color: "var(--ink)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } }, item.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--ink-40)", marginTop: 4, fontFamily: "JetBrains Mono", letterSpacing: "0.08em" } }, fmtUSD(item.price), " each"), cartBottleMix(item) && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--accent)", marginTop: 4, fontFamily: "JetBrains Mono", letterSpacing: "0.08em", lineHeight: 1.4 } }, "Mix: ", cartBottleMix(item)), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 0, marginTop: 8, border: "1px solid var(--line-strong)", borderRadius: 999, width: "fit-content" } }, /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty - 1, item.attributes),
-        disabled: item.qty <= 1,
-        "aria-label": `Decrease ${item.name} quantity`,
-        style: {
-          width: 26,
-          height: 26,
-          padding: 0,
-          background: "transparent",
-          border: 0,
-          color: item.qty <= 1 ? "var(--ink-20)" : "var(--ink-60)",
-          cursor: item.qty <= 1 ? "not-allowed" : "pointer",
-          fontFamily: "Inter Tight",
-          fontSize: 14,
-          fontWeight: 600,
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }
-      },
-      "\u2212"
-    ), /* @__PURE__ */ React.createElement("span", { style: { minWidth: 22, textAlign: "center", fontFamily: "Inter Tight", fontWeight: 600, fontSize: 12, color: "var(--ink)" } }, item.qty), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty + 1, item.attributes),
-        "aria-label": `Increase ${item.name} quantity`,
-        style: {
-          width: 26,
-          height: 26,
-          padding: 0,
-          background: "transparent",
-          border: 0,
-          color: "var(--ink-60)",
-          cursor: "pointer",
-          fontFamily: "Inter Tight",
-          fontSize: 14,
-          fontWeight: 600,
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }
-      },
-      "+"
-    ))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8, flexShrink: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 14, color: "var(--accent)", fontVariantNumeric: "tabular-nums" } }, fmtUSD(item.price * item.qty)), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => window.NB_CART && window.NB_CART.remove(item.slug, item.attributes),
-        "aria-label": `Remove ${item.name}`,
-        style: {
-          background: "transparent",
-          border: 0,
-          color: "var(--ink-40)",
-          cursor: "pointer",
-          fontFamily: "JetBrains Mono",
-          fontSize: 10,
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          padding: 0,
-          transition: "color .2s"
-        },
-        onMouseOver: (e) => e.currentTarget.style.color = "var(--accent)",
-        onMouseOut: (e) => e.currentTarget.style.color = "var(--ink-40)"
-      },
-      "remove"
-    )))), !cartItems.some((i) => i.slug === NB_FIRE_DUST.slug) && /* @__PURE__ */ React.createElement("div", { style: {
-      margin: "14px 0 4px",
-      padding: "12px 14px",
-      border: "1px solid var(--accent)",
-      borderRadius: 6,
-      background: "rgba(var(--accent-rgb),0.08)",
-      display: "flex",
-      alignItems: "center",
-      gap: 12
-    } }, /* @__PURE__ */ React.createElement("div", { style: {
-      width: 44,
-      height: 44,
-      flexShrink: 0,
-      background: "var(--paper-3)",
-      border: "1px solid var(--line)",
-      borderRadius: 4,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: 3
-    } }, /* @__PURE__ */ React.createElement(
-      "img",
-      {
-        src: NB_FIRE_DUST.image,
-        alt: "NoodleBomb Fire Dust seasoning topper",
-        loading: "lazy",
-        style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }
-      }
-    )), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "JetBrains Mono", fontSize: 9, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 700, marginBottom: 2 } }, "Power up your cart"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 600, fontSize: 13, color: "var(--ink)" } }, NB_FIRE_DUST.label, " \xB7 ", fmtUSD(NB_FIRE_DUST.price)), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 11, color: "var(--ink-60)", marginTop: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } }, NB_FIRE_DUST.tag)), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        onClick: () => {
-          if (window.NB_CART) window.NB_CART.add({ slug: NB_FIRE_DUST.slug, name: NB_FIRE_DUST.name, price: NB_FIRE_DUST.price });
-        },
-        "aria-label": "Add NoodleBomb Fire Dust to cart",
-        style: {
-          flexShrink: 0,
-          padding: "8px 16px",
-          borderRadius: 999,
-          background: "var(--accent)",
-          color: "var(--accent-ink)",
-          border: 0,
-          cursor: "pointer",
-          fontFamily: "Inter",
-          fontSize: 10,
-          fontWeight: 700,
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          whiteSpace: "nowrap"
-        }
-      },
-      "Add"
-    ))), /* @__PURE__ */ React.createElement("div", { style: {
-      padding: "20px 24px",
-      borderTop: "1px solid var(--line)",
-      background: "var(--paper)",
-      display: "flex",
-      flexDirection: "column",
-      gap: 14
-    } }, (() => {
-      const hasTrio = cartItems.some((i) => i.slug === "trio");
-      const singleSlugs = ["original", "spicy", "citrus"];
-      const singleCount = cartItems.filter((i) => singleSlugs.includes(i.slug)).reduce((sum, i) => sum + (Number(i.qty) || 0), 0);
-      if (hasTrio || singleCount < 1 || singleCount > 2) return null;
-      const swapToTrio = () => {
-        if (window.NB_CART) {
-          singleSlugs.forEach((slug) => window.NB_CART.remove(slug));
-          window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
-        }
-        const detail = { fromSingleCount: singleCount, savings: 5.98, destination: "trio" };
-        try {
-          window.dispatchEvent(new CustomEvent("nb_cart_upgrade_to_trio", { detail }));
-        } catch (_) {
-        }
-        try {
-          window.fbq && window.fbq("trackCustom", "UpgradeToTrioPrompt", detail);
-        } catch (_) {
-        }
-        try {
-          window.dataLayer && window.dataLayer.push({ event: "upgrade_to_trio_prompt", ...detail });
-        } catch (_) {
-        }
-      };
-      return /* @__PURE__ */ React.createElement("div", { style: {
-        padding: "12px 14px",
-        border: "1px solid var(--accent)",
-        borderRadius: 6,
-        background: "rgba(var(--accent-rgb),0.08)",
-        display: "flex",
-        alignItems: "center",
-        gap: 10
-      } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "JetBrains Mono", fontSize: 9, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)", fontWeight: 700, marginBottom: 2 } }, "Cart slot 1: Trio"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontSize: 13, fontWeight: 600, color: "var(--ink)" } }, "Add bottle 3 + unlock Trio savings")), /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          onClick: swapToTrio,
-          "aria-label": "Swap singles for The NoodleBomb Trio bundle",
-          style: {
-            flexShrink: 0,
-            padding: "8px 14px",
-            borderRadius: 999,
-            background: "var(--accent)",
-            color: "var(--accent-ink)",
+
+  return (
+    <nav className={`nav ${solid ? 'scrolled' : ''}`} style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: '0 clamp(24px, 5.5vw, 80px)',
+    }}>
+      <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+        <div style={{
+          width: 18, height: 18, borderRadius: 4,
+          background: 'var(--accent)', transition: 'background .6s',
+          display:'flex', alignItems:'center', justifyContent:'center',
+          color: 'var(--accent-ink)', fontFamily:'Inter Tight', fontWeight: 800, fontSize: 11
+        }}>N</div>
+        <span className="display" style={{ fontSize: 16, letterSpacing: '-0.04em', fontWeight: 700 }}>noodlebomb</span>
+      </div>
+      <div className="nav-links" style={{ display:'flex', gap: 32 }}>
+        {navLinks.map(([label, href]) => {
+          const isHash = href.startsWith('#');
+          return (
+            <a key={label} href={href} onClick={(e) => {
+              if (href === '#open-contact') {
+                e.preventDefault();
+                if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY('contact');
+                return;
+              }
+              if (!isHash) return; // real route — let browser navigate
+              e.preventDefault();
+              const el = document.querySelector(href);
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}>{label}</a>
+          );
+        })}
+      </div>
+      <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
+        {/* Cart icon → Shopify cart (the single source of truth). Drawer is
+            still rendered for users who add via legacy/local code paths, but
+            the icon goes direct so users never bounce off a stale local cart. */}
+        <a
+          href={NB_SHOPIFY_CART}
+          aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
+          style={{
+            position: 'relative',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 36,
+            height: 36,
+            borderRadius: 4,
+            color: 'var(--ink)',
+            textDecoration: 'none',
+            transition: 'background .2s, color .2s',
+            cursor: 'pointer',
+          }}
+          onMouseOver={(e) => { e.currentTarget.style.background = 'rgba(240,235,227,0.06)'; }}
+          onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          {cartCount > 0 && (
+            <span style={{
+              position: 'absolute',
+              top: 2,
+              right: 2,
+              minWidth: 16,
+              height: 16,
+              padding: '0 4px',
+              borderRadius: 999,
+              background: 'var(--accent)',
+              color: 'var(--accent-ink)',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 10,
+              fontWeight: 700,
+              lineHeight: '16px',
+              textAlign: 'center',
+              transition: 'background .6s',
+            }}>{cartCount > 9 ? '9+' : cartCount}</span>
+          )}
+        </a>
+        {/* Hamburger — mobile only */}
+        <button
+          className="nav-hamburger"
+          aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={drawerOpen}
+          onClick={() => {
+            // Mutually exclusive: opening menu closes cart drawer.
+            if (!drawerOpen) setCartDrawerOpen(false);
+            setDrawerOpen(!drawerOpen);
+          }}
+          style={{
+            display: 'none',
+            width: 44,
+            height: 44,
+            background: 'transparent',
             border: 0,
-            cursor: "pointer",
-            fontFamily: "Inter",
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap"
-          }
-        },
-        "Swap"
-      ));
-    })(), cartFreeShipping ? /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--accent)", fontFamily: "JetBrains Mono", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 } }, "\u2713 FREE US shipping unlocked") : /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--ink-60)", marginBottom: 6, fontFamily: "JetBrains Mono", letterSpacing: "0.1em", textTransform: "uppercase" } }, cartShipRemaining > 0 ? `Add ${fmtUSD(cartShipRemaining)} for FREE US shipping` : "FREE US shipping unlocked", " \\u00b7 else $3.50 flat"), /* @__PURE__ */ React.createElement("div", { style: { height: 4, background: "var(--paper-3)", borderRadius: 999, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: cartShipProgress + "%", background: "var(--accent)", borderRadius: 999, transition: "width .3s" } }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, color: "var(--ink-60)" } }, "Subtotal"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 22, color: "var(--accent)", fontVariantNumeric: "tabular-nums" } }, fmtUSD(cartSubtotal))), /* @__PURE__ */ React.createElement(
-      "a",
-      {
-        href: "/checkout.html",
-        style: {
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 8,
-          padding: "16px 24px",
-          borderRadius: 999,
-          background: "var(--accent)",
-          color: "var(--accent-ink)",
-          fontFamily: "Inter",
-          fontSize: 12,
-          fontWeight: 700,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-          textDecoration: "none",
-          transition: "transform .2s, box-shadow .2s"
-        },
-        onMouseOver: (e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 12px 28px var(--accent-glow)";
-        },
-        onMouseOut: (e) => {
-          e.currentTarget.style.transform = "";
-          e.currentTarget.style.boxShadow = "none";
-        }
-      },
-      `Checkout \u2014 ${fmtUSD(cartSubtotal)} \u2192`
-    ), cartItems.length > 1 && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "4px 12px", justifyContent: "center" } }, cartItems.map((it) => /* @__PURE__ */ React.createElement("a", { key: it.slug, href: nbCartPermalink(it.slug, Math.max(1, Math.floor(it.qty || 1))), style: { fontFamily: "JetBrains Mono", fontSize: 9, letterSpacing: "0.14em", color: "var(--ink-40)", textDecoration: "underline", textUnderlineOffset: 3, textTransform: "uppercase" } }, it.name, " \u2192"))), /* @__PURE__ */ React.createElement(
-      "a",
-      {
-        href: NB_SHOPIFY_CART,
-        style: {
-          textAlign: "center",
-          fontFamily: "JetBrains Mono",
-          fontSize: 10,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-          color: "var(--ink-40)",
-          textDecoration: "underline",
-          textUnderlineOffset: 4
-        },
-        onClick: () => setCartDrawerOpen(false)
-      },
-      "View full cart"
-    )))
-  ));
+            color: 'var(--ink)',
+            cursor: 'pointer',
+            padding: 0,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+            {drawerOpen ? (
+              <>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="7" x2="21" y2="7" />
+                <line x1="3" y1="13" x2="21" y2="13" />
+                <line x1="3" y1="19" x2="21" y2="19" />
+              </>
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile drawer overlay */}
+      <div
+        ref={menuDrawerRef}
+        className="nav-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+        aria-hidden={!drawerOpen}
+        tabIndex={drawerOpen ? 0 : -1}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99,
+          background: 'rgba(8,7,6,0.97)',
+          backdropFilter: 'blur(8px)',
+          opacity: drawerOpen ? 1 : 0,
+          pointerEvents: drawerOpen ? 'auto' : 'none',
+          transition: 'opacity .3s cubic-bezier(.2,.7,.2,1)',
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '88px 32px 32px',
+        }}
+      >
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 24, paddingTop: 16 }}>
+          {navLinks.map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              onClick={(e) => {
+                if (href === '#open-contact') {
+                  e.preventDefault();
+                  setDrawerOpen(false);
+                  if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY('contact');
+                  return;
+                }
+                if (!href.startsWith('#')) { setDrawerOpen(false); return; }
+                e.preventDefault();
+                goToHash(href);
+              }}
+              className="display"
+              style={{
+                fontSize: 32,
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                color: 'var(--ink)',
+                textDecoration: 'none',
+                paddingBlock: 8,
+                borderBottom: '1px solid rgba(240,235,227,0.08)',
+                transform: drawerOpen ? 'translateY(0)' : 'translateY(8px)',
+                opacity: drawerOpen ? 1 : 0,
+                transition: 'transform .35s cubic-bezier(.2,.7,.2,1), opacity .35s',
+              }}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+        <a
+          href={NB_WIX.shop}
+          target="_blank"
+          rel="noopener"
+          onClick={() => setDrawerOpen(false)}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 10,
+            padding: '18px 24px',
+            borderRadius: 999,
+            background: 'var(--accent)',
+            color: 'var(--accent-ink)',
+            fontFamily: 'Inter',
+            fontWeight: 600,
+            fontSize: 14,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            marginTop: 24,
+          }}
+        >
+          Shop the Range
+          <span style={{ fontSize: 16 }}>→</span>
+        </a>
+      </div>
+
+      {/* ─── Cart drawer — slide-out from right on Add to Cart and on Nav cart icon click. */}
+      <div
+        onClick={() => setCartDrawerOpen(false)}
+        aria-hidden="true"
+        style={{
+          position: 'fixed', inset: 0, zIndex: 105,
+          background: 'rgba(8,7,6,0.55)',
+          backdropFilter: 'blur(2px)',
+          opacity: cartDrawerOpen ? 1 : 0,
+          pointerEvents: cartDrawerOpen ? 'auto' : 'none',
+          transition: 'opacity .3s cubic-bezier(.2,.7,.2,1)',
+        }}
+      />
+      <aside
+        ref={cartDrawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Shopping cart"
+        aria-hidden={!cartDrawerOpen}
+        tabIndex={cartDrawerOpen ? 0 : -1}
+        style={{
+          position: 'fixed', top: 0, right: 0, bottom: 0,
+          width: 'min(420px, 100vw)',
+          background: 'var(--paper-2)',
+          borderLeft: '1px solid var(--line)',
+          zIndex: 110,
+          transform: `translateX(${cartDrawerOpen ? '0' : '100%'})`,
+          transition: 'transform .35s cubic-bezier(.2,.7,.2,1)',
+          display: 'flex', flexDirection: 'column',
+          boxShadow: cartDrawerOpen ? '-24px 0 60px rgba(0,0,0,0.4)' : 'none',
+        }}
+      >
+        {/* Header */}
+        <div style={{
+          padding: '20px 24px',
+          borderBottom: '1px solid var(--line)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <h2 style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', margin: 0, color: 'var(--ink)' }}>
+            Your cart{cartCount > 0 && (
+              <span style={{ color: 'var(--ink-40)', fontWeight: 500, marginLeft: 6 }}>
+                · {cartCount} {cartCount === 1 ? 'item' : 'items'}
+              </span>
+            )}
+          </h2>
+          <button
+            ref={cartDrawerCloseBtnRef}
+            onClick={() => setCartDrawerOpen(false)}
+            aria-label="Close cart"
+            style={{
+              background: 'transparent', border: 0, color: 'var(--ink-60)',
+              cursor: 'pointer', padding: 0, display: 'inline-flex',
+              width: 44, height: 44, alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Empty state */}
+        {cartItems.length === 0 ? (
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, padding: 32, textAlign: 'center' }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--ink-40)' }} aria-hidden="true">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <p style={{ fontFamily: 'Inter Tight', fontSize: 16, color: 'var(--ink)', margin: 0 }}>Your cart is empty.</p>
+            <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-60)', margin: 0, maxWidth: 240 }}>Pick a sauce. Build the bowl.</p>
+
+            {/* One-click Trio shortcut — frictionless path to the highest-AOV
+                product for users who clicked the cart icon with an empty cart. */}
+            <button
+              onClick={() => {
+                if (window.NB_CART) window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
+              }}
+              style={{
+                marginTop: 12,
+                padding: '14px 24px', borderRadius: 999,
+                minHeight: 48,
+                background: 'var(--accent)', color: 'var(--accent-ink)',
+                border: 0, cursor: 'pointer',
+                fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
+                letterSpacing: '0.16em', textTransform: 'uppercase',
+                transition: 'transform .2s, box-shadow .2s',
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
+            >
+              Add the Trio — $29.99
+            </button>
+            <div style={{ fontSize: 10, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.16em', textTransform: 'uppercase', marginTop: -8 }}>
+              All 3 flavors · save $5.98
+            </div>
+
+            <button
+              onClick={() => setCartDrawerOpen(false)}
+              style={{
+                marginTop: 4,
+                padding: '10px 20px',
+                minHeight: 44,
+                background: 'transparent', color: 'var(--ink-60)',
+                border: '1px solid var(--line-strong)', borderRadius: 999,
+                cursor: 'pointer',
+                fontFamily: 'Inter', fontSize: 11, fontWeight: 500,
+                letterSpacing: '0.16em', textTransform: 'uppercase',
+              }}
+            >
+              or keep shopping →
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Items — scrollable */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '8px 24px' }}>
+              {cartItems.map((item, index) => (
+                <div key={cartLineKey(item, index)} style={{
+                  padding: '14px 0',
+                  borderBottom: '1px solid var(--line)',
+                  display: 'flex', alignItems: 'flex-start', gap: 12,
+                }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 14, color: 'var(--ink)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {item.name}
+                    </div>
+                    <div style={{ fontSize: 11, color: 'var(--ink-40)', marginTop: 4, fontFamily: 'JetBrains Mono', letterSpacing: '0.08em' }}>
+                      {fmtUSD(item.price)} each
+                    </div>
+                    {cartBottleMix(item) && (
+                      <div style={{ fontSize: 11, color: 'var(--accent)', marginTop: 4, fontFamily: 'JetBrains Mono', letterSpacing: '0.08em', lineHeight: 1.4 }}>
+                        Mix: {cartBottleMix(item)}
+                      </div>
+                    )}
+                    {/* Inline qty stepper — minus/plus buttons let users adjust
+                        without navigating to /cart.html. Disabled minus at 1
+                        prevents accidental remove (use the explicit Remove btn). */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: 8, border: '1px solid var(--line-strong)', borderRadius: 999, width: 'fit-content' }}>
+                      <button
+                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty - 1, item.attributes)}
+                        disabled={item.qty <= 1}
+                        aria-label={`Decrease ${item.name} quantity`}
+                        style={{
+                          width: 26, height: 26, padding: 0,
+                          background: 'transparent', border: 0,
+                          color: item.qty <= 1 ? 'var(--ink-20)' : 'var(--ink-60)',
+                          cursor: item.qty <= 1 ? 'not-allowed' : 'pointer',
+                          fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600,
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        }}
+                      >−</button>
+                      <span style={{ minWidth: 22, textAlign: 'center', fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 12, color: 'var(--ink)' }}>{item.qty}</span>
+                      <button
+                        onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty + 1, item.attributes)}
+                        aria-label={`Increase ${item.name} quantity`}
+                        style={{
+                          width: 26, height: 26, padding: 0,
+                          background: 'transparent', border: 0,
+                          color: 'var(--ink-60)', cursor: 'pointer',
+                          fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600,
+                          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                        }}
+                      >+</button>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8, flexShrink: 0 }}>
+                    <div style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 14, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
+                      {fmtUSD(item.price * item.qty)}
+                    </div>
+                    <button
+                      onClick={() => window.NB_CART && window.NB_CART.remove(item.slug, item.attributes)}
+                      aria-label={`Remove ${item.name}`}
+                      style={{
+                        background: 'transparent', border: 0,
+                        color: 'var(--ink-40)', cursor: 'pointer',
+                        fontFamily: 'JetBrains Mono', fontSize: 10,
+                        letterSpacing: '0.12em', textTransform: 'uppercase',
+                        padding: 0, transition: 'color .2s',
+                      }}
+                      onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent)'}
+                      onMouseOut={(e) => e.currentTarget.style.color = 'var(--ink-40)'}
+                    >
+                      remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+
+              {/* Power up your cart — Fire Dust one-tap upsell (drawer). Mirrors
+                  the /cart.html upsell card; uses the canonical NB_CART add flow.
+                  Hidden once Fire Dust is already in the cart. */}
+              {!cartItems.some((i) => i.slug === NB_FIRE_DUST.slug) && (
+                <div style={{
+                  margin: '14px 0 4px',
+                  padding: '12px 14px',
+                  border: '1px solid var(--accent)',
+                  borderRadius: 6,
+                  background: 'rgba(var(--accent-rgb),0.08)',
+                  display: 'flex', alignItems: 'center', gap: 12,
+                }}>
+                  <div style={{
+                    width: 44, height: 44, flexShrink: 0,
+                    background: 'var(--paper-3)', border: '1px solid var(--line)',
+                    borderRadius: 4,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 3,
+                  }}>
+                    <img src={NB_FIRE_DUST.image} alt="NoodleBomb Fire Dust seasoning topper" loading="lazy"
+                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 700, marginBottom: 2 }}>
+                      Power up your cart
+                    </div>
+                    <div style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 13, color: 'var(--ink)' }}>
+                      {NB_FIRE_DUST.label} · {fmtUSD(NB_FIRE_DUST.price)}
+                    </div>
+                    <div style={{ fontFamily: 'Inter', fontSize: 11, color: 'var(--ink-60)', marginTop: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {NB_FIRE_DUST.tag}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => { if (window.NB_CART) window.NB_CART.add({ slug: NB_FIRE_DUST.slug, name: NB_FIRE_DUST.name, price: NB_FIRE_DUST.price }); }}
+                    aria-label="Add NoodleBomb Fire Dust to cart"
+                    style={{
+                      flexShrink: 0,
+                      padding: '8px 16px', borderRadius: 999,
+                      background: 'var(--accent)', color: 'var(--accent-ink)',
+                      border: 0, cursor: 'pointer',
+                      fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
+                      letterSpacing: '0.16em', textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Add
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div style={{
+              padding: '20px 24px',
+              borderTop: '1px solid var(--line)',
+              background: 'var(--paper)',
+              display: 'flex', flexDirection: 'column', gap: 14,
+            }}>
+              {/* Trio upsell — only when no trio yet AND under free-ship line.
+                  Earlier impression than the /cart.html upsell card; same logic. */}
+              {(() => {
+                const hasTrio = cartItems.some((i) => i.slug === 'trio');
+                const singleSlugs = ['original', 'spicy', 'citrus'];
+                const singleCount = cartItems
+                  .filter((i) => singleSlugs.includes(i.slug))
+                  .reduce((sum, i) => sum + (Number(i.qty) || 0), 0);
+                if (hasTrio || singleCount < 1 || singleCount > 2) return null;
+                const swapToTrio = () => {
+                  if (window.NB_CART) {
+                    singleSlugs.forEach((slug) => window.NB_CART.remove(slug));
+                    window.NB_CART.add({ slug: NB_TRIO.slug, name: NB_TRIO.name, price: NB_TRIO.priceUsd });
+                  }
+                  const detail = { fromSingleCount: singleCount, savings: 5.98, destination: 'trio' };
+                  try { window.dispatchEvent(new CustomEvent('nb_cart_upgrade_to_trio', { detail })); } catch (_) {}
+                  try { window.fbq && window.fbq('trackCustom', 'UpgradeToTrioPrompt', detail); } catch (_) {}
+                  try { window.dataLayer && window.dataLayer.push({ event: 'upgrade_to_trio_prompt', ...detail }); } catch (_) {}
+                };
+                return (
+                  <div style={{
+                    padding: '12px 14px',
+                    border: '1px solid var(--accent)',
+                    borderRadius: 6,
+                    background: 'rgba(var(--accent-rgb),0.08)',
+                    display: 'flex', alignItems: 'center', gap: 10,
+                  }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 700, marginBottom: 2 }}>
+                        Cart slot 1: Trio
+                      </div>
+                      <div style={{ fontFamily: 'Inter Tight', fontSize: 13, fontWeight: 600, color: 'var(--ink)' }}>
+                        Add bottle 3 + unlock Trio savings
+                      </div>
+                    </div>
+                    <button
+                      onClick={swapToTrio}
+                      aria-label="Swap singles for The NoodleBomb Trio bundle"
+                      style={{
+                        flexShrink: 0,
+                        padding: '8px 14px', borderRadius: 999,
+                        background: 'var(--accent)', color: 'var(--accent-ink)',
+                        border: 0, cursor: 'pointer',
+                        fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
+                        letterSpacing: '0.16em', textTransform: 'uppercase',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Swap
+                    </button>
+                  </div>
+                );
+              })()}
+
+              {/* Free shipping bar */}
+              {cartFreeShipping ? (
+                <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
+                  ✓ FREE US shipping unlocked
+                </div>
+              ) : (
+                <div>
+                  <div style={{ fontSize: 11, color: 'var(--ink-60)', marginBottom: 6, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    {cartShipRemaining > 0 ? `${cartShipRemaining} more bottle${cartShipRemaining === 1 ? '' : 's'} + both Shoyu = FREE US shipping` : 'Add both Shoyu for FREE US shipping'} \u00b7 else $3.50 flat
+                  </div>
+                  <div style={{ height: 4, background: 'var(--paper-3)', borderRadius: 999, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: cartShipProgress + '%', background: 'var(--accent)', borderRadius: 999, transition: 'width .3s' }} />
+                  </div>
+                </div>
+              )}
+
+              {/* Subtotal */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <span style={{ fontSize: 13, color: 'var(--ink-60)' }}>Subtotal</span>
+                <span style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 22, color: 'var(--accent)', fontVariantNumeric: 'tabular-nums' }}>
+                  {fmtUSD(cartSubtotal)}
+                </span>
+              </div>
+
+              {/* Checkout CTA — multi-line Shopify cart-permalink. Lands the
+                  user on Shopify cart with every line pre-loaded; Continue
+                  Shopping returns to noodlebomb.co via return_to. */}
+              <a
+                href="/checkout.html"
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  gap: 8, padding: '16px 24px', borderRadius: 999,
+                  background: 'var(--accent)', color: 'var(--accent-ink)',
+                  fontFamily: 'Inter', fontSize: 12, fontWeight: 700,
+                  letterSpacing: '0.18em', textTransform: 'uppercase',
+                  textDecoration: 'none',
+                  transition: 'transform .2s, box-shadow .2s',
+                }}
+                onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
+                onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
+              >
+                {`Checkout — ${fmtUSD(cartSubtotal)} →`}
+              </a>
+              {/* Per-item shortcuts for multi-item carts */}
+              {cartItems.length > 1 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', justifyContent: 'center' }}>
+                  {cartItems.map((it) => (
+                    <a key={it.slug} href={nbCartPermalink(it.slug, Math.max(1, Math.floor(it.qty || 1)))} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
+                      {it.name} →
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* View full cart escape hatch */}
+              <a
+                href={NB_SHOPIFY_CART}
+                style={{
+                  textAlign: 'center',
+                  fontFamily: 'JetBrains Mono', fontSize: 10,
+                  letterSpacing: '0.18em', textTransform: 'uppercase',
+                  color: 'var(--ink-40)', textDecoration: 'underline',
+                  textUnderlineOffset: 4,
+                }}
+                onClick={() => setCartDrawerOpen(false)}
+              >
+                View full cart
+              </a>
+            </div>
+          </>
+        )}
+      </aside>
+    </nav>
+  );
 }
-function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }) {
-  return /* @__PURE__ */ React.createElement("section", { className: "hero-section", style: { position: "relative", minHeight: "100vh", overflow: "hidden", display: "flex", flexDirection: "column" } }, /* @__PURE__ */ React.createElement("div", { className: "hero-bg-media", style: { position: "absolute", inset: 0, zIndex: 0, background: "#0a0705" } }, /* @__PURE__ */ React.createElement(
-    "img",
-    {
-      className: "hero-product-bg",
-      src: "uploads/nb-hero-pour-page.webp",
-      alt: "NoodleBomb sauce lineup on a dark background",
-      loading: "eager",
-      style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", transform: "none" }
-    }
-  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(10,7,5,0.96) 0%, rgba(10,7,5,0.82) 27%, rgba(10,7,5,0.38) 57%, rgba(10,7,5,0.08) 100%)", pointerEvents: "none" } }), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,7,5,0.28) 0%, rgba(10,7,5,0.06) 48%, rgba(10,7,5,0.82) 100%)", pointerEvents: "none" } }), /* @__PURE__ */ React.createElement("div", { className: "hero-bg-overlay-mobile", "aria-hidden": "true" })), /* @__PURE__ */ React.createElement("div", { className: "hero-meta-strip", style: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 clamp(24px, 5.5vw, 80px)", marginTop: 88, gap: 16, flexWrap: "wrap", position: "relative", zIndex: 2 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontWeight: 600, fontSize: 11, letterSpacing: "0.2em" } }, "TRIO BUNDLE"), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)" } }, "$29.99 vs $35.97 singles")), /* @__PURE__ */ React.createElement("div", { className: "hero-copy-panel", style: { flex: 1, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 clamp(24px, 5.5vw, 80px) clamp(64px, 8vh, 120px)", position: "relative", zIndex: 2, maxWidth: 780 } }, /* @__PURE__ */ React.createElement("h1", { className: "display", style: { margin: "0 0 24px", fontSize: "clamp(56px, 10vw, 140px)", lineHeight: 0.9, letterSpacing: "-0.045em", animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.2s both" } }, headline.split("\n").map((line, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { opacity: i === 1 ? 0.6 : 1 } }, line))), /* @__PURE__ */ React.createElement("div", { style: { animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both" } }, /* @__PURE__ */ React.createElement("div", { className: "hero-subcopy", style: { fontFamily: "Inter Tight", fontWeight: 500, fontSize: "clamp(16px, 1.4vw, 20px)", letterSpacing: "-0.02em", maxWidth: 440, lineHeight: 1.4, marginBottom: 28 } }, "Try All 3 Flavors for $29.99.", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink-60)" } }, "Save $5.98 vs singles. Best for new buyers and perfect for the ramen lover in your life."))), /* @__PURE__ */ React.createElement("div", { className: "hero-cta-row", style: { display: "flex", gap: 10, flexWrap: "wrap", animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.7s both" } }, /* @__PURE__ */ React.createElement(
-    "a",
-    {
-      href: nbCartPermalink("trio"),
-      style: {
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 10,
-        padding: "16px 28px",
-        borderRadius: 999,
-        background: "var(--accent)",
-        color: "var(--accent-ink)",
-        fontFamily: "Inter",
-        fontWeight: 600,
-        fontSize: 14,
-        letterSpacing: "0.12em",
-        textTransform: "uppercase",
-        textDecoration: "none",
-        transition: "transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .35s",
-        boxShadow: "0 8px 24px var(--accent-glow)"
-      },
-      onMouseEnter: (e) => {
-        e.currentTarget.style.transform = "translateY(-2px)";
-        e.currentTarget.style.boxShadow = "0 16px 36px var(--accent-glow)";
-      },
-      onMouseLeave: (e) => {
-        e.currentTarget.style.transform = "";
-        e.currentTarget.style.boxShadow = "0 8px 24px var(--accent-glow)";
-      }
-    },
-    "Get the Trio - $29.99",
-    /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16, lineHeight: 1 } }, "\u2192")
-  ), /* @__PURE__ */ React.createElement(
-    "a",
-    {
-      className: "btn btn-ghost",
-      href: "#lineup",
-      style: { textDecoration: "none", display: "inline-block", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", background: "rgba(245,241,234,0.08)", borderColor: "rgba(245,241,234,0.25)" }
-    },
-    "Build your own - singles $11.99"
-  )), /* @__PURE__ */ React.createElement("div", { className: "hero-trust-line", style: { marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.08em", color: "var(--ink-40)", lineHeight: 1.6, maxWidth: 420, animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both" } }, "$3.50 flat US shipping \\u00b7 FREE on $29.99+ US orders \\u00b7 ships from Bonney Lake, WA")), /* @__PURE__ */ React.createElement("div", { className: "scroll-hint hero-scroll-hint", style: { position: "absolute", left: "50%", bottom: 20, transform: "translateX(-50%)", zIndex: 4 } }, /* @__PURE__ */ React.createElement("div", { className: "label" }, "Scroll"), /* @__PURE__ */ React.createElement("div", { className: "line" })));
+
+// ———————————————————————————————————————————— Hero
+function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }) {
+  return (
+    <section className="hero-section" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      {/* Background photo — canonical homepage hero shot. Keep it fixed in place while
+          scrolling; scroll-driven transforms made the first image visibly
+          jitter on mobile and some desktop browsers. */}
+      <div className="hero-bg-media" style={{ position: 'absolute', inset: 0, zIndex: 0, background: '#0a0705' }}>
+        <img
+          className="hero-product-bg"
+          src="uploads/nb-hero-lineup-dark-2026-06-07.webp"
+          alt="NoodleBomb sauce lineup on a dark background"
+          loading="eager"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', transform: 'none' }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,7,5,0.96) 0%, rgba(10,7,5,0.82) 27%, rgba(10,7,5,0.38) 57%, rgba(10,7,5,0.08) 100%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,7,5,0.28) 0%, rgba(10,7,5,0.06) 48%, rgba(10,7,5,0.82) 100%)', pointerEvents: 'none' }} />
+        {/* Mobile-only right-side overlay so the bottle photo doesn't fight the headline */}
+        <div className="hero-bg-overlay-mobile" aria-hidden="true" />
+      </div>
+
+      {/* Top meta strip */}
+      <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 clamp(24px, 5.5vw, 80px)', marginTop: 88, gap: 16, flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
+        <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>TRIO BUNDLE</span>
+        <span className="mono" style={{ color: 'var(--ink-40)' }}>$29.99 vs $35.97 singles</span>
+      </div>
+
+      {/* Main hero content */}
+      <div className="hero-copy-panel" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(24px, 5.5vw, 80px) clamp(64px, 8vh, 120px)', position: 'relative', zIndex: 2, maxWidth: 780 }}>
+        <h1 className="display" style={{ margin: '0 0 24px', fontSize: 'clamp(56px, 10vw, 140px)', lineHeight: 0.9, letterSpacing: '-0.045em', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.2s both' }}>
+          {headline.split('\n').map((line, i) => (
+            <div key={i} style={{ opacity: i === 1 ? 0.6 : 1 }}>{line}</div>
+          ))}
+        </h1>
+        <div style={{ animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both' }}>
+          <div className="hero-subcopy" style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
+            Try All 3 Flavors for $29.99.<br />
+            <span style={{ color: 'var(--ink-60)' }}>Save $5.98 vs singles. Best for new buyers and perfect for the ramen lover in your life.</span>
+          </div>
+        </div>
+        <div className="hero-cta-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.7s both' }}>
+          <a
+            href={nbCartPermalink('trio')}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '16px 28px',
+              borderRadius: 999,
+              background: 'var(--accent)',
+              color: 'var(--accent-ink)',
+              fontFamily: 'Inter',
+              fontWeight: 600,
+              fontSize: 14,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              transition: 'transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .35s',
+              boxShadow: '0 8px 24px var(--accent-glow)',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px var(--accent-glow)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px var(--accent-glow)'; }}
+          >
+            Get the Trio - $29.99
+            <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+          </a>
+          <a
+            className="btn btn-ghost"
+            href="#lineup"
+            style={{ textDecoration: 'none', display: 'inline-block', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', background: 'rgba(245,241,234,0.08)', borderColor: 'rgba(245,241,234,0.25)' }}
+          >
+            Build your own - singles $11.99
+          </a>
+        </div>
+        {/* Trust line under CTAs */}
+        <div className="hero-trust-line" style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
+          $3.50 flat US shipping \u00b7 FREE on all 5 (both Shoyu + 3 core) \u00b7 ships from Bonney Lake, WA
+        </div>
+      </div>
+
+      {/* Scroll hint */}
+      <div className="scroll-hint hero-scroll-hint" style={{ position: 'absolute', left: '50%', bottom: 20, transform: 'translateX(-50%)', zIndex: 4 }}>
+        <div className="label">Scroll</div>
+        <div className="line" />
+      </div>
+    </section>
+  );
 }
+
+
+// ———————————————————————————————————————————— Inquiry modal (Wholesale + Contact)
 function InquiryModal({ open, kind, onClose }) {
   const [submitted, setSubmitted] = useState(false);
-  useEffect(() => {
-    if (!open) setSubmitted(false);
-  }, [open]);
+  useEffect(() => { if (!open) setSubmitted(false); }, [open]);
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => { document.body.style.overflow = prev; window.removeEventListener('keydown', onKey); };
   }, [open, onClose]);
+
   if (!open) return null;
-  const isWholesale = kind === "wholesale";
-  const title = isWholesale ? "Wholesale Inquiry" : "Get in Touch";
-  const intro = isWholesale ? "Tell us about your shop. We'll be in touch with wholesale terms." : "Questions, press, partnerships \u2014 drop us a line.";
-  const subject = isWholesale ? "NoodleBomb Wholesale Inquiry" : "NoodleBomb Contact";
-  return /* @__PURE__ */ React.createElement(
-    "div",
-    {
-      onClick: onClose,
-      style: {
-        position: "fixed",
-        inset: 0,
-        zIndex: 200,
-        background: "rgba(8,7,6,0.78)",
-        backdropFilter: "blur(6px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 20,
-        animation: "fadeIn 0.2s ease"
-      }
-    },
-    /* @__PURE__ */ React.createElement(
-      "div",
-      {
-        onClick: (e) => e.stopPropagation(),
-        style: {
-          background: "var(--paper-2)",
-          border: "1px solid var(--line-strong)",
+
+  const isWholesale = kind === 'wholesale';
+  const title = isWholesale ? 'Wholesale Inquiry' : 'Get in Touch';
+  const intro = isWholesale
+    ? "Tell us about your shop. We'll be in touch with wholesale terms."
+    : "Questions, press, partnerships — drop us a line.";
+  const subject = isWholesale ? 'NoodleBomb Wholesale Inquiry' : 'NoodleBomb Contact';
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        background: 'rgba(8,7,6,0.78)', backdropFilter: 'blur(6px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: 20, animation: 'fadeIn 0.2s ease',
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: 'var(--paper-2)',
+          border: '1px solid var(--line-strong)',
           borderRadius: 6,
-          width: "100%",
-          maxWidth: 520,
-          maxHeight: "90vh",
-          overflowY: "auto",
-          padding: "clamp(28px, 4vw, 40px)",
-          color: "var(--ink)",
-          position: "relative"
-        }
-      },
-      /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          "aria-label": "Close",
-          onClick: onClose,
-          style: {
-            position: "absolute",
-            top: 14,
-            right: 14,
-            width: 36,
-            height: 36,
-            background: "transparent",
-            border: 0,
-            color: "var(--ink)",
-            opacity: 0.65,
-            cursor: "pointer",
-            padding: 0,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }
-        },
-        /* @__PURE__ */ React.createElement("svg", { width: "18", height: "18", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.6", strokeLinecap: "round" }, /* @__PURE__ */ React.createElement("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), /* @__PURE__ */ React.createElement("line", { x1: "6", y1: "6", x2: "18", y2: "18" }))
-      ),
-      /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 11, letterSpacing: "0.18em", marginBottom: 12 } }, isWholesale ? "Stockists & Retail" : "Hello@noodlebomb.co"),
-      /* @__PURE__ */ React.createElement("h2", { className: "display", style: { margin: "0 0 12px", fontSize: 28, letterSpacing: "-0.03em", fontWeight: 700 } }, title),
-      /* @__PURE__ */ React.createElement("p", { style: { margin: "0 0 24px", color: "var(--ink-60)", fontSize: 14, lineHeight: 1.5 } }, intro),
-      submitted ? /* @__PURE__ */ React.createElement("div", { style: { padding: "24px 0", textAlign: "center" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontSize: 22, fontWeight: 600, marginBottom: 8 } }, "Thanks \u2014 we got it."), /* @__PURE__ */ React.createElement("div", { style: { color: "var(--ink-60)", fontSize: 14 } }, "We'll reply within 1\u20132 business days."), /* @__PURE__ */ React.createElement(
-        "button",
-        {
-          onClick: onClose,
-          style: {
-            marginTop: 24,
-            padding: "12px 24px",
-            borderRadius: 999,
-            background: "var(--ink)",
-            color: "var(--paper)",
-            border: 0,
-            fontFamily: "Inter",
-            fontSize: 13,
-            fontWeight: 600,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            cursor: "pointer"
-          }
-        },
-        "Done"
-      )) : /* @__PURE__ */ React.createElement(
-        "form",
-        {
-          action: "https://formsubmit.co/hello@noodlebomb.co",
-          method: "POST",
-          onSubmit: () => setSubmitted(true),
-          style: { display: "flex", flexDirection: "column", gap: 12 }
-        },
-        /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_subject", value: subject }),
-        /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_template", value: "table" }),
-        /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_captcha", value: "false" }),
-        /* @__PURE__ */ React.createElement("input", { type: "text", name: "_honey", style: { display: "none" } }),
-        /* @__PURE__ */ React.createElement(
-          "input",
-          {
-            type: "text",
-            name: "name",
-            placeholder: "Your name *",
-            required: true,
-            style: inputStyle
-          }
-        ),
-        /* @__PURE__ */ React.createElement(
-          "input",
-          {
-            type: "email",
-            name: "email",
-            placeholder: "Email *",
-            required: true,
-            style: inputStyle
-          }
-        ),
-        isWholesale && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("input", { type: "text", name: "business", placeholder: "Business name *", required: true, style: inputStyle }), /* @__PURE__ */ React.createElement("input", { type: "text", name: "location", placeholder: "Location (city, state) *", required: true, style: inputStyle }), /* @__PURE__ */ React.createElement("input", { type: "text", name: "volume", placeholder: "Estimated monthly volume", style: inputStyle })),
-        /* @__PURE__ */ React.createElement(
-          "textarea",
-          {
-            name: "message",
-            placeholder: isWholesale ? "Anything else we should know?" : "Your message *",
-            required: !isWholesale,
-            rows: 4,
-            style: { ...inputStyle, resize: "vertical" }
-          }
-        ),
-        /* @__PURE__ */ React.createElement(
-          "button",
-          {
-            type: "submit",
-            style: {
-              marginTop: 8,
-              padding: "14px 24px",
-              background: "var(--accent)",
-              color: "var(--accent-ink)",
-              border: 0,
-              borderRadius: 4,
-              fontFamily: "Inter",
-              fontSize: 14,
-              fontWeight: 600,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              cursor: "pointer",
-              transition: "filter .2s"
-            },
-            onMouseOver: (e) => e.currentTarget.style.filter = "brightness(1.08)",
-            onMouseOut: (e) => e.currentTarget.style.filter = "none"
-          },
-          "Send Inquiry"
-        )
-      )
-    )
+          width: '100%', maxWidth: 520,
+          maxHeight: '90vh', overflowY: 'auto',
+          padding: 'clamp(28px, 4vw, 40px)',
+          color: 'var(--ink)',
+          position: 'relative',
+        }}
+      >
+        <button
+          aria-label="Close"
+          onClick={onClose}
+          style={{
+            position: 'absolute', top: 14, right: 14,
+            width: 36, height: 36,
+            background: 'transparent', border: 0, color: 'var(--ink)',
+            opacity: 0.65, cursor: 'pointer', padding: 0,
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
+        <div className="mono" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '0.18em', marginBottom: 12 }}>
+          {isWholesale ? 'Stockists & Retail' : 'Hello@noodlebomb.co'}
+        </div>
+        <h2 className="display" style={{ margin: '0 0 12px', fontSize: 28, letterSpacing: '-0.03em', fontWeight: 700 }}>
+          {title}
+        </h2>
+        <p style={{ margin: '0 0 24px', color: 'var(--ink-60)', fontSize: 14, lineHeight: 1.5 }}>
+          {intro}
+        </p>
+
+        {submitted ? (
+          <div style={{ padding: '24px 0', textAlign: 'center' }}>
+            <div style={{ fontFamily: 'Inter Tight', fontSize: 22, fontWeight: 600, marginBottom: 8 }}>Thanks — we got it.</div>
+            <div style={{ color: 'var(--ink-60)', fontSize: 14 }}>We'll reply within 1–2 business days.</div>
+            <button
+              onClick={onClose}
+              style={{
+                marginTop: 24, padding: '12px 24px', borderRadius: 999,
+                background: 'var(--ink)', color: 'var(--paper)',
+                border: 0, fontFamily: 'Inter', fontSize: 13, fontWeight: 600,
+                letterSpacing: '0.16em', textTransform: 'uppercase', cursor: 'pointer',
+              }}
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <form
+            action="https://formsubmit.co/hello@noodlebomb.co"
+            method="POST"
+            onSubmit={() => setSubmitted(true)}
+            style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+          >
+            <input type="hidden" name="_subject" value={subject} />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" style={{ display: 'none' }} />
+
+            <input
+              type="text" name="name" placeholder="Your name *" required
+              style={inputStyle}
+            />
+            <input
+              type="email" name="email" placeholder="Email *" required
+              style={inputStyle}
+            />
+            {isWholesale && (
+              <>
+                <input type="text" name="business" placeholder="Business name *" required style={inputStyle} />
+                <input type="text" name="location" placeholder="Location (city, state) *" required style={inputStyle} />
+                <input type="text" name="volume" placeholder="Estimated monthly volume" style={inputStyle} />
+              </>
+            )}
+            <textarea
+              name="message"
+              placeholder={isWholesale ? "Anything else we should know?" : "Your message *"}
+              required={!isWholesale}
+              rows={4}
+              style={{ ...inputStyle, resize: 'vertical' }}
+            />
+            <button
+              type="submit"
+              style={{
+                marginTop: 8,
+                padding: '14px 24px',
+                background: 'var(--accent)',
+                color: 'var(--accent-ink)',
+                border: 0, borderRadius: 4,
+                fontFamily: 'Inter', fontSize: 14, fontWeight: 600,
+                letterSpacing: '0.06em', textTransform: 'uppercase',
+                cursor: 'pointer', transition: 'filter .2s',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.filter = 'brightness(1.08)'}
+              onMouseOut={(e) => e.currentTarget.style.filter = 'none'}
+            >
+              Send Inquiry
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
   );
 }
+
 const inputStyle = {
-  width: "100%",
-  padding: "12px 14px",
-  background: "#100E0C",
-  border: "1px solid var(--line)",
+  width: '100%',
+  padding: '12px 14px',
+  background: '#100E0C',
+  border: '1px solid var(--line)',
   borderRadius: 4,
-  color: "var(--ink)",
-  fontFamily: "Inter",
+  color: 'var(--ink)',
+  fontFamily: 'Inter',
   fontSize: 14,
-  outline: "none"
+  outline: 'none',
 };
+
+
 Object.assign(window, { Reveal, Bottle, Shot, FoodShot, Nav, Hero, InquiryModal });
