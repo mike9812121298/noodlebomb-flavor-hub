@@ -53,7 +53,7 @@
   var STORAGE_KEY = 'nb_cart_v2';
   var BUS = (typeof window !== 'undefined') ? new EventTarget() : null;
   var CHANGE = 'nb-cart-change';
-  var FREE_SHIPPING_THRESHOLD = 29.99;
+  var FREE_SHIPPING_THRESHOLD = 32.99;
   var RETIRED_SLUGS = {};  // Spicy Shoyu is live; keep this empty unless Mike retires a slug.
   var PRODUCT_CATALOG = {
     original: { slug: 'original', name: 'Original', price: 12.99 },
@@ -129,7 +129,7 @@
     return (items || safeRead()).reduce(function (n, i) { return n + ((i.slug === 'trio' ? 3 : 1) * (Number(i.qty) || 0)); }, 0);
   }
 
-  // Free US shipping rule (2026-06): automatic free US shipping at $29.99+.
+  // Free US shipping rule (2026-06): automatic free US shipping at $32.99+.
   // Site messaging only; final shipping is enforced at Shopify checkout.
   function qualifiesForFreeShipping(items) {
     var list = items || safeRead();

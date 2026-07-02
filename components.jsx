@@ -200,7 +200,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
   const cartHasTrio = cartItems.some((i) => i.slug === "trio" && (Number(i.qty) || 0) > 0);
   const cartBottleCount = cartItems.reduce((n, i) => n + (i.slug === "trio" ? 3 : 1) * (Number(i.qty) || 0), 0);
-  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 29.99;
+  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 32.99;
   const cartFreeShipping = cartSubtotal >= cartFreeShippingThreshold;
   const cartShipRemaining = cartFreeShipping ? 0 : Math.max(cartFreeShippingThreshold - cartSubtotal, 0);
   const cartShipProgress = cartFreeShipping ? 100 : Math.min(cartSubtotal / cartFreeShippingThreshold * 100, 100);
@@ -826,7 +826,7 @@ function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }
       style: { textDecoration: "none", display: "inline-block", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", background: "rgba(245,241,234,0.08)", borderColor: "rgba(245,241,234,0.25)" }
     },
     "Build your own - singles $12.99"
-  )), /* @__PURE__ */ React.createElement("div", { className: "hero-trust-line", style: { marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.08em", color: "var(--ink-40)", lineHeight: 1.6, maxWidth: 420, animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both" } }, "$3.50 flat US shipping \\u00b7 FREE on $29.99+ US orders \\u00b7 ships from Bonney Lake, WA")), /* @__PURE__ */ React.createElement("div", { className: "scroll-hint hero-scroll-hint", style: { position: "absolute", left: "50%", bottom: 20, transform: "translateX(-50%)", zIndex: 4 } }, /* @__PURE__ */ React.createElement("div", { className: "label" }, "Scroll"), /* @__PURE__ */ React.createElement("div", { className: "line" })));
+  )), /* @__PURE__ */ React.createElement("div", { className: "hero-trust-line", style: { marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.08em", color: "var(--ink-40)", lineHeight: 1.6, maxWidth: 420, animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both" } }, "$3.50 flat US shipping \\u00b7 FREE on $32.99+ US orders \\u00b7 ships from Bonney Lake, WA")), /* @__PURE__ */ React.createElement("div", { className: "scroll-hint hero-scroll-hint", style: { position: "absolute", left: "50%", bottom: 20, transform: "translateX(-50%)", zIndex: 4 } }, /* @__PURE__ */ React.createElement("div", { className: "label" }, "Scroll"), /* @__PURE__ */ React.createElement("div", { className: "line" })));
 }
 function InquiryModal({ open, kind, onClose }) {
   const [submitted, setSubmitted] = useState(false);
