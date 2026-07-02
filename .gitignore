@@ -30,6 +30,3 @@ build/
 # large media + audit artifacts (use CDN, not git)
 uploads/
 audit_screens/
-
-# Local Netlify folder
-.netlify

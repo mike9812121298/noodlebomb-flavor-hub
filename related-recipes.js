@@ -56,7 +56,7 @@
         var safeSlug = String(slug).replace(/[^a-z0-9-]/gi, "");
         var title = titleFromSlug(safeSlug);
         return (
-          '<a class="related-recipe-card" href="/recipes/' +
+          '<a class="related-recipe-card" href="/recipes#' +
           safeSlug +
           '">' +
           '<span class="related-recipe-thumb" aria-hidden="true">NB</span>' +

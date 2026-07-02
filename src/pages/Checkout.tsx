@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { getCheckoutUrl, WIX_STORE_BASE } from "@/lib/wix-checkout";
-import { trackMetaInitiateCheckout } from "@/lib/meta-pixel";
 import EmberParticles from "@/components/EmberParticles";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
@@ -97,7 +96,6 @@ const Checkout = () => {
       return;
     }
     setRedirecting(true);
-    trackMetaInitiateCheckout(items, subtotal);
     // Open the Wix store in a new tab so the cart isn't lost if they bounce back
     window.open(wixCheckoutUrl, "_blank", "noopener,noreferrer");
   };
