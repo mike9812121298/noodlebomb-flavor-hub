@@ -149,10 +149,11 @@
     if (existing) {
       existing.qty += qty;
     } else {
+      var catalogItem = PRODUCT_CATALOG[item.slug] || null;
       var nextItem = {
         slug: item.slug,
-        name: item.name || item.slug,
-        price: Number(item.price) || 0,
+        name: item.name || (catalogItem && catalogItem.name) || item.slug,
+        price: Number(item.price) || (catalogItem ? catalogItem.price : 0),
         qty: qty
       };
       if (normalizedAttributes.length) nextItem.attributes = normalizedAttributes;

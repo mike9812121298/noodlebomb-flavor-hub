@@ -1538,3 +1538,37 @@ body.launch-page .page-footer .nav-brand {
     padding-inline: 22px;
   }
 }
+
+/* Shop quick-add pills (2026-07-02): one-tap add on /shop cards via NB_CART,
+   fallback navigates to /cart?add=. Buttons sit inside the card link; the
+   click handler stops propagation. */
+.sku-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 14px;
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 235, 227, 0.22);
+  background: rgba(245, 241, 234, 0.07);
+  color: var(--ink, #F0EBE3);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.sku-add:hover {
+  background: var(--accent, #D4A24A);
+  border-color: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
+  transform: translateY(-1px);
+}
+.sku-add.is-added {
+  background: var(--accent, #D4A24A);
+  border-color: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
+}

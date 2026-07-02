@@ -552,3 +552,35 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSpiceCross);
   else initSpiceCross();
 })();
+
+/* ───────── Shop quick-add (2026-07-02) ─────────
+   One-tap add for [data-quick-add] buttons (shop.html sku cards). Adds via
+   the canonical NB_CART with a catalog-priced payload; falls back to the
+   /cart?add= permalink when cart-store.js is absent. Buttons live inside
+   card anchors, so the handler prevents navigation. */
+(function () {
+  function init() {
+    var buttons = document.querySelectorAll('[data-quick-add]');
+    if (!buttons.length) return;
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var slug = btn.getAttribute('data-slug') || '';
+        if (btn.classList.contains('is-added')) {
+          window.location.href = '/cart';
+          return;
+        }
+        if (window.NB_CART && typeof window.NB_CART.add === 'function') {
+          window.NB_CART.add({ slug: slug, name: btn.getAttribute('data-name'), price: parseFloat(btn.getAttribute('data-price')), qty: 1 });
+          btn.classList.add('is-added');
+          btn.textContent = 'Added \u2713 \u00b7 View cart';
+        } else {
+          window.location.href = '/cart?add=' + encodeURIComponent(slug) + '&qty=1';
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();

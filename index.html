@@ -3692,6 +3692,8 @@
 <!-- cart-store.js sets window.NB_CART. Deferred — runs before the build/*.js
      bundles in document order, so window.NB_CART is ready when they evaluate. -->
 <script defer src="cart-store.js?v=20260702ship"></script>
+<script defer src="reviews-config.js?v=20260702"></script>
+<script defer src="welcome-popup.js?v=20260702"></script>
 <!-- Shopify config + checkout client. Homepage can defer these until after
      first paint because cart state comes from cart-store.js, not these files. -->
 <script>
@@ -3831,6 +3833,27 @@
   .nbrb-link:hover { opacity: 1; }
   @media (max-width: 820px) { .nbrb-actions { flex-direction: row; width: 100%; } .nbrb-join { flex: 1; } }
 
+  /* Customer review marquee (2026-07-02). Populated from reviews-config.js;
+     the section renders only when 3+ real reviews are listed there. */
+  .nb-rev-section { background: var(--paper); padding: 120px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; overflow: hidden; }
+  .nb-rev-head { max-width: 1300px; margin: 0 auto 44px; padding: 0 clamp(24px, 5.5vw, 80px); display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; }
+  .nb-rev-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+  .nb-rev-track { display: flex; width: max-content; animation: nbRevScroll 60s linear infinite; }
+  .nb-rev-marquee:hover .nb-rev-track,
+  .nb-rev-track:focus-within { animation-play-state: paused; }
+  .nb-rev-group { display: flex; gap: 18px; padding-right: 18px; }
+  .nb-rev-card { width: clamp(280px, 30vw, 370px); flex: 0 0 auto; background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px; padding: 26px 26px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .nb-rev-stars { color: #E0B24C; font-size: 14px; letter-spacing: 3px; }
+  .nb-rev-quote { font-family: 'Inter Tight', sans-serif; font-size: 16px; line-height: 1.5; letter-spacing: -0.01em; flex: 1; }
+  .nb-rev-meta { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 1px solid rgba(240,235,227,0.07); padding-top: 12px; }
+  .nb-rev-name { font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 13px; }
+  .nb-rev-chip { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 4px 9px; border-radius: 999px; white-space: nowrap; flex: 0 0 auto; }
+  @keyframes nbRevScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .nb-rev-track { animation: none !important; }
+    .nb-rev-marquee { overflow-x: auto; mask-image: none; -webkit-mask-image: none; }
+  }
+
   /* Mobile compositing diet (2026-07-02): iOS Safari was crashing the tab
      under layer-memory pressure. Below 769px, decorative blend-mode grain/
      glow layers are dropped and backdrop blurs replaced with near-opaque
@@ -3857,6 +3880,7 @@
     .nav.scrolled { background: rgba(8,7,6,0.97) !important; }
     .sticky-cart-bar { background: linear-gradient(90deg, rgba(var(--accent-rgb),0.18), rgba(8,7,6,0.97) 44%, rgba(var(--accent-rgb),0.12)) !important; }
     .nb-app-dock { background: rgba(8,7,6,0.97) !important; }
+    .nb-rev-marquee { mask-image: none !important; -webkit-mask-image: none !important; }
   }
 </style>
 <section class="nbrb" aria-label="NoodleBomb Flavor Club">

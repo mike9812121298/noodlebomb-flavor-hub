@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v29-bundle5-20260702';
+const NB_CACHE = 'noodlebomb-app-shell-v30-reviews-20260702';
 const NB_ASSETS = [
   '/',
   '/index.html',
