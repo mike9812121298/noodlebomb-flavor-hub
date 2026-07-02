@@ -66,7 +66,7 @@ function MonthlyDrop() {
             <Reveal delay={1}>
               <a className="md-photo-card" href="/monthly-box" aria-label="Subscribe to the Monthly Noodle Club" style={{ display: 'block', textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
                 <img
-                  src="uploads/monthly-noodle-club-2026-05-08.png"
+                  src="uploads/monthly-noodle-club-2026-05-08-web.webp"
                   alt="NoodleBomb Monthly Noodle Club box with noodles, sauces, and surprise extras"
                   loading="lazy"
                 />
