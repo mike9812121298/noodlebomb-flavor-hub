@@ -40,7 +40,7 @@ const FREE_SHIPPING = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD |
 const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === "trio" && (Number(i.qty) || 0) > 0);
 const getBottleCount = (items) => (items || []).reduce((n, i) => n + (i.slug === "trio" ? 3 : 1) * (Number(i.qty) || 0), 0);
 const FLAT_SHIPPING = 3.5;
-const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 29.99 };
+const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
 const FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper" };
 const RITUAL_KIT = {
   name: "Ramen Ritual Kit",
@@ -255,7 +255,7 @@ function CartPage() {
         loading: "lazy",
         style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }
       }
-    )), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 4 } }, "CART SLOT 1: TRIO"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 16, color: "var(--ink)", marginBottom: 4 } }, "Add a third bottle for trio pricing"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12, color: "var(--ink-60)", lineHeight: 1.5 } }, "Any 3 bottles qualify for the $29.99 Trio price.")), /* @__PURE__ */ React.createElement(
+    )), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 4 } }, "CART SLOT 1: TRIO"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 16, color: "var(--ink)", marginBottom: 4 } }, "Add a third bottle for trio pricing"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12, color: "var(--ink-60)", lineHeight: 1.5 } }, "Any 3 bottles qualify for the $32.99 Trio price.")), /* @__PURE__ */ React.createElement(
       "button",
       {
         onClick: swapToTrio,

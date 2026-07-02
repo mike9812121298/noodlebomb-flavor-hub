@@ -2,7 +2,7 @@
 // The original JSX source lives only in the deploy tree; this file is the compiled
 // equivalent (plain JS, no JSX sugar) and re-builds byte-stable through esbuild.
 const WIX_URLS = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical" };
-const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 29.99 };
+const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
 const SHOPIFY_VARIANT_IDS = {
   original: "53998041596214",
   spicy: "53998042120502",
@@ -64,7 +64,7 @@ const FLAVORS = {
     line2: "Roasted garlic, toasted sesame, smooth soy.",
     price: "$12.99",
     priceUsd: 12.99,
-    pack: "$29.99 / 3-pack"
+    pack: "$32.99 / 3-pack"
   },
   spicy: {
     name: "Spicy Tokyo",
@@ -78,7 +78,7 @@ const FLAVORS = {
     line2: "Roasted chili, garlic, sesame.",
     price: "$12.99",
     priceUsd: 12.99,
-    pack: "$29.99 / 3-pack"
+    pack: "$32.99 / 3-pack"
   },
   citrus: {
     name: "Citrus Shoyu",
@@ -92,7 +92,7 @@ const FLAVORS = {
     line2: "Shoyu base with a clean citrus lift.",
     price: "$12.99",
     priceUsd: 12.99,
-    pack: "$29.99 / 3-pack"
+    pack: "$32.99 / 3-pack"
   },
   shoyu: {
     name: "Shoyu Reserve",
@@ -1190,7 +1190,7 @@ function Origin() {
             e.currentTarget.style.boxShadow = "none";
           }
         },
-        "Try the Trio \u2014 $29.99 \u00b7 Save $8.98",
+        "Try the Trio \u2014 $32.99 \u00b7 Save $5.98",
         /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16 } }, "\u2192")
       ),
       /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 10, letterSpacing: "0.14em" } }, "$3.50 flat US ship \u00b7 FREE on $29.99+")
@@ -1226,7 +1226,7 @@ function FlavorPicker({ flavor, setFlavor }) {
     ["Start here", "Original", "Garlic, sesame, smooth soy."],
     ["Want heat", "Spicy Tokyo", "Roasted chili over deep umami."],
     ["Want lift", "Citrus Shoyu", "Bright shoyu for rich bowls."],
-    ["Not sure", "The Trio", "All 3 bottles for $29.99."]
+    ["Not sure", "The Trio", "All 3 bottles for $32.99."]
   ].map(([kicker, title, copy]) => /* @__PURE__ */ React.createElement("div", { key: title, style: {
     border: "1px solid var(--line)",
     background: "rgba(14,13,12,0.34)",
@@ -1351,7 +1351,7 @@ function FlavorPicker({ flavor, setFlavor }) {
       loading: "lazy",
       style: { display: "block", width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", filter: "drop-shadow(0 28px 50px rgba(0,0,0,0.45))" }
     }
-  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)", pointerEvents: "none" } })), /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-copy", style: { padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em" } }, "BUNDLE - SAVE $5.98"), /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(36px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 1.02, margin: 0, fontWeight: 700 } }, "Try All 3 Flavors", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "\u2014 $29.99.")), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 15, color: "var(--ink-60)", lineHeight: 1.55, maxWidth: "42ch" } }, "One of each: Original, Spicy Tokyo, Citrus Shoyu. $29.99 vs $38.97 singles, so new buyers save $8.98 and start with the full line."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } }, ["Original", "Spicy Tokyo", "Citrus Shoyu"].map((label) => /* @__PURE__ */ React.createElement("span", { key: label, style: {
+  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)", pointerEvents: "none" } })), /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-copy", style: { padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em" } }, "BUNDLE - SAVE $5.98"), /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(36px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 1.02, margin: 0, fontWeight: 700 } }, "Try All 3 Flavors", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "\u2014 $32.99.")), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 15, color: "var(--ink-60)", lineHeight: 1.55, maxWidth: "42ch" } }, "One of each: Original, Spicy Tokyo, Citrus Shoyu. $32.99 vs $38.97 singles, so new buyers save $5.98 and start with the full line."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } }, ["Original", "Spicy Tokyo", "Citrus Shoyu"].map((label) => /* @__PURE__ */ React.createElement("span", { key: label, style: {
     display: "inline-flex",
     alignItems: "center",
     gap: 8,
@@ -1403,7 +1403,7 @@ function FlavorPicker({ flavor, setFlavor }) {
         e.currentTarget.style.background = "var(--accent)";
       }
     },
-    "Buy the Trio - $29.99",
+    "Buy the Trio - $32.99",
     /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16, lineHeight: 1 } }, "\u2192")
   )))))));
 }
@@ -2647,7 +2647,7 @@ function StickyCartBar({ flavor, flavors }) {
         className: "scb-trio",
         tabIndex: showBar ? void 0 : -1
       },
-      "3-Pack \u2014 $29.99"
+      "3-Pack \u2014 $32.99"
     ), /* @__PURE__ */ React.createElement(
       "a",
       {
@@ -3109,7 +3109,7 @@ function TheDrop() {
       /* @__PURE__ */ React.createElement("p", { style: { font: `400 13.5px/1.5 ${TDROP_DISP}`, color: "rgba(240,235,227,0.6)", margin: "0 0 14px" } }, "Gochugaru, toasted sesame, shiitake. Dust every bowl."),
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, /* @__PURE__ */ React.createElement(TheDropMeter, { label: "UMAMI", pct: "80%", kind: "umami" }), /* @__PURE__ */ React.createElement(TheDropMeter, { label: "HEAT", pct: "62%", kind: "heat" })),
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 21px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$10.99"), /* @__PURE__ */ React.createElement("span", { style: { font: `700 10px ${TDROP_MONO}`, letterSpacing: "0.14em", color: "rgba(240,235,227,0.4)" } }, "3.2 OZ"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[2]), className: "tdrop-btn tdrop-btn--chiliDark", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 18px", border: "1px solid rgba(240,235,227,0.14)", borderRadius: 999, background: "#14100B", color: "#F0EBE3", font: `700 11px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" } }, "Add \u2192"))
-    )), /* @__PURE__ */ React.createElement("div", { className: "tdrop-strip", style: { marginTop: 22, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", border: "1px solid rgba(201,162,78,0.35)", borderRadius: 14, padding: "18px 26px", background: "linear-gradient(90deg,rgba(224,178,76,0.10),rgba(20,16,11,0.3))" } }, /* @__PURE__ */ React.createElement("span", { style: { font: `700 12px ${TDROP_MONO}`, letterSpacing: "0.2em", color: "#E0B24C" } }, "GET THE FULL DROP"), /* @__PURE__ */ React.createElement("span", { style: { font: `400 14px ${TDROP_DISP}`, color: "rgba(240,235,227,0.65)" } }, "Both sauces + Fire Dust \u2014 ", /* @__PURE__ */ React.createElement("span", { style: { color: "#F0EBE3", fontWeight: 600 } }, "$29.99"), " ", /* @__PURE__ */ React.createElement("span", { style: { textDecoration: "line-through", color: "rgba(240,235,227,0.4)" } }, "$34.97"), " \u00b7 ships free."), /* @__PURE__ */ React.createElement("button", { onClick: addDrop, className: "tdrop-btn tdrop-btn--cta", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 9, padding: "13px 26px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E0B24C,#C99A3F)", color: "#1A1206", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 44px -12px rgba(224,178,76,0.55)" } }, "Add the drop \u2192")))
+    )), /* @__PURE__ */ React.createElement("div", { className: "tdrop-strip", style: { marginTop: 22, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", border: "1px solid rgba(201,162,78,0.35)", borderRadius: 14, padding: "18px 26px", background: "linear-gradient(90deg,rgba(224,178,76,0.10),rgba(20,16,11,0.3))" } }, /* @__PURE__ */ React.createElement("span", { style: { font: `700 12px ${TDROP_MONO}`, letterSpacing: "0.2em", color: "#E0B24C" } }, "GET THE FULL DROP"), /* @__PURE__ */ React.createElement("span", { style: { font: `400 14px ${TDROP_DISP}`, color: "rgba(240,235,227,0.65)" } }, "Both sauces + Fire Dust \u2014 ", /* @__PURE__ */ React.createElement("span", { style: { color: "#F0EBE3", fontWeight: 600 } }, "$36.97"), " \u00b7 ships free."), /* @__PURE__ */ React.createElement("button", { onClick: addDrop, className: "tdrop-btn tdrop-btn--cta", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 9, padding: "13px 26px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E0B24C,#C99A3F)", color: "#1A1206", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 44px -12px rgba(224,178,76,0.55)" } }, "Add the drop \u2192")))
   );
 }
 function App() {
