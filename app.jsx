@@ -3,32 +3,6 @@
 // equivalent (plain JS, no JSX sugar) and re-builds byte-stable through esbuild.
 const WIX_URLS = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical" };
 const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 29.99 };
-const NB_SAVED_LOADOUTS_KEY = "nb_saved_loadouts_v1";
-const NB_SAVED_LOADOUTS_EVENT = "nb-saved-loadouts-change";
-const readSavedLoadouts = () => {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = window.localStorage.getItem(NB_SAVED_LOADOUTS_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (_) {
-    return [];
-  }
-};
-const writeSavedLoadouts = (loadouts) => {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(NB_SAVED_LOADOUTS_KEY, JSON.stringify(loadouts.slice(0, 12)));
-  window.dispatchEvent(new CustomEvent(NB_SAVED_LOADOUTS_EVENT));
-};
-const saveFlavorLoadout = (loadout) => {
-  const next = { ...loadout, id: `loadout-${Date.now()}`, savedAt: Date.now() };
-  const existing = readSavedLoadouts().filter((item) => JSON.stringify(item.quantities) !== JSON.stringify(loadout.quantities));
-  writeSavedLoadouts([next, ...existing]);
-  return next;
-};
-const deleteFlavorLoadout = (id) => {
-  writeSavedLoadouts(readSavedLoadouts().filter((item) => item.id !== id));
-};
 const SHOPIFY_VARIANT_IDS = {
   original: "53998041596214",
   spicy: "53998042120502",
@@ -2615,19 +2589,12 @@ function OrderMapSection() {
 }
 function MobileAppDock({ flavor, flavors }) {
   const [cartCount, setCartCount] = useState(() => window.NB_CART ? window.NB_CART.getItemCount() : 0);
-  const [savedCount, setSavedCount] = useState(() => readSavedLoadouts().length);
   useEffect(() => {
     const syncCart = () => setCartCount(window.NB_CART ? window.NB_CART.getItemCount() : 0);
-    const syncSaved = () => setSavedCount(readSavedLoadouts().length);
     const unbindCart = window.NB_CART ? window.NB_CART.onChange(syncCart) : null;
-    window.addEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
-    window.addEventListener("storage", syncSaved);
     syncCart();
-    syncSaved();
     return () => {
       if (unbindCart) unbindCart();
-      window.removeEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
-      window.removeEventListener("storage", syncSaved);
     };
   }, []);
   const active = flavors[flavor] || flavors.original;
@@ -2642,7 +2609,7 @@ function MobileAppDock({ flavor, flavors }) {
     if (window.history && window.history.replaceState) window.history.replaceState(null, "", hash);
   };
   const openCart = () => window.dispatchEvent(new CustomEvent("nb-open-cart"));
-  return /* @__PURE__ */ React.createElement("nav", { className: "nb-app-dock", "aria-label": "NoodleBomb mobile app navigation", style: { "--dock-accent": active.color, "--dock-accent-rgb": active.rgb, "--dock-ink": active.ink } }, /* @__PURE__ */ React.createElement("a", { href: "#main-content", onClick: goHash("#main-content"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "N"), /* @__PURE__ */ React.createElement("span", null, "Home")), /* @__PURE__ */ React.createElement("a", { href: "#bundle-builder", onClick: goHash("#bundle-builder"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "+"), /* @__PURE__ */ React.createElement("span", null, "Build"), savedCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, savedCount)), /* @__PURE__ */ React.createElement("a", { href: "#monthly", onClick: goHash("#monthly"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "$"), /* @__PURE__ */ React.createElement("span", null, "Box")), /* @__PURE__ */ React.createElement("a", { href: "/recipes", className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "R"), /* @__PURE__ */ React.createElement("span", null, "Recipes")), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: openCart, className: "nb-app-dock-item nb-app-dock-button" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "C"), /* @__PURE__ */ React.createElement("span", null, "Cart"), cartCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, cartCount)));
+  return /* @__PURE__ */ React.createElement("nav", { className: "nb-app-dock", "aria-label": "NoodleBomb mobile app navigation", style: { "--dock-accent": active.color, "--dock-accent-rgb": active.rgb, "--dock-ink": active.ink } }, /* @__PURE__ */ React.createElement("a", { href: "#main-content", onClick: goHash("#main-content"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "N"), /* @__PURE__ */ React.createElement("span", null, "Home")), /* @__PURE__ */ React.createElement("a", { href: "#bundle-builder", onClick: goHash("#bundle-builder"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "+"), /* @__PURE__ */ React.createElement("span", null, "Build")), /* @__PURE__ */ React.createElement("a", { href: "#monthly", onClick: goHash("#monthly"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "$"), /* @__PURE__ */ React.createElement("span", null, "Box")), /* @__PURE__ */ React.createElement("a", { href: "/recipes", className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "R"), /* @__PURE__ */ React.createElement("span", null, "Recipes")), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: openCart, className: "nb-app-dock-item nb-app-dock-button" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "C"), /* @__PURE__ */ React.createElement("span", null, "Cart"), cartCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, cartCount)));
 }
 function StickyCartBar({ flavor, flavors }) {
   const [visible, setVisible] = useState(false);
@@ -2786,17 +2753,6 @@ function BuildBundle() {
     shoyu: 0
   });
   const [added, setAdded] = useState(false);
-  const [savedLoadouts, setSavedLoadouts] = useState(readSavedLoadouts);
-  const [loadoutFlash, setLoadoutFlash] = useState(null);
-  useEffect(() => {
-    const syncSaved = () => setSavedLoadouts(readSavedLoadouts());
-    window.addEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
-    window.addEventListener("storage", syncSaved);
-    return () => {
-      window.removeEventListener(NB_SAVED_LOADOUTS_EVENT, syncSaved);
-      window.removeEventListener("storage", syncSaved);
-    };
-  }, []);
   const totalBottles = products.reduce((sum, p) => sum + quantities[p.slug], 0);
   const trioSets = Math.floor(totalBottles / 3);
   const trioBottles = trioSets * 3;
@@ -2824,7 +2780,6 @@ function BuildBundle() {
       ]
     }] : []
   ];
-  const loadoutLines = products.filter((p) => quantities[p.slug] > 0).map((p) => ({ slug: p.slug, name: p.name, price: p.price, qty: quantities[p.slug] }));
   const cartTotal = cartLines.reduce((sum, line) => sum + line.price * line.qty, 0);
   const savings = Math.max(0, compareTotal - cartTotal);
   const activeProduct = [...products].reverse().find((p) => quantities[p.slug] > 0) || products[0];
@@ -2866,46 +2821,6 @@ function BuildBundle() {
     setAdded(true);
     window.dispatchEvent(new CustomEvent("nb-open-cart"));
     window.setTimeout(() => setAdded(false), 1800);
-  };
-  const showLoadoutMessage = (message) => {
-    setLoadoutFlash(message);
-    window.clearTimeout(window.__nbLoadoutFlashTimer);
-    window.__nbLoadoutFlashTimer = window.setTimeout(() => setLoadoutFlash(null), 1800);
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      const settleMobileLayout = () => window.scrollTo(0, window.scrollY);
-      window.requestAnimationFrame(settleMobileLayout);
-      window.setTimeout(settleMobileLayout, 90);
-    }
-  };
-  const saveCurrentLoadout = () => {
-    if (!totalBottles) return;
-    const name = trioSets === 1 && totalBottles === 3 ? "Trio restock" : `${totalBottles} bottle sauce shelf`;
-    saveFlavorLoadout({
-      name,
-      quantities,
-      totalBottles,
-      cartTotal,
-      savings,
-      lines: loadoutLines
-    });
-    setSavedLoadouts(readSavedLoadouts());
-    showLoadoutMessage("Saved to Sauce Shelf");
-  };
-  const loadSavedLoadout = (loadout) => {
-    const saved = loadout.quantities || {};
-    setQuantities({
-      original: Math.max(0, Math.min(9, Math.floor(Number(saved.original) || 0))),
-      spicy: Math.max(0, Math.min(9, Math.floor(Number(saved.spicy) || 0))),
-      citrus: Math.max(0, Math.min(9, Math.floor(Number(saved.citrus) || 0))),
-      shoyu: Math.max(0, Math.min(9, Math.floor(Number(saved.shoyu) || 0)))
-    });
-    setAdded(false);
-    showLoadoutMessage("Loadout loaded");
-  };
-  const removeSavedLoadout = (id) => {
-    deleteFlavorLoadout(id);
-    setSavedLoadouts(readSavedLoadouts());
-    showLoadoutMessage("Loadout removed");
   };
   const maxedOut = (slug) => quantities[slug] >= 9;
   const money = (n) => `$${n.toFixed(2)}`;
@@ -2984,16 +2899,7 @@ function BuildBundle() {
       },
       added ? "Added to cart" : `Add ${totalBottles || 0} bottle${totalBottles === 1 ? "" : "s"} - ${money(cartTotal)}`,
       /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true" }, "\xE2\u2020\u2019")
-    ), /* @__PURE__ */ React.createElement("div", { className: "bundle-note" }, "Any 3 bottles unlock Trio savings. $3.50 flat US shipping \\u2014 FREE on $29.99+ US orders. Priority $12 at checkout."), /* @__PURE__ */ React.createElement("div", { className: "bundle-shelf" }, /* @__PURE__ */ React.createElement("div", { className: "bundle-shelf-head" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", { className: "mono" }, "My Sauce Shelf"), /* @__PURE__ */ React.createElement("strong", null, "Save this mix for later")), /* @__PURE__ */ React.createElement(
-      "button",
-      {
-        type: "button",
-        className: "bundle-save-loadout",
-        onClick: saveCurrentLoadout,
-        disabled: !totalBottles
-      },
-      "Save"
-    )), savedLoadouts.length ? /* @__PURE__ */ React.createElement("div", { className: "bundle-saved-list", "aria-label": "Saved sauce loadouts" }, savedLoadouts.slice(0, 3).map((loadout) => /* @__PURE__ */ React.createElement("div", { className: "bundle-saved-loadout", key: loadout.id }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("strong", null, loadout.name || `${loadout.totalBottles || 0} bottle loadout`), /* @__PURE__ */ React.createElement("span", null, (loadout.lines || []).map((line) => `${line.qty}x ${line.name}`).join(" / ") || "Saved flavor mix")), /* @__PURE__ */ React.createElement("div", { className: "bundle-loadout-actions" }, /* @__PURE__ */ React.createElement("button", { type: "button", onClick: () => loadSavedLoadout(loadout) }, "Load"), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: () => removeSavedLoadout(loadout.id), "aria-label": `Delete ${loadout.name || "saved loadout"}` }, "Delete"))))) : /* @__PURE__ */ React.createElement("div", { className: "bundle-shelf-empty" }, "Save a combo once and it stays one tap away on this device."), loadoutFlash && /* @__PURE__ */ React.createElement("div", { className: "bundle-shelf-flash" }, loadoutFlash))))))
+    ), /* @__PURE__ */ React.createElement("div", { className: "bundle-note" }, "Any 3 bottles unlock Trio savings. $3.50 flat US shipping \\u2014 FREE on $29.99+ US orders. Priority $12 at checkout.")))))
   );
 }
 const TDROP_MONO = "'Space Mono', 'JetBrains Mono', monospace";
