@@ -585,6 +585,39 @@
   else init();
 })();
 
+
+
+/* 2026-07-03 - First Ramen Night Box tracking + direct Shopify handoff */
+(function () {
+  var base = 'https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798%26properties%5B_first_box_source%5D=';
+  function sourceFromPage(el) {
+    var params = new URLSearchParams(window.location.search || '');
+    return params.get('source') || (el && el.getAttribute('data-source')) || 'site';
+  }
+  function directUrl(source) {
+    return base + encodeURIComponent(String(source || 'site').replace(/[^a-z0-9_-]/gi, '-').toLowerCase());
+  }
+  function track(source, surface) {
+    var detail = { source: source, surface: surface || 'site', code: 'FIRSTBOX50', offer: 'first_ramen_night_box' };
+    try { window.fbq && window.fbq('trackCustom', 'FirstBox50Click', detail); } catch (_) {}
+    try { window.dataLayer && window.dataLayer.push(Object.assign({ event: 'first_box_50_click' }, detail)); } catch (_) {}
+  }
+  function init() {
+    document.querySelectorAll('[data-first-box-direct]').forEach(function (el) {
+      var source = sourceFromPage(el);
+      el.setAttribute('href', directUrl(source));
+      el.setAttribute('data-source', source);
+    });
+    document.addEventListener('click', function (event) {
+      var el = event.target.closest && event.target.closest('[data-first-box-cta]');
+      if (!el) return;
+      track(sourceFromPage(el), el.getAttribute('data-surface') || (el.hasAttribute('data-first-box-direct') ? 'landing' : 'pdp'));
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
 /* \u2500\u2500\u2500\u2500\u2500 Klaviyo-ready email capture (2026-07-02) \u2500\u2500\u2500\u2500\u2500
    TO GO LIVE: set companyId (Klaviyo public API key, 6-7 chars) and listId
    below. While either is empty this is a NO-OP and every footer/email form

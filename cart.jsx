@@ -151,7 +151,7 @@ function RitualKitCard({ items, variant }) {
     " \u2192"
   )));
 }
-const FIRST_BOX_50_URL = "https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798";
+const FIRST_BOX_50_URL = "https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798%26properties%5B_first_box_source%5D=cart_one_bottle";
 function BowlClubUpsell({ item }) {
   const sourceName = item && item.name ? item.name : "your sauce";
   return /* @__PURE__ */ React.createElement("div", { className: "card", style: {
@@ -178,17 +178,15 @@ function BowlClubUpsell({ item }) {
     fontSize: 19,
     fontWeight: 800,
     letterSpacing: "0.08em"
-  } }, "50%"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "RAMEN NIGHT UPGRADE"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Turn ", sourceName, " into a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "Your first Monthly Ramen Box includes premium ramen, a recipe idea, and another full 7 oz NoodleBomb sauce bottle. Use FIRSTBOX50 for 50% off the first box; renews monthly unless skipped or canceled.")), /* @__PURE__ */ React.createElement("a", {
+  } }, "50%"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "FIRST RAMEN NIGHT BOX"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Try ", sourceName, " inside a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "First box $15, renews at $29.99. Includes premium ramen, a recipe idea, and another full 7 oz NoodleBomb sauce bottle. Skip or cancel anytime.")), /* @__PURE__ */ React.createElement("a", {
     href: FIRST_BOX_50_URL,
-    target: "_blank",
-    rel: "noopener",
     onClick: () => {
       try {
-        window.fbq && window.fbq("trackCustom", "BowlClubUpsellClick", { source: "cart_one_bottle", code: "FIRSTBOX50" });
+        window.fbq && window.fbq("trackCustom", "FirstBox50Click", { source: "cart_one_bottle", code: "FIRSTBOX50", surface: "cart" });
       } catch (_) {
       }
       try {
-        window.dataLayer && window.dataLayer.push({ event: "bowl_club_upsell_click", source: "cart_one_bottle", code: "FIRSTBOX50" });
+        window.dataLayer && window.dataLayer.push({ event: "first_box_50_click", source: "cart_one_bottle", code: "FIRSTBOX50", surface: "cart" });
       } catch (_) {
       }
     },
@@ -207,7 +205,7 @@ function BowlClubUpsell({ item }) {
       whiteSpace: "nowrap",
       boxShadow: "0 12px 28px rgba(232,74,58,0.22)"
     }
-  }, "Get first box 50% off"));
+  }, "Start first box for $15"));
 }
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);

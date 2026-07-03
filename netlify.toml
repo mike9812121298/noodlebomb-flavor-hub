@@ -484,6 +484,12 @@
   status = 301
   force = true
 
+
+[[redirects]]
+  from = "/first-box-50"
+  to = "/first-box-50.html"
+  status = 200
+
 [[redirects]]
   from = "/monthly-box"
   to = "/monthly-box.html"
