@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -13,7 +13,6 @@ import RelatedRecipes from "@/components/RelatedRecipes";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
 import { PRODUCT_TO_SHOPIFY_HANDLE } from "@/lib/relatedRecipes";
-import { trackMetaViewContent } from "@/lib/meta-pixel";
 import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
 import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
 import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
@@ -187,16 +186,6 @@ const ProductPage = () => {
   const isTrio = product?.slug === "variety-pack";
   const isSingle = ["original-ramen", "spicy-tokyo", "citrus-shoyu"].includes(product?.slug || "");
   const trioSavings = 35.97 - 29.99;
-
-  useEffect(() => {
-    if (!product) return;
-    trackMetaViewContent({
-      slug: product.slug,
-      name: product.name,
-      price: product.price,
-      category: isTrio ? "Sauce bundle" : "Sauce",
-    });
-  }, [product, isTrio]);
 
   if (!product) {
     return (
