@@ -621,8 +621,8 @@ function Nav({ flavor, setFlavor, flavors }) {
       alignItems: "center",
       gap: 12
     } }, /* @__PURE__ */ React.createElement("div", { style: {
-      width: 44,
-      height: 44,
+      width: 64,
+      height: 64,
       flexShrink: 0,
       background: "var(--paper-3)",
       border: "1px solid var(--line)",
