@@ -1036,3 +1036,102 @@ body:has(.page-nav) { padding-top: 64px; }
   .first-box-grid { grid-template-columns:1fr; }
   .first-box-link { width:100%; box-sizing:border-box; }
 }
+
+/* PDP cleanup 2026-07-03: keep tall bottle art fully visible in mobile galleries.
+   The source assets are real bottle cutouts; force contain boxes so thumbnails
+   never crop cap/base/label inside the small carousel tiles. */
+.pdp-gallery-main,
+.pdp-gallery-thumbs button {
+  position: relative !important;
+}
+.pdp-gallery-main img,
+.pdp-gallery-thumbs img {
+  position: absolute !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  display: block !important;
+}
+.pdp-gallery-main img {
+  inset: clamp(18px, 3vw, 34px) !important;
+  width: calc(100% - (2 * clamp(18px, 3vw, 34px))) !important;
+  height: calc(100% - (2 * clamp(18px, 3vw, 34px))) !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+}
+.pdp-gallery-thumbs button {
+  display: block !important;
+}
+.pdp-gallery-thumbs img {
+  inset: 10px !important;
+  width: calc(100% - 20px) !important;
+  height: calc(100% - 20px) !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+}
+@media (max-width: 720px) {
+  .pdp-gallery-main img {
+    inset: 18px !important;
+    width: calc(100% - 36px) !important;
+    height: calc(100% - 36px) !important;
+  }
+  .pdp-gallery-thumbs button {
+    min-height: 108px !important;
+    padding: 0 !important;
+  }
+}
+
+/* Replace the placeholder-looking NB recipe squares with a cleaner sauce-bowl
+   badge. This avoids fake food photos while making PDP recipe cards feel intentional. */
+.related-recipe-thumb {
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  font-size: 0 !important;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(var(--accent-rgb, 212,162,74), .38), transparent 34%),
+    radial-gradient(circle at 72% 82%, rgba(232, 74, 58, .18), transparent 38%),
+    linear-gradient(145deg, rgba(245,241,234,.08), rgba(var(--accent-rgb, 212,162,74), .14) 48%, rgba(8,7,6,.9));
+  box-shadow: inset 0 0 0 1px rgba(245,241,234,.04), 0 12px 28px rgba(0,0,0,.22);
+}
+.related-recipe-thumb::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 23px;
+  height: 18px;
+  border: 2px solid rgba(245,241,234,.72);
+  border-top-color: rgba(245,241,234,.92);
+  border-radius: 50% / 62%;
+  transform: rotate(-4deg);
+}
+.related-recipe-thumb::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 20px;
+  bottom: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb,212,162,74), .95), transparent);
+  box-shadow: 0 -11px 0 rgba(232,74,58,.55), 7px -17px 0 -1px rgba(245,241,234,.55);
+}
+@media (max-width: 560px) {
+  .related-recipe-card {
+    grid-template-columns: 58px 1fr;
+    min-height: 88px;
+    padding: 12px;
+    gap: 13px;
+  }
+  .related-recipe-thumb {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+  }
+  .related-recipe-card strong {
+    font-size: 20px;
+    line-height: 1.08;
+  }
+}
+
