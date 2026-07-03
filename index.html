@@ -195,10 +195,10 @@
     --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 40px;
     --s-5: 64px; --s-6: 96px; --s-7: 128px; --s-8: 160px;
   }
-  /* `overflow-x: hidden` on html breaks `position: sticky` (computed becomes
-     `hidden auto` which makes html a scroll-container). Apply it only on body. */
+  /* Use clip on html to prevent marquee-width scroll without turning html into
+     a sticky-breaking scroll-container; body still hides stray overflow. */
   html, body { margin:0; padding:0; background: var(--paper); color: var(--ink); transition: background-color .45s ease, color .45s ease; }
-  html { scroll-behavior: auto; }
+  html { scroll-behavior: auto; overflow-x: clip; }
   body { overflow-x: hidden; }
   #main-content {
     position: relative;
