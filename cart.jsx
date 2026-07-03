@@ -52,11 +52,11 @@ const RITUAL_KIT = {
 };
 const RITUAL_KIT_TOTAL = RITUAL_KIT.components.reduce((s, c) => s + c.price, 0);
 const PRODUCT_IMAGES = {
-  original: "uploads/nb-original-cart-thumb-2026-06-06.webp",
-  spicy: "uploads/nb-spicy-cart-thumb-2026-06-06.webp",
-  citrus: "uploads/nb-citrus-cart-thumb-2026-06-06.webp",
+  original: "uploads/nb-original-front-cutout-2026-06-26.webp",
+  spicy: "uploads/nb-spicy-tokyo-cutout-2026-06-22.webp",
+  citrus: "uploads/nb-citrus-cutout-2026-06-22.webp",
   trio: "uploads/noodlebomb-trio.png",
-  shoyu: "uploads/shoyu-reserve-cart-thumb-2026-06-06.webp",
+  shoyu: "uploads/nb-shoyu-reserve-cutout-2026-06-22.webp",
   shoyuspicy: "uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp",
   firedust: "uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp",
   rgs: "uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp"
@@ -151,6 +151,64 @@ function RitualKitCard({ items, variant }) {
     " \u2192"
   )));
 }
+const FIRST_BOX_50_URL = "https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798";
+function BowlClubUpsell({ item }) {
+  const sourceName = item && item.name ? item.name : "your sauce";
+  return /* @__PURE__ */ React.createElement("div", { className: "card", style: {
+    border: "1px solid rgba(212,162,74,0.85)",
+    background: "linear-gradient(135deg, rgba(212,162,74,0.16) 0%, rgba(232,74,58,0.08) 48%, rgba(13,11,9,0.94) 100%)",
+    padding: 22,
+    display: "flex",
+    gap: 16,
+    alignItems: "center",
+    marginBottom: 24,
+    flexWrap: "wrap"
+  } }, /* @__PURE__ */ React.createElement("div", { style: {
+    width: 58,
+    height: 58,
+    borderRadius: 999,
+    flexShrink: 0,
+    background: "rgba(212,162,74,0.18)",
+    border: "1px solid rgba(212,162,74,0.55)",
+    color: "var(--gold)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "Inter Tight",
+    fontSize: 19,
+    fontWeight: 800,
+    letterSpacing: "0.08em"
+  } }, "50%"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "RAMEN NIGHT UPGRADE"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Turn ", sourceName, " into a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "Your first Monthly Ramen Box includes premium ramen, a recipe idea, and another full 7 oz NoodleBomb sauce bottle. Use FIRSTBOX50 for 50% off the first box; renews monthly unless skipped or canceled.")), /* @__PURE__ */ React.createElement("a", {
+    href: FIRST_BOX_50_URL,
+    target: "_blank",
+    rel: "noopener",
+    onClick: () => {
+      try {
+        window.fbq && window.fbq("trackCustom", "BowlClubUpsellClick", { source: "cart_one_bottle", code: "FIRSTBOX50" });
+      } catch (_) {
+      }
+      try {
+        window.dataLayer && window.dataLayer.push({ event: "bowl_club_upsell_click", source: "cart_one_bottle", code: "FIRSTBOX50" });
+      } catch (_) {
+      }
+    },
+    style: {
+      flexShrink: 0,
+      padding: "12px 18px",
+      borderRadius: 999,
+      background: "var(--accent)",
+      color: "var(--accent-ink)",
+      textDecoration: "none",
+      fontFamily: "Inter Tight, sans-serif",
+      fontSize: 13,
+      fontWeight: 800,
+      letterSpacing: "0.13em",
+      textTransform: "uppercase",
+      whiteSpace: "nowrap",
+      boxShadow: "0 12px 28px rgba(232,74,58,0.22)"
+    }
+  }, "Get first box 50% off"));
+}
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
@@ -188,9 +246,12 @@ function CartPage() {
   const addRec = (rec) => window.NB_CART && window.NB_CART.add({ slug: rec.slug, name: rec.name, price: rec.price });
   const hasTrioInCart = items.some((i) => i.slug === "trio");
   const hasFireDustInCart = items.some((i) => i.slug === FIRE_DUST.slug);
+  const oneBottleUpsellSlugs = ["original", "spicy", "citrus", "shoyu", "shoyuspicy"];
+  const singleBottleItem = items.length === 1 ? items[0] : null;
+  const showBowlClubUpsell = !!singleBottleItem && oneBottleUpsellSlugs.includes(singleBottleItem.slug) && Number(singleBottleItem.qty) === 1 && !hasTrioInCart;
   const trioSingleSlugs = ["original", "spicy", "citrus"];
   const trioSingleCount = items.filter((i) => trioSingleSlugs.includes(i.slug)).reduce((sum, i) => sum + (Number(i.qty) || 0), 0);
-  const showTrioUpsell = !hasTrioInCart && trioSingleCount >= 1 && trioSingleCount <= 2;
+  const showTrioUpsell = !showBowlClubUpsell && !hasTrioInCart && trioSingleCount >= 1 && trioSingleCount <= 2;
   const showRitualKit = !hasTrioInCart && !hasFireDustInCart && !showTrioUpsell;
   const showFireDustUpsell = !hasFireDustInCart && !showRitualKit;
   if (itemCount === 0) {
@@ -207,7 +268,7 @@ function CartPage() {
       fmtUSD(TRIO.priceUsd)
     ), /* @__PURE__ */ React.createElement("a", { className: "btn btn-secondary", href: "/#lineup", style: { width: "auto", display: "inline-flex", padding: "14px 32px" } }, "Shop the lineup \u2192")), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8, fontSize: 11, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase" } }, "All 3 flavors \xB7 save $8.98"), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 520, margin: "28px auto 0" } }, /* @__PURE__ */ React.createElement(RitualKitCard, { items, variant: "feature" })), /* @__PURE__ */ React.createElement("div", { className: "recommendations" }, RECS.map((r) => /* @__PURE__ */ React.createElement("a", { key: r.slug, className: "rec-card", href: "/?flavor=" + r.slug + "#lineup" }, /* @__PURE__ */ React.createElement("div", { className: "img-wrap" }, /* @__PURE__ */ React.createElement("img", { src: PRODUCT_IMAGES[r.slug], alt: "NoodleBomb " + r.name + " ramen sauce" })), /* @__PURE__ */ React.createElement("h3", null, r.name), /* @__PURE__ */ React.createElement("div", { className: "tag" }, r.tag), /* @__PURE__ */ React.createElement("div", { className: "price-row" }, /* @__PURE__ */ React.createElement("span", { className: "price" }, fmtUSD(r.price)), /* @__PURE__ */ React.createElement("span", { className: "arrow" }, "View \u2192"))))));
   }
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("a", { className: "crumb", href: "/#lineup" }, "\u2190 Continue shopping"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 12, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("h1", { className: "page-title" }, "Your ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--accent)", fontFamily: "Inter Tight", fontStyle: "normal", fontWeight: 800 } }, "cart."))), /* @__PURE__ */ React.createElement("p", { className: "page-meta" }, itemCount, " ", itemCount === 1 ? "item" : "items", " \xB7 secure checkout opens on Shopify"), /* @__PURE__ */ React.createElement("div", { className: "layout" }, /* @__PURE__ */ React.createElement("div", null, freeShipping ? /* @__PURE__ */ React.createElement("div", { className: "card ship-bar unlocked" }, /* @__PURE__ */ React.createElement("div", { className: "icon" }, /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 14, color: "var(--ink)" } }, "\u2713 Free US shipping included"), /* @__PURE__ */ React.createElement("div", { style: { color: "var(--ink-40)", fontSize: 12, marginTop: 2 } }, "Your cart crossed the $32.99 free-shipping line."))) : /* @__PURE__ */ React.createElement("div", { className: "card ship-bar" }, /* @__PURE__ */ React.createElement("div", { className: "row" }, /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink-60)" } }, "Add ", /* @__PURE__ */ React.createElement("span", { className: "accent" }, fmtUSD(remaining)), " for ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink)" } }, "FREE US shipping"), " \xB7 else $3.50 flat"), /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", { className: "track" }, /* @__PURE__ */ React.createElement("div", { className: "fill", style: { width: progress + "%" } }))), showRitualKit && /* @__PURE__ */ React.createElement(RitualKitCard, { items, variant: "inline" }), (() => {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("a", { className: "crumb", href: "/#lineup" }, "\u2190 Continue shopping"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 12, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("h1", { className: "page-title" }, "Your ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--accent)", fontFamily: "Inter Tight", fontStyle: "normal", fontWeight: 800 } }, "cart."))), /* @__PURE__ */ React.createElement("p", { className: "page-meta" }, itemCount, " ", itemCount === 1 ? "item" : "items", " \xB7 secure checkout opens on Shopify"), /* @__PURE__ */ React.createElement("div", { className: "layout" }, /* @__PURE__ */ React.createElement("div", null, freeShipping ? /* @__PURE__ */ React.createElement("div", { className: "card ship-bar unlocked" }, /* @__PURE__ */ React.createElement("div", { className: "icon" }, /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 14, color: "var(--ink)" } }, "\u2713 Free US shipping included"), /* @__PURE__ */ React.createElement("div", { style: { color: "var(--ink-40)", fontSize: 12, marginTop: 2 } }, "Your cart crossed the $32.99 free-shipping line."))) : /* @__PURE__ */ React.createElement("div", { className: "card ship-bar" }, /* @__PURE__ */ React.createElement("div", { className: "row" }, /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink-60)" } }, "Add ", /* @__PURE__ */ React.createElement("span", { className: "accent" }, fmtUSD(remaining)), " for ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink)" } }, "FREE US shipping"), " \xB7 else $3.50 flat"), /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", { className: "track" }, /* @__PURE__ */ React.createElement("div", { className: "fill", style: { width: progress + "%" } }))), showBowlClubUpsell && /* @__PURE__ */ React.createElement(BowlClubUpsell, { item: singleBottleItem }), showRitualKit && /* @__PURE__ */ React.createElement(RitualKitCard, { items, variant: "inline" }), (() => {
     if (!showTrioUpsell) return null;
     const singleSlugs = trioSingleSlugs;
     const singleCount = trioSingleCount;
