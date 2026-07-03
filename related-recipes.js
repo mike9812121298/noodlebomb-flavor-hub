@@ -59,7 +59,7 @@
           '<a class="related-recipe-card" href="/recipes#' +
           safeSlug +
           '">' +
-          '<span class="related-recipe-thumb" aria-hidden="true">NB</span>' +
+          '<span class="related-recipe-thumb" aria-hidden="true"></span>' +
           '<span class="related-recipe-copy">' +
           '<span class="related-recipe-kicker">Recipe</span>' +
           '<strong>' +
