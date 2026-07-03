@@ -3499,6 +3499,35 @@
     .footer-contact a { margin-left: 0 !important; }
   }
 
+
+  .starter-path {
+    padding: clamp(54px, 7vw, 92px) clamp(20px, 5vw, 72px);
+    background: linear-gradient(180deg, rgba(14,13,12,0.98), var(--paper-2));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 96px;
+  }
+  .starter-path-inner { max-width: 1280px; margin: 0 auto; }
+  .starter-path-eyebrow { color: var(--accent); margin-bottom: 14px; }
+  .starter-path-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: clamp(22px, 5vw, 56px); align-items: start; }
+  .starter-path-heading { font-size: clamp(38px, 6vw, 76px); line-height: 0.95; letter-spacing: -0.055em; margin: 0; }
+  .starter-path-copy { margin: 18px 0 0; color: var(--ink-60); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; max-width: 42ch; }
+  .starter-path-cards { display: grid; gap: 12px; }
+  .starter-path-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; min-height: 118px; padding: 20px clamp(18px, 3vw, 28px); border-radius: 26px; border: 1px solid var(--line); background: rgba(245,241,234,0.035); color: var(--ink); text-decoration: none; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+  .starter-path-card:hover { transform: translateY(-2px); border-color: rgba(245,241,234,0.22); background: rgba(245,241,234,0.055); }
+  .starter-path-card.is-primary { border-color: rgba(232,74,58,0.42); background: linear-gradient(135deg, rgba(232,74,58,0.16), rgba(20,18,16,0.82)); }
+  .starter-path-card-eyebrow { font-size: 10px; margin-bottom: 8px; }
+  .starter-path-card-title { font-size: clamp(24px, 3vw, 34px); margin: 0; letter-spacing: -0.035em; }
+  .starter-path-card-copy { margin: 8px 0 0; color: var(--ink-60); font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.5; max-width: 58ch; }
+  .starter-path-card-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 999px; background: rgba(245,241,234,0.08); color: var(--ink); white-space: nowrap; }
+  .starter-path-card.is-primary .starter-path-card-cta { background: var(--accent); color: var(--accent-ink); }
+  @media (max-width: 760px) {
+    .starter-path { padding-top: 42px; padding-bottom: 42px; }
+    .starter-path-grid { grid-template-columns: 1fr; }
+    .starter-path-card { grid-template-columns: 1fr; min-height: 0; }
+    .starter-path-card-cta { width: fit-content; }
+  }
+
   .nb-app-dock {
     display: none;
   }
@@ -3641,10 +3670,10 @@
     <a href="/" aria-current="page">Home</a>
     <a href="/shop">Shop Sauces</a>
     <a href="/seasonings">Seasonings</a>
-    <a href="/shop">Build a Bundle</a>
+    <a href="#starter-path">Start Here</a>
     <a href="/recipes">Recipes</a>
     <a href="/about">About</a>
-    <a href="/monthly-box">Monthly Ramen Box</a>
+    <a href="/monthly-box">Ramen Night Club</a>
     <a href="/faq">FAQ</a>
     <a href="#open-contact">Contact</a>
   </div>
@@ -3657,13 +3686,13 @@
     <a href="/" aria-current="page">Home</a>
     <a href="/shop">Shop Sauces</a>
     <a href="/seasonings">Seasonings</a>
-    <a href="/shop">Build a Bundle</a>
+    <a href="#starter-path">Start Here</a>
     <a href="/recipes">Recipes</a>
     <a href="/about">About</a>
-    <a href="/monthly-box">Monthly Ramen Box</a>
+    <a href="/monthly-box">Ramen Night Club</a>
     <a href="/faq">FAQ</a>
     <a href="#open-contact">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
+  <a class="drawer-cta" href="/cart?add=trio&amp;qty=1">Get the Trio &rarr;</a>
 </div>
 
 <div id="scroll-progress"></div>
@@ -3730,7 +3759,7 @@
     { src: 'build/components.js?v=20260702price' },
     { src: 'build/monthly-drop.js?v=20260702price' },
     { src: 'build/next-drop.js?v=20260702price' },
-    { src: 'build/app.js?v=20260702bundle5' }
+    { src: 'build/app.js?v=20260703starterpath' }
   ];
   function loadScript(file) {
     return new Promise(function (resolve, reject) {

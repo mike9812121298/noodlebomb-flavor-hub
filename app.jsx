@@ -122,11 +122,11 @@ const SOY_SAUCES = [
 const FOOD_IMAGES = {
   ramen: "uploads/nb-hero-pour-page.webp",
   stirfry: "uploads/usecase-noodles-v2.jpg",
-  // Editorial wings â€” glossy, saucy, close crop
+  // Editorial wings Ã¢â‚¬â€ glossy, saucy, close crop
   wings: "uploads/usecase-wings-v2.jpg",
   rice: "uploads/usecase-rice-v2.jpg",
   dumplings: "uploads/usecase-dumplings-v2.jpg",
-  // Editorial pulled pork â€” shredded on a bun, close crop (replaced slow-cooker shot)
+  // Editorial pulled pork Ã¢â‚¬â€ shredded on a bun, close crop (replaced slow-cooker shot)
   pulledpork: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=1600&q=80&auto=format&fit=crop"
 };
 const ORDER_MAP_FALLBACK_CITIES = [
@@ -1339,7 +1339,7 @@ function FlavorPicker({ flavor, setFlavor }) {
         "Flavor details"
       ))
     ));
-  })), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 72 } }, /* @__PURE__ */ React.createElement(Reveal, null, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", marginBottom: 16 } }, "Index 08b \u2014 The Soy Sauces")), /* @__PURE__ */ React.createElement(Reveal, { delay: 1 }, /* @__PURE__ */ React.createElement("h2", { className: "display section-h2", style: { margin: "0 0 12px", maxWidth: 900, fontSize: "clamp(28px, 3.4vw, 40px)", letterSpacing: "-0.03em", lineHeight: 1 } }, "Two soy sauces.", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "Slow-brewed. Pour bold."))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("p", { style: { color: "var(--ink-60)", fontFamily: "Inter", fontSize: 14, maxWidth: "52ch", margin: "0 0 28px", lineHeight: 1.55 } }, "The reserve line \u2014 premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.")), /* @__PURE__ */ React.createElement("div", { className: "soy-grid lineup-grid", style: { display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 24, maxWidth: 760 } }, SOY_SAUCES.map((s, i) => /* @__PURE__ */ React.createElement(Reveal, { key: s.slug, delay: i + 1 }, /* @__PURE__ */ React.createElement("div", { className: "tilt-card", style: { background: `linear-gradient(170deg, rgba(${s.rgb},0.10) 0%, rgba(${s.rgb},0.03) 100%)`, border: `1px solid rgba(${s.rgb},0.28)`, padding: 32 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0, flex: 1 } }, s.tag), /* @__PURE__ */ React.createElement("div", { style: { width: 8, height: 8, borderRadius: 999, background: s.color, flexShrink: 0 } })), /* @__PURE__ */ React.createElement("div", { style: { height: 340, display: "flex", justifyContent: "center" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 200, height: "100%" } }, /* @__PURE__ */ React.createElement(Bottle, { flavor: s.tag, accent: s.color, src: s.image }))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 24 } }, /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(24px, 3.4vw, 32px)", letterSpacing: "-0.04em", fontWeight: 700, margin: 0, lineHeight: 0.95 } }, s.name, "."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 14, color: "var(--ink-60)", marginTop: 8, lineHeight: 1.5 } }, s.line1, " ", s.line2), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12, display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" } }, "In Stock"))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 32, paddingTop: 20, borderTop: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("div", { className: "serif", style: { fontSize: 22, fontStyle: "normal" } }, s.price), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", fontSize: 10 } }, "7 fl oz")), /* @__PURE__ */ React.createElement("a", { href: cartPermalink(s.slug), onClick: (e) => openCartWithFeedback(e, "Opening cart..."), className: "lineup-buy-btn", style: { display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", minHeight: 48, padding: "14px 20px", borderRadius: 999, background: "#0B0A09", border: "1px solid #0B0A09", color: "#F5F1EA", fontFamily: "Inter", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", cursor: "pointer" } }, "Add to Cart", /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, lineHeight: 1 } }, "\u2192")), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--ink-40)", fontSize: 9, letterSpacing: "0.14em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $32.99+"), /* @__PURE__ */ React.createElement("a", { href: s.detail, onClick: (e) => e.stopPropagation(), style: { display: "flex", alignItems: "center", justifyContent: "center", minHeight: 44, marginTop: 10, color: "var(--ink-60)", fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", textDecoration: "none" } }, "Bottle details"))))))), /* @__PURE__ */ React.createElement(Reveal, { delay: 4 }, /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-grid", style: {
+  })), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 72 } }, /* @__PURE__ */ React.createElement(Reveal, null, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", marginBottom: 16 } }, "Reserve soy sauces")), /* @__PURE__ */ React.createElement(Reveal, { delay: 1 }, /* @__PURE__ */ React.createElement("h2", { className: "display section-h2", style: { margin: "0 0 12px", maxWidth: 900, fontSize: "clamp(28px, 3.4vw, 40px)", letterSpacing: "-0.03em", lineHeight: 1 } }, "Two soy sauces.", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "Slow-brewed. Pour bold."))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("p", { style: { color: "var(--ink-60)", fontFamily: "Inter", fontSize: 14, maxWidth: "52ch", margin: "0 0 28px", lineHeight: 1.55 } }, "The reserve line \u2014 premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.")), /* @__PURE__ */ React.createElement("div", { className: "soy-grid lineup-grid", style: { display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 24, maxWidth: 760 } }, SOY_SAUCES.map((s, i) => /* @__PURE__ */ React.createElement(Reveal, { key: s.slug, delay: i + 1 }, /* @__PURE__ */ React.createElement("div", { className: "tilt-card", style: { background: `linear-gradient(170deg, rgba(${s.rgb},0.10) 0%, rgba(${s.rgb},0.03) 100%)`, border: `1px solid rgba(${s.rgb},0.28)`, padding: 32 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0, flex: 1 } }, s.tag), /* @__PURE__ */ React.createElement("div", { style: { width: 8, height: 8, borderRadius: 999, background: s.color, flexShrink: 0 } })), /* @__PURE__ */ React.createElement("div", { style: { height: 340, display: "flex", justifyContent: "center" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 200, height: "100%" } }, /* @__PURE__ */ React.createElement(Bottle, { flavor: s.tag, accent: s.color, src: s.image }))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 24 } }, /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(24px, 3.4vw, 32px)", letterSpacing: "-0.04em", fontWeight: 700, margin: 0, lineHeight: 0.95 } }, s.name, "."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 14, color: "var(--ink-60)", marginTop: 8, lineHeight: 1.5 } }, s.line1, " ", s.line2), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12, display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" } }, "In Stock"))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 32, paddingTop: 20, borderTop: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("div", { className: "serif", style: { fontSize: 22, fontStyle: "normal" } }, s.price), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", fontSize: 10 } }, "7 fl oz")), /* @__PURE__ */ React.createElement("a", { href: cartPermalink(s.slug), onClick: (e) => openCartWithFeedback(e, "Opening cart..."), className: "lineup-buy-btn", style: { display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", minHeight: 48, padding: "14px 20px", borderRadius: 999, background: "#0B0A09", border: "1px solid #0B0A09", color: "#F5F1EA", fontFamily: "Inter", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", cursor: "pointer" } }, "Add to Cart", /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, lineHeight: 1 } }, "\u2192")), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--ink-40)", fontSize: 9, letterSpacing: "0.14em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $32.99+"), /* @__PURE__ */ React.createElement("a", { href: s.detail, onClick: (e) => e.stopPropagation(), style: { display: "flex", alignItems: "center", justifyContent: "center", minHeight: 44, marginTop: 10, color: "var(--ink-60)", fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", textDecoration: "none" } }, "Bottle details"))))))), /* @__PURE__ */ React.createElement(Reveal, { delay: 4 }, /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-grid", style: {
     marginTop: 28,
     background: "var(--paper-2)",
     borderTop: "1px solid var(--line)",
@@ -2593,6 +2593,61 @@ function OrderMapSection() {
     recent.length > 0 && /* @__PURE__ */ React.createElement("div", { className: "nbg-ticker", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("span", { className: "nbg-ticker-lab" }, "Recently shipped"), /* @__PURE__ */ React.createElement("div", { className: "nbg-ticker-vp" }, /* @__PURE__ */ React.createElement("div", { className: "nbg-ticker-track" }, recent.concat(recent).map((o, i) => /* @__PURE__ */ React.createElement("span", { className: "nbg-ticker-item", key: i }, /* @__PURE__ */ React.createElement("span", { className: "nbg-ti-dot", style: { background: nbgColor(o.flavor.color) } }), o.city, ", ", o.region, /* @__PURE__ */ React.createElement("span", { className: "nbg-ti-flavor", style: { color: nbgColor(o.flavor.color) } }, o.product || o.flavor.name))))))
   );
 }
+function StarterPath() {
+  const cards = [
+    {
+      eyebrow: "Best first order",
+      title: "The Trio",
+      body: "Try Original, Spicy Tokyo, and Citrus Shoyu in one cart. It is the cleanest way to learn your favorite pour.",
+      cta: "Get the Trio",
+      href: cartPermalink("trio"),
+      accent: "#E84A3A"
+    },
+    {
+      eyebrow: "Best add-on",
+      title: "Shake-on crunch",
+      body: "Add Fire Dust or Roasted Garlic Sesame when you want heat, garlic, sesame, and texture on bowls, eggs, wings, or rice.",
+      cta: "Shop seasonings",
+      href: "/seasonings",
+      accent: "#D7A84D"
+    },
+    {
+      eyebrow: "Best repeat deal",
+      title: "Ramen Night Club",
+      body: "Use the monthly box as the easy repeat option: ramen-night ideas, sauce rotation, and dinner help without thinking too hard.",
+      cta: "See the box",
+      href: "/monthly-box",
+      accent: "#F5F1EA"
+    }
+  ];
+  return <section id="starter-path" className="starter-path" aria-label="New to NoodleBomb starter path">
+    <div className="starter-path-inner">
+      <div className="mono starter-path-eyebrow">New to NoodleBomb?</div>
+      <div className="starter-path-grid">
+        <div>
+          <h2 className="display starter-path-heading">Start with the right flavor path.</h2>
+          <p className="starter-path-copy">One clean choice for first-time buyers, one crunchy add-on path, and one repeat option for ramen nights.</p>
+        </div>
+        <div className="starter-path-cards">
+          {cards.map((card, i) => <a
+            key={card.title}
+            href={card.href}
+            onClick={card.href.indexOf("/cart?") === 0 ? (e) => openCartWithFeedback(e, "Opening cart...") : void 0}
+            className={"starter-path-card" + (i === 0 ? " is-primary" : "")}
+          >
+            <div>
+              <div className="mono starter-path-card-eyebrow" style={{ color: card.accent }}>{card.eyebrow}</div>
+              <h3 className="display starter-path-card-title">{card.title}</h3>
+              <p className="starter-path-card-copy">{card.body}</p>
+            </div>
+            <span className="mono starter-path-card-cta">{card.cta} &rarr;</span>
+          </a>)}
+        </div>
+      </div>
+    </div>
+  </section>;
+}
+
 function MobileAppDock({ flavor, flavors }) {
   const [cartCount, setCartCount] = useState(() => window.NB_CART ? window.NB_CART.getItemCount() : 0);
   useEffect(() => {
@@ -2615,7 +2670,7 @@ function MobileAppDock({ flavor, flavors }) {
     if (window.history && window.history.replaceState) window.history.replaceState(null, "", hash);
   };
   const openCart = () => window.dispatchEvent(new CustomEvent("nb-open-cart"));
-  return /* @__PURE__ */ React.createElement("nav", { className: "nb-app-dock", "aria-label": "NoodleBomb mobile app navigation", style: { "--dock-accent": active.color, "--dock-accent-rgb": active.rgb, "--dock-ink": active.ink } }, /* @__PURE__ */ React.createElement("a", { href: "#main-content", onClick: goHash("#main-content"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "N"), /* @__PURE__ */ React.createElement("span", null, "Home")), /* @__PURE__ */ React.createElement("a", { href: "#bundle-builder", onClick: goHash("#bundle-builder"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "+"), /* @__PURE__ */ React.createElement("span", null, "Build")), /* @__PURE__ */ React.createElement("a", { href: "#monthly", onClick: goHash("#monthly"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "$"), /* @__PURE__ */ React.createElement("span", null, "Box")), /* @__PURE__ */ React.createElement("a", { href: "/recipes", className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "R"), /* @__PURE__ */ React.createElement("span", null, "Recipes")), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: openCart, className: "nb-app-dock-item nb-app-dock-button" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "C"), /* @__PURE__ */ React.createElement("span", null, "Cart"), cartCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, cartCount)));
+  return /* @__PURE__ */ React.createElement("nav", { className: "nb-app-dock", "aria-label": "NoodleBomb mobile app navigation", style: { "--dock-accent": active.color, "--dock-accent-rgb": active.rgb, "--dock-ink": active.ink } }, /* @__PURE__ */ React.createElement("a", { href: "#main-content", onClick: goHash("#main-content"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "N"), /* @__PURE__ */ React.createElement("span", null, "Home")), /* @__PURE__ */ React.createElement("a", { href: cartPermalink("trio"), onClick: (e) => openCartWithFeedback(e, "Opening cart..."), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "+"), /* @__PURE__ */ React.createElement("span", null, "Trio")), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: openCart, className: "nb-app-dock-item nb-app-dock-button" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "C"), /* @__PURE__ */ React.createElement("span", null, "Cart"), cartCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, cartCount)));
 }
 function StickyCartBar({ flavor, flavors }) {
   const [visible, setVisible] = useState(false);
@@ -3167,7 +3222,7 @@ function App() {
     {
       "flavor": "original",
       "grain": true,
-      
+
       "headline": "TRY ALL 3\nFLAVORS"
     }
   );
@@ -3301,6 +3356,8 @@ function App() {
     return () => window.removeEventListener("message", onMsg);
   }, [IS_DEV_MODE]);
   const headline = (state.headline || "").replace(/\\n/g, "\n");
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(StickyCartBar, { flavor: state.flavor, flavors: FLAVORS }), /* @__PURE__ */ React.createElement(Nav, { flavor: state.flavor, setFlavor: (k) => set({ flavor: k }), flavors: FLAVORS }), /* @__PURE__ */ React.createElement(MobileAppDock, { flavor: state.flavor, flavors: FLAVORS }), /* @__PURE__ */ React.createElement(Hero, { headline, bottleSrc: FLAVOR_IMAGES[state.flavor], flavorKey: state.flavor, flavorMeta: FLAVORS[state.flavor] }), /* @__PURE__ */ React.createElement(TrustStrip, null), /* @__PURE__ */ React.createElement(FlavorBreakdownV2, { flavor: state.flavor, setFlavor: (k) => set({ flavor: k }) }), /* @__PURE__ */ React.createElement(BuildBundle, null), showDeferredHome && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(OrderMapSection, null), /* @__PURE__ */ React.createElement(MonthlyDrop, null), /* @__PURE__ */ React.createElement(Testimonials, null), /* @__PURE__ */ React.createElement(FlavorPicker, { flavor: state.flavor, setFlavor: (k) => set({ flavor: k }) }), /* @__PURE__ */ React.createElement(UseItOn, null), /* @__PURE__ */ React.createElement(FAQ, null), /* @__PURE__ */ React.createElement(FinalCTA, null)), IS_DEV_MODE && /* @__PURE__ */ React.createElement(Tweaks, { state, set, open: tweaksOpen, setOpen: setTweaksOpen }), /* @__PURE__ */ React.createElement(InquiryModal, { open: !!inquiry, kind: inquiry, onClose: () => setInquiry(null) }));
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(StickyCartBar, { flavor: state.flavor, flavors: FLAVORS }), /* @__PURE__ */ React.createElement(Nav, { flavor: state.flavor, setFlavor: (k) => set({ flavor: k }), flavors: FLAVORS }), /* @__PURE__ */ React.createElement(MobileAppDock, { flavor: state.flavor, flavors: FLAVORS }), /* @__PURE__ */ React.createElement(Hero, { headline, bottleSrc: FLAVOR_IMAGES[state.flavor], flavorKey: state.flavor, flavorMeta: FLAVORS[state.flavor] }), /* @__PURE__ */ React.createElement(TrustStrip, null), /* @__PURE__ */ React.createElement(StarterPath, null), /* @__PURE__ */ React.createElement(FlavorBreakdownV2, { flavor: state.flavor, setFlavor: (k) => set({ flavor: k }) }), /* @__PURE__ */ React.createElement(BuildBundle, null), showDeferredHome && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(OrderMapSection, null), /* @__PURE__ */ React.createElement(MonthlyDrop, null), /* @__PURE__ */ React.createElement(Testimonials, null), /* @__PURE__ */ React.createElement(FlavorPicker, { flavor: state.flavor, setFlavor: (k) => set({ flavor: k }) }), /* @__PURE__ */ React.createElement(UseItOn, null), /* @__PURE__ */ React.createElement(FAQ, null), /* @__PURE__ */ React.createElement(FinalCTA, null)), IS_DEV_MODE && /* @__PURE__ */ React.createElement(Tweaks, { state, set, open: tweaksOpen, setOpen: setTweaksOpen }), /* @__PURE__ */ React.createElement(InquiryModal, { open: !!inquiry, kind: inquiry, onClose: () => setInquiry(null) }));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(/* @__PURE__ */ React.createElement(App, null));
+
+
