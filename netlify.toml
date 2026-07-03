@@ -23,6 +23,14 @@
   status = 404
   force = true
 
+# Marketplace image archive + stale generated files — not part of the site
+# (live returns 404 for /public/* as of 2026-07-01).
+[[redirects]]
+  from = "/public/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/node_modules/*"
   to = "/404.html"
@@ -178,6 +186,13 @@
   status = 404
   force = true
 
+# Internal ops docs (owner checklist) — not for the public site.
+[[redirects]]
+  from = "/GO-LIVE-CHECKLIST.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
 # noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
@@ -217,6 +232,8 @@
   status = 302
   force = true
 
+# June 2026 launch pages: canonical slugs live at the root
+# (/fire-dust, /roasted-garlic-sesame, /shoyu-reserve) — live 2026-07-01.
 [[redirects]]
   from = "/seasonings"
   to = "/seasonings.html"
@@ -225,46 +242,54 @@
 
 [[redirects]]
   from = "/product/fire-dust"
+  to = "/fire-dust"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product/roasted-garlic-sesame"
+  to = "/roasted-garlic-sesame"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/product/shoyu-reserve"
+  to = "/shoyu-reserve"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fire-dust"
   to = "/product-fire-dust.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/product/roasted-garlic-sesame"
+  from = "/roasted-garlic-sesame"
   to = "/product-roasted-garlic-sesame.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/product/shoyu-reserve"
+  from = "/shoyu-reserve"
   to = "/product-shoyu-reserve.html"
   status = 200
   force = true
 
-[[redirects]]
-  from = "/shoyu-reserve"
-  to = "/product/shoyu-reserve"
-  status = 301
-  force = true
+# No /product/* catch-all: unknown /product/* paths 404 (matches live).
 
-# Catch-all for any other /product/* deep link — go to lineup
-[[redirects]]
-  from = "/product/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
-  status = 302
-  force = true
-
-# /shop and /shop/* — primary CTA target
+# /shop is a local storefront page (live 2026-07-01); old Shopify-style
+# deep links under /shop/* bounce to it carrying the path in ?s=.
 [[redirects]]
   from = "/shop"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
-  status = 302
+  to = "/shop.html"
+  status = 200
   force = true
 
 [[redirects]]
   from = "/shop/*"
-  to = "https://nu2vqa-ma.myshopify.com/:splat"
-  status = 302
+  to = "/shop?s=:splat"
+  status = 301
   force = true
 
 # Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
@@ -412,25 +437,29 @@
   status = 200
 
 [[redirects]]
-  from = "/seasonings"
-  to = "/seasonings.html"
+  from = "/spicy-shoyu-ramen-sauce"
+  to = "/product-spicy-shoyu.html"
   status = 200
 
 [[redirects]]
-  from = "/product/fire-dust"
-  to = "/product-fire-dust.html"
+  from = "/ramen-sauce-trio"
+  to = "/ramen-sauce-trio.html"
   status = 200
 
 [[redirects]]
-  from = "/product/roasted-garlic-sesame"
-  to = "/product-roasted-garlic-sesame.html"
+  from = "/rewards"
+  to = "/rewards.html"
   status = 200
 
 [[redirects]]
-  from = "/product/shoyu-reserve"
-  to = "/product-shoyu-reserve.html"
+  from = "/wholesale"
+  to = "/wholesale.html"
   status = 200
 
+# Canonicalize the older static filenames to the search-friendly URLs.
+# (The seasoning-line PDP .html files are NOT canonicalized — live serves
+# them 200 at both URLs as of 2026-07-01. The recipe/use-case SEO pages
+# rely on Netlify's default pretty-URL resolution of /<slug> -> <slug>.html.)
 [[redirects]]
   from = "/product-original.html"
   to = "/original-ramen-sauce"
@@ -450,20 +479,8 @@
   force = true
 
 [[redirects]]
-  from = "/product-fire-dust.html"
-  to = "/product/fire-dust"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/product-roasted-garlic-sesame.html"
-  to = "/product/roasted-garlic-sesame"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/product-shoyu-reserve.html"
-  to = "/product/shoyu-reserve"
+  from = "/product-spicy-shoyu.html"
+  to = "/spicy-shoyu-ramen-sauce"
   status = 301
   force = true
 

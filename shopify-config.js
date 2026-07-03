@@ -5,11 +5,11 @@
  * To go live with Shopify checkout:
  *   1. Confirm 4 products are created in the Shopify store and published
  *      to the Headless sales channel:
- *        - Original ($11.99)
- *        - Spicy Tokyo ($11.99)
- *        - Citrus Shoyu ($11.99)
- *        - The NoodleBomb Trio ($29.99)
- *        - Shoyu Reserve ($9.99 preorder)
+ *        - Original ($12.99)
+ *        - Spicy Tokyo ($12.99)
+ *        - Citrus Shoyu ($12.99)
+ *        - The NoodleBomb Trio ($32.99)
+ *        - Shoyu Reserve ($12.99 live)
  *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:
  *        fetch('https://nu2vqa-ma.myshopify.com/api/2026-04/graphql.json', {
@@ -72,7 +72,10 @@
       spicy:    'gid://shopify/ProductVariant/53998042120502',
       citrus:   'gid://shopify/ProductVariant/53998041071926',
       trio:     'gid://shopify/ProductVariant/53998042644790',
-      shoyu:    'gid://shopify/ProductVariant/54006619636022'
+      shoyu:    'gid://shopify/ProductVariant/54006619636022',
+      shoyuspicy: 'gid://shopify/ProductVariant/54097354686774',
+      firedust: 'gid://shopify/ProductVariant/54111262146870',
+      rgs:      'gid://shopify/ProductVariant/54125810614582'
     }
   };
 })();

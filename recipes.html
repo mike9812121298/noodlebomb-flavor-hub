@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
@@ -24,8 +32,21 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="/page-shared.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "NoodleBomb Ramen Sauce Recipes",
+  "url": "https://noodlebomb.co/recipes",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "The Big Flavor Ramen", "url": "https://noodlebomb.co/recipes#original-chicken-ramen"},
+    {"@type": "ListItem", "position": 2, "name": "Citrus Shoyu Salmon Bowl", "url": "https://noodlebomb.co/recipes#citrus-shoyu-salmon-rice-bowl"},
+    {"@type": "ListItem", "position": 3, "name": "Spicy Tokyo Wing Toss", "url": "https://noodlebomb.co/recipes#spicy-tokyo-air-fryer-wings"}
+  ]
+}
+</script>
 </head>
 <body class="grain">
 <a href="#main" class="skip-to-content">Skip to main content</a>
@@ -71,41 +92,51 @@
       <div class="kicker">Quick wins &middot; Under 10 minutes</div>
       <h2 class="serif">Start here.</h2>
       <div class="recipe-grid">
-        <article class="recipe-card">
+        <article class="recipe-card" id="original-chicken-ramen">
+          <span id="original-garlic-sesame-ramen" aria-hidden="true"></span>
+          <span id="spicy-tokyo-chili-ramen" aria-hidden="true"></span>
           <div class="recipe-meta"><span>5 MIN</span><span class="dot"></span><span>1 BOWL</span></div>
           <h3>The Big Flavor Ramen</h3>
           <p>Cook your favorite noodles, drain. Add 1.5&nbsp;tbsp of NoodleBomb Original (or Spicy Tokyo) to the bowl. Pour in 1&frac12; cups of hot broth or hot water. Top with a soft-boiled egg, scallions, and toasted sesame.</p>
           <div class="pairing">Best with &middot; Original</div>
+          <a class="pairing" href="/sauce-for-noodles" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Noodle sauce guide &rarr;</a>
+          <a class="pairing" href="/spicy-noodle-sauce" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Spicy noodle guide &rarr;</a>
         </article>
-        <article class="recipe-card">
+        <article class="recipe-card" id="citrus-shoyu-salmon-rice-bowl">
           <div class="recipe-meta"><span>7 MIN</span><span class="dot"></span><span>2 BOWLS</span></div>
           <h3>Citrus Shoyu Salmon Bowl</h3>
           <p>Brush 2 tbsp of Citrus Shoyu over a fillet, broil 6 minutes. Plate over short-grain rice with quick-pickled cucumber and a final drizzle of the sauce. Bright and clean.</p>
           <div class="pairing">Best with &middot; Citrus Shoyu</div>
+          <a class="pairing" href="/what-is-shoyu" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Shoyu guide &rarr;</a>
         </article>
-        <article class="recipe-card">
+        <article class="recipe-card" id="spicy-tokyo-air-fryer-wings">
           <div class="recipe-meta"><span>8 MIN</span><span class="dot"></span><span>FOR 2</span></div>
           <h3>Spicy Tokyo Wing Toss</h3>
           <p>Bake or air-fry wings until crispy. In a bowl, combine 3&nbsp;tbsp Spicy Tokyo with 1&nbsp;tsp honey and a squeeze of lime. Toss the wings while still hot. Game-day approved.</p>
           <div class="pairing">Best with &middot; Spicy Tokyo</div>
+          <a class="pairing" href="/ramen-sauce-for-wings" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Wing guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>3 MIN</span><span class="dot"></span><span>BREAKFAST</span></div>
           <h3>Soy-Butter Eggs</h3>
           <p>Soft-scramble two eggs in a knob of butter. Off heat, fold in 1&nbsp;tsp Original. Serve on toasted shokupan or rice. The egg upgrade you didn&rsquo;t know you needed.</p>
           <div class="pairing">Best with &middot; Original</div>
+          <a class="pairing" href="/ramen-sauce-for-eggs" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Egg guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>10 MIN</span><span class="dot"></span><span>SIDE</span></div>
           <h3>Charred Brassicas</h3>
           <p>Roast broccolini or bok choy at 450&deg;F until charred. Off the sheet pan, toss with 2&nbsp;tbsp Citrus Shoyu and a hit of sesame oil. The simplest plate of vegetables you&rsquo;ll ever serve.</p>
           <div class="pairing">Best with &middot; Citrus Shoyu</div>
+          <a class="pairing" href="/ramen-sauce-for-vegetables" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Vegetable guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>6 MIN</span><span class="dot"></span><span>WEEKNIGHT</span></div>
           <h3>Spicy Tokyo Stir-Fry</h3>
           <p>Hot pan, neutral oil. Sear protein and aromatics. Push to one side, splash 2&nbsp;tbsp Spicy Tokyo into the empty side, let it caramelize 20&nbsp;seconds, then toss everything together with cooked noodles.</p>
           <div class="pairing">Best with &middot; Spicy Tokyo</div>
+          <a class="pairing" href="/stir-fry-sauce-for-noodles" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Stir-fry noodle guide &rarr;</a>
+          <a class="pairing" href="/spicy-noodle-sauce" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Spicy noodle guide &rarr;</a>
         </article>
       </div>
     </div>
@@ -121,12 +152,16 @@
           <h3>Crispy Rice Salmon Bowl</h3>
           <p>Brush 2 salmon fillets with Original, rest 10 min. Press 2 cups cooked short-grain rice flat in a non-stick pan with 2&nbsp;tbsp oil; crisp 6&ndash;8 min undisturbed. Sear salmon skin-side down 4 min, glaze with another spoon of Original, finish 2 min. Plate rice browned-side up, top with salmon, drizzle, then avocado, scallions, sesame, lime.</p>
           <div class="pairing">Best with &middot; Original</div>
+          <a class="pairing" href="/sauce-for-rice-bowls" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Rice bowl guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>20 MIN</span><span class="dot"></span><span>FOR 2</span></div>
           <h3>Tokyo Heat Mapo Udon</h3>
           <p>Crisp 1/2&nbsp;lb ground pork in a hot wok 5 min. Add 4 cloves minced garlic, 1&nbsp;tbsp ginger, 1&nbsp;tbsp doubanjiang &mdash; stir-fry 1 min. Pour in 1 cup chicken stock and 4&nbsp;tbsp Spicy Tokyo, boil. Slide in 1 block silken tofu cut into cubes; simmer 3 min undisturbed. Cook 2 portions thick udon, divide. Spoon mapo over, finish with toasted Sichuan peppercorns and chili oil.</p>
           <div class="pairing">Best with &middot; Spicy Tokyo</div>
+          <a class="pairing" href="/spicy-sauce-for-rice-bowls" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Spicy rice bowl guide &rarr;</a>
+          <a class="pairing" href="/sauce-for-udon-noodles" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Udon sauce guide &rarr;</a>
+          <a class="pairing" href="/ramen-sauce-for-pork" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Pork sauce guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>10 MIN</span><span class="dot"></span><span>FOR 2</span></div>
@@ -154,12 +189,14 @@
           <h3>Spicy Tokyo Smashburger</h3>
           <p>Loose 4&nbsp;oz balls of 80/20 ground beef, don&rsquo;t pack. Smash flat in a screaming-hot cast iron, salt, hard 90&nbsp;sec for crust, flip. Brush each patty with 1&nbsp;tsp Spicy Tokyo, top with American, finish 30&nbsp;sec. Stack two per bun with shredded iceberg, dill pickle, and Kewpie mayo cut with another spoon of the sauce.</p>
           <div class="pairing">Best with &middot; Spicy Tokyo</div>
+          <a class="pairing" href="/sauce-for-steak" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Steak sauce guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>3 MIN</span><span class="dot"></span><span>FOR 4</span></div>
           <h3>Tokyo Heat Dumpling Dip</h3>
           <p>Pour 1/4 cup Spicy Tokyo into a small dipping bowl. Add 1&nbsp;tbsp rice vinegar and 1&nbsp;tsp toasted sesame oil; whisk with a fork. Top with thin-sliced scallion, sesame, and crushed garlic if you want a heavier hit. Serve next to gyoza, soup dumplings, or wontons. Three ingredients, full chef energy.</p>
           <div class="pairing">Best with &middot; Spicy Tokyo</div>
+          <a class="pairing" href="/spicy-sauce-for-dumplings" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Dumpling sauce guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>10 MIN</span><span class="dot"></span><span>SIDE FOR 4</span></div>
@@ -181,6 +218,7 @@
           <h3>Sunday Night Chashu Ramen</h3>
           <p>Tie 1.5&nbsp;lb pork belly into a tight log; sear deep brown in a Dutch oven. Add 4 cups dashi, 1/4 cup soy, 1/4 cup mirin, 4 garlic cloves, sliced ginger. Cover, braise at 300&deg;F for 2 hours, turning halfway. Slice into 1/2-inch coins; torch the edges. Pour 3&nbsp;tbsp Original over each bowl of fresh noodles, ladle hot strained broth, top with chashu, soft egg, scallions, nori.</p>
           <div class="pairing">Best with &middot; Original</div>
+          <a class="pairing" href="/ramen-sauce-for-pork" style="display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px;">Pork sauce guide &rarr;</a>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>15 MIN</span><span class="dot"></span><span>FOR 2</span></div>
@@ -188,6 +226,23 @@
           <p>Cut a head of broccoli into long flat planks &mdash; florets and stems. Heat a cast iron until smoking; lay the planks flat in 2&nbsp;tbsp oil. Char hard 3&ndash;4 min per side until edges are deep black-brown. Slide into a bowl, pour 4&nbsp;tbsp Original over while hot, toss with 1/2 cup roasted peanuts, fried shallots, and torn cilantro. Serve over rice or eat from the bowl.</p>
           <div class="pairing">Best with &middot; Original</div>
         </article>
+      </div>
+
+      <div class="inline-capture" style="margin-top:28px;">
+        <h3>Need a sauce for one exact plate?</h3>
+        <p>Jump straight to the guide that matches dinner: eggs, wings, dumplings, burgers, tuna, crispy vegetables, and weeknight proteins.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+          <a class="btn btn-ghost" href="/ramen-sauce-for-eggs">Eggs</a>
+          <a class="btn btn-ghost" href="/ramen-sauce-for-wings">Wings</a>
+          <a class="btn btn-ghost" href="/sauce-for-dumplings">Dumplings</a>
+          <a class="btn btn-ghost" href="/sauce-for-burgers">Burgers</a>
+          <a class="btn btn-ghost" href="/sauce-for-tuna">Tuna</a>
+          <a class="btn btn-ghost" href="/sauce-for-asparagus">Asparagus</a>
+          <a class="btn btn-ghost" href="/sauce-for-cauliflower">Cauliflower</a>
+          <a class="btn btn-ghost" href="/sauce-for-chicken-thighs">Chicken thighs</a>
+          <a class="btn btn-ghost" href="/sauce-for-pork-chops">Pork chops</a>
+          <a class="btn btn-ghost" href="/ramen-sauce-trio">Trio</a>
+        </div>
       </div>
 
       <div class="inline-capture">

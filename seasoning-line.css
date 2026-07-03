@@ -1,4 +1,4 @@
-/* NoodleBomb June 2026 launch pages: Shoyu Reserve + dry blends */
+﻿/* NoodleBomb June 2026 launch pages: Shoyu Reserve + dry blends */
 
 :root {
   --nb-ink: #f5efe6;
@@ -85,9 +85,10 @@ body.launch-page {
 .launch-lede {
   max-width: 660px;
   color: var(--nb-ink);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Inter Tight", system-ui, sans-serif;
   font-size: clamp(22px, 3.1vw, 36px);
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
@@ -163,15 +164,15 @@ body.launch-page {
 .launch-stage img {
   position: relative;
   width: 100%;
-  max-height: min(680px, 68vh);
+  max-height: min(520px, 52vh);
   object-fit: contain;
   filter: drop-shadow(0 34px 46px rgba(0, 0, 0, 0.62));
   animation: nbFloat 6s ease-in-out infinite;
 }
 
-.launch-stage img[src*="nb-fire-dust-cutout"],
-.launch-stage img[src*="nb-roasted-garlic-sesame-cutout"] {
-  height: min(680px, 68vh);
+.launch-stage img[src*="nb-fire-dust-cutout-tight"],
+.launch-stage img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+  height: min(520px, 52vh);
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -247,9 +248,9 @@ body.launch-page {
 .sku-card {
   position: relative;
   overflow: hidden;
-  min-height: 620px;
+  min-height: 760px;
   display: grid;
-  grid-template-rows: minmax(320px, 1fr) auto;
+  grid-template-rows: minmax(480px, 1fr) auto;
   border: 1px solid var(--nb-line);
   border-radius: 24px;
   background:
@@ -282,7 +283,7 @@ body.launch-page {
 }
 
 .sku-card-media {
-  min-height: 390px;
+  min-height: 560px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -290,17 +291,17 @@ body.launch-page {
 }
 
 .sku-card-media img {
-  width: min(86%, 330px);
-  height: min(530px, 52vw);
+  width: min(78%, 280px);
+  height: min(430px, 42vw);
   object-fit: contain;
   object-position: center bottom;
   filter: drop-shadow(0 28px 42px rgba(0, 0, 0, 0.65));
   transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
 }
 
-.sku-card-media img[src*="nb-fire-dust-cutout"],
-.sku-card-media img[src*="nb-roasted-garlic-sesame-cutout"] {
-  width: min(90%, 360px);
+.sku-card-media img[src*="nb-fire-dust-cutout-tight"],
+.sku-card-media img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+  width: min(80%, 300px);
   object-fit: contain;
   object-position: center bottom;
 }
@@ -354,9 +355,10 @@ body.launch-page {
 
 .sku-anchor {
   color: var(--nb-ink);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Inter Tight", system-ui, sans-serif;
   font-size: 22px;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -389,7 +391,7 @@ body.launch-page {
 .launch-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   transition: transform 0.8s cubic-bezier(.2,.7,.2,1);
 }
@@ -474,8 +476,8 @@ body.launch-page {
   filter: drop-shadow(0 28px 44px rgba(0, 0, 0, 0.45));
 }
 
-.format-media img[src*="nb-fire-dust-cutout"],
-.format-media img[src*="nb-roasted-garlic-sesame-cutout"] {
+.format-media img[src*="nb-fire-dust-cutout-tight"],
+.format-media img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
   width: min(88%, 380px);
   height: min(430px, 48vh);
   object-fit: contain;
@@ -1003,17 +1005,17 @@ body.launch-page {
 }
 
 .pdp-launch-main-img img {
-  width: min(86%, 470px);
-  max-height: min(690px, 70vh);
+  width: min(78%, 390px);
+  max-height: min(560px, 58vh);
   object-fit: contain;
   object-position: center bottom;
   filter: drop-shadow(0 32px 52px rgba(0, 0, 0, 0.58));
 }
 
-.pdp-launch-main-img img[src*="nb-fire-dust-cutout"],
-.pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-cutout"] {
-  width: min(92%, 560px);
-  height: min(690px, 70vh);
+.pdp-launch-main-img img[src*="nb-fire-dust-cutout-tight"],
+.pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+  width: min(80%, 430px);
+  height: min(560px, 58vh);
   object-fit: contain;
   object-position: center bottom;
 }
@@ -1038,7 +1040,7 @@ body.launch-page {
 .pdp-launch-thumbs img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -1053,9 +1055,10 @@ body.launch-page {
 .pdp-launch-anchor {
   margin: 0 0 22px;
   color: var(--nb-ink);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: "Inter Tight", system-ui, sans-serif;
   font-size: clamp(23px, 3vw, 34px);
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
   line-height: 1.18;
 }
 
@@ -1395,7 +1398,7 @@ body.launch-page {
   }
 
   .sku-card-media img {
-    height: 420px;
+    height: 340px;
   }
 
   .pdp-launch-thumbs {
@@ -1406,6 +1409,35 @@ body.launch-page {
     min-height: 170px;
   }
 
+  .pdp-launch-copy {
+    order: -1;
+  }
+
+  /* 2026-06-29: keep seasoning PDP buy path reachable on mobile.
+     Tall jar art should stay prominent without pushing title/CTA below giant thumbnails. */
+  .pdp-launch-main-img {
+    min-height: min(520px, 58vh);
+  }
+
+  .pdp-launch-main-img img,
+  .pdp-launch-main-img img[src*="nb-fire-dust-cutout-tight"],
+  .pdp-launch-main-img img[src*="nb-roasted-garlic-sesame-cutout-tight"] {
+    height: auto;
+    max-height: min(500px, 56vh);
+  }
+
+  .pdp-launch-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pdp-launch-thumbs button {
+    min-height: 92px;
+  }
+
+  .pdp-launch-thumbs img {
+    max-height: 110px;
+    object-fit: contain;
+  }
   .format-panel {
     min-height: 440px;
   }
@@ -1418,4 +1450,125 @@ body.launch-page {
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+
+/* 2026-06-26 live-product CTA cleanup */
+.pdp-buy-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.pdp-buy-actions .launch-btn { min-width: min(100%, 220px); justify-content: center; }
+@media (max-width: 640px) { .pdp-buy-actions { flex-direction: column; align-items: stretch; } .pdp-buy-actions .launch-btn { width: 100%; } }
+
+
+
+/* 2026-06-29: seasonings footer cleanup.
+   The seasonings page uses .footer-grid instead of the shared .footer-cols footer,
+   so links were falling back to raw browser inline styling. Keep this scoped to
+   launch pages and leave product/cart behavior untouched. */
+body.launch-page .page-footer {
+  border-top: 1px solid rgba(240, 235, 227, 0.12);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(232, 74, 58, 0.10), transparent 30vw),
+    linear-gradient(180deg, rgba(12, 10, 8, 0.96), #080706);
+  padding: clamp(42px, 6vw, 72px) clamp(18px, 5vw, 72px);
+}
+
+body.launch-page .footer-grid {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) repeat(2, minmax(170px, 0.75fr));
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+}
+
+body.launch-page .footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+body.launch-page .footer-grid p {
+  margin: 14px 0 0;
+  max-width: 280px;
+  color: rgba(240, 235, 227, 0.68);
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+body.launch-page .footer-grid h3 {
+  margin: 0 0 4px;
+  color: rgba(240, 235, 227, 0.92);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+body.launch-page .page-footer a:not(.nav-brand) {
+  display: block;
+  width: fit-content;
+  color: rgba(240, 235, 227, 0.70);
+  font-size: 14px;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color .2s ease, transform .2s ease;
+}
+
+body.launch-page .page-footer a:not(.nav-brand):hover,
+body.launch-page .page-footer a:not(.nav-brand):focus-visible {
+  color: #ff4f45;
+  transform: translateX(2px);
+}
+
+body.launch-page .page-footer .nav-brand {
+  width: fit-content;
+}
+
+@media (max-width: 760px) {
+  body.launch-page .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  body.launch-page .page-footer {
+    padding-inline: 22px;
+  }
+}
+
+/* Shop quick-add pills (2026-07-02): one-tap add on /shop cards via NB_CART,
+   fallback navigates to /cart?add=. Buttons sit inside the card link; the
+   click handler stops propagation. */
+.sku-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 14px;
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 235, 227, 0.22);
+  background: rgba(245, 241, 234, 0.07);
+  color: var(--ink, #F0EBE3);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.sku-add:hover {
+  background: var(--accent, #D4A24A);
+  border-color: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
+  transform: translateY(-1px);
+}
+.sku-add.is-added {
+  background: var(--accent, #D4A24A);
+  border-color: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
 }
