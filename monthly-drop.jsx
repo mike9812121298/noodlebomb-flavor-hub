@@ -130,19 +130,19 @@ function MonthlyDrop() {
 
             <Reveal delay={1}>
 
-              <a className="md-photo-card" href="/monthly-box" aria-label="Subscribe to Ramen Night Club" style={{ display: 'block', textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
+              <a className="md-photo-card" href="/monthly-box" aria-label="Subscribe to the Monthly Ramen Box" style={{ display: 'block', textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
 
                 <img
 
                   src="uploads/monthly-noodle-club-2026-05-08-web.webp"
 
-                  alt="NoodleBomb Ramen Night Club box with noodles, sauces, and surprise extras"
+                  alt="NoodleBomb Monthly Ramen Box with noodles, sauce, and ramen-night extras"
 
                   loading="lazy"
 
                 />
 
-                <div className="md-photo-badge">Ramen Night Club</div>
+                <div className="md-photo-badge">Monthly Ramen Box</div>
 
                 <div className="md-photo-glow" aria-hidden="true" />
 
@@ -300,7 +300,7 @@ function MonthlyDrop() {
 
 
 
-            {/* Ramen Night Club subscription links. */}
+            {/* Monthly Ramen Box subscription links; Ramen Night Club is the theme. */}
 
             <Reveal delay={5}>
 

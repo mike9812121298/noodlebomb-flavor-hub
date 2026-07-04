@@ -110,3 +110,6 @@
 # The recipe/use-case SEO pages (sauce-for-*, ramen-sauce-for-*,
 # what-is-shoyu, …) rely on Netlify/Cloudflare default pretty-URL
 # resolution of /<slug> -> /<slug>.html — no explicit rules needed.
+
+# Store finder route.
+/where-to-buy      /#stores       301!
