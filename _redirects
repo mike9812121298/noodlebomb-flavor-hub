@@ -69,7 +69,7 @@
 # (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
 /product-page/*           https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
 /cart-page                https://nu2vqa-ma.myshopify.com/cart                           302!
-/category/*               https://nu2vqa-ma.myshopify.com/collections/:splat             302!
+/category/*               /shop?s=:splat                                               301!
 /ramensauce               https://nu2vqa-ma.myshopify.com/products/original              302!
 /ramensauce-1             https://nu2vqa-ma.myshopify.com/products/citrus-shoyu          302!
 /ramensauce-2             https://nu2vqa-ma.myshopify.com/products/spicy-tokyo           302!

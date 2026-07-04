@@ -307,8 +307,8 @@
 
 [[redirects]]
   from = "/category/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/:splat"
-  status = 302
+  to = "/shop?s=:splat"
+  status = 301
   force = true
 
 [[redirects]]
