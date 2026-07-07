@@ -18,9 +18,9 @@ import {
 import { useState, useMemo } from "react";
 import { useCart } from "@/hooks/useCart";
 import EmberParticles from "@/components/EmberParticles";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 
 const PRODUCT_IMAGES: Record<string, string> = {
@@ -32,7 +32,7 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "sampler": nbLineupTrio,
 };
 
-const FREE_SHIPPING_THRESHOLD = 40;
+const FREE_SHIPPING_THRESHOLD = 29.99;
 
 const RECOMMENDATIONS = [
   {
@@ -335,10 +335,10 @@ const Cart = () => {
                         Cart slot 1: Trio
                       </p>
                       <h2 className="mt-1 font-display text-xl font-bold text-foreground">
-                        Add one more flavor and save $5.98 by upgrading to Trio.
+                        Add bottle 3 and unlock Trio savings.
                       </h2>
                       <p className="mt-1 text-sm text-foreground/65">
-                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $29.99.
+                        Any 3 bottles qualify for the $29.99 Trio price.
                       </p>
                     </div>
                   </div>

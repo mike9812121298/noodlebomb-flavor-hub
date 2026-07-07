@@ -1,8 +1,8 @@
-// Wix Stores deep links — legacy fallback only (Storefront API checkout
+// Wix Stores deep links - legacy fallback only (Storefront API checkout
 // fallback path). Add-to-Cart buttons no longer route through Wix.
-const NB_WIX = {"original": "https://shop.noodlebomb.co/ramensauce", "spicy": "https://shop.noodlebomb.co/ramensauce-2", "citrus": "https://shop.noodlebomb.co/ramensauce-1", "trio": "https://shop.noodlebomb.co/product-page/the-noodlebomb-trio", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://shop.noodlebomb.co/cart-page", "shop": "https://shop.noodlebomb.co/category/all-products"};
+const NB_WIX = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
 
-// Branded cart permalink — adds via noodlebomb.co/cart so shoppers do not
+// Branded cart permalink - adds via noodlebomb.co/cart so shoppers do not
 // land inside Shopify's default cart theme before final checkout.
 const NB_SHOPIFY_VARIANT_IDS = {
   original: '53998041596214',
@@ -17,7 +17,7 @@ const nbCartPermalink = (slug, qty = 1) => {
   return `/cart?add=${encodeURIComponent(slug)}&qty=${n}`;
 };
 
-// Returns the best Wix URL for a given cart item list — used as the last-resort
+// Returns the best Wix URL for a given cart item list - used as the last-resort
 // fallback if both Storefront API and Shopify cart-permalink fail.
 const nbCheckoutUrl = (items) => {
   if (!items || items.length === 0) return NB_WIX.shop;
@@ -28,6 +28,9 @@ const nbCheckoutUrl = (items) => {
 // Single-bottle and trio prices (must match app.jsx FLAVORS).
 const NB_BOTTLE_PRICE = 11.99;
 const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+// Fire Dust seasoning topper - cart-drawer "Power up your cart" one-tap upsell.
+// Mirrors cart.jsx FIRE_DUST; slug/price already in cart-store.js PRODUCT_CATALOG.
+const NB_FIRE_DUST = { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch - 3.2 oz topper', image: 'uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp' };
 
 // Add to local NB_CART and open the slide-out cart drawer (handled by Nav).
 // Modifier-click preserves browser-native navigation; href="/cart.html" stays
@@ -39,10 +42,10 @@ const nbAddAndOpenCart = (item, e) => {
   window.dispatchEvent(new CustomEvent('nb-open-cart'));
 };
 
-// NoodleBomb — shared components
+// NoodleBomb - shared components
 const { useEffect, useRef, useState, useMemo, useLayoutEffect } = React;
 
-// ———————————————————————————————————————————— Reveal on scroll
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Reveal on scroll
 function Reveal({ children, delay = 0, as: Tag = 'div', className = '', style }) {
   const ref = useRef(null);
   useEffect(() => {
@@ -57,8 +60,8 @@ function Reveal({ children, delay = 0, as: Tag = 'div', className = '', style })
   return <Tag ref={ref} className={`reveal ${d} ${className}`} style={style}>{children}</Tag>;
 }
 
-// ———————————————————————————————————————————— Bottle (real photo or SVG fallback)
-// `loading` defaults to "lazy" — bottle is used in Hero (passes "eager"),
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Bottle (real photo or SVG fallback)
+// `loading` defaults to "lazy" - bottle is used in Hero (passes "eager"),
 // FlavorBreakdown, PourAndCompare, and the Lineup cards. Only the Hero bottle
 // is above the fold on initial paint, so the rest stays out of the critical path.
 function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var(--accent)', tilt = 0, dripping = false, src = null, loading = 'lazy' }) {
@@ -86,8 +89,8 @@ function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var
         <text x="100" y="240" textAnchor="middle" fontFamily="Inter Tight" fontWeight="900" fontSize="26" fill="#0B0B0B" letterSpacing="-1.2">{label.split('').slice(0,6).join('')}</text>
         <text x="100" y="262" textAnchor="middle" fontFamily="Inter Tight" fontWeight="900" fontSize="26" fill="#0B0B0B" letterSpacing="-1.2">{label.split('').slice(6).join('')}</text>
         <line x1="60" y1="282" x2="140" y2="282" stroke="#0B0B0B" strokeWidth="1" />
-        <text x="100" y="302" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7" fill="#6B6258" letterSpacing="1.5">SMALL BATCH · 150ML</text>
-        <text x="100" y="318" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7" fill="#6B6258" letterSpacing="1.5">BREWED · AGED · BOTTLED</text>
+        <text x="100" y="302" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7" fill="#6B6258" letterSpacing="1.5">SMALL BATCH - 150ML</text>
+        <text x="100" y="318" textAnchor="middle" fontFamily="JetBrains Mono" fontSize="7" fill="#6B6258" letterSpacing="1.5">BREWED - AGED - BOTTLED</text>
         <circle cx="100" cy="340" r="7" fill="none" stroke="#0B0B0B" strokeWidth="1" />
         <text x="100" y="344" textAnchor="middle" fontFamily="Inter Tight" fontWeight="800" fontSize="9" fill="#0B0B0B">01</text>
         {/* highlight */}
@@ -113,7 +116,7 @@ function Bottle({ label = 'NOODLEBOMB', flavor = 'ORIGINAL No.01', accent = 'var
   );
 }
 
-// ———————————————————————————————————————————— Placeholder food/product shot
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Placeholder food/product shot
 function FoodShot({ src, alt = '', style }) {
   if (src) return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden', ...style }}>
@@ -123,7 +126,7 @@ function FoodShot({ src, alt = '', style }) {
   return null;
 }
 
-// ———————————————————————————————————————————— Placeholder food/product shot (legacy)
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Placeholder food/product shot (legacy)
 function Shot({ label, aspect = '4/5', tag, style, children }) {
   return (
     <div className="shot" style={{ aspectRatio: aspect, width: '100%', ...style }}>
@@ -134,7 +137,7 @@ function Shot({ label, aspect = '4/5', tag, style, children }) {
   );
 }
 
-// ———————————————————————————————————————————— Navbar
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Navbar
 function Nav({ flavor, setFlavor, flavors }) {
   const [solid, setSolid] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -156,7 +159,7 @@ function Nav({ flavor, setFlavor, flavors }) {
       setCartItems(window.NB_CART.getItems());
     });
   }, []);
-  // Listen for global "open cart" event — fired by Add-to-Cart buttons
+  // Listen for global "open cart" event - fired by Add-to-Cart buttons
   // across app.jsx and components.jsx so the drawer becomes the universal
   // post-add-to-cart UX without coupling those buttons to Nav state.
   // Also closes the mobile menu drawer if open (mutually exclusive).
@@ -193,7 +196,7 @@ function Nav({ flavor, setFlavor, flavors }) {
     }
   }, [cartDrawerOpen]);
 
-  // a11y: focus trap inside cart drawer — Tab/Shift-Tab cycle within the drawer
+  // a11y: focus trap inside cart drawer - Tab/Shift-Tab cycle within the drawer
   // while it's open so keyboard users can't tab into the inert page behind.
   useEffect(() => {
     if (!cartDrawerOpen) return;
@@ -220,7 +223,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   }, [cartDrawerOpen]);
 
   // a11y: same focus pattern for the mobile menu drawer (drawerOpen).
-  // No explicit close button — the menu closes on link-click, outside-click,
+  // No explicit close button - the menu closes on link-click, outside-click,
   // or Escape. Initial focus goes to the first nav link.
   const menuDrawerRef = useRef(null);
   const menuTriggerRef = useRef(null);
@@ -290,11 +293,12 @@ function Nav({ flavor, setFlavor, flavors }) {
 
   // Cart drawer derived values
   const cartSubtotal = cartItems.reduce((s, i) => s + (i.price || 0) * (i.qty || 0), 0);
-  const cartFreeShipThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 29.99;
   const cartHasTrio = cartItems.some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
-  const cartFreeShipping = cartHasTrio || cartSubtotal >= cartFreeShipThreshold;
-  const cartShipRemaining = cartFreeShipping ? 0 : Math.max(cartFreeShipThreshold - cartSubtotal, 0);
-  const cartShipProgress = cartFreeShipping ? 100 : Math.min((cartSubtotal / cartFreeShipThreshold) * 100, 100);
+  const cartBottleCount = cartItems.reduce((n, i) => n + ((i.slug === 'trio' ? 3 : 1) * (Number(i.qty) || 0)), 0);
+  const cartFreeShippingThreshold = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 29.99;
+  const cartFreeShipping = cartSubtotal >= cartFreeShippingThreshold;
+  const cartShipRemaining = cartFreeShipping ? 0 : Math.max(cartFreeShippingThreshold - cartSubtotal, 0);
+  const cartShipProgress = cartFreeShipping ? 100 : Math.min((cartSubtotal / cartFreeShippingThreshold) * 100, 100);
   const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
   const cartLineKey = (item, index) => `${item.slug}-${index}-${JSON.stringify(item.attributes || [])}`;
   const cartBottleMix = (item) => (item.attributes || []).find((attr) => attr.key === 'Bottle mix')?.value;
@@ -302,7 +306,7 @@ function Nav({ flavor, setFlavor, flavors }) {
   // navLinks: tuples of [label, href]. Hrefs starting with '#' are
   // smooth-scrolled in-page; hrefs starting with '/' are real-page nav.
   // /about, /recipes, /faq are static HTML pages added 2026-05-06 to fix
-  // the launch audit — those routes used to 404 because the prior nav
+  // the launch audit - those routes used to 404 because the prior nav
   // was hash-only against the one-page index.html.
   // Canonical 7-item nav (locked 2026-05-07 pre-launch). Hash hrefs scroll
   // in-page; '/'-prefixed hrefs are real routes; mailto: opens the user's
@@ -352,7 +356,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                 if (window.NB_OPEN_INQUIRY) window.NB_OPEN_INQUIRY('contact');
                 return;
               }
-              if (!isHash) return; // real route — let browser navigate
+              if (!isHash) return; // real route - let browser navigate
               e.preventDefault();
               const el = document.querySelector(href);
               if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -361,12 +365,12 @@ function Nav({ flavor, setFlavor, flavors }) {
         })}
       </div>
       <div style={{ display:'flex', gap: 10, alignItems:'center' }}>
-        {/* Cart icon → Shopify cart (the single source of truth). Drawer is
+        {/* Cart icon  Shopify cart (the single source of truth). Drawer is
             still rendered for users who add via legacy/local code paths, but
             the icon goes direct so users never bounce off a stale local cart. */}
         <a
           href={NB_SHOPIFY_CART}
-          aria-label={`Cart — ${cartCount} item${cartCount === 1 ? '' : 's'}`}
+          aria-label={`Cart - ${cartCount} item${cartCount === 1 ? '' : 's'}`}
           style={{
             position: 'relative',
             display: 'inline-flex',
@@ -408,7 +412,7 @@ function Nav({ flavor, setFlavor, flavors }) {
             }}>{cartCount > 9 ? '9+' : cartCount}</span>
           )}
         </a>
-        {/* Hamburger — mobile only */}
+        {/* Hamburger - mobile only */}
         <button
           className="nav-hamburger"
           aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
@@ -530,11 +534,11 @@ function Nav({ flavor, setFlavor, flavors }) {
           }}
         >
           Shop the Range
-          <span style={{ fontSize: 16 }}>→</span>
+          <span style={{ fontSize: 16 }}></span>
         </a>
       </div>
 
-      {/* ─── Cart drawer — slide-out from right on Add to Cart and on Nav cart icon click. */}
+      {/* --- Cart drawer - slide-out from right on Add to Cart and on Nav cart icon click. */}
       <div
         onClick={() => setCartDrawerOpen(false)}
         aria-hidden="true"
@@ -575,7 +579,7 @@ function Nav({ flavor, setFlavor, flavors }) {
           <h2 style={{ fontFamily: 'Inter Tight', fontWeight: 700, fontSize: 16, letterSpacing: '-0.02em', margin: 0, color: 'var(--ink)' }}>
             Your cart{cartCount > 0 && (
               <span style={{ color: 'var(--ink-40)', fontWeight: 500, marginLeft: 6 }}>
-                · {cartCount} {cartCount === 1 ? 'item' : 'items'}
+                - {cartCount} {cartCount === 1 ? 'item' : 'items'}
               </span>
             )}
           </h2>
@@ -607,7 +611,7 @@ function Nav({ flavor, setFlavor, flavors }) {
             <p style={{ fontFamily: 'Inter Tight', fontSize: 16, color: 'var(--ink)', margin: 0 }}>Your cart is empty.</p>
             <p style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-60)', margin: 0, maxWidth: 240 }}>Pick a sauce. Build the bowl.</p>
 
-            {/* One-click Trio shortcut — frictionless path to the highest-AOV
+            {/* One-click Trio shortcut - frictionless path to the highest-AOV
                 product for users who clicked the cart icon with an empty cart. */}
             <button
               onClick={() => {
@@ -626,10 +630,10 @@ function Nav({ flavor, setFlavor, flavors }) {
               onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
               onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
             >
-              Add the Trio — $29.99
+              Add the Trio - $29.99
             </button>
             <div style={{ fontSize: 10, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.16em', textTransform: 'uppercase', marginTop: -8 }}>
-              All 3 flavors · save $5.98
+              All 3 flavors - save $5.98
             </div>
 
             <button
@@ -645,12 +649,11 @@ function Nav({ flavor, setFlavor, flavors }) {
                 letterSpacing: '0.16em', textTransform: 'uppercase',
               }}
             >
-              or keep shopping →
-            </button>
+              or keep shopping            </button>
           </div>
         ) : (
           <>
-            {/* Items — scrollable */}
+            {/* Items - scrollable */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '8px 24px' }}>
               {cartItems.map((item, index) => (
                 <div key={cartLineKey(item, index)} style={{
@@ -670,7 +673,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                         Mix: {cartBottleMix(item)}
                       </div>
                     )}
-                    {/* Inline qty stepper — minus/plus buttons let users adjust
+                    {/* Inline qty stepper - minus/plus buttons let users adjust
                         without navigating to /cart.html. Disabled minus at 1
                         prevents accidental remove (use the explicit Remove btn). */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 0, marginTop: 8, border: '1px solid var(--line-strong)', borderRadius: 999, width: 'fit-content' }}>
@@ -686,7 +689,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                           fontFamily: 'Inter Tight', fontSize: 14, fontWeight: 600,
                           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                         }}
-                      >−</button>
+                      >-</button>
                       <span style={{ minWidth: 22, textAlign: 'center', fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 12, color: 'var(--ink)' }}>{item.qty}</span>
                       <button
                         onClick={() => window.NB_CART && window.NB_CART.setQty(item.slug, item.qty + 1, item.attributes)}
@@ -723,6 +726,56 @@ function Nav({ flavor, setFlavor, flavors }) {
                   </div>
                 </div>
               ))}
+
+              {/* Power up your cart - Fire Dust one-tap upsell (drawer). Mirrors
+                  the /cart.html upsell card; uses the canonical NB_CART add flow.
+                  Hidden once Fire Dust is already in the cart. */}
+              {!cartItems.some((i) => i.slug === NB_FIRE_DUST.slug) && (
+                <div style={{
+                  margin: '14px 0 4px',
+                  padding: '12px 14px',
+                  border: '1px solid var(--accent)',
+                  borderRadius: 6,
+                  background: 'rgba(var(--accent-rgb),0.08)',
+                  display: 'flex', alignItems: 'center', gap: 12,
+                }}>
+                  <div style={{
+                    width: 44, height: 44, flexShrink: 0,
+                    background: 'var(--paper-3)', border: '1px solid var(--line)',
+                    borderRadius: 4,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 3,
+                  }}>
+                    <img src={NB_FIRE_DUST.image} alt="NoodleBomb Fire Dust seasoning topper" loading="lazy"
+                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 700, marginBottom: 2 }}>
+                      Power up your cart
+                    </div>
+                    <div style={{ fontFamily: 'Inter Tight', fontWeight: 600, fontSize: 13, color: 'var(--ink)' }}>
+                      {NB_FIRE_DUST.label} - {fmtUSD(NB_FIRE_DUST.price)}
+                    </div>
+                    <div style={{ fontFamily: 'Inter', fontSize: 11, color: 'var(--ink-60)', marginTop: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {NB_FIRE_DUST.tag}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => { if (window.NB_CART) window.NB_CART.add({ slug: NB_FIRE_DUST.slug, name: NB_FIRE_DUST.name, price: NB_FIRE_DUST.price }); }}
+                    aria-label="Add NoodleBomb Fire Dust to cart"
+                    style={{
+                      flexShrink: 0,
+                      padding: '8px 16px', borderRadius: 999,
+                      background: 'var(--accent)', color: 'var(--accent-ink)',
+                      border: 0, cursor: 'pointer',
+                      fontFamily: 'Inter', fontSize: 10, fontWeight: 700,
+                      letterSpacing: '0.16em', textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    Add
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Footer */}
@@ -732,7 +785,7 @@ function Nav({ flavor, setFlavor, flavors }) {
               background: 'var(--paper)',
               display: 'flex', flexDirection: 'column', gap: 14,
             }}>
-              {/* Trio upsell — only when no trio yet AND under free-ship line.
+              {/* Trio upsell - only when no trio yet AND under free-ship line.
                   Earlier impression than the /cart.html upsell card; same logic. */}
               {(() => {
                 const hasTrio = cartItems.some((i) => i.slug === 'trio');
@@ -789,12 +842,12 @@ function Nav({ flavor, setFlavor, flavors }) {
               {/* Free shipping bar */}
               {cartFreeShipping ? (
                 <div style={{ fontSize: 11, color: 'var(--accent)', fontFamily: 'JetBrains Mono', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700 }}>
-                  ✓ FREE shipping unlocked
+                   FREE US shipping unlocked
                 </div>
               ) : (
                 <div>
                   <div style={{ fontSize: 11, color: 'var(--ink-60)', marginBottom: 6, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                    You're {fmtUSD(cartShipRemaining)} away from FREE US shipping
+                    {cartShipRemaining > 0 ? `Add ${fmtUSD(cartShipRemaining)} for FREE US shipping` : 'FREE US shipping unlocked'} - else $3.50 flat
                   </div>
                   <div style={{ height: 4, background: 'var(--paper-3)', borderRadius: 999, overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: cartShipProgress + '%', background: 'var(--accent)', borderRadius: 999, transition: 'width .3s' }} />
@@ -810,7 +863,7 @@ function Nav({ flavor, setFlavor, flavors }) {
                 </span>
               </div>
 
-              {/* Checkout CTA — multi-line Shopify cart-permalink. Lands the
+              {/* Checkout CTA - multi-line Shopify cart-permalink. Lands the
                   user on Shopify cart with every line pre-loaded; Continue
                   Shopping returns to noodlebomb.co via return_to. */}
               <a
@@ -827,15 +880,14 @@ function Nav({ flavor, setFlavor, flavors }) {
                 onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
               >
-                {`Checkout — ${fmtUSD(cartSubtotal)} →`}
+                {`Checkout - ${fmtUSD(cartSubtotal)} `}
               </a>
               {/* Per-item shortcuts for multi-item carts */}
               {cartItems.length > 1 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 12px', justifyContent: 'center' }}>
                   {cartItems.map((it) => (
                     <a key={it.slug} href={nbCartPermalink(it.slug, Math.max(1, Math.floor(it.qty || 1)))} style={{ fontFamily: 'JetBrains Mono', fontSize: 9, letterSpacing: '0.14em', color: 'var(--ink-40)', textDecoration: 'underline', textUnderlineOffset: 3, textTransform: 'uppercase' }}>
-                      {it.name} →
-                    </a>
+                      {it.name}                    </a>
                   ))}
                 </div>
               )}
@@ -862,18 +914,18 @@ function Nav({ flavor, setFlavor, flavors }) {
   );
 }
 
-// ———————————————————————————————————————————— Hero
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Hero
 function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }) {
   return (
     <section className="hero-section" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-      {/* Background photo — clean trio product shot. Keep it fixed in place while
+      {/* Background photo - canonical homepage hero shot. Keep it fixed in place while
           scrolling; scroll-driven transforms made the first image visibly
           jitter on mobile and some desktop browsers. */}
       <div className="hero-bg-media" style={{ position: 'absolute', inset: 0, zIndex: 0, background: '#0a0705' }}>
         <img
           className="hero-product-bg"
           src="uploads/nb-hero-pour-page.webp"
-          alt="NoodleBomb sauce bottles beside ramen and fresh ingredients on a dark background"
+          alt="NoodleBomb sauce lineup on a dark background"
           loading="eager"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', transform: 'none' }}
         />
@@ -926,7 +978,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
             onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px var(--accent-glow)'; }}
           >
             Get the Trio - $29.99
-            <span style={{ fontSize: 16, lineHeight: 1 }}>→</span>
+            <span style={{ fontSize: 16, lineHeight: 1 }}></span>
           </a>
           <a
             className="btn btn-ghost"
@@ -938,7 +990,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </div>
         {/* Trust line under CTAs */}
         <div className="hero-trust-line" style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
-          3+ bottles ship FREE (US) - gift-ready - ships from Bonney Lake, WA
+          $3.50 flat US shipping - FREE on $29.99+ US orders - ships from Bonney Lake, WA
         </div>
       </div>
 
@@ -952,7 +1004,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
 }
 
 
-// ———————————————————————————————————————————— Inquiry modal (Wholesale + Contact)
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  Inquiry modal (Wholesale + Contact)
 function InquiryModal({ open, kind, onClose }) {
   const [submitted, setSubmitted] = useState(false);
   useEffect(() => { if (!open) setSubmitted(false); }, [open]);
@@ -971,7 +1023,7 @@ function InquiryModal({ open, kind, onClose }) {
   const title = isWholesale ? 'Wholesale Inquiry' : 'Get in Touch';
   const intro = isWholesale
     ? "Tell us about your shop. We'll be in touch with wholesale terms."
-    : "Questions, press, partnerships — drop us a line.";
+    : "Questions, press, partnerships - drop us a line.";
   const subject = isWholesale ? 'NoodleBomb Wholesale Inquiry' : 'NoodleBomb Contact';
 
   return (
@@ -1026,8 +1078,8 @@ function InquiryModal({ open, kind, onClose }) {
 
         {submitted ? (
           <div style={{ padding: '24px 0', textAlign: 'center' }}>
-            <div style={{ fontFamily: 'Inter Tight', fontSize: 22, fontWeight: 600, marginBottom: 8 }}>Thanks — we got it.</div>
-            <div style={{ color: 'var(--ink-60)', fontSize: 14 }}>We'll reply within 1–2 business days.</div>
+            <div style={{ fontFamily: 'Inter Tight', fontSize: 22, fontWeight: 600, marginBottom: 8 }}>Thanks - we got it.</div>
+            <div style={{ color: 'var(--ink-60)', fontSize: 14 }}>We'll reply within 1-2 business days.</div>
             <button
               onClick={onClose}
               style={{

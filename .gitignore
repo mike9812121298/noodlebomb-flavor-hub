@@ -30,3 +30,9 @@ build/
 # large media + audit artifacts (use CDN, not git)
 uploads/
 audit_screens/
+
+# Local Netlify folder
+.netlify
+
+# Deploy staging tree built by scripts/deploy-nb.sh
+.nb-staging/

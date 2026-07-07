@@ -48,6 +48,25 @@
     }
   }
 
+  function recipeMediaLabel(slug, title) {
+    var value = String(slug || title || "").toLowerCase();
+    if (value.indexOf("wing") !== -1) return "Wings";
+    if (value.indexOf("rice") !== -1 || value.indexOf("bowl") !== -1) return "Bowl";
+    if (value.indexOf("chicken") !== -1) return "Chicken";
+    if (value.indexOf("salmon") !== -1) return "Salmon";
+    if (value.indexOf("cold") !== -1) return "Cold";
+    if (value.indexOf("sauce-for") !== -1 || value.indexOf("guide") !== -1) return "Guide";
+    return "Ramen";
+  }
+
+  function recipeMediaTone(slug) {
+    var value = String(slug || "").toLowerCase();
+    if (value.indexOf("spicy") !== -1 || value.indexOf("wing") !== -1) return "heat";
+    if (value.indexOf("citrus") !== -1 || value.indexOf("salmon") !== -1) return "bright";
+    if (value.indexOf("rice") !== -1 || value.indexOf("bowl") !== -1) return "bowl";
+    return "umami";
+  }
+
   function render(container, handles) {
     if (!container || !handles.length) return;
     container.innerHTML = handles
@@ -55,11 +74,17 @@
       .map(function (slug) {
         var safeSlug = String(slug).replace(/[^a-z0-9-]/gi, "");
         var title = titleFromSlug(safeSlug);
+        var mediaLabel = recipeMediaLabel(safeSlug, title);
+        var mediaTone = recipeMediaTone(safeSlug);
         return (
-          '<a class="related-recipe-card" href="/recipes/' +
+          '<a class="related-recipe-card" href="/recipes#' +
           safeSlug +
           '">' +
-          '<span class="related-recipe-thumb" aria-hidden="true">NB</span>' +
+          '<span class="related-recipe-thumb related-recipe-thumb--' +
+          mediaTone +
+          '" aria-hidden="true"><span class="related-recipe-thumb-label">' +
+          mediaLabel +
+          "</span></span>" +
           '<span class="related-recipe-copy">' +
           '<span class="related-recipe-kicker">Recipe</span>' +
           '<strong>' +

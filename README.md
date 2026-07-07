@@ -62,7 +62,10 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+**noodlebomb.co is deployed via the Netlify CLI wrapper, NOT Lovable Publish.**
+Use `npm run deploy` (draft) / `npm run deploy:prod` (production). Both run a
+mandatory pre-deploy syntax gate first. See **[DEPLOY.md](DEPLOY.md)** for the
+full runbook and why the gate exists (the 2026-06-09/10 cart-truncation outage).
 
 ## Can I connect a custom domain to my Lovable project?
 

@@ -41,7 +41,7 @@ const RelatedRecipes = ({ shopifyHandle }: RelatedRecipesProps) => {
         {recipes.map((recipe) => (
           <Link
             key={recipe.slug}
-            to={`/recipes/${recipe.slug}`}
+            to={`/recipes#${recipe.slug}`}
             className="group grid min-h-28 grid-cols-[64px_1fr] items-center gap-4 rounded-2xl border border-border bg-card/70 p-4 transition-colors hover:border-primary/40"
           >
             <span className="grid h-16 w-16 place-items-center rounded-xl border border-border bg-primary/10 text-primary">

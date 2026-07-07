@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { motion, useScroll } from "framer-motion";
 import { ArrowRight, Check, Gift, ShoppingCart, Sparkles, Truck } from "lucide-react";
 import nbLogo from "@/assets/nb-logo.png";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
-import heroSceneTrioCounter from "@/assets/nb-hero-scene-trio-counter.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
+import heroSceneTrioCounter from "@/assets/nb-hero-scene-trio-counter.webp";
 import trioFlatlayChopsticks from "@/assets/nb-scene-trio-flatlay-chopsticks.jpg";
-import sceneOriginalSteamingBowl from "@/assets/nb-scene-original-steaming-bowl.png";
-import sceneSpicyWokAction from "@/assets/nb-scene-spicy-wok-action.png";
-import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.png";
+import sceneOriginalSteamingBowl from "@/assets/nb-scene-original-steaming-bowl.webp";
+import sceneSpicyWokAction from "@/assets/nb-scene-spicy-wok-action.webp";
+import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.webp";
 import PressBar from "@/components/PressBar";
 
 const TRIO_PRICE = 29.99;
@@ -76,7 +76,7 @@ const TrioFlavorComparison = () => {
                 className={`rounded-2xl border p-5 text-left transition-all ${selected ? `${flavor.color} shadow-[0_0_32px_hsl(var(--primary)/0.16)]` : "border-border bg-background/60 hover:border-primary/30"}`}
               >
                 <div className="mb-5 flex h-48 items-end justify-center rounded-xl bg-secondary/40 p-5">
-                  <img src={flavor.image} alt={flavor.name} className="h-full w-auto object-contain" />
+                  <img src={flavor.image} alt={flavor.name} loading="lazy" decoding="async" className="h-full w-auto object-contain" />
                 </div>
                 <div className="mb-3 flex items-start justify-between gap-3">
                   <h3 className="font-display text-xl font-bold text-foreground">{flavor.name}</h3>
@@ -232,7 +232,7 @@ const Index = () => {
                 className="rounded-2xl border border-border bg-card p-5"
               >
                 <div className="mb-5 flex h-56 items-end justify-center rounded-xl bg-secondary/40 p-5">
-                  <img src={flavor.image} alt={flavor.name} className="h-full w-auto object-contain" />
+                  <img src={flavor.image} alt={flavor.name} loading="lazy" decoding="async" className="h-full w-auto object-contain" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-foreground">{flavor.name}</h3>
                 <p className="mt-2 text-sm text-foreground/60">{flavor.descriptor}</p>
@@ -259,7 +259,7 @@ const Index = () => {
               { img: sceneSpicyWokAction, label: "Heat lovers", caption: "Spicy Tokyo brings the bold option to the table." },
             ].map((item) => (
               <div key={item.label} className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border bg-card">
-                <img src={item.img} alt={item.label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={item.img} alt={item.label} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <p className="font-display text-xl font-bold text-white">{item.label}</p>

@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, ShoppingCart, Flame } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
 
 const sauces = [
   { id: "original", slug: "original-ramen", name: "Original", price: 11.99, image: nbOriginal },
@@ -106,7 +106,7 @@ const BundleBuilder = () => {
         <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: "easeOut" }} className="flex justify-center gap-3 md:gap-4 mb-8">
           {[
             { min: 2, label: "The Dynamic Duo", sublabel: "2+ Bottles", pct: "10%" },
-            { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING OVER $35", featured: true },
+            { min: 3, label: "The Triple Threat", sublabel: "3+ Bottles", pct: "15% + FREE SHIPPING $29.99+", featured: true },
             { min: 4, label: "The Kitchen Hero", sublabel: "4+ Bottles", pct: "20%" },
           ].map((tier) => {
             const active = totalItems >= tier.min;

@@ -1,5 +1,5 @@
 // NoodleBomb checkout - editorial palette, Shopify handoff.
-const { useEffect, useState, useMemo } = React;
+const { useEffect, useState, useMemo, useRef } = React;
 
 const FREE_SHIPPING = (window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD) || 29.99;
 const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === 'trio' && (Number(i.qty) || 0) > 0);
@@ -10,6 +10,9 @@ const NB_SITE_URLS = {
   citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
   spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
   shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
+  shoyuspicy: 'https://noodlebomb.co/spicy-shoyu-ramen-sauce',
+  firedust: 'https://noodlebomb.co/product/fire-dust',
+  rgs: 'https://noodlebomb.co/product/roasted-garlic-sesame',
   trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/#lineup'
@@ -19,7 +22,10 @@ const SHOPIFY_VARIANT_IDS = {
   citrus: '53998041071926',
   spicy: '53998042120502',
   trio: '53998042644790',
-  shoyu: '54006619636022'
+  shoyu: '54006619636022',
+  shoyuspicy: '54097354686774',
+  firedust: '54111262146870',
+  rgs: '54125810614582'
 };
 const getShopifyCartPermalink = (items) => {
   const lines = (items || [])
@@ -39,6 +45,9 @@ const PRODUCT_IMAGES = {
   citrus:   'uploads/nb-citrus-cart-thumb-2026-06-06.webp',
   spicy:    'uploads/nb-spicy-cart-thumb-2026-06-06.webp',
   shoyu:    'uploads/shoyu-reserve-cart-thumb-2026-06-06.webp',
+  shoyuspicy: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp',
+  firedust: 'uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp',
+  rgs:      'uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp',
   trio:     'uploads/noodlebomb-trio.png'
 };
 
@@ -47,7 +56,10 @@ const PRODUCT_TAGS = {
   spicy:    'Spicy Tokyo',
   citrus:   'Citrus Shoyu',
   trio:     '3-pack bundle',
-  shoyu:    'Shoyu Reserve preorder'
+  shoyu:    'Shoyu Reserve',
+  shoyuspicy: 'Spicy Shoyu',
+  firedust: 'Fire Dust',
+  rgs:      'Roasted Garlic Sesame'
 };
 
 const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);
@@ -70,6 +82,7 @@ function CheckoutPage() {
   const [emailTouched, setEmailTouched] = useState(false);
   const [marketing, setMarketing] = useState(true);
   const [redirecting, setRedirecting] = useState(false);
+  const emailRef = useRef(null);
 
   // Restore email
   useEffect(() => {
@@ -101,7 +114,7 @@ function CheckoutPage() {
   const delivery = useMemo(() => {
     const a = new Date(); a.setDate(a.getDate() + 5);
     const b = new Date(); b.setDate(b.getDate() + 7);
-    return isoDate(a) + ' – ' + isoDate(b);
+    return isoDate(a) + ' - ' + isoDate(b);
   }, []);
 
   const fallbackLinks = items.map((it) => ({
@@ -122,7 +135,14 @@ function CheckoutPage() {
   };
 
   const proceed = () => {
-    if (!emailValid) { setEmailTouched(true); return; }
+    if (!emailValid) {
+      setEmailTouched(true);
+      if (emailRef.current) {
+        try { emailRef.current.focus({ preventScroll: true }); } catch (_) { emailRef.current.focus(); }
+        if (emailRef.current.scrollIntoView) emailRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
     setRedirecting(true);
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       window.NB_SHOPIFY_CHECKOUT.createCheckoutUrl(items)
@@ -139,7 +159,7 @@ function CheckoutPage() {
 
   return (
     <>
-      <a className="crumb" href="/cart.html">← Back to cart</a>
+      <a className="crumb" href="/cart.html"> Back to cart</a>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
         <h1 className="page-title"><em>Checkout.</em></h1>
@@ -167,6 +187,7 @@ function CheckoutPage() {
             </div>
             <label className="field-label">Email</label>
             <input
+              ref={emailRef}
               className={'field' + (emailTouched && !emailValid ? ' error' : '')}
               type="email"
               value={email}
@@ -175,9 +196,13 @@ function CheckoutPage() {
               placeholder="you@example.com"
               autoComplete="email"
               inputMode="email"
+              aria-invalid={emailTouched && !emailValid}
+              aria-describedby="checkout-email-error"
             />
             {emailTouched && !emailValid && (
-              <div className="field-error">Please enter a valid email address.</div>
+              <div className="field-error" id="checkout-email-error" role="alert">
+                {email.trim() === '' ? 'Enter your email to continue.' : 'Please enter a valid email address.'}
+              </div>
             )}
             <label className="checkbox-row">
               <input type="checkbox" checked={marketing} onChange={(e) => setMarketing(e.target.checked)} />
@@ -207,7 +232,7 @@ function CheckoutPage() {
                         Mix: {bottleMix(item)}
                       </div>
                     )}
-                    <div className="meta">{PRODUCT_TAGS[item.slug] || ''} · {fmtUSD(item.price)} each</div>
+                    <div className="meta">{PRODUCT_TAGS[item.slug] || ''} - {fmtUSD(item.price)} each</div>
                   </div>
                   <div className="price">{fmtUSD(item.price * item.qty)}</div>
                 </div>
@@ -228,7 +253,7 @@ function CheckoutPage() {
           </div>
         </div>
 
-        {/* Right column — summary */}
+        {/* Right column - summary */}
         <div className="card summary">
           <h2>Total</h2>
           <p className="lede">Tax + shipping at next step</p>
@@ -241,7 +266,7 @@ function CheckoutPage() {
 
           {!freeShipping && remaining > 0 && (
             <div style={{ marginTop: 14, padding: '10px 12px', border: '1px solid var(--line)', fontSize: 11, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Add {fmtUSD(remaining)} for free shipping · <a href="/cart.html" style={{ color: 'var(--accent)' }}>edit cart →</a>
+              Add {fmtUSD(remaining)} for free shipping - <a href="/cart.html" style={{ color: 'var(--accent)' }}>edit cart</a>
             </div>
           )}
 
@@ -252,8 +277,8 @@ function CheckoutPage() {
           </div>
 
           <div style={{ marginTop: 22 }}>
-            <button className="btn" onClick={proceed} disabled={!emailValid || redirecting}>
-              {redirecting ? <>Opening secure checkout…</> : <><Lock /> Pay {fmtUSD(subtotal)} →</>}
+            <button className="btn" onClick={proceed} disabled={redirecting}>
+              {redirecting ? <>Opening secure checkout...</> : <><Lock /> Pay {fmtUSD(subtotal)} </>}
             </button>
           </div>
 
@@ -263,13 +288,13 @@ function CheckoutPage() {
               If nothing happened, you can{' '}
               <a href={fallbackUrl}>return to the NoodleBomb lineup</a> and keep shopping.
               <button onClick={() => { window.NB_CART && window.NB_CART.clear(); window.location.href = '/'; }}>
-                I finished my order — clear my cart
+                I finished my order - clear my cart
               </button>
             </div>
           )}
 
           <div className="trust">
-            <div className="trust-row"><Shield /> Secure SSL · PCI-compliant payment</div>
+            <div className="trust-row"><Shield /> Secure SSL - PCI-compliant payment</div>
             <div className="trust-row"><Truck /> FREE US shipping at $29.99+ subtotal</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
@@ -287,7 +312,7 @@ function CheckoutPage() {
 
       <div className="sticky-mobile">
         <div className="total"><small>Subtotal</small><strong>{fmtUSD(subtotal)}</strong></div>
-        <button className="btn" onClick={proceed} disabled={!emailValid || redirecting}>
+        <button className="btn" onClick={proceed} disabled={redirecting}>
           <Lock /> Pay
         </button>
       </div>

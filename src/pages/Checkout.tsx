@@ -16,10 +16,11 @@ import {
 } from "lucide-react";
 import { useCart } from "@/hooks/useCart";
 import { getCheckoutUrl, WIX_STORE_BASE } from "@/lib/wix-checkout";
+import { trackGoogleAdsBeginCheckout } from "@/lib/google-ads";
 import EmberParticles from "@/components/EmberParticles";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 
 const PRODUCT_IMAGES: Record<string, string> = {
@@ -31,7 +32,7 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "sampler": nbLineupTrio,
 };
 
-const FREE_SHIPPING_THRESHOLD = 40;
+const FREE_SHIPPING_THRESHOLD = 29.99;
 const EMAIL_KEY = "nb_checkout_email";
 
 const Checkout = () => {
@@ -96,6 +97,7 @@ const Checkout = () => {
       return;
     }
     setRedirecting(true);
+    trackGoogleAdsBeginCheckout(subtotal, itemCount);
     // Open the Wix store in a new tab so the cart isn't lost if they bounce back
     window.open(wixCheckoutUrl, "_blank", "noopener,noreferrer");
   };

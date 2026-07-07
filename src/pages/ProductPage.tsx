@@ -13,9 +13,9 @@ import RelatedRecipes from "@/components/RelatedRecipes";
 import { useCart } from "@/hooks/useCart";
 import { useToast } from "@/hooks/use-toast";
 import { PRODUCT_TO_SHOPIFY_HANDLE } from "@/lib/relatedRecipes";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 // Designer / lifestyle creatives — per flavor gallery
 import originalBoldTimeless from "@/assets/nb-hero-original-bold-timeless.png";
@@ -134,7 +134,7 @@ const PRODUCTS: Record<string, ProductData> = {
   },
   "shoyu-reserve": {
     slug: "shoyu-reserve",
-    name: "Shoyu Reserve Ramen Sauce",
+    name: "Shoyu Reserve Soy Sauce",
     tagline: "Slow-Brewed Depth",
     price: 9.99,
     displayPrice: "$9.99",

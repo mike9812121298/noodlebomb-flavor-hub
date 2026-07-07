@@ -1,21 +1,43 @@
-# NoodleBomb production — premium editorial design (POUR IT ON EVERYTHING)
-# Static deploy — index.html + 6 .jsx files + uploads/ images served from repo root
+# NoodleBomb production - premium editorial design (POUR IT ON EVERYTHING)
+# Static deploy - index.html + 6 .jsx files + uploads/ images served from repo root
 # Pages: index.html (landing), cart.html (/cart), checkout.html (/checkout)
 # Vite build is skipped via no-op command + ignore.
 # To roll back to the React/Vite SPA, restore this file to commit 862db66 and revert index.html.
 
 [build]
-  # Compiles repo-root *.jsx → build/*.js via esbuild, replacing the prior
+  # Compiles repo-root *.jsx -> build/*.js via esbuild, replacing the prior
   # Babel-in-browser setup (~770KB shipped to every visitor, gone). Netlify
   # auto-runs `npm install` first to fetch esbuild from devDeps.
   command = "npm run build:static"
   publish = "."
   ignore = "/bin/false"
 
+[functions]
+  included_files = ["data/order-map-cities.json"]
+
+# --- Dead-route fixes (2026-06-21) - resolve 404s to correct destinations ---
+[[redirects]]
+  from = "/products/shoyu-reserve"
+  to = "/product/shoyu-reserve"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/collections/all"
+  to = "/shop"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/build-your-bundle"
+  to = "/shop"
+  status = 301
+  force = true
+
 # Block repo internals from being served. publish = "." means every file at
 # the root gets deployed, including /src/ (dormant Vite tree), /node_modules/,
 # /supabase/config.toml, package.json, and lockfiles. robots.txt only deters
-# search engines — these rules return 404 to anyone fetching the paths
+# search engines - these rules return 404 to anyone fetching the paths
 # directly, with force = true to override the filesystem match.
 [[redirects]]
   from = "/src/*"
@@ -41,10 +63,137 @@
   status = 404
   force = true
 
+[[redirects]]
+  from = "/tmp/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/test-results/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
 # /dist/ is a stale Vite build (different homepage, sitemap with broken
 # paths and a "yuzu" reference banned per commit a577290).
 [[redirects]]
   from = "/dist/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Scratch, hidden, and agent work folders. publish="." would otherwise expose them.
+[[redirects]]
+  from = "/work/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.git/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.claude/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.darkfix/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nb-fix/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nb-pass1-stage/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-allergen/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-cart/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-gate/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-img22/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-live/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-ship/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.nbov-ship2/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/.playwright-mcp/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/audit_screens/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/test-results-live-2026-06-07/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/%TMPOUT%/*"
   to = "/404.html"
   status = 404
   force = true
@@ -115,7 +264,7 @@
   status = 404
   force = true
 
-# JSX source files — compiled to /build/*.js by esbuild on deploy. The
+# JSX source files - compiled to /build/*.js by esbuild on deploy. The
 # source remains in the repo for diff/review but isn't needed at runtime.
 # NOTE: Netlify's `/*.jsx` glob silently does NOT override existing static
 # files (verified live 2026-04-30: /app.jsx returned 200 despite the rule).
@@ -163,7 +312,98 @@
   status = 404
   force = true
 
-# Dotfiles — .env contains only Supabase publishable keys (safe to expose by
+# Root-level work artifacts and internal docs/screenshots/logs.
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.log"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/_*.py"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/lh-*.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tmp-*.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/draft-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/LIVE-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/shop-LIVE-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/shop-draft-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/shoyu-pdp-draft.png"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/ritualkit-*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/NB_Storefront_Audit_*.pdf"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/prod*.log"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/vite*.log"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/work-*.log"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Dotfiles - .env contains only Supabase publishable keys (safe to expose by
 # design) but leaking the file is poor hygiene; .gitignore is harmless but
 # pollutes the surface area.
 [[redirects]]
@@ -178,14 +418,32 @@
   status = 404
   force = true
 
-# ─────────────────────────────────────────────────────────────────
+[[redirects]]
+  from = "/tmp-netlify-deploys.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/seo-keyword-coverage.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/data/wholesale-one-sheet-products.json"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# -----------------------------------------------------------------
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
 # noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
 # See CANONICAL_URL_MAP.md.
 #
 # Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
 # rebrand the storefront domain later without redirect-cache pollution.
-# ─────────────────────────────────────────────────────────────────
+# -----------------------------------------------------------------
 
 [[redirects]]
   from = "/product/original-ramen"
@@ -222,52 +480,62 @@
   to = "/seasonings.html"
   status = 200
   force = true
+# /shop - primary CTA target. On-site NB-branded catalog (shop.html) so
+# customers stay in the NoodleBomb experience; handoff to Shopify happens
+# only at checkout (via the cart). Was a 302 to the bare myshopify store.
 
 [[redirects]]
-  from = "/product/fire-dust"
+  from = "/fire-dust"
   to = "/product-fire-dust.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/product/roasted-garlic-sesame"
+  from = "/roasted-garlic-sesame"
   to = "/product-roasted-garlic-sesame.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/product/shoyu-reserve"
+  from = "/shoyu-reserve"
   to = "/product-shoyu-reserve.html"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/shoyu-reserve"
-  to = "/product/shoyu-reserve"
+  from = "/product/fire-dust"
+  to = "/fire-dust"
   status = 301
   force = true
 
-# Catch-all for any other /product/* deep link — go to lineup
 [[redirects]]
-  from = "/product/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
-  status = 302
+  from = "/product/roasted-garlic-sesame"
+  to = "/roasted-garlic-sesame"
+  status = 301
   force = true
 
-# /shop and /shop/* — primary CTA target
+[[redirects]]
+  from = "/product/shoyu-reserve"
+  to = "/shoyu-reserve"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/shop"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
-  status = 302
-  force = true
+  to = "/shop.html"
+  status = 200
 
+# Any /shop/* deep link also lands on the branded catalog rather than the
+# bare Shopify storefront. The :splat is consumed explicitly in the query so
+# Netlify doesn't auto-append it to the path (which would self-loop to
+# /shop/<splat> and 404); shop.html ignores the query.
 [[redirects]]
   from = "/shop/*"
-  to = "https://nu2vqa-ma.myshopify.com/:splat"
-  status = 302
+  to = "/shop?s=:splat"
+  status = 301
   force = true
 
-# Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
+# Wix-pattern URLs from old marketing - now bounce to Shopify, NOT Wix
 [[redirects]]
   from = "/product-page/*"
   to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
@@ -318,67 +586,72 @@
 [[headers]]
   for = "/*.jsx"
   [headers.values]
-    Content-Type = "application/javascript; charset=utf-8"
-    Cache-Control = "public, max-age=300, must-revalidate"
+  Content-Type = "application/javascript; charset=utf-8"
+  Cache-Control = "public, max-age=300, must-revalidate"
 
-# Compiled bundles — same short-cache treatment as the source .jsx
+# Compiled bundles - same short-cache treatment as the source .jsx
 # (no content hashing yet; if added later, switch to immutable + 1y).
 [[headers]]
   for = "/build/*"
   [headers.values]
-    Cache-Control = "public, max-age=300, must-revalidate"
+  Cache-Control = "public, max-age=300, must-revalidate"
 
-# cart-store.js is the cart logic — short cache so threshold/price updates
+# cart-store.js is the cart logic - short cache so threshold/price updates
 # propagate quickly. Same revalidate behavior as the .jsx files.
 [[headers]]
   for = "/cart-store.js"
   [headers.values]
-    Cache-Control = "public, max-age=300, must-revalidate"
+  Cache-Control = "public, max-age=300, must-revalidate"
 
 [[headers]]
   for = "/uploads/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+  Cache-Control = "public, max-age=31536000, immutable"
 
-# HTML pages — always revalidate so updates ship immediately.
+# HTML pages - always revalidate so updates ship immediately.
 [[headers]]
   for = "/index.html"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+  Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/cart.html"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+  Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/checkout.html"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+  Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "/404.html"
   [headers.values]
-    Cache-Control = "public, max-age=3600"
+  Cache-Control = "public, max-age=3600"
 
-# Favicon — long cache, the file rarely changes.
+# Favicon - long cache, the file rarely changes.
 [[headers]]
   for = "/favicon.ico"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+  Cache-Control = "public, max-age=604800"
 
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+  X-Frame-Options = "SAMEORIGIN"
+  X-Content-Type-Options = "nosniff"
+  Referrer-Policy = "strict-origin-when-cross-origin"
+  Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Pretty-URL rewrites for the new structural pages added 2026-05-06.
 [[redirects]]
   from = "/about"
   to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/wholesale"
+  to = "/wholesale.html"
   status = 200
 
 [[redirects]]
@@ -388,7 +661,152 @@
 
 [[redirects]]
   from = "/recipes/*"
-  to = "/recipes.html"
+  to = "/recipes"
+  status = 301
+
+[[redirects]]
+  from = "/ramen-sauce-for-eggs"
+  to = "/ramen-sauce-for-eggs.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-sauce-for-wings"
+  to = "/ramen-sauce-for-wings.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-sauce"
+  to = "/ramen-sauce.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-seasoning"
+  to = "/ramen-seasoning.html"
+  status = 200
+
+[[redirects]]
+  from = "/chili-garlic-crunch"
+  to = "/chili-garlic-crunch.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-gift-box"
+  to = "/ramen-gift-box.html"
+  status = 200
+
+[[redirects]]
+  from = "/what-is-shoyu"
+  to = "/what-is-shoyu.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-rice-bowls"
+  to = "/sauce-for-rice-bowls.html"
+  status = 200
+
+[[redirects]]
+  from = "/spicy-sauce-for-dumplings"
+  to = "/spicy-sauce-for-dumplings.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-dumplings"
+  to = "/sauce-for-dumplings.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-sauce-for-chicken"
+  to = "/ramen-sauce-for-chicken.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-noodles"
+  to = "/sauce-for-noodles.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-sauce-for-vegetables"
+  to = "/ramen-sauce-for-vegetables.html"
+  status = 200
+
+[[redirects]]
+  from = "/spicy-sauce-for-rice-bowls"
+  to = "/spicy-sauce-for-rice-bowls.html"
+  status = 200
+
+[[redirects]]
+  from = "/soy-sauce-for-noodles"
+  to = "/soy-sauce-for-noodles.html"
+  status = 200
+
+[[redirects]]
+  from = "/stir-fry-sauce-for-noodles"
+  to = "/stir-fry-sauce-for-noodles.html"
+  status = 200
+
+[[redirects]]
+  from = "/spicy-noodle-sauce"
+  to = "/spicy-noodle-sauce.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-udon-noodles"
+  to = "/sauce-for-udon-noodles.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-sauce-for-pork"
+  to = "/ramen-sauce-for-pork.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-fried-rice"
+  to = "/sauce-for-fried-rice.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-tofu"
+  to = "/sauce-for-tofu.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-salmon"
+  to = "/sauce-for-salmon.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-tuna"
+  to = "/sauce-for-tuna.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-shrimp"
+  to = "/sauce-for-shrimp.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-steak"
+  to = "/sauce-for-steak.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-burgers"
+  to = "/sauce-for-burgers.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-mushrooms"
+  to = "/sauce-for-mushrooms.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-roasted-vegetables"
+  to = "/sauce-for-roasted-vegetables.html"
+  status = 200
+
+[[redirects]]
+  from = "/sauce-for-roasted-broccoli"
+  to = "/sauce-for-roasted-broccoli.html"
   status = 200
 
 [[redirects]]
@@ -412,25 +830,15 @@
   status = 200
 
 [[redirects]]
+  from = "/spicy-shoyu-ramen-sauce"
+  to = "/product-spicy-shoyu.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/seasonings"
   to = "/seasonings.html"
   status = 200
-
-[[redirects]]
-  from = "/product/fire-dust"
-  to = "/product-fire-dust.html"
-  status = 200
-
-[[redirects]]
-  from = "/product/roasted-garlic-sesame"
-  to = "/product-roasted-garlic-sesame.html"
-  status = 200
-
-[[redirects]]
-  from = "/product/shoyu-reserve"
-  to = "/product-shoyu-reserve.html"
-  status = 200
-
 [[redirects]]
   from = "/product-original.html"
   to = "/original-ramen-sauce"
@@ -450,20 +858,8 @@
   force = true
 
 [[redirects]]
-  from = "/product-fire-dust.html"
-  to = "/product/fire-dust"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/product-roasted-garlic-sesame.html"
-  to = "/product/roasted-garlic-sesame"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/product-shoyu-reserve.html"
-  to = "/product/shoyu-reserve"
+  from = "/product-spicy-shoyu.html"
+  to = "/spicy-shoyu-ramen-sauce"
   status = 301
   force = true
 
@@ -486,3 +882,24 @@
   from = "/shipping-returns"
   to = "/shipping-returns.html"
   status = 200
+
+
+# -----------------------------------------------------------------
+# Restored from live resolved config (.netlify dump): 3 redirect rules
+# that drifted out of the working-tree netlify.toml. Verified live
+# 2026-06-30 audit: Spicy Shoyu is now sellable via Shopify variant
+# 54097354686774, so the public PDP routes to its canonical product page.
+# -----------------------------------------------------------------
+
+[[redirects]]
+  from = "/rewards"
+  to = "/rewards.html"
+  status = 200
+
+[[redirects]]
+  from = "/recipes/:slug"
+  to = "/recipes"
+  status = 301
+  force = true
+
+

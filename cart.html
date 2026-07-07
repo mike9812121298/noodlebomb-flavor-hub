@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-34HRPRKYCQ');
-</script>
-
 <meta charset="utf-8">
+<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
 <title>Your Cart | NoodleBomb</title>
-<meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. FREE US shipping at $29.99+ subtotal." />
+<meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. $3.50 flat US shipping; free on $29.99+ US orders." />
 <meta name="robots" content="noindex" />
 <link rel="canonical" href="https://noodlebomb.co/cart" />
 
@@ -263,19 +255,26 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
     grid-template-columns: 1fr !important;
   }
   .cart-rec-card {
-    padding: 12px !important;
+    padding: 14px !important;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
   }
   .cart-rec-add {
-    width: 40px !important;
-    height: 40px !important;
+    min-width: 64px !important;
+    width: auto !important;
+    height: 44px !important;
+    padding: 0 16px !important;
     font-size: 20px !important;
+    flex-shrink: 0;
   }
   .sticky-mobile {
     display: flex; align-items: center; gap: 12px;
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
-    padding: 14px clamp(16px, 5vw, 28px);
+    position: fixed; bottom: max(8px, env(safe-area-inset-bottom)); left: 10px; right: 10px; z-index: 50;
+    padding: 12px clamp(14px, 4vw, 24px);
     background: rgba(14,13,12,0.96); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px);
-    border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(15,15,15,0.06);
+    border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 -8px 24px rgba(15,15,15,0.06);
   }
   .sticky-mobile .total { flex: 1; }
   .sticky-mobile .total small { display: block; color: var(--ink-40); font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -312,10 +311,11 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   </div>
 </main>
 
-<script defer src="cart-store.js"></script>
+<script defer src="cart-store.js?v=20260620-spicy-alias"></script>
 <script defer src="shopify-config.js"></script>
+<script defer src="attribution.js"></script>
 <script defer src="shopify-checkout.js"></script>
-<script defer src="build/cart.js"></script>
+<script defer src="build/cart.js?v=20260610navupsell"></script>
 <!-- Smile.io rewards launcher (headless Smile UI). cart.html does not load
      page-shared.js, so the launcher is inlined here. Guest mode (no on-site
      login); pub_ key is safe to expose. See page-shared.js for the canonical copy. -->
