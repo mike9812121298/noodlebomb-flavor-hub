@@ -437,8 +437,7 @@
     var slide2 = document.createElement('img');
     slide2.className = 'hero-product-bg nb-hero-slide2';
     slide2.src = SLIDE2_SRC;
-    slide2.alt = '';
-    slide2.setAttribute('aria-hidden', 'true');
+    slide2.alt = 'NoodleBomb sauce and seasoning lineup';
     slide2.setAttribute('decoding', 'async');
     slide2.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;transform:none;opacity:0;transition:opacity ' + FADE + 'ms ease;will-change:opacity;pointer-events:none;';
     base.insertAdjacentElement('afterend', slide2);

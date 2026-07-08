@@ -2951,7 +2951,7 @@ function OrderMapSection() {
   <span className="nbg-bottle-halo" />
   <span className="nbg-bottle-ring" />
   <span className="nbg-bottle-flash" />
-  <img className="nbg-bottle-img" src={spotlightFlavor.img} alt="" />
+  <img className="nbg-bottle-img" src={spotlightFlavor.img} alt={`${spotlightFlavor.name} bottle`} />
   <span className="nbg-bottle-label">
   <span className="nbg-bottle-kicker">Just bought</span>
   <span className="nbg-bottle-name">{spotlightProduct}</span>
