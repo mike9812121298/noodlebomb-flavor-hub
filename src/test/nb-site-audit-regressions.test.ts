@@ -159,6 +159,16 @@ describe("NoodleBomb July site-audit regressions", () => {
     expect(productPages).not.toMatch(/PREORDER/i);
   });
 
+  it("gates the Monthly Box page while subscription migration is pending", () => {
+    const monthlyBox = read("monthly-box.html");
+
+    expect(monthlyBox).not.toContain("selling_plan=");
+    expect(monthlyBox).not.toContain("nu2vqa-ma.myshopify.com/cart/add");
+    expect(monthlyBox).not.toMatch(/Subscribe - \$\d/i);
+    expect(monthlyBox).toContain("Box signups are paused");
+    expect(monthlyBox).toContain("Join the box waitlist");
+  });
+
   it("ships basic security and cache headers for public static assets", () => {
     const netlify = read("netlify.toml");
     const headers = read("_headers");
