@@ -8,7 +8,7 @@
 // Wix Stores deep links (added 2026-04-25 for production deploy)
 // Kept for the Footer "Shop all" browse links - purchases now flow through
 // the local cart (cart.html -> checkout.html -> Wix payment handoff).
-const WIX_URLS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
+const WIX_URLS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
 
 // Trio bundle price - used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
@@ -1050,7 +1050,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
   <a className="fbv2-trio" href={reserveActive ? '#bundle-builder' : cartPermalink('trio')}>{reserveActive ? 'Build a bundle' : 'Get all 3'}</a>
   </div>
   <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.12em', marginTop: 10 }}>
-  $3.50 flat US ship - FREE on $29.99+
+  Free US shipping on orders $29.99+
   </div>
   <div className="fbv2-panel-note">{activeItem.line}</div>
   </Reveal>
@@ -1601,7 +1601,7 @@ function Origin() {
   Try the Trio - $29.99 | Save $6
   </a>
   <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.14em' }}>
-  $3.50 flat US ship - FREE on $29.99+
+  Free US shipping on orders $29.99+
   </div>
   </div>
   </Reveal>
@@ -1687,7 +1687,7 @@ function FinalCTA() {
 
   <Reveal delay={3}>
   <div className="finalcta-row" style={{ marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
-  <a className="btn" href={WIX_URLS.shop} target="_blank" rel="noopener" style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all from $11.99</a>
+  <a className="btn" href={WIX_URLS.shop} style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all from $11.99</a>
   <form className="finalcta-waitlist" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', flex: 1, minWidth: 280, gap: 0, border: '1px solid rgba(245,241,234,0.35)', borderRadius: 4, overflow: 'hidden', background: 'rgba(0,0,0,0.18)' }}>
   <input type="hidden" name="_subject" value="NoodleBomb Waitlist Signup" />
   <input type="hidden" name="_template" value="table" />
@@ -1706,7 +1706,7 @@ function FinalCTA() {
   <div className="trust-line-track mono" style={{ display: 'inline-flex', whiteSpace: 'nowrap', fontSize: 11, letterSpacing: '0.18em', opacity: 0.7, willChange: 'transform' }}>
   {Array.from({ length: 4 }).map((_, j) => (
   <span key={j} style={{ paddingRight: 32 }}>
-  PREMIUM INGREDIENTS - SMALL BATCH - MADE IN BONNEY LAKE, WA - $3.50 FLAT US SHIPPING - FREE ON $29.99+
+  PREMIUM INGREDIENTS - SMALL BATCH - MADE IN WASHINGTON - FREE US SHIPPING ON ORDERS $29.99+
   </span>
   ))}
   </div>
@@ -1890,7 +1890,7 @@ function Tweaks({ state, set, open, setOpen }) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - TrustStrip - 4-icon trust signals (under hero)
 function TrustStrip() {
   const items = [
-  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: '$3.50 flat US ship - FREE on $29.99+' },
+  { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>, label: 'Free US shipping on orders $29.99+' },
   { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>, label: 'Love it or your money back' },
   { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>, label: 'Ships in 1-2 days' },
   { icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>, label: 'Small-batch, made in USA' },
@@ -3402,7 +3402,7 @@ function BuildBundle() {
   </p>
   <div className="bundle-savings-banner">
   <strong>Any 3 Pour bottles = Trio pricing</strong>
-  <span>Mix sauces, soy, and spices. $3.50 flat US ship - FREE on $29.99+.</span>
+  <span>Mix sauces, soy, and spices. Free US shipping on orders $29.99+.</span>
   </div>
   </div>
   </Reveal>
@@ -3525,7 +3525,7 @@ function BuildBundle() {
   >
   {added ? 'Added to cart' : `Add ${totalItems || 0} item${totalItems === 1 ? '' : 's'} - ${money(cartTotal)}`}
   </a>
-  <div className="bundle-note">Any 3 Pour bottles unlock Trio savings. $3.50 flat US shipping - FREE on $29.99+ US orders. Priority $12 at checkout.</div>
+  <div className="bundle-note">Any 3 Pour bottles unlock Trio savings. Free US shipping on orders $29.99+. Priority $12 at checkout.</div>
   </div>
   </Reveal>
   </div>

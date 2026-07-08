@@ -447,32 +447,32 @@
 
 [[redirects]]
   from = "/product/original-ramen"
-  to = "https://nu2vqa-ma.myshopify.com/products/original"
-  status = 302
+  to = "/original-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/spicy-tokyo"
-  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
-  status = 302
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/citrus-shoyu"
-  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
-  status = 302
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/trio"
-  to = "https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio"
-  status = 302
+  to = "/ramen-sauce-trio"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/the-noodlebomb-trio"
-  to = "https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio"
-  status = 302
+  to = "/ramen-sauce-trio"
+  status = 301
   force = true
 
 [[redirects]]
@@ -538,38 +538,38 @@
 # Wix-pattern URLs from old marketing - now bounce to Shopify, NOT Wix
 [[redirects]]
   from = "/product-page/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
-  status = 302
+  to = "/shop"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/cart-page"
-  to = "https://nu2vqa-ma.myshopify.com/cart"
-  status = 302
+  to = "/cart"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/category/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/:splat"
-  status = 302
+  to = "/shop"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/ramensauce"
-  to = "https://nu2vqa-ma.myshopify.com/products/original"
-  status = 302
+  to = "/original-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/ramensauce-1"
-  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
-  status = 302
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/ramensauce-2"
-  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
-  status = 302
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
   force = true
 
 # Pretty URLs for the local cart/checkout pages
@@ -587,6 +587,16 @@
   for = "/*.jsx"
   [headers.values]
   Content-Type = "application/javascript; charset=utf-8"
+  Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+  Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
   Cache-Control = "public, max-age=300, must-revalidate"
 
 # Compiled bundles - same short-cache treatment as the source .jsx
@@ -642,6 +652,7 @@
   X-Content-Type-Options = "nosniff"
   Referrer-Policy = "strict-origin-when-cross-origin"
   Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+  Content-Security-Policy = "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://formsubmit.co https://nu2vqa-ma.myshopify.com"
 
 # Pretty-URL rewrites for the new structural pages added 2026-05-06.
 [[redirects]]
@@ -663,6 +674,28 @@
   from = "/recipes/*"
   to = "/recipes"
   status = 301
+
+[[redirects]]
+  from = "/post/*"
+  to = "/recipes"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blank-*"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/ramen-sauce-trio"
+  to = "/ramen-sauce-trio.html"
+  status = 200
 
 [[redirects]]
   from = "/ramen-sauce-for-eggs"

@@ -136,8 +136,8 @@ const PRODUCTS: Record<string, ProductData> = {
     slug: "shoyu-reserve",
     name: "Shoyu Reserve Soy Sauce",
     tagline: "Slow-Brewed Depth",
-    price: 9.99,
-    displayPrice: "$9.99",
+    price: 11.99,
+    displayPrice: "$11.99",
     subscribePrice: null,
     displaySubscribePrice: null,
     image: nbOriginal,
@@ -369,7 +369,7 @@ const ProductPage = () => {
                 </Link>
               </div>
               <p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-3"><Truck className="h-3.5 w-3.5" />
-                Free shipping over $35 · Ships from WA</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
+                Free US shipping on orders $29.99+ · Ships from WA</p><p className="text-xs text-muted-foreground flex items-center justify-center gap-1.5 mt-1.5"><ShieldCheck className="h-3.5 w-3.5" />30-day money-back guarantee. Love it or we refund you.
               </p>
             </div>
 
@@ -377,7 +377,7 @@ const ProductPage = () => {
             <div className="flex flex-wrap gap-6 pt-2 border-t border-border/40">
               <div className="flex items-center gap-2 text-xs text-foreground/50">
                 <Truck className="h-4 w-4 text-primary/60" />
-                Free shipping over $35
+                Free US shipping on orders $29.99+
               </div>
               <div className="flex items-center gap-2 text-xs text-foreground/50">
                 <ShieldCheck className="h-4 w-4 text-primary/60" />

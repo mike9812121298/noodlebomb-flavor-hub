@@ -5,6 +5,12 @@
   Content-Type: application/javascript; charset=utf-8
   Cache-Control: public, max-age=300, must-revalidate
 
+/*.js
+  Cache-Control: public, max-age=300, must-revalidate
+
+/*.css
+  Cache-Control: public, max-age=300, must-revalidate
+
 /build/*
   Cache-Control: public, max-age=300, must-revalidate
 
@@ -34,3 +40,4 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self' https://formsubmit.co https://nu2vqa-ma.myshopify.com

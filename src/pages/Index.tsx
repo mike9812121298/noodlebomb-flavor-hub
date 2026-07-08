@@ -171,7 +171,7 @@ const Index = () => {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-[11px] font-display font-semibold uppercase tracking-[0.18em] text-foreground/45">
-              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5" /> Free shipping over $35</span>
+              <span className="inline-flex items-center gap-1.5"><Truck className="h-3.5 w-3.5" /> Free US shipping on orders $29.99+</span>
               <span className="inline-flex items-center gap-1.5"><Gift className="h-3.5 w-3.5" /> Perfect for the ramen lover in your life</span>
             </div>
           </motion.div>
@@ -198,7 +198,7 @@ const Index = () => {
 
       <div className="border-y border-border/40 py-4">
         <div className="container flex flex-wrap items-center justify-center gap-6 text-xs uppercase tracking-widest text-muted-foreground md:gap-10">
-          {["Small batch crafted in USA", "Gift-ready Trio", "Fast checkout", "Free shipping over $35"].map((item) => (
+          {["Small batch crafted in USA", "Gift-ready Trio", "Fast checkout", "Free US shipping on orders $29.99+"].map((item) => (
             <span key={item} className="inline-flex items-center gap-2">
               <Check className="h-3.5 w-3.5 text-primary" /> {item}
             </span>

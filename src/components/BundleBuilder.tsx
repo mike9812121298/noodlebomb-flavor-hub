@@ -247,7 +247,7 @@ const BundleBuilder = () => {
               <span className="font-display text-2xl font-bold text-foreground block mb-2">${subtotal.toFixed(2)}</span>
             )}
             <div className="flex items-center justify-center gap-1.5 mb-3">
-              <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free Shipping Over $35</span>
+              <span className="text-[10px] font-display uppercase tracking-wider text-muted-foreground">🚚 Free US shipping on orders $29.99+</span>
             </div>
             <motion.a
               href={getCheckoutUrl("variety-pack")}

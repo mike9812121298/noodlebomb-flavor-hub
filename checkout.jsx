@@ -9,10 +9,10 @@ const NB_SITE_URLS = {
   original: 'https://noodlebomb.co/original-ramen-sauce',
   citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
   spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
-  shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
+  shoyu: 'https://noodlebomb.co/shoyu-reserve',
   shoyuspicy: 'https://noodlebomb.co/spicy-shoyu-ramen-sauce',
-  firedust: 'https://noodlebomb.co/product/fire-dust',
-  rgs: 'https://noodlebomb.co/product/roasted-garlic-sesame',
+  firedust: 'https://noodlebomb.co/fire-dust',
+  rgs: 'https://noodlebomb.co/roasted-garlic-sesame',
   trio: 'https://noodlebomb.co/#lineup',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/#lineup'
@@ -295,7 +295,7 @@ function CheckoutPage() {
 
           <div className="trust">
             <div className="trust-row"><Shield /> Secure SSL - PCI-compliant payment</div>
-            <div className="trust-row"><Truck /> FREE US shipping at $29.99+ subtotal</div>
+            <div className="trust-row"><Truck /> Free US shipping on orders $29.99+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
           </div>
 

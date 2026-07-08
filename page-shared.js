@@ -85,7 +85,7 @@
     document.head.appendChild(style);
   }
 
-  function patchShoyuPreorder() {
+  function patchShoyuLiveCta() {
     var stage = document.querySelector('#next-drop .nd-bottle-stage');
     if (!stage) return false;
 
@@ -101,7 +101,7 @@
 
     cta.classList.add('nd-stage-tag', 'nd-image-preorder');
     cta.href = '/cart?add=shoyu&qty=1';
-    cta.textContent = 'PREORDER FOR $9.99 ';
+    cta.textContent = 'ADD SHOYU RESERVE';
     cta.removeAttribute('aria-hidden');
     cta.removeAttribute('tabindex');
 
@@ -119,7 +119,7 @@
 
   function applyHomepagePatch() {
     ensureHomepagePatchStyles();
-    var shoyuDone = patchShoyuPreorder();
+    var shoyuDone = patchShoyuLiveCta();
     return shoyuDone;
   }
 
@@ -281,7 +281,7 @@
     var grouped = [
       container.querySelector('a[href="/about"]'),
       container.querySelector('a[href="/faq"]'),
-      container.querySelector('a[href="#open-contact"], a[href^="mailto:"]')
+      container.querySelector('a[href="/contact"], a[href="#open-contact"], a[href^="mailto:"]')
     ].filter(Boolean);
     if (!grouped.length) return; // page carries none of these to group
 

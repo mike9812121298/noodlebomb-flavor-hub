@@ -6,14 +6,14 @@ const plans = [
   {
     name: "Monthly Box",
     price: "$29.99",
-    href: "https://shop.noodlebomb.co/product-page/monthly-ramen-box",
+    href: "https://noodlebomb.co/product-page/monthly-ramen-box",
     desc: "Curated ramen packs, a fast recipe idea, and a free full bottle of NoodleBomb sauce every month.",
     features: ["Premium instant ramen selection", "Free full 7 oz bottle of sauce", "Choose or rotate your sauce flavor", "Billed monthly, cancel anytime"],
   },
   {
     name: "Premium Box",
     price: "$39.99",
-    href: "https://shop.noodlebomb.co/product-page/premium-ramen-box",
+    href: "https://noodlebomb.co/product-page/premium-ramen-box",
     desc: "A bigger pantry box with more ramen discovery, surprise extras, and a free full bottle of NoodleBomb sauce every month.",
     features: ["Larger premium ramen selection", "Free full 7 oz bottle of sauce", "Surprise extras and special drops", "Billed monthly, cancel anytime"],
   },

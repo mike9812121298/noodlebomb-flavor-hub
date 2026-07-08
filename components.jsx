@@ -1,6 +1,6 @@
 // Wix Stores deep links - legacy fallback only (Storefront API checkout
 // fallback path). Add-to-Cart buttons no longer route through Wix.
-const NB_WIX = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"};
+const NB_WIX = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
 
 // Branded cart permalink - adds via noodlebomb.co/cart so shoppers do not
 // land inside Shopify's default cart theme before final checkout.
@@ -990,7 +990,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </div>
         {/* Trust line under CTAs */}
         <div className="hero-trust-line" style={{ marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.08em', color: 'var(--ink-40)', lineHeight: 1.6, maxWidth: 420, animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both' }}>
-          $3.50 flat US shipping - FREE on $29.99+ US orders - ships from Bonney Lake, WA
+          Free US shipping on orders $29.99+ - ships from Bonney Lake, WA
         </div>
       </div>
 

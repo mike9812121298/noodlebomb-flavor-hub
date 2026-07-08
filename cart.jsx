@@ -6,11 +6,11 @@ const NB_SITE_URLS = {
   original: 'https://noodlebomb.co/original-ramen-sauce',
   citrus: 'https://noodlebomb.co/citrus-shoyu-ramen-sauce',
   spicy: 'https://noodlebomb.co/spicy-tokyo-ramen-sauce',
-  shoyu: 'https://nu2vqa-ma.myshopify.com/products/shoyu-reserve',
+  shoyu: 'https://noodlebomb.co/shoyu-reserve',
   shoyuspicy: 'https://noodlebomb.co/spicy-shoyu-ramen-sauce',
-  rgs: 'https://noodlebomb.co/product/roasted-garlic-sesame',
+  rgs: 'https://noodlebomb.co/roasted-garlic-sesame',
   trio: 'https://noodlebomb.co/shop',
-  firedust: 'https://noodlebomb.co/product/fire-dust',
+  firedust: 'https://noodlebomb.co/fire-dust',
   cart: 'https://noodlebomb.co/cart.html',
   shop: 'https://noodlebomb.co/shop'
 };
@@ -453,7 +453,7 @@ function CartPage() {
           ) : (
             <div className="card ship-bar">
               <div className="row">
-                <span style={{ color: 'var(--ink-60)' }}>Add <span className="accent">{fmtUSD(remaining)}</span> for <span style={{ color: 'var(--ink)' }}>FREE US shipping</span> - else $3.50 flat</span>
+                <span style={{ color: 'var(--ink-60)' }}>Add <span className="accent">{fmtUSD(remaining)}</span> for <span style={{ color: 'var(--ink)' }}>Free US shipping on orders $29.99+</span></span>
                 <Truck />
               </div>
               <div className="track"><div className="fill" style={{ width: progress + '%' }} /></div>
@@ -677,7 +677,7 @@ function CartPage() {
             <div className="trust-row"><Check /> Sauces $11.99 - spices $10.99</div>
             <div className="trust-row"><Check /> Pour. Shake. Stack.</div>
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
-            <div className="trust-row"><Truck /> $3.50 flat US shipping - FREE on $29.99+ US orders</div>
+            <div className="trust-row"><Truck /> Free US shipping on orders $29.99+</div>
             <div className="trust-row"><Repeat /> 30-day satisfaction guarantee</div>
             <div className="trust-row"><Check /> Ships from Bonney Lake, WA</div>
           </div>

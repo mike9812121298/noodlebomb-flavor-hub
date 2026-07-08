@@ -11,7 +11,7 @@
 // Add new SKUs here when launching them. If a slug is unknown, the helper
 // falls back to the Wix store homepage rather than the broken local cart.
 
-export const WIX_STORE_BASE = "https://shop.noodlebomb.co";
+export const WIX_STORE_BASE = "https://noodlebomb.co";
 
 // Map of internal React slugs -> Wix Stores slug
 const WIX_PRODUCT_SLUG: Record<string, string> = {
