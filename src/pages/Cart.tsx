@@ -39,28 +39,28 @@ const RECOMMENDATIONS = [
     slug: "variety-pack",
     name: "NoodleBomb Trio",
     tagline: "Try all 3 flavors",
-    price: 29.99,
+    price: 32.99,
     image: nbLineupTrio,
   },
   {
     slug: "original-ramen",
     name: "Original",
     tagline: "Umami, Perfected",
-    price: 11.99,
+    price: 12.99,
     image: nbOriginal,
   },
   {
     slug: "spicy-tokyo",
     name: "Spicy Tokyo",
     tagline: "The Street Heat Legend",
-    price: 11.99,
+    price: 12.99,
     image: nbSpicyTokyo,
   },
   {
     slug: "citrus-shoyu",
     name: "Citrus Shoyu",
     tagline: "Bright. Snappy. Citrus-forward.",
-    price: 11.99,
+    price: 12.99,
     image: nbCitrusShoyu,
   },
 ];
@@ -69,7 +69,7 @@ const SINGLE_SLUGS = ["original-ramen", "spicy-tokyo", "citrus-shoyu"];
 const TRIO_ITEM = {
   slug: "variety-pack",
   name: "NoodleBomb Trio",
-  price: 29.99,
+  price: 32.99,
   purchaseType: "one-time" as const,
   quantity: 1,
 };
@@ -95,7 +95,7 @@ const Cart = () => {
     end.setDate(end.getDate() + 7);
     const fmt = (d: Date) =>
       d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-    return `${fmt(start)} – ${fmt(end)}`;
+    return `${fmt(start)} â€“ ${fmt(end)}`;
   }, []);
 
   const handleDiscount = () => {
@@ -137,7 +137,7 @@ const Cart = () => {
     (r) => !items.some((i) => i.slug === r.slug)
   ).slice(0, 3);
 
-  // ── Empty state ───────────────────────────────────────────────────────────
+  // â”€â”€ Empty state â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   if (itemCount === 0) {
     return (
       <div className="relative min-h-screen bg-background pt-24 pb-20 overflow-hidden">
@@ -230,7 +230,7 @@ const Cart = () => {
                         ${rec.price.toFixed(2)}
                       </span>
                       <span className="text-xs font-display font-semibold uppercase tracking-wider text-foreground/50 group-hover:text-primary transition-colors">
-                        Shop →
+                        Shop â†’
                       </span>
                     </div>
                   </Link>
@@ -243,7 +243,7 @@ const Cart = () => {
     );
   }
 
-  // ── Filled cart ───────────────────────────────────────────────────────────
+  // â”€â”€ Filled cart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   return (
     <div className="relative min-h-screen bg-background pt-24 pb-32 md:pb-20 overflow-hidden">
       <EmberParticles count={6} />
@@ -265,7 +265,7 @@ const Cart = () => {
               </span>
             </h1>
             <span className="text-xs font-display uppercase tracking-[0.2em] text-foreground/40">
-              Step 1 of 2 — Review
+              Step 1 of 2 â€” Review
             </span>
           </div>
         </div>
@@ -338,7 +338,7 @@ const Cart = () => {
                         Add bottle 3 and unlock Trio savings.
                       </h2>
                       <p className="mt-1 text-sm text-foreground/65">
-                        Any 3 bottles qualify for the $29.99 Trio price.
+                        Any 3 bottles qualify for the $32.99 Trio price.
                       </p>
                     </div>
                   </div>
@@ -393,7 +393,7 @@ const Cart = () => {
                             {isSubscription ? (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30 text-[10px] font-display font-bold uppercase tracking-wider text-primary">
                                 <Repeat className="h-2.5 w-2.5" />
-                                Subscription · Save 15%
+                                Subscription Â· Save 15%
                               </span>
                             ) : (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border border-border/60 text-[10px] font-display font-semibold uppercase tracking-wider text-foreground/55">
@@ -620,7 +620,7 @@ const Cart = () => {
                   className="w-full flex items-center justify-center gap-2 bg-gradient-fire px-6 py-4 rounded-full font-display text-sm font-bold uppercase tracking-wider text-primary-foreground hover:shadow-[0_0_40px_hsl(var(--flame)/0.45)] hover:scale-[1.02] transition-all btn-shimmer animate-pulse-glow"
                 >
                   <Lock className="h-3.5 w-3.5" />
-                  Secure Checkout — ${subtotal.toFixed(2)}
+                  Secure Checkout â€” ${subtotal.toFixed(2)}
                 </button>
                 <Link
                   to="/shop"
@@ -638,7 +638,7 @@ const Cart = () => {
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-foreground/55">
                   <Truck className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" />
-                  <span>Free US shipping on orders $29.99+ · Ships from Pacific NW</span>
+                  <span>Free US shipping on orders $29.99+ Â· Ships from Pacific NW</span>
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-foreground/55">
                   <Repeat className="h-3.5 w-3.5 text-primary/60 flex-shrink-0" />
@@ -675,3 +675,4 @@ const Cart = () => {
 };
 
 export default Cart;
+

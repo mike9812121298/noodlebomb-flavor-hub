@@ -120,6 +120,45 @@ describe("NoodleBomb July site-audit regressions", () => {
     expect(dormantSourceText).not.toMatch(/price:\s*9\.99/i);
   });
 
+  it("aligns public sauce and trio prices with Shopify checkout pricing", () => {
+    const shop = read("shop.html");
+    const cartStore = read("cart-store.js");
+    const trioPage = read("ramen-sauce-trio.html");
+    const productPages = [
+      "product-original.html",
+      "product-spicy.html",
+      "product-citrus.html",
+      "product-shoyu-reserve.html",
+      "product-spicy-shoyu.html",
+    ].map(read).join("\n");
+
+    expect(cartStore).toMatch(/original:\s*\{[^}]*price:\s*12\.99/);
+    expect(cartStore).toMatch(/spicy:\s*\{[^}]*price:\s*12\.99/);
+    expect(cartStore).toMatch(/citrus:\s*\{[^}]*price:\s*12\.99/);
+    expect(cartStore).toMatch(/shoyu:\s*\{[^}]*price:\s*12\.99/);
+    expect(cartStore).toMatch(/shoyuspicy:\s*\{[^}]*price:\s*12\.99/);
+    expect(cartStore).toMatch(/trio:\s*\{[^}]*price:\s*32\.99/);
+    expect(cartStore).toMatch(/rgs:\s*\{[^}]*price:\s*10\.99/);
+
+    expect(shop).toContain("SAUCES $12.99 - SPICES $10.99");
+    expect(shop).toMatch(/Original[\s\S]{0,120}\$12\.99/);
+    expect(shop).toMatch(/Spicy Tokyo[\s\S]{0,120}\$12\.99/);
+    expect(shop).toMatch(/Citrus Shoyu[\s\S]{0,120}\$12\.99/);
+    expect(shop).toMatch(/Reserve[\s\S]{0,120}\$12\.99/);
+    expect(shop).toMatch(/Reserve Heat[\s\S]{0,120}\$12\.99/);
+    expect(shop).toMatch(/Roasted Garlic Sesame[\s\S]{0,140}\$10\.99/);
+    expect(shop).toContain("Add the Trio - $32.99");
+
+    expect(trioPage).toContain("Shop the Trio - $32.99");
+    expect(trioPage).toContain("The Trio is $32.99");
+    expect(trioPage).toMatch(/sav(?:e|es)\s+\$5\.98/i);
+    expect(trioPage).toContain("which reaches NoodleBomb's automatic free US shipping threshold");
+
+    expect(productPages).toContain("$12.99");
+    expect(productPages).not.toContain("$11.99");
+    expect(productPages).not.toMatch(/PREORDER/i);
+  });
+
   it("ships basic security and cache headers for public static assets", () => {
     const netlify = read("netlify.toml");
     const headers = read("_headers");

@@ -11,7 +11,7 @@ const products = [
   {
     name: "Original Ramen Sauce",
     tagline: "Deep umami that makes every bowl taste intentional.",
-    price: "$11.99",
+    price: "$12.99",
     image: nbOriginal,
     spiceLevel: 1,
     color: "bg-primary text-primary-foreground",
@@ -24,7 +24,7 @@ const products = [
   {
     name: "Spicy Tokyo Ramen Sauce",
     tagline: "Tokyo street heat — dark, layered, built to burn clean.",
-    price: "$11.99",
+    price: "$12.99",
     image: nbSpicyTokyo,
     spiceLevel: 3,
     color: "bg-flame text-flame-foreground",
@@ -37,7 +37,7 @@ const products = [
   {
     name: "Citrus Shoyu Ramen Sauce",
     tagline: "Clean soy lifted by bright citrus — bright, sharp, surprisingly bold.",
-    price: "$11.99",
+    price: "$12.99",
     image: nbCitrusShoyu,
     spiceLevel: 1,
     color: "bg-accent text-accent-foreground",
@@ -52,8 +52,8 @@ const bundles = [
   {
     name: "NoodleBomb Trio",
     tagline: "All three flavors in one clean lineup. Free US shipping on orders $29.99+.",
-    price: "$29.99",
-    originalPrice: "$35.97",
+    price: "$32.99",
+    originalPrice: "$38.97",
     spiceLevel: 3,
     color: "bg-primary text-primary-foreground",
   },

@@ -630,7 +630,7 @@ function Nav({ flavor, setFlavor, flavors }) {
               onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 12px 28px var(--accent-glow)'; }}
               onMouseOut={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = 'none'; }}
             >
-              Add the Trio - $29.99
+              Add the Trio - $32.99
             </button>
             <div style={{ fontSize: 10, color: 'var(--ink-40)', fontFamily: 'JetBrains Mono', letterSpacing: '0.16em', textTransform: 'uppercase', marginTop: -8 }}>
               All 3 flavors - save $5.98
@@ -938,7 +938,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       {/* Top meta strip */}
       <div className="hero-meta-strip" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 clamp(24px, 5.5vw, 80px)', marginTop: 88, gap: 16, flexWrap: 'wrap', position: 'relative', zIndex: 2 }}>
         <span className="mono" style={{ color: 'var(--accent)', fontWeight: 600, fontSize: 11, letterSpacing: '0.2em' }}>TRIO BUNDLE</span>
-        <span className="mono" style={{ color: 'var(--ink-40)' }}>$29.99 vs $35.97 singles</span>
+        <span className="mono" style={{ color: 'var(--ink-40)' }}>$32.99 vs $38.97 singles</span>
       </div>
 
       {/* Main hero content */}
@@ -950,7 +950,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
         </h1>
         <div style={{ animation: 'heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.5s both' }}>
           <div className="hero-subcopy" style={{ fontFamily: 'Inter Tight', fontWeight: 500, fontSize: 'clamp(16px, 1.4vw, 20px)', letterSpacing: '-0.02em', maxWidth: 440, lineHeight: 1.4, marginBottom: 28 }}>
-            Try All 3 Flavors for $29.99.<br />
+            Try All 3 Flavors for $32.99.<br />
             <span style={{ color: 'var(--ink-60)' }}>Save $5.98 vs singles. Best for new buyers and perfect for the ramen lover in your life.</span>
           </div>
         </div>
@@ -977,7 +977,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
             onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 36px var(--accent-glow)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 8px 24px var(--accent-glow)'; }}
           >
-            Get the Trio - $29.99
+            Get the Trio - $32.99
             <span style={{ fontSize: 16, lineHeight: 1 }}></span>
           </a>
           <a
@@ -985,7 +985,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
             href="#lineup"
             style={{ textDecoration: 'none', display: 'inline-block', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', background: 'rgba(245,241,234,0.08)', borderColor: 'rgba(245,241,234,0.25)' }}
           >
-            Build your own - singles $11.99
+            Build your own - singles $12.99
           </a>
         </div>
         {/* Trust line under CTAs */}

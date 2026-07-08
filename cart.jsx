@@ -509,7 +509,7 @@ function CartPage() {
                     Add bottle 3 + unlock Trio savings
                   </div>
                   <div style={{ fontFamily: 'Inter', fontSize: 12, color: 'var(--ink-60)', lineHeight: 1.5 }}>
-                    Any 3 bottles qualify for the $29.99 Trio price.
+                    Any 3 bottles qualify for the $32.99 Trio price.
                   </div>
                 </div>
                 <button onClick={swapToTrio} aria-label="Swap singles for the Trio bundle" style={{
@@ -674,7 +674,7 @@ function CartPage() {
           </div>
 
           <div className="trust">
-            <div className="trust-row"><Check /> Sauces $11.99 - spices $10.99</div>
+            <div className="trust-row"><Check /> Sauces $12.99 - spices $10.99</div>
             <div className="trust-row"><Check /> Pour. Shake. Stack.</div>
             <div className="trust-row"><Shield /> Secure SSL checkout</div>
             <div className="trust-row"><Truck /> Free US shipping on orders $29.99+</div>

@@ -4,9 +4,9 @@ import wholesaleHero from "@/assets/nb-atmosphere-wholesale-kitchen.png";
 import wholesaleTrio from "@/assets/nb-scene-trio-lineup.png";
 
 const products = [
-  { name: "Original", sku: "Gt-50001", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
-    { name: "Spicy Tokyo", sku: "Gt-50003", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
-        { name: "Citrus Shoyu", sku: "Gt-50002", size: "7 fl oz", msrp: "$11.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
+  { name: "Original", sku: "Gt-50001", size: "7 fl oz", msrp: "$12.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
+    { name: "Spicy Tokyo", sku: "Gt-50003", size: "7 fl oz", msrp: "$12.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
+        { name: "Citrus Shoyu", sku: "Gt-50002", size: "7 fl oz", msrp: "$12.99", wholesale: "$6.00", moq: "12 units", shelfLife: "See label", support: "Full POS assets" },
         ];
 
         const specRows = [

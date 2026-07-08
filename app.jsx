@@ -76,23 +76,23 @@ const FLAVORS = {
   original: { name: 'Original', tag: 'No.01 - Garlic & Sesame', short: 'No.01', color: '#D4A24A', ink: '#0E0D0C', rgb: '212, 162, 74', deep: '#8A6424',
   line1: 'The one that started it all.',
   line2: 'Roasted garlic, toasted sesame, smooth soy.',
-  price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
+  price: '$12.99', priceUsd: 12.99, pack: '$32.99 / 3-pack' },
   spicy: { name: 'Spicy Tokyo', tag: 'No.03 - Spicy Tokyo', short: 'No.03', color: '#E84A3A', ink: '#0E0D0C', rgb: '232, 74, 58', deep: '#8B1E1E',
   line1: 'Umami meets fire.',
   line2: 'Roasted chili, garlic, sesame.',
-  price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
+  price: '$12.99', priceUsd: 12.99, pack: '$32.99 / 3-pack' },
   citrus: { name: 'Citrus Shoyu', tag: 'No.02 - Citrus Shoyu', short: 'No.02', color: '#FF6A1A', ink: '#0B0B0B', rgb: '255, 106, 26', deep: '#B83A10',
   line1: 'Bright, tangy, refreshing.',
   line2: 'Shoyu base with a clean citrus lift.',
-  price: '$11.99', priceUsd: 11.99, pack: '$29.99 / 3-pack' },
+  price: '$12.99', priceUsd: 12.99, pack: '$32.99 / 3-pack' },
   shoyu: { name: 'Shoyu Reserve', tag: 'Reserve - Soy Sauce', short: 'RSV', color: '#D7A84D', ink: '#0E0D0C', rgb: '215, 168, 77', deep: '#7A5A21',
   line1: 'Slow-brewed shoyu depth.',
   line2: 'Bold, clean finish.',
-  price: '$11.99', priceUsd: 11.99, pack: '$11.99 / bottle' },
+  price: '$12.99', priceUsd: 12.99, pack: '$12.99 / bottle' },
   shoyuspicy: { name: 'Spicy Shoyu', tag: 'Reserve - Spicy Soy Sauce', short: 'SPY', color: '#E84A3A', ink: '#0E0D0C', rgb: '232, 74, 58', deep: '#7A231E',
   line1: 'Reserve depth with heat.',
   line2: 'Bold shoyu finish, turned up.',
-  price: '$11.99', priceUsd: 11.99, pack: '$11.99 / bottle' }
+  price: '$12.99', priceUsd: 12.99, pack: '$12.99 / bottle' }
 };
 
 const FLAVOR_IMAGES = {
@@ -105,8 +105,8 @@ const FLAVOR_IMAGES = {
 
 // Soy Sauce reserve line - second product group on the lineup (DTC, 2026-06-09).
 const SOY_SAUCES = [
-  { slug: 'shoyu', name: 'Shoyu Reserve', tag: 'Reserve - Soy Sauce', color: '#D7A84D', rgb: '215, 168, 77', line1: 'Slow-brewed shoyu depth.', line2: 'Bold, clean finish.', price: '$11.99', image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', detail: '/product/shoyu-reserve' },
-  { slug: 'shoyuspicy', name: 'Spicy Shoyu', tag: 'Reserve - Spicy Soy Sauce', color: '#E84A3A', rgb: '232, 74, 58', line1: 'Reserve depth with heat.', line2: 'Bold shoyu finish, turned up.', price: '$11.99', image: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp', detail: '/spicy-shoyu-ramen-sauce' }
+  { slug: 'shoyu', name: 'Shoyu Reserve', tag: 'Reserve - Soy Sauce', color: '#D7A84D', rgb: '215, 168, 77', line1: 'Slow-brewed shoyu depth.', line2: 'Bold, clean finish.', price: '$12.99', image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', detail: '/product/shoyu-reserve' },
+  { slug: 'shoyuspicy', name: 'Spicy Shoyu', tag: 'Reserve - Spicy Soy Sauce', color: '#E84A3A', rgb: '232, 74, 58', line1: 'Reserve depth with heat.', line2: 'Bold shoyu finish, turned up.', price: '$12.99', image: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp', detail: '/spicy-shoyu-ramen-sauce' }
 ];
 
 const FOOD_IMAGES = {
@@ -1598,7 +1598,7 @@ function Origin() {
   e.currentTarget.style.boxShadow = 'none';
   }}
   >
-  Try the Trio - $29.99 | Save $6
+  Try the Trio - $32.99 | Save $5.98
   </a>
   <div className="mono" style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: '0.14em' }}>
   Free US shipping on orders $29.99+
@@ -1687,7 +1687,7 @@ function FinalCTA() {
 
   <Reveal delay={3}>
   <div className="finalcta-row" style={{ marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
-  <a className="btn" href={WIX_URLS.shop} style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all from $11.99</a>
+  <a className="btn" href={WIX_URLS.shop} style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all from $10.99</a>
   <form className="finalcta-waitlist" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', flex: 1, minWidth: 280, gap: 0, border: '1px solid rgba(245,241,234,0.35)', borderRadius: 4, overflow: 'hidden', background: 'rgba(0,0,0,0.18)' }}>
   <input type="hidden" name="_subject" value="NoodleBomb Waitlist Signup" />
   <input type="hidden" name="_template" value="table" />
@@ -3082,7 +3082,7 @@ function StickyCartBar({ flavor, flavors }) {
   href={cartPermalink('trio')}
   className="scb-trio"
   tabIndex={showBar ? undefined : -1}
-  >3-Pack - $29.99</a>
+  >3-Pack - $32.99</a>
   <a
   href={barHref}
   className="scb-btn"
@@ -3211,7 +3211,7 @@ function BuildBundle() {
   image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
   core: false,
   group: 'Soy sauces',
-  groupNote: 'Reserve soy bottles - $11.99 each',
+  groupNote: 'Reserve soy bottles - $12.99 each',
   unit: '7 fl oz',
   trioEligible: false,
   imageAlt: 'NoodleBomb Shoyu Reserve soy sauce bottle'
@@ -3228,7 +3228,7 @@ function BuildBundle() {
   image: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp',
   core: false,
   group: 'Soy sauces',
-  groupNote: 'Reserve soy bottles - $11.99 each',
+  groupNote: 'Reserve soy bottles - $12.99 each',
   unit: '7 fl oz',
   trioEligible: false,
   imageAlt: 'NoodleBomb Spicy Shoyu soy sauce bottle'
@@ -3545,7 +3545,7 @@ const TDROP_DISP = "'Inter Tight', system-ui, sans-serif";
 const TDROP_SERIF = "'Spectral', Georgia, serif";
 const TDROP_PRODUCTS = [
   {
-  key: 'classic', slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99,
+  key: 'classic', slug: 'shoyu', name: 'Shoyu Reserve', price: 12.99,
   glowRgb: '224,178,76', h: 252, glowInset: '2% -34% 4%',
   glowBg: 'radial-gradient(46% 44% at 50% 42%, rgba(224,178,76,0.30), rgba(224,178,76,0) 70%)',
   img: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
@@ -3747,7 +3747,7 @@ function TheDrop() {
   <TheDropMeter label="HEAT" pct="7%" kind="heat" />
   </div>
   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-  <span style={{ font: `500 italic 21px ${TDROP_SERIF}`, color: '#F0EBE3' }}>$11.99</span>
+  <span style={{ font: `500 italic 21px ${TDROP_SERIF}`, color: '#F0EBE3' }}>$12.99</span>
   <button onClick={addOne(TDROP_PRODUCTS[0])} className="tdrop-btn tdrop-btn--gold" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '11px 18px', border: '1px solid rgba(240,235,227,0.14)', borderRadius: 999, background: '#14100B', color: '#F0EBE3', font: `700 11px ${TDROP_DISP}`, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer' }}>Add</button>
   </div>
   </div>
@@ -3793,7 +3793,7 @@ function TheDrop() {
   {/* full-drop bundle strip */}
   <div className="tdrop-strip" style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', border: '1px solid rgba(201,162,78,0.35)', borderRadius: 14, padding: '18px 26px', background: 'linear-gradient(90deg,rgba(224,178,76,0.10),rgba(20,16,11,0.3))' }}>
   <span style={{ font: `700 12px ${TDROP_MONO}`, letterSpacing: '0.2em', color: '#E0B24C' }}>GET THE FULL DROP</span>
-  <span style={{ font: `400 14px ${TDROP_DISP}`, color: 'rgba(240,235,227,0.65)' }}>Shoyu Reserve + Fire Dust + Roasted Garlic Sesame - <span style={{ color: '#F0EBE3', fontWeight: 600 }}>$29.99</span> <span style={{ textDecoration: 'line-through', color: 'rgba(240,235,227,0.4)' }}>$33.97</span> - ships free.</span>
+  <span style={{ font: `400 14px ${TDROP_DISP}`, color: 'rgba(240,235,227,0.65)' }}>Shoyu Reserve + Fire Dust + Roasted Garlic Sesame - <span style={{ color: '#F0EBE3', fontWeight: 600 }}>$34.97</span> - ships free.</span>
   <button onClick={addDrop} className="tdrop-btn tdrop-btn--cta" style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 9, padding: '13px 26px', border: 'none', borderRadius: 999, background: 'linear-gradient(180deg,#E0B24C,#C99A3F)', color: '#1A1206', font: `700 12px ${TDROP_DISP}`, letterSpacing: '0.12em', textTransform: 'uppercase', cursor: 'pointer', boxShadow: '0 0 44px -12px rgba(224,178,76,0.55)' }}>Add the drop</button>
   </div>
 
