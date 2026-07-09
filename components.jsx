@@ -1,6 +1,5 @@
-// Wix Stores deep links - legacy fallback only (Storefront API checkout
-// fallback path). Add-to-Cart buttons no longer route through Wix.
-const NB_WIX = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
+// On-domain product links used by the cart drawer and browse CTAs.
+const NB_STORE_LINKS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
 
 // Branded cart permalink - adds via noodlebomb.co/cart so shoppers do not
 // land inside Shopify's default cart theme before final checkout.
@@ -17,12 +16,11 @@ const nbCartPermalink = (slug, qty = 1) => {
   return `/cart?add=${encodeURIComponent(slug)}&qty=${n}`;
 };
 
-// Returns the best Wix URL for a given cart item list - used as the last-resort
-// fallback if both Storefront API and Shopify cart-permalink fail.
+// Returns the best on-domain browse URL for a given cart item list.
 const nbCheckoutUrl = (items) => {
-  if (!items || items.length === 0) return NB_WIX.shop;
-  if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
-  return NB_WIX.shop;
+  if (!items || items.length === 0) return NB_STORE_LINKS.shop;
+  if (items.length === 1) return NB_STORE_LINKS[items[0].slug] || NB_STORE_LINKS.shop;
+  return NB_STORE_LINKS.shop;
 };
 
 // Single-bottle and trio prices (must match app.jsx FLAVORS).
@@ -511,7 +509,7 @@ function Nav({ flavor, setFlavor, flavors }) {
           ))}
         </div>
         <a
-          href={NB_WIX.shop}
+          href={NB_STORE_LINKS.shop}
           target="_blank"
           rel="noopener"
           onClick={() => setDrawerOpen(false)}

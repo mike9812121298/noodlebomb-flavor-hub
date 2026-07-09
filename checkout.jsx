@@ -123,7 +123,7 @@ function CheckoutPage() {
     qty: it.qty,
     url: NB_SITE_URLS[it.slug] || NB_SITE_URLS.shop,
   }));
-  const fallbackUrl = getShopifyCartPermalink(items);
+  const cartPermalink = getShopifyCartPermalink(items);
   const emailValid = validEmail(email);
 
   const onEmailChange = (e) => {
@@ -147,10 +147,10 @@ function CheckoutPage() {
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       window.NB_SHOPIFY_CHECKOUT.createCheckoutUrl(items)
         .then((url) => { window.location.href = url; })
-        .catch(() => { window.location.href = fallbackUrl; });
+        .catch(() => { window.location.href = cartPermalink; });
       return;
     }
-    window.location.href = fallbackUrl;
+    window.location.href = cartPermalink;
   };
 
   if (itemCount === 0) {
@@ -286,7 +286,7 @@ function CheckoutPage() {
             <div className="redirect-confirm">
               <strong>Opening secure checkout.</strong>
               If nothing happened, you can{' '}
-              <a href={fallbackUrl}>return to the NoodleBomb lineup</a> and keep shopping.
+              <a href={cartPermalink}>return to the NoodleBomb lineup</a> and keep shopping.
               <button onClick={() => { window.NB_CART && window.NB_CART.clear(); window.location.href = '/'; }}>
                 I finished my order - clear my cart
               </button>

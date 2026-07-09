@@ -125,9 +125,9 @@
   }
 
   // Intercepts a click on a checkout link/button. If Shopify is enabled and
-  // succeeds, redirects to the Shopify checkout URL. Otherwise falls through
-  // (lets the default href / fallbackUrl handle it).
-  function handleCheckoutClick(items, e, fallbackUrl) {
+  // succeeds, redirects to the Shopify checkout URL. If the API errors, keep
+  // the shopper on-domain with their local cart intact.
+  function handleCheckoutClick(items, e) {
     // GA4 begin_checkout — the canonical "user clicked checkout" moment, fired
     // before the redirect to the off-domain Shopify checkout so GA4 sees the
     // funnel step it otherwise never gets. (Meta InitiateCheckout + Purchase are
@@ -152,8 +152,15 @@
       return true;
     }).catch(function (err) {
       if (window.console && console.error) console.error('Shopify checkout failed:', err);
-      // Fall back to the existing href / Wix URL so the user is never stranded.
-      if (fallbackUrl) window.location.href = fallbackUrl;
+      try {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'checkout_error', {
+            error_message: String((err && err.message) || err).slice(0, 100)
+          });
+        }
+      } catch (e3) { /* analytics never breaks checkout */ }
+      // Stay on-domain and preserve the local cart for another checkout attempt.
+      window.location.href = '/cart?checkout_error=1';
       return false;
     });
   }

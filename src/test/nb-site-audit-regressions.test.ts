@@ -169,6 +169,46 @@ describe("NoodleBomb July site-audit regressions", () => {
     expect(monthlyBox).toContain("Join the box waitlist");
   });
 
+  it("forces the stale discontinued 4-pack product-page URL to the live shop", () => {
+    const netlify = read("netlify.toml");
+    const redirects = read("_redirects");
+
+    expect(netlify).toMatch(/from = "\/product-page\/noodlebomb-variety-4-pack"\s+to = "\/shop"\s+status = 301\s+force = true/s);
+    expect(redirects).toMatch(/^\/product-page\/noodlebomb-variety-4-pack\s+\/shop\s+301!/m);
+  });
+
+  it("keeps failed Shopify checkout recovery on-domain with a saved-cart banner", () => {
+    const checkoutClient = read("shopify-checkout.js");
+    const cart = read("cart.jsx");
+
+    expect(checkoutClient).not.toMatch(/wix/i);
+    expect(checkoutClient).not.toContain("fallbackUrl");
+    expect(checkoutClient).toContain("checkout_error");
+    expect(checkoutClient).toContain("/cart?checkout_error=1");
+    expect(checkoutClient).toContain("checkout_error");
+
+    expect(cart).toContain("checkout_error");
+    expect(cart).toContain("Checkout hit a snag");
+    expect(cart).toContain("your cart is saved");
+  });
+
+  it("keeps browser-shipped source free of retired-store fallback names", () => {
+    const shippedSources = [
+      "app.jsx",
+      "components.jsx",
+      "shopify-checkout.js",
+      "shopify-config.js",
+      "cart-store.js",
+      "cart.jsx",
+      "checkout.jsx",
+      "index.html",
+    ].map(read).join("\n");
+
+    expect(shippedSources).not.toMatch(/wix/i);
+    expect(shippedSources).not.toContain("fallbackUrl");
+    expect(shippedSources).not.toContain("shop.noodlebomb.co");
+  });
+
   it("ships basic security and cache headers for public static assets", () => {
     const netlify = read("netlify.toml");
     const headers = read("_headers");

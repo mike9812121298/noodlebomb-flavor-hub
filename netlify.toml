@@ -438,11 +438,7 @@
 
 # -----------------------------------------------------------------
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
-# noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
-# See CANONICAL_URL_MAP.md.
-#
-# Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
-# rebrand the storefront domain later without redirect-cache pollution.
+# noodlebomb.co is the brand front; checkout handoff happens only at Shopify checkout.
 # -----------------------------------------------------------------
 
 [[redirects]]
@@ -535,7 +531,13 @@
   status = 301
   force = true
 
-# Wix-pattern URLs from old marketing - now bounce to Shopify, NOT Wix
+# Retired product-page URLs from old marketing/search results now canonicalize to the live shop.
+[[redirects]]
+  from = "/product-page/noodlebomb-variety-4-pack"
+  to = "/shop"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/product-page/*"
   to = "/shop"
@@ -934,5 +936,3 @@
   to = "/recipes"
   status = 301
   force = true
-
-

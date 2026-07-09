@@ -3,7 +3,7 @@
  * Exposes a single global: window.NB_CART
  *
  * Item shape: { slug, name, price, qty, attributes? }
- *   slug   - internal product key (matches Wix deep-link map keys)
+ *   slug   - internal product key (matches on-domain product route keys)
  *   name   - display label
  *   price  - number, USD
  *   qty    - integer >= 1

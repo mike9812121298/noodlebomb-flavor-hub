@@ -5,10 +5,9 @@
 // the JSX bundles ship as plain <script> tags (post-Babel-in-browser) and
 // share global scope. cart.jsx and checkout.jsx keep their own destructures
 // because they ship as single-file bundles on cart.html / checkout.html.
-// Wix Stores deep links (added 2026-04-25 for production deploy)
-// Kept for the Footer "Shop all" browse links - purchases now flow through
-// the local cart (cart.html -> checkout.html -> Wix payment handoff).
-const WIX_URLS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
+// On-domain product links for Footer browse links; purchases flow through
+// the local cart before final Shopify checkout handoff.
+const NB_APP_LINKS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
 
 // Trio bundle price - used by the bundle CTAs.
 const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
@@ -1687,7 +1686,7 @@ function FinalCTA() {
 
   <Reveal delay={3}>
   <div className="finalcta-row" style={{ marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', maxWidth: 720, marginLeft: 'auto', marginRight: 'auto' }}>
-  <a className="btn" href={WIX_URLS.shop} style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all from $10.99</a>
+  <a className="btn" href={NB_APP_LINKS.shop} style={{ background: 'var(--accent-ink)', color: 'var(--accent)', padding: '18px 32px', fontWeight: 600, border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Inter', fontSize: 15, letterSpacing: '-0.005em', transition: 'transform .2s, box-shadow .2s', textDecoration: 'none', display: 'inline-block', flexShrink: 0 }} onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.18)'; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>Shop all from $10.99</a>
   <form className="finalcta-waitlist" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" style={{ display: 'flex', flex: 1, minWidth: 280, gap: 0, border: '1px solid rgba(245,241,234,0.35)', borderRadius: 4, overflow: 'hidden', background: 'rgba(0,0,0,0.18)' }}>
   <input type="hidden" name="_subject" value="NoodleBomb Waitlist Signup" />
   <input type="hidden" name="_template" value="table" />
@@ -1766,7 +1765,7 @@ function FinalCTA() {
   </p>
   </div>
   {[
-  ['Shop', [['Original', WIX_URLS.original], ['Spicy Tokyo', WIX_URLS.spicy], ['Citrus Shoyu', WIX_URLS.citrus], ['The NoodleBomb Trio', WIX_URLS.trio], ['Shoyu Reserve', WIX_URLS.shoyu], ['Monthly Box', '#monthly']]],
+  ['Shop', [['Original', NB_APP_LINKS.original], ['Spicy Tokyo', NB_APP_LINKS.spicy], ['Citrus Shoyu', NB_APP_LINKS.citrus], ['The NoodleBomb Trio', NB_APP_LINKS.trio], ['Shoyu Reserve', NB_APP_LINKS.shoyu], ['Monthly Box', '#monthly']]],
   ['Learn', [['Recipes', '/recipes'], ['Ingredients', '#ingredients'], ['The Range', '#range'], ['The Pour', '#pour'], ['Monthly Box', '#monthly']]],
   ['Company', [['About', '/about'], ['Where to Buy', '/#stores'], ['FAQ', '/faq'], ['Wholesale', '#open-wholesale'], ['Contact', '#open-contact'], ['hello@noodlebomb.co', 'mailto:hello@noodlebomb.co'], ['253-486-3445', 'tel:+12534863445']]]].
   map(([h, items]) =>
@@ -3992,4 +3991,3 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-

@@ -37,8 +37,8 @@
  * Acceptable risk for these scopes. The private `shpat_...` token must
  * NEVER ship in client-side code - that one CAN read sensitive data.
  *
- * The Wix flow remains the fallback when enabled is false OR if the
- * Shopify API call errors at runtime.
+ * If checkout creation fails at runtime, the cart redirects back on-domain
+ * with a saved-cart error banner.
  */
 (function () {
   'use strict';

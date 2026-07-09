@@ -315,12 +315,19 @@ function StackOfferCard({ offer, items }) {
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const checkoutError = typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('checkout_error') === '1';
+  const CheckoutErrorBanner = () => checkoutError ? (
+    <div className="card checkout-error-banner" role="alert" style={{ border: '1px solid var(--accent)', background: 'rgba(232,74,58,0.10)', color: 'var(--ink)', padding: 16, margin: '0 0 18px' }}>
+      <strong>Checkout hit a snag</strong> - your cart is saved. Try again.
+    </div>
+  ) : null;
 
   const onCheckoutClick = (e) => {
     if (checkoutLoading) { e.preventDefault(); return; }
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       setCheckoutLoading(true);
-      window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items))
+      window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e)
         .finally(() => setCheckoutLoading(false));
     }
   };
@@ -374,6 +381,7 @@ function CartPage() {
     return (
       <div className="empty">
         <a className="crumb" href="/"> Back to site</a>
+        <CheckoutErrorBanner />
         <div className="empty-mark">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <circle cx="9" cy="21" r="1"/>
@@ -432,6 +440,7 @@ function CartPage() {
   return (
     <>
       <a className="crumb" href="/shop"> Continue shopping</a>
+      <CheckoutErrorBanner />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12, marginBottom: 8 }}>
         <h1 className="page-title">Your <span style={{ color: 'var(--accent)', fontFamily: 'Inter Tight', fontStyle: 'normal', fontWeight: 800 }}>cart.</span></h1>
