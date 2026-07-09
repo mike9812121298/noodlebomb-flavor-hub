@@ -10,7 +10,7 @@
 const NB_APP_LINKS = {"original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop"};
 
 // Trio bundle price - used by the bundle CTAs.
-const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 32.99 };
 
 // Branded cart permalink: keep shoppers inside noodlebomb.co until the final
 // Shopify checkout handoff. /cart reads add/qty and stores the line locally.
@@ -3203,7 +3203,7 @@ function BuildBundle() {
   name: 'Shoyu Reserve',
   eyebrow: 'Reserve soy',
   role: 'Slow-brewed premium soy sauce. Bold, clean finish.',
-  price: 11.99,
+  price: 12.99,
   color: '#D7A84D',
   rgb: '215, 168, 77',
   ink: '#0E0D0C',
@@ -3220,7 +3220,7 @@ function BuildBundle() {
   name: 'Spicy Shoyu',
   eyebrow: 'Reserve heat',
   role: 'Slow-brewed shoyu depth with a bold layer of heat.',
-  price: 11.99,
+  price: 12.99,
   color: '#E84A3A',
   rgb: '232, 74, 58',
   ink: '#0E0D0C',

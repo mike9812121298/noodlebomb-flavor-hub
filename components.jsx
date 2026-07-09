@@ -24,8 +24,8 @@ const nbCheckoutUrl = (items) => {
 };
 
 // Single-bottle and trio prices (must match app.jsx FLAVORS).
-const NB_BOTTLE_PRICE = 11.99;
-const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+const NB_BOTTLE_PRICE = 12.99;
+const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 32.99 };
 // Fire Dust seasoning topper - cart-drawer "Power up your cart" one-tap upsell.
 // Mirrors cart.jsx FIRE_DUST; slug/price already in cart-store.js PRODUCT_CATALOG.
 const NB_FIRE_DUST = { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch - 3.2 oz topper', image: 'uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp' };
@@ -1020,7 +1020,7 @@ function InquiryModal({ open, kind, onClose }) {
   const isWholesale = kind === 'wholesale';
   const title = isWholesale ? 'Wholesale Inquiry' : 'Get in Touch';
   const intro = isWholesale
-    ? "Tell us about your shop. We'll be in touch with wholesale terms."
+    ? "Tell us about your shop. We'll send current wholesale terms after we qualify the account."
     : "Questions, press, partnerships - drop us a line.";
   const subject = isWholesale ? 'NoodleBomb Wholesale Inquiry' : 'NoodleBomb Contact';
 
@@ -1102,28 +1102,34 @@ function InquiryModal({ open, kind, onClose }) {
             <input type="hidden" name="_captcha" value="false" />
             <input type="text" name="_honey" style={{ display: 'none' }} />
 
-            <input
-              type="text" name="name" placeholder="Your name *" required
-              style={inputStyle}
-            />
-            <input
-              type="email" name="email" placeholder="Email *" required
-              style={inputStyle}
-            />
-            {isWholesale && (
+            {isWholesale ? (
               <>
-                <input type="text" name="business" placeholder="Business name *" required style={inputStyle} />
-                <input type="text" name="location" placeholder="Location (city, state) *" required style={inputStyle} />
-                <input type="text" name="volume" placeholder="Estimated monthly volume" style={inputStyle} />
+                <input type="text" name="store_name" placeholder="Store / business name *" required style={inputStyle} />
+                <input type="text" name="buyer_name" placeholder="Buyer name *" required style={inputStyle} />
+                <input type="email" name="buyer_email" placeholder="Buyer email *" required style={inputStyle} />
+                <input type="tel" name="phone" placeholder="Phone *" required style={inputStyle} />
+                <input type="url" name="store_website" placeholder="Store website or social link *" required style={inputStyle} />
+                <input type="text" name="store_city_state" placeholder="City, state *" required style={inputStyle} />
+                <select name="store_type" required style={inputStyle} defaultValue="">
+                  <option value="" disabled>Store type *</option>
+                  <option value="specialty_grocery">Specialty grocery</option>
+                  <option value="co_op">Co-op / natural market</option>
+                  <option value="ramen_shop">Ramen shop / restaurant</option>
+                  <option value="gift_shop">Gift shop / pantry retail</option>
+                  <option value="distributor">Distributor</option>
+                  <option value="other">Other</option>
+                </select>
+                <input type="number" min="1" name="location_count" placeholder="Number of locations *" required style={inputStyle} />
+                <textarea name="products_interested" placeholder="Products you want to carry *" required rows={3} style={{ ...inputStyle, resize: 'vertical' }} />
+                <textarea name="notes" placeholder="Anything else we should know?" rows={3} style={{ ...inputStyle, resize: 'vertical' }} />
+              </>
+            ) : (
+              <>
+                <input type="text" name="name" placeholder="Your name *" required style={inputStyle} />
+                <input type="email" name="email" placeholder="Email *" required style={inputStyle} />
+                <textarea name="message" placeholder="Your message *" required rows={4} style={{ ...inputStyle, resize: 'vertical' }} />
               </>
             )}
-            <textarea
-              name="message"
-              placeholder={isWholesale ? "Anything else we should know?" : "Your message *"}
-              required={!isWholesale}
-              rows={4}
-              style={{ ...inputStyle, resize: 'vertical' }}
-            />
             <button
               type="submit"
               style={{

@@ -13,7 +13,7 @@ import sceneSpicyWokAction from "@/assets/nb-scene-spicy-wok-action.webp";
 import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.webp";
 import PressBar from "@/components/PressBar";
 
-const TRIO_PRICE = 29.99;
+const TRIO_PRICE = 32.99;
 const SINGLES_TOTAL = 38.97;
 const TRIO_SAVINGS = SINGLES_TOTAL - TRIO_PRICE;
 

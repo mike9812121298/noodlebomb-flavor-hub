@@ -131,6 +131,7 @@ describe("NoodleBomb July site-audit regressions", () => {
       "product-shoyu-reserve.html",
       "product-spicy-shoyu.html",
     ].map(read).join("\n");
+    const rgsPage = read("product-roasted-garlic-sesame.html");
 
     expect(cartStore).toMatch(/original:\s*\{[^}]*price:\s*12\.99/);
     expect(cartStore).toMatch(/spicy:\s*\{[^}]*price:\s*12\.99/);
@@ -156,7 +157,10 @@ describe("NoodleBomb July site-audit regressions", () => {
 
     expect(productPages).toContain("$12.99");
     expect(productPages).not.toContain("$11.99");
+    expect(productPages).not.toMatch(/price:\s*11\.99/);
     expect(productPages).not.toMatch(/PREORDER/i);
+    expect(rgsPage).toContain('"price": "10.99"');
+    expect(rgsPage).not.toContain('"price": "11.99"');
   });
 
   it("gates the Monthly Box page while subscription migration is pending", () => {
@@ -220,4 +224,82 @@ describe("NoodleBomb July site-audit regressions", () => {
     expect(headers).toMatch(/^\/\*\.js\s+Cache-Control: public, max-age=300, must-revalidate/m);
     expect(headers).toMatch(/^\/\*\.css\s+Cache-Control: public, max-age=300, must-revalidate/m);
   });
+
+  it("aligns browser source constants and JSON-LD with the approved price ledger", () => {
+    const app = read("app.jsx");
+    const components = read("components.jsx");
+    const cart = read("cart.jsx");
+    const index = read("index.html");
+    const dormant = [
+      "src/pages/ProductPage.tsx",
+      "src/pages/Shop.tsx",
+      "src/pages/Index.tsx",
+      "src/components/BundleBuilder.tsx",
+    ].filter((file) => existsSync(`${root}/${file}`)).map(read).join("\n");
+
+    expect(app).toMatch(/const TRIO = \{ slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 32\.99 \}/);
+    expect(components).toMatch(/const NB_BOTTLE_PRICE = 12\.99;/);
+    expect(components).toMatch(/const NB_TRIO = \{ slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 32\.99 \}/);
+    expect(cart).toMatch(/const TRIO = \{ slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 32\.99 \}/);
+    expect(cart).toContain("// 43.98");
+
+    expect(index).toContain('"price": "12.99"');
+    expect(index).toContain('"price": "32.99"');
+    expect(index).not.toContain('"price": "11.99"');
+    expect(index).not.toContain('"price": "29.99"');
+
+    expect(dormant).not.toMatch(/price:\s*11\.99/);
+    expect(dormant).not.toMatch(/displayPrice:\s*"\$11\.99"/);
+    expect(dormant).not.toMatch(/subscribePrice:\s*9\.59/);
+    expect(dormant).not.toMatch(/displaySubscribePrice:\s*"\$9\.59\/mo"/);
+    expect(dormant).toContain('price: 12.99');
+    expect(dormant).toContain('displaySubscribePrice: "$11.04/mo"');
+  });
+
+  it("does not ship fake review claims before a real reviews platform is live", () => {
+    const reviewSource = [
+      "src/components/AnnouncementBar.tsx",
+      "src/components/ReviewsSection.tsx",
+      "src/components/SocialProof.tsx",
+      "src/components/TestimonialSection.tsx",
+      "src/pages/ProductPage.tsx",
+      "src/pages/Shop.tsx",
+    ].filter((file) => existsSync(`${root}/${file}`)).map(read).join("\n");
+
+    expect(reviewSource).not.toMatch(/4\.9\s*Stars?/i);
+    expect(reviewSource).not.toMatch(/500\+\s*Reviews?/i);
+    expect(reviewSource).not.toMatch(/Verified Buyer/i);
+    expect(reviewSource).not.toMatch(/stars:\s*5/);
+    expect(reviewSource).not.toContain(String.fromCodePoint(0x2b50));
+    expect(reviewSource).not.toMatch(new RegExp(`${String.fromCodePoint(0x1f525)}\\s*Most Popular`, "i"));
+    expect(reviewSource).not.toMatch(/Sarah K\.|Jessica|Marcus|Emily R\./i);
+    expect(reviewSource).toMatch(/Real reviews are coming next/i);
+    expect(reviewSource).toMatch(/No fake stars/i);
+  });
+
+  it("qualifies wholesale leads without publishing wholesale pricing", () => {
+    const modal = read("components.jsx");
+    const wholesale = read("wholesale.html");
+    const requiredFields = [
+      "store_name",
+      "buyer_name",
+      "buyer_email",
+      "phone",
+      "store_website",
+      "store_city_state",
+      "store_type",
+      "location_count",
+      "products_interested",
+    ];
+
+    for (const field of requiredFields) {
+      expect(modal, `${field} missing from modal lead form`).toContain(`name="${field}"`);
+      expect(wholesale, `${field} missing from wholesale page`).toContain(`name="${field}"`);
+    }
+
+    expect(`${modal}\n${wholesale}`).not.toMatch(/\$6\s*wholesale/i);
+    expect(`${modal}\n${wholesale}`).not.toMatch(/wholesale\s+price\s*[:=]?\s*\$\d/i);
+    expect(wholesale).toContain("Request wholesale info");
+  });
+
 });

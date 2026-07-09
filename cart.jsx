@@ -48,7 +48,7 @@ const FLAT_SHIPPING = 3.50;
 
 // Trio bundle - single source of truth for slug/name/price within this file.
 // Mirrors app.jsx TRIO and components.jsx NB_TRIO. Keep all three in sync.
-const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
+const TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 32.99 };
 
 // Fire Dust seasoning topper - the "Power up your cart" one-tap upsell. Pairs
 // with every sauce, so it's offered as its own row rather than a sauce rec.
@@ -58,7 +58,7 @@ const FIRE_DUST = { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire
 // Ramen Ritual Kit - the higher-AOV bundle: the Trio (all 3 sauces) + the Fire
 // Dust topper. Presented as one card; "Add the Kit" drops BOTH components into
 // the existing NB cart as separate line items (no Shopify bundle SKU yet - the
-// on-site total therefore equals what Shopify charges, $40.98, so we never
+// on-site total therefore equals what Shopify charges, $43.98, so we never
 // promise a discount the checkout won't honor). To turn this into a true
 // discounted bundle, configure a bundle SKU or an automatic discount in Shopify
 // (see DEPLOY notes) and wire its variant id / discount code here.
@@ -70,7 +70,7 @@ const RITUAL_KIT = {
     { slug: FIRE_DUST.slug, name: FIRE_DUST.name, price: FIRE_DUST.price },
   ],
 };
-const RITUAL_KIT_TOTAL = RITUAL_KIT.components.reduce((s, c) => s + c.price, 0); // 40.98
+const RITUAL_KIT_TOTAL = RITUAL_KIT.components.reduce((s, c) => s + c.price, 0); // 43.98
 
 const STACK_OFFERS = [
   {
@@ -79,7 +79,7 @@ const STACK_OFFERS = [
     tag: 'Original + Roasted Garlic Sesame',
     note: 'Pour. Shake. Stack. Built for rice, eggs, ramen, and leftovers.',
     components: [
-      { slug: 'original', name: 'Original', price: 11.99 },
+      { slug: 'original', name: 'Original', price: 12.99 },
       { slug: 'rgs', name: 'Roasted Garlic Sesame', price: 10.99 },
     ],
   },
@@ -89,7 +89,7 @@ const STACK_OFFERS = [
     tag: 'Spicy Tokyo + Fire Dust',
     note: 'Chili-forward sauce plus crunchy heat for noodles, wings, and dumplings.',
     components: [
-      { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99 },
+      { slug: 'spicy', name: 'Spicy Tokyo', price: 12.99 },
       { slug: 'firedust', name: 'Fire Dust', price: 10.99 },
     ],
   },
@@ -99,7 +99,7 @@ const STACK_OFFERS = [
     tag: 'Citrus Shoyu + Roasted Garlic Sesame',
     note: 'Bright shoyu plus toasted garlic and sesame for bowls and greens.',
     components: [
-      { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 },
+      { slug: 'citrus', name: 'Citrus Shoyu', price: 12.99 },
       { slug: 'rgs', name: 'Roasted Garlic Sesame', price: 10.99 },
     ],
   },
@@ -109,7 +109,7 @@ const STACK_OFFERS = [
     tag: 'Spicy Shoyu + Fire Dust',
     note: 'Deep shoyu heat with a shake-on crunchy finish.',
     components: [
-      { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 11.99 },
+      { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 12.99 },
       { slug: 'firedust', name: 'Fire Dust', price: 10.99 },
     ],
   },
@@ -119,8 +119,8 @@ const STACK_OFFERS = [
     tag: 'Shoyu Reserve + Spicy Shoyu',
     note: 'One deep, one spicy. Built for ramen, rice, eggs, dumplings, and dipping.',
     components: [
-      { slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99 },
-      { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 11.99 },
+      { slug: 'shoyu', name: 'Shoyu Reserve', price: 12.99 },
+      { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 12.99 },
     ],
   },
 ];
@@ -148,9 +148,9 @@ const PRODUCT_LABELS = {
 };
 
 const RECS = [
-  { slug: 'original', name: 'Original', tag: 'No.01 - Garlic & Sesame', price: 11.99 },
-  { slug: 'spicy',    name: 'Spicy Tokyo', tag: 'No.03 - Spicy Tokyo', price: 11.99 },
-  { slug: 'citrus',   name: 'Citrus Shoyu', tag: 'No.02 - Citrus Shoyu', price: 11.99 }
+  { slug: 'original', name: 'Original', tag: 'No.01 - Garlic & Sesame', price: 12.99 },
+  { slug: 'spicy',    name: 'Spicy Tokyo', tag: 'No.03 - Spicy Tokyo', price: 12.99 },
+  { slug: 'citrus',   name: 'Citrus Shoyu', tag: 'No.02 - Citrus Shoyu', price: 12.99 }
 ];
 
 const fmtUSD = (n) => '$' + (Number(n) || 0).toFixed(2);

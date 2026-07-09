@@ -9,9 +9,9 @@ import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
 import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
 
 const sauces = [
-  { id: "original", slug: "original-ramen", name: "Original", price: 11.99, image: nbOriginal },
-  { id: "spicy", slug: "spicy-tokyo", name: "Spicy Tokyo", price: 11.99, image: nbSpicyTokyo },
-  { id: "citrus", slug: "citrus-shoyu", name: "Citrus Shoyu", price: 11.99, image: nbCitrusShoyu },
+  { id: "original", slug: "original-ramen", name: "Original", price: 12.99, image: nbOriginal },
+  { id: "spicy", slug: "spicy-tokyo", name: "Spicy Tokyo", price: 12.99, image: nbSpicyTokyo },
+  { id: "citrus", slug: "citrus-shoyu", name: "Citrus Shoyu", price: 12.99, image: nbCitrusShoyu },
 ];
 
 function getDiscount(count: number) {
@@ -55,7 +55,7 @@ const BundleBuilder = () => {
 
   const totalItems = Object.values(quantities).reduce((a, b) => a + b, 0);
   const subtotal = Object.entries(quantities).reduce(
-    (sum, [, qty]) => sum + qty * 11.99,
+    (sum, [, qty]) => sum + qty * 12.99,
     0
   );
   const discount = getDiscount(totalItems);

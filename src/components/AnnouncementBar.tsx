@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
 
 const messages = [
-  "Loved by Ramen Fans Everywhere",
   "Free US shipping on orders $29.99+",
-  "Bundle & Save Up to 20%",
-  "4.9 Stars \u00B7 500+ Reviews",
+  "Sauces $12.99 - Spices $10.99",
+  "Real reviews are coming next - no fake stars",
 ];
 
 const AnnouncementBar = () => (
   <div className="bg-gradient-fire text-primary-foreground overflow-hidden">
     <motion.div
-      animate={{ x: [0, -1200] }}
+      animate={{ x: [0, -1000] }}
       transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
       className="flex whitespace-nowrap py-2"
     >
@@ -19,7 +18,7 @@ const AnnouncementBar = () => (
           {messages.map((msg, j) => (
             <span key={j}>
               {msg}
-              {j < messages.length - 1 && " \u00A0\u00A0\u2022\u00A0\u00A0 "}
+              {j < messages.length - 1 && "  |  "}
             </span>
           ))}
         </span>

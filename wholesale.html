@@ -26,6 +26,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=optional" rel="stylesheet">
 <link rel="stylesheet" href="/page-shared.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Wholesale Ramen Sauce","description":"Wholesale ramen sauce and specialty food wholesale inquiries for NoodleBomb.","url":"https://noodlebomb.co/wholesale","publisher":{"@type":"Organization","name":"NoodleBomb","url":"https://noodlebomb.co"}}</script>
+
+<style>
+.wholesale-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:24px;max-width:820px}
+.wholesale-form .form-control{width:100%;padding:14px 16px;border:1px solid rgba(245,241,234,.18);border-radius:12px;background:#100E0C;color:#F5F1EA;font:inherit}
+.wholesale-form textarea,.wholesale-form button{grid-column:1/-1}.wholesale-form .form-control::placeholder{color:rgba(245,241,234,.48)}
+@media (max-width:700px){.wholesale-form{grid-template-columns:1fr}}
+</style>
 </head>
 <body class="grain">
 <a href="#main" class="skip-to-content">Skip to main content</a>
@@ -100,12 +107,34 @@
   <section class="page-section">
     <div class="container narrow">
       <div class="kicker">Request access</div>
-      <h2 class="serif">Send your store details.</h2>
-      <p>Email your store name, location, buyer contact, resale certificate status, and the products you want to carry. The team will reply with the current wholesale sheet and next steps.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-accent" href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry&body=Store%20name:%0ALocation:%0ABuyer%20contact:%0AProducts%20of%20interest:%0AResale%20certificate:%0A">Email wholesale inquiry</a>
-        <a class="btn btn-ghost" href="/faq">Wholesale FAQ</a>
-      </div>
+      <h2 class="serif">Request wholesale info.</h2>
+      <p>Send your store details and product interest. We will reply with current case information, availability, retail support, and next steps. No public wholesale pricing is posted here.</p>
+      <form class="wholesale-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+        <input type="hidden" name="_subject" value="NoodleBomb Wholesale Inquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+        <input class="form-control" type="text" name="store_name" placeholder="Store / business name *" required>
+        <input class="form-control" type="text" name="buyer_name" placeholder="Buyer name *" required>
+        <input class="form-control" type="email" name="buyer_email" placeholder="Buyer email *" required>
+        <input class="form-control" type="tel" name="phone" placeholder="Phone *" required>
+        <input class="form-control" type="url" name="store_website" placeholder="Store website or social link *" required>
+        <input class="form-control" type="text" name="store_city_state" placeholder="City, state *" required>
+        <select class="form-control" name="store_type" required>
+          <option value="">Store type *</option>
+          <option value="specialty_grocery">Specialty grocery</option>
+          <option value="co_op">Co-op / natural market</option>
+          <option value="ramen_shop">Ramen shop / restaurant</option>
+          <option value="gift_shop">Gift shop / pantry retail</option>
+          <option value="distributor">Distributor</option>
+          <option value="other">Other</option>
+        </select>
+        <input class="form-control" type="number" min="1" name="location_count" placeholder="Number of locations *" required>
+        <textarea class="form-control" name="products_interested" placeholder="Products you want to carry *" rows="3" required></textarea>
+        <textarea class="form-control" name="notes" placeholder="Anything else we should know?" rows="3"></textarea>
+        <button class="btn btn-accent" type="submit">Request wholesale info</button>
+      </form>
+      <p style="margin-top:18px;"><a class="btn btn-ghost" href="/faq">Wholesale FAQ</a></p>
     </div>
   </section>
 

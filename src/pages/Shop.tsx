@@ -16,9 +16,9 @@ const products = [
     spiceLevel: 1,
     color: "bg-primary text-primary-foreground",
     pairsWellWith: ["Ramen", "Rice Bowls", "Stir Fry"],
-    subscribePrice: "$9.59/mo",
+    subscribePrice: "$11.04/mo",
     flavorHook: "Bold. Balanced. Essential.",
-    badge: "⭐ Best Seller",
+    badge: "Signature Sauce",
     buyUrl: "/product/original-ramen",
   },
   {
@@ -29,9 +29,9 @@ const products = [
     spiceLevel: 3,
     color: "bg-flame text-flame-foreground",
     pairsWellWith: ["Wings", "Fried Rice", "Steak"],
-    subscribePrice: "$9.59/mo",
+    subscribePrice: "$11.04/mo",
     flavorHook: "Heat That Hooks You.",
-    badge: "🔥 Most Popular Heat",
+    badge: "Bold Heat",
     buyUrl: "/product/spicy-tokyo",
   },
   {
@@ -42,7 +42,7 @@ const products = [
     spiceLevel: 1,
     color: "bg-accent text-accent-foreground",
     pairsWellWith: ["Seafood", "Shrimp", "Salads"],
-    subscribePrice: "$9.59/mo",
+    subscribePrice: "$11.04/mo",
     flavorHook: "Bright. Tangy. Fresh.",
     buyUrl: "/product/citrus-shoyu",
   },
@@ -105,8 +105,8 @@ const Shop = () => (
             <div className="flex-1 min-w-[200px]">
               <p className="text-base text-foreground font-display font-bold">Original + Spicy Tokyo</p>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-sm text-muted-foreground line-through">$19.98</span>
-                <span className="font-display text-2xl font-bold text-primary">$17.98</span>
+                <span className="text-sm text-muted-foreground line-through">$25.98</span>
+                <span className="font-display text-2xl font-bold text-primary">$22.08</span>
               </div>
               <span className="inline-block mt-1 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">
                 Save 15% — $2.00 Off
