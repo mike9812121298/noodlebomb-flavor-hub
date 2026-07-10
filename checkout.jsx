@@ -41,7 +41,7 @@ const getShopifyCartPermalink = (items) => {
 };
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-cart-thumb-2026-06-06.webp',
+  original: 'uploads/nb-original-approved-front-20260710-normalized.webp',
   citrus:   'uploads/nb-citrus-cart-thumb-2026-06-06.webp',
   spicy:    'uploads/nb-spicy-cart-thumb-2026-06-06.webp',
   shoyu:    'uploads/shoyu-reserve-cart-thumb-2026-06-06.webp',

@@ -21,7 +21,7 @@ const NB_ASSETS = [
   '/icons/noodlebomb-icon-512.png',
   '/uploads/nb-hero-lineup-dark-2026-06-07.webp',
   '/uploads/nb-hero-lineup-rotate-2026-06-15.webp',
-  '/uploads/nb-original-front-cutout-2026-05-09.webp',
+  '/uploads/nb-original-approved-front-20260710-normalized.webp',
   '/uploads/nb-spicy-front-cutout-2026-05-09.webp',
   '/uploads/nb-citrus-front-cutout-2026-05-09.webp',
   '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',

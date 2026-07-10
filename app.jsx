@@ -96,7 +96,7 @@ const FLAVORS = {
 };
 
 const FLAVOR_IMAGES = {
-  original: 'uploads/nb-original-front-cutout-2026-05-09.webp',
+  original: 'uploads/nb-original-approved-front-20260710-normalized.webp',
   spicy: 'uploads/nb-spicy-front-cutout-2026-05-09.webp',
   citrus: 'uploads/nb-citrus-front-cutout-2026-05-09.webp',
   shoyu: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
@@ -1937,7 +1937,7 @@ const nbgColor = (key) => NBG_COLORS[key] || NBG_COLORS['--nbg-chili'];
 
 // Brand flavors - orders pick one at random (drives the toast theater).
 const NBG_FLAVORS = [
-  { name: 'Original',  tag: 'Garlic & Sesame', color: '--nbg-sesame', img: '/uploads/nb-original-front-cutout-v2-2026-06-07.webp',  weight: 4 },
+  { name: 'Original',  tag: 'Garlic & Sesame', color: '--nbg-sesame', img: '/uploads/nb-original-approved-front-20260710-normalized.webp',  weight: 4 },
   { name: 'Spicy Tokyo',  tag: 'Roasted Chili',  color: '--nbg-chili',  img: '/uploads/nb-spicy-front-cutout-v2-2026-06-07.webp',  weight: 4 },
   { name: 'Citrus Shoyu', tag: 'Bright Shoyu',  color: '--nbg-citrus', img: '/uploads/nb-citrus-front-cutout-v2-2026-06-07.webp',  weight: 3 },
   { name: 'Shoyu Reserve', tag: 'Slow-brewed depth', color: '--nbg-gold', img: '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', weight: 1 },

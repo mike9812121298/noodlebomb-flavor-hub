@@ -126,7 +126,7 @@ const STACK_OFFERS = [
 ];
 
 const PRODUCT_IMAGES = {
-  original: 'uploads/nb-original-cart-thumb-2026-06-06.webp',
+  original: 'uploads/nb-original-approved-front-20260710-normalized.webp',
   spicy:    'uploads/nb-spicy-cart-thumb-2026-06-06.webp',
   citrus:   'uploads/nb-citrus-cart-thumb-2026-06-06.webp',
   trio:     'uploads/noodlebomb-trio.png',
