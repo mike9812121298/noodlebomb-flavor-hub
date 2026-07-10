@@ -924,7 +924,7 @@ function Hero({ headline, bottleSrc, flavorKey = 'original', flavorMeta = null }
       <div className="hero-bg-media" style={{ position: 'absolute', inset: 0, zIndex: 0, background: '#0a0705' }}>
         <img
           className="hero-product-bg"
-          src="uploads/nb-hero-pour-page.webp"
+          src="/uploads/nb-hero-pour-page.webp"
           alt="NoodleBomb sauce lineup on a dark background"
           loading="eager"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center', transform: 'none' }}
