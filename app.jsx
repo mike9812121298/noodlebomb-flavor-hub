@@ -2869,14 +2869,14 @@ function OrderMapSection() {
 
   <div className="nbg-stats">
   <div>
-  <div className="nbg-stat-num"><BombCount value={revealed ? citiesReached : 0} /></div>
+  <div className="nbg-stat-num"><BombCount value={citiesReached} /></div>
   <div className="nbg-stat-lab">Cities Lit Up</div>
   </div>
   <div className="nbg-stat-div" />
   <div className="nbg-reach">
-  <span className="nbg-reach-line"><b><BombCount value={revealed ? statesCount : 0} /></b> {statesCount === 1 ? 'state' : 'states'}</span>
+  <span className="nbg-reach-line"><b><BombCount value={statesCount} /></b> {statesCount === 1 ? 'state' : 'states'}</span>
   <span className="nbg-reach-dot"> - </span>
-  <span className="nbg-reach-line"><b><BombCount value={revealed ? countries : 0} /></b> {countries === 1 ? 'country' : 'countries'}</span>
+  <span className="nbg-reach-line"><b><BombCount value={countries} /></b> {countries === 1 ? 'country' : 'countries'}</span>
   </div>
   </div>
 
