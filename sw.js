@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v25-unified-tracking-20260707';
+const NB_CACHE = 'noodlebomb-app-shell-v26-approved-sauce-labels-20260710';
 const NB_ASSETS = [
   '/',
   '/index.html',
@@ -21,9 +21,9 @@ const NB_ASSETS = [
   '/icons/noodlebomb-icon-512.png',
   '/uploads/nb-hero-lineup-dark-2026-06-07.webp',
   '/uploads/nb-hero-lineup-rotate-2026-06-15.webp',
-  '/uploads/nb-original-approved-front-20260710-normalized.webp',
-  '/uploads/nb-spicy-front-cutout-2026-05-09.webp',
-  '/uploads/nb-citrus-front-cutout-2026-05-09.webp',
+  '/uploads/nb-original-approved-front-v2-20260710-normalized.webp',
+  '/uploads/nb-spicy-approved-front-v2-20260710-normalized.webp',
+  '/uploads/nb-citrus-approved-front-v2-20260710-normalized.webp',
   '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
   '/uploads/monthly-subscription-box-2026-05-08.webp'
 ];
