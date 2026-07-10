@@ -127,7 +127,7 @@ const STACK_OFFERS = [
 
 const PRODUCT_IMAGES = {
   original: 'uploads/nb-original-approved-front-v2-20260710-normalized.webp',
-  spicy:    'uploads/nb-spicy-approved-front-v2-20260710-normalized.webp',
+  spicy:    'uploads/nb-spicy-approved-front-v3-20260710-normalized.webp',
   citrus:   'uploads/nb-citrus-approved-front-v3-20260710-normalized.webp',
   trio:     'uploads/noodlebomb-trio.png',
   shoyu:    'uploads/shoyu-reserve-cart-thumb-2026-06-06.webp',

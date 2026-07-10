@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v27-citrus-approved-views-20260710';
+const NB_CACHE = 'noodlebomb-app-shell-v28-spicy-approved-views-20260710';
 const NB_ASSETS = [
   '/',
   '/index.html',
@@ -22,7 +22,7 @@ const NB_ASSETS = [
   '/uploads/nb-hero-lineup-dark-2026-06-07.webp',
   '/uploads/nb-hero-lineup-rotate-2026-06-15.webp',
   '/uploads/nb-original-approved-front-v2-20260710-normalized.webp',
-  '/uploads/nb-spicy-approved-front-v2-20260710-normalized.webp',
+  '/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp',
   '/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp',
   '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
   '/uploads/monthly-subscription-box-2026-05-08.webp'
