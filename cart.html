@@ -134,6 +134,7 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 .page-meta { color: var(--ink-60); font-size: 14px; margin: 0 0 40px; }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+.layout > * { min-width: 0; }
 @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 
 .card {
@@ -251,10 +252,23 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 .sticky-mobile { display: none; }
 @media (max-width: 900px) {
   .summary { position: static; }
-  .cart-recs-grid {
+  .cart-product-grid {
     /* Keep cart add-ons visible without turning the cart into a long scroll. */
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 8px !important;
+  }
+  .cart-stack-grid {
+    /* Stack cards carry use-case copy and an action, so keep them readable. */
+    grid-template-columns: 1fr !important;
+  }
+  .cart-stack-grid .cart-rec-card {
+    display: grid !important;
+    gap: 10px;
+  }
+  .cart-stack-grid .cart-rec-card > div:first-child {
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
   }
   .cart-rec-card {
     padding: 10px !important;
@@ -273,6 +287,9 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   }
   .cart-rec-card > div:nth-child(2) > div:last-child {
     font-size: 12px !important;
+  }
+  .cart-product-grid .cart-rec-card > div:nth-child(2) {
+    min-width: 0;
   }
   .cart-rec-add {
     min-width: 34px !important;
@@ -293,6 +310,14 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   .sticky-mobile .total small { display: block; color: var(--ink-40); font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
   .sticky-mobile .total strong { font-family: 'Inter Tight'; font-weight: 700; font-size: 22px; color: var(--accent); }
   .sticky-mobile .btn { flex: 1.2; padding: 14px 20px; }
+}
+@media (max-width: 359px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+  .nav-cart { padding-left: 16px; padding-right: 16px; gap: 8px; }
+  .cart-product-grid { grid-template-columns: 1fr !important; }
+  .line-item { gap: 12px; padding: 16px; }
+  .line-item-img { width: 64px; height: 64px; padding: 5px; }
+  .line-item > div:nth-child(2) > div:last-child { flex-wrap: wrap; gap: 10px; margin-top: 12px !important; }
 }
 
 /* Step indicator */

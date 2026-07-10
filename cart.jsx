@@ -601,7 +601,7 @@ function CartPage() {
           {stacksToShow.length > 0 && (
             <div style={{ marginTop: 28 }}>
               <div className="mono" style={{ color: 'var(--ink-40)', marginBottom: 14 }}>Build your flavor stack</div>
-              <div className="cart-recs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(' + stacksToShow.length + ', minmax(0, 1fr))', gap: 10 }}>
+              <div className="cart-recs-grid cart-stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(' + stacksToShow.length + ', minmax(0, 1fr))', gap: 10 }}>
                 {stacksToShow.map((offer) => <StackOfferCard key={offer.key} offer={offer} items={items} />)}
               </div>
             </div>
@@ -611,7 +611,7 @@ function CartPage() {
           {recsToShow.length > 0 && (
             <div style={{ marginTop: 28 }}>
               <div className="mono" style={{ color: 'var(--ink-40)', marginBottom: 14 }}>You might also like</div>
-              <div className="cart-recs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(' + recsToShow.length + ', minmax(0, 1fr))', gap: 10 }}>
+              <div className="cart-recs-grid cart-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(' + recsToShow.length + ', minmax(0, 1fr))', gap: 10 }}>
                 {recsToShow.map((r) => (
                   <div key={r.slug} className="card cart-rec-card" style={{ padding: 14, display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{ width: 48, height: 48, background: 'var(--paper-3)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 4, flexShrink: 0 }}>
