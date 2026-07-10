@@ -30,7 +30,7 @@ const NB_BOTTLE_PRICE = 11.99;
 const NB_TRIO = { slug: 'trio', name: 'The NoodleBomb Trio', priceUsd: 29.99 };
 // Fire Dust seasoning topper - cart-drawer "Power up your cart" one-tap upsell.
 // Mirrors cart.jsx FIRE_DUST; slug/price already in cart-store.js PRODUCT_CATALOG.
-const NB_FIRE_DUST = { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch - 3.2 oz topper', image: 'uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp' };
+const NB_FIRE_DUST = { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch - 3.2 oz topper', image: 'uploads/nb-fire-dust-approved-front-20260710-thumb.webp' };
 
 // Add to local NB_CART and open the slide-out cart drawer (handled by Nav).
 // Modifier-click preserves browser-native navigation; href="/cart.html" stays
