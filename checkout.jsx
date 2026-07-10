@@ -46,8 +46,8 @@ const PRODUCT_IMAGES = {
   spicy:    'uploads/nb-spicy-cart-thumb-2026-06-06.webp',
   shoyu:    'uploads/shoyu-reserve-cart-thumb-2026-06-06.webp',
   shoyuspicy: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp',
-  firedust: 'uploads/nb-fire-dust-approved-front-20260710-thumb.webp',
-  rgs:      'uploads/nb-rgs-approved-front-20260710-thumb.webp',
+  firedust: 'uploads/nb-fire-dust-approved-front-20260710-normalized-thumb.webp',
+  rgs:      'uploads/nb-rgs-approved-front-20260710-normalized-thumb.webp',
   trio:     'uploads/noodlebomb-trio.png'
 };
 
