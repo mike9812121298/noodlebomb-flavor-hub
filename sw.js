@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v29-current-labels-20260711';
+const NB_CACHE = 'noodlebomb-app-shell-v30-no-retired-range-labels-20260711';
 const NB_ASSETS = [
   '/',
   '/index.html',
