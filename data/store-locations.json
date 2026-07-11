@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-06-02T13:45:00-07:00",
+  "source": "confirmed_stockists_manual",
+  "privacy": "Retail store locations only. No customer names, addresses, or order data.",
+  "stores": [
+    {
+      "name": "Newport Avenue Market (Rudy's)",
+      "address": "1121 NW Newport Avenue",
+      "city": "Bend",
+      "state": "OR",
+      "postalCode": "97703",
+      "country": "United States",
+      "lat": 44.0582,
+      "lng": -121.3153,
+      "websiteUrl": "https://newportavemarket.com/",
+      "products": [
+        "NoodleBomb"
+      ],
+      "status": "confirmed",
+      "source": "manual_stockist_entry"
+    }
+  ]
+}
