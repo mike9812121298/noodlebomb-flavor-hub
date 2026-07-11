@@ -49,6 +49,13 @@
 # June 2026 launch pages stay on the brand domain; canonical slugs live at
 # the root (/fire-dust, /roasted-garlic-sesame, /shoyu-reserve) per live
 # behavior verified 2026-07-01. Old /product/* forms 301 to the new slugs.
+# Retired June Shoyu photos used the former cream labels. Redirect any saved
+# or indexed image URL to the current approved black-label product front.
+/uploads/nb-shoyu-reserve-back-cutout-2026-06-09.webp   /uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp   301!
+/uploads/nb-shoyu-reserve-depth-cutout-2026-06-09.webp  /uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp   301!
+/uploads/nb-shoyu-spicy-back-cutout-2026-06-09.webp     /uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp    301!
+/uploads/nb-shoyu-spicy-depth-cutout-2026-06-09.webp    /uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp    301!
+/uploads/nb-shoyu-spicy-duo-cutout-2026-06-09.webp     /uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp    301!
 /seasonings               /seasonings.html                                             200
 /product/fire-dust        /fire-dust                                                   301!
 /product/roasted-garlic-sesame  /roasted-garlic-sesame                                 301!

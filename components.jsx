@@ -1038,7 +1038,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
       "Add the Trio \u2014 $32.99"
 
-    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $8.98"), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $5.98"), /* @__PURE__ */ React.createElement(
 
       "button",
 

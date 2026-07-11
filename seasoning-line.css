@@ -913,6 +913,26 @@ body.launch-page {
   transform: rotate(7deg) translate(-8%, 8px) scale(0.96);
 }
 
+/* The full-lineup card carries four current products. Keep every jar/bottle
+   completely inside the card instead of applying the two-product overlap. */
+.loadout-stack-media-full {
+  min-height: 210px;
+  gap: 2px;
+  padding-inline: 4px;
+}
+
+.loadout-stack-media-full img,
+.loadout-stack-media-full img + img,
+.loadout-stack-media-full img:nth-child(1),
+.loadout-stack-media-full img:nth-child(2),
+.loadout-stack-media-full img:nth-child(3) {
+  width: 24%;
+  max-width: 24%;
+  max-height: 205px;
+  margin-left: 0;
+  transform: none;
+}
+
 .loadout-stack-copy {
   position: relative;
   z-index: 2;

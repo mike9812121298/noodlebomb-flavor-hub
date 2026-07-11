@@ -202,6 +202,38 @@
 # rebrand the storefront domain later without redirect-cache pollution.
 # ─────────────────────────────────────────────────────────────────
 
+# Retired June Shoyu photos used the former cream labels. Keep old image URLs
+# useful without letting obsolete packaging remain visible or indexable.
+[[redirects]]
+  from = "/uploads/nb-shoyu-reserve-back-cutout-2026-06-09.webp"
+  to = "/uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uploads/nb-shoyu-reserve-depth-cutout-2026-06-09.webp"
+  to = "/uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uploads/nb-shoyu-spicy-back-cutout-2026-06-09.webp"
+  to = "/uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uploads/nb-shoyu-spicy-depth-cutout-2026-06-09.webp"
+  to = "/uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/uploads/nb-shoyu-spicy-duo-cutout-2026-06-09.webp"
+  to = "/uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/product/original-ramen"
   to = "/original-ramen-sauce"
