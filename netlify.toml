@@ -312,6 +312,18 @@
   force = true
 
 [[redirects]]
+  from = "/post/*"
+  to = "/recipes"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blank-*"
+  to = "/404.html"
+  status = 410
+  force = true
+
+[[redirects]]
   from = "/ramensauce"
   to = "/original-ramen-sauce"
   status = 301

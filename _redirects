@@ -36,18 +36,16 @@
 
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
-# noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
+# noodlebomb.co is the public storefront; retired store hosts are not fallbacks.
 #
-# Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
-# rebrand the storefront domain later without redirect-cache pollution.
-# Update these to https://shop.noodlebomb.co/... after Shopify custom
-# domain is wired (see CANONICAL_URL_MAP.md).
+# Legacy product routes now 301 to canonical on-domain product pages.
+# Shopify remains the checkout handoff, not the public product catalog.
 # ─────────────────────────────────────────────────────────────────
-/product/original-ramen   https://nu2vqa-ma.myshopify.com/products/original              302!
-/product/spicy-tokyo      https://nu2vqa-ma.myshopify.com/products/spicy-tokyo           302!
-/product/citrus-shoyu     https://nu2vqa-ma.myshopify.com/products/citrus-shoyu          302!
-/product/trio             https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio   302!
-/product/the-noodlebomb-trio  https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio  302!
+/product/original-ramen   /original-ramen-sauce                                  301!
+/product/spicy-tokyo      /spicy-tokyo-ramen-sauce                              301!
+/product/citrus-shoyu     /citrus-shoyu-ramen-sauce                             301!
+/product/trio             /ramen-sauce-trio                                                  301!
+/product/the-noodlebomb-trio  /ramen-sauce-trio                                            301!
 # June 2026 launch pages stay on the brand domain; canonical slugs live at
 # the root (/fire-dust, /roasted-garlic-sesame, /shoyu-reserve) per live
 # behavior verified 2026-07-01. Old /product/* forms 301 to the new slugs.
@@ -65,14 +63,15 @@
 /shop                     /shop.html                                                   200
 /shop/*                   /shop?s=:splat                                               301!
 
-# Wix-pattern URLs from old marketing emails / ads — bounce to Shopify, NOT Wix
-# (Wix is now subscription-only and not the public storefront. See CANONICAL_URL_MAP.md.)
-/product-page/*           https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical                302!
-/cart-page                https://nu2vqa-ma.myshopify.com/cart                           302!
+# Legacy marketing URLs stay on the branded storefront.
+/product-page/*           /shop                                                                            301!
+/cart-page                /cart                                                   301!
 /category/*               /shop?s=:splat                                               301!
-/ramensauce               https://nu2vqa-ma.myshopify.com/products/original              302!
-/ramensauce-1             https://nu2vqa-ma.myshopify.com/products/citrus-shoyu          302!
-/ramensauce-2             https://nu2vqa-ma.myshopify.com/products/spicy-tokyo           302!
+/post/*                   /recipes                                                     301!
+/blank-*                  /404.html                                                   410!
+/ramensauce               /original-ramen-sauce                                  301!
+/ramensauce-1             /citrus-shoyu-ramen-sauce                             301!
+/ramensauce-2             /spicy-tokyo-ramen-sauce                              301!
 
 # Pretty URLs for the local cart/checkout pages (kept for the optional
 # in-page cart drawer; primary CTAs go straight to Shopify).
