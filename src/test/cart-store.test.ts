@@ -7,15 +7,28 @@ const cartStoreSource = fs.readFileSync(
   "utf8",
 );
 
+type CartItem = {
+  slug: string;
+  name: string;
+  price: number;
+  qty: number;
+};
+
+type CartApi = {
+  getItems: () => CartItem[];
+  add: (item: CartItem) => void;
+  getSubtotal: () => number;
+};
+
 function loadCartStore() {
   window.eval(cartStoreSource);
-  return (window as typeof window & { NB_CART: any }).NB_CART;
+  return (window as typeof window & { NB_CART: CartApi }).NB_CART;
 }
 
 describe("NoodleBomb cart catalog migration", () => {
   beforeEach(() => {
     localStorage.clear();
-    delete (window as typeof window & { NB_CART?: any }).NB_CART;
+    delete (window as typeof window & { NB_CART?: CartApi }).NB_CART;
   });
 
   it("migrates legacy saved prices and names to the current catalog", () => {
@@ -36,10 +49,10 @@ describe("NoodleBomb cart catalog migration", () => {
     const cart = loadCartStore();
     const items = cart.getItems();
 
-    expect(items.map((item: any) => item.price)).toEqual([
+    expect(items.map((item) => item.price)).toEqual([
       12.99, 12.99, 12.99, 32.99, 12.99, 12.99, 10.99, 10.99,
     ]);
-    expect(items.map((item: any) => item.name)).toEqual([
+    expect(items.map((item) => item.name)).toEqual([
       "Original",
       "Spicy Tokyo",
       "Citrus Shoyu",
