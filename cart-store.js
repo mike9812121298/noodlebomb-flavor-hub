@@ -74,9 +74,32 @@
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       var parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed.filter(function (item) {
+      if (!Array.isArray(parsed)) return [];
+
+      var changed = false;
+      var cleanItems = parsed.filter(function (item) {
         return item && !isRetiredSlug(item.slug);
-      }) : [];
+      }).map(function (item) {
+        var catalogItem = PRODUCT_CATALOG[item.slug] || null;
+        if (!catalogItem) return item;
+
+        // A returning shopper can have an older price saved in localStorage.
+        // The catalog is the storefront source of truth, so migrate known items
+        // before the cart, free-shipping meter, analytics, or checkout sees them.
+        if (Number(item.price) !== catalogItem.price || item.name !== catalogItem.name) {
+          changed = true;
+          var migrated = {};
+          Object.keys(item).forEach(function (key) { migrated[key] = item[key]; });
+          migrated.name = catalogItem.name;
+          migrated.price = catalogItem.price;
+          return migrated;
+        }
+        return item;
+      });
+
+      if (cleanItems.length !== parsed.length) changed = true;
+      if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanItems));
+      return cleanItems;
     } catch (e) {
       return [];
     }
@@ -101,8 +124,9 @@
     return safeRead().reduce(function (n, i) { return n + (i.qty || 0); }, 0);
   }
 
-  function getSubtotal() {
-    return safeRead().reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
+  function getSubtotal(items) {
+    var list = Array.isArray(items) ? items : safeRead();
+    return list.reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
   }
 
   function normalizeAttributes(attributes) {
@@ -140,6 +164,7 @@
     if (!item || !item.slug) return;
     if (isRetiredSlug(item.slug)) return;
     var items = safeRead();
+    var catalogItem = PRODUCT_CATALOG[item.slug] || null;
     var normalizedAttributes = normalizeAttributes(item.attributes);
     var incomingAttributesKey = attributesKey(normalizedAttributes);
     var existing = items.find(function (i) {
@@ -149,11 +174,10 @@
     if (existing) {
       existing.qty += qty;
     } else {
-      var catalogItem = PRODUCT_CATALOG[item.slug] || null;
       var nextItem = {
         slug: item.slug,
-        name: item.name || (catalogItem && catalogItem.name) || item.slug,
-        price: Number(item.price) || (catalogItem ? catalogItem.price : 0),
+        name: catalogItem ? catalogItem.name : (item.name || item.slug),
+        price: catalogItem ? catalogItem.price : (Number(item.price) || 0),
         qty: qty
       };
       if (normalizedAttributes.length) nextItem.attributes = normalizedAttributes;
@@ -170,13 +194,13 @@
     // "You might also like" upsell strips, the bundle builder, Flavor Finder,
     // and ?add= quick links. value + currency + content ids included so Meta's
     // purchase optimization, Advantage+ and lookalikes get clean signal.
-    var atcPrice = Number(item.price) || 0;
+    var atcPrice = catalogItem ? catalogItem.price : (Number(item.price) || 0);
     var atcValue = Math.round(atcPrice * qty * 100) / 100;
     try {
       if (window.NB_PIXEL && typeof window.NB_PIXEL.track === 'function') {
         window.NB_PIXEL.track('AddToCart', {
           content_ids: [item.slug],
-          content_name: item.name || item.slug,
+          content_name: catalogItem ? catalogItem.name : (item.name || item.slug),
           content_type: 'product',
           contents: [{ id: item.slug, quantity: qty, item_price: atcPrice }],
           value: atcValue,
@@ -193,7 +217,7 @@
           value: atcValue,
           items: [{
             item_id: item.slug,
-            item_name: item.name || item.slug,
+            item_name: catalogItem ? catalogItem.name : (item.name || item.slug),
             price: atcPrice,
             quantity: qty
           }]

@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v32-approved-labels-20260711';
+const NB_CACHE = 'noodlebomb-app-shell-v33-cart-price-migration-20260711';
 const NB_ASSETS = [
   '/',
   '/index.html',
