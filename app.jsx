@@ -99,13 +99,13 @@ const FLAVOR_IMAGES = {
   original: 'uploads/nb-original-approved-front-v2-20260710-normalized.webp',
   spicy: 'uploads/nb-spicy-approved-front-v3-20260710-normalized.webp',
   citrus: 'uploads/nb-citrus-approved-front-v3-20260710-normalized.webp',
-  shoyu: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+  shoyu: 'uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp',
   shoyuspicy: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp'
 };
 
 // Soy Sauce reserve line - second product group on the lineup (DTC, 2026-06-09).
 const SOY_SAUCES = [
-  { slug: 'shoyu', name: 'Shoyu Reserve', tag: 'Reserve - Soy Sauce', color: '#D7A84D', rgb: '215, 168, 77', line1: 'Slow-brewed shoyu depth.', line2: 'Bold, clean finish.', price: '$11.99', image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', detail: '/product/shoyu-reserve' },
+  { slug: 'shoyu', name: 'Shoyu Reserve', tag: 'Reserve - Soy Sauce', color: '#D7A84D', rgb: '215, 168, 77', line1: 'Slow-brewed shoyu depth.', line2: 'Bold, clean finish.', price: '$11.99', image: 'uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp', detail: '/product/shoyu-reserve' },
   { slug: 'shoyuspicy', name: 'Spicy Shoyu', tag: 'Reserve - Spicy Soy Sauce', color: '#E84A3A', rgb: '232, 74, 58', line1: 'Reserve depth with heat.', line2: 'Bold shoyu finish, turned up.', price: '$11.99', image: 'uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp', detail: '/spicy-shoyu-ramen-sauce' }
 ];
 
@@ -1940,7 +1940,7 @@ const NBG_FLAVORS = [
   { name: 'Original',  tag: 'Garlic & Sesame', color: '--nbg-sesame', img: '/uploads/nb-original-approved-front-v2-20260710-normalized.webp',  weight: 4 },
   { name: 'Spicy Tokyo',  tag: 'Roasted Chili',  color: '--nbg-chili',  img: '/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp',  weight: 4 },
   { name: 'Citrus Shoyu', tag: 'Bright Shoyu',  color: '--nbg-citrus', img: '/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp',  weight: 3 },
-  { name: 'Shoyu Reserve', tag: 'Slow-brewed depth', color: '--nbg-gold', img: '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp', weight: 1 },
+  { name: 'Shoyu Reserve', tag: 'Slow-brewed depth', color: '--nbg-gold', img: '/uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp', weight: 1 },
   { name: 'The Trio',  tag: 'One of each',  color: '--nbg-cream',  img: '/uploads/og-trio-counter-page.webp',  weight: 2 },
 ];
 const NBG_FLAVOR_POOL = [];
@@ -3208,7 +3208,7 @@ function BuildBundle() {
   color: '#D7A84D',
   rgb: '215, 168, 77',
   ink: '#0E0D0C',
-  image: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+  image: 'uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp',
   core: false,
   group: 'Soy sauces',
   groupNote: 'Reserve soy bottles - $11.99 each',
@@ -3548,7 +3548,7 @@ const TDROP_PRODUCTS = [
   key: 'classic', slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99,
   glowRgb: '224,178,76', h: 252, glowInset: '2% -34% 4%',
   glowBg: 'radial-gradient(46% 44% at 50% 42%, rgba(224,178,76,0.30), rgba(224,178,76,0) 70%)',
-  img: 'uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
+  img: 'uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp',
   alt: 'NoodleBomb Shoyu Reserve bottle',
   },
   {
