@@ -6,7 +6,7 @@ const NB_SITE_URLS = {
   original: "https://noodlebomb.co/original-ramen-sauce",
   citrus: "https://noodlebomb.co/citrus-shoyu-ramen-sauce",
   spicy: "https://noodlebomb.co/spicy-tokyo-ramen-sauce",
-  shoyu: "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve",
+  shoyu: "/shoyu-reserve",
   shoyuspicy: "https://noodlebomb.co/spicy-shoyu-ramen-sauce",
   rgs: "https://noodlebomb.co/roasted-garlic-sesame",
   trio: "https://noodlebomb.co/#lineup",
@@ -52,14 +52,14 @@ const RITUAL_KIT = {
 };
 const RITUAL_KIT_TOTAL = RITUAL_KIT.components.reduce((s, c) => s + c.price, 0);
 const PRODUCT_IMAGES = {
-  original: "uploads/nb-original-front-cutout-2026-06-26.webp",
-  spicy: "uploads/nb-spicy-tokyo-cutout-2026-06-22.webp",
-  citrus: "uploads/nb-citrus-cutout-2026-06-22.webp",
-  trio: "uploads/noodlebomb-trio.png",
-  shoyu: "uploads/nb-shoyu-reserve-cutout-2026-06-22.webp",
-  shoyuspicy: "uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp",
-  firedust: "uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp",
-  rgs: "uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp"
+  original: "uploads/nb-original-approved-front-v2-20260710-normalized.webp",
+  spicy: "uploads/nb-spicy-approved-front-v3-20260710-normalized.webp",
+  citrus: "uploads/nb-citrus-approved-front-v3-20260710-normalized.webp",
+  trio: "uploads/nb-trio-approved-20260711.webp",
+  shoyu: "uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp",
+  shoyuspicy: "uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp",
+  firedust: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
+  rgs: "uploads/nb-rgs-approved-front-20260710-normalized.webp"
 };
 const PRODUCT_LABELS = {
   original: { tag: "No.01", tagline: "Garlic & Sesame" },
@@ -151,7 +151,7 @@ function RitualKitCard({ items, variant }) {
     " \u2192"
   )));
 }
-const FIRST_BOX_50_URL = "https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798%26properties%5B_first_box_source%5D=cart_one_bottle";
+const FIRST_BOX_50_URL = "/monthly-box#waitlist";
 function BowlClubUpsell({ item }) {
   const sourceName = item && item.name ? item.name : "your sauce";
   return /* @__PURE__ */ React.createElement("div", { className: "card", style: {
@@ -178,7 +178,7 @@ function BowlClubUpsell({ item }) {
     fontSize: 19,
     fontWeight: 800,
     letterSpacing: "0.08em"
-  } }, "50%"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "FIRST RAMEN NIGHT BOX"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Try ", sourceName, " inside a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "First box $15, renews at $29.99. Includes premium ramen, a recipe idea, and another full 7 oz NoodleBomb sauce bottle. Skip or cancel anytime.")), /* @__PURE__ */ React.createElement("a", {
+  } }, "LIST"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "FIRST RAMEN NIGHT BOX"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Try ", sourceName, " inside a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "New Monthly Box subscriptions are paused. Join the waitlist and we will email you when enrollment reopens.")), /* @__PURE__ */ React.createElement("a", {
     href: FIRST_BOX_50_URL,
     onClick: () => {
       try {
@@ -205,7 +205,7 @@ function BowlClubUpsell({ item }) {
       whiteSpace: "nowrap",
       boxShadow: "0 12px 28px rgba(232,74,58,0.22)"
     }
-  }, "Start first box for $15"));
+  }, "Join waitlist"));
 }
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
@@ -217,7 +217,7 @@ function CartPage() {
     }
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       setCheckoutLoading(true);
-      window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e, getCheckoutUrl(items)).finally(() => setCheckoutLoading(false));
+      window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e).finally(() => setCheckoutLoading(false));
     }
   };
   useEffect(() => {
@@ -309,7 +309,7 @@ function CartPage() {
     } }, /* @__PURE__ */ React.createElement(
       "img",
       {
-        src: "uploads/noodlebomb-trio.png",
+        src: "uploads/nb-trio-approved-20260711.webp",
         alt: "The NoodleBomb Trio",
         loading: "lazy",
         style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }

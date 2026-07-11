@@ -4,7 +4,7 @@
 
 // equivalent (plain JS, no JSX sugar) and re-builds byte-stable through esbuild.
 
-const WIX_URLS = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical" };
+const SITE_URLS = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop" };
 
 const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
 
@@ -222,21 +222,21 @@ const FLAVORS = {
 
 const FLAVOR_IMAGES = {
 
-  original: "uploads/nb-original-front-cutout-2026-05-09.webp",
+  original: "uploads/nb-original-approved-front-v2-20260710-normalized.webp",
 
-  spicy: "uploads/nb-spicy-front-cutout-2026-05-09.webp",
+  spicy: "uploads/nb-spicy-approved-front-v3-20260710-normalized.webp",
 
-  citrus: "uploads/nb-citrus-front-cutout-2026-05-09.webp",
+  citrus: "uploads/nb-citrus-approved-front-v3-20260710-normalized.webp",
 
-  shoyu: "uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp"
+  shoyu: "uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp"
 
 };
 
 const SOY_SAUCES = [
 
-  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$12.99", image: "uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp", detail: "/shoyu-reserve" },
+  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$12.99", image: "uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp", detail: "/shoyu-reserve" },
 
-  { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "The reserve bottle, turned up.", line2: "Slow-brewed depth with real heat.", price: "$12.99", image: "uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp", detail: "/spicy-shoyu-ramen-sauce" }
+  { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "The reserve bottle, turned up.", line2: "Slow-brewed depth with real heat.", price: "$12.99", image: "uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp", detail: "/spicy-shoyu-ramen-sauce" }
 
 ];
 
@@ -246,7 +246,7 @@ const FOOD_IMAGES = {
 
   stirfry: "uploads/usecase-noodles-v2.jpg",
 
-  // Editorial wings ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â glossy, saucy, close crop
+  // Editorial wings — glossy, saucy, close crop
 
   wings: "uploads/usecase-wings-v2.jpg",
 
@@ -254,7 +254,7 @@ const FOOD_IMAGES = {
 
   dumplings: "uploads/usecase-dumplings-v2.jpg",
 
-  // Editorial pulled pork ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â shredded on a bun, close crop (replaced slow-cooker shot)
+  // Editorial pulled pork — shredded on a bun, close crop (replaced slow-cooker shot)
 
   pulledpork: "https://images.unsplash.com/photo-1619740455993-9e612b1af08a?w=1600&q=80&auto=format&fit=crop"
 
@@ -1802,11 +1802,11 @@ function UseItOn() {
 
   const items = [
 
-    { key: "original", name: "Original", no: "No.01", tag: "GARLIC & SESAME", line: "The one that started it all.", note: "Roasted garlic. Toasted sesame. Smooth soy.", bg: "#8A6424", ink: "#F5F1EA", sub: "rgba(245,241,234,0.68)", img: FLAVOR_IMAGES.original, lifestyle: "uploads/range-original-clean-2026-05-07.jpg" },
+    { key: "original", name: "Original", no: "No.01", tag: "GARLIC & SESAME", line: "The one that started it all.", note: "Roasted garlic. Toasted sesame. Smooth soy.", bg: "#8A6424", ink: "#F5F1EA", sub: "rgba(245,241,234,0.68)", img: FLAVOR_IMAGES.original, lifestyle: "uploads/nb-original-approved-front-v2-20260710-normalized.webp" },
 
-    { key: "spicy", name: "Spicy Tokyo", no: "No.03", tag: "UMAMI MEETS FIRE", line: "Roasted chili. Garlic. Sesame.", note: "Bold heat for wings, fried rice, noodles, and anything that needs a kick.", bg: "#B23A0C", ink: "#F5F1EA", sub: "rgba(245,241,234,0.70)", img: FLAVOR_IMAGES.spicy, lifestyle: "uploads/range-spicy-clean-2026-05-07.jpg" },
+    { key: "spicy", name: "Spicy Tokyo", no: "No.03", tag: "UMAMI MEETS FIRE", line: "Roasted chili. Garlic. Sesame.", note: "Bold heat for wings, fried rice, noodles, and anything that needs a kick.", bg: "#B23A0C", ink: "#F5F1EA", sub: "rgba(245,241,234,0.70)", img: FLAVOR_IMAGES.spicy, lifestyle: "uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" },
 
-    { key: "citrus", name: "Citrus Shoyu", no: "No.02", tag: "BRIGHT & TANGY", line: "Shoyu base. Clean citrus lift.", note: "Bright citrus over clean shoyu. Cuts through richness.", bg: "#B83A10", ink: "#F5F1EA", sub: "rgba(245,241,234,0.70)", img: FLAVOR_IMAGES.citrus, lifestyle: "uploads/range-citrus-clean-2026-05-07.jpg" }
+    { key: "citrus", name: "Citrus Shoyu", no: "No.02", tag: "BRIGHT & TANGY", line: "Shoyu base. Clean citrus lift.", note: "Bright citrus over clean shoyu. Cuts through richness.", bg: "#B83A10", ink: "#F5F1EA", sub: "rgba(245,241,234,0.70)", img: FLAVOR_IMAGES.citrus, lifestyle: "uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" }
 
   ];
 
@@ -2206,7 +2206,7 @@ function Origin() {
 
       {
 
-        src: "uploads/origin-making.webp",
+        src: "uploads/nb-original-approved-front-v2-20260710-normalized.webp",
 
         alt: "NoodleBomb sauce production and Pacific Northwest brand story",
 
@@ -2854,7 +2854,7 @@ function FinalCTA() {
 
     { label: "dumplings", svg: /* @__PURE__ */ React.createElement("svg", { viewBox: "0 0 32 32", width: "32", height: "32", fill: "none", stroke: "currentColor", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React.createElement("path", { d: "M5 20c0-5 5-9 11-9s11 4 11 9c0 1-1 2-2 2H7c-1 0-2-1-2-2Z" }), /* @__PURE__ */ React.createElement("path", { d: "M9 20c1-2 2-3 3-3M14 20c1-2 2-3 3-3M19 20c1-2 2-3 3-3" })) }
 
-  ].map((it, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 10, color: "var(--accent-ink)", opacity: 0.85 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 56, height: 56, borderRadius: 999, border: "1px solid rgba(245,241,234,0.35)", display: "flex", alignItems: "center", justifyContent: "center" } }, it.svg), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { fontSize: 11, letterSpacing: "0.18em", opacity: 0.85 } }, it.label))))), /* @__PURE__ */ React.createElement(Reveal, { delay: 3 }, /* @__PURE__ */ React.createElement("div", { className: "finalcta-row", style: { marginTop: 48, display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", justifyContent: "center", maxWidth: 720, marginLeft: "auto", marginRight: "auto" } }, /* @__PURE__ */ React.createElement("a", { className: "btn", href: WIX_URLS.shop, target: "_blank", rel: "noopener", style: { background: "var(--accent-ink)", color: "var(--accent)", padding: "18px 32px", fontWeight: 600, border: "none", borderRadius: 4, cursor: "pointer", fontFamily: "Inter", fontSize: 15, letterSpacing: "-0.005em", transition: "transform .2s, box-shadow .2s", textDecoration: "none", display: "inline-block", flexShrink: 0 }, onMouseOver: (e) => {
+  ].map((it, i) => /* @__PURE__ */ React.createElement("div", { key: i, style: { display: "flex", flexDirection: "column", alignItems: "center", gap: 10, color: "var(--accent-ink)", opacity: 0.85 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 56, height: 56, borderRadius: 999, border: "1px solid rgba(245,241,234,0.35)", display: "flex", alignItems: "center", justifyContent: "center" } }, it.svg), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { fontSize: 11, letterSpacing: "0.18em", opacity: 0.85 } }, it.label))))), /* @__PURE__ */ React.createElement(Reveal, { delay: 3 }, /* @__PURE__ */ React.createElement("div", { className: "finalcta-row", style: { marginTop: 48, display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", justifyContent: "center", maxWidth: 720, marginLeft: "auto", marginRight: "auto" } }, /* @__PURE__ */ React.createElement("a", { className: "btn", href: SITE_URLS.shop, style: { background: "var(--accent-ink)", color: "var(--accent)", padding: "18px 32px", fontWeight: 600, border: "none", borderRadius: 4, cursor: "pointer", fontFamily: "Inter", fontSize: 15, letterSpacing: "-0.005em", transition: "transform .2s, box-shadow .2s", textDecoration: "none", display: "inline-block", flexShrink: 0 }, onMouseOver: (e) => {
 
     e.currentTarget.style.transform = "translateY(-2px)";
 
@@ -2912,7 +2912,7 @@ function FinalCTA() {
 
   ), /* @__PURE__ */ React.createElement("button", { type: "submit", className: "btn", style: { background: "var(--accent)", color: "var(--accent-ink)", border: "none", padding: "0 28px", fontWeight: 600, cursor: "pointer", fontFamily: "Inter", fontSize: 14, letterSpacing: "-0.005em", transition: "filter .2s" }, onMouseOver: (e) => e.currentTarget.style.filter = "brightness(1.08)", onMouseOut: (e) => e.currentTarget.style.filter = "none" }, "Subscribe"))), /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid var(--line)", maxWidth: 1440, margin: "0 auto 56px" } }), /* @__PURE__ */ React.createElement("div", { className: "footer-cols", style: { display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 64, maxWidth: 1440, margin: "0 auto" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10, marginBottom: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { width: 20, height: 20, borderRadius: 4, background: "var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--accent-ink)", fontFamily: "Inter Tight", fontWeight: 800, fontSize: 12 } }, "N"), /* @__PURE__ */ React.createElement("span", { className: "display", style: { fontSize: 18, letterSpacing: "-0.04em", fontWeight: 700 } }, "noodlebomb")), /* @__PURE__ */ React.createElement("p", { style: { maxWidth: 320, color: "var(--ink-60)", fontSize: 13, lineHeight: 1.6 } }, "Bold ramen sauce crafted in the Pacific Northwest. Made for noodles, rice, wings, dumplings, eggs, vegetables, and every quick meal that needs a bigger finish.")), [
 
-    ["Shop", [["Original", WIX_URLS.original], ["Spicy Tokyo", WIX_URLS.spicy], ["Citrus Shoyu", WIX_URLS.citrus], ["The NoodleBomb Trio", WIX_URLS.trio], ["Shoyu Reserve", WIX_URLS.shoyu], ["Monthly Ramen Box", "#monthly"]]],
+    ["Shop", [["Original", SITE_URLS.original], ["Spicy Tokyo", SITE_URLS.spicy], ["Citrus Shoyu", SITE_URLS.citrus], ["The NoodleBomb Trio", SITE_URLS.trio], ["Shoyu Reserve", SITE_URLS.shoyu], ["Monthly Ramen Box", "#monthly"]]],
 
     ["Learn", [["Recipes", "/recipes"], ["Ingredients", "#ingredients"], ["The Range", "#range"], ["The Pour", "#pour"], ["Monthly Ramen Box", "#monthly"]]],
 
@@ -3138,15 +3138,15 @@ const nbgColor = (key) => NBG_COLORS[key] || NBG_COLORS["--nbg-chili"];
 
 const NBG_FLAVORS = [
 
-  { name: "Original", tag: "Garlic & Sesame", color: "--nbg-sesame", img: "/uploads/nb-original-front-cutout-v2-2026-06-07.webp", weight: 4 },
+  { name: "Original", tag: "Garlic & Sesame", color: "--nbg-sesame", img: "/uploads/nb-original-approved-front-v2-20260710-normalized.webp", weight: 4 },
 
-  { name: "Spicy Tokyo", tag: "Roasted Chili", color: "--nbg-chili", img: "/uploads/nb-spicy-front-cutout-v2-2026-06-07.webp", weight: 4 },
+  { name: "Spicy Tokyo", tag: "Roasted Chili", color: "--nbg-chili", img: "/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp", weight: 4 },
 
-  { name: "Citrus Shoyu", tag: "Bright Shoyu", color: "--nbg-citrus", img: "/uploads/nb-citrus-front-cutout-v2-2026-06-07.webp", weight: 3 },
+  { name: "Citrus Shoyu", tag: "Bright Shoyu", color: "--nbg-citrus", img: "/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp", weight: 3 },
 
-  { name: "Shoyu Reserve", tag: "Slow-brewed depth", color: "--nbg-gold", img: "/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp", weight: 1 },
+  { name: "Shoyu Reserve", tag: "Slow-brewed depth", color: "--nbg-gold", img: "/uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp", weight: 1 },
 
-  { name: "The Trio", tag: "One of each", color: "--nbg-cream", img: "/uploads/og-trio-counter-page.webp", weight: 2 }
+  { name: "The Trio", tag: "One of each", color: "--nbg-cream", img: "/uploads/nb-trio-approved-20260711.webp", weight: 2 }
 
 ];
 
@@ -4528,7 +4528,7 @@ function OrderMapSection() {
 
           position: absolute; inset: 0; z-index: 0; pointer-events: none;
 
-          background: url("/uploads/og-trio-counter-page.webp") right center / cover no-repeat;
+          background: url("/uploads/nb-trio-approved-20260711.webp") right center / cover no-repeat;
 
           opacity: .16;
 
@@ -5638,7 +5638,7 @@ function BuildBundle() {
 
       ink: "#0E0D0C",
 
-      image: "uploads/nb-shoyu-reserve-front-cutout-tight-2026-07-02.webp",
+      image: "uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp",
 
       core: false
 
@@ -5662,7 +5662,7 @@ function BuildBundle() {
 
       ink: "#F5F1EA",
 
-      image: "uploads/nb-shoyu-spicy-front-cutout-tight-2026-07-02.webp",
+      image: "uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp",
 
       core: false
 
@@ -5686,7 +5686,7 @@ function BuildBundle() {
 
       ink: "#1A0806",
 
-      image: "uploads/nb-fire-dust-cutout-2026-06-22.webp",
+      image: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
 
       core: false,
 
@@ -5712,7 +5712,7 @@ function BuildBundle() {
 
       ink: "#0E0D0C",
 
-      image: "uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp",
+      image: "uploads/nb-rgs-approved-front-20260710-normalized.webp",
 
       core: false,
 
@@ -6072,7 +6072,7 @@ const TDROP_PRODUCTS = [
 
     glowBg: "radial-gradient(46% 44% at 50% 42%, rgba(224,178,76,0.30), rgba(224,178,76,0) 70%)",
 
-    img: "uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp",
+    img: "uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp",
 
     alt: "NoodleBomb Shoyu Reserve bottle"
 
@@ -6096,7 +6096,7 @@ const TDROP_PRODUCTS = [
 
     glowBg: "radial-gradient(46% 44% at 50% 42%, rgba(232,74,58,0.28), rgba(232,74,58,0) 70%)",
 
-    img: "uploads/nb-fire-dust-front-cutout-2026-06-10.webp",
+    img: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
 
     alt: "NoodleBomb Fire Dust seasoning topper"
 
@@ -6120,7 +6120,7 @@ const TDROP_PRODUCTS = [
 
     glowBg: "radial-gradient(50% 46% at 50% 48%, rgba(232,74,58,0.30), rgba(232,74,58,0) 70%)",
 
-    img: "uploads/nb-fire-dust-front-cutout-2026-06-10.webp",
+    img: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
 
     alt: "NoodleBomb Fire Dust seasoning topper"
 

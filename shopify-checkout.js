@@ -111,10 +111,9 @@
     });
   }
 
-  // Intercepts a click on a checkout link/button. If Shopify is enabled and
-  // succeeds, redirects to the Shopify checkout URL. Otherwise falls through
-  // (lets the default href / fallbackUrl handle it).
-  function handleCheckoutClick(items, e, fallbackUrl) {
+  // Intercepts a checkout click and redirects to Shopify. Failures stay on
+  // noodlebomb.co with the local cart intact; never fall through to a retired store.
+  function handleCheckoutClick(items, e) {
     if (!isEnabled()) return Promise.resolve(false);
     if (e && typeof e.preventDefault === 'function') e.preventDefault();
     return createCheckoutUrl(items).then(function (url) {
@@ -122,8 +121,16 @@
       return true;
     }).catch(function (err) {
       if (window.console && console.error) console.error('Shopify checkout failed:', err);
-      // Fall back to the existing href / Wix URL so the user is never stranded.
-      if (fallbackUrl) window.location.href = fallbackUrl;
+      try {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'checkout_error', {
+            error_message: String((err && err.message) || err).slice(0, 100)
+          });
+        }
+      } catch (_) {
+        // Analytics must never break checkout recovery.
+      }
+      window.location.href = '/cart?checkout_error=1';
       return false;
     });
   }

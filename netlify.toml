@@ -195,7 +195,7 @@
 
 # ─────────────────────────────────────────────────────────────────
 # COMMERCE FOREVER-FIX (2026-05-07): Shopify is the cash register.
-# noodlebomb.co = brand front. shop.noodlebomb.co = legacy Wix subs only.
+# noodlebomb.co = brand front. shop.noodlebomb.co = retired legacy storefront.
 # See CANONICAL_URL_MAP.md.
 #
 # Per-flavor 302s to canonical Shopify PDPs. 302 (not 301) so we can
@@ -204,32 +204,32 @@
 
 [[redirects]]
   from = "/product/original-ramen"
-  to = "https://nu2vqa-ma.myshopify.com/products/original"
-  status = 302
+  to = "/original-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/spicy-tokyo"
-  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
-  status = 302
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/citrus-shoyu"
-  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
-  status = 302
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/trio"
-  to = "https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio"
-  status = 302
+  to = "/ramen-sauce-trio"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/product/the-noodlebomb-trio"
-  to = "https://nu2vqa-ma.myshopify.com/products/the-noodlebomb-trio"
-  status = 302
+  to = "/ramen-sauce-trio"
+  status = 301
   force = true
 
 # June 2026 launch pages: canonical slugs live at the root
@@ -292,17 +292,17 @@
   status = 301
   force = true
 
-# Wix-pattern URLs from old marketing — now bounce to Shopify, NOT Wix
+# Legacy marketing URL patterns stay on the branded site
 [[redirects]]
   from = "/product-page/*"
-  to = "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical"
-  status = 302
+  to = "/shop"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/cart-page"
-  to = "https://nu2vqa-ma.myshopify.com/cart"
-  status = 302
+  to = "/cart"
+  status = 301
   force = true
 
 [[redirects]]
@@ -313,20 +313,20 @@
 
 [[redirects]]
   from = "/ramensauce"
-  to = "https://nu2vqa-ma.myshopify.com/products/original"
-  status = 302
+  to = "/original-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/ramensauce-1"
-  to = "https://nu2vqa-ma.myshopify.com/products/citrus-shoyu"
-  status = 302
+  to = "/citrus-shoyu-ramen-sauce"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/ramensauce-2"
-  to = "https://nu2vqa-ma.myshopify.com/products/spicy-tokyo"
-  status = 302
+  to = "/spicy-tokyo-ramen-sauce"
+  status = 301
   force = true
 
 # Pretty URLs for the local cart/checkout pages

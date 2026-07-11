@@ -81,9 +81,20 @@
   });
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/sw.js').catch(function () {});
-    });
+    var registerServiceWorker = function () {
+      var didReload = false;
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        if (didReload || sessionStorage.getItem('nb_sw_v32_reloaded') === '1') return;
+        didReload = true;
+        sessionStorage.setItem('nb_sw_v32_reloaded', '1');
+        window.location.reload();
+      });
+      navigator.serviceWorker.register('/sw.js?v=20260711', { scope: '/', updateViaCache: 'none' })
+        .then(function (registration) { return registration.update(); })
+        .catch(function () {});
+    };
+    if (document.readyState === 'complete') registerServiceWorker();
+    else window.addEventListener('load', registerServiceWorker, { once: true });
   }
 
   if (!document.querySelector('link[rel="manifest"]')) {
@@ -403,8 +414,8 @@
    rotation is disabled and oNew stays as the static current-labels lead.
    Idempotent + observer-guarded. */
 (function () {
-  var SLIDE_NEW_SRC = '/uploads/nb-hero-lineup-dark-2026-06-07.webp'; // current/new labels — LEAD
-  var SLIDE2_SRC = '/uploads/nb-hero-lineup-rotate-2026-06-15.webp';
+  var SLIDE_NEW_SRC = '/uploads/nb-hero-pour-page.webp'; // current/new labels — LEAD
+  var SLIDE2_SRC = '/uploads/nb-hero-pour-page.webp';
   var INTERVAL = 5000;
   var FADE = 1200;
 
@@ -508,8 +519,8 @@
     if (!cross) return false;
     if (document.querySelector('.pdp-spice-cross')) return true;
     var SPICES = [
-      { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch · 3.2 oz', img: '/uploads/nb-fire-dust-cutout-2026-06-22.webp', href: '/fire-dust' },
-      { slug: 'rgs', name: 'NoodleBomb Roasted Garlic Sesame', label: 'Roasted Garlic Sesame', price: 10.99, tag: 'Toasted garlic · sesame · 3.2 oz', img: '/uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp', href: '/roasted-garlic-sesame' }
+      { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch · 3.2 oz', img: '/uploads/nb-fire-dust-approved-front-20260710-normalized.webp', href: '/fire-dust' },
+      { slug: 'rgs', name: 'NoodleBomb Roasted Garlic Sesame', label: 'Roasted Garlic Sesame', price: 10.99, tag: 'Toasted garlic · sesame · 3.2 oz', img: '/uploads/nb-rgs-approved-front-20260710-normalized.webp', href: '/roasted-garlic-sesame' }
     ];
     var cards = SPICES.map(function (s) {
       return '<a class="pdp-spice-card" href="' + s.href + '" style="display:flex;gap:18px;align-items:center;text-decoration:none;color:inherit;border:1px solid rgba(240,235,227,0.12);border-radius:14px;padding:20px;background:rgba(245,241,234,0.03);">' +
@@ -587,15 +598,11 @@
 
 
 
-/* 2026-07-03 - First Ramen Night Box tracking + direct Shopify handoff */
+/* Monthly Box waitlist tracking; no selling-plan handoff while enrollment is paused. */
 (function () {
-  var base = 'https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798%26properties%5B_first_box_source%5D=';
   function sourceFromPage(el) {
     var params = new URLSearchParams(window.location.search || '');
     return params.get('source') || (el && el.getAttribute('data-source')) || 'site';
-  }
-  function directUrl(source) {
-    return base + encodeURIComponent(String(source || 'site').replace(/[^a-z0-9_-]/gi, '-').toLowerCase());
   }
   function track(source, surface) {
     var detail = { source: source, surface: surface || 'site', code: 'FIRSTBOX50', offer: 'first_ramen_night_box' };
@@ -605,7 +612,7 @@
   function init() {
     document.querySelectorAll('[data-first-box-direct]').forEach(function (el) {
       var source = sourceFromPage(el);
-      el.setAttribute('href', directUrl(source));
+      el.setAttribute('href', '/monthly-box#waitlist');
       el.setAttribute('data-source', source);
     });
     document.addEventListener('click', function (event) {

@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v31-godmode-20260702';
+const NB_CACHE = 'noodlebomb-app-shell-v32-approved-labels-20260711';
 const NB_ASSETS = [
   '/',
   '/index.html',
@@ -18,17 +18,16 @@ const NB_ASSETS = [
   '/favicon.ico',
   '/icons/noodlebomb-icon-192.png',
   '/icons/noodlebomb-icon-512.png',
-  '/uploads/nb-hero-lineup-dark-2026-06-07.webp',
-  '/uploads/nb-hero-lineup-rotate-2026-06-15.webp',
-  '/uploads/nb-original-front-cutout-2026-05-09.webp',
-  '/uploads/nb-spicy-front-cutout-2026-05-09.webp',
-  '/uploads/nb-citrus-front-cutout-2026-05-09.webp',
-  '/uploads/nb-shoyu-reserve-front-cutout-v2-2026-06-07.webp',
-  '/uploads/nb-shoyu-reserve-front-cutout-tight-2026-07-02.webp',
-  '/uploads/nb-shoyu-spicy-front-cutout-tight-2026-07-02.webp',
-  '/uploads/nb-fire-dust-cutout-2026-06-22.webp',
-  '/uploads/nb-roasted-garlic-sesame-cutout-2026-06-22.webp',
-  '/uploads/monthly-subscription-box-2026-05-08.webp'
+  '/uploads/nb-hero-pour-page.webp',
+  '/uploads/nb-original-approved-front-v2-20260710-normalized.webp',
+  '/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp',
+  '/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp',
+  '/uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp',
+  '/uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp',
+  '/uploads/nb-fire-dust-approved-front-20260710-normalized.webp',
+  '/uploads/nb-rgs-approved-front-20260710-normalized.webp',
+  '/uploads/nb-trio-approved-20260711.webp',
+  '/uploads/nb-pour-vs-shake-approved-20260711.webp'
 ];
 
 self.addEventListener('install', (event) => {

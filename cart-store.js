@@ -3,7 +3,7 @@
  * Exposes a single global: window.NB_CART
  *
  * Item shape: { slug, name, price, qty, attributes? }
- *   slug   — internal product key (matches Wix deep-link map keys)
+ *   slug   — internal product key used by the NoodleBomb product map
  *   name   — display label
  *   price  — number, USD
  *   qty    — integer >= 1

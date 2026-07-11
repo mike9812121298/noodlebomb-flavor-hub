@@ -4,7 +4,7 @@
 
 // equivalent (plain JS, no JSX sugar) and re-builds byte-stable through esbuild.
 
-const NB_WIX = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical" };
+const NB_SITE = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop" };
 
 const NB_SHOPIFY_VARIANT_IDS = {
 
@@ -32,11 +32,11 @@ const nbCartPermalink = (slug, qty = 1) => {
 
 const nbCheckoutUrl = (items) => {
 
-  if (!items || items.length === 0) return NB_WIX.shop;
+  if (!items || items.length === 0) return NB_SITE.shop;
 
-  if (items.length === 1) return NB_WIX[items[0].slug] || NB_WIX.shop;
+  if (items.length === 1) return NB_SITE[items[0].slug] || NB_SITE.shop;
 
-  return NB_WIX.shop;
+  return NB_SITE.shop;
 
 };
 
@@ -44,7 +44,7 @@ const NB_BOTTLE_PRICE = 12.99;
 
 const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
 
-const NB_FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper", image: "uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp" };
+const NB_FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper", image: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp" };
 
 const nbAddAndOpenCart = (item, e) => {
 
@@ -788,7 +788,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
       {
 
-        href: NB_WIX.shop,
+        href: NB_SITE.shop,
 
         target: "_blank",
 
