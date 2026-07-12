@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v35-hero-fit-20260711';
+const NB_CACHE = 'noodlebomb-app-shell-v36-mobile-recovery-20260712';
 const NB_ASSETS = [
   '/',
   '/index.html',
@@ -18,7 +18,7 @@ const NB_ASSETS = [
   '/favicon.ico',
   '/icons/noodlebomb-icon-192.png',
   '/icons/noodlebomb-icon-512.png',
-  '/uploads/nb-hero-pour-page.webp',
+  '/uploads/nb-hero-pour-page.webp?v=20260712-mobilefix',
   '/uploads/nb-original-approved-front-v2-20260710-normalized.webp',
   '/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp',
   '/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp',

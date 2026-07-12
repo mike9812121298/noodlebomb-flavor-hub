@@ -242,7 +242,7 @@ const SOY_SAUCES = [
 
 const FOOD_IMAGES = {
 
-  ramen: "uploads/nb-hero-pour-page.webp",
+  ramen: "uploads/nb-hero-pour-page.webp?v=20260712-mobilefix",
 
   stirfry: "uploads/usecase-noodles-v2.jpg",
 
@@ -2704,7 +2704,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     {
 
-      src: "uploads/nb-hero-pour-page.webp",
+      src: "uploads/nb-hero-pour-page.webp?v=20260712-mobilefix",
 
       alt: "NoodleBomb Trio \u2014 Original (left), Spicy Tokyo (center), Citrus Shoyu (right)",
 
@@ -2876,6 +2876,8 @@ function FinalCTA() {
 
       name: "email",
 
+      "aria-label": "Email address for the Monthly Ramen Box waitlist",
+
       placeholder: "Join the waitlist \u00b7 your@email.com",
 
       required: true,
@@ -2901,6 +2903,8 @@ function FinalCTA() {
       type: "email",
 
       name: "email",
+
+      "aria-label": "Email address for NoodleBomb updates",
 
       placeholder: "your@email.com",
 
@@ -5308,8 +5312,6 @@ function MobileAppDock({ flavor, flavors }) {
 
   const [cartCount, setCartCount] = useState(() => window.NB_CART ? window.NB_CART.getItemCount() : 0);
 
-  const [visible, setVisible] = useState(false);
-
   useEffect(() => {
 
     const syncCart = () => setCartCount(window.NB_CART ? window.NB_CART.getItemCount() : 0);
@@ -5321,34 +5323,6 @@ function MobileAppDock({ flavor, flavors }) {
     return () => {
 
       if (unbindCart) unbindCart();
-
-    };
-
-  }, []);
-
-  useEffect(() => {
-
-    const onScroll = () => {
-
-      const starter = document.querySelector("#starter-path");
-
-      const starterStillReading = starter ? starter.getBoundingClientRect().bottom > window.innerHeight * 0.24 : false;
-
-      setVisible(window.scrollY > window.innerHeight * 1.15 && !starterStillReading);
-
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    window.addEventListener("resize", onScroll);
-
-    onScroll();
-
-    return () => {
-
-      window.removeEventListener("scroll", onScroll);
-
-      window.removeEventListener("resize", onScroll);
 
     };
 
@@ -5378,7 +5352,9 @@ function MobileAppDock({ flavor, flavors }) {
 
   const openCart = () => window.dispatchEvent(new CustomEvent("nb-open-cart"));
 
-  return /* @__PURE__ */ React.createElement("nav", { className: "nb-app-dock" + (visible ? " is-visible" : ""), "aria-label": "NoodleBomb mobile app navigation", style: { "--dock-accent": active.color, "--dock-accent-rgb": active.rgb, "--dock-ink": active.ink } }, /* @__PURE__ */ React.createElement("a", { href: "#main-content", onClick: goHash("#main-content"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "N"), /* @__PURE__ */ React.createElement("span", null, "Home")), /* @__PURE__ */ React.createElement("a", { href: cartPermalink("trio"), onClick: (e) => openCartWithFeedback(e, "Opening cart..."), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "+"), /* @__PURE__ */ React.createElement("span", null, "Trio")), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: openCart, className: "nb-app-dock-item nb-app-dock-button" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "C"), /* @__PURE__ */ React.createElement("span", null, "Cart"), cartCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, cartCount)));
+  const dock = /* @__PURE__ */ React.createElement("nav", { className: "nb-app-dock is-visible", "aria-label": "NoodleBomb mobile app navigation", style: { "--dock-accent": active.color, "--dock-accent-rgb": active.rgb, "--dock-ink": active.ink } }, /* @__PURE__ */ React.createElement("a", { href: "#main-content", onClick: goHash("#main-content"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "N"), /* @__PURE__ */ React.createElement("span", null, "Home")), /* @__PURE__ */ React.createElement("a", { href: "#bundle-builder", onClick: goHash("#bundle-builder"), className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "+"), /* @__PURE__ */ React.createElement("span", null, "Build")), /* @__PURE__ */ React.createElement("a", { href: "/monthly-box", className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "$"), /* @__PURE__ */ React.createElement("span", null, "Box")), /* @__PURE__ */ React.createElement("a", { href: "/recipes", className: "nb-app-dock-item" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "R"), /* @__PURE__ */ React.createElement("span", null, "Recipes")), /* @__PURE__ */ React.createElement("button", { type: "button", onClick: openCart, className: "nb-app-dock-item nb-app-dock-button" }, /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-icon", "aria-hidden": "true" }, "C"), /* @__PURE__ */ React.createElement("span", null, "Cart"), cartCount > 0 && /* @__PURE__ */ React.createElement("span", { className: "nb-app-dock-badge" }, cartCount)));
+
+  return ReactDOM.createPortal(dock, document.body);
 
 }
 

@@ -1564,7 +1564,7 @@ function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }
 
       className: "hero-product-bg",
 
-      src: "uploads/nb-hero-pour-page.webp",
+      src: "uploads/nb-hero-pour-page.webp?v=20260712-mobilefix",
 
       alt: "NoodleBomb sauce lineup on a dark background",
 

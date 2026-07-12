@@ -84,12 +84,12 @@
     var registerServiceWorker = function () {
       var didReload = false;
       navigator.serviceWorker.addEventListener('controllerchange', function () {
-        if (didReload || sessionStorage.getItem('nb_sw_v35_reloaded') === '1') return;
+        if (didReload || sessionStorage.getItem('nb_sw_v36_reloaded') === '1') return;
         didReload = true;
-        sessionStorage.setItem('nb_sw_v35_reloaded', '1');
+        sessionStorage.setItem('nb_sw_v36_reloaded', '1');
         window.location.reload();
       });
-      navigator.serviceWorker.register('/sw.js?v=20260711-herofit', { scope: '/', updateViaCache: 'none' })
+      navigator.serviceWorker.register('/sw.js?v=20260712-mobilefix', { scope: '/', updateViaCache: 'none' })
         .then(function (registration) { return registration.update(); })
         .catch(function () {});
     };
@@ -414,8 +414,8 @@
    rotation is disabled and oNew stays as the static current-labels lead.
    Idempotent + observer-guarded. */
 (function () {
-  var SLIDE_NEW_SRC = '/uploads/nb-hero-pour-page.webp'; // current/new labels — LEAD
-  var SLIDE2_SRC = '/uploads/nb-hero-pour-page.webp';
+  var SLIDE_NEW_SRC = '/uploads/nb-hero-pour-page.webp?v=20260712-mobilefix'; // current/new labels — LEAD
+  var SLIDE2_SRC = '/uploads/nb-hero-pour-page.webp?v=20260712-mobilefix';
   var INTERVAL = 5000;
   var FADE = 1200;
 
