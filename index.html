@@ -7498,7 +7498,7 @@
 
     loadDeferredScript('/rewards-config.js');
 
-    loadDeferredScript('/page-shared.js?v=20260711-copycleanup');
+    loadDeferredScript('/page-shared.js?v=20260711-herofit');
 
   }
 
@@ -7532,13 +7532,13 @@
 
     { src: 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js', crossOrigin: 'anonymous' },
 
-    { src: 'build/components.js?v=20260711-copycleanup' },
+    { src: 'build/components.js?v=20260711-herofit' },
 
-    { src: 'build/monthly-drop.js?v=20260711-copycleanup' },
+    { src: 'build/monthly-drop.js?v=20260711-herofit' },
 
-    { src: 'build/next-drop.js?v=20260711-copycleanup' },
+    { src: 'build/next-drop.js?v=20260711-herofit' },
 
-    { src: 'build/app.js?v=20260711-copycleanup' }
+    { src: 'build/app.js?v=20260711-herofit' }
 
   ];
 
@@ -7840,6 +7840,31 @@
 
     .nb-rev-marquee { mask-image: none !important; -webkit-mask-image: none !important; }
 
+  }
+
+  /* Final product-image fit: the Trio artwork is a complete 16:9 composition.
+     Contain it on desktop so Citrus never clips at the viewport edge. On
+     phones, enlarge and offset the same approved artwork so all three bottles
+     remain visible above the sales copy instead of cropping down to one. */
+  .hero-product-bg {
+    object-fit: contain !important;
+    object-position: right center !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .hero-product-bg {
+      width: 180% !important;
+      height: 58% !important;
+      left: -80% !important;
+      right: auto !important;
+      top: 64px !important;
+      bottom: auto !important;
+      object-fit: contain !important;
+      object-position: center top !important;
+      opacity: 0.9 !important;
+    }
   }
 
 </style>

@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v34-copy-label-cleanup-20260711';
+const NB_CACHE = 'noodlebomb-app-shell-v35-hero-fit-20260711';
 const NB_ASSETS = [
   '/',
   '/index.html',

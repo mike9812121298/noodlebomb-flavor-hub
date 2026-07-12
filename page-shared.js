@@ -84,12 +84,12 @@
     var registerServiceWorker = function () {
       var didReload = false;
       navigator.serviceWorker.addEventListener('controllerchange', function () {
-        if (didReload || sessionStorage.getItem('nb_sw_v34_reloaded') === '1') return;
+        if (didReload || sessionStorage.getItem('nb_sw_v35_reloaded') === '1') return;
         didReload = true;
-        sessionStorage.setItem('nb_sw_v34_reloaded', '1');
+        sessionStorage.setItem('nb_sw_v35_reloaded', '1');
         window.location.reload();
       });
-      navigator.serviceWorker.register('/sw.js?v=20260711-copycleanup', { scope: '/', updateViaCache: 'none' })
+      navigator.serviceWorker.register('/sw.js?v=20260711-herofit', { scope: '/', updateViaCache: 'none' })
         .then(function (registration) { return registration.update(); })
         .catch(function () {});
     };
