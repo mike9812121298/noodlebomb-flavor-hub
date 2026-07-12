@@ -242,7 +242,7 @@ const SOY_SAUCES = [
 
 const FOOD_IMAGES = {
 
-  ramen: "uploads/nb-hero-pour-page.webp?v=20260712-mobilefix",
+  ramen: "uploads/nb-hero-pour-page.webp?v=20260712-stability",
 
   stirfry: "uploads/usecase-noodles-v2.jpg",
 
@@ -2704,11 +2704,27 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     {
 
-      src: "uploads/nb-hero-pour-page.webp?v=20260712-mobilefix",
+      src: "uploads/nb-hero-pour-page.webp?v=20260712-stability",
 
       alt: "NoodleBomb Trio \u2014 Original (left), Spicy Tokyo (center), Citrus Shoyu (right)",
 
-      loading: "lazy",
+      loading: "eager",
+
+      fetchPriority: "low",
+
+      decoding: "async",
+
+      onError: (event) => {
+
+        const image = event.currentTarget;
+
+        if (image.dataset.nbRetry === "1") return;
+
+        image.dataset.nbRetry = "1";
+
+        image.src = "/uploads/nb-hero-pour-page.webp?v=20260712-stability-retry";
+
+      },
 
       style: { display: "block", width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", filter: "drop-shadow(0 28px 50px rgba(0,0,0,0.45))" }
 

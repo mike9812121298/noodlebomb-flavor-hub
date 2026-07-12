@@ -20,10 +20,12 @@ describe("mobile storefront shell", () => {
   });
 
   it("uses a fresh hero-image cache key everywhere the approved hero is loaded", () => {
-    const heroUrl = "nb-hero-pour-page.webp?v=20260712-mobilefix";
+    const heroUrl = "nb-hero-pour-page.webp?v=20260712-stability";
     for (const source of [app, components, index, shared, serviceWorker]) {
       expect(source).toContain(heroUrl);
     }
-    expect(serviceWorker).toContain("noodlebomb-app-shell-v36-mobile-recovery-20260712");
+    expect(serviceWorker).toContain("noodlebomb-app-shell-v37-stability-20260712");
+    expect(shared).not.toContain("window.location.reload()");
+    expect(app).toContain('image.dataset.nbRetry = "1"');
   });
 });

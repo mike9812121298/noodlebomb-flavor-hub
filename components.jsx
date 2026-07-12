@@ -1,4 +1,4 @@
-﻿// Reconstructed 2026-07-01 from the live compiled bundle (/build/components.js on noodlebomb.co).
+// Reconstructed 2026-07-01 from the live compiled bundle (/build/components.js on noodlebomb.co).
 
 // The original JSX source lives only in the deploy tree; this file is the compiled
 
@@ -1564,7 +1564,7 @@ function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }
 
       className: "hero-product-bg",
 
-      src: "uploads/nb-hero-pour-page.webp?v=20260712-mobilefix",
+      src: "uploads/nb-hero-pour-page.webp?v=20260712-stability",
 
       alt: "NoodleBomb sauce lineup on a dark background",
 
