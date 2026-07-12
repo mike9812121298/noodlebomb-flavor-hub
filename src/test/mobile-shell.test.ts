@@ -15,6 +15,8 @@ describe("mobile storefront shell", () => {
     expect(app).toContain('href: "/monthly-box"');
     expect(app).toContain('href: "/recipes"');
     expect(app).toContain('React.createElement("span", null, "Cart")');
+    expect(index).toMatch(/\.hero-trust-line\s*\{\s*display:\s*none\s*!important;/);
+    expect(index).toContain("padding: 0 24px 156px !important;");
   });
 
   it("uses a fresh hero-image cache key everywhere the approved hero is loaded", () => {
