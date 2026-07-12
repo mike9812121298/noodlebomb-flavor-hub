@@ -24,8 +24,20 @@ describe("mobile storefront shell", () => {
     for (const source of [app, components, index, shared, serviceWorker]) {
       expect(source).toContain(heroUrl);
     }
-    expect(serviceWorker).toContain("noodlebomb-app-shell-v37-stability-20260712");
+    expect(serviceWorker).toContain("noodlebomb-app-shell-v38-smooth-20260712");
     expect(shared).not.toContain("window.location.reload()");
     expect(app).toContain('image.dataset.nbRetry = "1"');
+  });
+
+  it("keeps expensive motion dormant until it can help the visible experience", () => {
+    expect(app).toContain("const [visible, setVisible] = useState(false)");
+    expect(app).toContain('if (ready || !visible || typeof window === "undefined")');
+    expect(app).toContain('rootMargin: "220px 0px"');
+    expect(app).toContain("compactGlobe ? 1 : 1.65");
+    expect(app).toContain("const [mapActive, setMapActive] = useState(false)");
+    expect(app).toContain("!hasOrderData || !mapActive");
+    expect(index).toContain("build/app.js?v=20260712-smooth");
+    expect(index).toContain("Mobile performance budget");
+    expect(index).toContain(".hero-product-bg { will-change: auto; }");
   });
 });

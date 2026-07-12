@@ -3322,7 +3322,10 @@ function BombGlobe({ mode, autoSpin, spinSpeed, shippedRef, arcsRef, focusRef, s
 
   const [ready, setReady] = useState(typeof window !== "undefined" && !!window.createGlobe);
 
-  const [visible, setVisible] = useState(true);
+  // The WebGL globe is well below the fold. Keep it completely dormant until
+  // the section is near the viewport; starting it during first paint made
+  // mobile Safari compete with scrolling and image decoding.
+  const [visible, setVisible] = useState(false);
 
   const applyZoom = React.useCallback(() => {
 
@@ -3348,7 +3351,7 @@ function BombGlobe({ mode, autoSpin, spinSpeed, shippedRef, arcsRef, focusRef, s
 
   useEffect(() => {
 
-    if (ready || typeof window === "undefined") return void 0;
+    if (ready || !visible || typeof window === "undefined") return void 0;
 
     let alive = true;
 
@@ -3388,7 +3391,7 @@ function BombGlobe({ mode, autoSpin, spinSpeed, shippedRef, arcsRef, focusRef, s
 
     };
 
-  }, [ready]);
+  }, [ready, visible]);
 
   useEffect(() => {
 
@@ -3396,9 +3399,17 @@ function BombGlobe({ mode, autoSpin, spinSpeed, shippedRef, arcsRef, focusRef, s
 
     const el = canvasRef.current && canvasRef.current.closest(".nbg-globe-wrap");
 
-    if (!el || !("IntersectionObserver" in window)) return void 0;
+    if (!el) return void 0;
 
-    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0, rootMargin: "140px" });
+    if (!("IntersectionObserver" in window)) {
+
+      setVisible(true);
+
+      return void 0;
+
+    }
+
+    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), { threshold: 0.01, rootMargin: "220px 0px" });
 
     io.observe(el);
 
@@ -3426,11 +3437,13 @@ function BombGlobe({ mode, autoSpin, spinSpeed, shippedRef, arcsRef, focusRef, s
 
     const compactGlobe = w < 520 || ((_b = (_a = window.matchMedia) == null ? void 0 : _a.call(window, "(pointer: coarse)")) == null ? void 0 : _b.matches);
 
-    const dpr = Math.min(window.devicePixelRatio || 1, compactGlobe ? 1.35 : 1.65);
+    const dpr = Math.min(window.devicePixelRatio || 1, compactGlobe ? 1 : 1.65);
 
-    const mapSamples = compactGlobe ? 9500 : 14500;
+    const mapSamples = compactGlobe ? 5200 : 14500;
 
     const tdef = NBG_THEME;
+
+    let lastFxAt = 0;
 
     function drawFx(phiEff, theta) {
 
@@ -3740,7 +3753,15 @@ function BombGlobe({ mode, autoSpin, spinSpeed, shippedRef, arcsRef, focusRef, s
 
         state.height = widthRef.current * dpr;
 
-        drawFx(state.phi, state.theta);
+        const fxNow = performance.now();
+
+        if (!compactGlobe || fxNow - lastFxAt >= 50) {
+
+          lastFxAt = fxNow;
+
+          drawFx(state.phi, state.theta);
+
+        }
 
       }
 
@@ -3943,6 +3964,8 @@ function OrderMapSection() {
   const [recent, setRecent] = useState([]);
 
   const [revealed, setRevealed] = useState(false);
+
+  const [mapActive, setMapActive] = useState(false);
 
   const [query, setQuery] = useState("");
 
@@ -4340,6 +4363,36 @@ function OrderMapSection() {
 
   }, []);
 
+  useEffect(() => {
+
+    if (typeof window === "undefined") {
+
+      setMapActive(true);
+
+      return void 0;
+
+    }
+
+    const el = sectionRef.current;
+
+    if (!el) return void 0;
+
+    if (!("IntersectionObserver" in window)) {
+
+      setMapActive(true);
+
+      return void 0;
+
+    }
+
+    const io = new IntersectionObserver(([entry]) => setMapActive(entry.isIntersecting), { threshold: 0.01, rootMargin: "220px 0px" });
+
+    io.observe(el);
+
+    return () => io.disconnect();
+
+  }, []);
+
   const dropOrder = React.useCallback(() => {
 
     const pool = shippedRef.current;
@@ -4384,7 +4437,7 @@ function OrderMapSection() {
 
   useEffect(() => {
 
-    if (mode !== "orders" || prefersReduced || !hasOrderData) {
+    if (mode !== "orders" || prefersReduced || !hasOrderData || !mapActive) {
 
       setToastOn(false);
 
@@ -4416,7 +4469,7 @@ function OrderMapSection() {
 
     };
 
-  }, [mode, prefersReduced, hasOrderData, dropOrder]);
+  }, [mode, prefersReduced, hasOrderData, mapActive, dropOrder]);
 
   useEffect(() => () => {
 

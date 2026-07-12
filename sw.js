@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v37-stability-20260712';
+const NB_CACHE = 'noodlebomb-app-shell-v38-smooth-20260712';
 const NB_CURRENT_HERO = '/uploads/nb-hero-pour-page.webp?v=20260712-stability';
 const NB_ASSETS = [
   '/',
