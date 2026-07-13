@@ -266,7 +266,7 @@
     var grouped = [
       container.querySelector('a[href="/about"]'),
       container.querySelector('a[href="/faq"]'),
-      container.querySelector('a[href="#open-contact"], a[href^="mailto:"]')
+      container.querySelector('a[href="/contact"], a[href="#open-contact"], a[href^="mailto:"]')
     ].filter(Boolean);
     if (!grouped.length) return; // page carries none of these to group
 
@@ -619,6 +619,42 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+
+/* Conversion events that remain on the brand domain. Shopify owns the final
+   purchase event, but lead submissions must be visible in GA4 before the
+   browser hands off to the form processor. Beacon transport avoids delaying
+   or breaking the real form submission. */
+(function () {
+  if (typeof document === 'undefined') return;
+  function trackLead(form) {
+    var kind = form.getAttribute('data-lead-form') || 'site';
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          lead_type: kind,
+          form_location: window.location.pathname,
+          transport_type: 'beacon'
+        });
+      }
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'nb_lead_submit',
+          lead_type: kind,
+          form_location: window.location.pathname
+        });
+      }
+    } catch (_) { /* analytics never blocks a form */ }
+  }
+  function initLeadTracking() {
+    document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
+      if (form.dataset.nbLeadTracked === '1') return;
+      form.dataset.nbLeadTracked = '1';
+      form.addEventListener('submit', function () { trackLead(form); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLeadTracking);
+  else initLeadTracking();
 })();
 
 /* \u2500\u2500\u2500\u2500\u2500 Klaviyo-ready email capture (2026-07-02) \u2500\u2500\u2500\u2500\u2500

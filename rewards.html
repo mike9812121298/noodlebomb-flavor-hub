@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=optional" rel="stylesheet">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <style>
   /* Rewards landing - premium layer on /page-shared.css */
   .rw-hero { padding: clamp(68px, 11vw, 150px) 0 clamp(48px, 7vw, 88px); border-bottom: 1px solid var(--line); }
@@ -273,7 +273,7 @@
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/rewards" class="nav-rewards" aria-current="page">Rewards</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
     <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
@@ -288,7 +288,7 @@
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/rewards" class="nav-rewards" aria-current="page">Rewards</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
@@ -484,7 +484,7 @@
         <div class="footer-newsletter-h">Sauce drops, restock alerts, the occasional recipe.</div>
         <div class="footer-newsletter-sub">Once a month. Never spam.</div>
       </div>
-      <form class="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="footer-newsletter-form" data-lead-form="newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
         <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1">
@@ -517,6 +517,6 @@
   </div>
 </footer>
 <script src="/rewards-config.js" defer></script>
-<script src="/page-shared.js?v=20260712-stability" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>

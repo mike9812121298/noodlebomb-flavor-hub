@@ -31,7 +31,7 @@
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-fire-dust-approved-front-20260710-normalized.webp">
 <meta name="twitter:image:alt" content="NoodleBomb Fire Dust seasoning topper jar, front label">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-fire-dust-approved-front-20260710-normalized.webp" fetchpriority="high">
 <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -223,7 +223,7 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
     <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
@@ -238,7 +238,7 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
@@ -275,7 +275,7 @@
               <a class="pdp-cta pdp-cta-2" href="/shop">Shop the sauces &rarr;</a>
             </div>
             <p class="pdp-choice-note">A medium-hot shake-on blend for ramen, eggs, rice, wings, and fries. Pour a sauce, then finish with the shake.</p>
-            <div class="pdp-proof-row"><span>Ships from WA</span><span>Free US shipping $32.99+</span><span>30-day guarantee</span></div>
+            <div class="pdp-proof-row"><span>Ships from WA</span><span>Free US shipping $29.99+</span><span>30-day guarantee</span></div>
           </div>
           <div class="pdp-tags"><span class="pdp-tag">KOREAN CHILI</span><span class="pdp-tag">GARLIC</span><span class="pdp-tag">SESAME</span><span class="pdp-tag">SHIITAKE</span><span class="pdp-tag">MEDIUM-HOT</span></div>
           <dl class="pdp-spec-list">
@@ -287,7 +287,7 @@
             <div><dt>Allergens</dt><dd>Contains sesame &middot; contains MSG</dd></div>
             <div><dt>Ingredients</dt><dd>Korean chili pepper (gochugaru), toasted sesame seed, granulated garlic, shiitake mushroom powder, roasted garlic flakes, sea salt, shallot flakes, dried onion, brown sugar, black pepper, monosodium glutamate, citric acid. Contains: sesame.</dd></div>
           </dl>
-          <p style="font-size:13px;color:var(--ink-40);margin-top:18px;">Free US shipping $32.99+ &middot; If you don&rsquo;t love it, email <a style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;" href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a> in 30 days for a full refund. Keep the jar.</p>
+          <p style="font-size:13px;color:var(--ink-40);margin-top:18px;">Free US shipping $29.99+ &middot; If you don&rsquo;t love it, email <a style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;" href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a> in 30 days for a full refund. Keep the jar.</p>
         </div>
       </div>
     </div>
@@ -345,7 +345,7 @@
         <div class="footer-newsletter-h">Sauce drops, restock alerts, the occasional recipe.</div>
         <div class="footer-newsletter-sub">Once a month. Never spam.</div>
       </div>
-      <form class="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="footer-newsletter-form" data-lead-form="newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
         <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1">
@@ -372,8 +372,8 @@
   </div>
 </footer>
 <script src="/rewards-config.js" defer></script>
-<script src="/cart-store.js?v=20260711-cartprice" defer></script>
-<script src="/page-shared.js?v=20260712-stability" defer></script>
+<script src="/cart-store.js?v=20260712-final2" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 
 
 <script>
@@ -390,7 +390,7 @@
     }));
   });
 
-  // Add to cart — uses the canonical local cart (window.NB_CART from cart-store.js).
+  // Add to cart — uses the canonical local cart (window.NB_CART from cart-store.js?v=20260712-final2).
   // Checkout (on /cart) maps slug 'firedust' -> Shopify variant via shopify-config.js.
   // The href="/cart" is the no-JS fallback; the handler adds the line, then the
   // browser follows the link to the cart.

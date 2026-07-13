@@ -290,7 +290,7 @@
 
 <link rel="preload" as="image" href="uploads/nb-hero-pour-page.webp?v=20260712-stability" fetchpriority="high">
 
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 
 
 
@@ -320,7 +320,7 @@
 
      exposed on window.createGlobe. The Live View component guards for this
 
-     global, so order of execution vs. build/app.js does not matter. -->
+     global, so order of execution vs. build/app.js?v=20260712-final2 does not matter. -->
 
 <script type="module">
 
@@ -6786,7 +6786,7 @@
 
   /* DUPLICATE-WORDMARK FIX (2026-05-07) ════════════════════════════
 
-     The React app (build/app.js) still renders its legacy <nav class="nav">
+     The React app (build/app.js?v=20260712-final2) still renders its legacy <nav class="nav">
 
      on top of the canonical static <nav class="page-nav"> added in d3d8a7c.
 
@@ -7399,7 +7399,7 @@
 
     <a href="/faq">FAQ</a>
 
-    <a href="#open-contact">Contact</a>
+    <a href="/contact">Contact</a>
 
   </div>
 
@@ -7431,7 +7431,7 @@
 
     <a href="/faq">FAQ</a>
 
-    <a href="#open-contact">Contact</a>
+    <a href="/contact">Contact</a>
 
   <a class="drawer-cta" href="/cart?add=trio&amp;qty=1">Get the Trio &rarr;</a>
 
@@ -7477,7 +7477,7 @@
 
 <h2 style="font-family:Inter Tight,sans-serif;font-size:24px;letter-spacing:-0.02em;margin:32px 0 12px;">About</h2>
 
-<p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Built for noodles, rice, wings, dumplings, eggs, vegetables, and more. Free US shipping $32.99+.</p>
+<p style="opacity:0.85;margin:0 0 32px;">Founded by Ashley March in Bonney Lake, WA. Built for noodles, rice, wings, dumplings, eggs, vegetables, and more. Free US shipping $29.99+.</p>
 
 <p><a href="/shop" style="display:inline-block;color:#0E0D0C;background:#E84A3A;padding:14px 28px;text-decoration:none;font-weight:600;border-radius:999px;">Shop the Range →</a></p>
 
@@ -7485,11 +7485,11 @@
 
 
 
-<!-- cart-store.js sets window.NB_CART. Deferred — runs before the build/*.js
+<!-- cart-store.js?v=20260712-final2 sets window.NB_CART. Deferred — runs before the build/*.js
 
      bundles in document order, so window.NB_CART is ready when they evaluate. -->
 
-<script defer src="cart-store.js?v=20260711-cartprice"></script>
+<script defer src="cart-store.js?v=20260712-final2"></script>
 
 <script defer src="reviews-config.js?v=20260702a"></script>
 
@@ -7497,7 +7497,7 @@
 
 <!-- Shopify config + checkout client. Homepage can defer these until after
 
-     first paint because cart state comes from cart-store.js, not these files. -->
+     first paint because cart state comes from cart-store.js?v=20260712-final2, not these files. -->
 
 <script>
 
@@ -7527,7 +7527,7 @@
 
     loadDeferredScript('/rewards-config.js');
 
-    loadDeferredScript('/page-shared.js?v=20260712-stability');
+    loadDeferredScript('/page-shared.js?v=20260712-final2');
 
   }
 
@@ -7561,13 +7561,13 @@
 
     { src: 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js', crossOrigin: 'anonymous' },
 
-    { src: 'build/components.js?v=20260712-stability' },
+    { src: 'build/components.js?v=20260712-final2' },
 
-    { src: 'build/monthly-drop.js?v=20260712-stability' },
+    { src: 'build/monthly-drop.js?v=20260712-final2' },
 
-    { src: 'build/next-drop.js?v=20260712-stability' },
+    { src: 'build/next-drop.js?v=20260712-final2' },
 
-    { src: 'build/app.js?v=20260712-smooth' }
+    { src: 'build/app.js?v=20260712-final2' }
 
   ];
 
@@ -7942,7 +7942,7 @@
 
       </div>
 
-      <form class="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="footer-newsletter-form" data-lead-form="newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
 
         <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup">
 

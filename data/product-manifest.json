@@ -1,0 +1,72 @@
+{
+  "version": "2026-07-12",
+  "currency": "USD",
+  "products": [
+    {
+      "slug": "original",
+      "name": "Original",
+      "price": 12.99,
+      "route": "/original-ramen-sauce",
+      "image": "/uploads/nb-original-approved-front-v2-20260710-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/53998041596214",
+      "gtin": "00198715152555"
+    },
+    {
+      "slug": "spicy",
+      "name": "Spicy Tokyo",
+      "price": 12.99,
+      "route": "/spicy-tokyo-ramen-sauce",
+      "image": "/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/53998042120502"
+    },
+    {
+      "slug": "citrus",
+      "name": "Citrus Shoyu",
+      "price": 12.99,
+      "route": "/citrus-shoyu-ramen-sauce",
+      "image": "/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/53998041071926",
+      "gtin": "00199874424767"
+    },
+    {
+      "slug": "trio",
+      "name": "The NoodleBomb Trio",
+      "price": 32.99,
+      "route": "/ramen-sauce-trio",
+      "image": "/uploads/nb-trio-approved-20260711-960.webp",
+      "variantId": "gid://shopify/ProductVariant/53998042644790"
+    },
+    {
+      "slug": "shoyu",
+      "name": "Shoyu Reserve",
+      "price": 12.99,
+      "route": "/shoyu-reserve",
+      "image": "/uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/54006619636022"
+    },
+    {
+      "slug": "shoyuspicy",
+      "name": "Spicy Shoyu",
+      "price": 12.99,
+      "route": "/spicy-shoyu-ramen-sauce",
+      "image": "/uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/54097354686774"
+    },
+    {
+      "slug": "firedust",
+      "name": "NoodleBomb Fire Dust",
+      "price": 10.99,
+      "route": "/fire-dust",
+      "image": "/uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/54111262146870"
+    },
+    {
+      "slug": "rgs",
+      "name": "NoodleBomb Roasted Garlic Sesame",
+      "price": 10.99,
+      "route": "/roasted-garlic-sesame",
+      "image": "/uploads/nb-rgs-approved-front-20260710-normalized.webp",
+      "variantId": "gid://shopify/ProductVariant/54125810614582"
+    }
+  ]
+}

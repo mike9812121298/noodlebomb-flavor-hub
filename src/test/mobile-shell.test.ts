@@ -36,7 +36,7 @@ describe("mobile storefront shell", () => {
     expect(app).toContain("compactGlobe ? 1 : 1.65");
     expect(app).toContain("const [mapActive, setMapActive] = useState(false)");
     expect(app).toContain("!hasOrderData || !mapActive");
-    expect(index).toContain("build/app.js?v=20260712-smooth");
+    expect(index).toContain("build/app.js?v=20260712-final2");
     expect(index).toContain("Mobile performance budget");
     expect(index).toContain(".hero-product-bg { will-change: auto; }");
   });

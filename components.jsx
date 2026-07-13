@@ -402,7 +402,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
   const cartBottleCount = cartItems.reduce((n, i) => n + (i.slug === "trio" ? 3 : 1) * (Number(i.qty) || 0), 0);
 
-  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 32.99;
+  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 29.99;
 
   const cartFreeShipping = cartSubtotal >= cartFreeShippingThreshold;
 
@@ -438,7 +438,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
     ["FAQ", "/faq"],
 
-    ["Contact", "#open-contact"]
+    ["Contact", "/contact"]
 
   ];
 
@@ -1452,7 +1452,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
       ));
 
-    })(), cartFreeShipping ? /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--accent)", fontFamily: "JetBrains Mono", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 } }, "\u2713 Free US shipping included") : /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--ink-60)", marginBottom: 6, fontFamily: "JetBrains Mono", letterSpacing: "0.1em", textTransform: "uppercase" } }, cartShipRemaining > 0 ? `Add ${fmtUSD(cartShipRemaining)} for FREE US shipping` : "Free US shipping included", " \\u00b7 else $3.50 flat"), /* @__PURE__ */ React.createElement("div", { style: { height: 4, background: "var(--paper-3)", borderRadius: 999, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: cartShipProgress + "%", background: "var(--accent)", borderRadius: 999, transition: "width .3s" } }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, color: "var(--ink-60)" } }, "Subtotal"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 22, color: "var(--accent)", fontVariantNumeric: "tabular-nums" } }, fmtUSD(cartSubtotal))), /* @__PURE__ */ React.createElement(
+    })(), cartFreeShipping ? /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--accent)", fontFamily: "JetBrains Mono", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 } }, "\u2713 Free US shipping included") : /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "var(--ink-60)", marginBottom: 6, fontFamily: "JetBrains Mono", letterSpacing: "0.1em", textTransform: "uppercase" } }, cartShipRemaining > 0 ? `Add ${fmtUSD(cartShipRemaining)} for FREE US shipping` : "Free US shipping included", " \\u00b7 else $3.00 flat"), /* @__PURE__ */ React.createElement("div", { style: { height: 4, background: "var(--paper-3)", borderRadius: 999, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: cartShipProgress + "%", background: "var(--accent)", borderRadius: 999, transition: "width .3s" } }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, color: "var(--ink-60)" } }, "Subtotal"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 22, color: "var(--accent)", fontVariantNumeric: "tabular-nums" } }, fmtUSD(cartSubtotal))), /* @__PURE__ */ React.createElement(
 
       "a",
 
@@ -1875,6 +1875,8 @@ function InquiryModal({ open, kind, onClose }) {
           action: "https://formsubmit.co/hello@noodlebomb.co",
 
           method: "POST",
+
+          "data-lead-form": isWholesale ? "wholesale-modal" : "contact-modal",
 
           onSubmit: () => setSubmitted(true),
 

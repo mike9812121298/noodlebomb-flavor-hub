@@ -500,6 +500,11 @@
   to = "/wholesale.html"
   status = 200
 
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
 # Canonicalize the older static filenames to the search-friendly URLs.
 # (The seasoning-line PDP .html files are NOT canonicalized — live serves
 # them 200 at both URLs as of 2026-07-01. The recipe/use-case SEO pages
@@ -531,8 +536,9 @@
 
 [[redirects]]
   from = "/first-box-50"
-  to = "/first-box-50.html"
-  status = 200
+  to = "/monthly-box#waitlist"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/monthly-box"

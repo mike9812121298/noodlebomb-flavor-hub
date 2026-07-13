@@ -36,10 +36,9 @@ const getCheckoutUrl = (items) => {
   if (!items || items.length === 0) return NB_SITE_URLS.shop;
   return getShopifyCartPermalink(items);
 };
-const FREE_SHIPPING = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 32.99;
+const FREE_SHIPPING = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 29.99;
 const hasFreeShippingTrio = (items) => (items || []).some((i) => i.slug === "trio" && (Number(i.qty) || 0) > 0);
 const getBottleCount = (items) => (items || []).reduce((n, i) => n + (i.slug === "trio" ? 3 : 1) * (Number(i.qty) || 0), 0);
-const FLAT_SHIPPING = 3.5;
 const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
 const FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper" };
 const RITUAL_KIT = {
@@ -55,7 +54,7 @@ const PRODUCT_IMAGES = {
   original: "uploads/nb-original-approved-front-v2-20260710-normalized.webp",
   spicy: "uploads/nb-spicy-approved-front-v3-20260710-normalized.webp",
   citrus: "uploads/nb-citrus-approved-front-v3-20260710-normalized.webp",
-  trio: "uploads/nb-trio-approved-20260711.webp",
+  trio: "uploads/nb-trio-approved-20260711-640.webp",
   shoyu: "uploads/nb-shoyu-reserve-front-approved-20260711-normalized.webp",
   shoyuspicy: "uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp",
   firedust: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
@@ -210,11 +209,45 @@ function BowlClubUpsell({ item }) {
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const trackBeginCheckout = () => {
+    const value = Math.round(items.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.qty || 0), 0) * 100) / 100;
+    const gaItems = items.map((item) => ({
+      item_id: item.slug,
+      item_name: item.name || item.slug,
+      price: Number(item.price || 0),
+      quantity: Number(item.qty || 0)
+    }));
+    try {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "begin_checkout", {
+          currency: "USD",
+          value,
+          items: gaItems,
+          transport_type: "beacon"
+        });
+      }
+      if (window.dataLayer) {
+        window.dataLayer.push({ event: "nb_begin_checkout", currency: "USD", value, items: gaItems });
+      }
+      if (window.NB_PIXEL && typeof window.NB_PIXEL.track === "function") {
+        window.NB_PIXEL.track("InitiateCheckout", {
+          content_ids: items.map((item) => item.slug),
+          contents: items.map((item) => ({ id: item.slug, quantity: Number(item.qty || 0), item_price: Number(item.price || 0) })),
+          num_items: items.reduce((sum, item) => sum + Number(item.qty || 0), 0),
+          value,
+          currency: "USD"
+        });
+      }
+    } catch (_) {
+      // Analytics must never delay or break Shopify checkout.
+    }
+  };
   const onCheckoutClick = (e) => {
     if (checkoutLoading) {
       e.preventDefault();
       return;
     }
+    trackBeginCheckout();
     if (window.NB_SHOPIFY_CHECKOUT && window.NB_SHOPIFY_CHECKOUT.isEnabled()) {
       setCheckoutLoading(true);
       window.NB_SHOPIFY_CHECKOUT.handleCheckoutClick(items, e).finally(() => setCheckoutLoading(false));
@@ -266,7 +299,7 @@ function CartPage() {
       fmtUSD(TRIO.priceUsd)
     ), /* @__PURE__ */ React.createElement("a", { className: "btn btn-secondary", href: "/#lineup", style: { width: "auto", display: "inline-flex", padding: "14px 32px" } }, "Shop the lineup \u2192")), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8, fontSize: 11, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase" } }, "All 3 flavors \xB7 save $5.98"), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 520, margin: "28px auto 0" } }, /* @__PURE__ */ React.createElement(RitualKitCard, { items, variant: "feature" })), /* @__PURE__ */ React.createElement("div", { className: "recommendations" }, RECS.map((r) => /* @__PURE__ */ React.createElement("a", { key: r.slug, className: "rec-card", href: "/?flavor=" + r.slug + "#lineup" }, /* @__PURE__ */ React.createElement("div", { className: "img-wrap" }, /* @__PURE__ */ React.createElement("img", { src: PRODUCT_IMAGES[r.slug], alt: "NoodleBomb " + r.name + " ramen sauce" })), /* @__PURE__ */ React.createElement("h3", null, r.name), /* @__PURE__ */ React.createElement("div", { className: "tag" }, r.tag), /* @__PURE__ */ React.createElement("div", { className: "price-row" }, /* @__PURE__ */ React.createElement("span", { className: "price" }, fmtUSD(r.price)), /* @__PURE__ */ React.createElement("span", { className: "arrow" }, "View \u2192"))))));
   }
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("a", { className: "crumb", href: "/#lineup" }, "\u2190 Continue shopping"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 12, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("h1", { className: "page-title" }, "Your ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--accent)", fontFamily: "Inter Tight", fontStyle: "normal", fontWeight: 800 } }, "cart."))), /* @__PURE__ */ React.createElement("p", { className: "page-meta" }, itemCount, " ", itemCount === 1 ? "item" : "items", " \xB7 secure checkout opens on Shopify"), /* @__PURE__ */ React.createElement("div", { className: "layout" }, /* @__PURE__ */ React.createElement("div", null, freeShipping ? /* @__PURE__ */ React.createElement("div", { className: "card ship-bar unlocked" }, /* @__PURE__ */ React.createElement("div", { className: "icon" }, /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 14, color: "var(--ink)" } }, "\u2713 Free US shipping included"), /* @__PURE__ */ React.createElement("div", { style: { color: "var(--ink-40)", fontSize: 12, marginTop: 2 } }, "Your cart crossed the $32.99 free-shipping line."))) : /* @__PURE__ */ React.createElement("div", { className: "card ship-bar" }, /* @__PURE__ */ React.createElement("div", { className: "row" }, /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink-60)" } }, "Add ", /* @__PURE__ */ React.createElement("span", { className: "accent" }, fmtUSD(remaining)), " for ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink)" } }, "FREE US shipping"), " \xB7 else $3.50 flat"), /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", { className: "track" }, /* @__PURE__ */ React.createElement("div", { className: "fill", style: { width: progress + "%" } }))), showBowlClubUpsell && /* @__PURE__ */ React.createElement(BowlClubUpsell, { item: singleBottleItem }), showRitualKit && /* @__PURE__ */ React.createElement(RitualKitCard, { items, variant: "inline" }), (() => {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("a", { className: "crumb", href: "/#lineup" }, "\u2190 Continue shopping"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 12, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("h1", { className: "page-title" }, "Your ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--accent)", fontFamily: "Inter Tight", fontStyle: "normal", fontWeight: 800 } }, "cart."))), /* @__PURE__ */ React.createElement("p", { className: "page-meta" }, itemCount, " ", itemCount === 1 ? "item" : "items", " \xB7 secure checkout opens on Shopify"), /* @__PURE__ */ React.createElement("div", { className: "layout" }, /* @__PURE__ */ React.createElement("div", null, freeShipping ? /* @__PURE__ */ React.createElement("div", { className: "card ship-bar unlocked" }, /* @__PURE__ */ React.createElement("div", { className: "icon" }, /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 700, fontSize: 14, color: "var(--ink)" } }, "\u2713 Free US shipping included"), /* @__PURE__ */ React.createElement("div", { style: { color: "var(--ink-40)", fontSize: 12, marginTop: 2 } }, "Your cart crossed the $29.99 free-shipping line."))) : /* @__PURE__ */ React.createElement("div", { className: "card ship-bar" }, /* @__PURE__ */ React.createElement("div", { className: "row" }, /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink-60)" } }, "Add ", /* @__PURE__ */ React.createElement("span", { className: "accent" }, fmtUSD(remaining)), " for ", /* @__PURE__ */ React.createElement("span", { style: { color: "var(--ink)" } }, "FREE US shipping"), " \xB7 else $3.00 flat"), /* @__PURE__ */ React.createElement(Truck, null)), /* @__PURE__ */ React.createElement("div", { className: "track" }, /* @__PURE__ */ React.createElement("div", { className: "fill", style: { width: progress + "%" } }))), showBowlClubUpsell && /* @__PURE__ */ React.createElement(BowlClubUpsell, { item: singleBottleItem }), showRitualKit && /* @__PURE__ */ React.createElement(RitualKitCard, { items, variant: "inline" }), (() => {
     if (!showTrioUpsell) return null;
     const singleSlugs = trioSingleSlugs;
     const singleCount = trioSingleCount;
@@ -309,7 +342,7 @@ function CartPage() {
     } }, /* @__PURE__ */ React.createElement(
       "img",
       {
-        src: "uploads/nb-trio-approved-20260711.webp",
+        src: "uploads/nb-trio-approved-20260711-640.webp",
         alt: "The NoodleBomb Trio",
         loading: "lazy",
         style: { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }
@@ -407,7 +440,7 @@ function CartPage() {
       style: { opacity: checkoutLoading ? 0.7 : 1, pointerEvents: checkoutLoading ? "none" : "auto" }
     },
     checkoutLoading ? "Opening checkout\u2026" : `Secure checkout \u2014 ${fmtUSD(subtotal)}`
-  ), items.length > 1 && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "4px 14px", justifyContent: "center", paddingTop: 2 } }, items.map((it) => NB_SITE_URLS[it.slug] && /* @__PURE__ */ React.createElement("a", { key: it.slug, href: NB_SITE_URLS[it.slug], style: { fontFamily: "JetBrains Mono", fontSize: 9, letterSpacing: "0.13em", color: "var(--ink-40)", textDecoration: "underline", textUnderlineOffset: 3, textTransform: "uppercase" } }, it.name, " \u2192"))), /* @__PURE__ */ React.createElement("a", { className: "btn btn-secondary", href: "/#lineup", style: { display: "inline-flex" } }, "Continue shopping")), /* @__PURE__ */ React.createElement("div", { className: "trust" }, /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Shield, null), " Secure SSL checkout"), /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Truck, null), " $3.50 flat US shipping \xB7 FREE on $32.99+ US orders"), /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Repeat, null), " 30-day satisfaction guarantee"), /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Check, null), " Ships from Bonney Lake, WA")))), /* @__PURE__ */ React.createElement("div", { className: "sticky-mobile" }, /* @__PURE__ */ React.createElement("div", { className: "total" }, /* @__PURE__ */ React.createElement("small", null, "Subtotal"), /* @__PURE__ */ React.createElement("strong", null, fmtUSD(subtotal))), /* @__PURE__ */ React.createElement(
+  ), items.length > 1 && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "4px 14px", justifyContent: "center", paddingTop: 2 } }, items.map((it) => NB_SITE_URLS[it.slug] && /* @__PURE__ */ React.createElement("a", { key: it.slug, href: NB_SITE_URLS[it.slug], style: { fontFamily: "JetBrains Mono", fontSize: 9, letterSpacing: "0.13em", color: "var(--ink-40)", textDecoration: "underline", textUnderlineOffset: 3, textTransform: "uppercase" } }, it.name, " \u2192"))), /* @__PURE__ */ React.createElement("a", { className: "btn btn-secondary", href: "/#lineup", style: { display: "inline-flex" } }, "Continue shopping")), /* @__PURE__ */ React.createElement("div", { className: "trust" }, /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Shield, null), " Secure SSL checkout"), /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Truck, null), " $3.00 flat US shipping \xB7 FREE on $29.99+ US orders"), /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Repeat, null), " 30-day satisfaction guarantee"), /* @__PURE__ */ React.createElement("div", { className: "trust-row" }, /* @__PURE__ */ React.createElement(Check, null), " Ships from Bonney Lake, WA")))), /* @__PURE__ */ React.createElement("div", { className: "sticky-mobile" }, /* @__PURE__ */ React.createElement("div", { className: "total" }, /* @__PURE__ */ React.createElement("small", null, "Subtotal"), /* @__PURE__ */ React.createElement("strong", null, fmtUSD(subtotal))), /* @__PURE__ */ React.createElement(
     "a",
     {
       className: "btn",

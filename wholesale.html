@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=optional" rel="stylesheet">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Wholesale Ramen Sauce","description":"Wholesale ramen sauce and specialty food wholesale inquiries for NoodleBomb.","url":"https://noodlebomb.co/wholesale","publisher":{"@type":"Organization","name":"NoodleBomb","url":"https://noodlebomb.co"}}</script>
 </head>
 <body class="grain">
@@ -51,7 +51,7 @@
     <a href="/wholesale" aria-current="page">Wholesale</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry">Request sheet</a>
+    <a class="nav-cta" href="#wholesale-form">Request sheet</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -62,7 +62,7 @@
   <a href="/recipes">Recipes</a>
   <a href="/about">About</a>
   <a href="/wholesale" aria-current="page">Wholesale</a>
-  <a class="drawer-cta" href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry">Request sheet</a>
+  <a class="drawer-cta" href="#wholesale-form">Request sheet</a>
 </div>
 
 <main id="main">
@@ -72,7 +72,7 @@
       <h1 class="display">Wholesale ramen sauce <br><em>for retail shelves.</em></h1>
       <p class="lede">NoodleBomb is a premium ramen sauce brand built for specialty grocery, ramen shops, gift boxes, and everyday savory food.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;">
-        <a class="btn btn-accent" href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry">Request wholesale sheet</a>
+        <a class="btn btn-accent" href="#wholesale-form">Request wholesale sheet</a>
         <a class="btn btn-ghost" href="/shop">View lineup</a>
       </div>
     </div>
@@ -109,11 +109,48 @@
 
   <section class="page-section">
     <div class="container narrow">
+      <div id="wholesale-sent" class="nb-form-status" hidden role="status">Thanks. Your wholesale request was sent to the NoodleBomb team.</div>
       <div class="kicker">Request access</div>
       <h2 class="serif">Send your store details.</h2>
       <p>Email your store name, location, buyer contact, resale certificate status, and the products you want to carry. The team will reply with the current wholesale sheet and next steps.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-accent" href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry&body=Store%20name:%0ALocation:%0ABuyer%20contact:%0AProducts%20of%20interest:%0AResale%20certificate:%0A">Email wholesale inquiry</a>
+      <form id="wholesale-form" class="nb-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST" data-lead-form="wholesale">
+        <input type="hidden" name="_subject" value="NoodleBomb Wholesale Inquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://noodlebomb.co/wholesale?sent=1">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;">
+        <div class="nb-form-field">
+          <label for="wholesale-store">Store name</label>
+          <input id="wholesale-store" name="store_name" type="text" autocomplete="organization" required>
+        </div>
+        <div class="nb-form-field">
+          <label for="wholesale-buyer">Buyer name</label>
+          <input id="wholesale-buyer" name="buyer_name" type="text" autocomplete="name" required>
+        </div>
+        <div class="nb-form-field">
+          <label for="wholesale-email">Buyer email</label>
+          <input id="wholesale-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="nb-form-field">
+          <label for="wholesale-phone">Phone</label>
+          <input id="wholesale-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="nb-form-field">
+          <label for="wholesale-city">City</label>
+          <input id="wholesale-city" name="city" type="text" autocomplete="address-level2" required>
+        </div>
+        <div class="nb-form-field">
+          <label for="wholesale-state">State or region</label>
+          <input id="wholesale-state" name="state_region" type="text" autocomplete="address-level1" required>
+        </div>
+        <div class="nb-form-field nb-form-field--full">
+          <label for="wholesale-interest">Products and store details</label>
+          <textarea id="wholesale-interest" name="products_and_store_details" placeholder="Tell us what you want to carry and how many locations you buy for." required></textarea>
+        </div>
+        <p class="nb-form-note nb-form-field--full">We use these details only to answer your wholesale request. Prefer email? <a href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry">hello@noodlebomb.co</a>.</p>
+        <button class="btn btn-accent" type="submit">Send wholesale request</button>
+      </form>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;">
         <a class="btn btn-ghost" href="/faq">Wholesale FAQ</a>
       </div>
     </div>
@@ -123,7 +160,7 @@
     <div class="container">
       <h2 class="display">Bring NoodleBomb<br><em>to the shelf.</em></h2>
       <p>Wholesale ramen sauce, soy sauce, and shake-on seasoning inquiries go straight to the NoodleBomb team.</p>
-      <a class="btn btn-accent" href="mailto:hello@noodlebomb.co?subject=Wholesale%20Inquiry">Request wholesale sheet</a>
+      <a class="btn btn-accent" href="#wholesale-form">Request wholesale sheet</a>
     </div>
   </section>
 </main>
@@ -148,6 +185,12 @@
     </div>
   </div>
 </footer>
-<script src="/page-shared.js?v=20260712-stability" defer></script>
+<script>
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    var status = document.getElementById('wholesale-sent');
+    if (status) status.hidden = false;
+  }
+</script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>

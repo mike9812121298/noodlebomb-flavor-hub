@@ -113,6 +113,8 @@
 /terms              /terms.html              200
 /shipping-returns   /shipping-returns.html   200
 /wholesale          /wholesale.html          200
+/contact            /contact.html            200
+/first-box-50       /monthly-box#waitlist     301!
 # The recipe/use-case SEO pages (sauce-for-*, ramen-sauce-for-*,
 # what-is-shoyu, …) rely on Netlify/Cloudflare default pretty-URL
 # resolution of /<slug> -> /<slug>.html — no explicit rules needed.
