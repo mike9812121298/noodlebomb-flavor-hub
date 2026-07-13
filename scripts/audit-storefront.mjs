@@ -30,6 +30,8 @@ function localFileForUrl(value) {
 const manifest = JSON.parse(read('data/product-manifest.json'));
 const catalogSource = read('cart-store.js');
 const shopifySource = read('shopify-config.js');
+const appSource = read('app.jsx');
+const shellSource = `${appSource}\n${read('components.jsx')}\n${read('index.html')}`;
 
 check(manifest.products.length === 8, 'manifest has exactly 8 revenue products');
 
@@ -92,6 +94,29 @@ for (const file of htmlFiles) {
 
 const htmlText = htmlFiles.map((file) => read(file)).join('\n');
 check(!/href=["']#open-(?:contact|wholesale)["']/i.test(htmlText), 'no dead contact or wholesale sentinel links');
+
+const validHomepageFragmentTargets = new Set([
+  'main-content',
+  'starter-path',
+  'ingredients',
+  'bundle-builder',
+  'order-map',
+  'stores',
+  'monthly',
+  'lineup',
+  'faq',
+  'cta'
+]);
+const navigationFragmentTargets = new Set([
+  ...[...shellSource.matchAll(/\bhref\s*(?:=|:)\s*["']#([a-z][a-z0-9-]+)["']/gi)].map((match) => match[1]),
+  ...[...shellSource.matchAll(/\[\s*["'][^"']+["']\s*,\s*["']\/?#([a-z][a-z0-9-]+)["']\s*\]/gi)].map((match) => match[1])
+].filter((target) => !target.startsWith('open-')));
+for (const target of navigationFragmentTargets) {
+  check(
+    validHomepageFragmentTargets.has(target),
+    `homepage navigation fragment #${target} is a rendered section or handled alias`
+  );
+}
 
 console.log(`Storefront audit: ${passes.length} checks passed, ${failures.length} failed.`);
 if (failures.length) {

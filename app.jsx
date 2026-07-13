@@ -2934,7 +2934,7 @@ function FinalCTA() {
 
     ["Shop", [["Original", SITE_URLS.original], ["Spicy Tokyo", SITE_URLS.spicy], ["Citrus Shoyu", SITE_URLS.citrus], ["The NoodleBomb Trio", SITE_URLS.trio], ["Shoyu Reserve", SITE_URLS.shoyu], ["Monthly Ramen Box", "#monthly"]]],
 
-    ["Learn", [["Recipes", "/recipes"], ["Flavor Finder", "#ingredients"], ["Sauce Lineup", "#lineup"], ["The Pour", "#pour"], ["Monthly Ramen Box", "#monthly"]]],
+    ["Learn", [["Recipes", "/recipes"], ["Flavor Finder", "#ingredients"], ["Sauce Lineup", "#lineup"], ["Monthly Ramen Box", "#monthly"]]],
 
     ["Company", [["About", "/about"], ["Where to Buy", "/#stores"], ["FAQ", "/faq"], ["Wholesale", "/wholesale"], ["Contact", "/contact"], ["hello@noodlebomb.co", "mailto:hello@noodlebomb.co"], ["253-486-3445", "tel:+12534863445"]]]
 
