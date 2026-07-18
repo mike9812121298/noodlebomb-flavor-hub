@@ -6127,13 +6127,13 @@ const TDROP_PRODUCTS = [
 
   {
 
-    key: "firedust-feature",
+    key: "spicy-shoyu-feature",
 
-    slug: "firedust",
+    slug: "shoyuspicy",
 
-    name: "Fire Dust",
+    name: "Spicy Shoyu",
 
-    price: 10.99,
+    price: 12.99,
 
     glowRgb: "232,74,58",
 
@@ -6143,9 +6143,9 @@ const TDROP_PRODUCTS = [
 
     glowBg: "radial-gradient(46% 44% at 50% 42%, rgba(232,74,58,0.28), rgba(232,74,58,0) 70%)",
 
-    img: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp",
+    img: "uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp",
 
-    alt: "NoodleBomb Fire Dust seasoning topper"
+    alt: "NoodleBomb Spicy Shoyu bottle"
 
   },
 
@@ -6473,9 +6473,9 @@ function TheDrop() {
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { font: `700 11px ${TDROP_MONO}`, letterSpacing: "0.18em", color: "#E84A3A" } }, "NO.02 \u00b7 WANT HEAT"), /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true", style: { font: `700 22px/1 ${TDROP_SERIF}`, color: "rgba(232,74,58,0.6)" } }, "\u8f9b")),
 
-      /* @__PURE__ */ React.createElement("h3", { style: { font: `800 26px/1 ${TDROP_DISP}`, letterSpacing: "-0.02em", margin: "10px 0 5px", color: "#F0EBE3" } }, "Fire Dust."),
+      /* @__PURE__ */ React.createElement("h3", { style: { font: `800 26px/1 ${TDROP_DISP}`, letterSpacing: "-0.02em", margin: "10px 0 5px", color: "#F0EBE3" } }, "Spicy Shoyu."),
 
-      /* @__PURE__ */ React.createElement("p", { style: { font: `400 14px/1.5 ${TDROP_DISP}`, color: "rgba(240,235,227,0.62)", margin: "0 0 14px" } }, "Korean chili crunch seasoning for ramen, eggs, rice, wings, and vegetables."),
+      /* @__PURE__ */ React.createElement("p", { style: { font: `400 14px/1.5 ${TDROP_DISP}`, color: "rgba(240,235,227,0.62)", margin: "0 0 14px" } }, "Slow-brewed shoyu depth. Datil pepper heat."),
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, /* @__PURE__ */ React.createElement(TheDropMeter, { label: "UMAMI", pct: "88%", kind: "umami" }), /* @__PURE__ */ React.createElement(TheDropMeter, { label: "HEAT", pct: "74%", kind: "heat" })),
 

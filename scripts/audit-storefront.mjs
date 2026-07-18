@@ -71,6 +71,7 @@ for (const pattern of forbiddenAssetPatterns) {
 }
 
 check(!/aggregateRating/i.test(productionText), 'no fabricated aggregateRating markup');
+check(!/SHOYU10/i.test(productionText), 'customer copy has no retired SHOYU10 discount promise');
 const spicyShoyuPdp = read('product-spicy-shoyu.html');
 check(
   spicyShoyuPdp.includes("Soybeans, sugar, wheat flour, water, grapeseed oil, red pepper flake, datil Pepper") &&
@@ -112,6 +113,27 @@ check(monthlyVariantUrl.test(monthlyBoxSources), 'Monthly Box live Shopify varia
 check(premiumVariantUrl.test(monthlyBoxSources), 'Premium Box live Shopify variant and selling plan are wired');
 check(!/wait.?list|subscriptions? (?:are|is) (?:currently )?paused|enrollment (?:is )?paused|enrollment reopens/i.test(monthlyBoxSources), 'Monthly Box customer surfaces have no stale waitlist or paused-enrollment copy');
 check((read('monthly-box.html').match(/https:\/\/schema\.org\/InStock/g) || []).length === 2, 'Monthly Box structured data marks both live plans InStock');
+
+const theDropSource = appSource.match(/const TDROP_PRODUCTS = \[([\s\S]*?)\n\];/)?.[1] || '';
+const theDropSlugs = [...theDropSource.matchAll(/slug:\s*"([^"]+)"/g)].map((match) => match[1]);
+const theDropNames = [...theDropSource.matchAll(/name:\s*"([^"]+)"/g)].map((match) => match[1]);
+const theDropPrices = [...theDropSource.matchAll(/price:\s*([0-9.]+)/g)].map((match) => Number(match[1]));
+check(
+  JSON.stringify(theDropSlugs) === JSON.stringify(['shoyu', 'shoyuspicy', 'firedust']),
+  'homepage drop adds Shoyu Reserve, Spicy Shoyu, and Fire Dust exactly once'
+);
+check(
+  JSON.stringify(theDropNames) === JSON.stringify(['Shoyu Reserve', 'Spicy Shoyu', 'Fire Dust']),
+  'homepage drop labels match the three configured products'
+);
+check(
+  JSON.stringify(theDropPrices) === JSON.stringify([12.99, 12.99, 10.99]),
+  'homepage drop prices match the configured products'
+);
+check(
+  /Both sauces \+ Fire Dust/.test(appSource) && /\$36\.97/.test(appSource),
+  'homepage full-drop copy describes the configured products and matches their total'
+);
 
 const htmlFiles = fs.readdirSync(root).filter((file) => file.endsWith('.html'));
 for (const file of htmlFiles) {
