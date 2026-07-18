@@ -31,6 +31,7 @@ const manifest = JSON.parse(read('data/product-manifest.json'));
 const catalogSource = read('cart-store.js');
 const shopifySource = read('shopify-config.js');
 const appSource = read('app.jsx');
+const sharedCss = read('page-shared.css');
 const shellSource = `${appSource}\n${read('components.jsx')}\n${read('index.html')}`;
 
 check(manifest.products.length === 8, 'manifest has exactly 8 revenue products');
@@ -72,6 +73,7 @@ for (const pattern of forbiddenAssetPatterns) {
 
 check(!/aggregateRating/i.test(productionText), 'no fabricated aggregateRating markup');
 check(!/SHOYU10/i.test(productionText), 'customer copy has no retired SHOYU10 discount promise');
+check(!/\.recipe-card\s*\{[^}]*animation:\s*recipeRise/s.test(sharedCss), 'recipe cards do not depend on an opacity entrance animation');
 const spicyShoyuPdp = read('product-spicy-shoyu.html');
 check(
   spicyShoyuPdp.includes("Soybeans, sugar, wheat flour, water, grapeseed oil, red pepper flake, datil Pepper") &&
