@@ -96,7 +96,7 @@ function MonthlyDrop() {
 
         color: 'var(--muted)',
 
-        opacity: 0.55,
+        opacity: 0.9,
 
         pointerEvents: 'none'
 

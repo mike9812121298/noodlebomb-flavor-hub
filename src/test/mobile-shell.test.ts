@@ -21,12 +21,18 @@ describe("mobile storefront shell", () => {
 
   it("uses a fresh hero-image cache key everywhere the approved hero is loaded", () => {
     const heroUrl = "nb-hero-pour-page.webp?v=20260712-stability";
-    for (const source of [app, components, index, shared, serviceWorker]) {
+    for (const source of [app, components, index, serviceWorker]) {
       expect(source).toContain(heroUrl);
     }
     expect(serviceWorker).toContain("noodlebomb-app-shell-v38-smooth-20260712");
     expect(shared).not.toContain("window.location.reload()");
     expect(app).toContain('image.dataset.nbRetry = "1"');
+  });
+
+  it("renders one fixed React hero without static swap or deferred boot scripts", () => {
+    expect(shared).not.toMatch(/Hero crossfade slideshow|nb-hero-slide/);
+    expect(index.match(/^\s*bootApp\(\);/gm)).toHaveLength(1);
+    expect(index).not.toMatch(/addEventListener\([^\n]*bootApp/);
   });
 
   it("keeps expensive motion dormant until it can help the visible experience", () => {

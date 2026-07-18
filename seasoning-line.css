@@ -65,8 +65,8 @@ body.launch-page {
   padding: 8px 13px;
   border: 1px solid rgba(245, 239, 230, 0.2);
   border-radius: 999px;
-  background: rgba(8, 7, 6, 0.52);
-  color: var(--nb-ink-soft);
+  background: rgba(8, 7, 6, 0.92);
+  color: #F5EFE6;
   font-family: "JetBrains Mono", monospace;
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -1289,7 +1289,7 @@ body.launch-page {
 
 .bundle-strip p {
   margin: 0;
-  color: var(--nb-ink-soft);
+  color: var(--ink, #F0EBE3);
 }
 
 @keyframes nbFloat {
@@ -1591,4 +1591,12 @@ body.launch-page .page-footer .nav-brand {
   background: var(--accent, #D4A24A);
   border-color: var(--accent, #D4A24A);
   color: var(--accent-ink, #0E0D0C);
+}
+.sku-add:disabled {
+  cursor: not-allowed;
+  opacity: 0.78;
+  background: rgba(245, 241, 234, 0.04);
+  border-color: rgba(240, 235, 227, 0.18);
+  color: var(--ink-60, rgba(240,235,227,0.82));
+  transform: none;
 }

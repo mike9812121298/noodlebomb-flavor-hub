@@ -16,9 +16,7 @@
 
 
 
-<!-- Google tag (gtag.js) -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<!-- Google tag: queue immediately, load after engagement/first paint. -->
 
 <script>
 
@@ -29,6 +27,21 @@
   gtag('js', new Date());
 
   gtag('config', 'G-34HRPRKYCQ');
+
+  function NBLoadGoogleTag() {
+    if (document.getElementById('nb-google-tag')) return;
+    var script = document.createElement('script');
+    script.id = 'nb-google-tag';
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ';
+    document.head.appendChild(script);
+  }
+
+  window.NBLoadGoogleTag = NBLoadGoogleTag;
+  window.addEventListener('pointerdown', NBLoadGoogleTag, { once: true, passive: true });
+  window.addEventListener('keydown', NBLoadGoogleTag, { once: true });
+  window.addEventListener('scroll', NBLoadGoogleTag, { once: true, passive: true });
+  window.addEventListener('load', function () { window.setTimeout(NBLoadGoogleTag, 12000); }, { once: true });
 
 </script>
 
@@ -7637,19 +7650,9 @@
 
   window.NBBootHomepageApp = bootApp;
 
-  window.addEventListener('pointerdown', bootApp, { once: true, passive: true });
+  // Eager boot: paint the real React TRIO hero on the first frame. Keep this
 
-  window.addEventListener('keydown', bootApp, { once: true });
-
-  window.addEventListener('scroll', bootApp, { once: true, passive: true });
-
-  // Eager boot (surgical fix 2026-06-07): paint the real React TRIO hero on
-
-  // first load with no static-placeholder flash. Interaction listeners above
-
-  // remain as an idempotent fallback. NBLoadCobeGlobe (globe lazy-load) is
-
-  // intentionally untouched so the globe still loads on demand.
+  // as the only boot path; interaction-triggered booting caused blank starts.
 
   bootApp();
 

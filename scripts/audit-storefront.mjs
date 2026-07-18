@@ -41,7 +41,11 @@ for (const product of manifest.products) {
     's'
   );
   check(pricePattern.test(catalogSource), `${product.slug} catalog name and price match manifest`);
-  check(shopifySource.includes(`${product.slug}:`) && shopifySource.includes(product.variantId), `${product.slug} Shopify variant mapping matches manifest`);
+  if (product.available === false) {
+    check(!shopifySource.includes(`${product.slug}:`), `${product.slug} safety hold removes Shopify variant mapping`);
+  } else {
+    check(shopifySource.includes(`${product.slug}:`) && shopifySource.includes(product.variantId), `${product.slug} Shopify variant mapping matches manifest`);
+  }
   check(exists(product.image), `${product.slug} approved image exists`, product.image);
 }
 

@@ -39,12 +39,20 @@
       else window.fbq('track', event);
     } catch (e) {}
   }
-  ensureFbq();
-  if (!window.__nbPixelPageViewFired) {       // PageView exactly once per page load
+  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  function firePageView() {
+    if (window.__nbPixelPageViewFired) return;
     window.__nbPixelPageViewFired = true;
     track('PageView');
   }
-  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  if ((location.pathname.replace(/\/$/, '') || '/') === '/') {
+    window.addEventListener('pointerdown', firePageView, { once: true, passive: true });
+    window.addEventListener('keydown', firePageView, { once: true });
+    window.addEventListener('scroll', firePageView, { once: true, passive: true });
+    window.addEventListener('load', function () { window.setTimeout(firePageView, 12000); }, { once: true });
+  } else {
+    firePageView();
+  }
 })();
 
 (function () {
@@ -54,7 +62,9 @@
   var BUS = (typeof window !== 'undefined') ? new EventTarget() : null;
   var CHANGE = 'nb-cart-change';
   var FREE_SHIPPING_THRESHOLD = 29.99;
-  var RETIRED_SLUGS = {};  // Spicy Shoyu is live; keep this empty unless Mike retires a slug.
+  // Temporary safety hold: remove the SKU from saved carts and reject every
+  // direct/add-to-cart path until its final physical ingredient panel is verified.
+  var RETIRED_SLUGS = { shoyuspicy: true };
   var PRODUCT_CATALOG = {
     original: { slug: 'original', name: 'Original', price: 12.99 },
     spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 12.99 },

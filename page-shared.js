@@ -33,12 +33,20 @@
       else window.fbq('track', event);
     } catch (e) {}
   }
-  ensureFbq();
-  if (!window.__nbPixelPageViewFired) {       // PageView exactly once per page load
+  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  function firePageView() {
+    if (window.__nbPixelPageViewFired) return;
     window.__nbPixelPageViewFired = true;
     track('PageView');
   }
-  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  if ((location.pathname.replace(/\/$/, '') || '/') === '/') {
+    window.addEventListener('pointerdown', firePageView, { once: true, passive: true });
+    window.addEventListener('keydown', firePageView, { once: true });
+    window.addEventListener('scroll', firePageView, { once: true, passive: true });
+    window.addEventListener('load', function () { window.setTimeout(firePageView, 12000); }, { once: true });
+  } else {
+    firePageView();
+  }
 })();
 
 (function () {
@@ -121,6 +129,13 @@
 (function () {
   if (window.__nbSmileLauncherLoaded) return;
   window.__nbSmileLauncherLoaded = true;
+
+  // Smile only authorizes the production storefront origin. Netlify draft
+  // subdomains otherwise emit unavoidable CORS errors during preview QA.
+  if (/\.netlify\.app$/i.test(location.hostname)) {
+    window.NBLoadSmileLauncher = function () {};
+    return;
+  }
 
   var KEY = 'pub_2d27941cfeaca289';
   if (!KEY || KEY.indexOf('pub_') !== 0) return;
@@ -398,109 +413,6 @@
   }
 })();
 
-/* ───────── Hero crossfade slideshow (safe additive DOM overlay, 2026-06-15) ─────────
-   Rotates the homepage hero across THREE slides. Pure overlay — does NOT touch the
-   React bundle. Two <img>s are injected directly above the base hero image but BELOW
-   the gradient scrims (no positive z-index, so paint order = DOM order and the scrims
-   + headline/CTA copy panel stay on top and legible on ALL slides):
-     base (React, dark studio) → oRotate (full lineup) → oNew (CURRENT labels, topmost)
-   oNew carries the current packaging and is the LEAD slide: it starts visible so the
-   FIRST PAINT shows the current labels, then the cycle rotates new → base → rotate → new.
-   Auto-crossfade ~5s, pause on hover / hidden tab. Under prefers-reduced-motion the
-   rotation is disabled and oNew stays as the static current-labels lead.
-   Idempotent + observer-guarded. */
-(function () {
-  var SLIDE_NEW_SRC = '/uploads/nb-hero-pour-page.webp?v=20260712-stability'; // current/new labels — LEAD
-  var SLIDE2_SRC = '/uploads/nb-hero-pour-page.webp?v=20260712-stability';
-  var INTERVAL = 5000;
-  var FADE = 1200;
-
-  function initHeroRotator() {
-    var media = document.querySelector('.hero-section .hero-bg-media');
-    if (!media) return false;
-    if (media.getAttribute('data-nb-rotator') === '1') return true;
-    var base = media.querySelector('.hero-product-bg');
-    if (!base) return false;
-    media.setAttribute('data-nb-rotator', '1');
-
-    var reduce = false;
-    try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-
-    var OVERLAY_CSS = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;transform:none;opacity:0;transition:opacity ' + FADE + 'ms ease;will-change:opacity;pointer-events:none;';
-    function mkSlide(src, cls) {
-      var img = document.createElement('img');
-      img.className = 'hero-product-bg ' + cls;
-      img.src = src;
-      img.alt = '';
-      img.setAttribute('aria-hidden', 'true');
-      img.setAttribute('decoding', 'async');
-      img.style.cssText = OVERLAY_CSS;
-      return img;
-    }
-
-    // DOM order within .hero-bg-media, all BELOW the gradient scrims:
-    //   base (bottom) → oRotate (middle) → oNew (topmost overlay).
-    var oRotate = mkSlide(SLIDE2_SRC, 'nb-hero-slide2');
-    var oNew = mkSlide(SLIDE_NEW_SRC, 'nb-hero-slide3');
-    // LEAD overlay loads eagerly + high priority so the current-labels shot wins the
-    // FIRST PAINT even on a cold visit (before it decodes the base would briefly show).
-    oNew.setAttribute('loading', 'eager');
-    try { oNew.fetchPriority = 'high'; } catch (e) {}
-    oNew.setAttribute('fetchpriority', 'high');
-    base.insertAdjacentElement('afterend', oRotate);
-    oRotate.insertAdjacentElement('afterend', oNew);
-
-    // LEAD: current-labels shot on top, visible on first paint.
-    oNew.style.opacity = '1';
-
-    if (reduce) return true; // static current-labels lead, no rotation
-
-    // 3-slide cycle: 0 = new (oNew, topmost), 1 = base (dark studio), 2 = rotate (oRotate).
-    var state = 0, timer = null, resetT = null;
-    function apply() {
-      if (resetT) { clearTimeout(resetT); resetT = null; }
-      if (state === 0) {              // crossfade up to the new-labels lead (over oRotate)
-        oNew.style.opacity = '1';
-        resetT = setTimeout(function () { oRotate.style.opacity = '0'; }, FADE + 60);
-      } else if (state === 1) {       // fade overlays out to reveal the base studio shot
-        oNew.style.opacity = '0';
-        oRotate.style.opacity = '0';
-      } else {                        // crossfade the full-lineup shot in over the base
-        oRotate.style.opacity = '1';
-        oNew.style.opacity = '0';
-      }
-    }
-    function flip() { state = (state + 1) % 3; apply(); }
-    function start() { if (!timer) timer = setInterval(flip, INTERVAL); }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-
-    var section = media.closest('.hero-section') || media.parentNode;
-    if (section) {
-      section.addEventListener('mouseenter', stop);
-      section.addEventListener('mouseleave', start);
-    }
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
-    start();
-    return true;
-  }
-
-  function boot() {
-    if (!document.getElementById('root') && !document.querySelector('.hero-section')) return;
-    if (initHeroRotator()) return;
-    var tries = 0;
-    var poll = setInterval(function () { if (initHeroRotator() || ++tries > 80) clearInterval(poll); }, 150);
-    var root = document.getElementById('root') || document.body;
-    if (window.MutationObserver && root) {
-      var mo = new MutationObserver(function () { if (initHeroRotator()) { mo.disconnect(); clearInterval(poll); } });
-      mo.observe(root, { childList: true, subtree: true });
-      setTimeout(function () { try { mo.disconnect(); } catch (e) {} }, 15000);
-    }
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-
 /* ───────── PDP finishing-spice cross-sell (core sauce PDPs, 2026-06-16) ─────────
    The core sauce PDPs (Original / Spicy Tokyo / Citrus Shoyu) cross-sell only the
    sibling sauces in their ".pdp-cross" block ("Three flavors. One mission."). The
@@ -533,7 +445,7 @@
     sec.className = 'pdp-spice-cross';
     sec.style.cssText = 'padding:0 0 72px;';
     sec.innerHTML = '<div class="container" style="max-width:1100px;margin:0 auto;padding-left:clamp(24px,5.5vw,80px);padding-right:clamp(24px,5.5vw,80px);">' +
-      '<div class="eyebrow" style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;opacity:0.7;margin-bottom:10px;">Finish your bowl</div>' +
+      '<div class="eyebrow" style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE3;opacity:1;margin-bottom:10px;">Finish your bowl</div>' +
       '<h2 class="serif" style="margin:0 0 20px;">Shake on a topper.</h2>' +
       '<div class="pdp-spice-grid" style="display:grid;gap:18px;">' + cards + '</div>' +
     '</div>';
