@@ -71,6 +71,13 @@ for (const pattern of forbiddenAssetPatterns) {
 }
 
 check(!/aggregateRating/i.test(productionText), 'no fabricated aggregateRating markup');
+const spicyShoyuPdp = read('product-spicy-shoyu.html');
+check(
+  spicyShoyuPdp.includes("Soybeans, sugar, wheat flour, water, grapeseed oil, red pepper flake, datil Pepper") &&
+    spicyShoyuPdp.includes('<strong>Contains:</strong> Soy, wheat.'),
+  'Spicy Shoyu PDP carries the approved physical-label ingredients and allergens'
+);
+check(!/Temporarily unavailable|Safety hold|verification is in progress/i.test(spicyShoyuPdp), 'Spicy Shoyu PDP has no stale safety-hold copy');
 check(/FREE_SHIPPING_THRESHOLD\s*=\s*29\.99/.test(catalogSource), 'cart free-shipping threshold is $29.99');
 check(/FLAT_SHIPPING:\s*3\.00/.test(catalogSource), 'cart flat-shipping display rate is $3.00');
 check(!/FREE_SHIPPING_THRESHOLD\s*=\s*32\.99/.test(catalogSource), 'cart has no stale $32.99 shipping threshold');

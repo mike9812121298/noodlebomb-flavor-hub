@@ -50,7 +50,7 @@ describe("NoodleBomb cart catalog migration", () => {
     const items = cart.getItems();
 
     expect(items.map((item) => item.price)).toEqual([
-      12.99, 12.99, 12.99, 32.99, 12.99, 10.99, 10.99,
+      12.99, 12.99, 12.99, 32.99, 12.99, 12.99, 10.99, 10.99,
     ]);
     expect(items.map((item) => item.name)).toEqual([
       "Original",
@@ -58,6 +58,7 @@ describe("NoodleBomb cart catalog migration", () => {
       "Citrus Shoyu",
       "The NoodleBomb Trio",
       "Shoyu Reserve",
+      "Spicy Shoyu",
       "NoodleBomb Fire Dust",
       "NoodleBomb Roasted Garlic Sesame",
     ]);
@@ -75,12 +76,14 @@ describe("NoodleBomb cart catalog migration", () => {
     expect(cart.getSubtotal()).toBe(12.99);
   });
 
-  it("rejects Spicy Shoyu while its physical ingredient panel is on safety hold", () => {
+  it("adds Spicy Shoyu at the live Shopify price after final label approval", () => {
     const cart = loadCartStore();
 
-    cart.add({ slug: "shoyuspicy", name: "Spicy Shoyu", price: 12.99, qty: 1 });
+    cart.add({ slug: "shoyuspicy", name: "Old Spicy Shoyu", price: 0.01, qty: 1 });
 
-    expect(cart.getItems()).toEqual([]);
-    expect(cart.getSubtotal()).toBe(0);
+    expect(cart.getItems()).toEqual([
+      { slug: "shoyuspicy", name: "Spicy Shoyu", price: 12.99, qty: 1 },
+    ]);
+    expect(cart.getSubtotal()).toBe(12.99);
   });
 });

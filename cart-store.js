@@ -62,9 +62,7 @@
   var BUS = (typeof window !== 'undefined') ? new EventTarget() : null;
   var CHANGE = 'nb-cart-change';
   var FREE_SHIPPING_THRESHOLD = 29.99;
-  // Temporary safety hold: remove the SKU from saved carts and reject every
-  // direct/add-to-cart path until its final physical ingredient panel is verified.
-  var RETIRED_SLUGS = { shoyuspicy: true };
+  var RETIRED_SLUGS = {};  // Keep empty unless Mike retires a slug.
   var PRODUCT_CATALOG = {
     original: { slug: 'original', name: 'Original', price: 12.99 },
     spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 12.99 },

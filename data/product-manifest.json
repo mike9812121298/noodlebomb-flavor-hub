@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-18",
+  "version": "2026-07-18-label-proof",
   "currency": "USD",
   "products": [
     {
@@ -51,8 +51,7 @@
       "route": "/spicy-shoyu-ramen-sauce",
       "image": "/uploads/nb-shoyu-spicy-front-approved-20260711-normalized.webp",
       "variantId": "gid://shopify/ProductVariant/54097354686774",
-      "available": false,
-      "holdReason": "Final physical ingredient and allergen panel pending approval"
+      "available": true
     },
     {
       "slug": "firedust",
