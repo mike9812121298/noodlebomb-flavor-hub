@@ -150,7 +150,7 @@ function RitualKitCard({ items, variant }) {
     " \u2192"
   )));
 }
-const FIRST_BOX_50_URL = "/monthly-box#waitlist";
+const FIRST_BOX_50_URL = "/monthly-box#plans";
 function BowlClubUpsell({ item }) {
   const sourceName = item && item.name ? item.name : "your sauce";
   return /* @__PURE__ */ React.createElement("div", { className: "card", style: {
@@ -177,7 +177,7 @@ function BowlClubUpsell({ item }) {
     fontSize: 19,
     fontWeight: 800,
     letterSpacing: "0.08em"
-  } }, "LIST"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "FIRST RAMEN NIGHT BOX"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Try ", sourceName, " inside a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "New Monthly Box subscriptions are paused. Join the waitlist and we will email you when enrollment reopens.")), /* @__PURE__ */ React.createElement("a", {
+  } }, "BOX"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 0 } }, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--accent)", fontSize: 10, letterSpacing: "0.18em", fontWeight: 700, marginBottom: 5 } }, "MONTHLY RAMEN BOX"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter Tight", fontWeight: 800, fontSize: 18, color: "var(--ink)", marginBottom: 6, letterSpacing: "-0.02em" } }, "Try ", sourceName, " inside a full ramen night."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 12.5, color: "var(--ink-60)", lineHeight: 1.55 } }, "Plans from $29.99/month with premium ramen and a full 7 oz NoodleBomb sauce bottle. Skip or cancel anytime.")), /* @__PURE__ */ React.createElement("a", {
     href: FIRST_BOX_50_URL,
     onClick: () => {
       try {
@@ -204,7 +204,7 @@ function BowlClubUpsell({ item }) {
       whiteSpace: "nowrap",
       boxShadow: "0 12px 28px rgba(232,74,58,0.22)"
     }
-  }, "Join waitlist"));
+  }, "Choose a plan"));
 }
 function CartPage() {
   const [items, setItems] = useState(() => window.NB_CART ? window.NB_CART.getItems() : []);

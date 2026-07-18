@@ -90,8 +90,28 @@ check(/begin_checkout/.test(read('cart.jsx')), 'checkout click emits begin_check
 check(/data-lead-form/.test(productionText), 'lead forms carry analytics labels');
 check(fs.existsSync(path.join(root, 'contact.html')), 'contact page exists');
 check(/from\s*=\s*"\/contact"/i.test(read('netlify.toml')), 'Netlify contact route exists');
-check(/\/first-box-50\s+\/monthly-box#waitlist\s+301/.test(read('_redirects')), 'first-box route is a permanent redirect');
+check(/\/first-box-50\s+\/monthly-box#plans\s+301/.test(read('_redirects')), 'first-box route is a permanent redirect to live plans');
 check(!/https:\/\/noodlebomb\.co\/first-box-50/.test(read('sitemap.xml')), 'first-box route is absent from sitemap');
+
+const monthlyBoxSources = [
+  read('monthly-box.html'),
+  read('monthly-drop.jsx'),
+  read('cart.jsx'),
+  read('faq.html'),
+  read('first-box-50.html'),
+  read('product-original.html'),
+  read('product-spicy.html'),
+  read('product-citrus.html'),
+  read('product-shoyu-reserve.html'),
+  read('product-spicy-shoyu.html'),
+  read('app.jsx')
+].join('\n');
+const monthlyVariantUrl = /54099648545078(?:&|&amp;)quantity=1(?:&|&amp;)selling_plan=8721727798/;
+const premiumVariantUrl = /54099648577846(?:&|&amp;)quantity=1(?:&|&amp;)selling_plan=8721695030/;
+check(monthlyVariantUrl.test(monthlyBoxSources), 'Monthly Box live Shopify variant and selling plan are wired');
+check(premiumVariantUrl.test(monthlyBoxSources), 'Premium Box live Shopify variant and selling plan are wired');
+check(!/wait.?list|subscriptions? (?:are|is) (?:currently )?paused|enrollment (?:is )?paused|enrollment reopens/i.test(monthlyBoxSources), 'Monthly Box customer surfaces have no stale waitlist or paused-enrollment copy');
+check((read('monthly-box.html').match(/https:\/\/schema\.org\/InStock/g) || []).length === 2, 'Monthly Box structured data marks both live plans InStock');
 
 const htmlFiles = fs.readdirSync(root).filter((file) => file.endsWith('.html'));
 for (const file of htmlFiles) {

@@ -224,7 +224,7 @@ function MonthlyDrop() {
 
               }}>
 
-                A ramen-night club built around NoodleBomb sauce: premium instant ramen, surprise extras, quick recipe ideas, and a full bottle of sauce. New subscriptions are currently paused.
+                A ramen-night club built around NoodleBomb sauce: premium instant ramen, surprise extras, quick recipe ideas, and a full bottle of sauce, delivered every month.
 
               </p>
 
@@ -244,7 +244,7 @@ function MonthlyDrop() {
 
                   'Every box includes a free full 7 oz bottle of sauce',
 
-                  'Join the waitlist for the next enrollment window'
+                  'Skip or cancel anytime'
 
                 ].map((line, i) => (
 
@@ -294,13 +294,13 @@ function MonthlyDrop() {
 
               </div>
 
-              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Enrollment is paused. Joining the waitlist does not start billing.</div>
+              <div style={{ fontFamily: 'Inter', fontSize: 13, color: 'var(--ink-40)', marginTop: 6, marginBottom: 28 }}>Recurring monthly. Choose your plan, then skip or cancel anytime.</div>
 
             </Reveal>
 
 
 
-            {/* Monthly Ramen Box waitlist links; no selling-plan checkout while enrollment is paused. */}
+            {/* Live Monthly Ramen Box subscription links with verified Shopify selling plans. */}
 
             <Reveal delay={5}>
 
@@ -308,7 +308,9 @@ function MonthlyDrop() {
 
                 <a
 
-                  href="/monthly-box#waitlist"
+                  href="https://nu2vqa-ma.myshopify.com/cart/add?id=54099648545078&quantity=1&selling_plan=8721727798"
+                  target="_blank"
+                  rel="noopener"
 
                   className="btn"
 
@@ -332,13 +334,15 @@ function MonthlyDrop() {
 
                 >
 
-                  Join the waitlist
+                  Subscribe - $29.99/mo
 
                 </a>
 
                 <a
 
-                  href="/monthly-box#waitlist"
+                  href="https://nu2vqa-ma.myshopify.com/cart/add?id=54099648577846&quantity=1&selling_plan=8721695030"
+                  target="_blank"
+                  rel="noopener"
 
                   className="btn"
 
@@ -362,13 +366,13 @@ function MonthlyDrop() {
 
                 >
 
-                  Premium waitlist
+                  Premium - $39.99/mo
 
                 </a>
 
                 <div className="mono" style={{ flexBasis: '100%', marginTop: 2, fontSize: 10, color: 'var(--muted)', letterSpacing: '0.14em' }}>
 
-                  NO BILLING UNTIL ENROLLMENT REOPENS
+                  RECURRING MONTHLY · SKIP OR CANCEL ANYTIME
 
                 </div>
 

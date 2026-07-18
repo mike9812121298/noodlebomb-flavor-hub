@@ -506,7 +506,7 @@
 
 
 
-/* Monthly Box waitlist tracking; no selling-plan handoff while enrollment is paused. */
+/* Monthly Box subscription tracking. */
 (function () {
   function sourceFromPage(el) {
     var params = new URLSearchParams(window.location.search || '');
@@ -519,9 +519,7 @@
   }
   function init() {
     document.querySelectorAll('[data-first-box-direct]').forEach(function (el) {
-      var source = sourceFromPage(el);
-      el.setAttribute('href', '/monthly-box#waitlist');
-      el.setAttribute('data-source', source);
+      el.setAttribute('data-source', sourceFromPage(el));
     });
     document.addEventListener('click', function (event) {
       var el = event.target.closest && event.target.closest('[data-first-box-cta]');

@@ -543,7 +543,7 @@
 
 [[redirects]]
   from = "/first-box-50"
-  to = "/monthly-box#waitlist"
+  to = "/monthly-box#plans"
   status = 301
   force = true
 
