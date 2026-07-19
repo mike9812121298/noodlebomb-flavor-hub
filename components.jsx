@@ -98,11 +98,25 @@ function Reveal({ children, delay = 0, as: Tag = "div", className = "", style })
 
 }
 
+function nbImageCdnUrl(src, width, quality = 82) {
+
+  const clean = String(src || "").split("?")[0].replace(/^\/+/, "");
+
+  if (!clean.startsWith("uploads/")) return null;
+
+  return `/.netlify/images?url=/${clean}&w=${width}&q=${quality}`;
+
+}
+
 function Bottle({ label = "NOODLEBOMB", flavor = "ORIGINAL No.01", accent = "var(--accent)", tilt = 0, dripping = false, src = null, loading = "lazy" }) {
 
   if (src) {
 
-    return /* @__PURE__ */ React.createElement("div", { className: "bottle", style: { transform: `rotate(${tilt}deg)`, transition: "transform 0.8s cubic-bezier(.2,.7,.2,1)", width: "100%", height: "100%" } }, /* @__PURE__ */ React.createElement("img", { src, alt: `NoodleBomb ${flavor} ramen sauce bottle`, loading, decoding: "async", style: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center bottom", display: "block" } }));
+    const optimized = nbImageCdnUrl(src, 480);
+
+    const srcSet = optimized ? [240, 360, 480].map((width) => `${nbImageCdnUrl(src, width)} ${width}w`).join(", ") : void 0;
+
+    return /* @__PURE__ */ React.createElement("div", { className: "bottle", style: { transform: `rotate(${tilt}deg)`, transition: "transform 0.8s cubic-bezier(.2,.7,.2,1)", width: "100%", height: "100%" } }, /* @__PURE__ */ React.createElement("img", { src: optimized || src, srcSet, sizes: srcSet ? "(max-width: 600px) 44vw, 200px" : void 0, alt: `NoodleBomb ${flavor} ramen sauce bottle`, loading, decoding: "async", style: { width: "100%", height: "100%", objectFit: "contain", objectPosition: "center bottom", display: "block" } }));
 
   }
 
@@ -1564,11 +1578,17 @@ function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }
 
       className: "hero-product-bg",
 
-      src: "uploads/nb-hero-pour-page.webp?v=20260712-stability",
+      src: "/.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=1280&q=75",
+
+      srcSet: "/.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=480&q=75 480w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=640&q=75 640w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=720&q=75 720w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=960&q=75 960w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=1280&q=75 1280w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=1600&q=75 1600w",
+
+      sizes: "(max-width: 600px) 60vw, 100vw",
 
       alt: "NoodleBomb sauce lineup on a dark background",
 
       loading: "eager",
+
+      fetchPriority: "high",
 
       style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", transform: "none" }
 

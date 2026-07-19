@@ -289,10 +289,6 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
-<link rel="preconnect" href="https://unpkg.com" crossorigin="">
-
-
-
 <!-- Preload critical above-the-fold assets so the browser fetches them
 
      during HTML parse instead of waiting to discover them in the body.
@@ -301,7 +297,9 @@
 
      must paint first on the homepage. -->
 
-<link rel="preload" as="image" href="uploads/nb-hero-pour-page.webp?v=20260712-stability" fetchpriority="high">
+<link rel="preload" as="image" href="/.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=1280&amp;q=75" imagesrcset="/.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=480&amp;q=75 480w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=640&amp;q=75 640w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=720&amp;q=75 720w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=960&amp;q=75 960w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=1280&amp;q=75 1280w, /.netlify/images?url=/uploads/nb-hero-pour-page.webp&amp;w=1600&amp;q=75 1600w" imagesizes="(max-width: 600px) 60vw, 100vw" fetchpriority="high">
+
+<link rel="preload" as="script" href="build/homepage.js?v=20260719-growth">
 
 <link rel="stylesheet" href="/page-shared.css?v=20260712">
 
@@ -7504,9 +7502,9 @@
 
 <script defer src="cart-store.js?v=20260712-final2"></script>
 
-<script defer src="reviews-config.js?v=20260702a"></script>
+<script defer src="reviews-config.js?v=20260719-growth"></script>
 
-<script defer src="welcome-popup.js?v=20260702"></script>
+<script defer src="welcome-popup.js?v=20260719-growth"></script>
 
 <!-- Shopify config + checkout client. Homepage can defer these until after
 
@@ -7540,7 +7538,7 @@
 
     loadDeferredScript('/rewards-config.js');
 
-    loadDeferredScript('/page-shared.js?v=20260712-final2');
+    loadDeferredScript('/page-shared.js?v=20260719-growth');
 
   }
 
@@ -7570,17 +7568,7 @@
 
   var bootFiles = [
 
-    { src: 'https://unpkg.com/react@18.3.1/umd/react.production.min.js', crossOrigin: 'anonymous' },
-
-    { src: 'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js', crossOrigin: 'anonymous' },
-
-    { src: 'build/components.js?v=20260712-final2' },
-
-    { src: 'build/monthly-drop.js?v=20260712-final2' },
-
-    { src: 'build/next-drop.js?v=20260712-final2' },
-
-    { src: 'build/app.js?v=20260712-final2' }
+    { src: 'build/homepage.js?v=20260719-growth' }
 
   ];
 

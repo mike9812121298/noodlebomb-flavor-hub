@@ -19,11 +19,15 @@ describe("mobile storefront shell", () => {
     expect(index).toContain("padding: 0 24px 156px !important;");
   });
 
-  it("uses a fresh hero-image cache key everywhere the approved hero is loaded", () => {
-    const heroUrl = "nb-hero-pour-page.webp?v=20260712-stability";
+  it("uses the approved hero asset everywhere and responsive CDN delivery above the fold", () => {
+    const heroAsset = "nb-hero-pour-page.webp";
     for (const source of [app, components, index, serviceWorker]) {
-      expect(source).toContain(heroUrl);
+      expect(source).toContain(heroAsset);
     }
+    expect(app).toContain("nb-hero-pour-page.webp?v=20260712-stability");
+    expect(serviceWorker).toContain("nb-hero-pour-page.webp?v=20260712-stability");
+    expect(components).toContain("/.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=640&q=75 640w");
+    expect(index).toContain("imagesrcset=");
     expect(serviceWorker).toContain("noodlebomb-app-shell-v38-smooth-20260712");
     expect(shared).not.toContain("window.location.reload()");
     expect(app).toContain('image.dataset.nbRetry = "1"');
@@ -42,7 +46,8 @@ describe("mobile storefront shell", () => {
     expect(app).toContain("compactGlobe ? 1 : 1.65");
     expect(app).toContain("const [mapActive, setMapActive] = useState(false)");
     expect(app).toContain("!hasOrderData || !mapActive");
-    expect(index).toContain("build/app.js?v=20260712-final2");
+    expect(index).toContain("build/homepage.js?v=20260719-growth");
+    expect(index).not.toContain("https://unpkg.com/react@");
     expect(index).toContain("Mobile performance budget");
     expect(index).toContain(".hero-product-bg { will-change: auto; }");
   });

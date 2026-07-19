@@ -567,44 +567,86 @@
   else initLeadTracking();
 })();
 
-/* \u2500\u2500\u2500\u2500\u2500 Klaviyo-ready email capture (2026-07-02) \u2500\u2500\u2500\u2500\u2500
-   TO GO LIVE: set companyId (Klaviyo public API key, 6-7 chars) and listId
-   below. While either is empty this is a NO-OP and every footer/email form
-   keeps posting to its existing formsubmit.co action. Once set, submissions
-   from any form with an email input are intercepted and sent to Klaviyo's
-   client subscribe API instead (double-opt-in per list settings), with
-   formsubmit kept as the failure fallback. One flip point, every page. */
+/* \u2500\u2500\u2500\u2500\u2500 Klaviyo email capture (2026-07-19) \u2500\u2500\u2500\u2500\u2500
+   Public client credentials only. Marketing signup forms are subscribed to
+   NoodleBomb's Email List with explicit email consent. Contact and wholesale
+   forms remain on FormSubmit and are intentionally never intercepted here. */
 (function () {
-  var NB_KLAVIYO = { companyId: '', listId: '' };
+  var NB_KLAVIYO = { companyId: 'XSwJ9H', listId: 'WtA8eA' };
   if (!NB_KLAVIYO.companyId || !NB_KLAVIYO.listId) return;
-  function subscribe(email) {
-    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(NB_KLAVIYO.companyId), {
+  function subscribe(email, source) {
+    return fetch('https://a.klaviyo.com/client/subscriptions?company_id=' + encodeURIComponent(NB_KLAVIYO.companyId), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', revision: '2024-10-15' },
+      headers: {
+        Accept: 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+        revision: '2026-07-15'
+      },
       body: JSON.stringify({
         data: {
           type: 'subscription',
-          attributes: { profile: { data: { type: 'profile', attributes: { email: email } } } },
+          attributes: {
+            custom_source: source || 'NoodleBomb website signup',
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: {
+                  email: email,
+                  subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } }
+                }
+              }
+            }
+          },
           relationships: { list: { data: { type: 'list', id: NB_KLAVIYO.listId } } }
         }
       })
-    }).then(function (res) { if (!res.ok) throw new Error('Klaviyo HTTP ' + res.status); });
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Klaviyo HTTP ' + res.status);
+      window.dispatchEvent(new CustomEvent('nb:klaviyo-subscribed', { detail: { source: source || 'website' } }));
+    });
   }
+  window.NB_KLAVIYO = Object.freeze(NB_KLAVIYO);
+  window.NBKlaviyoSubscribe = subscribe;
+
   function init() {
-    document.querySelectorAll('form[action*="formsubmit.co"]').forEach(function (form) {
+    var selector = [
+      'form[data-lead-form="newsletter"]',
+      'form[data-lead-form="content-newsletter"]',
+      'form.footer-newsletter-form',
+      'form.footer-form'
+    ].join(',');
+    document.querySelectorAll(selector).forEach(function (form) {
+      if (form.dataset.nbKlaviyoBound === '1') return;
       var emailInput = form.querySelector('input[type=email]');
       if (!emailInput) return;
+      form.dataset.nbKlaviyoBound = '1';
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         var email = String(emailInput.value || '').trim();
         if (!email) return;
         var btn = form.querySelector('button[type=submit], input[type=submit]');
+        var originalLabel = btn ? (btn.value || btn.textContent) : '';
         if (btn) btn.disabled = true;
-        subscribe(email).then(function () {
-          form.innerHTML = '<p style="font:600 14px \'Inter Tight\',sans-serif;color:#D4A24A;margin:0;">You\u2019re in. Watch your inbox.</p>';
+        if (btn && btn.tagName === 'INPUT') btn.value = 'Joining...';
+        else if (btn) btn.textContent = 'Joining...';
+        var source = form.getAttribute('data-lead-form') || 'footer-newsletter';
+        subscribe(email, 'NoodleBomb website: ' + source).then(function () {
+          form.innerHTML = '<p role="status" style="font:600 14px \'Inter Tight\',sans-serif;color:#D4A24A;margin:0;">You\u2019re in. Check your inbox for WELCOME10.</p>';
         }).catch(function () {
-          if (btn) btn.disabled = false;
-          form.submit(); // native submit skips listeners; falls back to formsubmit
+          if (btn) {
+            btn.disabled = false;
+            if (btn.tagName === 'INPUT') btn.value = originalLabel;
+            else btn.textContent = originalLabel;
+          }
+          var status = form.querySelector('[data-klaviyo-status]');
+          if (!status) {
+            status = document.createElement('p');
+            status.setAttribute('data-klaviyo-status', '');
+            status.setAttribute('role', 'alert');
+            status.style.cssText = 'flex-basis:100%;font:600 13px Inter,sans-serif;color:#E84A3A;margin:8px 0 0;';
+            form.appendChild(status);
+          }
+          status.textContent = 'We could not add you right now. Please try again.';
         });
       });
     });
