@@ -11,6 +11,7 @@ describe("storefront growth sprint", () => {
   it("routes only marketing signup forms into the verified NoodleBomb Klaviyo list", () => {
     expect(shared).toContain("companyId: 'XSwJ9H', listId: 'WtA8eA'");
     expect(shared).toContain("revision: '2026-07-15'");
+    expect(shared).toContain("credentials: 'omit'");
     expect(shared).toContain("subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } }");
     expect(shared).toContain("form[data-lead-form=\"newsletter\"]");
     expect(shared).toContain("form[data-lead-form=\"content-newsletter\"]");

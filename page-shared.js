@@ -577,6 +577,7 @@
   function subscribe(email, source) {
     return fetch('https://a.klaviyo.com/client/subscriptions?company_id=' + encodeURIComponent(NB_KLAVIYO.companyId), {
       method: 'POST',
+      credentials: 'omit',
       headers: {
         Accept: 'application/vnd.api+json',
         'Content-Type': 'application/vnd.api+json',
