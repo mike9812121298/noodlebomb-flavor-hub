@@ -87,6 +87,10 @@ check(!/FREE_SHIPPING_THRESHOLD\s*=\s*32\.99/.test(catalogSource), 'cart has no 
 check(/cartFreeShippingThreshold[^\n]*\|\|\s*29\.99/.test(read('components.jsx')), 'header cart fallback threshold is $29.99');
 check(!/\$32\.99\+/.test(productionText), 'customer copy has no stale $32.99+ shipping threshold');
 check(/\$29\.99\+/.test(productionText), 'customer copy includes the approved $29.99+ shipping threshold');
+check(manifest.products.find((product) => product.slug === 'trio')?.price === 34.99, 'Trio manifest price is $34.99');
+check(/trio:\s*\{[^}]*price:\s*34\.99/.test(catalogSource), 'cart Trio price is $34.99');
+check(/Try the Trio[^\n]*\$34\.99[^\n]*Save \$3\.98/.test(appSource), 'homepage Trio wording uses $34.99 and $3.98 savings');
+check(!/\$32\.99/.test(`${productionText}\n${read('components.jsx')}`), 'customer surfaces have no stale $32.99 Trio price');
 check(!/\$3\.50/.test(productionText), 'customer copy has no stale $3.50 flat-shipping rate');
 check(/\$3\.00/.test(productionText), 'customer copy includes Shopify checkout\'s $3.00 flat-shipping rate');
 check(/begin_checkout/.test(read('cart.jsx')), 'checkout click emits begin_checkout analytics');

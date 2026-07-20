@@ -13,8 +13,8 @@ import sceneSpicyWokAction from "@/assets/nb-scene-spicy-wok-action.png";
 import atmosphereRamenOverhead from "@/assets/nb-atmosphere-ramen-overhead.png";
 import PressBar from "@/components/PressBar";
 
-const TRIO_PRICE = 29.99;
-const SINGLES_TOTAL = 35.97;
+const TRIO_PRICE = 34.99;
+const SINGLES_TOTAL = 38.97;
 const TRIO_SAVINGS = SINGLES_TOTAL - TRIO_PRICE;
 
 const flavors = [
@@ -98,14 +98,14 @@ const TrioFlavorComparison = () => {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-5 rounded-2xl border border-primary/25 bg-primary/5 p-6 md:flex-row">
           <div>
-            <p className="font-display text-xl font-bold text-foreground">Get all 3 for $29.99.</p>
-            <p className="mt-1 text-sm text-foreground/60">Singles total $35.97. The Trio saves ${TRIO_SAVINGS.toFixed(2)} and makes the first order easy.</p>
+            <p className="font-display text-xl font-bold text-foreground">Get all 3 for $34.99.</p>
+            <p className="mt-1 text-sm text-foreground/60">Singles total $38.97. The Trio saves ${TRIO_SAVINGS.toFixed(2)} and makes the first order easy.</p>
           </div>
           <Link
             to="/product/variety-pack"
             className="inline-flex items-center gap-2 rounded-full bg-gradient-fire px-8 py-3.5 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-fire transition-transform hover:scale-[1.02]"
           >
-            Get all 3 for $29.99 <ArrowRight className="h-4 w-4" />
+            Get all 3 for $34.99 <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -139,13 +139,13 @@ const Index = () => {
               Try All 3 Flavors.
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-foreground/70 md:text-xl">
-              Start with the Trio: Original, Spicy Tokyo, and Citrus Shoyu in one gift-ready box for $29.99.
+              Start with the Trio: Original, Spicy Tokyo, and Citrus Shoyu in one gift-ready box for $34.99.
             </p>
 
             <div className="mt-7 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
               {[
-                { label: "Trio price", value: "$29.99" },
-                { label: "Singles total", value: "$35.97" },
+                { label: "Trio price", value: "$34.99" },
+                { label: "Singles total", value: "$38.97" },
                 { label: "You save", value: `$${TRIO_SAVINGS.toFixed(2)}` },
               ].map((item) => (
                 <div key={item.label} className="rounded-xl border border-border/60 bg-background/70 p-4 backdrop-blur">
@@ -187,8 +187,8 @@ const Index = () => {
                   <p className="text-sm text-foreground/55">Best for first orders and gifting.</p>
                 </div>
                 <div className="text-left sm:text-right">
-                  <p className="font-display text-3xl font-bold text-primary">$29.99</p>
-                  <p className="text-xs text-foreground/45 line-through">$35.97 singles</p>
+                  <p className="font-display text-3xl font-bold text-primary">$34.99</p>
+                  <p className="text-xs text-foreground/45 line-through">$38.97 singles</p>
                 </div>
               </div>
             </div>
@@ -218,7 +218,7 @@ const Index = () => {
               Singles if you already know your flavor.
             </h2>
             <p className="mt-4 text-sm text-foreground/60">
-              New to NoodleBomb? The Trio is still the easiest start and saves $5.98.
+              New to NoodleBomb? The Trio is still the easiest start and saves $3.98.
             </p>
           </div>
 
@@ -284,7 +284,7 @@ const Index = () => {
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <Link to="/product/variety-pack" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-fire px-10 py-4 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground shadow-fire transition-transform hover:scale-[1.02]">
-                Buy the Trio - $29.99
+                Buy the Trio - $34.99
               </Link>
               <Link to="/shop" className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-8 py-4 font-display text-xs font-bold uppercase tracking-wider text-foreground/70 hover:border-primary/45 hover:text-primary">
                 See all products <ArrowRight className="h-4 w-4" />

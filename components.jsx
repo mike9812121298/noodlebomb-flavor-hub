@@ -42,7 +42,7 @@ const nbCheckoutUrl = (items) => {
 
 const NB_BOTTLE_PRICE = 12.99;
 
-const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
+const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 34.99 };
 
 const NB_FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper", image: "uploads/nb-fire-dust-approved-front-20260710-normalized.webp" };
 
@@ -1050,9 +1050,9 @@ function Nav({ flavor, setFlavor, flavors }) {
 
       },
 
-      "Add the Trio \u2014 $32.99"
+      "Add the Trio \u2014 $34.99"
 
-    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $5.98"), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $3.98"), /* @__PURE__ */ React.createElement(
 
       "button",
 
@@ -1376,7 +1376,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
         }
 
-        const detail = { fromSingleCount: singleCount, savings: 5.98, destination: "trio" };
+        const detail = { fromSingleCount: singleCount, savings: 3.98, destination: "trio" };
 
         try {
 

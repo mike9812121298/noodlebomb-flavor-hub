@@ -39,7 +39,7 @@ const RECOMMENDATIONS = [
     slug: "variety-pack",
     name: "NoodleBomb Trio",
     tagline: "Try all 3 flavors",
-    price: 29.99,
+    price: 34.99,
     image: nbLineupTrio,
   },
   {
@@ -69,7 +69,7 @@ const SINGLE_SLUGS = ["original-ramen", "spicy-tokyo", "citrus-shoyu"];
 const TRIO_ITEM = {
   slug: "variety-pack",
   name: "NoodleBomb Trio",
-  price: 29.99,
+  price: 34.99,
   purchaseType: "one-time" as const,
   quantity: 1,
 };
@@ -335,10 +335,10 @@ const Cart = () => {
                         Cart slot 1: Trio
                       </p>
                       <h2 className="mt-1 font-display text-xl font-bold text-foreground">
-                        Add one more flavor and save $5.98 by upgrading to Trio.
+                        Add one more flavor and save $3.98 by upgrading to Trio.
                       </h2>
                       <p className="mt-1 text-sm text-foreground/65">
-                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $29.99.
+                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $34.99.
                       </p>
                     </div>
                   </div>

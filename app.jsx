@@ -6,7 +6,7 @@
 
 const SITE_URLS = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "/shoyu-reserve", "cart": "/cart", "shop": "/shop" };
 
-const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
+const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 34.99 };
 
 const SHOPIFY_VARIANT_IDS = {
 
@@ -130,7 +130,7 @@ const FLAVORS = {
 
     priceUsd: 12.99,
 
-    pack: "$32.99 / 3-pack"
+    pack: "$34.99 / 3-pack"
 
   },
 
@@ -158,7 +158,7 @@ const FLAVORS = {
 
     priceUsd: 12.99,
 
-    pack: "$32.99 / 3-pack"
+    pack: "$34.99 / 3-pack"
 
   },
 
@@ -186,7 +186,7 @@ const FLAVORS = {
 
     priceUsd: 12.99,
 
-    pack: "$32.99 / 3-pack"
+    pack: "$34.99 / 3-pack"
 
   },
 
@@ -2382,7 +2382,7 @@ function Origin() {
 
         },
 
-        "Try the Trio \u2014 $32.99 \u00b7 Save $5.98",
+        "Try the Trio \u2014 $34.99 \u00b7 Save $3.98",
 
         /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16 } }, "\u2192")
 
@@ -2464,7 +2464,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     ["Want lift", "Citrus Shoyu", "Bright shoyu for rich bowls."],
 
-    ["Not sure", "The Trio", "All 3 bottles for $32.99."]
+    ["Not sure", "The Trio", "All 3 bottles for $34.99."]
 
   ].map(([kicker, title, copy]) => /* @__PURE__ */ React.createElement("div", { key: title, style: {
 
@@ -2730,7 +2730,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     }
 
-  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)", pointerEvents: "none" } })), /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-copy", style: { padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em" } }, "BUNDLE - SAVE $5.98"), /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(36px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 1.02, margin: 0, fontWeight: 700 } }, "Try All 3 Flavors", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "\u2014 $32.99.")), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 15, color: "var(--ink-60)", lineHeight: 1.55, maxWidth: "42ch" } }, "One of each: Original, Spicy Tokyo, Citrus Shoyu. $32.99 vs $38.97 singles, so new buyers save $5.98 and start with the full line."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } }, ["Original", "Spicy Tokyo", "Citrus Shoyu"].map((label) => /* @__PURE__ */ React.createElement("span", { key: label, style: {
+  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)", pointerEvents: "none" } })), /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-copy", style: { padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em" } }, "BUNDLE - SAVE $3.98"), /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(36px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 1.02, margin: 0, fontWeight: 700 } }, "Try All 3 Flavors", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "\u2014 $34.99.")), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 15, color: "var(--ink-60)", lineHeight: 1.55, maxWidth: "42ch" } }, "One of each: Original, Spicy Tokyo, Citrus Shoyu. $34.99 vs $38.97 singles, so new buyers save $3.98 and start with the full line."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } }, ["Original", "Spicy Tokyo", "Citrus Shoyu"].map((label) => /* @__PURE__ */ React.createElement("span", { key: label, style: {
 
     display: "inline-flex",
 
@@ -2834,7 +2834,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     },
 
-    "Buy the Trio - $32.99",
+    "Buy the Trio - $34.99",
 
     /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16, lineHeight: 1 } }, "\u2192")
 
@@ -5493,7 +5493,7 @@ function StickyCartBar({ flavor, flavors }) {
 
       },
 
-      "3-Pack \u2014 $32.99"
+      "3-Pack \u2014 $34.99"
 
     ), /* @__PURE__ */ React.createElement(
 

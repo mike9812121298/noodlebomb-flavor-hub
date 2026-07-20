@@ -8,7 +8,7 @@
  *        - Original ($12.99)
  *        - Spicy Tokyo ($12.99)
  *        - Citrus Shoyu ($12.99)
- *        - The NoodleBomb Trio ($32.99)
+ *        - The NoodleBomb Trio ($34.99)
  *        - Shoyu Reserve ($12.99 live)
  *   2. Fill in the variantIds map below with each product's variant GID.
  *      Get them from a browser fetch on a allowed origin:

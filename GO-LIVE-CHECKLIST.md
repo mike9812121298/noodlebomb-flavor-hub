@@ -14,7 +14,7 @@ Shopify admin → Products → edit each variant price:
 | Citrus Shoyu Ramen Sauce | 53998041071926 | **$12.99** |
 | Shoyu Reserve | 54006619636022 | **$12.99** |
 | Shoyu Reserve — Spicy | 54097354686774 | **$12.99** |
-| Ramen Sauce Trio | 53998042644790 | **$32.99** |
+| Ramen Sauce Trio | 53998042644790 | **$34.99** |
 
 The session watches `products.json`; when all six show the new prices,
 PR #20 merges to `main` (= production deploy of the whole reconciled
@@ -79,6 +79,6 @@ trio line-item pattern.
 ## Already done, waiting only on the deploy
 
 Review marquee (13 real Amazon reviews) · full bundle builder lineup ·
-$12.99/$32.99 verbiage everywhere · free shipping at $32.99 · shop
+$12.99/$34.99 verbiage everywhere · free shipping at $29.99 · shop
 quick-add · cart price hardening · mobile iOS crash mitigations ·
 SEO/JSON-LD fixes · sitemap.

@@ -50,7 +50,7 @@ describe("NoodleBomb cart catalog migration", () => {
     const items = cart.getItems();
 
     expect(items.map((item) => item.price)).toEqual([
-      12.99, 12.99, 12.99, 32.99, 12.99, 12.99, 10.99, 10.99,
+      12.99, 12.99, 12.99, 34.99, 12.99, 12.99, 10.99, 10.99,
     ]);
     expect(items.map((item) => item.name)).toEqual([
       "Original",

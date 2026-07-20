@@ -117,8 +117,8 @@ const PRODUCTS: Record<string, ProductData> = {
     slug: "variety-pack",
     name: "NoodleBomb Trio",
     tagline: "Try All 3 Flavors",
-    price: 29.99,
-    displayPrice: "$29.99",
+    price: 34.99,
+    displayPrice: "$34.99",
     subscribePrice: null,
     displaySubscribePrice: null,
     image: nbLineupTrio,
@@ -127,7 +127,7 @@ const PRODUCTS: Record<string, ProductData> = {
     flavorHook: "Best for new buyers - start with all 3.",
     badge: "Best Value",
     description:
-      "Original, Spicy Tokyo, and Citrus Shoyu in one gift-ready box. Singles total $35.97; the Trio is $29.99.",
+      "Original, Spicy Tokyo, and Citrus Shoyu in one gift-ready box. Singles total $38.97; the Trio is $34.99.",
     ingredients:
       "Includes Original Ramen Sauce, Spicy Tokyo Ramen Sauce, and Citrus Shoyu Ramen Sauce.",
     allergens: "Soy, Wheat, Sesame.",
@@ -185,7 +185,7 @@ const ProductPage = () => {
   const product = slug ? PRODUCTS[slug] : null;
   const isTrio = product?.slug === "variety-pack";
   const isSingle = ["original-ramen", "spicy-tokyo", "citrus-shoyu"].includes(product?.slug || "");
-  const trioSavings = 35.97 - 29.99;
+  const trioSavings = 38.97 - 34.99;
 
   if (!product) {
     return (
@@ -298,7 +298,7 @@ const ProductPage = () => {
                       Customers who buy {product.name.replace(" Ramen Sauce", "")} also buy the Trio.
                     </h2>
                     <p className="mt-2 text-sm leading-relaxed text-foreground/65">
-                      Upgrade to all 3 flavors for $29.99 and save ${trioSavings.toFixed(2)} versus buying singles.
+                      Upgrade to all 3 flavors for $34.99 and save ${trioSavings.toFixed(2)} versus buying singles.
                     </p>
                   </div>
                   <Link
