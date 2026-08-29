@@ -1,4 +1,4 @@
-/* NoodleBomb June 2026 launch pages: Shoyu Reserve + dry blends */
+﻿/* NoodleBomb June 2026 launch pages: Shoyu Reserve + dry blends */
 
 :root {
   --nb-ink: #f5efe6;
@@ -65,8 +65,8 @@ body.launch-page {
   padding: 8px 13px;
   border: 1px solid rgba(245, 239, 230, 0.2);
   border-radius: 999px;
-  background: rgba(8, 7, 6, 0.52);
-  color: var(--nb-ink-soft);
+  background: rgba(8, 7, 6, 0.92);
+  color: #F5EFE6;
   font-family: "JetBrains Mono", monospace;
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -170,8 +170,8 @@ body.launch-page {
   animation: nbFloat 6s ease-in-out infinite;
 }
 
-.launch-stage img[src*="nb-fire-dust-approved-front-20260710"],
-.launch-stage img[src*="nb-rgs-approved-front-20260710"] {
+.launch-stage img[src*="nb-fire-dust-approved-front"],
+.launch-stage img[src*="nb-rgs-approved-front"] {
   height: min(520px, 52vh);
   width: auto;
   max-width: 100%;
@@ -299,8 +299,8 @@ body.launch-page {
   transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
 }
 
-.sku-card-media img[src*="nb-fire-dust-approved-front-20260710"],
-.sku-card-media img[src*="nb-rgs-approved-front-20260710"] {
+.sku-card-media img[src*="nb-fire-dust-approved-front"],
+.sku-card-media img[src*="nb-rgs-approved-front"] {
   width: min(80%, 300px);
   object-fit: contain;
   object-position: center bottom;
@@ -476,8 +476,8 @@ body.launch-page {
   filter: drop-shadow(0 28px 44px rgba(0, 0, 0, 0.45));
 }
 
-.format-media img[src*="nb-fire-dust-approved-front-20260710"],
-.format-media img[src*="nb-rgs-approved-front-20260710"] {
+.format-media img[src*="nb-fire-dust-approved-front"],
+.format-media img[src*="nb-rgs-approved-front"] {
   width: min(88%, 380px);
   height: min(430px, 48vh);
   object-fit: contain;
@@ -913,6 +913,26 @@ body.launch-page {
   transform: rotate(7deg) translate(-8%, 8px) scale(0.96);
 }
 
+/* The full-lineup card carries four current products. Keep every jar/bottle
+   completely inside the card instead of applying the two-product overlap. */
+.loadout-stack-media-full {
+  min-height: 210px;
+  gap: 2px;
+  padding-inline: 4px;
+}
+
+.loadout-stack-media-full img,
+.loadout-stack-media-full img + img,
+.loadout-stack-media-full img:nth-child(1),
+.loadout-stack-media-full img:nth-child(2),
+.loadout-stack-media-full img:nth-child(3) {
+  width: 24%;
+  max-width: 24%;
+  max-height: 205px;
+  margin-left: 0;
+  transform: none;
+}
+
 .loadout-stack-copy {
   position: relative;
   z-index: 2;
@@ -1012,8 +1032,8 @@ body.launch-page {
   filter: drop-shadow(0 32px 52px rgba(0, 0, 0, 0.58));
 }
 
-.pdp-launch-main-img img[src*="nb-fire-dust-approved-front-20260710"],
-.pdp-launch-main-img img[src*="nb-rgs-approved-front-20260710"] {
+.pdp-launch-main-img img[src*="nb-fire-dust-approved-front"],
+.pdp-launch-main-img img[src*="nb-rgs-approved-front"] {
   width: min(80%, 430px);
   height: min(560px, 58vh);
   object-fit: contain;
@@ -1269,7 +1289,7 @@ body.launch-page {
 
 .bundle-strip p {
   margin: 0;
-  color: var(--nb-ink-soft);
+  color: var(--ink, #F0EBE3);
 }
 
 @keyframes nbFloat {
@@ -1420,8 +1440,8 @@ body.launch-page {
   }
 
   .pdp-launch-main-img img,
-  .pdp-launch-main-img img[src*="nb-fire-dust-approved-front-20260710"],
-  .pdp-launch-main-img img[src*="nb-rgs-approved-front-20260710"] {
+  .pdp-launch-main-img img[src*="nb-fire-dust-approved-front"],
+  .pdp-launch-main-img img[src*="nb-rgs-approved-front"] {
     height: auto;
     max-height: min(500px, 56vh);
   }
@@ -1459,3 +1479,124 @@ body.launch-page {
 @media (max-width: 640px) { .pdp-buy-actions { flex-direction: column; align-items: stretch; } .pdp-buy-actions .launch-btn { width: 100%; } }
 
 
+
+/* 2026-06-29: seasonings footer cleanup.
+   The seasonings page uses .footer-grid instead of the shared .footer-cols footer,
+   so links were falling back to raw browser inline styling. Keep this scoped to
+   launch pages and leave product/cart behavior untouched. */
+body.launch-page .page-footer {
+  border-top: 1px solid rgba(240, 235, 227, 0.12);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(232, 74, 58, 0.10), transparent 30vw),
+    linear-gradient(180deg, rgba(12, 10, 8, 0.96), #080706);
+  padding: clamp(42px, 6vw, 72px) clamp(18px, 5vw, 72px);
+}
+
+body.launch-page .footer-grid {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) repeat(2, minmax(170px, 0.75fr));
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+}
+
+body.launch-page .footer-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+body.launch-page .footer-grid p {
+  margin: 14px 0 0;
+  max-width: 280px;
+  color: rgba(240, 235, 227, 0.68);
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+body.launch-page .footer-grid h3 {
+  margin: 0 0 4px;
+  color: rgba(240, 235, 227, 0.92);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+body.launch-page .page-footer a:not(.nav-brand) {
+  display: block;
+  width: fit-content;
+  color: rgba(240, 235, 227, 0.70);
+  font-size: 14px;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color .2s ease, transform .2s ease;
+}
+
+body.launch-page .page-footer a:not(.nav-brand):hover,
+body.launch-page .page-footer a:not(.nav-brand):focus-visible {
+  color: #ff4f45;
+  transform: translateX(2px);
+}
+
+body.launch-page .page-footer .nav-brand {
+  width: fit-content;
+}
+
+@media (max-width: 760px) {
+  body.launch-page .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  body.launch-page .page-footer {
+    padding-inline: 22px;
+  }
+}
+
+/* Shop quick-add pills (2026-07-02): one-tap add on /shop cards via NB_CART,
+   fallback navigates to /cart?add=. Buttons sit inside the card link; the
+   click handler stops propagation. */
+.sku-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 14px;
+  min-height: 42px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 235, 227, 0.22);
+  background: rgba(245, 241, 234, 0.07);
+  color: var(--ink, #F0EBE3);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.sku-add:hover {
+  background: var(--accent, #D4A24A);
+  border-color: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
+  transform: translateY(-1px);
+}
+.sku-add.is-added {
+  background: var(--accent, #D4A24A);
+  border-color: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
+}
+.sku-add:disabled {
+  cursor: not-allowed;
+  opacity: 0.78;
+  background: rgba(245, 241, 234, 0.04);
+  border-color: rgba(240, 235, 227, 0.18);
+  color: var(--ink-60, rgba(240,235,227,0.82));
+  transform: none;
+}

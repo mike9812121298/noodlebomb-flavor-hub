@@ -18,9 +18,9 @@ import {
 import { useState, useMemo } from "react";
 import { useCart } from "@/hooks/useCart";
 import EmberParticles from "@/components/EmberParticles";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
 import nbLineupTrio from "@/assets/nb-lineup-trio-clean.png";
 
 const PRODUCT_IMAGES: Record<string, string> = {
@@ -32,14 +32,14 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "sampler": nbLineupTrio,
 };
 
-const FREE_SHIPPING_THRESHOLD = 29.99;
+const FREE_SHIPPING_THRESHOLD = 40;
 
 const RECOMMENDATIONS = [
   {
     slug: "variety-pack",
     name: "NoodleBomb Trio",
     tagline: "Try all 3 flavors",
-    price: 29.99,
+    price: 34.99,
     image: nbLineupTrio,
   },
   {
@@ -69,7 +69,7 @@ const SINGLE_SLUGS = ["original-ramen", "spicy-tokyo", "citrus-shoyu"];
 const TRIO_ITEM = {
   slug: "variety-pack",
   name: "NoodleBomb Trio",
-  price: 29.99,
+  price: 34.99,
   purchaseType: "one-time" as const,
   quantity: 1,
 };
@@ -335,10 +335,10 @@ const Cart = () => {
                         Cart slot 1: Trio
                       </p>
                       <h2 className="mt-1 font-display text-xl font-bold text-foreground">
-                        Add bottle 3 and unlock Trio savings.
+                        Add one more flavor and save $3.98 by upgrading to Trio.
                       </h2>
                       <p className="mt-1 text-sm text-foreground/65">
-                        Any 3 bottles qualify for the $29.99 Trio price.
+                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $34.99.
                       </p>
                     </div>
                   </div>

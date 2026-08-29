@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
@@ -285,7 +292,7 @@ input.field.error { border-color: var(--error); }
     <span class="brand-name">noodlebomb</span>
   </a>
   <div class="nav-cart-actions" aria-label="Checkout navigation">
-    <a class="nav-cart-link is-primary" href="/cart.html">Edit cart</a>
+    <a class='nav-cart-link is-primary' href='/cart'>Edit cart</a>
     <a class="nav-cart-link optional" href="/#lineup">Shop sauces</a>
     <a class="nav-cart-link optional" href="/recipes">Recipes</a>
     <a class="nav-cart-link optional" href="/faq">FAQ</a>
@@ -298,14 +305,14 @@ input.field.error { border-color: var(--error); }
   </div>
 </main>
 
-<script defer src="cart-store.js"></script>
+<script defer src="cart-store.js?v=20260712-final2"></script>
 <script defer src="shopify-config.js"></script>
 <script defer src="attribution.js"></script>
 <script defer src="shopify-checkout.js"></script>
-<script defer src="build/checkout.js?v=20260710-spicy-approved-views"></script>
+<script defer src="build/checkout.js?v=20260712-final2"></script>
 <!-- Smile.io rewards launcher (headless Smile UI). checkout.html does not load
-     page-shared.js, so the launcher is inlined here. Guest mode (no on-site
-     login); pub_ key is safe to expose. See page-shared.js for the canonical copy. -->
+     page-shared.js?v=20260712-final2, so the launcher is inlined here. Guest mode (no on-site
+     login); pub_ key is safe to expose. See page-shared.js?v=20260712-final2 for the canonical copy. -->
 <script>
 (function () {
   if (window.__nbSmileLauncherLoaded) return;

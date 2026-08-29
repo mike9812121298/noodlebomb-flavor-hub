@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #D4A24A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
+
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
@@ -22,7 +30,7 @@
 <meta name="twitter:description" content="Soft scrambles, fried eggs, rice bowls, and breakfast noodles with NoodleBomb ramen sauce.">
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-original-approved-front-v2-20260710-normalized.webp">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" fetchpriority="high">
 <style>
   .egg-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -75,7 +83,7 @@
         "@type": "Offer",
         "url": "https://noodlebomb.co/original-ramen-sauce",
         "priceCurrency": "USD",
-        "price": "11.99",
+        "price": "13.99",
         "availability": "https://schema.org/InStock"
       }
     },
@@ -110,10 +118,10 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/shop">Shop sauces</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -124,18 +132,18 @@
   <a href="/about">About</a>
   <a href="/monthly-box">Monthly Ramen Box</a>
   <a href="/faq">FAQ</a>
-  <a href="mailto:hello@noodlebomb.co">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces</a>
+  <a href="/contact">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Eggs - Quick breakfast</div>
+      <div class="eyebrow">Eggs &middot; Quick breakfast</div>
       <h1 class="display">Ramen sauce<br><em>for eggs.</em></h1>
       <p class="lede">Eggs are the fastest way to understand NoodleBomb: a spoon of Original turns a soft scramble, fried egg, or rice bowl into a real meal without a long ingredient list.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/original-ramen-sauce">Start with Original </a>
+        <a class="btn btn-primary" href="/original-ramen-sauce">Start with Original &rarr;</a>
         <a class="btn btn-ghost" href="/recipes">See more recipes</a>
       </div>
     </div>
@@ -148,19 +156,19 @@
       <div class="egg-product-grid">
         <article class="egg-product-card">
           <img src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original ramen sauce bottle" loading="eager" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.01 - Garlic & Sesame</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.01 &middot; Garlic & Sesame</div>
           <h3>Soft scrambled eggs</h3>
           <p class="anchor-line">Cook two eggs low and slow in butter. Turn off the heat, fold in 1 teaspoon Original, then finish with scallions.</p>
         </article>
         <article class="egg-product-card">
           <img src="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Spicy Tokyo ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 - Roasted chili</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 &middot; Roasted chili</div>
           <h3>Crispy fried egg</h3>
           <p class="anchor-line">Fry an egg until the edges lace. Spoon Spicy Tokyo over the whites, then slide it onto rice or noodles.</p>
         </article>
         <article class="egg-product-card">
           <img src="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Citrus Shoyu ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.02 - Bright shoyu</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.02 &middot; Bright shoyu</div>
           <h3>Breakfast rice bowl</h3>
           <p class="anchor-line">Rice, jammy egg, avocado, cucumber, sesame, and a light pour of Citrus Shoyu when you want a cleaner finish.</p>
         </article>
@@ -179,13 +187,13 @@
           <div class="recipe-meta"><span>3 MIN</span><span class="dot"></span><span>BREAKFAST</span></div>
           <h3>Soy-butter eggs</h3>
           <p>Soft-scramble two eggs in butter. Off heat, fold in 1 teaspoon Original. Serve over warm rice with sesame and scallions.</p>
-          <div class="pairing">Best with - Original</div>
+          <div class="pairing">Best with &middot; Original</div>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>5 MIN</span><span class="dot"></span><span>RICE BOWL</span></div>
           <h3>Spicy egg rice</h3>
           <p>Top rice with a crispy egg, 1 tablespoon Spicy Tokyo, scallions, sesame, and a little butter or mayo if you want it richer.</p>
-          <div class="pairing">Best with - Spicy Tokyo</div>
+          <div class="pairing">Best with &middot; Spicy Tokyo</div>
         </article>
       </div>
     </div>
@@ -207,7 +215,7 @@
     <div class="container">
       <h2 class="display">Make breakfast<br><em>less boring.</em></h2>
       <p>Start with Original, then try Spicy Tokyo when you want heat and Citrus Shoyu when you want a brighter finish.</p>
-      <a class="btn btn-accent" href="/shop">Shop sauces</a>
+      <a class="btn btn-accent" href="/shop">Shop sauces &rarr;</a>
     </div>
   </section>
 </main>
@@ -219,7 +227,7 @@
         <div class="footer-newsletter-h">Sauce drops, restock alerts, the occasional recipe.</div>
         <p>No spam. Just the good stuff.</p>
       </div>
-      <form class="inline-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="inline-form" data-lead-form="content-newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
         <input type="hidden" name="_subject" value="NoodleBomb Recipes Signup">
         <input type="email" name="email" placeholder="email address" required aria-label="Email address">
         <button type="submit">Join</button>
@@ -234,6 +242,6 @@
   </div>
 </footer>
 
-<script src="/page-shared.js?v=20260710-approved-labels" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>

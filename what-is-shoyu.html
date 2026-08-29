@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #D4A24A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
+
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
@@ -22,7 +30,7 @@
 <meta name="twitter:description" content="A quick guide to shoyu, shoyu vs soy sauce, and how to use shoyu flavor in bowls, eggs, wings, and rice.">
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" fetchpriority="high">
 <style>
   .shoyu-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(28px, 6vw, 72px); align-items: center; }
@@ -81,7 +89,7 @@
         "@type": "Offer",
         "url": "https://noodlebomb.co/citrus-shoyu-ramen-sauce",
         "priceCurrency": "USD",
-        "price": "11.99",
+        "price": "13.99",
         "availability": "https://schema.org/InStock"
       }
     },
@@ -121,10 +129,10 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/shop">Shop sauces</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -135,18 +143,18 @@
   <a href="/about">About</a>
   <a href="/monthly-box">Monthly Ramen Box</a>
   <a href="/faq">FAQ</a>
-  <a href="mailto:hello@noodlebomb.co">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces</a>
+  <a href="/contact">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Shoyu - Quick guide</div>
+      <div class="eyebrow">Shoyu &middot; Quick guide</div>
       <h1 class="display">What is<br><em>shoyu?</em></h1>
       <p class="lede">Shoyu is Japanese-style soy sauce: salty, savory, rounded, and built for deep umami. It is one of the reasons ramen, rice bowls, eggs, and noodles can taste complete fast.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/citrus-shoyu-ramen-sauce">Try Citrus Shoyu </a>
+        <a class="btn btn-primary" href="/citrus-shoyu-ramen-sauce">Try Citrus Shoyu &rarr;</a>
         <a class="btn btn-ghost" href="/recipes">See recipes</a>
       </div>
     </div>
@@ -204,7 +212,7 @@
       <div class="shoyu-answer-grid">
         <div class="shoyu-answer-card"><strong>Eggs</strong><span>A small spoon gives scrambled eggs, fried eggs, and rice bowls fast savory depth.</span></div>
         <div class="shoyu-answer-card"><strong>Wings</strong><span>Use shoyu flavor with heat, honey, lime, or sesame when crisp wings need a clean savory toss.</span></div>
-        <div class="shoyu-answer-card"><strong>Noodles</strong><span>Add shoyu flavor to ramen, cold noodles, udon, rice noodles, or quick broth bowls. <a href="/soy-sauce-for-noodles" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">See the noodle guide </a></span></div>
+        <div class="shoyu-answer-card"><strong>Noodles</strong><span>Add shoyu flavor to ramen, cold noodles, udon, rice noodles, or quick broth bowls. <a href="/soy-sauce-for-noodles" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">See the noodle guide &rarr;</a></span></div>
       </div>
     </div>
   </section>
@@ -213,7 +221,7 @@
     <div class="container">
       <h2 class="display">Bright shoyu.<br><em>Bold finish.</em></h2>
       <p>Citrus Shoyu is the fast way into the shoyu side of NoodleBomb: bright, savory, and built for real food.</p>
-      <a class="btn btn-accent" href="/citrus-shoyu-ramen-sauce">Shop Citrus Shoyu </a>
+      <a class="btn btn-accent" href="/citrus-shoyu-ramen-sauce">Shop Citrus Shoyu &rarr;</a>
     </div>
   </section>
 </main>
@@ -225,7 +233,7 @@
         <div class="footer-newsletter-h">Sauce drops, restock alerts, the occasional recipe.</div>
         <p>No spam. Just the good stuff.</p>
       </div>
-      <form class="inline-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="inline-form" data-lead-form="content-newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
         <input type="hidden" name="_subject" value="NoodleBomb Recipes Signup">
         <input type="email" name="email" placeholder="email address" required aria-label="Email address">
         <button type="submit">Join</button>
@@ -240,6 +248,6 @@
   </div>
 </footer>
 
-<script src="/page-shared.js?v=20260710-approved-labels" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>

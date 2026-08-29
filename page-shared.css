@@ -1,4 +1,4 @@
-/* NoodleBomb shared page styles - about / recipes / faq
+/* NoodleBomb shared page styles — about / recipes / faq
    Matches editorial design system used in index.html */
 
 :root {
@@ -15,8 +15,8 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
-html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; max-width: 100%; background: var(--paper); color: var(--ink); }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   font-family: 'Inter', -apple-system, system-ui, sans-serif;
   font-weight: 400;
@@ -94,16 +94,19 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* -- Nav ------------------------------------------- */
+/* ── Nav ─────────────────────────────────────────── */
+body:has(.page-nav) { padding-top: 64px; }
 .page-nav {
-  position: sticky; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  width: 100%;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 clamp(24px, 5.5vw, 80px);
   height: 64px;
-  background: rgba(14,13,12,0.85);
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  background: rgba(14,13,12,0.92);
+  backdrop-filter: saturate(150%) blur(14px);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
 }
 .nav-brand { display: flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: var(--ink); }
 .nav-brand-mark {
@@ -170,7 +173,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   text-align: center; text-transform: uppercase;
 }
 
-/* -- "More" nav dropdown (groups About / FAQ / Contact / Rewards) ---- */
+/* ── "More" nav dropdown (groups About / FAQ / Contact / Rewards) ──── */
 .nav-more { position: relative; display: inline-flex; align-items: center; }
 /* invisible bridge so hover survives the gap between trigger and flyout */
 .nav-more::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px; }
@@ -234,7 +237,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 }
 .nav-drawer .drawer-more-menu a[aria-current="page"] { color: var(--accent); }
 
-/* -- Hero ----------------------------------------- */
+/* ── Hero ───────────────────────────────────────── */
 .page-hero {
   padding: clamp(72px, 12vw, 160px) 0 clamp(56px, 9vw, 96px);
   border-bottom: 1px solid var(--line);
@@ -247,7 +250,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   color: var(--ink);
 }
 
-/* -- Section -------------------------------------- */
+/* ── Section ────────────────────────────────────── */
 .page-section { padding: clamp(72px, 10vw, 128px) 0; border-bottom: 1px solid var(--line); }
 .page-section h2.serif { font-size: clamp(32px, 5vw, 56px); margin-bottom: 32px; }
 
@@ -520,7 +523,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   font-size: 22px; color: var(--accent); margin-top: 24px;
 }
 
-/* -- CTA ------------------------------------------ */
+/* ── CTA ────────────────────────────────────────── */
 .page-cta {
   background: var(--accent); color: var(--accent-ink);
   padding: clamp(80px, 12vw, 132px) 0;
@@ -528,7 +531,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 }
 .page-cta h2.display { font-size: clamp(56px, 10vw, 140px); }
 .page-cta h2.display em { color: var(--accent-ink); opacity: 0.8; }
-.page-cta p { color: var(--accent-ink); opacity: 0.85; font-size: 18px; margin: 28px auto 36px; max-width: 480px; }
+.page-cta p { color: #21150E; opacity: 1; font-size: 18px; margin: 28px auto 36px; max-width: 480px; }
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 16px 28px; border-radius: 999px;
@@ -545,7 +548,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
 .btn-ghost:hover { transform: translateY(-2px); border-color: var(--ink); }
 
-/* -- FAQ Accordion ------------------------------- */
+/* ── FAQ Accordion ─────────────────────────────── */
 .faq-list { margin-top: 48px; }
 .faq-item { border-top: 1px solid var(--line); }
 .faq-item:last-of-type { border-bottom: 1px solid var(--line); }
@@ -571,7 +574,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 .faq-a p:last-child { margin: 0; }
 .faq-a strong { color: var(--ink); font-weight: 600; }
 
-/* -- Recipe Cards -------------------------------- */
+/* ── Recipe Cards ──────────────────────────────── */
 .recipe-grid {
   margin-top: 48px;
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -583,14 +586,8 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   background: var(--paper-2); border: 1px solid var(--line);
   border-radius: 8px; padding: 32px 28px;
   display: flex; flex-direction: column; gap: 14px;
-  animation: recipeRise .7s cubic-bezier(.16,1,.3,1) both;
   transition: border-color .25s, transform .25s, box-shadow .25s, background .25s;
 }
-.recipe-card:nth-child(2) { animation-delay: .05s; }
-.recipe-card:nth-child(3) { animation-delay: .10s; }
-.recipe-card:nth-child(4) { animation-delay: .15s; }
-.recipe-card:nth-child(5) { animation-delay: .20s; }
-.recipe-card:nth-child(6) { animation-delay: .25s; }
 .recipe-card::before {
   content: '';
   position: absolute; inset: 0 0 auto; height: 1px;
@@ -621,16 +618,12 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   filter: saturate(1.08) brightness(1.05);
 }
 
-@keyframes recipeRise {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
-}
 @media (prefers-reduced-motion: reduce) {
-  .recipe-card { animation: none !important; transition: none !important; }
+  .recipe-card { transition: none !important; }
   .recipe-card::before { display: none; }
 }
 
-/* -- Newsletter inline (recipes/etc) ------------- */
+/* ── Newsletter inline (recipes/etc) ───────────── */
 .inline-capture {
   margin-top: 56px;
   padding: 40px 32px;
@@ -644,6 +637,67 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 .inline-form button { background: var(--accent); color: var(--accent-ink); border: 0; padding: 0 24px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; transition: filter .2s; }
 .inline-form button:hover { filter: brightness(1.1); }
 
+/* Contact + wholesale lead forms. These stay deliberately plain and fast:
+   one column on phones, two columns where space allows, and a visible
+   no-JavaScript submit path through the existing FormSubmit inbox. */
+.nb-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 30px;
+  padding: clamp(22px, 4vw, 36px);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: rgba(16,14,12,0.72);
+}
+.nb-form-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.nb-form-field--full { grid-column: 1 / -1; }
+.nb-form label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.nb-form input,
+.nb-form select,
+.nb-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 14px 15px;
+  font: 400 15px/1.45 'Inter', sans-serif;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.nb-form textarea { min-height: 150px; resize: vertical; }
+.nb-form input:focus,
+.nb-form select:focus,
+.nb-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(212,162,74,0.14);
+}
+.nb-form select { color-scheme: dark; }
+.nb-form-note { margin: 0; color: var(--ink-60); font-size: 13px; line-height: 1.5; }
+.nb-form-status {
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  border: 1px solid rgba(212,162,74,0.32);
+  border-radius: 4px;
+  background: rgba(212,162,74,0.10);
+  color: var(--ink);
+  font-size: 14px;
+}
+.nb-form .btn { justify-self: start; min-height: 48px; }
+@media (max-width: 680px) {
+  .nb-form { grid-template-columns: 1fr; }
+  .nb-form-field--full { grid-column: auto; }
+  .nb-form .btn { width: 100%; justify-content: center; }
+}
+
 .related-recipes {
   padding: clamp(48px, 7vw, 80px) 0;
   border-top: 1px solid var(--line);
@@ -651,118 +705,45 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 .related-recipes-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 26px;
+  gap: 14px;
+  margin-top: 24px;
 }
 .related-recipe-card {
-  position: relative;
-  overflow: hidden;
   display: grid;
-  grid-template-columns: 92px 1fr;
-  align-items: stretch;
-  gap: 16px;
-  min-height: 128px;
-  padding: 12px;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 14px;
+  min-height: 92px;
+  padding: 14px;
   color: var(--ink);
   text-decoration: none;
-  background:
-    linear-gradient(135deg, rgba(245,241,234,0.065), transparent 42%),
-    var(--paper-2);
+  background: var(--paper-2);
   border: 1px solid var(--line);
   border-radius: 10px;
-  transition: border-color .2s, transform .2s, background .2s, box-shadow .2s;
-}
-.related-recipe-card::after {
-  content: '';
-  position: absolute;
-  inset: auto 16px 0 124px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(var(--accent-rgb, 212, 162, 74), .48), transparent);
-  opacity: .72;
+  transition: border-color .2s, transform .2s, background .2s;
 }
 .related-recipe-card:hover {
   border-color: var(--line-strong);
   background: var(--paper-3);
   transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
 }
 .related-recipe-thumb {
-  position: relative;
-  overflow: hidden;
   display: grid;
   place-items: center;
-  width: 92px;
-  min-height: 104px;
+  width: 64px;
+  height: 64px;
   border-radius: 8px;
   background:
-    radial-gradient(circle at 34% 24%, rgba(245,241,234,.34), transparent 28%),
-    radial-gradient(circle at 72% 76%, rgba(var(--accent-rgb, 212, 162, 74), .30), transparent 34%),
-    linear-gradient(135deg, rgba(var(--accent-rgb, 212, 162, 74), .26), var(--paper-3));
+    radial-gradient(circle at 30% 20%, rgba(var(--accent-rgb, 212, 162, 74), .36), transparent 36%),
+    linear-gradient(135deg, var(--paper-3), rgba(var(--accent-rgb, 212, 162, 74), .16));
   border: 1px solid var(--line);
-}
-.related-recipe-thumb::before {
-  content: '';
-  position: absolute;
-  inset: 15px 18px 30px;
-  border-radius: 999px;
-  border: 1px solid rgba(245,241,234,.32);
-  background:
-    radial-gradient(circle at 50% 45%, rgba(245,241,234,.18), transparent 44%),
-    linear-gradient(180deg, rgba(0,0,0,.16), rgba(0,0,0,.34));
-  box-shadow: inset 0 0 0 7px rgba(0,0,0,.14), 0 14px 22px rgba(0,0,0,.28);
-}
-.related-recipe-thumb::after {
-  content: '';
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 22px;
-  height: 12px;
-  border-radius: 999px;
-  background: rgba(245,241,234,.18);
-  transform: rotate(-4deg);
-}
-.related-recipe-thumb--heat {
-  background:
-    radial-gradient(circle at 34% 24%, rgba(255,204,156,.34), transparent 28%),
-    radial-gradient(circle at 72% 76%, rgba(232,74,58,.42), transparent 34%),
-    linear-gradient(135deg, rgba(232,74,58,.30), var(--paper-3));
-}
-.related-recipe-thumb--bright {
-  background:
-    radial-gradient(circle at 34% 24%, rgba(255,238,171,.38), transparent 28%),
-    radial-gradient(circle at 72% 76%, rgba(98,171,126,.34), transparent 34%),
-    linear-gradient(135deg, rgba(245,200,66,.24), var(--paper-3));
-}
-.related-recipe-thumb--bowl {
-  background:
-    radial-gradient(circle at 34% 24%, rgba(245,241,234,.34), transparent 28%),
-    radial-gradient(circle at 72% 76%, rgba(124,88,48,.36), transparent 34%),
-    linear-gradient(135deg, rgba(232,154,58,.22), var(--paper-3));
-}
-.related-recipe-thumb-label {
-  position: relative;
-  z-index: 1;
-  margin-top: 52px;
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: rgba(8,7,6,.72);
-  border: 1px solid rgba(245,241,234,.18);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: rgba(245,241,234,.88);
+  letter-spacing: .12em;
+  color: var(--accent);
 }
-.related-recipe-copy {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px 4px 8px 0;
-}
+.related-recipe-copy { min-width: 0; }
 .related-recipe-kicker {
   display: block;
   margin-bottom: 5px;
@@ -776,12 +757,12 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 .related-recipe-card strong {
   display: block;
   font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(19px, 2vw, 24px);
-  line-height: 1.02;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.05;
   letter-spacing: -.03em;
 }
 
-/* -- Footer -------------------------------------- */
+/* ── Footer ────────────────────────────────────── */
 .page-footer {
   background: #080706; color: var(--ink);
   padding: 80px 0 40px;
@@ -818,24 +799,13 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
 
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 28px 0 0; border-top: 1px solid var(--line); gap: 24px; flex-wrap: wrap; }
 
-/* -- Responsive ---------------------------------- */
+/* ── Responsive ────────────────────────────────── */
 @media (max-width: 880px) {
   .nav-links, .nav-cta { display: none; }
   .nav-burger { display: flex; }
   .page-section .pillar-grid { grid-template-columns: 1fr; gap: 16px; }
   .recipe-grid { grid-template-columns: 1fr; gap: 16px; }
   .related-recipes-grid { grid-template-columns: 1fr; }
-  .related-recipe-card {
-    grid-template-columns: 88px 1fr;
-    min-height: 118px;
-  }
-  .related-recipe-thumb {
-    width: 88px;
-    min-height: 94px;
-  }
-  .related-recipe-card::after {
-    left: 116px;
-  }
   .footer-newsletter { grid-template-columns: 1fr; gap: 24px; }
   .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 0 16px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -844,7 +814,7 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   .footer-cols { grid-template-columns: 1fr; gap: 28px; }
 }
 
-/* -- Rewards promotion (nav link + PDP earn chip) -------------------- */
+/* ── Rewards promotion (nav link + PDP earn chip) ──────────────────── */
 .nav-links a.nav-rewards {
   display: inline-flex; align-items: center; gap: 7px;
   color: var(--accent); opacity: 1; font-weight: 500;
@@ -976,6 +946,20 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
   }
 }
 
+/* Revenue/editorial hero bottles must always stay inside their grid cell. */
+.product-portrait {
+  min-width: 0;
+}
+
+.product-portrait img {
+  display: block;
+  width: min(100%, 760px);
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .about-card,
   .about-bottle-row img {
@@ -989,3 +973,230 @@ p { line-height: 1.65; letter-spacing: -0.005em; color: var(--ink-60); margin: 0
     transform: none;
   }
 }
+
+
+/* ───────── PDP finishing-spice cross-sell strip (enlarged 2026-06-16) ─────────
+   Columns live here (not inline) so the strip is comfortably large on desktop
+   and stacks cleanly to full-width cards on mobile. Markup + inline base styles
+   are injected by page-shared.js (.pdp-spice-cross / .pdp-spice-grid). */
+.pdp-spice-cross .pdp-spice-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+@media (max-width: 760px) {
+  .pdp-spice-cross .pdp-spice-grid { grid-template-columns: minmax(0, 1fr); }
+  .pdp-spice-card {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    gap: 14px;
+  }
+  /* Thumb size is governed by the responsive clamp() in the injected inline
+     style (page-shared.js) so the enlarged jar reads as a real product image
+     while staying contained on small screens. */
+}
+
+
+/* 2026-06-21 — Mobile CTA label fit: prevent "Add"/"Shop Sauces" pill labels
+   from clipping on narrow viewports. Scoped to <=600px so desktop is untouched.
+   Lets labels wrap and the pill size to content instead of clipping. */
+@media (max-width: 600px) {
+  .nav-cta, .drawer-cta, .pdp-cta, .pdp-cta-2,
+  .mobile-pdp-bar a, .btn, .btn-accent, .btn-ghost,
+  .hero-cta-row a, .lineup-buy-btn, .trio-bundle-cta,
+  .bundle-add, .sticky-cart-bar a {
+    white-space: normal;
+    overflow: visible;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    line-height: 1.2;
+    text-overflow: clip;
+  }
+}
+
+/* 2026-06-26 audit cleanup: SEO/use-case hero split must not force a 760px mobile viewport. */
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 360px);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+}
+.hero-split > * { min-width: 0; }
+.hero-split img {
+  display: block;
+  width: min(100%, 360px) !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: min(620px, 70vh) !important;
+  object-fit: contain;
+  margin-inline: auto;
+}
+@media (max-width: 760px) {
+  .hero-split { grid-template-columns: 1fr; }
+  .hero-split img { width: min(72vw, 260px) !important; max-height: 360px !important; }
+}
+
+
+
+/* 2026-07-03 — First Ramen Night Box offer blocks */
+.first-box-offer {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid rgba(212, 162, 74, 0.45);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(212,162,74,0.12), rgba(232,74,58,0.06));
+  color: var(--ink, #f5efe6);
+}
+.first-box-offer-launch { margin-top: 18px; }
+.first-box-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent, #D4A24A);
+  margin-bottom: 6px;
+}
+.first-box-offer strong {
+  display: block;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 18px;
+  line-height: 1.15;
+  color: var(--ink, #f5efe6);
+}
+.first-box-offer p {
+  margin: 8px 0 12px;
+  font-size: 13px;
+  line-height: 1.52;
+  color: var(--ink-60, rgba(245,239,230,.68));
+}
+.first-box-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--accent, #D4A24A);
+  color: var(--accent-ink, #0E0D0C);
+  text-decoration: none;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: transform .2s, box-shadow .2s;
+}
+.first-box-link:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(212,162,74,.18); }
+.first-box-hero { padding: clamp(56px, 8vw, 104px) 0; }
+.first-box-grid { display:grid; grid-template-columns: minmax(0,1.05fr) minmax(280px,.95fr); gap: clamp(28px,5vw,72px); align-items:center; }
+.first-box-card { border:1px solid rgba(245,239,230,.12); border-radius:24px; padding:clamp(22px,4vw,34px); background:rgba(14,13,12,.52); box-shadow:0 28px 80px rgba(0,0,0,.22); }
+.first-box-price { display:flex; align-items:baseline; gap:12px; margin:18px 0; }
+.first-box-price strong { font-family:'Inter Tight',sans-serif; font-size:clamp(48px,8vw,76px); line-height:.9; color:var(--accent,#D4A24A); }
+.first-box-price span { color:var(--ink-60,rgba(245,239,230,.68)); }
+.first-box-list { display:grid; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
+.first-box-list li { padding:12px 14px; border:1px solid rgba(245,239,230,.10); border-radius:14px; background:rgba(245,239,230,.035); }
+@media (max-width: 780px) {
+  .first-box-grid { grid-template-columns:1fr; }
+  .first-box-link { width:100%; box-sizing:border-box; }
+}
+
+/* PDP cleanup 2026-07-03: keep tall bottle art fully visible in mobile galleries.
+   The source assets are real bottle cutouts; force contain boxes so thumbnails
+   never crop cap/base/label inside the small carousel tiles. */
+.pdp-gallery-main,
+.pdp-gallery-thumbs button {
+  position: relative !important;
+}
+.pdp-gallery-main img,
+.pdp-gallery-thumbs img {
+  position: absolute !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  display: block !important;
+}
+.pdp-gallery-main img {
+  inset: clamp(18px, 3vw, 34px) !important;
+  width: calc(100% - (2 * clamp(18px, 3vw, 34px))) !important;
+  height: calc(100% - (2 * clamp(18px, 3vw, 34px))) !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+}
+.pdp-gallery-thumbs button {
+  display: block !important;
+}
+.pdp-gallery-thumbs img {
+  inset: 10px !important;
+  width: calc(100% - 20px) !important;
+  height: calc(100% - 20px) !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+}
+@media (max-width: 720px) {
+  .pdp-gallery-main img {
+    inset: 18px !important;
+    width: calc(100% - 36px) !important;
+    height: calc(100% - 36px) !important;
+  }
+  .pdp-gallery-thumbs button {
+    min-height: 108px !important;
+    padding: 0 !important;
+  }
+}
+
+/* Replace the placeholder-looking NB recipe squares with a cleaner sauce-bowl
+   badge. This avoids fake food photos while making PDP recipe cards feel intentional. */
+.related-recipe-thumb {
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  font-size: 0 !important;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(var(--accent-rgb, 212,162,74), .38), transparent 34%),
+    radial-gradient(circle at 72% 82%, rgba(232, 74, 58, .18), transparent 38%),
+    linear-gradient(145deg, rgba(245,241,234,.08), rgba(var(--accent-rgb, 212,162,74), .14) 48%, rgba(8,7,6,.9));
+  box-shadow: inset 0 0 0 1px rgba(245,241,234,.04), 0 12px 28px rgba(0,0,0,.22);
+}
+.related-recipe-thumb::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 23px;
+  height: 18px;
+  border: 2px solid rgba(245,241,234,.72);
+  border-top-color: rgba(245,241,234,.92);
+  border-radius: 50% / 62%;
+  transform: rotate(-4deg);
+}
+.related-recipe-thumb::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 20px;
+  bottom: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb,212,162,74), .95), transparent);
+  box-shadow: 0 -11px 0 rgba(232,74,58,.55), 7px -17px 0 -1px rgba(245,241,234,.55);
+}
+@media (max-width: 560px) {
+  .related-recipe-card {
+    grid-template-columns: 58px 1fr;
+    min-height: 88px;
+    padding: 12px;
+    gap: 13px;
+  }
+  .related-recipe-thumb {
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
+  }
+  .related-recipe-card strong {
+    font-size: 20px;
+    line-height: 1.08;
+  }
+}
+

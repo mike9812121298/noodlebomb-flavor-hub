@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
+
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
@@ -22,7 +30,7 @@
 <meta name="twitter:description" content="Gyoza, wontons, potstickers, rice bowls, and noodles with chili, garlic, sesame, and shoyu from Spicy Tokyo.">
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" fetchpriority="high">
 <style>
   .dumpling-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -75,7 +83,7 @@
         "@type": "Offer",
         "url": "https://noodlebomb.co/spicy-tokyo-ramen-sauce",
         "priceCurrency": "USD",
-        "price": "11.99",
+        "price": "13.99",
         "availability": "https://schema.org/InStock"
       }
     },
@@ -115,10 +123,10 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/shop">Shop sauces</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -129,18 +137,18 @@
   <a href="/about">About</a>
   <a href="/monthly-box">Monthly Ramen Box</a>
   <a href="/faq">FAQ</a>
-  <a href="mailto:hello@noodlebomb.co">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces</a>
+  <a href="/contact">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Dumplings - Dip fast</div>
+      <div class="eyebrow">Dumplings &middot; Dip fast</div>
       <h1 class="display">Spicy sauce<br><em>for dumplings.</em></h1>
       <p class="lede">Gyoza, wontons, soup dumplings, and potstickers need heat with depth. Spicy Tokyo brings roasted chili, garlic, sesame, smooth soy, and deep umami in one fast dip.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Start with Spicy Tokyo </a>
+        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Start with Spicy Tokyo &rarr;</a>
         <a class="btn btn-ghost" href="/recipes">See dumpling recipe</a>
       </div>
     </div>
@@ -153,19 +161,19 @@
       <div class="dumpling-product-grid">
         <article class="dumpling-product-card">
           <img src="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Spicy Tokyo ramen sauce bottle" loading="eager" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 - Roasted chili</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 &middot; Roasted chili</div>
           <h3>Tokyo heat dip</h3>
           <p class="anchor-line">Whisk Spicy Tokyo with rice vinegar and toasted sesame oil. Add scallion, sesame, or crushed garlic, then dip crisp gyoza.</p>
         </article>
         <article class="dumpling-product-card">
           <img src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.01 - Garlic & sesame</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.01 &middot; Garlic & sesame</div>
           <h3>Mellow dumpling dip</h3>
           <p class="anchor-line">Use Original when you want garlic, sesame, and savory depth without the bigger chili push.</p>
         </article>
         <article class="dumpling-product-card">
           <img src="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Citrus Shoyu ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.02 - Bright shoyu</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.02 &middot; Bright shoyu</div>
           <h3>Bright wonton bowl</h3>
           <p class="anchor-line">Citrus Shoyu works with wontons, cucumber, scallion, noodles, and rice when the plate needs a clean lift.</p>
         </article>
@@ -205,7 +213,7 @@
       <p>Add 1/4 cup Spicy Tokyo to a small dipping bowl. Whisk in 1 tablespoon rice vinegar and 1 teaspoon toasted sesame oil. Top with thin-sliced scallion, sesame, and crushed garlic if you want a heavier hit.</p>
       <p style="margin-top:22px;">Serve next to gyoza, soup dumplings, wontons, potstickers, or crispy tofu. It is fast enough for a freezer-night dinner and strong enough for a full dumpling spread.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Shop Spicy Tokyo </a>
+        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Shop Spicy Tokyo &rarr;</a>
         <a class="btn btn-ghost" href="/recipes">More recipes</a>
       </div>
     </div>
@@ -215,7 +223,7 @@
     <div class="container">
       <h2 class="display">Dumplings need<br><em>depth with heat.</em></h2>
       <p>Spicy Tokyo is the fast bottle for gyoza, wontons, potstickers, wings, noodles, and rice bowls.</p>
-      <a class="btn btn-accent" href="/spicy-tokyo-ramen-sauce">Get Spicy Tokyo </a>
+      <a class="btn btn-accent" href="/spicy-tokyo-ramen-sauce">Get Spicy Tokyo &rarr;</a>
     </div>
   </section>
 </main>
@@ -237,7 +245,7 @@
   </div>
 </footer>
 
-<script src="/cart-store.js" defer></script>
-<script src="/page-shared.js?v=20260710-approved-labels" defer></script>
+<script src="/cart-store.js?v=20260712-final2" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>

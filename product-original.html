@@ -2,18 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
-<script>window.NB_TRACK&&NB_TRACK.viewItem({slug:'original',name:"Original",price:11.99});</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
 <title>Original Ramen Sauce | Garlic Sesame Umami | NoodleBomb</title>
-<meta name="description" content="Buy NoodleBomb Original ramen sauce: roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, small-batch in Bonney Lake, WA.">
+<meta name="description" content="Buy NoodleBomb Original ramen sauce: roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, family-owned in Washington.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="https://noodlebomb.co/original-ramen-sauce">
 <meta property="og:type" content="product">
 <meta property="og:title" content="Original Ramen Sauce | NoodleBomb">
-<meta property="og:description" content="Roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, made in Bonney Lake, WA.">
+<meta property="og:description" content="Roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, produced with our co-packer in Tacoma, WA.">
 <meta property="og:image" content="https://noodlebomb.co/uploads/nb-original-approved-front-v2-20260710-normalized.webp">
 <meta property="og:image:alt" content="NoodleBomb Original ramen sauce bottle, front label">
 <meta property="og:url" content="https://noodlebomb.co/original-ramen-sauce">
@@ -25,17 +31,17 @@
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-original-approved-front-v2-20260710-normalized.webp">
 <meta name="twitter:image:alt" content="NoodleBomb Original ramen sauce bottle, front label">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" fetchpriority="high">
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Original ramen sauce",
-  "description": "Original ramen sauce with roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, hand-mixed in Bonney Lake, WA.",
+  "description": "Original ramen sauce with roasted garlic, toasted sesame, smooth soy, and big umami without big heat. 7 fl oz, produced with our co-packer in Tacoma, WA.",
   "image": [
     "https://noodlebomb.co/uploads/nb-original-approved-front-v2-20260710-normalized.webp",
-    "https://noodlebomb.co/uploads/nb-original-approved-front-v2-20260710-normalized.webp",
-    "https://noodlebomb.co/uploads/nb-original-approved-front-v2-20260710-normalized.webp"
+    "https://noodlebomb.co/uploads/nb-original-approved-side-20260710.webp",
+    "https://noodlebomb.co/uploads/nb-original-approved-back-20260710.webp"
   ],
   "brand": { "@type": "Brand", "name": "NoodleBomb" },
   "sku": "NB-ORIGINAL-7OZ",
@@ -43,7 +49,7 @@
     "@type": "Offer",
     "url": "https://noodlebomb.co/original-ramen-sauce",
     "priceCurrency": "USD",
-    "price": "11.99",
+    "price": "13.99",
     "availability": "https://schema.org/InStock",
     "itemCondition": "https://schema.org/NewCondition"
   }
@@ -58,7 +64,7 @@
 }</script>
 
 <style>
-  /* PDP-specific layout - works on top of /page-shared.css */
+  /* PDP-specific layout &mdash; works on top of /page-shared.css */
   .pdp-hero { padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 64px); }
   .pdp-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
   @media (max-width: 880px) { .pdp-grid { grid-template-columns: 1fr; } }
@@ -246,31 +252,6 @@
     }
   }
 
-  /* NB 2026-08 lineup teaser + shop-all strip (additive, minimal) */
-  .pdp-gallery-thumbs a.pdp-thumb-link {
-    position: relative; display: grid; place-items: center;
-    background: rgba(240,235,227,0.045); border: 1px solid var(--line);
-    border-radius: 8px; overflow: hidden; padding: 8px; aspect-ratio: 1/1;
-    transition: border-color .2s, transform .2s, box-shadow .2s;
-  }
-  .pdp-gallery-thumbs a.pdp-thumb-link:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 10px 24px rgba(0,0,0,0.22); }
-  .pdp-gallery-thumbs a.pdp-thumb-link img { width: auto; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
-  .pdp-thumb-cap {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase;
-    text-align: center; padding: 3px 2px; color: var(--ink);
-    background: linear-gradient(180deg, transparent, rgba(14,13,12,0.86));
-  }
-  .pdp-shopall { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 2px; }
-  .pdp-shopall-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-40); width: 100%; }
-  .pdp-shopall a, .pdp-shopall span.cur {
-    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
-    border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; text-decoration: none; color: var(--ink-60);
-    transition: border-color .2s, color .2s, transform .2s;
-  }
-  .pdp-shopall a:hover { color: var(--ink); border-color: var(--accent); transform: translateY(-1px); }
-  .pdp-shopall span.cur { color: var(--accent); border-color: var(--accent); }
-
 </style>
 
 </head>
@@ -286,10 +267,10 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/shop">Shop sauces</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -300,8 +281,8 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces</a>
+    <a href="/contact">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 
@@ -311,57 +292,80 @@
       <div class="pdp-grid">
         <div class="pdp-gallery">
           <div class="pdp-gallery-main">
-            <img id="pdp-main-img" src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original bottle - front label" loading="eager" decoding="async">
+            <img id="pdp-main-img" src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original bottle &mdash; front label" loading="eager" decoding="async">
           </div>
-          <div class="pdp-gallery-thumbs" aria-label="Original bottle and full lineup">
+          <div class="pdp-gallery-thumbs" aria-label="Original bottle gallery">
             <button type="button" aria-current="true" aria-label="Front studio shot">
-              <img src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" data-full="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original - front label" loading="lazy" decoding="async">
+              <img src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" data-full="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original &mdash; front label" loading="lazy" decoding="async">
             </button>
-            <a class="pdp-thumb-link" href="/spicy-tokyo-ramen-sauce" aria-label="Shop Spicy Tokyo">
-              <img src="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Spicy Tokyo bottle, front label" loading="lazy" decoding="async">
-              <span class="pdp-thumb-cap">Spicy Tokyo</span>
-            </a>
-            <a class="pdp-thumb-link" href="/citrus-shoyu-ramen-sauce" aria-label="Shop Citrus Shoyu">
-              <img src="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Citrus Shoyu bottle, front label" loading="lazy" decoding="async">
-              <span class="pdp-thumb-cap">Citrus Shoyu</span>
-            </a>
+            <button type="button" aria-current="false" aria-label="Side panel">
+              <img src="/uploads/nb-original-approved-side-20260710.webp" data-full="/uploads/nb-original-approved-side-20260710.webp" alt="NoodleBomb Original &mdash; side panel" loading="lazy" decoding="async">
+            </button>
+            <button type="button" aria-current="false" aria-label="Back label">
+              <img src="/uploads/nb-original-approved-back-20260710.webp" data-full="/uploads/nb-original-approved-back-20260710.webp" alt="NoodleBomb Original &mdash; back label with ingredients and nutrition" loading="lazy" decoding="async">
+            </button>
           </div>
         </div>
         <div class="pdp-info">
-          <div class="eyebrow">No.01 - GARLIC & SESAME</div>
+          <div class="eyebrow">No.01 &middot; GARLIC & SESAME</div>
           <h1 class="display"><em>Original.</em></h1>
           <p class="pdp-anchor">Turn up the flavor. Not the heat.</p>
           <p>Roasted garlic. Toasted sesame. Smooth soy.</p>
           <div class="pdp-buy-panel">
             <div class="pdp-price">
-              <span class="amt">$11.99</span>
-              <span class="meta">7 fl oz - controlled pour cap</span>
+              <span class="amt">$13.99</span>
+              <span class="meta">7 fl oz &middot; controlled pour cap</span>
             </div>
             <div class="pdp-cta-row">
-              <a class="pdp-cta" href="/cart?add=original&amp;qty=1">Add Original </a>
-              <a class="pdp-cta pdp-cta-2" href="/cart?add=trio&amp;qty=1">Try the Trio </a>
-            </div>
-            <div class="pdp-shopall" aria-label="Shop all flavors">
-              <span class="pdp-shopall-label">Shop all flavors</span>
-              <span class="cur" aria-current="true">Original</span>
-              <a href="/spicy-tokyo-ramen-sauce">Spicy Tokyo</a>
-              <a href="/citrus-shoyu-ramen-sauce">Citrus Shoyu</a>
-              <a href="/ramen-sauce-trio">Trio</a>
+              <a class="pdp-cta" href="/cart?add=original&amp;qty=1">Add Original &rarr;</a>
+              <a class="pdp-cta pdp-cta-2" href="/cart?add=trio&amp;qty=1">Try the Trio &rarr;</a>
             </div>
             <p class="pdp-choice-note">Start here if you want the most flexible everyday bottle. Get the Trio if you want to taste the full range.</p>
             <div class="pdp-proof-row"><span>Ships from WA</span><span>Free US shipping $29.99+</span><span>30-day guarantee</span></div>
+            <div class="first-box-offer" data-first-box-offer>
+              <div class="first-box-kicker">First Ramen Night Box</div>
+              <strong>The Monthly Box is open.</strong>
+              <p>Choose the $29.99 Monthly Box or $39.99 Premium Box. Every box includes premium ramen and a full 7 oz NoodleBomb sauce bottle.</p>
+              <a class="first-box-link" href="/monthly-box#plans" data-original-source="pdp-original" data-first-box-cta data-source="pdp-original">Choose your box &rarr;</a>
+            </div>
           </div>
           <div class="pdp-tags"><span class="pdp-tag">UMAMI</span><span class="pdp-tag">GARLIC</span><span class="pdp-tag">SESAME</span><span class="pdp-tag">MEDIUM-LIGHT HEAT</span></div>
           <dl class="pdp-spec-list">
             <div><dt>Bottle size</dt><dd>7 fl oz</dd></div>
-            <div><dt>Heat level</dt><dd>Medium-light - flavor-forward</dd></div>
-            <div><dt>Made in</dt><dd>Bonney Lake, WA - small batch</dd></div>
-            <div><dt>Shelf life</dt><dd>Shelf stable unopened - refrigerate after opening</dd></div>
+            <div><dt>Heat level</dt><dd>Medium-light &middot; flavor-forward</dd></div>
+            <div><dt>Produced in</dt><dd>Tacoma, WA &middot; co-packer</dd></div>
+            <div><dt>Shelf life</dt><dd>Shelf stable unopened &middot; refrigerate after opening</dd></div>
             <div><dt>Allergens</dt><dd>Contains Soy, Wheat, Milk, Sesame.</dd></div>
             <div><dt>Ingredients</dt><dd>See bottle label for the full ingredient list. Contains: Soy, Wheat, Milk, Sesame.</dd></div>
           </dl>
-          <p style="font-size:13px;color:var(--ink-40);margin-top:18px;">Free US shipping $29.99+ - If you don&rsquo;t love it, email <a style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;" href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a> in 30 days for a full refund. Keep the bottle.</p>
+          <p style="font-size:13px;color:var(--ink-40);margin-top:18px;">Free US shipping $29.99+ &middot; If you don&rsquo;t love it, email <a style="color:var(--accent);text-decoration:underline;text-underline-offset:3px;" href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a> in 30 days for a full refund. Keep the bottle.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container narrow">
+      <div class="eyebrow">About this bottle</div>
+      <h2 class="serif">What it is.</h2>
+      <p>The one that started it all. Built to turn up the savory without taking over the meal. Roasted garlic and toasted sesame oil layered over a smooth soy base, balanced with kombu and mirin so it adds depth fast. Equal parts noodle sauce, rice bowl finisher, dumpling dip, wing glaze, stir-fry weapon, and weeknight vegetable closer. <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/sauce-for-noodles">Noodle sauce guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/stir-fry-sauce-for-noodles">Stir-fry guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/ramen-sauce-for-pork">Pork guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-pork-chops">Pork chop guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-fried-rice">Fried rice guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-rice-bowls">Rice bowl guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/ramen-sauce-for-chicken">Chicken guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-chicken-thighs">Chicken thigh guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/ramen-sauce-for-eggs">Egg guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-green-beans">Green bean guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-brussels-sprouts">Brussels sprout guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-bok-choy">Bok choy guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-snap-peas">Snap pea guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-cabbage">Cabbage guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-roasted-broccoli">Roasted broccoli guide &rarr;</a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-cauliflower">Cauliflower guide &rarr;</a></p>
+      <p style="margin-top:18px;"><a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/ramen-sauce-trio">Compare the Trio &rarr;</a></p>
+      <p style="margin-top:24px;">The pour cap is built for control: a thin stream for bowls, a steady pour for marinades and stir-fry. Store unopened in a cool, dry place. Refrigerate after opening for peak flavor. Don&rsquo;t leave it on the stovetop &mdash; heat dulls the top notes.</p>
+      <p style="margin-top:24px;">Family-owned in Bonney Lake, WA. Produced with our Tacoma co-packer, no shortcuts. <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/about">Read the story &rarr;</a></p>
+      <div class="best-with" aria-label="Best with Original">
+        <span>Noodles</span><span>Rice bowls</span><span>Dumplings</span><span>Eggs</span><span>Stir-fry</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-recipes" data-related-recipes data-shopify-handle="original">
+    <div class="container">
+      <div class="eyebrow">Try this sauce on</div>
+      <h2 class="serif">Start with these recipes.</h2>
+      <div class="related-recipes-grid" data-related-recipes-grid>
+        <a class="related-recipe-card" href="/recipes#original-chicken-ramen"><span class="related-recipe-thumb" aria-hidden="true"></span><span class="related-recipe-copy"><span class="related-recipe-kicker">Recipe</span><strong>Original Chicken Ramen</strong></span></a>
+        <a class="related-recipe-card" href="/recipes#original-garlic-sesame-ramen"><span class="related-recipe-thumb" aria-hidden="true"></span><span class="related-recipe-copy"><span class="related-recipe-kicker">Recipe</span><strong>Original Garlic Sesame Ramen</strong></span></a>
+        <a class="related-recipe-card" href="/recipes"><span class="related-recipe-thumb" aria-hidden="true"></span><span class="related-recipe-copy"><span class="related-recipe-kicker">Recipe</span><strong>Original Crispy Chicken Rice Bowl</strong></span></a>
       </div>
     </div>
   </section>
@@ -374,49 +378,23 @@
 
         <a class="pdp-cross-card" href="/spicy-tokyo-ramen-sauce">
           <img src="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Spicy Tokyo bottle, front label" loading="lazy" decoding="async">
-          <div class="mono" style="color:#ff8a78;margin-bottom:6px;">No.03 - UMAMI MEETS FIRE</div>
+          <div class="mono" style="color:#ff8a78;margin-bottom:6px;">No.03 &middot; UMAMI MEETS FIRE</div>
           <h3>Spicy Tokyo</h3>
           <p class="anchor-line">Bold heat. Deep umami.</p>
         </a>
         <a class="pdp-cross-card" href="/citrus-shoyu-ramen-sauce">
           <img src="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Citrus Shoyu bottle, front label" loading="lazy" decoding="async">
-          <div class="mono" style="color:#ff8a78;margin-bottom:6px;">No.02 - BRIGHT & TANGY</div>
+          <div class="mono" style="color:#ff8a78;margin-bottom:6px;">No.02 &middot; BRIGHT & TANGY</div>
           <h3>Citrus Shoyu</h3>
           <p class="anchor-line">Bright lift. Bold finish.</p>
         </a>
       </div>
     </div>
   </section>
-
-  <section class="page-section">
-    <div class="container narrow">
-      <div class="eyebrow">About this bottle</div>
-      <h2 class="serif">What it is.</h2>
-      <p>The one that started it all. Built to turn up the savory without taking over the meal. Roasted garlic and toasted sesame oil layered over a smooth soy base, balanced with kombu and mirin so it adds depth fast. Equal parts noodle sauce, rice bowl finisher, dumpling dip, wing glaze, stir-fry weapon, and weeknight vegetable closer. <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/sauce-for-noodles">Noodle sauce guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/stir-fry-sauce-for-noodles">Stir-fry guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/ramen-sauce-for-pork">Pork guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-pork-chops">Pork chop guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-fried-rice">Fried rice guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-rice-bowls">Rice bowl guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/ramen-sauce-for-chicken">Chicken guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-chicken-thighs">Chicken thigh guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/ramen-sauce-for-eggs">Egg guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-green-beans">Green bean guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-brussels-sprouts">Brussels sprout guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-bok-choy">Bok choy guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-snap-peas">Snap pea guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-cabbage">Cabbage guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-roasted-broccoli">Roasted broccoli guide </a> <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);margin-left:10px;" href="/sauce-for-cauliflower">Cauliflower guide </a></p>
-      <p style="margin-top:18px;"><a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/ramen-sauce-trio">Compare the Trio </a></p>
-      <p style="margin-top:24px;">The pour cap is built for control: a thin stream for bowls, a steady pour for marinades and stir-fry. Store unopened in a cool, dry place. Refrigerate after opening for peak flavor. Don&rsquo;t leave it on the stovetop - heat dulls the top notes.</p>
-      <p style="margin-top:24px;">Same hands mix every batch. Bonney Lake, WA. Small kitchen, no shortcuts. <a style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);" href="/about">Read the story </a></p>
-      <div class="best-with" aria-label="Best with Original">
-        <span>Noodles</span><span>Rice bowls</span><span>Dumplings</span><span>Eggs</span><span>Stir-fry</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="related-recipes" data-related-recipes data-shopify-handle="original">
-    <div class="container">
-      <div class="eyebrow">Try this sauce on</div>
-      <h2 class="serif">Start with these recipes.</h2>
-      <div class="related-recipes-grid" data-related-recipes-grid>
-        <a class="related-recipe-card" href="/recipes#original-chicken-ramen"><span class="related-recipe-thumb related-recipe-thumb--umami" aria-hidden="true"><span class="related-recipe-thumb-label">Chicken</span></span><span class="related-recipe-copy"><span class="related-recipe-kicker">Recipe</span><strong>Original Chicken Ramen</strong></span></a>
-        <a class="related-recipe-card" href="/recipes#original-garlic-sesame-ramen"><span class="related-recipe-thumb related-recipe-thumb--umami" aria-hidden="true"><span class="related-recipe-thumb-label">Ramen</span></span><span class="related-recipe-copy"><span class="related-recipe-kicker">Recipe</span><strong>Original Garlic Sesame Ramen</strong></span></a>
-        <a class="related-recipe-card" href="/recipes#original-crispy-chicken-rice-bowl"><span class="related-recipe-thumb related-recipe-thumb--bowl" aria-hidden="true"><span class="related-recipe-thumb-label">Bowl</span></span><span class="related-recipe-copy"><span class="related-recipe-kicker">Recipe</span><strong>Original Crispy Chicken Rice Bowl</strong></span></a>
-      </div>
-    </div>
-  </section>
 </main>
 <div class="mobile-pdp-bar" aria-label="Mobile purchase bar">
-  <div class="mobile-pdp-price"><small>Original</small><strong>$11.99</strong></div>
-  <a href="/cart?add=original&amp;qty=1">Add </a>
+  <div class="mobile-pdp-price"><small>Original</small><strong>$13.99</strong></div>
+  <a href="/cart?add=original&amp;qty=1">Add &rarr;</a>
 </div>
 <footer class="page-footer">
   <div class="container">
@@ -425,7 +403,7 @@
         <div class="footer-newsletter-h">Sauce drops, restock alerts, the occasional recipe.</div>
         <div class="footer-newsletter-sub">Once a month. Never spam.</div>
       </div>
-      <form class="footer-newsletter-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="footer-newsletter-form" data-lead-form="newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
         <input type="hidden" name="_subject" value="NoodleBomb Newsletter Signup">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://noodlebomb.co/?subscribed=1">
@@ -446,13 +424,13 @@
       <a href="mailto:hello@noodlebomb.co" style="color:var(--ink);opacity:0.85;text-decoration:none;font-size:14px;">hello@noodlebomb.co</a><a href="tel:+12534863445" style="color:var(--ink);opacity:0.85;text-decoration:none;font-size:14px;margin-left:14px;">253-486-3445</a>
     </div>
     <div class="footer-bottom" style="justify-content:center;flex-direction:column;gap:6px;text-align:center;border-top:1px solid var(--line);padding-top:20px;">
-      <span class="mono">(c) 2026 NoodleBomb</span>
-      <span style="font-size:12.5px;opacity:0.7;letter-spacing:-0.005em;">Handcrafted in Bonney Lake, WA - Small batch - Pour bold.</span>
+      <span class="mono">&copy; 2026 NoodleBomb</span>
+      <span style="font-size:12.5px;opacity:0.7;letter-spacing:-0.005em;">Family-owned in Bonney Lake, WA &middot; Produced with our Tacoma co-packer &middot; Pour bold.</span>
     </div>
   </div>
 </footer>
 <script src="/rewards-config.js" defer></script>
-<script src="/page-shared.js?v=20260710-approved-labels" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 <script src="/related-recipes.js" defer></script>
 
 

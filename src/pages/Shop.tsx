@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import ComingSoonDrop from "@/components/ComingSoonDrop";
-import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.webp";
-import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.webp";
-import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.webp";
+import nbOriginal from "@/assets/nb-original-front-cutout-2026-05-09.png";
+import nbSpicyTokyo from "@/assets/nb-spicy-front-cutout-2026-05-09.png";
+import nbCitrusShoyu from "@/assets/nb-citrus-front-cutout-2026-05-09.png";
 import { Link } from "react-router-dom";
 import { Truck, Lock, Flame, Check } from "lucide-react";
 
@@ -51,9 +51,9 @@ const products = [
 const bundles = [
   {
     name: "NoodleBomb Trio",
-    tagline: "All three flavors in one clean lineup. Free shipping over $35.",
-    price: "$29.99",
-    originalPrice: "$35.97",
+    tagline: "All three flavors in one clean lineup. Automatic free US shipping.",
+    price: "$34.99",
+    originalPrice: "$38.97",
     spiceLevel: 3,
     color: "bg-primary text-primary-foreground",
   },
@@ -151,7 +151,7 @@ const Shop = () => (
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-base text-muted-foreground line-through">{b.originalPrice}</span>
                   <span className="font-display text-3xl font-bold text-primary">{b.price}</span>
-                  <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">Save $5.98</span>
+                  <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">Save $3.98</span>
                 </div>
                 <div className="flex items-center gap-1.5 mb-6">
                   <Truck className="h-4 w-4 text-primary" />

@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
+
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
@@ -22,7 +30,7 @@
 <meta name="twitter:description" content="Air-fried, baked, grilled, or pan-tossed wings with NoodleBomb ramen sauce.">
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" fetchpriority="high">
 <style>
   .wing-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -75,7 +83,7 @@
         "@type": "Offer",
         "url": "https://noodlebomb.co/spicy-tokyo-ramen-sauce",
         "priceCurrency": "USD",
-        "price": "11.99",
+        "price": "13.99",
         "availability": "https://schema.org/InStock"
       }
     },
@@ -110,10 +118,10 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/shop">Shop sauces</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -124,18 +132,18 @@
   <a href="/about">About</a>
   <a href="/monthly-box">Monthly Ramen Box</a>
   <a href="/faq">FAQ</a>
-  <a href="mailto:hello@noodlebomb.co">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces</a>
+  <a href="/contact">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Wings - Crisp first</div>
+      <div class="eyebrow">Wings &middot; Crisp first</div>
       <h1 class="display">Ramen sauce<br><em>for wings.</em></h1>
       <p class="lede">Cook the wings crisp, then toss them hot with Spicy Tokyo for roasted chili, garlic, sesame, shoyu depth, and a clean hit of heat.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Start with Spicy Tokyo </a>
+        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Start with Spicy Tokyo &rarr;</a>
         <a class="btn btn-ghost" href="/recipes">See more recipes</a>
       </div>
     </div>
@@ -148,19 +156,19 @@
       <div class="wing-product-grid">
         <article class="wing-product-card">
           <img src="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Spicy Tokyo ramen sauce bottle" loading="eager" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 - Roasted chili</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 &middot; Roasted chili</div>
           <h3>Air-fryer wing toss</h3>
           <p class="anchor-line">Cook wings until crisp. Toss 3 tablespoons Spicy Tokyo with 1 teaspoon honey and lime, then coat while the wings are still hot.</p>
         </article>
         <article class="wing-product-card">
           <img src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.01 - Garlic & sesame</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.01 &middot; Garlic & sesame</div>
           <h3>Garlic sesame wings</h3>
           <p class="anchor-line">Warm Original with a small spoon of butter, toss with baked wings, then finish with sesame and thin-sliced scallions.</p>
         </article>
         <article class="wing-product-card">
           <img src="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Citrus Shoyu ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.02 - Bright shoyu</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.02 &middot; Bright shoyu</div>
           <h3>Citrus grilled wings</h3>
           <p class="anchor-line">Grill wings over medium heat, brush lightly near the end, then add a final Citrus Shoyu pour after they come off the heat.</p>
         </article>
@@ -179,13 +187,13 @@
           <div class="recipe-meta"><span>8 MIN</span><span class="dot"></span><span>FOR 2</span></div>
           <h3>Spicy Tokyo wing toss</h3>
           <p>Air-fry or bake wings until crisp. Toss with Spicy Tokyo, honey, lime, and scallions. Add sesame right before serving.</p>
-          <div class="pairing">Best with - Spicy Tokyo</div>
+          <div class="pairing">Best with &middot; Spicy Tokyo</div>
         </article>
         <article class="recipe-card">
           <div class="recipe-meta"><span>10 MIN</span><span class="dot"></span><span>GAME DAY</span></div>
           <h3>Garlic sesame platter</h3>
           <p>Toss hot wings with Original and butter. Serve with cucumber, rice, pickles, and extra sauce on the side.</p>
-          <div class="pairing">Best with - Original</div>
+          <div class="pairing">Best with &middot; Original</div>
         </article>
       </div>
     </div>
@@ -207,7 +215,7 @@
     <div class="container">
       <h2 class="display">Make wing night<br><em>hit harder.</em></h2>
       <p>Start with Spicy Tokyo, then keep Original close for garlic-sesame wings and Citrus Shoyu for grilled batches.</p>
-      <a class="btn btn-accent" href="/shop">Shop sauces</a>
+      <a class="btn btn-accent" href="/shop">Shop sauces &rarr;</a>
     </div>
   </section>
 </main>
@@ -219,7 +227,7 @@
         <div class="footer-newsletter-h">Sauce drops, restock alerts, the occasional recipe.</div>
         <p>No spam. Just the good stuff.</p>
       </div>
-      <form class="inline-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+      <form class="inline-form" data-lead-form="content-newsletter" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
         <input type="hidden" name="_subject" value="NoodleBomb Recipes Signup">
         <input type="email" name="email" placeholder="email address" required aria-label="Email address">
         <button type="submit">Join</button>
@@ -234,6 +242,6 @@
   </div>
 </footer>
 
-<script src="/page-shared.js?v=20260710-approved-labels" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>

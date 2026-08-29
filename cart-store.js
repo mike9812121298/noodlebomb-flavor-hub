@@ -1,15 +1,15 @@
-/* NoodleBomb cart store - vanilla JS, localStorage-backed.
+/* NoodleBomb cart store — vanilla JS, localStorage-backed.
  * Shared between index.html, cart.html, and checkout.html.
  * Exposes a single global: window.NB_CART
  *
  * Item shape: { slug, name, price, qty, attributes? }
- *   slug   - internal product key (matches Wix deep-link map keys)
- *   name   - display label
- *   price  - number, USD
- *   qty    - integer >= 1
+ *   slug   — internal product key used by the NoodleBomb product map
+ *   name   — display label
+ *   price  — number, USD
+ *   qty    — integer >= 1
  */
 
-/* -- Meta Pixel bootstrap (added 2026-06-22, ad-audit fix) -----------------
+/* ── Meta Pixel bootstrap (added 2026-06-22, ad-audit fix) ─────────────────
  * cart.html / checkout.html load cart-store.js but NOT page-shared.js, so the
  * pixel bootstrap is mirrored here to guarantee PageView fires on EVERY page.
  * Idempotent and identical to the copy in page-shared.js (single fbq init,
@@ -19,7 +19,7 @@
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
   var PIXEL_ID = '976149235141968';
   function ensureFbq() {
-    if (window.fbq) return;                 // canonical single init - no double-load
+    if (window.fbq) return;                 // canonical single init — no double-load
     var n = window.fbq = function () {
       n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
     };
@@ -39,12 +39,20 @@
       else window.fbq('track', event);
     } catch (e) {}
   }
-  ensureFbq();
-  if (!window.__nbPixelPageViewFired) {       // PageView exactly once per page load
+  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  function firePageView() {
+    if (window.__nbPixelPageViewFired) return;
     window.__nbPixelPageViewFired = true;
     track('PageView');
   }
-  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  if ((location.pathname.replace(/\/$/, '') || '/') === '/') {
+    window.addEventListener('pointerdown', firePageView, { once: true, passive: true });
+    window.addEventListener('keydown', firePageView, { once: true });
+    window.addEventListener('scroll', firePageView, { once: true, passive: true });
+    window.addEventListener('load', function () { window.setTimeout(firePageView, 12000); }, { once: true });
+  } else {
+    firePageView();
+  }
 })();
 
 (function () {
@@ -54,14 +62,14 @@
   var BUS = (typeof window !== 'undefined') ? new EventTarget() : null;
   var CHANGE = 'nb-cart-change';
   var FREE_SHIPPING_THRESHOLD = 29.99;
-  var RETIRED_SLUGS = {};  // Spicy Shoyu is live; keep this empty unless Mike retires a slug.
+  var RETIRED_SLUGS = {};  // Keep empty unless Mike retires a slug.
   var PRODUCT_CATALOG = {
-    original: { slug: 'original', name: 'Original', price: 11.99 },
-    spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 11.99 },
-    citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 11.99 },
-    trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 29.99 },
-    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 11.99 },
-    shoyuspicy: { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 11.99 },
+    original: { slug: 'original', name: 'Original', price: 13.99 },
+    spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 13.99 },
+    citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 13.99 },
+    trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 34.99 },
+    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 13.99 },
+    shoyuspicy: { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 13.99 },
     firedust: { slug: 'firedust', name: 'NoodleBomb Fire Dust', price: 10.99 },
     rgs: { slug: 'rgs', name: 'NoodleBomb Roasted Garlic Sesame', price: 10.99 }
   };
@@ -74,9 +82,32 @@
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
       var parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed.filter(function (item) {
+      if (!Array.isArray(parsed)) return [];
+
+      var changed = false;
+      var cleanItems = parsed.filter(function (item) {
         return item && !isRetiredSlug(item.slug);
-      }) : [];
+      }).map(function (item) {
+        var catalogItem = PRODUCT_CATALOG[item.slug] || null;
+        if (!catalogItem) return item;
+
+        // A returning shopper can have an older price saved in localStorage.
+        // The catalog is the storefront source of truth, so migrate known items
+        // before the cart, free-shipping meter, analytics, or checkout sees them.
+        if (Number(item.price) !== catalogItem.price || item.name !== catalogItem.name) {
+          changed = true;
+          var migrated = {};
+          Object.keys(item).forEach(function (key) { migrated[key] = item[key]; });
+          migrated.name = catalogItem.name;
+          migrated.price = catalogItem.price;
+          return migrated;
+        }
+        return item;
+      });
+
+      if (cleanItems.length !== parsed.length) changed = true;
+      if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(cleanItems));
+      return cleanItems;
     } catch (e) {
       return [];
     }
@@ -101,8 +132,9 @@
     return safeRead().reduce(function (n, i) { return n + (i.qty || 0); }, 0);
   }
 
-  function getSubtotal() {
-    return safeRead().reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
+  function getSubtotal(items) {
+    var list = Array.isArray(items) ? items : safeRead();
+    return list.reduce(function (s, i) { return s + (Number(i.price) || 0) * (Number(i.qty) || 0); }, 0);
   }
 
   function normalizeAttributes(attributes) {
@@ -140,10 +172,11 @@
     if (!item || !item.slug) return;
     if (isRetiredSlug(item.slug)) return;
     var items = safeRead();
+    var catalogItem = PRODUCT_CATALOG[item.slug] || null;
     var normalizedAttributes = normalizeAttributes(item.attributes);
     var incomingAttributesKey = attributesKey(normalizedAttributes);
     var existing = items.find(function (i) {
-      return i.slug === item.slug && attributesKey(i.attributes) === incomingAttributesKey;
+      return i.slug === item.slug && (i.sellingPlanId || '') === (item.sellingPlanId || '') && attributesKey(i.attributes) === incomingAttributesKey;
     });
     var qty = item.qty || 1;
     if (existing) {
@@ -151,27 +184,31 @@
     } else {
       var nextItem = {
         slug: item.slug,
-        name: item.name || item.slug,
-        price: Number(item.price) || 0,
+        name: catalogItem ? catalogItem.name : (item.name || item.slug),
+        price: catalogItem ? catalogItem.price : (Number(item.price) || 0),
         qty: qty
       };
       if (normalizedAttributes.length) nextItem.attributes = normalizedAttributes;
+      /* Subscribe & Save (prepped 2026-07-02): pass a Shopify SellingPlan gid
+         to check out as a subscription line. UI lands once selling plans
+         exist in Shopify; plumbing is live end-to-end. */
+      if (typeof item.sellingPlanId === 'string' && item.sellingPlanId) nextItem.sellingPlanId = item.sellingPlanId;
       items.push(nextItem);
     }
     safeWrite(items);
     emitChange();
-    // Meta Pixel AddToCart - fired from the single canonical add() chokepoint,
+    // Meta Pixel AddToCart — fired from the single canonical add() chokepoint,
     // so EVERY add path reports it: PDP buttons, the "Power up your cart" /
     // "You might also like" upsell strips, the bundle builder, Flavor Finder,
     // and ?add= quick links. value + currency + content ids included so Meta's
     // purchase optimization, Advantage+ and lookalikes get clean signal.
-    var atcPrice = Number(item.price) || 0;
+    var atcPrice = catalogItem ? catalogItem.price : (Number(item.price) || 0);
     var atcValue = Math.round(atcPrice * qty * 100) / 100;
     try {
       if (window.NB_PIXEL && typeof window.NB_PIXEL.track === 'function') {
         window.NB_PIXEL.track('AddToCart', {
           content_ids: [item.slug],
-          content_name: item.name || item.slug,
+          content_name: catalogItem ? catalogItem.name : (item.name || item.slug),
           content_type: 'product',
           contents: [{ id: item.slug, quantity: qty, item_price: atcPrice }],
           value: atcValue,
@@ -188,7 +225,7 @@
           value: atcValue,
           items: [{
             item_id: item.slug,
-            item_name: item.name || item.slug,
+            item_name: catalogItem ? catalogItem.name : (item.name || item.slug),
             price: atcPrice,
             quantity: qty
           }]
@@ -280,8 +317,7 @@
       hasFreeShippingTrio: hasFreeShippingTrio,
       qualifiesForFreeShipping: qualifiesForFreeShipping,
       getBottleCount: getBottleCount,
-      FLAT_SHIPPING: 3.50,
-      PRIORITY_SHIPPING: 12,
+      FLAT_SHIPPING: 3.00,
       FREE_SHIPPING_THRESHOLD: FREE_SHIPPING_THRESHOLD
     };
     addFromUrl();

@@ -1,4 +1,4 @@
-/* NoodleBomb traffic-source attribution capture - standalone, dependency-free.
+/* NoodleBomb traffic-source attribution capture — standalone, dependency-free.
  * Added 2026-06 to fix headless attribution loss.
  *
  * WHY: noodlebomb.co is a headless storefront; the Shopify checkout
@@ -7,13 +7,13 @@
  * and Meta over-credits itself. This module captures the click IDs + UTMs on
  * the FIRST landing pageview, persists them (localStorage + cookie fallback),
  * and exposes them as Shopify cart attributes so the TRUE source rides into the
- * order - visible in Shopify admin (order "Additional details") and CSV exports.
+ * order — visible in Shopify admin (order "Additional details") and CSV exports.
  *
  * FIRST-TOUCH WINS: once a record is stored within the visit window it is not
  * overwritten, so the ad that earned the click keeps the credit even if the
  * shopper later returns direct/branded before converting.
  *
- * Public API - window.NB_ATTRIBUTION:
+ * Public API — window.NB_ATTRIBUTION:
  *   get()               -> captured fields object (or {})
  *   getCartAttributes() -> [{key,value}] ready for Shopify CartInput.attributes
  *   getNote()           -> short human-readable source summary (Shopify note)
@@ -136,7 +136,7 @@
     if (src) bits.push('source=' + src);
     if (d.utm_medium) bits.push('medium=' + d.utm_medium);
     if (d.utm_campaign) bits.push('campaign=' + d.utm_campaign);
-    return bits.length ? ('NB attribution - ' + bits.join(' / ')) : '';
+    return bits.length ? ('NB attribution — ' + bits.join(' / ')) : '';
   }
 
   window.NB_ATTRIBUTION = {

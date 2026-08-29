@@ -1,19 +1,52 @@
-// NoodleBomb shared page interactions - about / recipes / faq
+// NoodleBomb shared page interactions — about / recipes / faq
 
-// -- Traffic-source attribution capture (first-touch) ------------------------
-// Loads the standalone attribution.js module on every page that includes this
-// shared script (home, product, SEO landing pages - the ad destinations) so
-// first-touch click IDs + UTMs are captured the moment a shopper lands.
-// cart.html / checkout.html load attribution.js directly. Captured values are
-// attached to the Shopify cart at checkout (see shopify-checkout.js). Kept as a
-// separate module so this file owns no attribution logic of its own.
+/* ── Meta Pixel bootstrap (added 2026-06-22, ad-audit fix) ─────────────────
+ * The noodlebomb.co storefront shipped with NO Meta Pixel — only the Shopify
+ * checkout domain had one. So AddToCart + PageView never fired on the brand
+ * domain: Meta saw AddToCart(6) < InitiateCheckout(21) (funnel inversion) and
+ * almost no Landing-Page Views (168 clicks -> 26 LPV). This installs the SAME
+ * pixel id Shopify already uses (976149235141968) so on-site browser events
+ * consolidate with the Shopify CAPI stream into ONE pixel. Idempotent — safe
+ * to load from both page-shared.js and cart-store.js (single fbq init, single
+ * PageView per page). Exposes window.NB_PIXEL.track(event, params). */
 (function () {
-  if (typeof window === 'undefined') return;
-  if (window.NB_ATTRIBUTION || document.getElementById('nb-attribution-js')) return;
-  var s = document.createElement('script');
-  s.id = 'nb-attribution-js';
-  s.src = '/attribution.js';
-  (document.head || document.documentElement).appendChild(s);
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  var PIXEL_ID = '976149235141968';
+  function ensureFbq() {
+    if (window.fbq) return;                 // canonical single init — no double-load
+    var n = window.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!window._fbq) window._fbq = n;
+    n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+    var t = document.createElement('script');
+    t.async = true; t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    var s = document.getElementsByTagName('script')[0];
+    if (s && s.parentNode) s.parentNode.insertBefore(t, s);
+    else document.head.appendChild(t);
+    window.fbq('init', PIXEL_ID);
+  }
+  function track(event, params) {
+    try {
+      ensureFbq();
+      if (params && Object.keys(params).length) window.fbq('track', event, params);
+      else window.fbq('track', event);
+    } catch (e) {}
+  }
+  window.NB_PIXEL = window.NB_PIXEL || { track: track, PIXEL_ID: PIXEL_ID };
+  function firePageView() {
+    if (window.__nbPixelPageViewFired) return;
+    window.__nbPixelPageViewFired = true;
+    track('PageView');
+  }
+  if ((location.pathname.replace(/\/$/, '') || '/') === '/') {
+    window.addEventListener('pointerdown', firePageView, { once: true, passive: true });
+    window.addEventListener('keydown', firePageView, { once: true });
+    window.addEventListener('scroll', firePageView, { once: true, passive: true });
+    window.addEventListener('load', function () { window.setTimeout(firePageView, 12000); }, { once: true });
+  } else {
+    firePageView();
+  }
 })();
 
 (function () {
@@ -56,9 +89,16 @@
   });
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/sw.js').catch(function () {});
-    });
+    var registerServiceWorker = function () {
+      // Never reload an active shopping session when a new worker takes
+      // control. The former controllerchange reload cancelled lazy images,
+      // map requests, and in-progress scrolling on Safari.
+      navigator.serviceWorker.register('/sw.js?v=20260712-stability', { scope: '/', updateViaCache: 'none' })
+        .then(function (registration) { return registration.update(); })
+        .catch(function () {});
+    };
+    if (document.readyState === 'complete') registerServiceWorker();
+    else window.addEventListener('load', registerServiceWorker, { once: true });
   }
 
   if (!document.querySelector('link[rel="manifest"]')) {
@@ -68,80 +108,16 @@
     document.head.appendChild(manifestLink);
   }
 
-  // Homepage production patch: keeps the current live build aligned with the
-  // latest launch direction while the source bundle deploy is pending.
-  var patchStylesId = 'nb-live-homepage-patch';
-  function ensureHomepagePatchStyles() {
-    if (document.getElementById(patchStylesId)) return;
-    var style = document.createElement('style');
-    style.id = patchStylesId;
-    style.textContent = [
-      '#next-drop .nd-bottle-stage{position:relative!important;}',
-      '#next-drop a[href*="add=shoyu"]:not(.nd-image-preorder){display:none!important;}',
-      '#next-drop .nd-notify-caption{display:none!important;}',
-      '#next-drop .nd-image-preorder{position:absolute!important;left:50%!important;right:auto!important;bottom:clamp(6px,1.4vw,18px)!important;top:auto!important;z-index:12!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:fit-content!important;max-width:calc(100% - 24px)!important;min-height:44px!important;margin:0!important;padding:13px 18px!important;border:1px solid rgba(255,255,255,.42)!important;border-radius:999px!important;background:#f4efe7!important;color:#0e0d0c!important;font-family:Inter,system-ui,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.13em!important;text-transform:uppercase!important;text-decoration:none!important;white-space:nowrap!important;box-shadow:0 16px 34px rgba(0,0,0,.34)!important;transform:translateX(-50%)!important;}',
-      '@media (max-width:768px){#next-drop .nd-image-preorder{bottom:6px!important;font-size:10px!important;letter-spacing:.1em!important;padding:12px 14px!important;max-width:calc(100% - 18px)!important;}}'
-    ].join('\n');
-    document.head.appendChild(style);
-  }
-
-  function patchShoyuPreorder() {
-    var stage = document.querySelector('#next-drop .nd-bottle-stage');
-    if (!stage) return false;
-
-    var cta = document.querySelector('#next-drop .nd-image-preorder') || stage.querySelector('.nd-stage-tag');
-    if (!cta) return false;
-
-    if (cta.tagName.toLowerCase() !== 'a') {
-      var replacement = document.createElement('a');
-      replacement.className = cta.className;
-      cta.parentNode.replaceChild(replacement, cta);
-      cta = replacement;
-    }
-
-    cta.classList.add('nd-stage-tag', 'nd-image-preorder');
-    cta.href = '/cart?add=shoyu&qty=1';
-    cta.textContent = 'PREORDER FOR $9.99 ';
-    cta.removeAttribute('aria-hidden');
-    cta.removeAttribute('tabindex');
-
-    if (cta.parentNode !== stage) {
-      stage.appendChild(cta);
-    }
-
-    document.querySelectorAll('#next-drop a[href*="add=shoyu"]').forEach(function (link) {
-      if (link === cta || link.classList.contains('nd-image-preorder')) return;
-      link.setAttribute('aria-hidden', 'true');
-      link.setAttribute('tabindex', '-1');
-    });
-    return true;
-  }
-
-  function applyHomepagePatch() {
-    ensureHomepagePatchStyles();
-    var shoyuDone = patchShoyuPreorder();
-    return shoyuDone;
-  }
-
-  if (document.querySelector('.hero-section') || document.getElementById('next-drop')) {
-    var attempts = 0;
-    var timer = window.setInterval(function () {
-      attempts += 1;
-      if (applyHomepagePatch() || attempts > 40) window.clearInterval(timer);
-    }, 250);
-    window.addEventListener('resize', applyHomepagePatch);
-    applyHomepagePatch();
-  }
 })();
 
-// -- Smile.io rewards launcher (headless Smile UI) ---------------------------
+// ── Smile.io rewards launcher (headless Smile UI) ───────────────────────────
 // NoodleBomb's live site is a static/custom storefront that only uses Shopify at
 // checkout, so the Shopify theme-app-embed Smile launcher never loads for real
 // customers. This mounts Smile's official headless SDK instead.
 //
 // Verified against dev.smile.io (May 2026): the launcher loads from
 // https://js.smile.io/v1/smile-ui.js and is started with
-// SmileUI.initialize({ publishableKey }). The publishable key (pub_...) is a
+// SmileUI.initialize({ publishableKey }). The publishable key (pub_…) is a
 // DIFFERENT credential from the Shopify channel_ key and is the only identifier
 // initialize() accepts; the legacy channel-key path (Storefront.js) was retired
 // 2025-12-31. The pub_ key is "safe to expose publicly" per Smile.
@@ -153,6 +129,13 @@
 (function () {
   if (window.__nbSmileLauncherLoaded) return;
   window.__nbSmileLauncherLoaded = true;
+
+  // Smile only authorizes the production storefront origin. Netlify draft
+  // subdomains otherwise emit unavoidable CORS errors during preview QA.
+  if (/\.netlify\.app$/i.test(location.hostname)) {
+    window.NBLoadSmileLauncher = function () {};
+    return;
+  }
 
   var KEY = 'pub_2d27941cfeaca289';
   if (!KEY || KEY.indexOf('pub_') !== 0) return;
@@ -203,7 +186,7 @@
   }
 })();
 
-// -- NoodleBomb Rewards promotion layer --------------------------------------
+// ── NoodleBomb Rewards promotion layer ──────────────────────────────────────
 // Promotes the (already-embedded) Smile program across the site: a "Rewards"
 // nav link, the Join CTAs, and computed "Earn X points" labels on product
 // pages. Every CTA opens the same Smile panel the floating launcher opens, via
@@ -244,6 +227,23 @@
   // Inject the "Rewards" nav link into the shared header + mobile drawer. The
   // static pages each carry their own copy of the nav markup, so adding it once
   // here keeps the link consistent everywhere without editing every file.
+  // Inject a "Seasonings" link into the static-page nav (desktop + drawer) so
+  // the dry-blend toppers catalog (/seasonings) is reachable from the nav on
+  // EVERY entry point — mirrors how addWhereToBuyLink keeps one nav link
+  // consistent across the hand-written static-page nav markup without editing
+  // every file. The React homepage nav carries this link in navLinks directly.
+  function addSeasoningsLink(container, isDrawer) {
+    if (!container || container.querySelector('a[href="/seasonings"]')) return;
+    var link = document.createElement('a');
+    link.href = '/seasonings';
+    link.className = 'nav-seasonings';
+    link.textContent = 'Seasonings';
+    var shop = container.querySelector('a[href="/shop"]');
+    if (shop && shop.nextSibling) container.insertBefore(link, shop.nextSibling);
+    else if (shop) container.appendChild(link);
+    else container.appendChild(link);
+  }
+
   function addWhereToBuyLink(container, isDrawer) {
     if (!container || container.querySelector('a[href="/#stores"]')) return;
     var link = document.createElement('a');
@@ -274,14 +274,14 @@
   // Group About / FAQ / Contact / Rewards under a single "More" dropdown so the
   // top-level nav stays lean. About/FAQ/Contact already ship as flat anchors in
   // the static markup (so they work with JS disabled); here they're MOVED into
-  // the dropdown - keeping their hrefs + aria-current - and a Rewards link is
+  // the dropdown — keeping their hrefs + aria-current — and a Rewards link is
   // appended. Desktop = hover/click flyout; mobile drawer = tap-to-expand.
   function buildMoreMenu(container, isDrawer) {
     if (!container || container.querySelector('.nav-more, .drawer-more')) return;
     var grouped = [
       container.querySelector('a[href="/about"]'),
       container.querySelector('a[href="/faq"]'),
-      container.querySelector('a[href="#open-contact"], a[href^="mailto:"]')
+      container.querySelector('a[href="/contact"], a[href="#open-contact"], a[href^="mailto:"]')
     ].filter(Boolean);
     if (!grouped.length) return; // page carries none of these to group
 
@@ -299,13 +299,13 @@
     trigger.setAttribute('aria-expanded', 'false');
     trigger.setAttribute('aria-haspopup', 'true');
     trigger.innerHTML = 'More <span class="nav-more-caret" aria-hidden="true">' +
-      (isDrawer ? '' : 'v') + '</span>';
+      (isDrawer ? '›' : '▾') + '</span>';
     var menu = document.createElement('div');
     menu.className = isDrawer ? 'drawer-more-menu' : 'nav-more-menu';
 
     // Drop the wrapper into place (end of the desktop links / above the drawer
-    // CTA), then relocate the existing anchors - preserving their listeners and
-    // attributes - into the menu and append Rewards.
+    // CTA), then relocate the existing anchors — preserving their listeners and
+    // attributes — into the menu and append Rewards.
     var ctaRef = isDrawer ? container.querySelector('.drawer-cta') : null;
     if (ctaRef) container.insertBefore(wrap, ctaRef); else container.appendChild(wrap);
     grouped.forEach(function (a) { menu.appendChild(a); });
@@ -346,6 +346,8 @@
 
   addWhereToBuyLink(document.querySelector('nav .nav-links'), false);
   addWhereToBuyLink(document.getElementById('nav-drawer'), true);
+  addSeasoningsLink(document.querySelector('nav .nav-links'), false);
+  addSeasoningsLink(document.getElementById('nav-drawer'), true);
   buildMoreMenu(document.querySelector('nav .nav-links'), false);
   buildMoreMenu(document.getElementById('nav-drawer'), true);
 
@@ -404,74 +406,252 @@
       chip.type = 'button';
       chip.className = 'pdp-points nb-rewards-cta';
       chip.innerHTML = '<span class="pdp-points-dot" aria-hidden="true"></span>Earn <strong>' +
-        points + '</strong> points - <span class="pdp-points-join">join Rewards</span>';
+        points + '</strong> Bomb Points &middot; <span class="pdp-points-join">join Flavor Club</span>';
       if (priceEl.insertAdjacentElement) priceEl.insertAdjacentElement('afterend', chip);
       else host.insertBefore(chip, priceEl.nextSibling);
     });
   }
 })();
 
-/* --------- Hero crossfade slideshow (safe additive DOM overlay, 2026-06-15) ---------
-   Rotates the homepage hero between the existing studio background and the new
-   full-lineup shot. Pure overlay - does NOT touch the React bundle. A second <img>
-   is injected directly above the base hero image but BELOW the gradient scrims, so
-   the headline/CTA copy panel and gradients stay on top and legible on BOTH slides.
-   Auto-crossfade ~5s, pause on hover / hidden tab, fully disabled under
-   prefers-reduced-motion (original hero only). Idempotent + observer-guarded. */
+/* ───────── PDP finishing-spice cross-sell (core sauce PDPs, 2026-06-16) ─────────
+   The core sauce PDPs (Original / Spicy Tokyo / Citrus Shoyu) cross-sell only the
+   sibling sauces in their ".pdp-cross" block ("Three flavors. One mission."). The
+   dry-blend toppers belong on that pairings surface too. This appends a compact
+   "Finish your bowl" strip (Fire Dust + Roasted Garlic Sesame, $10.99) right after
+   the sauce cross-sell. One-tap add via the canonical NB_CART (cart-store.js) —
+   mirrors the proven product-roasted-garlic-sesame.html data-add wiring. Additive
+   DOM overlay: idempotent, scoped to pages that actually have a .pdp-cross. */
 (function () {
-  var SLIDE2_SRC = '/uploads/nb-hero-lineup-rotate-2026-06-15.webp';
-  var INTERVAL = 5000;
-  var FADE = 1200;
-
-  function initHeroRotator() {
-    var media = document.querySelector('.hero-section .hero-bg-media');
-    if (!media) return false;
-    if (media.getAttribute('data-nb-rotator') === '1') return true;
-    var base = media.querySelector('.hero-product-bg');
-    if (!base) return false;
-    media.setAttribute('data-nb-rotator', '1');
-
-    var reduce = false;
-    try { reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-
-    var slide2 = document.createElement('img');
-    slide2.className = 'hero-product-bg nb-hero-slide2';
-    slide2.src = SLIDE2_SRC;
-    slide2.alt = 'NoodleBomb sauce and seasoning lineup';
-    slide2.setAttribute('decoding', 'async');
-    slide2.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;transform:none;opacity:0;transition:opacity ' + FADE + 'ms ease;will-change:opacity;pointer-events:none;';
-    base.insertAdjacentElement('afterend', slide2);
-
-    if (reduce) return true;
-
-    var showing2 = false, timer = null;
-    function flip() { showing2 = !showing2; slide2.style.opacity = showing2 ? '1' : '0'; }
-    function start() { if (!timer) timer = setInterval(flip, INTERVAL); }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-
-    var section = media.closest('.hero-section') || media.parentNode;
-    if (section) {
-      section.addEventListener('mouseenter', stop);
-      section.addEventListener('mouseleave', start);
-    }
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
-    start();
+  function initSpiceCross() {
+    var cross = document.querySelector('.pdp-cross');
+    if (!cross) return false;
+    if (document.querySelector('.pdp-spice-cross')) return true;
+    var SPICES = [
+      { slug: 'firedust', name: 'NoodleBomb Fire Dust', label: 'Fire Dust', price: 10.99, tag: 'Korean chili crunch · 3.2 oz', img: '/uploads/nb-fire-dust-approved-front-20260710-normalized.webp', href: '/fire-dust' },
+      { slug: 'rgs', name: 'NoodleBomb Roasted Garlic Sesame', label: 'Roasted Garlic Sesame', price: 10.99, tag: 'Toasted garlic · sesame · 3.2 oz', img: '/uploads/nb-rgs-approved-front-20260710-normalized.webp', href: '/roasted-garlic-sesame' }
+    ];
+    var cards = SPICES.map(function (s) {
+      return '<a class="pdp-spice-card" href="' + s.href + '" style="display:flex;gap:18px;align-items:center;text-decoration:none;color:inherit;border:1px solid rgba(240,235,227,0.12);border-radius:14px;padding:20px;background:rgba(245,241,234,0.03);">' +
+        '<span class="pdp-spice-thumb" style="width:clamp(140px,30vw,176px);height:clamp(140px,30vw,176px);flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:rgba(14,13,12,0.4);border:1px solid rgba(240,235,227,0.10);border-radius:12px;padding:6px;"><img src="' + s.img + '" alt="NoodleBomb ' + s.label + ' seasoning topper" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain;"></span>' +
+        '<span style="flex:1;min-width:0;">' +
+          '<span style="display:block;font-family:\'Inter Tight\',sans-serif;font-weight:700;font-size:18px;">' + s.label + '</span>' +
+          '<span style="display:block;font-size:13px;color:rgba(240,235,227,0.62);margin-top:2px;">' + s.tag + '</span>' +
+          '<span style="display:block;font-family:\'Inter Tight\',sans-serif;font-weight:700;font-size:17px;color:var(--accent,#D4A24A);margin-top:3px;">$' + s.price.toFixed(2) + '</span>' +
+        '</span>' +
+        '<button type="button" class="pdp-spice-add" data-slug="' + s.slug + '" data-name="' + s.name + '" data-price="' + s.price + '" aria-label="Add NoodleBomb ' + s.label + ' to cart" style="flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:999px;background:var(--accent,#D4A24A);color:var(--accent-ink,#0E0D0C);border:0;cursor:pointer;font-family:\'Inter Tight\',sans-serif;font-size:15px;font-weight:700;line-height:1;">Add</button>' +
+      '</a>';
+    }).join('');
+    var sec = document.createElement('section');
+    sec.className = 'pdp-spice-cross';
+    sec.style.cssText = 'padding:0 0 72px;';
+    sec.innerHTML = '<div class="container" style="max-width:1100px;margin:0 auto;padding-left:clamp(24px,5.5vw,80px);padding-right:clamp(24px,5.5vw,80px);">' +
+      '<div class="eyebrow" style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE3;opacity:1;margin-bottom:10px;">Finish your bowl</div>' +
+      '<h2 class="serif" style="margin:0 0 20px;">Shake on a topper.</h2>' +
+      '<div class="pdp-spice-grid" style="display:grid;gap:18px;">' + cards + '</div>' +
+    '</div>';
+    cross.parentNode.insertBefore(sec, cross.nextSibling);
+    sec.querySelectorAll('.pdp-spice-add').forEach(function (btn) {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (window.NB_CART && typeof window.NB_CART.add === 'function') {
+          window.NB_CART.add({ slug: btn.getAttribute('data-slug'), name: btn.getAttribute('data-name'), price: parseFloat(btn.getAttribute('data-price')), qty: 1 });
+          var original = btn.textContent;
+          btn.textContent = 'Added ✓';
+          window.setTimeout(function () { btn.textContent = original; }, 1400);
+        } else {
+          var slug = btn.getAttribute('data-slug') || '';
+          window.location.href = '/cart?add=' + encodeURIComponent(slug) + '&qty=1';
+        }
+      });
+    });
     return true;
   }
 
-  function boot() {
-    if (!document.getElementById('root') && !document.querySelector('.hero-section')) return;
-    if (initHeroRotator()) return;
-    var tries = 0;
-    var poll = setInterval(function () { if (initHeroRotator() || ++tries > 80) clearInterval(poll); }, 150);
-    var root = document.getElementById('root') || document.body;
-    if (window.MutationObserver && root) {
-      var mo = new MutationObserver(function () { if (initHeroRotator()) { mo.disconnect(); clearInterval(poll); } });
-      mo.observe(root, { childList: true, subtree: true });
-      setTimeout(function () { try { mo.disconnect(); } catch (e) {} }, 15000);
-    }
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSpiceCross);
+  else initSpiceCross();
+})();
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+/* ───────── Shop quick-add (2026-07-02) ─────────
+   One-tap add for [data-quick-add] buttons (shop.html sku cards). Adds via
+   the canonical NB_CART with a catalog-priced payload; falls back to the
+   /cart?add= permalink when cart-store.js is absent. Buttons live inside
+   card anchors, so the handler prevents navigation. */
+(function () {
+  function init() {
+    var buttons = document.querySelectorAll('[data-quick-add]');
+    if (!buttons.length) return;
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var slug = btn.getAttribute('data-slug') || '';
+        if (btn.classList.contains('is-added')) {
+          window.location.href = '/cart';
+          return;
+        }
+        if (window.NB_CART && typeof window.NB_CART.add === 'function') {
+          window.NB_CART.add({ slug: slug, name: btn.getAttribute('data-name'), price: parseFloat(btn.getAttribute('data-price')), qty: 1 });
+          btn.classList.add('is-added');
+          btn.textContent = 'Added \u2713 \u00b7 View cart';
+        } else {
+          window.location.href = '/cart?add=' + encodeURIComponent(slug) + '&qty=1';
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+
+
+/* Monthly Box subscription tracking. */
+(function () {
+  function sourceFromPage(el) {
+    var params = new URLSearchParams(window.location.search || '');
+    return params.get('source') || (el && el.getAttribute('data-source')) || 'site';
+  }
+  function track(source, surface) {
+    var detail = { source: source, surface: surface || 'site', code: 'FIRSTBOX50', offer: 'first_ramen_night_box' };
+    try { window.fbq && window.fbq('trackCustom', 'FirstBox50Click', detail); } catch (_) {}
+    try { window.dataLayer && window.dataLayer.push(Object.assign({ event: 'first_box_50_click' }, detail)); } catch (_) {}
+  }
+  function init() {
+    document.querySelectorAll('[data-first-box-direct]').forEach(function (el) {
+      el.setAttribute('data-source', sourceFromPage(el));
+    });
+    document.addEventListener('click', function (event) {
+      var el = event.target.closest && event.target.closest('[data-first-box-cta]');
+      if (!el) return;
+      track(sourceFromPage(el), el.getAttribute('data-surface') || (el.hasAttribute('data-first-box-direct') ? 'landing' : 'pdp'));
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+/* Conversion events that remain on the brand domain. Shopify owns the final
+   purchase event, but lead submissions must be visible in GA4 before the
+   browser hands off to the form processor. Beacon transport avoids delaying
+   or breaking the real form submission. */
+(function () {
+  if (typeof document === 'undefined') return;
+  function trackLead(form) {
+    var kind = form.getAttribute('data-lead-form') || 'site';
+    try {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          lead_type: kind,
+          form_location: window.location.pathname,
+          transport_type: 'beacon'
+        });
+      }
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'nb_lead_submit',
+          lead_type: kind,
+          form_location: window.location.pathname
+        });
+      }
+    } catch (_) { /* analytics never blocks a form */ }
+  }
+  function initLeadTracking() {
+    document.querySelectorAll('form[data-lead-form]').forEach(function (form) {
+      if (form.dataset.nbLeadTracked === '1') return;
+      form.dataset.nbLeadTracked = '1';
+      form.addEventListener('submit', function () { trackLead(form); });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initLeadTracking);
+  else initLeadTracking();
+})();
+
+/* \u2500\u2500\u2500\u2500\u2500 Klaviyo email capture (2026-07-19) \u2500\u2500\u2500\u2500\u2500
+   Public client credentials only. Marketing signup forms are subscribed to
+   NoodleBomb's Email List with explicit email consent. Contact and wholesale
+   forms remain on FormSubmit and are intentionally never intercepted here. */
+(function () {
+  var NB_KLAVIYO = { companyId: 'XSwJ9H', listId: 'WtA8eA' };
+  if (!NB_KLAVIYO.companyId || !NB_KLAVIYO.listId) return;
+  function subscribe(email, source) {
+    return fetch('https://a.klaviyo.com/client/subscriptions?company_id=' + encodeURIComponent(NB_KLAVIYO.companyId), {
+      method: 'POST',
+      credentials: 'omit',
+      headers: {
+        Accept: 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+        revision: '2026-07-15'
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            custom_source: source || 'NoodleBomb website signup',
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: {
+                  email: email,
+                  subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } }
+                }
+              }
+            }
+          },
+          relationships: { list: { data: { type: 'list', id: NB_KLAVIYO.listId } } }
+        }
+      })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Klaviyo HTTP ' + res.status);
+      window.dispatchEvent(new CustomEvent('nb:klaviyo-subscribed', { detail: { source: source || 'website' } }));
+    });
+  }
+  window.NB_KLAVIYO = Object.freeze(NB_KLAVIYO);
+  window.NBKlaviyoSubscribe = subscribe;
+
+  function init() {
+    var selector = [
+      'form[data-lead-form="newsletter"]',
+      'form[data-lead-form="content-newsletter"]',
+      'form.footer-newsletter-form',
+      'form.footer-form'
+    ].join(',');
+    document.querySelectorAll(selector).forEach(function (form) {
+      if (form.dataset.nbKlaviyoBound === '1') return;
+      var emailInput = form.querySelector('input[type=email]');
+      if (!emailInput) return;
+      form.dataset.nbKlaviyoBound = '1';
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var email = String(emailInput.value || '').trim();
+        if (!email) return;
+        var btn = form.querySelector('button[type=submit], input[type=submit]');
+        var originalLabel = btn ? (btn.value || btn.textContent) : '';
+        if (btn) btn.disabled = true;
+        if (btn && btn.tagName === 'INPUT') btn.value = 'Joining...';
+        else if (btn) btn.textContent = 'Joining...';
+        var source = form.getAttribute('data-lead-form') || 'footer-newsletter';
+        subscribe(email, 'NoodleBomb website: ' + source).then(function () {
+          form.innerHTML = '<p role="status" style="font:600 14px \'Inter Tight\',sans-serif;color:#D4A24A;margin:0;">You\u2019re in. Check your inbox for WELCOME10.</p>';
+        }).catch(function () {
+          if (btn) {
+            btn.disabled = false;
+            if (btn.tagName === 'INPUT') btn.value = originalLabel;
+            else btn.textContent = originalLabel;
+          }
+          var status = form.querySelector('[data-klaviyo-status]');
+          if (!status) {
+            status = document.createElement('p');
+            status.setAttribute('data-klaviyo-status', '');
+            status.setAttribute('role', 'alert');
+            status.style.cssText = 'flex-basis:100%;font:600 13px Inter,sans-serif;color:#E84A3A;margin:8px 0 0;';
+            form.appendChild(status);
+          }
+          status.textContent = 'We could not add you right now. Please try again.';
+        });
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
 <title>Your Cart | NoodleBomb</title>
-<meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce, made in Bonney Lake, WA. $3.50 flat US shipping; free on $29.99+ US orders." />
+<meta name="description" content="Review your NoodleBomb order. Bold small-batch ramen sauce from a family-owned Washington brand. $3.00 flat US shipping; free on $29.99+ US orders." />
 <meta name="robots" content="noindex" />
 <link rel="canonical" href="https://noodlebomb.co/cart" />
 
@@ -70,6 +77,18 @@ body::before {
 .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 a { color: inherit; }
+.checkout-error-banner {
+  display: none;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(232,74,58,0.55);
+  border-radius: 8px;
+  background: rgba(232,74,58,0.12);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.checkout-error-banner.is-visible { display: block; }
 
 .nav-cart {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -134,7 +153,6 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 .page-meta { color: var(--ink-60); font-size: 14px; margin: 0 0 40px; }
 
 .layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
-.layout > * { min-width: 0; }
 @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 
 .card {
@@ -158,9 +176,9 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 
 .line-item { display: flex; gap: 18px; align-items: flex-start; }
 .line-item-img {
-  width: 88px; height: 88px; flex-shrink: 0;
+  width: 124px; height: 124px; flex-shrink: 0;
   background: var(--paper-3); border: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: center; padding: 8px;
+  display: flex; align-items: center; justify-content: center; padding: 6px;
 }
 .line-item-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .line-item-name { font-family: 'Inter Tight'; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; margin: 0; line-height: 1.15; color: var(--ink); }
@@ -252,51 +270,22 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 .sticky-mobile { display: none; }
 @media (max-width: 900px) {
   .summary { position: static; }
-  .cart-product-grid {
-    /* Keep cart add-ons visible without turning the cart into a long scroll. */
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
-  }
-  .cart-stack-grid {
-    /* Stack cards carry use-case copy and an action, so keep them readable. */
+  .cart-recs-grid {
     grid-template-columns: 1fr !important;
   }
-  .cart-stack-grid .cart-rec-card {
-    display: grid !important;
-    gap: 10px;
-  }
-  .cart-stack-grid .cart-rec-card > div:first-child {
-    width: auto !important;
-    height: auto !important;
-    padding: 0 !important;
-  }
   .cart-rec-card {
-    padding: 10px !important;
-    display: flex !important;
+    padding: 14px !important;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 8px;
-    min-width: 0;
-  }
-  .cart-rec-card > div:first-child {
-    width: 38px !important;
-    height: 38px !important;
-    padding: 2px !important;
-  }
-  .cart-rec-card > div:nth-child(2) > div:first-child {
-    font-size: 12px !important;
-  }
-  .cart-rec-card > div:nth-child(2) > div:last-child {
-    font-size: 12px !important;
-  }
-  .cart-product-grid .cart-rec-card > div:nth-child(2) {
-    min-width: 0;
+    gap: 12px;
   }
   .cart-rec-add {
-    min-width: 34px !important;
-    width: 34px !important;
-    height: 34px !important;
-    padding: 0 !important;
-    font-size: 17px !important;
+    min-width: 64px !important;
+    width: auto !important;
+    height: 44px !important;
+    padding: 0 16px !important;
+    font-size: 20px !important;
     flex-shrink: 0;
   }
   .sticky-mobile {
@@ -311,13 +300,28 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
   .sticky-mobile .total strong { font-family: 'Inter Tight'; font-weight: 700; font-size: 22px; color: var(--accent); }
   .sticky-mobile .btn { flex: 1.2; padding: 14px 20px; }
 }
-@media (max-width: 359px) {
-  .container { padding-left: 16px; padding-right: 16px; }
-  .nav-cart { padding-left: 16px; padding-right: 16px; gap: 8px; }
-  .cart-product-grid { grid-template-columns: 1fr !important; }
-  .line-item { gap: 12px; padding: 16px; }
-  .line-item-img { width: 64px; height: 64px; padding: 5px; }
-  .line-item > div:nth-child(2) > div:last-child { flex-wrap: wrap; gap: 10px; margin-top: 12px !important; }
+@media (max-width: 520px) {
+  .container { padding-left: 16px; padding-right: 16px; overflow: hidden; }
+  .layout, .layout > div, .card { min-width: 0; max-width: 100%; }
+  .card { width: 100%; overflow: hidden; }
+  .ship-bar.unlocked { align-items: flex-start; }
+  .line-item { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; }
+  .line-item-img { width: 104px; height: 104px; }
+  .line-item > div:nth-child(2) > div { min-width: 0; }
+  .line-item > div:nth-child(2) > div:first-child { gap: 8px !important; }
+  .line-item > div:nth-child(2) > div:last-child { flex-wrap: wrap; gap: 10px; }
+  .line-item-name { font-size: 16px; }
+  .line-item-meta { font-size: 9.5px; letter-spacing: 0.08em; }
+  .cart-rec-card { max-width: 100%; overflow: hidden; }
+  .sticky-mobile { left: 10px; right: 10px; max-width: calc(100vw - 20px); }
+  .card { padding: 20px; }
+  .line-item { gap: 14px; }
+  .line-item-img { width: 104px; height: 104px; padding: 5px; }
+}
+@media (max-width: 380px) {
+  .container { padding-left: 12px; padding-right: 12px; }
+  .line-item { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; }
+  .line-item-img { width: 96px; height: 96px; }
 }
 
 /* Step indicator */
@@ -345,18 +349,25 @@ h1.page-title { font-family: 'Inter Tight'; font-size: clamp(40px, 5.5vw, 64px);
 
 <main id="main-content">
   <div class="container">
+    <div id="checkout-error-banner" class="checkout-error-banner" role="alert">Checkout hit a snag — your cart is saved. Try again.</div>
     <div id="cart-root"></div>
   </div>
 </main>
 
-<script defer src="cart-store.js?v=20260620-spicy-alias"></script>
+<script>
+  if (new URLSearchParams(window.location.search).get('checkout_error') === '1') {
+    document.getElementById('checkout-error-banner').classList.add('is-visible');
+  }
+</script>
+
+<script defer src="cart-store.js?v=20260712-final2"></script>
 <script defer src="shopify-config.js"></script>
 <script defer src="attribution.js"></script>
 <script defer src="shopify-checkout.js"></script>
-<script defer src="build/cart.js?v=20260710-spicy-approved-views"></script>
+<script defer src="build/cart.js?v=20260712-final2"></script>
 <!-- Smile.io rewards launcher (headless Smile UI). cart.html does not load
-     page-shared.js, so the launcher is inlined here. Guest mode (no on-site
-     login); pub_ key is safe to expose. See page-shared.js for the canonical copy. -->
+     page-shared.js?v=20260712-final2, so the launcher is inlined here. Guest mode (no on-site
+     login); pub_ key is safe to expose. See page-shared.js?v=20260712-final2 for the canonical copy. -->
 <script>
 (function () {
   if (window.__nbSmileLauncherLoaded) return;

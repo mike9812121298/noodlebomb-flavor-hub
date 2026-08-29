@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="--accent: #E84A3A; --accent-ink: #0E0D0C;">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34HRPRKYCQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-34HRPRKYCQ');
+</script>
+
 <meta charset="utf-8">
-<script src="/tracking.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
@@ -22,7 +30,7 @@
 <meta name="twitter:description" content="Crispy chicken, fried egg, roasted vegetables, tofu, steak, pork, sesame, and scallions with Spicy Tokyo.">
 <meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="stylesheet" href="/page-shared.css">
+<link rel="stylesheet" href="/page-shared.css?v=20260712">
 <link rel="preload" as="image" href="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" fetchpriority="high">
 <style>
   .spicy-bowl-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -68,7 +76,7 @@
         "@type": "Offer",
         "url": "https://noodlebomb.co/spicy-tokyo-ramen-sauce",
         "priceCurrency": "USD",
-        "price": "11.99",
+        "price": "13.99",
         "availability": "https://schema.org/InStock"
       }
     },
@@ -108,10 +116,10 @@
     <a href="/about">About</a>
     <a href="/monthly-box">Monthly Ramen Box</a>
     <a href="/faq">FAQ</a>
-    <a href="mailto:hello@noodlebomb.co">Contact</a>
+    <a href="/contact">Contact</a>
   </div>
   <div class="nav-right">
-    <a class="nav-cta" href="/shop">Shop sauces</a>
+    <a class="nav-cta" href="/shop">Shop sauces &rarr;</a>
     <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-drawer"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -122,18 +130,18 @@
   <a href="/about">About</a>
   <a href="/monthly-box">Monthly Ramen Box</a>
   <a href="/faq">FAQ</a>
-  <a href="mailto:hello@noodlebomb.co">Contact</a>
-  <a class="drawer-cta" href="/shop">Shop sauces</a>
+  <a href="/contact">Contact</a>
+  <a class="drawer-cta" href="/shop">Shop sauces &rarr;</a>
 </div>
 
 <main id="main">
   <section class="page-hero">
     <div class="container">
-      <div class="eyebrow">Rice bowls - Heat path</div>
+      <div class="eyebrow">Rice bowls &middot; Heat path</div>
       <h1 class="display">Spicy sauce<br><em>for rice bowls.</em></h1>
       <p class="lede">Build a heat bowl fast: warm rice, crispy chicken or tofu, fried egg, roasted vegetables, scallions, sesame, and a spoon of Spicy Tokyo.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Start with Spicy Tokyo </a>
+        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Start with Spicy Tokyo &rarr;</a>
         <a class="btn btn-ghost" href="/sauce-for-rice-bowls">Rice bowl basics</a>
       </div>
     </div>
@@ -146,19 +154,19 @@
       <div class="spicy-bowl-grid">
         <article class="spicy-bowl-card">
           <img src="/uploads/nb-spicy-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Spicy Tokyo ramen sauce bottle" loading="eager" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 - Roasted chili</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">No.03 &middot; Roasted chili</div>
           <h3>Crispy chicken bowl</h3>
           <p class="anchor-line">Rice, crispy chicken, cucumber, scallions, sesame, lime, and Spicy Tokyo right before serving.</p>
         </article>
         <article class="spicy-bowl-card">
           <img src="/uploads/nb-original-approved-front-v2-20260710-normalized.webp" alt="NoodleBomb Original ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">Optional - mellow base</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">Optional &middot; mellow base</div>
           <h3>Egg and tofu bowl</h3>
           <p class="anchor-line">Use Original for a mellow base, then add Spicy Tokyo over fried egg, tofu, mushrooms, and rice.</p>
         </article>
         <article class="spicy-bowl-card">
           <img src="/uploads/nb-citrus-approved-front-v3-20260710-normalized.webp" alt="NoodleBomb Citrus Shoyu ramen sauce bottle" loading="lazy" decoding="async">
-          <div class="mono" style="color:var(--accent);margin-bottom:6px;">Optional - bright lift</div>
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">Optional &middot; bright lift</div>
           <h3>Salmon heat bowl</h3>
           <p class="anchor-line">Use Citrus Shoyu for brightness, then finish with a smaller spoon of Spicy Tokyo when the bowl needs heat.</p>
         </article>
@@ -183,7 +191,7 @@
       <p>Start with warm rice, add one cooked protein, one vegetable, and one crunchy topping. Spoon Spicy Tokyo over the top after cooking so the roasted chili and garlic stay bold.</p>
       <div class="spicy-formula-grid">
         <div class="spicy-step"><strong>Rice</strong><span>Short-grain, jasmine, brown rice, crispy rice, or leftover rice.</span></div>
-        <div class="spicy-step"><strong>Protein</strong><span>Crispy chicken, tofu, steak, pork, salmon, shrimp, or fried egg. <a href="/sauce-for-steak" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Steak guide</a> - <a href="/sauce-for-shrimp" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Shrimp guide</a> - <a href="/sauce-for-salmon" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Salmon guide</a> - <a href="/ramen-sauce-for-pork" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Pork guide</a></span></div>
+        <div class="spicy-step"><strong>Protein</strong><span>Crispy chicken, tofu, steak, pork, salmon, shrimp, or fried egg. <a href="/sauce-for-steak" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Steak guide</a> &middot; <a href="/sauce-for-shrimp" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Shrimp guide</a> &middot; <a href="/sauce-for-salmon" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Salmon guide</a> &middot; <a href="/ramen-sauce-for-pork" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Pork guide</a></span></div>
         <div class="spicy-step"><strong>Vegetables</strong><span>Cabbage, broccoli, mushrooms, cucumber, avocado, green beans, or carrots.</span></div>
         <div class="spicy-step"><strong>Finish</strong><span>Scallions, sesame, lime, fried shallots, nori, or a second spoon of sauce.</span></div>
       </div>
@@ -197,7 +205,7 @@
       <p>Cook rice and keep it warm. Crisp chicken thighs or tenders in a pan or air fryer, then slice. Add rice to a bowl with cucumber, scallions, sesame, and a fried egg. Spoon 1 to 2 tablespoons Spicy Tokyo over the hot chicken and rice.</p>
       <p style="margin-top:22px;">For extra crunch, add fried shallots or cabbage. For a lighter bowl, use grilled chicken and cucumber with a smaller spoon of sauce.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Shop Spicy Tokyo </a>
+        <a class="btn btn-primary" href="/spicy-tokyo-ramen-sauce">Shop Spicy Tokyo &rarr;</a>
         <a class="btn btn-ghost" href="/recipes">More recipes</a>
       </div>
     </div>
@@ -206,8 +214,8 @@
   <section class="page-cta">
     <div class="container">
       <h2 class="display">Your heat bowl<br><em>starts here.</em></h2>
-      <p>Spicy Tokyo brings roasted chili, garlic, sesame, and deep umami to rice bowls without making dinner complicated. <a href="/sauce-for-fried-rice" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Fried rice guide </a></p>
-      <a class="btn btn-accent" href="/spicy-tokyo-ramen-sauce">Get Spicy Tokyo </a>
+      <p>Spicy Tokyo brings roasted chili, garlic, sesame, and deep umami to rice bowls without making dinner complicated. <a href="/sauce-for-fried-rice" style="color:var(--accent);text-decoration:underline;text-underline-offset:4px;">Fried rice guide &rarr;</a></p>
+      <a class="btn btn-accent" href="/spicy-tokyo-ramen-sauce">Get Spicy Tokyo &rarr;</a>
     </div>
   </section>
 </main>
@@ -223,10 +231,12 @@
       <a href="/recipes">Recipes</a>
       <a href="/about">About</a>
       <a href="/faq">FAQ</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
       <a href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a>
     </div>
   </div>
 </footer>
-<script src="/page-shared.js?v=20260710-approved-labels" defer></script>
+<script src="/page-shared.js?v=20260712-final2" defer></script>
 </body>
 </html>
