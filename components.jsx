@@ -40,7 +40,7 @@ const nbCheckoutUrl = (items) => {
 
 };
 
-const NB_BOTTLE_PRICE = 12.99;
+const NB_BOTTLE_PRICE = 13.99;
 
 const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 34.99 };
 

@@ -126,9 +126,9 @@ const FLAVORS = {
 
     line2: "Roasted garlic, toasted sesame, smooth soy.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
     pack: "$34.99 / 3-pack"
 
@@ -154,9 +154,9 @@ const FLAVORS = {
 
     line2: "Roasted chili, garlic, sesame.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
     pack: "$34.99 / 3-pack"
 
@@ -182,9 +182,9 @@ const FLAVORS = {
 
     line2: "Shoyu base with a clean citrus lift.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
     pack: "$34.99 / 3-pack"
 
@@ -210,11 +210,11 @@ const FLAVORS = {
 
     line2: "Bold, clean finish.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
-    pack: "$12.99 / bottle"
+    pack: "$13.99 / bottle"
 
   }
 
@@ -234,9 +234,9 @@ const FLAVOR_IMAGES = {
 
 const SOY_SAUCES = [
 
-  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$12.99", image: "uploads/nb-shoyu-reserve-front-approved-20260711-480.webp", detail: "/shoyu-reserve" },
+  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$13.99", image: "uploads/nb-shoyu-reserve-front-approved-20260711-480.webp", detail: "/shoyu-reserve" },
 
-  { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "Slow-brewed shoyu depth.", line2: "Datil pepper heat.", price: "$12.99", image: "uploads/nb-shoyu-spicy-front-approved-20260711-480.webp", detail: "/spicy-shoyu-ramen-sauce" }
+  { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "Slow-brewed shoyu depth.", line2: "Datil pepper heat.", price: "$13.99", image: "uploads/nb-shoyu-spicy-front-approved-20260711-480.webp", detail: "/spicy-shoyu-ramen-sauce" }
 
 ];
 
@@ -2882,7 +2882,7 @@ function FinalCTA() {
 
     e.currentTarget.style.boxShadow = "none";
 
-  } }, "Shop all \u2014 from $12.99"), /* @__PURE__ */ React.createElement("form", { className: "finalcta-commerce", "data-commerce-form": "monthly-box", action: "https://nu2vqa-ma.myshopify.com/cart/add", method: "GET", target: "_blank", style: { display: "flex", flex: 1, minWidth: 280, gap: 0, border: "1px solid rgba(245,241,234,0.35)", borderRadius: 4, overflow: "hidden", background: "rgba(0,0,0,0.18)" } }, /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "id", value: "54099648545078" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "quantity", value: "1" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "selling_plan", value: "8721727798" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "properties[_source]", value: "homepage-final-cta" }), /* @__PURE__ */ React.createElement(
+  } }, "Shop all \u2014 from $13.99"), /* @__PURE__ */ React.createElement("form", { className: "finalcta-commerce", "data-commerce-form": "monthly-box", action: "https://nu2vqa-ma.myshopify.com/cart/add", method: "GET", target: "_blank", style: { display: "flex", flex: 1, minWidth: 280, gap: 0, border: "1px solid rgba(245,241,234,0.35)", borderRadius: 4, overflow: "hidden", background: "rgba(0,0,0,0.18)" } }, /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "id", value: "54099648545078" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "quantity", value: "1" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "selling_plan", value: "8721727798" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "properties[_source]", value: "homepage-final-cta" }), /* @__PURE__ */ React.createElement(
 
     "input",
 
@@ -5677,7 +5677,7 @@ function BuildBundle() {
 
       role: "Slow-brewed premium soy sauce. Bold, clean finish.",
 
-      price: 12.99,
+      price: 13.99,
 
       color: "#D7A84D",
 
@@ -5701,7 +5701,7 @@ function BuildBundle() {
 
       role: "The reserve bottle, turned up \u2014 slow-brewed depth with real heat.",
 
-      price: 12.99,
+      price: 13.99,
 
       color: "#B2221A",
 
@@ -6109,7 +6109,7 @@ const TDROP_PRODUCTS = [
 
     name: "Shoyu Reserve",
 
-    price: 12.99,
+    price: 13.99,
 
     glowRgb: "224,178,76",
 
@@ -6133,7 +6133,7 @@ const TDROP_PRODUCTS = [
 
     name: "Spicy Shoyu",
 
-    price: 12.99,
+    price: 13.99,
 
     glowRgb: "232,74,58",
 
@@ -6455,7 +6455,7 @@ function TheDrop() {
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, /* @__PURE__ */ React.createElement(TheDropMeter, { label: "UMAMI", pct: "92%", kind: "umami" }), /* @__PURE__ */ React.createElement(TheDropMeter, { label: "HEAT", pct: "7%", kind: "heat" })),
 
-      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 21px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$12.99"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[0]), className: "tdrop-btn tdrop-btn--gold", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 18px", border: "1px solid rgba(240,235,227,0.14)", borderRadius: 999, background: "#14100B", color: "#F0EBE3", font: `700 11px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" } }, "Add \u2192"))
+      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 21px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$13.99"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[0]), className: "tdrop-btn tdrop-btn--gold", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 18px", border: "1px solid rgba(240,235,227,0.14)", borderRadius: 999, background: "#14100B", color: "#F0EBE3", font: `700 11px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" } }, "Add \u2192"))
 
     ), /* @__PURE__ */ React.createElement(
 
@@ -6479,7 +6479,7 @@ function TheDrop() {
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, /* @__PURE__ */ React.createElement(TheDropMeter, { label: "UMAMI", pct: "88%", kind: "umami" }), /* @__PURE__ */ React.createElement(TheDropMeter, { label: "HEAT", pct: "74%", kind: "heat" })),
 
-      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 23px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$12.99"), /* @__PURE__ */ React.createElement("span", { style: { font: `700 10px ${TDROP_MONO}`, letterSpacing: "0.14em", color: "rgba(240,235,227,0.4)" } }, "7 FL OZ"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[1]), className: "tdrop-btn tdrop-btn--chili", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E84A3A,#c93c2e)", color: "#fff", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 40px -10px rgba(232,74,58,0.6)" } }, "Add \u2192"))
+      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 23px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$13.99"), /* @__PURE__ */ React.createElement("span", { style: { font: `700 10px ${TDROP_MONO}`, letterSpacing: "0.14em", color: "rgba(240,235,227,0.4)" } }, "7 FL OZ"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[1]), className: "tdrop-btn tdrop-btn--chili", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E84A3A,#c93c2e)", color: "#fff", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 40px -10px rgba(232,74,58,0.6)" } }, "Add \u2192"))
 
     ), /* @__PURE__ */ React.createElement(
 
@@ -6505,7 +6505,7 @@ function TheDrop() {
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 21px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$10.99"), /* @__PURE__ */ React.createElement("span", { style: { font: `700 10px ${TDROP_MONO}`, letterSpacing: "0.14em", color: "rgba(240,235,227,0.4)" } }, "3.2 OZ"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[2]), className: "tdrop-btn tdrop-btn--chiliDark", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 18px", border: "1px solid rgba(240,235,227,0.14)", borderRadius: 999, background: "#14100B", color: "#F0EBE3", font: `700 11px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" } }, "Add \u2192"))
 
-    )), /* @__PURE__ */ React.createElement("div", { className: "tdrop-strip", style: { marginTop: 22, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", border: "1px solid rgba(201,162,78,0.35)", borderRadius: 14, padding: "18px 26px", background: "linear-gradient(90deg,rgba(224,178,76,0.10),rgba(20,16,11,0.3))" } }, /* @__PURE__ */ React.createElement("span", { style: { font: `700 12px ${TDROP_MONO}`, letterSpacing: "0.2em", color: "#E0B24C" } }, "GET THE FULL DROP"), /* @__PURE__ */ React.createElement("span", { style: { font: `400 14px ${TDROP_DISP}`, color: "rgba(240,235,227,0.65)" } }, "Both sauces + Fire Dust \u2014 ", /* @__PURE__ */ React.createElement("span", { style: { color: "#F0EBE3", fontWeight: 600 } }, "$36.97"), " \u00b7 ships free."), /* @__PURE__ */ React.createElement("button", { onClick: addDrop, className: "tdrop-btn tdrop-btn--cta", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 9, padding: "13px 26px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E0B24C,#C99A3F)", color: "#1A1206", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 44px -12px rgba(224,178,76,0.55)" } }, "Add the drop \u2192")))
+    )), /* @__PURE__ */ React.createElement("div", { className: "tdrop-strip", style: { marginTop: 22, display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", border: "1px solid rgba(201,162,78,0.35)", borderRadius: 14, padding: "18px 26px", background: "linear-gradient(90deg,rgba(224,178,76,0.10),rgba(20,16,11,0.3))" } }, /* @__PURE__ */ React.createElement("span", { style: { font: `700 12px ${TDROP_MONO}`, letterSpacing: "0.2em", color: "#E0B24C" } }, "GET THE FULL DROP"), /* @__PURE__ */ React.createElement("span", { style: { font: `400 14px ${TDROP_DISP}`, color: "rgba(240,235,227,0.65)" } }, "Both sauces + Fire Dust \u2014 ", /* @__PURE__ */ React.createElement("span", { style: { color: "#F0EBE3", fontWeight: 600 } }, "$38.97"), " \u00b7 ships free."), /* @__PURE__ */ React.createElement("button", { onClick: addDrop, className: "tdrop-btn tdrop-btn--cta", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 9, padding: "13px 26px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E0B24C,#C99A3F)", color: "#1A1206", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 44px -12px rgba(224,178,76,0.55)" } }, "Add the drop \u2192")))
 
   );
 

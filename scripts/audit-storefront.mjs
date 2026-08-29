@@ -133,11 +133,11 @@ check(
   'homepage drop labels match the three configured products'
 );
 check(
-  JSON.stringify(theDropPrices) === JSON.stringify([12.99, 12.99, 10.99]),
+  JSON.stringify(theDropPrices) === JSON.stringify([13.99, 13.99, 10.99]),
   'homepage drop prices match the configured products'
 );
 check(
-  /Both sauces \+ Fire Dust/.test(appSource) && /\$36\.97/.test(appSource),
+  /Both sauces \+ Fire Dust/.test(appSource) && /\$38\.97/.test(appSource),
   'homepage full-drop copy describes the configured products and matches their total'
 );
 

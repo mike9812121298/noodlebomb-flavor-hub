@@ -71,9 +71,9 @@ const PRODUCT_LABELS = {
   rgs: { tag: "Shake-On", tagline: "Roasted Garlic Sesame" }
 };
 const RECS = [
-  { slug: "original", name: "Original", tag: "No.01 \xB7 Garlic & Sesame", price: 12.99 },
-  { slug: "spicy", name: "Spicy Tokyo", tag: "No.03 \xB7 Spicy Tokyo", price: 12.99 },
-  { slug: "citrus", name: "Citrus Shoyu", tag: "No.02 \xB7 Citrus Shoyu", price: 12.99 }
+  { slug: "original", name: "Original", tag: "No.01 \xB7 Garlic & Sesame", price: 13.99 },
+  { slug: "spicy", name: "Spicy Tokyo", tag: "No.03 \xB7 Spicy Tokyo", price: 13.99 },
+  { slug: "citrus", name: "Citrus Shoyu", tag: "No.02 \xB7 Citrus Shoyu", price: 13.99 }
 ];
 const fmtUSD = (n) => "$" + (Number(n) || 0).toFixed(2);
 const isoDate = (d) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
