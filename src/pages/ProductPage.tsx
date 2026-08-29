@@ -134,10 +134,10 @@ const PRODUCTS: Record<string, ProductData> = {
   },
   "shoyu-reserve": {
     slug: "shoyu-reserve",
-    name: "Shoyu Reserve Ramen Sauce",
+    name: "Shoyu Reserve Soy Sauce",
     tagline: "Slow-Brewed Depth",
-    price: 9.99,
-    displayPrice: "$9.99",
+    price: 13.99,
+    displayPrice: "$13.99",
     subscribePrice: null,
     displaySubscribePrice: null,
     image: nbOriginal,

@@ -5525,9 +5525,9 @@ function FAQ() {
 
   const items = [
 
-    { q: "How long does a bottle last?", a: "It depends how you use it. The pour cap gives you control for bowls, wings, or mixing a quick marinade without over-pouring." },
+    { q: "What is the shelf life?", a: "NoodleBomb has a 2-year shelf life." },
 
-    { q: "Does it need to be refrigerated?", a: "Refrigerate after opening. Use within 6 months for peak flavor." },
+    { q: "Does it need to be refrigerated?", a: "No. Refrigeration is not required after opening." },
 
     { q: "What can I put it on besides ramen?", a: "Rice bowls, dumplings, stir-fry, eggs, roasted vegetables, wings, marinades. If it\u2019s savory, it probably works." },
 

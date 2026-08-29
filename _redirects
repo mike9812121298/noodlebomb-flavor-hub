@@ -139,6 +139,7 @@
 
 # Pretty URLs for new structural pages added 2026-05-07 launch pass.
 /monthly-box        /monthly-box.html        200
+/first-box-50       /monthly-box#plans       301
 /privacy            /privacy.html            200
 /terms              /terms.html              200
 /shipping-returns   /shipping-returns.html   200

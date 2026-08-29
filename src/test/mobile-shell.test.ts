@@ -28,7 +28,7 @@ describe("mobile storefront shell", () => {
     expect(serviceWorker).toContain("nb-hero-pour-page.webp?v=20260712-stability");
     expect(components).toContain("/.netlify/images?url=/uploads/nb-hero-pour-page.webp&w=640&q=75 640w");
     expect(index).toContain("imagesrcset=");
-    expect(serviceWorker).toContain("noodlebomb-app-shell-v38-smooth-20260712");
+    expect(serviceWorker).toContain("noodlebomb-app-shell-v39-catalog-truth-20260829");
     expect(shared).not.toContain("window.location.reload()");
     expect(app).toContain('image.dataset.nbRetry = "1"');
   });

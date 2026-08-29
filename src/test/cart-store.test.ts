@@ -50,7 +50,7 @@ describe("NoodleBomb cart catalog migration", () => {
     const items = cart.getItems();
 
     expect(items.map((item) => item.price)).toEqual([
-      12.99, 12.99, 12.99, 34.99, 12.99, 12.99, 10.99, 10.99,
+      13.99, 13.99, 13.99, 34.99, 13.99, 13.99, 10.99, 10.99,
     ]);
     expect(items.map((item) => item.name)).toEqual([
       "Original",
@@ -71,9 +71,9 @@ describe("NoodleBomb cart catalog migration", () => {
     cart.add({ slug: "original", name: "Old Original", price: 0.01, qty: 1 });
 
     expect(cart.getItems()).toEqual([
-      { slug: "original", name: "Original", price: 12.99, qty: 1 },
+      { slug: "original", name: "Original", price: 13.99, qty: 1 },
     ]);
-    expect(cart.getSubtotal()).toBe(12.99);
+    expect(cart.getSubtotal()).toBe(13.99);
   });
 
   it("adds Spicy Shoyu at the live Shopify price after final label approval", () => {
@@ -82,8 +82,8 @@ describe("NoodleBomb cart catalog migration", () => {
     cart.add({ slug: "shoyuspicy", name: "Old Spicy Shoyu", price: 0.01, qty: 1 });
 
     expect(cart.getItems()).toEqual([
-      { slug: "shoyuspicy", name: "Spicy Shoyu", price: 12.99, qty: 1 },
+      { slug: "shoyuspicy", name: "Spicy Shoyu", price: 13.99, qty: 1 },
     ]);
-    expect(cart.getSubtotal()).toBe(12.99);
+    expect(cart.getSubtotal()).toBe(13.99);
   });
 });

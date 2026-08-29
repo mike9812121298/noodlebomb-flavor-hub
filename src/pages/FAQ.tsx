@@ -50,7 +50,7 @@ const faqGroups = [
       },
       {
         q: "Does NoodleBomb contain preservatives?",
-        a: "Check the back label for the current ingredient list. Store unopened bottles in a cool, dry place, then refrigerate after opening for best flavor.",
+        a: "Check the back label for the current ingredient list. NoodleBomb has a 2-year shelf life, and refrigeration is not required after opening.",
       },
       {
         q: "Is MSG in NoodleBomb?",
