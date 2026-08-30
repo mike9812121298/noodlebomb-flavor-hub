@@ -14,21 +14,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0E0D0C">
-<title>NoodleBomb Flavor Club | Earn Bomb Points on Every Order</title>
-<meta name="description" content="Join the NoodleBomb Flavor Club free: 250 Bomb Points to start, 5 points per $1, and money off your next bottle. Refer a friend — give $5, get $5." />
+<title>NoodleBomb Bowl Shot Reward | Share a Photo, Get a Free Pour or Shake</title>
+<meta name="description" content="Show us how you use NoodleBomb. Post a photo or send it privately, submit it for verification, and get a single-use code for one eligible Pour sauce or Shake spice." />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 <link rel="canonical" href="https://noodlebomb.co/rewards" />
-<meta property="og:title" content="NoodleBomb Flavor Club | Earn Bomb Points" />
-<meta property="og:description" content="Join free, stack Bomb Points on every order, and turn them into money off the sauce you already love." />
-<meta property="og:image" content="https://noodlebomb.co/uploads/nb-trio-approved-20260711.webp" />
+<meta property="og:title" content="Show Your Bowl. Get a Free NoodleBomb Pour or Shake." />
+<meta property="og:description" content="Share a real photo of your NoodleBomb bottle or jar in action. After verification, we'll email a single-use product reward." />
+<meta property="og:image" content="https://noodlebomb.co/og-trio-2026-06.png" />
 <meta property="og:url" content="https://noodlebomb.co/rewards" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="NoodleBomb" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="NoodleBomb Flavor Club" />
-<meta name="twitter:description" content="Join free, earn Bomb Points on every order, turn them into sauce money." />
-<meta name="twitter:image" content="https://noodlebomb.co/uploads/nb-trio-approved-20260711.webp" />
+<meta name="twitter:title" content="NoodleBomb Bowl Shot Reward" />
+<meta name="twitter:description" content="Post your NoodleBomb bowl shot or send it privately. After verification, get a free eligible Pour or Shake." />
+<meta name="twitter:image" content="https://noodlebomb.co/og-trio-2026-06.png" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -123,6 +123,85 @@
   .rw-ref-side p { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-60); }
   .rw-ref-div { width: 1px; background: var(--line-strong); align-self: stretch; }
 
+  /* Bowl Shot Reward */
+  .shot-section {
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 16%, rgba(212,162,74,0.1), transparent 25%),
+      linear-gradient(180deg, rgba(255,255,255,0.015), transparent 42%);
+  }
+  .shot-intro { max-width: 760px; }
+  .shot-intro > p { max-width: 680px; margin: 18px 0 0; color: var(--ink-60); font-size: 17px; line-height: 1.65; }
+  .shot-steps { margin-top: 42px; }
+  .shot-grid { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: clamp(28px, 5vw, 72px); align-items: start; margin-top: 52px; }
+  .shot-rules { display: flex; flex-direction: column; gap: 18px; }
+  .shot-disclosure,
+  .shot-terms-card {
+    padding: 24px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: var(--paper-2);
+  }
+  .shot-disclosure { background: linear-gradient(145deg, rgba(212,162,74,0.11), rgba(212,162,74,0.025)), var(--paper-2); }
+  .shot-kicker { display: block; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .shot-disclosure p,
+  .shot-terms-card p { margin: 0; color: var(--ink-60); font-size: 14px; line-height: 1.65; }
+  .shot-disclosure blockquote {
+    margin: 18px 0 0; padding: 16px 18px; border-left: 2px solid var(--accent);
+    background: rgba(0,0,0,0.16); color: var(--ink); font-family: 'Inter Tight', sans-serif;
+    font-size: 16px; font-weight: 600; line-height: 1.45;
+  }
+  .shot-rules-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 12px; }
+  .shot-rules-list li { position: relative; padding-left: 22px; color: var(--ink-60); font-size: 13.5px; line-height: 1.55; }
+  .shot-rules-list li::before { content: '\2713'; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+  .shot-form-wrap { border: 1px solid var(--line-strong); border-radius: 10px; background: #15130f; padding: clamp(24px, 4vw, 40px); box-shadow: 0 24px 52px rgba(0,0,0,0.22); }
+  .shot-form-head { margin-bottom: 28px; }
+  .shot-form-head h3 { margin: 0; font-family: 'Inter Tight', sans-serif; font-size: clamp(26px, 3vw, 36px); letter-spacing: -0.04em; }
+  .shot-form-head p { margin: 10px 0 0; color: var(--ink-60); font-size: 14px; line-height: 1.6; }
+  .shot-form { display: grid; gap: 20px; }
+  .shot-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .shot-field { display: grid; gap: 8px; }
+  .shot-field label,
+  .shot-group-label { font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 600; color: var(--ink); }
+  .shot-field label span,
+  .shot-group-label span { color: var(--ink-40); font-weight: 400; }
+  .shot-field input,
+  .shot-field textarea {
+    width: 100%; box-sizing: border-box; border: 1px solid var(--line-strong); border-radius: 7px;
+    background: rgba(255,255,255,0.035); color: var(--ink); font: inherit; font-size: 15px;
+    padding: 13px 14px; transition: border-color .2s, box-shadow .2s, background .2s;
+  }
+  .shot-field textarea { min-height: 112px; resize: vertical; line-height: 1.55; }
+  .shot-field input::placeholder,
+  .shot-field textarea::placeholder { color: var(--ink-40); opacity: 0.9; }
+  .shot-field input:focus,
+  .shot-field textarea:focus { outline: none; border-color: var(--accent); background: rgba(255,255,255,0.055); box-shadow: 0 0 0 3px rgba(212,162,74,0.13); }
+  .shot-upload {
+    padding: 18px; border: 1px dashed var(--line-strong); border-radius: 8px;
+    background: rgba(212,162,74,0.035);
+  }
+  .shot-upload input[type="file"] { padding: 0; border: 0; background: transparent; font-size: 13px; }
+  .shot-upload input[type="file"]::file-selector-button {
+    margin-right: 12px; padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: 999px;
+    background: var(--paper-3); color: var(--ink); font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer;
+  }
+  .shot-help { margin: 0; color: var(--ink-40); font-size: 12px; line-height: 1.5; }
+  .shot-or { display: flex; align-items: center; gap: 12px; color: var(--ink-40); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .shot-or::before,
+  .shot-or::after { content: ''; height: 1px; flex: 1; background: var(--line); }
+  .shot-check { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; color: var(--ink-60); font-size: 12.5px; line-height: 1.55; }
+  .shot-check input { width: 17px; height: 17px; margin: 2px 0 0; accent-color: var(--accent); }
+  .shot-check strong { color: var(--ink); }
+  .shot-submit { width: 100%; min-height: 52px; justify-content: center; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: transform .2s, box-shadow .2s, opacity .2s; }
+  .shot-submit:hover { transform: translateY(-2px); box-shadow: 0 15px 34px rgba(212,162,74,0.22); }
+  .shot-submit:disabled { cursor: wait; opacity: 0.65; transform: none; box-shadow: none; }
+  .shot-status { min-height: 22px; margin: -4px 0 0; font-size: 13px; line-height: 1.55; color: var(--ink-60); }
+  .shot-status[data-state="success"] { color: #b8d39a; }
+  .shot-status[data-state="error"] { color: #f4a69e; }
+  .shot-fine-print { margin: 0; color: var(--ink-40); font-size: 11.5px; line-height: 1.6; }
+  .shot-fine-print a { color: var(--muted); }
+  .shot-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+
   @media (max-width: 880px) {
     .rw-hero-grid { grid-template-columns: 1fr; gap: 40px; }
     .rw-card { order: -1; }
@@ -131,11 +210,14 @@
     .rw-redeem-grid { grid-template-columns: 1fr; }
     .rw-referral { grid-template-columns: 1fr; }
     .rw-ref-div { width: auto; height: 1px; }
+    .shot-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
     .rw-earn { grid-template-columns: 1fr; }
     .rw-card-body { flex-direction: column; text-align: center; }
     .rw-ladder li { grid-template-columns: 92px 1fr auto; gap: 12px; padding: 14px 16px; }
+    .shot-field-row { grid-template-columns: 1fr; }
+    .shot-form-wrap { padding: 22px 18px; }
   }
 </style>
 <style>
@@ -298,52 +380,164 @@
     <div class="container">
       <div class="rw-hero-grid">
         <div>
-          <div class="eyebrow">NoodleBomb Flavor Club</div>
-          <h1 class="display">Flavor pays&nbsp;<em>you back.</em></h1>
-          <p class="lede">Join free, stack Bomb Points every time you order, and cash them in for money off the sauce you already keep on the counter.</p>
+          <div class="eyebrow">Bowl Shot Reward</div>
+          <h1 class="display">Show your bowl. <em>Get your next one on us.</em></h1>
+          <p class="lede">Post a real photo of your NoodleBomb bottle or jar in action—or send it to us privately. Submit it below and, after we verify it, we'll email a single-use code for one eligible Pour sauce or Shake spice.</p>
           <div class="rw-actions">
-            <button type="button" class="btn rw-join nb-rewards-cta">Join the Flavor Club &rarr;</button>
-            <a class="btn btn-ghost" href="#earn">See ways to earn</a>
+            <a class="btn rw-join" href="#photo-reward">Submit your photo &rarr;</a>
+            <button type="button" class="btn btn-ghost nb-rewards-cta">Join the Flavor Club</button>
           </div>
-          <p class="rw-cta-note">Free to join &middot; <b><span data-nb="signup">250</span> Bomb Points</b> the moment you do</p>
+          <p class="rw-cta-note"><b>One verified reward per customer</b> &middot; product only &middot; shipping and tax not included</p>
         </div>
 
-        <!-- Membership card (parchment) -->
-        <aside class="rw-card" aria-label="NoodleBomb Flavor Club membership">
+        <aside class="rw-card" aria-label="NoodleBomb Bowl Shot Reward">
           <div class="rw-card-head">
             <div class="rw-card-brand">
               <span class="rw-card-mark">N</span>
-              <span class="rw-card-name">Flavor Club</span>
+              <span class="rw-card-name">Bowl Shot Reward</span>
             </div>
-            <span class="rw-card-label">Bowl crew</span>
+            <span class="rw-card-label">Verified photo</span>
           </div>
           <div class="rw-card-body">
             <div class="rw-seal">
               <div>
-                <div class="n"><span data-nb="signup">250</span></div>
-                <div class="u">Bomb Points</div>
+                <div class="n">1</div>
+                <div class="u">Free single</div>
               </div>
             </div>
             <div class="rw-card-copy">
-              <h3>Starter stash</h3>
-              <p>We drop <span data-nb="signup">250</span> Bomb Points in your account the moment you join &mdash; your first flavor head start.</p>
+              <h3>Your bowl. Your move.</h3>
+              <p>Show the bottle or jar and tell us how you used it. No polished shoot and no positive review required.</p>
             </div>
           </div>
           <div class="rw-card-foot">
-            <div class="rw-card-stat"><b><span data-nb="earnRate">5</span> pts / $1</b><span>Every sauce run</span></div>
-            <div class="rw-card-stat"><b><span data-nb="redeemPer">100</span> pts = $1</b><span>Money off</span></div>
-            <div class="rw-card-stat"><b>No expiry</b><span>Points keep</span></div>
+            <div class="rw-card-stat"><b>Post or send</b><span>Your choice</span></div>
+            <div class="rw-card-stat"><b>We verify</b><span>Manual review</span></div>
+            <div class="rw-card-stat"><b>Code by email</b><span>Single use</span></div>
           </div>
-          <div class="rw-card-tag">Bold flavor. Every bite.</div>
+          <div class="rw-card-tag">Real bowl. Real NoodleBomb.</div>
         </aside>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section class="page-section">
+  <!-- Bowl Shot Reward submission -->
+  <section class="page-section shot-section" id="photo-reward">
     <div class="container">
-      <div class="eyebrow">How it works</div>
+      <div class="shot-intro">
+        <div class="eyebrow">How to claim it</div>
+        <h2 class="serif">One photo. One free Pour or Shake.</h2>
+        <p>Use the public-post route if you want to share it with your people, or upload the photo here and keep it between us. Either way, the NoodleBomb bottle or jar and how you used it need to be clear.</p>
+      </div>
+
+      <div class="rw-steps shot-steps">
+        <div class="rw-step">
+          <div class="rw-step-n">01 / Make it</div>
+          <h3>Take the bowl shot</h3>
+          <p>Show your finished food with the NoodleBomb bottle or spice jar visible. Real kitchen photos are exactly what we want.</p>
+        </div>
+        <div class="rw-step">
+          <div class="rw-step-n">02 / Share or send</div>
+          <h3>Post it—or keep it private</h3>
+          <p>Share publicly with the reward disclosure below, or upload the original photo directly in the form.</p>
+        </div>
+        <div class="rw-step">
+          <div class="rw-step-n">03 / Get your code</div>
+          <h3>We verify and email</h3>
+          <p>Once approved, we'll email a single-use code for one eligible one-time-purchase Pour sauce or Shake spice.</p>
+        </div>
+      </div>
+
+      <div class="shot-grid">
+        <div class="shot-rules">
+          <div class="shot-disclosure">
+            <span class="shot-kicker">Posting publicly?</span>
+            <p>Say clearly in the post that a free product was promised. Put the disclosure where people can see it—not buried after a stack of hashtags.</p>
+            <blockquote>“Ad — I'll get a free NoodleBomb product for sharing this photo.”</blockquote>
+          </div>
+          <div class="shot-terms-card">
+            <span class="shot-kicker">What qualifies</span>
+            <p>Your photo must be yours, show a NoodleBomb Pour bottle or Shake jar, and show or explain how you used it.</p>
+            <ul class="shot-rules-list">
+              <li>No purchase receipt or positive review required.</li>
+              <li>One verified reward per customer while the program is active.</li>
+              <li>Reward covers one eligible product single; shipping and tax are separate.</li>
+              <li>Automatic free U.S. shipping still starts at $29.99.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="shot-form-wrap">
+          <div class="shot-form-head">
+            <span class="shot-kicker">Submit for verification</span>
+            <h3>Send us your bowl shot.</h3>
+            <p>Use a public post link or upload the photo. We review every submission before sending a reward code.</p>
+          </div>
+          <form class="shot-form" id="bowl-shot-form" name="noodlebomb-bowl-shot-reward" method="POST" action="/rewards?submitted=1#photo-reward" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="company">
+            <input type="hidden" name="form-name" value="noodlebomb-bowl-shot-reward">
+            <input type="hidden" name="campaign" value="Bowl Shot Reward">
+            <p class="shot-honeypot" aria-hidden="true">
+              <label>Do not fill this out: <input name="company" tabindex="-1" autocomplete="off"></label>
+            </p>
+
+            <div class="shot-field-row">
+              <div class="shot-field">
+                <label for="shot-name">Your name</label>
+                <input id="shot-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="shot-field">
+                <label for="shot-email">Email for your code</label>
+                <input id="shot-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+              </div>
+            </div>
+
+            <div class="shot-field">
+              <label for="shot-use">How did you use NoodleBomb?</label>
+              <textarea id="shot-use" name="how_used" placeholder="Example: Shoyu Reserve on crispy noodles with an egg…" maxlength="600" required></textarea>
+              <p class="shot-help">A sentence or two is plenty.</p>
+            </div>
+
+            <div class="shot-field">
+              <label for="shot-url">Public post link <span>(Instagram, Facebook, TikTok, or anywhere public)</span></label>
+              <input id="shot-url" name="public_post_url" type="url" inputmode="url" placeholder="https://…">
+            </div>
+
+            <div class="shot-or" aria-hidden="true">or upload privately</div>
+
+            <div class="shot-field shot-upload">
+              <label for="shot-photo">Photo upload <span>(optional if you linked a public post)</span></label>
+              <input id="shot-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.jpg,.jpeg,.png,.webp,.heic,.heif">
+              <p class="shot-help">JPG, PNG, WebP, HEIC, or HEIF. Maximum 8 MB.</p>
+            </div>
+
+            <div class="shot-field">
+              <label for="shot-order">Order number or where you bought it <span>(optional)</span></label>
+              <input id="shot-order" name="order_or_retailer" type="text" placeholder="Example: NB1234 or local market" maxlength="120">
+            </div>
+
+            <label class="shot-check" for="shot-agree">
+              <input id="shot-agree" name="submission_terms_accepted" type="checkbox" value="yes" required>
+              <span><strong>I confirm this is my content and I'm 18 or older.</strong> If I posted publicly, the post clearly says a free NoodleBomb product was promised. I understand the reward is limited to one verified submission per customer.</span>
+            </label>
+
+            <label class="shot-check" for="shot-repost">
+              <input id="shot-repost" name="repost_permission" type="checkbox" value="yes">
+              <span><strong>Optional:</strong> NoodleBomb may repost my submitted photo and first name on its website, email, and social channels. I keep ownership.</span>
+            </label>
+
+            <button class="shot-submit" type="submit">Send for verification &rarr;</button>
+            <p class="shot-status" id="shot-status" role="status" aria-live="polite"></p>
+            <p class="shot-fine-print">Submitting does not guarantee approval. Duplicate, copied, inaccessible, misleading, or incomplete submissions may be rejected. Product availability applies. No cash value. Questions? <a href="mailto:hello@noodlebomb.co">hello@noodlebomb.co</a>.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flavor Club -->
+  <section class="page-section" id="flavor-club">
+    <div class="container">
+      <div class="eyebrow">Flavor Club</div>
       <h2 class="serif">Sauce in. Bomb Points out.</h2>
       <div class="rw-steps">
         <div class="rw-step">
@@ -444,6 +638,18 @@
       <h2 class="serif">Questions, answered.</h2>
       <div class="faq-list">
         <details class="faq-item">
+          <summary class="faq-q">What happens after I submit a Bowl Shot?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
+          <div class="faq-a"><p>We review the photo, confirm the NoodleBomb bottle or jar and how you used it are clear, and check any public post for the reward disclosure. If approved, we'll email you a single-use code for one eligible Pour sauce or Shake spice.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Does the Bowl Shot reward cover shipping?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
+          <div class="faq-a"><p>The code covers one eligible product single. Shipping and tax are separate. Automatic free U.S. shipping still starts at <strong>$29.99</strong>.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do I have to say something positive?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
+          <div class="faq-a"><p>No. We want your real photo and how you actually used NoodleBomb—not a scripted or positive review. Public posts just need to clearly disclose that a free product was promised.</p></div>
+        </details>
+        <details class="faq-item">
           <summary class="faq-q">How do I earn Bomb Points?<span class="faq-q-icon" aria-hidden="true">+</span></summary>
           <div class="faq-a"><p>You earn <strong><span data-nb="earnRate">5</span> Bomb Points for every $1</strong> on every order. You also get <strong><span data-nb="signup">250</span> Bomb Points</strong> for joining, <strong><span data-nb="facebook">100</span></strong> for sharing on Facebook, and <strong><span data-nb="birthday">250</span></strong> on your birthday.</p></div>
         </details>
@@ -514,5 +720,93 @@
 </footer>
 <script src="/rewards-config.js" defer></script>
 <script src="/page-shared.js?v=20260712-final2" defer></script>
+<script>
+  (() => {
+    const form = document.getElementById('bowl-shot-form');
+    if (!form) return;
+
+    const status = document.getElementById('shot-status');
+    const postUrl = document.getElementById('shot-url');
+    const photo = document.getElementById('shot-photo');
+    const submit = form.querySelector('button[type="submit"]');
+    const defaultLabel = submit.textContent;
+    const maxFileBytes = 8 * 1024 * 1024;
+
+    const showStatus = (message, state = '') => {
+      status.textContent = message;
+      if (state) status.dataset.state = state;
+      else status.removeAttribute('data-state');
+    };
+
+    const validateProof = () => {
+      postUrl.setCustomValidity('');
+      photo.setCustomValidity('');
+      const file = photo.files && photo.files[0];
+
+      if (!postUrl.value.trim() && !file) {
+        postUrl.setCustomValidity('Add a public post link or upload your photo.');
+        return false;
+      }
+
+      if (file && file.size > maxFileBytes) {
+        photo.setCustomValidity('Please choose a photo smaller than 8 MB.');
+        return false;
+      }
+
+      return true;
+    };
+
+    [postUrl, photo].forEach((field) => {
+      field.addEventListener('input', () => {
+        postUrl.setCustomValidity('');
+        photo.setCustomValidity('');
+        showStatus('');
+      });
+      field.addEventListener('change', () => {
+        postUrl.setCustomValidity('');
+        photo.setCustomValidity('');
+        showStatus('');
+      });
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showStatus('');
+
+      if (!validateProof() || !form.checkValidity()) {
+        form.reportValidity();
+        showStatus('Please complete the required fields and add a public link or photo.', 'error');
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+      showStatus('Uploading your submission…');
+
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
+        });
+        if (!response.ok) throw new Error(`Submission failed: ${response.status}`);
+
+        form.reset();
+        showStatus("Thanks—we received it. After verification, we'll email your single-use reward code.", 'success');
+        if (typeof window.gtag === 'function') window.gtag('event', 'bowl_shot_reward_submit');
+      } catch (error) {
+        showStatus('We could not send that submission. Please try again, or email your photo to hello@noodlebomb.co.', 'error');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = defaultLabel;
+      }
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('submitted') === '1') {
+      showStatus("Thanks—we received it. After verification, we'll email your single-use reward code.", 'success');
+    }
+  })();
+</script>
 </body>
 </html>
