@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:storefront": "node scripts/audit-storefront.mjs",
+    "reward:photo": "node ops/photo-reward/issue-photo-reward.mjs",
     "gate": "npm run lint && npm run test && npm run build:static && npm run audit:storefront"
   },
   "dependencies": {

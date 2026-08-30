@@ -8,6 +8,8 @@
 /node_modules/*     /404.html   404!
 /supabase/*         /404.html   404!
 /dist/*             /404.html   404!
+/ops/*              /404.html   404!
+/scripts/*          /404.html   404!
 # Scratch, hidden, and agent work folders. publish="." would otherwise expose them.
 /work/*                      /404.html   404!
 /.git/*                      /404.html   404!
