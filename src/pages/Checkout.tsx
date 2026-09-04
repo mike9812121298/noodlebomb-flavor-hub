@@ -31,7 +31,7 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "sampler": nbLineupTrio,
 };
 
-const FREE_SHIPPING_THRESHOLD = 40;
+const FREE_SHIPPING_THRESHOLD = 29.99;
 const EMAIL_KEY = "nb_checkout_email";
 
 const Checkout = () => {

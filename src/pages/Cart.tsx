@@ -32,35 +32,35 @@ const PRODUCT_IMAGES: Record<string, string> = {
   "sampler": nbLineupTrio,
 };
 
-const FREE_SHIPPING_THRESHOLD = 40;
+const FREE_SHIPPING_THRESHOLD = 29.99;
 
 const RECOMMENDATIONS = [
   {
     slug: "variety-pack",
     name: "NoodleBomb Trio",
     tagline: "Try all 3 flavors",
-    price: 29.99,
+    price: 34.99,
     image: nbLineupTrio,
   },
   {
     slug: "original-ramen",
     name: "Original",
     tagline: "Umami, Perfected",
-    price: 11.99,
+    price: 13.99,
     image: nbOriginal,
   },
   {
     slug: "spicy-tokyo",
     name: "Spicy Tokyo",
     tagline: "The Street Heat Legend",
-    price: 11.99,
+    price: 13.99,
     image: nbSpicyTokyo,
   },
   {
     slug: "citrus-shoyu",
     name: "Citrus Shoyu",
     tagline: "Bright. Snappy. Citrus-forward.",
-    price: 11.99,
+    price: 13.99,
     image: nbCitrusShoyu,
   },
 ];
@@ -69,7 +69,7 @@ const SINGLE_SLUGS = ["original-ramen", "spicy-tokyo", "citrus-shoyu"];
 const TRIO_ITEM = {
   slug: "variety-pack",
   name: "NoodleBomb Trio",
-  price: 29.99,
+  price: 34.99,
   purchaseType: "one-time" as const,
   quantity: 1,
 };
@@ -335,10 +335,10 @@ const Cart = () => {
                         Cart slot 1: Trio
                       </p>
                       <h2 className="mt-1 font-display text-xl font-bold text-foreground">
-                        Add one more flavor and save $5.98 by upgrading to Trio.
+                        Add one more flavor and save $6.98 by upgrading to Trio.
                       </h2>
                       <p className="mt-1 text-sm text-foreground/65">
-                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $29.99.
+                        Swap your singles for Original, Spicy Tokyo, and Citrus Shoyu at $34.99.
                       </p>
                     </div>
                   </div>

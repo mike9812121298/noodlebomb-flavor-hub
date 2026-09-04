@@ -11,7 +11,7 @@ const products = [
   {
     name: "Original Ramen Sauce",
     tagline: "Deep umami that makes every bowl taste intentional.",
-    price: "$11.99",
+    price: "$13.99",
     image: nbOriginal,
     spiceLevel: 1,
     color: "bg-primary text-primary-foreground",
@@ -24,7 +24,7 @@ const products = [
   {
     name: "Spicy Tokyo Ramen Sauce",
     tagline: "Tokyo street heat — dark, layered, built to burn clean.",
-    price: "$11.99",
+    price: "$13.99",
     image: nbSpicyTokyo,
     spiceLevel: 3,
     color: "bg-flame text-flame-foreground",
@@ -37,7 +37,7 @@ const products = [
   {
     name: "Citrus Shoyu Ramen Sauce",
     tagline: "Clean soy lifted by bright citrus — bright, sharp, surprisingly bold.",
-    price: "$11.99",
+    price: "$13.99",
     image: nbCitrusShoyu,
     spiceLevel: 1,
     color: "bg-accent text-accent-foreground",
@@ -52,8 +52,8 @@ const bundles = [
   {
     name: "NoodleBomb Trio",
     tagline: "All three flavors in one clean lineup. Free shipping over $35.",
-    price: "$29.99",
-    originalPrice: "$35.97",
+    price: "$34.99",
+    originalPrice: "$41.97",
     spiceLevel: 3,
     color: "bg-primary text-primary-foreground",
   },
@@ -151,7 +151,7 @@ const Shop = () => (
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-base text-muted-foreground line-through">{b.originalPrice}</span>
                   <span className="font-display text-3xl font-bold text-primary">{b.price}</span>
-                  <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">Save $5.98</span>
+                  <span className="px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-display font-bold uppercase tracking-wider">Save $6.98</span>
                 </div>
                 <div className="flex items-center gap-1.5 mb-6">
                   <Truck className="h-4 w-4 text-primary" />

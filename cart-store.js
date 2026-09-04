@@ -53,15 +53,15 @@
   var STORAGE_KEY = 'nb_cart_v2';
   var BUS = (typeof window !== 'undefined') ? new EventTarget() : null;
   var CHANGE = 'nb-cart-change';
-  var FREE_SHIPPING_THRESHOLD = 32.99;
+  var FREE_SHIPPING_THRESHOLD = 29.99;
   var RETIRED_SLUGS = {};  // Spicy Shoyu is live; keep this empty unless Mike retires a slug.
   var PRODUCT_CATALOG = {
-    original: { slug: 'original', name: 'Original', price: 12.99 },
-    spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 12.99 },
-    citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 12.99 },
-    trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 32.99 },
-    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 12.99 },
-    shoyuspicy: { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 12.99 },
+    original: { slug: 'original', name: 'Original', price: 13.99 },
+    spicy: { slug: 'spicy', name: 'Spicy Tokyo', price: 13.99 },
+    citrus: { slug: 'citrus', name: 'Citrus Shoyu', price: 13.99 },
+    trio: { slug: 'trio', name: 'The NoodleBomb Trio', price: 34.99 },
+    shoyu: { slug: 'shoyu', name: 'Shoyu Reserve', price: 13.99 },
+    shoyuspicy: { slug: 'shoyuspicy', name: 'Spicy Shoyu', price: 13.99 },
     firedust: { slug: 'firedust', name: 'NoodleBomb Fire Dust', price: 10.99 },
     rgs: { slug: 'rgs', name: 'NoodleBomb Roasted Garlic Sesame', price: 10.99 }
   };
@@ -129,7 +129,7 @@
     return (items || safeRead()).reduce(function (n, i) { return n + ((i.slug === 'trio' ? 3 : 1) * (Number(i.qty) || 0)); }, 0);
   }
 
-  // Free US shipping rule (2026-06): automatic free US shipping at $32.99+.
+  // Free US shipping rule (2026-06): automatic free US shipping at $29.99+.
   // Site messaging only; final shipping is enforced at Shopify checkout.
   function qualifiesForFreeShipping(items) {
     var list = items || safeRead();

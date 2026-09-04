@@ -40,9 +40,9 @@ const nbCheckoutUrl = (items) => {
 
 };
 
-const NB_BOTTLE_PRICE = 12.99;
+const NB_BOTTLE_PRICE = 13.99;
 
-const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
+const NB_TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 34.99 };
 
 const NB_FIRE_DUST = { slug: "firedust", name: "NoodleBomb Fire Dust", label: "Fire Dust", price: 10.99, tag: "Korean chili crunch \xB7 3.2 oz topper", image: "uploads/nb-fire-dust-front-cutout-2026-06-10-thumb.webp" };
 
@@ -402,7 +402,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
   const cartBottleCount = cartItems.reduce((n, i) => n + (i.slug === "trio" ? 3 : 1) * (Number(i.qty) || 0), 0);
 
-  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 32.99;
+  const cartFreeShippingThreshold = window.NB_CART && window.NB_CART.FREE_SHIPPING_THRESHOLD || 29.99;
 
   const cartFreeShipping = cartSubtotal >= cartFreeShippingThreshold;
 
@@ -1036,9 +1036,9 @@ function Nav({ flavor, setFlavor, flavors }) {
 
       },
 
-      "Add the Trio \u2014 $32.99"
+      "Add the Trio \u2014 $34.99"
 
-    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $8.98"), /* @__PURE__ */ React.createElement(
+    ), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "var(--ink-40)", fontFamily: "JetBrains Mono", letterSpacing: "0.16em", textTransform: "uppercase", marginTop: -8 } }, "All 3 flavors \xB7 save $6.98"), /* @__PURE__ */ React.createElement(
 
       "button",
 
@@ -1362,7 +1362,7 @@ function Nav({ flavor, setFlavor, flavors }) {
 
         }
 
-        const detail = { fromSingleCount: singleCount, savings: 5.98, destination: "trio" };
+        const detail = { fromSingleCount: singleCount, savings: 6.98, destination: "trio" };
 
         try {
 

@@ -77,7 +77,7 @@ export function useCart() {
 
   const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
   const itemCount = items.reduce((s, i) => s + i.quantity, 0);
-  const freeShipping = subtotal >= 40;
+  const freeShipping = subtotal >= 29.99;
 
   return {
     items,

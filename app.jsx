@@ -6,7 +6,7 @@
 
 const WIX_URLS = { "original": "/original-ramen-sauce", "spicy": "/spicy-tokyo-ramen-sauce", "citrus": "/citrus-shoyu-ramen-sauce", "trio": "/cart?add=trio&qty=1", "shoyu": "https://nu2vqa-ma.myshopify.com/products/shoyu-reserve", "cart": "https://nu2vqa-ma.myshopify.com/cart", "shop": "https://nu2vqa-ma.myshopify.com/collections/all?sort_by=alphabetical" };
 
-const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 32.99 };
+const TRIO = { slug: "trio", name: "The NoodleBomb Trio", priceUsd: 34.99 };
 
 const SHOPIFY_VARIANT_IDS = {
 
@@ -126,11 +126,11 @@ const FLAVORS = {
 
     line2: "Roasted garlic, toasted sesame, smooth soy.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
-    pack: "$32.99 / 3-pack"
+    pack: "$34.99 / 3-pack"
 
   },
 
@@ -154,11 +154,11 @@ const FLAVORS = {
 
     line2: "Roasted chili, garlic, sesame.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
-    pack: "$32.99 / 3-pack"
+    pack: "$34.99 / 3-pack"
 
   },
 
@@ -182,11 +182,11 @@ const FLAVORS = {
 
     line2: "Shoyu base with a clean citrus lift.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
-    pack: "$32.99 / 3-pack"
+    pack: "$34.99 / 3-pack"
 
   },
 
@@ -210,11 +210,11 @@ const FLAVORS = {
 
     line2: "Bold, clean finish.",
 
-    price: "$12.99",
+    price: "$13.99",
 
-    priceUsd: 12.99,
+    priceUsd: 13.99,
 
-    pack: "$12.99 / bottle"
+    pack: "$13.99 / bottle"
 
   }
 
@@ -234,9 +234,9 @@ const FLAVOR_IMAGES = {
 
 const SOY_SAUCES = [
 
-  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$12.99", image: "uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp", detail: "/shoyu-reserve" },
+  { slug: "shoyu", name: "Shoyu Reserve", tag: "Reserve \u00b7 Soy Sauce", color: "#D7A84D", rgb: "215, 168, 77", line1: "Slow-brewed shoyu depth.", line2: "Bold, clean finish.", price: "$13.99", image: "uploads/nb-shoyu-reserve-front-cutout-2026-06-09.webp", detail: "/shoyu-reserve" },
 
-  { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "The reserve bottle, turned up.", line2: "Slow-brewed depth with real heat.", price: "$12.99", image: "uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp", detail: "/spicy-shoyu-ramen-sauce" }
+  { slug: "shoyuspicy", name: "Spicy Shoyu", tag: "Reserve \u00b7 Spicy Soy", color: "#B2221A", rgb: "178, 34, 25", line1: "The reserve bottle, turned up.", line2: "Slow-brewed depth with real heat.", price: "$13.99", image: "uploads/nb-shoyu-spicy-front-cutout-2026-06-09.webp", detail: "/spicy-shoyu-ramen-sauce" }
 
 ];
 
@@ -1726,7 +1726,7 @@ function FlavorBreakdownV2({ flavor, setFlavor }) {
 
       );
 
-    })))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("div", { className: "fbv2-bottle-stage" }, /* @__PURE__ */ React.createElement("div", { className: "fbv2-glow", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { className: "fbv2-sauce-ring", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}-swipe`, className: "fbv2-sauce-swipe", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}-burst`, className: "fbv2-flavor-burst", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}`, className: `fbv2-bottle-swap is-${activeKey}` }, /* @__PURE__ */ React.createElement(Bottle, { flavor: activeFlavor.tag, src: FLAVOR_IMAGES[activeKey] })), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}-caption`, className: "fbv2-stage-caption" }, /* @__PURE__ */ React.createElement("span", null, activeFlavor.short), activeItem.signal))), /* @__PURE__ */ React.createElement("div", { className: "fbv2-panel" }, /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("div", { className: "fbv2-reco-label" }, "Recommended for ", selected.label), /* @__PURE__ */ React.createElement("h3", null, activeFlavor.name), /* @__PURE__ */ React.createElement("p", null, selected.reason), /* @__PURE__ */ React.createElement("div", { className: "fbv2-job" }, activeItem.job), /* @__PURE__ */ React.createElement("div", { className: "fbv2-profile", "aria-label": `${activeFlavor.name} taste profile` }, activeItem.profile.map(([label, value]) => /* @__PURE__ */ React.createElement("div", { key: label, className: "fbv2-profile-row" }, /* @__PURE__ */ React.createElement("span", null, label), /* @__PURE__ */ React.createElement("div", { className: "fbv2-profile-track" }, /* @__PURE__ */ React.createElement("i", { style: { width: `${value}%` } }))))), /* @__PURE__ */ React.createElement("div", { className: "fbv2-actions" }, /* @__PURE__ */ React.createElement("a", { className: "fbv2-add", href: cartPermalink(activeKey), onClick: (e) => addFlavorAndViewProduct(activeKey, e) }, "Add ", activeFlavor.name, " \u2192"), /* @__PURE__ */ React.createElement("a", { className: "fbv2-trio", href: reserveActive ? "#bundle-builder" : cartPermalink("trio") }, reserveActive ? "Build a bundle" : "Get all 3")), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 10, letterSpacing: "0.12em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $32.99+"), /* @__PURE__ */ React.createElement("div", { className: "fbv2-panel-note" }, activeItem.line))))
+    })))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("div", { className: "fbv2-bottle-stage" }, /* @__PURE__ */ React.createElement("div", { className: "fbv2-glow", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { className: "fbv2-sauce-ring", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}-swipe`, className: "fbv2-sauce-swipe", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}-burst`, className: "fbv2-flavor-burst", "aria-hidden": "true" }), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}`, className: `fbv2-bottle-swap is-${activeKey}` }, /* @__PURE__ */ React.createElement(Bottle, { flavor: activeFlavor.tag, src: FLAVOR_IMAGES[activeKey] })), /* @__PURE__ */ React.createElement("div", { key: `${activeKey}-${selectedUse}-caption`, className: "fbv2-stage-caption" }, /* @__PURE__ */ React.createElement("span", null, activeFlavor.short), activeItem.signal))), /* @__PURE__ */ React.createElement("div", { className: "fbv2-panel" }, /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("div", { className: "fbv2-reco-label" }, "Recommended for ", selected.label), /* @__PURE__ */ React.createElement("h3", null, activeFlavor.name), /* @__PURE__ */ React.createElement("p", null, selected.reason), /* @__PURE__ */ React.createElement("div", { className: "fbv2-job" }, activeItem.job), /* @__PURE__ */ React.createElement("div", { className: "fbv2-profile", "aria-label": `${activeFlavor.name} taste profile` }, activeItem.profile.map(([label, value]) => /* @__PURE__ */ React.createElement("div", { key: label, className: "fbv2-profile-row" }, /* @__PURE__ */ React.createElement("span", null, label), /* @__PURE__ */ React.createElement("div", { className: "fbv2-profile-track" }, /* @__PURE__ */ React.createElement("i", { style: { width: `${value}%` } }))))), /* @__PURE__ */ React.createElement("div", { className: "fbv2-actions" }, /* @__PURE__ */ React.createElement("a", { className: "fbv2-add", href: cartPermalink(activeKey), onClick: (e) => addFlavorAndViewProduct(activeKey, e) }, "Add ", activeFlavor.name, " \u2192"), /* @__PURE__ */ React.createElement("a", { className: "fbv2-trio", href: reserveActive ? "#bundle-builder" : cartPermalink("trio") }, reserveActive ? "Build a bundle" : "Get all 3")), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 10, letterSpacing: "0.12em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $29.99+"), /* @__PURE__ */ React.createElement("div", { className: "fbv2-panel-note" }, activeItem.line))))
 
   );
 
@@ -2382,13 +2382,13 @@ function Origin() {
 
         },
 
-        "Try the Trio \u2014 $32.99 \u00b7 Save $5.98",
+        "Try the Trio \u2014 $34.99 \u00b7 Save $6.98",
 
         /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16 } }, "\u2192")
 
       ),
 
-      /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 10, letterSpacing: "0.14em" } }, "$3.50 flat US ship \u00b7 FREE on $32.99+")
+      /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 10, letterSpacing: "0.14em" } }, "$3.50 flat US ship \u00b7 FREE on $29.99+")
 
     )))
 
@@ -2464,7 +2464,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     ["Want lift", "Citrus Shoyu", "Bright shoyu for rich bowls."],
 
-    ["Not sure", "The Trio", "All 3 bottles for $32.99."]
+    ["Not sure", "The Trio", "All 3 bottles for $34.99."]
 
   ].map(([kicker, title, copy]) => /* @__PURE__ */ React.createElement("div", { key: title, style: {
 
@@ -2636,7 +2636,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
         /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, lineHeight: 1, transition: "transform 0.28s" } }, "\u2192")
 
-      ), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--ink-40)", fontSize: 9, letterSpacing: "0.14em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $32.99+"), /* @__PURE__ */ React.createElement(
+      ), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--ink-40)", fontSize: 9, letterSpacing: "0.14em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $29.99+"), /* @__PURE__ */ React.createElement(
 
         "a",
 
@@ -2680,7 +2680,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     ));
 
-  })), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 72 } }, /* @__PURE__ */ React.createElement(Reveal, null, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", marginBottom: 16 } }, "Reserve soy sauces")), /* @__PURE__ */ React.createElement(Reveal, { delay: 1 }, /* @__PURE__ */ React.createElement("h2", { className: "display section-h2", style: { margin: "0 0 12px", maxWidth: 900, fontSize: "clamp(28px, 3.4vw, 40px)", letterSpacing: "-0.03em", lineHeight: 1 } }, "Two soy sauces.", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "Slow-brewed. Pour bold."))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("p", { style: { color: "var(--ink-60)", fontFamily: "Inter", fontSize: 14, maxWidth: "52ch", margin: "0 0 28px", lineHeight: 1.55 } }, "The reserve line \u2014 premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.")), /* @__PURE__ */ React.createElement("div", { className: "soy-grid lineup-grid", style: { display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 24, maxWidth: 760 } }, SOY_SAUCES.map((s, i) => /* @__PURE__ */ React.createElement(Reveal, { key: s.slug, delay: i + 1 }, /* @__PURE__ */ React.createElement("div", { className: "tilt-card", style: { background: `linear-gradient(170deg, rgba(${s.rgb},0.10) 0%, rgba(${s.rgb},0.03) 100%)`, border: `1px solid rgba(${s.rgb},0.28)`, padding: 32 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0, flex: 1 } }, s.tag), /* @__PURE__ */ React.createElement("div", { style: { width: 8, height: 8, borderRadius: 999, background: s.color, flexShrink: 0 } })), /* @__PURE__ */ React.createElement("div", { style: { height: 340, display: "flex", justifyContent: "center" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 200, height: "100%" } }, /* @__PURE__ */ React.createElement(Bottle, { flavor: s.tag, accent: s.color, src: s.image }))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 24 } }, /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(24px, 3.4vw, 32px)", letterSpacing: "-0.04em", fontWeight: 700, margin: 0, lineHeight: 0.95 } }, s.name, "."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 14, color: "var(--ink-60)", marginTop: 8, lineHeight: 1.5 } }, s.line1, " ", s.line2), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12, display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" } }, "In Stock"))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 32, paddingTop: 20, borderTop: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("div", { className: "serif", style: { fontSize: 22, fontStyle: "normal" } }, s.price), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", fontSize: 10 } }, "7 fl oz")), /* @__PURE__ */ React.createElement("a", { href: cartPermalink(s.slug), onClick: (e) => openCartWithFeedback(e, "Opening cart..."), className: "lineup-buy-btn", style: { display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", minHeight: 48, padding: "14px 20px", borderRadius: 999, background: "#0B0A09", border: "1px solid #0B0A09", color: "#F5F1EA", fontFamily: "Inter", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", cursor: "pointer" } }, "Add to Cart", /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, lineHeight: 1 } }, "\u2192")), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--ink-40)", fontSize: 9, letterSpacing: "0.14em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $32.99+"), /* @__PURE__ */ React.createElement("a", { href: s.detail, onClick: (e) => e.stopPropagation(), style: { display: "flex", alignItems: "center", justifyContent: "center", minHeight: 44, marginTop: 10, color: "var(--ink-60)", fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", textDecoration: "none" } }, "Bottle details"))))))), /* @__PURE__ */ React.createElement(Reveal, { delay: 4 }, /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-grid", style: {
+  })), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 72 } }, /* @__PURE__ */ React.createElement(Reveal, null, /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", marginBottom: 16 } }, "Reserve soy sauces")), /* @__PURE__ */ React.createElement(Reveal, { delay: 1 }, /* @__PURE__ */ React.createElement("h2", { className: "display section-h2", style: { margin: "0 0 12px", maxWidth: 900, fontSize: "clamp(28px, 3.4vw, 40px)", letterSpacing: "-0.03em", lineHeight: 1 } }, "Two soy sauces.", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "Slow-brewed. Pour bold."))), /* @__PURE__ */ React.createElement(Reveal, { delay: 2 }, /* @__PURE__ */ React.createElement("p", { style: { color: "var(--ink-60)", fontFamily: "Inter", fontSize: 14, maxWidth: "52ch", margin: "0 0 28px", lineHeight: 1.55 } }, "The reserve line \u2014 premium soy sauce for bowls, rice, eggs, dumplings, and marinades. Classic or spicy.")), /* @__PURE__ */ React.createElement("div", { className: "soy-grid lineup-grid", style: { display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 24, maxWidth: 760 } }, SOY_SAUCES.map((s, i) => /* @__PURE__ */ React.createElement(Reveal, { key: s.slug, delay: i + 1 }, /* @__PURE__ */ React.createElement("div", { className: "tilt-card", style: { background: `linear-gradient(170deg, rgba(${s.rgb},0.10) 0%, rgba(${s.rgb},0.03) 100%)`, border: `1px solid rgba(${s.rgb},0.28)`, padding: 32 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, gap: 8 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0, flex: 1 } }, s.tag), /* @__PURE__ */ React.createElement("div", { style: { width: 8, height: 8, borderRadius: 999, background: s.color, flexShrink: 0 } })), /* @__PURE__ */ React.createElement("div", { style: { height: 340, display: "flex", justifyContent: "center" } }, /* @__PURE__ */ React.createElement("div", { style: { width: 200, height: "100%" } }, /* @__PURE__ */ React.createElement(Bottle, { flavor: s.tag, accent: s.color, src: s.image }))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 24 } }, /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(24px, 3.4vw, 32px)", letterSpacing: "-0.04em", fontWeight: 700, margin: 0, lineHeight: 0.95 } }, s.name, "."), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 14, color: "var(--ink-60)", marginTop: 8, lineHeight: 1.5 } }, s.line1, " ", s.line2), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 12, display: "flex", alignItems: "center", gap: 6 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--accent)" } }, "In Stock"))), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 32, paddingTop: 20, borderTop: "1px solid var(--line)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 } }, /* @__PURE__ */ React.createElement("div", { className: "serif", style: { fontSize: 22, fontStyle: "normal" } }, s.price), /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--ink-40)", fontSize: 10 } }, "7 fl oz")), /* @__PURE__ */ React.createElement("a", { href: cartPermalink(s.slug), onClick: (e) => openCartWithFeedback(e, "Opening cart..."), className: "lineup-buy-btn", style: { display: "flex", alignItems: "center", justifyContent: "center", gap: 10, width: "100%", minHeight: 48, padding: "14px 20px", borderRadius: 999, background: "#0B0A09", border: "1px solid #0B0A09", color: "#F5F1EA", fontFamily: "Inter", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", textDecoration: "none", cursor: "pointer" } }, "Add to Cart", /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, lineHeight: 1 } }, "\u2192")), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--ink-40)", fontSize: 9, letterSpacing: "0.14em", marginTop: 10 } }, "$3.50 flat US ship \u00b7 FREE on $29.99+"), /* @__PURE__ */ React.createElement("a", { href: s.detail, onClick: (e) => e.stopPropagation(), style: { display: "flex", alignItems: "center", justifyContent: "center", minHeight: 44, marginTop: 10, color: "var(--ink-60)", fontFamily: "JetBrains Mono", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", textDecoration: "none" } }, "Bottle details"))))))), /* @__PURE__ */ React.createElement(Reveal, { delay: 4 }, /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-grid", style: {
 
     marginTop: 28,
 
@@ -2714,7 +2714,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     }
 
-  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)", pointerEvents: "none" } })), /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-copy", style: { padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em" } }, "BUNDLE - SAVE $5.98"), /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(36px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 1.02, margin: 0, fontWeight: 700 } }, "Try All 3 Flavors", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "\u2014 $32.99.")), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 15, color: "var(--ink-60)", lineHeight: 1.55, maxWidth: "42ch" } }, "One of each: Original, Spicy Tokyo, Citrus Shoyu. $32.99 vs $38.97 singles, so new buyers save $5.98 and start with the full line."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } }, ["Original", "Spicy Tokyo", "Citrus Shoyu"].map((label) => /* @__PURE__ */ React.createElement("span", { key: label, style: {
+  ), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(8,7,6,0) 55%, rgba(8,7,6,0.55) 100%)", pointerEvents: "none" } })), /* @__PURE__ */ React.createElement("div", { className: "trio-bundle-copy", style: { padding: "clamp(32px, 4vw, 56px)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { color: "var(--accent)", fontSize: 12, fontWeight: 600, letterSpacing: "0.18em" } }, "BUNDLE - SAVE $6.98"), /* @__PURE__ */ React.createElement("h3", { className: "display", style: { fontSize: "clamp(36px, 4vw, 52px)", letterSpacing: "-0.03em", lineHeight: 1.02, margin: 0, fontWeight: 700 } }, "Try All 3 Flavors", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement("span", { style: { color: "var(--muted)" } }, "\u2014 $34.99.")), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "Inter", fontSize: 15, color: "var(--ink-60)", lineHeight: 1.55, maxWidth: "42ch" } }, "One of each: Original, Spicy Tokyo, Citrus Shoyu. $34.99 vs $41.97 singles, so new buyers save $6.98 and start with the full line."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } }, ["Original", "Spicy Tokyo", "Citrus Shoyu"].map((label) => /* @__PURE__ */ React.createElement("span", { key: label, style: {
 
     display: "inline-flex",
 
@@ -2744,7 +2744,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     flexShrink: 0
 
-  } }, /* @__PURE__ */ React.createElement("span", { style: { width: 6, height: 6, borderRadius: 999, background: "var(--accent)", display: "inline-block", boxShadow: "0 0 0 2px rgba(var(--accent-rgb),0.18)" } }), label))), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 11, letterSpacing: "0.14em", marginTop: -4 } }, "$3.50 FLAT US SHIP \u00b7 FREE ON $32.99+ \u00b7 GIFT-READY"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement(
+  } }, /* @__PURE__ */ React.createElement("span", { style: { width: 6, height: 6, borderRadius: 999, background: "var(--accent)", display: "inline-block", boxShadow: "0 0 0 2px rgba(var(--accent-rgb),0.18)" } }), label))), /* @__PURE__ */ React.createElement("div", { className: "mono", style: { color: "var(--muted)", fontSize: 11, letterSpacing: "0.14em", marginTop: -4 } }, "$3.50 FLAT US SHIP \u00b7 FREE ON $29.99+ \u00b7 GIFT-READY"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement(
 
     "a",
 
@@ -2818,7 +2818,7 @@ function FlavorPicker({ flavor, setFlavor }) {
 
     },
 
-    "Buy the Trio - $32.99",
+    "Buy the Trio - $34.99",
 
     /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16, lineHeight: 1 } }, "\u2192")
 
@@ -2866,7 +2866,7 @@ function FinalCTA() {
 
     e.currentTarget.style.boxShadow = "none";
 
-  } }, "Shop all \u2014 from $12.99"), /* @__PURE__ */ React.createElement("form", { className: "finalcta-waitlist", action: "https://formsubmit.co/hello@noodlebomb.co", method: "POST", style: { display: "flex", flex: 1, minWidth: 280, gap: 0, border: "1px solid rgba(245,241,234,0.35)", borderRadius: 4, overflow: "hidden", background: "rgba(0,0,0,0.18)" } }, /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_subject", value: "NoodleBomb Waitlist Signup" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_template", value: "table" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_next", value: "https://noodlebomb.co/?subscribed=1" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_captcha", value: "false" }), /* @__PURE__ */ React.createElement(
+  } }, "Shop all \u2014 from $13.99"), /* @__PURE__ */ React.createElement("form", { className: "finalcta-waitlist", action: "https://formsubmit.co/hello@noodlebomb.co", method: "POST", style: { display: "flex", flex: 1, minWidth: 280, gap: 0, border: "1px solid rgba(245,241,234,0.35)", borderRadius: 4, overflow: "hidden", background: "rgba(0,0,0,0.18)" } }, /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_subject", value: "NoodleBomb Waitlist Signup" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_template", value: "table" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_next", value: "https://noodlebomb.co/?subscribed=1" }), /* @__PURE__ */ React.createElement("input", { type: "hidden", name: "_captcha", value: "false" }), /* @__PURE__ */ React.createElement(
 
     "input",
 
@@ -2884,7 +2884,7 @@ function FinalCTA() {
 
     }
 
-  ), /* @__PURE__ */ React.createElement("button", { type: "submit", style: { background: "transparent", color: "var(--accent-ink)", border: "none", borderLeft: "1px solid rgba(245,241,234,0.25)", padding: "0 20px", fontWeight: 600, cursor: "pointer", fontFamily: "Inter", fontSize: 13, letterSpacing: "0.06em", textTransform: "uppercase", transition: "background .2s" }, onMouseOver: (e) => e.currentTarget.style.background = "rgba(245,241,234,0.08)", onMouseOut: (e) => e.currentTarget.style.background = "transparent" }, "Notify me \u2192")))), /* @__PURE__ */ React.createElement(Reveal, { delay: 4 }, /* @__PURE__ */ React.createElement("div", { className: "trust-line-wrap", style: { marginTop: 36, overflow: "hidden", maskImage: "linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)" } }, /* @__PURE__ */ React.createElement("div", { className: "trust-line-track mono", style: { display: "inline-flex", whiteSpace: "nowrap", fontSize: 11, letterSpacing: "0.18em", opacity: 0.7, willChange: "transform" } }, Array.from({ length: 4 }).map((_, j) => /* @__PURE__ */ React.createElement("span", { key: j, style: { paddingRight: 32 } }, "PREMIUM INGREDIENTS \u00b7 TACOMA CO-PACKER \u00b7 FAMILY-OWNED IN WASHINGTON \u00b7 $3.50 FLAT US SHIPPING \u00b7 FREE ON $32.99+ \u00b7")))))), /* @__PURE__ */ React.createElement("div", { className: "finalcta-corner finalcta-corner-left", style: { position: "absolute", bottom: 24, left: 28, zIndex: 1 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { opacity: 0.65 } }, "family-owned \u00b7 made in the USA")), /* @__PURE__ */ React.createElement("div", { className: "finalcta-corner finalcta-corner-right", style: { position: "absolute", bottom: 24, right: 28, zIndex: 1 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { opacity: 0.65 } }, "pacific northwest \u00b7 est. 2024"))), /* @__PURE__ */ React.createElement("div", { className: "marq-wrap", style: { padding: "32px 0", background: "#080706", color: "var(--ink)", overflow: "hidden", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", transform: "skewY(-2deg)", margin: "0 -2vw" } }, /* @__PURE__ */ React.createElement("div", { className: "marq-track" }, Array.from({ length: 2 }).map(
+  ), /* @__PURE__ */ React.createElement("button", { type: "submit", style: { background: "transparent", color: "var(--accent-ink)", border: "none", borderLeft: "1px solid rgba(245,241,234,0.25)", padding: "0 20px", fontWeight: 600, cursor: "pointer", fontFamily: "Inter", fontSize: 13, letterSpacing: "0.06em", textTransform: "uppercase", transition: "background .2s" }, onMouseOver: (e) => e.currentTarget.style.background = "rgba(245,241,234,0.08)", onMouseOut: (e) => e.currentTarget.style.background = "transparent" }, "Notify me \u2192")))), /* @__PURE__ */ React.createElement(Reveal, { delay: 4 }, /* @__PURE__ */ React.createElement("div", { className: "trust-line-wrap", style: { marginTop: 36, overflow: "hidden", maskImage: "linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)" } }, /* @__PURE__ */ React.createElement("div", { className: "trust-line-track mono", style: { display: "inline-flex", whiteSpace: "nowrap", fontSize: 11, letterSpacing: "0.18em", opacity: 0.7, willChange: "transform" } }, Array.from({ length: 4 }).map((_, j) => /* @__PURE__ */ React.createElement("span", { key: j, style: { paddingRight: 32 } }, "PREMIUM INGREDIENTS \u00b7 TACOMA CO-PACKER \u00b7 FAMILY-OWNED IN WASHINGTON \u00b7 $3.50 FLAT US SHIPPING \u00b7 FREE ON $29.99+ \u00b7")))))), /* @__PURE__ */ React.createElement("div", { className: "finalcta-corner finalcta-corner-left", style: { position: "absolute", bottom: 24, left: 28, zIndex: 1 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { opacity: 0.65 } }, "family-owned \u00b7 made in the USA")), /* @__PURE__ */ React.createElement("div", { className: "finalcta-corner finalcta-corner-right", style: { position: "absolute", bottom: 24, right: 28, zIndex: 1 } }, /* @__PURE__ */ React.createElement("span", { className: "mono", style: { opacity: 0.65 } }, "pacific northwest \u00b7 est. 2024"))), /* @__PURE__ */ React.createElement("div", { className: "marq-wrap", style: { padding: "32px 0", background: "#080706", color: "var(--ink)", overflow: "hidden", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)", transform: "skewY(-2deg)", margin: "0 -2vw" } }, /* @__PURE__ */ React.createElement("div", { className: "marq-track" }, Array.from({ length: 2 }).map(
 
     (_, j) => /* @__PURE__ */ React.createElement(React.Fragment, { key: j }, ["SMALL BATCH", "\u2022", "PREMIUM INGREDIENTS", "\u2022", "SLOW-BREWED FOR DEPTH", "\u2022", "POUR IT ON EVERYTHING", "\u2022", "MADE IN BONNEY LAKE WA", "\u2022"].map(
 
@@ -3102,7 +3102,7 @@ function TrustStrip() {
 
   const items = [
 
-    { icon: /* @__PURE__ */ React.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React.createElement("rect", { x: "1", y: "3", width: "15", height: "13" }), /* @__PURE__ */ React.createElement("polygon", { points: "16 8 20 8 23 11 23 16 16 16 16 8" }), /* @__PURE__ */ React.createElement("circle", { cx: "5.5", cy: "18.5", r: "2.5" }), /* @__PURE__ */ React.createElement("circle", { cx: "18.5", cy: "18.5", r: "2.5" })), label: "$3.50 flat US ship \u00b7 FREE on $32.99+" },
+    { icon: /* @__PURE__ */ React.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React.createElement("rect", { x: "1", y: "3", width: "15", height: "13" }), /* @__PURE__ */ React.createElement("polygon", { points: "16 8 20 8 23 11 23 16 16 16 16 8" }), /* @__PURE__ */ React.createElement("circle", { cx: "5.5", cy: "18.5", r: "2.5" }), /* @__PURE__ */ React.createElement("circle", { cx: "18.5", cy: "18.5", r: "2.5" })), label: "$3.50 flat US ship \u00b7 FREE on $29.99+" },
 
     { icon: /* @__PURE__ */ React.createElement("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.4", strokeLinecap: "round", strokeLinejoin: "round" }, /* @__PURE__ */ React.createElement("path", { d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" })), label: "30-day customer support" },
 
@@ -5446,7 +5446,7 @@ function StickyCartBar({ flavor, flavors }) {
 
       },
 
-      "3-Pack \u2014 $32.99"
+      "3-Pack \u2014 $34.99"
 
     ), /* @__PURE__ */ React.createElement(
 
@@ -5478,9 +5478,9 @@ function FAQ() {
 
   const items = [
 
-    { q: "How long does a bottle last?", a: "It depends how you use it. The pour cap gives you control for bowls, wings, or mixing a quick marinade without over-pouring." },
+    { q: "What is the shelf life?", a: "NoodleBomb has a 2-year shelf life." },
 
-    { q: "Does it need to be refrigerated?", a: "Refrigerate after opening. Use within 6 months for peak flavor." },
+    { q: "Does it need to be refrigerated?", a: "No. Refrigeration is not required after opening." },
 
     { q: "What can I put it on besides ramen?", a: "Rice bowls, dumplings, stir-fry, eggs, roasted vegetables, wings, marinades. If it\u2019s savory, it probably works." },
 
@@ -5630,7 +5630,7 @@ function BuildBundle() {
 
       role: "Slow-brewed premium soy sauce. Bold, clean finish.",
 
-      price: 12.99,
+      price: 13.99,
 
       color: "#D7A84D",
 
@@ -5654,7 +5654,7 @@ function BuildBundle() {
 
       role: "The reserve bottle, turned up \u2014 slow-brewed depth with real heat.",
 
-      price: 12.99,
+      price: 13.99,
 
       color: "#B2221A",
 
@@ -5918,7 +5918,7 @@ function BuildBundle() {
 
     /* @__PURE__ */ React.createElement("div", { className: "bundle-scanline", "aria-hidden": "true" }),
 
-    /* @__PURE__ */ React.createElement("div", { className: "bundle-shell" }, /* @__PURE__ */ React.createElement(Reveal, null, /* @__PURE__ */ React.createElement("div", { className: "bundle-head" }, /* @__PURE__ */ React.createElement("div", { className: "mono bundle-kicker" }, "Build a Bundle"), /* @__PURE__ */ React.createElement("h2", { className: "display" }, "Build your set."), /* @__PURE__ */ React.createElement("p", null, "Tap + to add bottles. Any three get trio pricing \u2014 no matching flavors required."), /* @__PURE__ */ React.createElement("div", { className: "bundle-savings-banner" }, /* @__PURE__ */ React.createElement("strong", null, "Any 3 bottles = Trio pricing"), /* @__PURE__ */ React.createElement("span", null, "Mix flavors. Save automatically. $3.50 flat US ship \u00b7 FREE on $32.99+.")))), /* @__PURE__ */ React.createElement("div", { className: "bundle-arena" }, /* @__PURE__ */ React.createElement(Reveal, { delay: 1 }, /* @__PURE__ */ React.createElement("div", { className: "bundle-product-grid", "aria-label": "Build a NoodleBomb bundle" }, products.map((product) => {
+    /* @__PURE__ */ React.createElement("div", { className: "bundle-shell" }, /* @__PURE__ */ React.createElement(Reveal, null, /* @__PURE__ */ React.createElement("div", { className: "bundle-head" }, /* @__PURE__ */ React.createElement("div", { className: "mono bundle-kicker" }, "Build a Bundle"), /* @__PURE__ */ React.createElement("h2", { className: "display" }, "Build your set."), /* @__PURE__ */ React.createElement("p", null, "Tap + to add bottles. Any three get trio pricing \u2014 no matching flavors required."), /* @__PURE__ */ React.createElement("div", { className: "bundle-savings-banner" }, /* @__PURE__ */ React.createElement("strong", null, "Any 3 bottles = Trio pricing"), /* @__PURE__ */ React.createElement("span", null, "Mix flavors. Save automatically. $3.50 flat US ship \u00b7 FREE on $29.99+.")))), /* @__PURE__ */ React.createElement("div", { className: "bundle-arena" }, /* @__PURE__ */ React.createElement(Reveal, { delay: 1 }, /* @__PURE__ */ React.createElement("div", { className: "bundle-product-grid", "aria-label": "Build a NoodleBomb bundle" }, products.map((product) => {
 
       const qty = quantities[product.slug];
 
@@ -6040,7 +6040,7 @@ function BuildBundle() {
 
       /* @__PURE__ */ React.createElement("span", { "aria-hidden": "true" }, "\u2192")
 
-    ), /* @__PURE__ */ React.createElement("div", { className: "bundle-note" }, "Any 3 bottles ship at the trio price. $3.50 flat US shipping \u2014 FREE on $32.99+ US orders. Priority $12 at checkout.")))))
+    ), /* @__PURE__ */ React.createElement("div", { className: "bundle-note" }, "Any 3 bottles ship at the trio price. $3.50 flat US shipping \u2014 FREE on $29.99+ US orders. Priority $12 at checkout.")))))
 
   );
 
@@ -6062,7 +6062,7 @@ const TDROP_PRODUCTS = [
 
     name: "Shoyu Reserve",
 
-    price: 12.99,
+    price: 13.99,
 
     glowRgb: "224,178,76",
 
@@ -6408,7 +6408,7 @@ function TheDrop() {
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, /* @__PURE__ */ React.createElement(TheDropMeter, { label: "UMAMI", pct: "92%", kind: "umami" }), /* @__PURE__ */ React.createElement(TheDropMeter, { label: "HEAT", pct: "7%", kind: "heat" })),
 
-      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 21px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$12.99"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[0]), className: "tdrop-btn tdrop-btn--gold", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 18px", border: "1px solid rgba(240,235,227,0.14)", borderRadius: 999, background: "#14100B", color: "#F0EBE3", font: `700 11px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" } }, "Add \u2192"))
+      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 21px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$13.99"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[0]), className: "tdrop-btn tdrop-btn--gold", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 18px", border: "1px solid rgba(240,235,227,0.14)", borderRadius: 999, background: "#14100B", color: "#F0EBE3", font: `700 11px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer" } }, "Add \u2192"))
 
     ), /* @__PURE__ */ React.createElement(
 
@@ -6432,7 +6432,7 @@ function TheDrop() {
 
       /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginBottom: 16 } }, /* @__PURE__ */ React.createElement(TheDropMeter, { label: "UMAMI", pct: "88%", kind: "umami" }), /* @__PURE__ */ React.createElement(TheDropMeter, { label: "HEAT", pct: "74%", kind: "heat" })),
 
-      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 23px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$12.99"), /* @__PURE__ */ React.createElement("span", { style: { font: `700 10px ${TDROP_MONO}`, letterSpacing: "0.14em", color: "rgba(240,235,227,0.4)" } }, "7 FL OZ"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[1]), className: "tdrop-btn tdrop-btn--chili", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E84A3A,#c93c2e)", color: "#fff", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 40px -10px rgba(232,74,58,0.6)" } }, "Add \u2192"))
+      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 12 } }, /* @__PURE__ */ React.createElement("span", { style: { font: `500 italic 23px ${TDROP_SERIF}`, color: "#F0EBE3" } }, "$10.99"), /* @__PURE__ */ React.createElement("span", { style: { font: `700 10px ${TDROP_MONO}`, letterSpacing: "0.14em", color: "rgba(240,235,227,0.4)" } }, "3.2 OZ"), /* @__PURE__ */ React.createElement("button", { onClick: addOne(TDROP_PRODUCTS[1]), className: "tdrop-btn tdrop-btn--chili", style: { marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 22px", border: "none", borderRadius: 999, background: "linear-gradient(180deg,#E84A3A,#c93c2e)", color: "#fff", font: `700 12px ${TDROP_DISP}`, letterSpacing: "0.12em", textTransform: "uppercase", cursor: "pointer", boxShadow: "0 0 40px -10px rgba(232,74,58,0.6)" } }, "Add \u2192"))
 
     ), /* @__PURE__ */ React.createElement(
 
