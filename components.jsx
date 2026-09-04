@@ -1634,7 +1634,7 @@ function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }
 
     },
 
-    "Get the Trio",
+    "Get the Trio \u2014 $34.99",
 
     /* @__PURE__ */ React.createElement("span", { style: { fontSize: 16, lineHeight: 1 } }, "\u2192")
 
@@ -1654,7 +1654,7 @@ function Hero({ headline, bottleSrc, flavorKey = "original", flavorMeta = null }
 
     "Start here"
 
-  )), /* @__PURE__ */ React.createElement("div", { className: "hero-trust-line", style: { marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.08em", color: "var(--ink-40)", lineHeight: 1.6, maxWidth: 420, animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both" } }, "Flat US shipping | free US shipping on qualifying orders | ships from Bonney Lake, WA")), /* @__PURE__ */ React.createElement("div", { className: "scroll-hint hero-scroll-hint", style: { position: "absolute", left: "50%", bottom: 20, transform: "translateX(-50%)", zIndex: 4 } }, /* @__PURE__ */ React.createElement("div", { className: "label" }, "Scroll"), /* @__PURE__ */ React.createElement("div", { className: "line" })));
+  )), /* @__PURE__ */ React.createElement("div", { className: "hero-trust-line", style: { marginTop: 18, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: "0.08em", color: "var(--ink-40)", lineHeight: 1.6, maxWidth: 420, animation: "heroLineIn 1s cubic-bezier(.16,1,.3,1) 0.9s both" } }, "Save $6.98 vs singles | FREE US shipping $29.99+ | ships from Bonney Lake, WA")), /* @__PURE__ */ React.createElement("div", { className: "scroll-hint hero-scroll-hint", style: { position: "absolute", left: "50%", bottom: 20, transform: "translateX(-50%)", zIndex: 4 } }, /* @__PURE__ */ React.createElement("div", { className: "label" }, "Scroll"), /* @__PURE__ */ React.createElement("div", { className: "line" })));
 
 }
 

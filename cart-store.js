@@ -30,6 +30,10 @@
     var s = document.getElementsByTagName('script')[0];
     if (s && s.parentNode) s.parentNode.insertBefore(t, s);
     else document.head.appendChild(t);
+    // Enforce explicit events only. The provider config has advertised inferred
+    // and Smart Setup features even while their Events Manager toggles read Off.
+    window.fbq('set', 'autoConfig', false, PIXEL_ID);
+    window.fbq('set', 'smartSetup', false, PIXEL_ID);
     window.fbq('init', PIXEL_ID);
   }
   function track(event, params) {

@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v33-checkout-events-20260904';
+const NB_CACHE = 'noodlebomb-app-shell-v34-sales-recovery-20260904';
 const NB_ASSETS = [
   '/',
   '/index.html',

@@ -58,4 +58,29 @@ describe("production storefront canon", () => {
       "f7a38b4aded67170e1a2e54658bb64a4b4aa09c4",
     );
   });
+
+  it("keeps the fixed Trio primary and offers Shake independently in cart", () => {
+    const runtime = read("app.jsx");
+    const cart = read("cart.jsx");
+    const hero = read("components.jsx");
+
+    expect(runtime).toContain("const CUSTOM_BUNDLE_ENABLED = false;");
+    expect(runtime).toContain("CUSTOM_BUNDLE_ENABLED &&");
+    expect(runtime).not.toContain('href: reserveActive ? "#bundle-builder"');
+    expect(cart).toContain("const showTrioUpsell = !hasTrioInCart");
+    expect(cart).toContain("const showFireDustUpsell = !hasFireDustInCart;");
+    expect(cart).not.toContain("Any 3 bottles qualify");
+    expect(cart).toContain("Original + Spicy Tokyo + Citrus Shoyu for $34.99.");
+    expect(hero).toContain("Get the Trio \\u2014 $34.99");
+    expect(hero).toContain("FREE US shipping $29.99+");
+  });
+
+  it("opts the storefront out of inferred Meta setup while retaining explicit events", () => {
+    for (const file of ["page-shared.js", "cart-store.js"]) {
+      const runtime = read(file);
+      expect(runtime).toContain("window.fbq('set', 'autoConfig', false, PIXEL_ID);");
+      expect(runtime).toContain("window.fbq('set', 'smartSetup', false, PIXEL_ID);");
+      expect(runtime).toContain("window.fbq('track', event");
+    }
+  });
 });
