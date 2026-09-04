@@ -45,6 +45,24 @@ describe("production storefront canon", () => {
     expect(spicy).toContain("Refrigeration is not required after opening.");
   });
 
+  it("keeps the published recipe imagery wired to each matching surface", () => {
+    const recipes = read("recipes.html");
+    const noodles = read("sauce-for-noodles.html");
+    const salmon = read("sauce-for-salmon.html");
+    const wings = read("ramen-sauce-for-wings.html");
+    const firstBox = read("first-box-50.html");
+
+    expect(recipes).toContain("/uploads/recipes-hero-weeknight-bowl-v1.webp");
+    expect(recipes).toContain("/uploads/recipe-big-flavor-ramen-v1.webp");
+    expect(recipes).toContain("/uploads/recipe-citrus-shoyu-salmon-v1.webp");
+    expect(recipes).toContain("/uploads/recipe-spicy-tokyo-wings-v1.webp");
+    expect(noodles).toContain("/uploads/recipe-big-flavor-ramen-v1.webp");
+    expect(salmon).toContain("/uploads/recipe-citrus-shoyu-salmon-v1.webp");
+    expect(wings).toContain("/uploads/recipe-spicy-tokyo-wings-v1.webp");
+    expect(firstBox).toContain("/uploads/monthly-ramen-night-v1.webp");
+    expect(recipes).not.toMatch(/\bdrizzle\b/i);
+  });
+
   it("preserves the locked homepage boot, hero, metadata, and Monthly Box bytes", () => {
     const homepage = read("index.html");
     const monthlyBox = readFileSync(join(root, "monthly-box.html"));
