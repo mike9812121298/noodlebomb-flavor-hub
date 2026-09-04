@@ -1,5 +1,17 @@
 // NoodleBomb shared page interactions — about / recipes / faq
 
+// -- Traffic-source attribution capture (first-touch) ------------------------
+// Load the standalone module on every shared static page so click IDs and UTMs
+// are captured before a shopper crosses into the Shopify checkout.
+(function () {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+  if (window.NB_ATTRIBUTION || document.getElementById('nb-attribution-js')) return;
+  var s = document.createElement('script');
+  s.id = 'nb-attribution-js';
+  s.src = '/attribution.js';
+  (document.head || document.documentElement).appendChild(s);
+})();
+
 /* ── Meta Pixel bootstrap (added 2026-06-22, ad-audit fix) ─────────────────
  * The noodlebomb.co storefront shipped with NO Meta Pixel — only the Shopify
  * checkout domain had one. So AddToCart + PageView never fired on the brand
@@ -589,17 +601,37 @@
 
 /* 2026-07-03 - First Ramen Night Box tracking + direct Shopify handoff */
 (function () {
-  var base = 'https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50?redirect=/cart/add?id=54099648545078%26quantity=1%26selling_plan=8721727798%26properties%5B_first_box_source%5D=';
+  var discountBase = 'https://nu2vqa-ma.myshopify.com/discount/FIRSTBOX50';
+  var cartBase = '/cart/add?id=54099648545078&quantity=1&selling_plan=8721727798';
   function sourceFromPage(el) {
     var params = new URLSearchParams(window.location.search || '');
     return params.get('source') || (el && el.getAttribute('data-source')) || 'site';
   }
   function directUrl(source) {
-    return base + encodeURIComponent(String(source || 'site').replace(/[^a-z0-9_-]/gi, '-').toLowerCase());
+    var target = new URL(discountBase);
+    var cart = new URL(cartBase, window.location.origin);
+    var properties = {
+      _first_box_source: String(source || 'site').replace(/[^a-z0-9_-]/gi, '-').toLowerCase()
+    };
+    try {
+      var attribution = window.NB_ATTRIBUTION;
+      var lineProperties = attribution && typeof attribution.getLineProperties === 'function'
+        ? attribution.getLineProperties() : [];
+      lineProperties.forEach(function (property) {
+        properties[property.key] = property.value;
+      });
+    } catch (_) {}
+    Object.keys(properties).forEach(function (key) {
+      var value = String(properties[key]).replace(/[\u0000-\u001f\u007f]/g, ' ').slice(0, 255);
+      if (value) cart.searchParams.set('properties[' + key + ']', value);
+    });
+    target.searchParams.set('redirect', cart.pathname + '?' + cart.searchParams.toString());
+    return target.toString();
   }
   function track(source, surface) {
     var detail = { source: source, surface: surface || 'site', code: 'FIRSTBOX50', offer: 'first_ramen_night_box' };
     try { window.fbq && window.fbq('trackCustom', 'FirstBox50Click', detail); } catch (_) {}
+    try { window.gtag && window.gtag('event', 'first_box_50_click', detail); } catch (_) {}
     try { window.dataLayer && window.dataLayer.push(Object.assign({ event: 'first_box_50_click' }, detail)); } catch (_) {}
   }
   function init() {
@@ -611,7 +643,9 @@
     document.addEventListener('click', function (event) {
       var el = event.target.closest && event.target.closest('[data-first-box-cta]');
       if (!el) return;
-      track(sourceFromPage(el), el.getAttribute('data-surface') || (el.hasAttribute('data-first-box-direct') ? 'landing' : 'pdp'));
+      var source = sourceFromPage(el);
+      track(source, el.getAttribute('data-surface') || (el.hasAttribute('data-first-box-direct') ? 'landing' : 'pdp'));
+      if (el.hasAttribute('data-first-box-direct')) el.setAttribute('href', directUrl(source));
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

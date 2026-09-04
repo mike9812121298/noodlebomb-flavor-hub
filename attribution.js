@@ -16,7 +16,9 @@
  * Public API — window.NB_ATTRIBUTION:
  *   get()               -> captured fields object (or {})
  *   getCartAttributes() -> [{key,value}] ready for Shopify CartInput.attributes
+ *   getLineProperties() -> private Shopify line properties for direct-cart URLs
  *   getNote()           -> short human-readable source summary (Shopify note)
+ *   decorateShopifyCartUrl(url) -> direct-cart URL with first-touch properties
  *   capture()           -> force a capture pass (returns current record)
  */
 (function () {
@@ -120,6 +122,35 @@
     return out;
   }
 
+  function getLineProperties() {
+    return getCartAttributes().map(function (attribute) {
+      return {
+        key: attribute.key.indexOf('nb_') === 0 ? ('_' + attribute.key) : ('_nb_' + attribute.key),
+        value: attribute.value
+      };
+    });
+  }
+
+  function decorateShopifyCartUrl(rawUrl) {
+    try {
+      var url = new URL(rawUrl, window.location.href);
+      if (url.protocol !== 'https:' || url.hostname !== 'nu2vqa-ma.myshopify.com' || url.pathname !== '/cart/add') {
+        return rawUrl;
+      }
+      getLineProperties().forEach(function (property) {
+        url.searchParams.set('properties[' + property.key + ']', property.value);
+      });
+      return url.toString();
+    } catch (e) { return rawUrl; }
+  }
+
+  function decorateDirectShopifyLinks() {
+    if (typeof document === 'undefined') return;
+    document.querySelectorAll('a[href^="https://nu2vqa-ma.myshopify.com/cart/add"]').forEach(function (link) {
+      link.setAttribute('href', decorateShopifyCartUrl(link.href));
+    });
+  }
+
   function inferredSource(d) {
     if (d.utm_source) return d.utm_source;
     if (d.fbclid) return 'facebook';
@@ -142,9 +173,20 @@
   window.NB_ATTRIBUTION = {
     get: function () { return readStored() || {}; },
     getCartAttributes: getCartAttributes,
+    getLineProperties: getLineProperties,
     getNote: getNote,
+    decorateShopifyCartUrl: decorateShopifyCartUrl,
     capture: ensureCaptured
   };
 
   ensureCaptured();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', decorateDirectShopifyLinks, { once: true });
+  } else {
+    decorateDirectShopifyLinks();
+  }
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[href^="https://nu2vqa-ma.myshopify.com/cart/add"]');
+    if (link) link.setAttribute('href', decorateShopifyCartUrl(link.href));
+  }, true);
 })();

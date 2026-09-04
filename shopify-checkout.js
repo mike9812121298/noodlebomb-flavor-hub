@@ -77,9 +77,22 @@
       return Promise.reject(new Error('No mapped Shopify variants for cart items'));
     }
 
+    var input = { lines: lines };
+    try {
+      var attribution = window.NB_ATTRIBUTION;
+      if (attribution && typeof attribution.getCartAttributes === 'function') {
+        var attributes = attribution.getCartAttributes();
+        if (Array.isArray(attributes) && attributes.length) input.attributes = attributes;
+      }
+      if (attribution && typeof attribution.getNote === 'function') {
+        var note = attribution.getNote();
+        if (note) input.note = note;
+      }
+    } catch (e) { /* attribution must never block checkout */ }
+
     var query = 'mutation cartCreate($input: CartInput!) {' +
       '  cartCreate(input: $input) {' +
-      '    cart { id checkoutUrl }' +
+      '    cart { id checkoutUrl attributes { key value } note }' +
       '    userErrors { field message }' +
       '  }' +
       '}';
@@ -94,7 +107,7 @@
       },
       body: JSON.stringify({
         query: query,
-        variables: { input: { lines: lines } }
+        variables: { input: input }
       })
     }).then(function (res) {
       if (!res.ok) throw new Error('Shopify HTTP ' + res.status);
@@ -115,6 +128,51 @@
   // succeeds, redirects to the Shopify checkout URL. Otherwise falls through
   // (lets the default href / fallbackUrl handle it).
   function handleCheckoutClick(items, e, fallbackUrl) {
+    // Record the last on-site funnel step before the cross-origin handoff.
+    try {
+      if (Array.isArray(items) && items.length) {
+        var value = items.reduce(function (sum, item) {
+          return sum + (Number(item.price) || 0) * (Number(item.qty) || 1);
+        }, 0);
+        var roundedValue = Math.round(value * 100) / 100;
+        var analyticsItems = items.map(function (item) {
+          return {
+            item_id: item.slug,
+            item_name: item.name || item.slug,
+            price: Number(item.price) || 0,
+            quantity: Number(item.qty) || 1
+          };
+        });
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'begin_checkout', {
+            currency: 'USD',
+            value: roundedValue,
+            items: analyticsItems
+          });
+        }
+        var metaParams = {
+          currency: 'USD',
+          value: roundedValue,
+          content_type: 'product',
+          content_ids: items.map(function (item) { return item.slug; }),
+          contents: items.map(function (item) {
+            return {
+              id: item.slug,
+              item_price: Number(item.price) || 0,
+              quantity: Number(item.qty) || 1
+            };
+          }),
+          num_items: items.reduce(function (sum, item) {
+            return sum + (Number(item.qty) || 1);
+          }, 0)
+        };
+        if (window.NB_PIXEL && typeof window.NB_PIXEL.track === 'function') {
+          window.NB_PIXEL.track('InitiateCheckout', metaParams);
+        } else if (typeof window.fbq === 'function') {
+          window.fbq('track', 'InitiateCheckout', metaParams);
+        }
+      }
+    } catch (analyticsError) { /* analytics must never block checkout */ }
     if (!isEnabled()) return Promise.resolve(false);
     if (e && typeof e.preventDefault === 'function') e.preventDefault();
     return createCheckoutUrl(items).then(function (url) {

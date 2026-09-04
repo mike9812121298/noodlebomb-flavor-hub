@@ -1,4 +1,4 @@
-const NB_CACHE = 'noodlebomb-app-shell-v31-godmode-20260702';
+const NB_CACHE = 'noodlebomb-app-shell-v33-checkout-events-20260904';
 const NB_ASSETS = [
   '/',
   '/index.html',
@@ -8,6 +8,7 @@ const NB_ASSETS = [
   '/recipes.html',
   '/page-shared.css',
   '/page-shared.js',
+  '/attribution.js',
   '/cart-store.js',
   '/shopify-config.js',
   '/shopify-checkout.js',
