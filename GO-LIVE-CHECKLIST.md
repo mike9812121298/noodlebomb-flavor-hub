@@ -20,6 +20,39 @@ The session watches `products.json`; when all six show the new prices,
 PR #20 merges to `main` (= production deploy of the whole reconciled
 tree) per owner instruction 2026-07-02 ("get the reviews live").
 
+## 1b. Every price change must also reach the ad platforms
+
+**Added 2026-07-24 after a miss.** The $11.99 → $12.99 change above shipped to
+the site and Shopify on 2026-07-02 and was verified "sitewide, zero $11.99
+residuals" — but *sitewide* meant this repo. A live Meta ad kept quoting $11.99
+for the next 22 days, and none of the monitoring noticed, because it all watches
+spend and ROAS rather than ad copy.
+
+Ad copy lives **only in Meta Ads Manager**. It is not in this repo, so it never
+appears in a diff, never gets reviewed, and no CI check can see it. It has to be
+walked manually.
+
+When any price, size, or product claim changes, check every surface:
+
+- [ ] Site (this repo) — PDP copy + Product JSON-LD + `cart-store.js` catalog
+- [ ] Shopify variant prices (section 1 above)
+- [ ] **Meta Ads Manager** — primary text, headline, and description of every
+      ACTIVE ad; also paused ads you may re-enable
+- [ ] Meta/Instagram Shop catalog feed, if a product feed is connected
+- [ ] Amazon, Walmart, Etsy, eBay listings
+- [ ] Klaviyo flow + campaign templates with hardcoded prices
+- [ ] Wholesale sheet MSRP (`wholesale.html`)
+
+An ad quoting a price checkout will not honor is a Meta policy risk, not only a
+brand one.
+
+**Automated backstop:** `openclaw-mission-control` now runs an ad-claims
+watchdog every 6 hours (`.github/workflows/ad-claims.yml`) that reads live Meta
+ad copy and diffs it against live noodlebomb.co prices, heat levels, and sizes.
+It needs the `META_ACCESS_TOKEN` and `META_AD_ACCOUNT_ID` repo secrets set there
+to read anything; until then it reports UNCHECKED rather than green. Treat it as
+a safety net, not a substitute for the list above.
+
 ## 2. Welcome popup → email capture + first-order offer
 
 1. Shopify admin → Discounts → create code `WELCOME10` (10% off, first
