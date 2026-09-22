@@ -1,0 +1,447 @@
+/* ==========================================================================
+   NoodleBomb — readable phone lineup
+   "Everyday Extraordinary" + "Shoyu Reserve", rebuilt as live text for phones.
+   --------------------------------------------------------------------------
+   Below 900px the .nbx sections replace the artwork versions (give each
+   original section the class .nbx-hide-mobile). Desktop stays as it is.
+   Floor: no text under 12px, every tap target 44px+ (buttons are 50px).
+   Every rule is scoped under .nbx, so nothing leaks into the rest of the page.
+   ========================================================================== */
+
+@media (min-width: 900px) {
+  .nbx { display: none !important; }
+}
+@media (max-width: 899.98px) {
+  .nbx-hide-mobile { display: none !important; }
+}
+
+/* ---- Base --------------------------------------------------------------- */
+
+.nbx {
+  --nbx-serif: 'Playfair Display', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --nbx-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --nbx-script: 'Satisfy', 'Snell Roundhand', 'Segoe Script', cursive;
+  --nbx-gutter: 20px;
+  display: block;
+  container-type: inline-size;
+  margin: 0;
+  background: var(--nbx-bg);
+  color: var(--nbx-ink);
+  font-family: var(--nbx-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+.nbx *, .nbx *::before, .nbx *::after { box-sizing: border-box; }
+.nbx :where(h2, h3, p, ul, li, figure, form) { margin: 0; padding: 0; }
+.nbx :where(img) { display: block; max-width: 100%; height: auto; }
+
+/* ---- Palettes (sampled from the artwork) -------------------------------- */
+
+.nbx-everyday {
+  --nbx-bg: #F3ECE0;          /* artwork paper */
+  --nbx-surface: #FBF7F0;     /* cards */
+  --nbx-ink: #1D1813;
+  --nbx-muted: #5B5248;       /* 6.3:1 on paper */
+  --nbx-line: rgba(29, 24, 19, 0.13);
+  --nbx-field-line: rgba(29, 24, 19, 0.45);
+  --nbx-gold: #9A7128;        /* display gold, 24px+ only */
+  --nbx-gold-text: #7E5A1C;   /* gold for small text, 5.3:1 on paper */
+}
+.nbx-reserve {
+  --nbx-bg: #0C0A08;
+  --nbx-surface: #16120E;
+  --nbx-ink: #F3EDE3;
+  --nbx-muted: #B9B0A3;       /* 8.8:1 on cards */
+  --nbx-line: rgba(243, 237, 227, 0.14);
+  --nbx-field-line: rgba(243, 237, 227, 0.45);
+  --nbx-gold: #D4A24A;
+  --nbx-gold-text: #DDB065;
+  color-scheme: dark;
+}
+
+/* Flavor accents: button fill, text on the button, small-label color.
+   White text only where it clears 4.5:1 (reds); gold and orange take ink. */
+.nbx-everyday .nbx-flavor--original { --nbx-accent: #C9A152; --nbx-on-accent: #1D1813; --nbx-accent-text: #7E5A1C; }
+.nbx-everyday .nbx-flavor--spicy    { --nbx-accent: #C41E24; --nbx-on-accent: #FFFFFF; --nbx-accent-text: #B01E1E; }
+.nbx-everyday .nbx-flavor--citrus   { --nbx-accent: #EF7C16; --nbx-on-accent: #1D1813; --nbx-accent-text: #A34A00; }
+.nbx-reserve  .nbx-flavor--original { --nbx-accent: #D4A24A; --nbx-on-accent: #0C0A08; --nbx-accent-text: #DDB065; }
+.nbx-reserve  .nbx-flavor--spicy    { --nbx-accent: #D23A2F; --nbx-on-accent: #FFFFFF; --nbx-accent-text: #EE6A5E; }
+.nbx-reserve  .nbx-flavor--garlic   { --nbx-accent: #A970EE; --nbx-on-accent: #0C0A08; --nbx-accent-text: #BE93F4; }
+
+/* ---- Layout ------------------------------------------------------------- */
+
+.nbx .nbx-wrap {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: var(--nbx-gutter);
+}
+
+/* ---- Section header ----------------------------------------------------- */
+
+.nbx .nbx-head { padding-block: 56px 32px; }
+.nbx-reserve .nbx-head { padding-block: 36px 28px; }
+
+.nbx .nbx-kicker {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 600 12px/1.3 var(--nbx-sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nbx-ink);
+}
+.nbx .nbx-kicker::after {
+  content: "";
+  flex: 0 1 64px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+.nbx-reserve .nbx-kicker { color: var(--nbx-gold-text); }
+
+.nbx .nbx-title {
+  margin-top: 14px;
+  font-family: var(--nbx-serif);
+  font-size: clamp(40px, 11.5cqi, 60px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.012em;
+  color: var(--nbx-ink);
+  text-wrap: balance;
+}
+.nbx .nbx-title em {
+  display: block;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--nbx-gold);
+}
+
+.nbx .nbx-tagline {
+  margin-top: 18px;
+  font: 600 13px/1.4 var(--nbx-sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nbx-ink);
+}
+.nbx .nbx-lede {
+  margin-top: 8px;
+  max-width: 34ch;
+  font: 400 17px/1.55 var(--nbx-sans);
+  color: var(--nbx-muted);
+  text-wrap: pretty;
+}
+
+/* One script accent per section, big enough to read (it was ~9px). */
+.nbx .nbx-script {
+  margin-top: 20px;
+  text-align: right;
+  font-family: var(--nbx-script);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--nbx-ink);
+  transform: rotate(-5deg);
+  transform-origin: right center;
+}
+.nbx .nbx-script::after {
+  content: "";
+  display: block;
+  width: 150px;
+  height: 3px;
+  margin: 8px 0 0 auto;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--nbx-gold) 35%);
+}
+
+/* ---- Artwork crops -------------------------------------------------------
+   Shows one slice of an artwork image. Values are fractions of the image
+   WIDTH, so they hold at any resolution:
+     --cx / --cy  left / top edge of the slice
+     --cw / --ch  width / height of the slice
+   Defaults show the full width. */
+
+.nbx .nbx-crop {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: var(--cw, 1) / var(--ch, 0.5);
+  background: var(--nbx-surface);
+}
+.nbx .nbx-crop > img {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  width: calc(100% / var(--cw, 1));
+  left: calc(var(--cx, 0) / var(--cw, 1) * -100%);
+  top: calc(var(--cy, 0) / var(--ch, 0.5) * -100%);
+}
+
+/* Reserve: the three bottle scenes side by side, labels dropped (the cards
+   below name each flavor). */
+.nbx .nbx-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--nbx-bg);
+}
+.nbx .nbx-trio img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 7;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+/* ---- Product cards ------------------------------------------------------ */
+
+.nbx .nbx-cards {
+  display: grid;
+  gap: 16px;
+  padding-block: 28px 8px;
+  list-style: none;
+}
+.nbx-reserve .nbx-cards { padding-bottom: 64px; }
+
+.nbx .nbx-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 20px;
+  background: var(--nbx-surface);
+  border: 1px solid var(--nbx-line);
+  border-radius: 14px;
+}
+.nbx .nbx-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.nbx .nbx-eyebrow {
+  font: 600 12px/1.3 var(--nbx-sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nbx-accent-text, var(--nbx-gold-text));
+}
+.nbx-reserve .nbx-card-top .nbx-eyebrow { color: var(--nbx-muted); }
+
+/* Availability pill: state, not decoration. */
+.nbx .nbx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font: 600 12px/1 var(--nbx-sans);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: var(--nbx-accent-text);
+}
+.nbx .nbx-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.nbx .nbx-card-title {
+  margin-top: 8px;
+  font-family: var(--nbx-serif);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--nbx-ink);
+}
+.nbx .nbx-card-desc {
+  margin-top: 6px;
+  font: 400 16px/1.5 var(--nbx-sans);
+  color: var(--nbx-muted);
+  text-wrap: pretty;
+}
+.nbx .nbx-buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 16px;
+}
+.nbx .nbx-price {
+  font-family: var(--nbx-serif);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--nbx-ink);
+}
+.nbx .nbx-size {
+  font: 500 14px/1.3 var(--nbx-sans);
+  color: var(--nbx-muted);
+}
+.nbx .nbx-eta {
+  margin-top: 16px;
+  font: 500 15px/1.4 var(--nbx-sans);
+  color: var(--nbx-ink);
+}
+
+/* ---- Buttons and links -------------------------------------------------- */
+
+.nbx .nbx-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 16px;
+  padding: 12px 20px;
+  border: 1.5px solid var(--nbx-accent, var(--nbx-ink));
+  border-radius: 8px;
+  background: var(--nbx-accent, var(--nbx-ink));
+  color: var(--nbx-on-accent, var(--nbx-bg));
+  font: 600 16px/1.2 var(--nbx-sans);
+  letter-spacing: 0.01em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease, filter 120ms ease, background-color 160ms ease;
+}
+.nbx .nbx-btn:hover { filter: brightness(1.06); }
+.nbx .nbx-btn:active { transform: translateY(1px); }
+.nbx .nbx-btn--outline {
+  background: transparent;
+  color: var(--nbx-accent-text);
+  border-color: var(--nbx-accent);
+}
+.nbx .nbx-btn--ink {
+  --nbx-accent: var(--nbx-ink);
+  --nbx-on-accent: var(--nbx-bg);
+  margin-top: 22px;
+}
+.nbx .nbx-btn.is-added {
+  background: var(--nbx-ink);
+  border-color: var(--nbx-ink);
+  color: var(--nbx-bg);
+}
+
+.nbx .nbx-link {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-top: 4px;
+  padding-inline: 8px;
+  font: 500 15px/1.2 var(--nbx-sans);
+  color: var(--nbx-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* Add to cart + Bottle details share one row; on the narrowest phones the
+   link wraps under the button, centered. */
+.nbx .nbx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  margin-top: 16px;
+}
+.nbx .nbx-actions .nbx-btn {
+  flex: 1 1 180px;
+  width: auto;
+  margin-top: 0;
+  padding-inline: 14px;
+}
+.nbx .nbx-actions .nbx-link { flex: 0 0 auto; margin-top: 0; }
+
+.nbx .nbx-btn:focus-visible,
+.nbx .nbx-link:focus-visible,
+.nbx .nbx-field:focus-visible {
+  outline: 3px solid var(--nbx-ink);
+  outline-offset: 3px;
+}
+
+/* ---- "Notify me at launch" (expands in place, no JS needed) ------------- */
+
+.nbx .nbx-notify { margin-top: 16px; }
+.nbx .nbx-notify > summary { margin-top: 0; list-style: none; }
+.nbx .nbx-notify > summary::-webkit-details-marker { display: none; }
+.nbx .nbx-notify-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.nbx .nbx-notify-form .nbx-btn { margin-top: 0; }
+.nbx .nbx-field {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--nbx-field-line);
+  border-radius: 8px;
+  background: var(--nbx-bg);
+  color: var(--nbx-ink);
+  font: 400 16px/1.3 var(--nbx-sans); /* 16px keeps iOS from zooming on focus */
+}
+.nbx .nbx-field::placeholder { color: var(--nbx-muted); opacity: 1; }
+.nbx .nbx-fine {
+  font: 400 14px/1.45 var(--nbx-sans);
+  color: var(--nbx-muted);
+}
+
+/* ---- Everyday closing band: bowl + recipes ------------------------------ */
+
+.nbx .nbx-promo { margin-top: 48px; }
+.nbx .nbx-promo-body { padding-block: 28px 64px; }
+.nbx .nbx-promo-title {
+  font-family: var(--nbx-serif);
+  font-size: clamp(32px, 9cqi, 44px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--nbx-ink);
+  text-wrap: balance;
+}
+.nbx .nbx-promo .nbx-tagline { margin-top: 14px; }
+
+.nbx .nbx-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Small tablets: three cards across ---------------------------------- */
+
+@container (min-width: 720px) {
+  .nbx .nbx-cards { grid-template-columns: repeat(3, 1fr); }
+  .nbx .nbx-card-title { font-size: 28px; }
+  .nbx .nbx-hero { max-width: 620px; margin-inline: auto; }
+  .nbx .nbx-promo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .nbx .nbx-promo-body { padding-block: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nbx .nbx-btn { transition: none; }
+}
