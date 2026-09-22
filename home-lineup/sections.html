@@ -1,0 +1,140 @@
+<!--
+  NoodleBomb readable phone lineup — paste-in markup.
+  Integration steps: home-lineup/README.md.
+
+  1. Add class="nbx-hide-mobile" to the live Everyday artwork section and to the
+     live Shoyu Reserve section (desktop keeps showing them).
+  2. Paste the Everyday block right after the Everyday artwork section and the
+     Reserve block right after the Reserve section.
+  3. Replace the {{…}} image placeholders with the files those live sections
+     already use, so phones download nothing new.
+-->
+
+<!-- ============ Everyday Extraordinary (phones) ============ -->
+<section class="nbx nbx-everyday" id="nbx-everyday" aria-labelledby="nbx-everyday-title">
+  <div class="nbx-wrap nbx-head">
+    <p class="nbx-kicker">Noodle Bomb</p>
+    <h2 class="nbx-title" id="nbx-everyday-title">Everyday <em>Extraordinary.</em></h2>
+    <p class="nbx-tagline">Ramen sauces for real life.</p>
+    <p class="nbx-lede">Same bold flavor. Different vibes. Made with real ingredients to turn everyday meals into something special.</p>
+    <p class="nbx-script">Good Food Goes Further.</p>
+  </div>
+
+  <!-- Bottle lineup slice of the Everyday artwork (2:3 image). -->
+  <figure class="nbx-crop" style="--cx:0; --cy:.3136; --cw:1; --ch:.5273">
+    <img src="{{EVERYDAY_ART}}" alt="Original, Spicy Tokyo and Citrus Shoyu ramen sauce bottles with garlic, chilies, mushrooms and oranges" loading="lazy" decoding="async">
+  </figure>
+
+  <ul class="nbx-wrap nbx-cards" role="list">
+    <li class="nbx-card nbx-flavor--original">
+      <p class="nbx-eyebrow">The classic</p>
+      <h3 class="nbx-card-title">Original</h3>
+      <p class="nbx-card-desc">Rich. Balanced. Versatile.</p>
+      <p class="nbx-buy"><span class="nbx-price">$13.99</span><span class="nbx-size">7 fl oz (207 ml)</span></p>
+      <div class="nbx-actions">
+        <a class="nbx-btn" href="/cart?add=original&amp;qty=1" data-nbx-add data-slug="original" data-name="Original" data-price="13.99"><span data-nbx-label>Add to cart</span><span class="nbx-sr">: Original ramen sauce, $13.99</span></a>
+        <a class="nbx-link" href="/original-ramen-sauce">Bottle details <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </li>
+    <li class="nbx-card nbx-flavor--spicy">
+      <p class="nbx-eyebrow">Bring the heat</p>
+      <h3 class="nbx-card-title">Spicy Tokyo</h3>
+      <p class="nbx-card-desc">Bold. Complex. Heat.</p>
+      <p class="nbx-buy"><span class="nbx-price">$13.99</span><span class="nbx-size">7 fl oz (207 ml)</span></p>
+      <div class="nbx-actions">
+        <a class="nbx-btn" href="/cart?add=spicy&amp;qty=1" data-nbx-add data-slug="spicy" data-name="Spicy Tokyo" data-price="13.99"><span data-nbx-label>Add to cart</span><span class="nbx-sr">: Spicy Tokyo ramen sauce, $13.99</span></a>
+        <a class="nbx-link" href="/spicy-tokyo-ramen-sauce">Bottle details <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </li>
+    <li class="nbx-card nbx-flavor--citrus">
+      <p class="nbx-eyebrow">A bright twist</p>
+      <h3 class="nbx-card-title">Citrus Shoyu</h3>
+      <p class="nbx-card-desc">Fresh. Zesty. Unique.</p>
+      <p class="nbx-buy"><span class="nbx-price">$13.99</span><span class="nbx-size">7 fl oz (207 ml)</span></p>
+      <div class="nbx-actions">
+        <a class="nbx-btn" href="/cart?add=citrus&amp;qty=1" data-nbx-add data-slug="citrus" data-name="Citrus Shoyu" data-price="13.99"><span data-nbx-label>Add to cart</span><span class="nbx-sr">: Citrus Shoyu ramen sauce, $13.99</span></a>
+        <a class="nbx-link" href="/citrus-shoyu-ramen-sauce">Bottle details <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </li>
+  </ul>
+
+  <div class="nbx-promo">
+    <!-- Ramen bowl slice from the bottom band of the same artwork. -->
+    <figure class="nbx-crop" style="--cx:0; --cy:1.2212; --cw:.4848; --ch:.2788">
+      <img src="{{EVERYDAY_ART}}" alt="Bowl of ramen with a soft egg, pork and green onions" loading="lazy" decoding="async">
+    </figure>
+    <div class="nbx-wrap nbx-promo-body">
+      <h3 class="nbx-promo-title">Real Ingredients. Bigger Flavor.</h3>
+      <p class="nbx-tagline">Dip. Drizzle. Cook. Enjoy.</p>
+      <a class="nbx-btn nbx-btn--ink" href="/recipes">Explore recipes <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+
+  <p class="nbx-sr" aria-live="polite" data-nbx-status></p>
+</section>
+
+<!-- ============ Shoyu Reserve (phones) ============ -->
+<section class="nbx nbx-reserve" id="nbx-reserve" aria-labelledby="nbx-reserve-title">
+  <!-- Pour + "Same Culture Higher Standards." slice of the Reserve hero image.
+       Crop assumes the hero image spans the section width; nudge --cy if not. -->
+  <figure class="nbx-crop nbx-hero" style="--cx:.5644; --cy:.0833; --cw:.4356; --ch:.4">
+    <img src="{{RESERVE_HERO}}" alt="Shoyu Reserve poured over glazed chicken, with the line &ldquo;Same culture. Higher standards.&rdquo;" loading="lazy" decoding="async">
+  </figure>
+
+  <div class="nbx-wrap nbx-head">
+    <p class="nbx-kicker">The Reserve collection</p>
+    <h2 class="nbx-title" id="nbx-reserve-title">Shoyu <em>Reserve.</em></h2>
+    <p class="nbx-tagline">Premium soy sauce.</p>
+    <p class="nbx-lede">A little more depth at your table.</p>
+  </div>
+
+  <div class="nbx-trio">
+    <img src="{{RESERVE_PANEL_ORIGINAL}}" alt="Shoyu Reserve Original bottle with green onions and soybeans" loading="lazy" decoding="async">
+    <img src="{{RESERVE_PANEL_SPICY}}" alt="Shoyu Reserve Spicy bottle with red chilies" loading="lazy" decoding="async">
+    <img src="{{RESERVE_PANEL_BLACK_GARLIC}}" alt="Shoyu Reserve Black Garlic bottle with black garlic" loading="lazy" decoding="async">
+  </div>
+
+  <ul class="nbx-wrap nbx-cards" role="list">
+    <li class="nbx-card nbx-flavor--original">
+      <div class="nbx-card-top"><p class="nbx-eyebrow">Shoyu Reserve</p><span class="nbx-pill">Available now</span></div>
+      <h3 class="nbx-card-title">Original</h3>
+      <p class="nbx-card-desc">Your everyday shoyu for dipping, drizzling, and finishing.</p>
+      <p class="nbx-buy"><span class="nbx-price">$13.99</span><span class="nbx-size">7 fl oz (207 ml)</span></p>
+      <div class="nbx-actions">
+        <a class="nbx-btn" href="/cart?add=shoyu&amp;qty=1" data-nbx-add data-slug="shoyu" data-name="Shoyu Reserve" data-price="13.99"><span data-nbx-label>Add to cart</span><span class="nbx-sr">: Shoyu Reserve Original, $13.99</span></a>
+        <a class="nbx-link" href="/shoyu-reserve">Bottle details <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </li>
+    <li class="nbx-card nbx-flavor--spicy">
+      <div class="nbx-card-top"><p class="nbx-eyebrow">Shoyu Reserve</p><span class="nbx-pill">Available now</span></div>
+      <h3 class="nbx-card-title">Spicy</h3>
+      <p class="nbx-card-desc">Shoyu with chili heat. For meals that need an extra kick.</p>
+      <p class="nbx-buy"><span class="nbx-price">$13.99</span><span class="nbx-size">7 fl oz (207 ml)</span></p>
+      <div class="nbx-actions">
+        <a class="nbx-btn" href="/cart?add=shoyuspicy&amp;qty=1" data-nbx-add data-slug="shoyuspicy" data-name="Spicy Shoyu" data-price="13.99"><span data-nbx-label>Add to cart</span><span class="nbx-sr">: Shoyu Reserve Spicy, $13.99</span></a>
+        <a class="nbx-link" href="/spicy-shoyu-ramen-sauce">Bottle details <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </li>
+    <li class="nbx-card nbx-flavor--garlic">
+      <div class="nbx-card-top"><p class="nbx-eyebrow">Shoyu Reserve</p><span class="nbx-pill">Coming soon</span></div>
+      <h3 class="nbx-card-title">Black Garlic</h3>
+      <p class="nbx-card-desc">The next expression of Shoyu Reserve. Deep. Savory. Unforgettable.</p>
+      <p class="nbx-eta">Expected November 2026</p>
+      <details class="nbx-notify">
+        <summary class="nbx-btn nbx-btn--outline">Notify me at launch</summary>
+        <form class="nbx-notify-form" action="https://formsubmit.co/hello@noodlebomb.co" method="POST">
+          <input type="hidden" name="_subject" value="Black Garlic launch list">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://noodlebomb.co/?notify=black-garlic">
+          <input type="hidden" name="interest" value="Shoyu Reserve Black Garlic">
+          <label class="nbx-sr" for="nbx-notify-email">Email address</label>
+          <input class="nbx-field" id="nbx-notify-email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+          <button class="nbx-btn" type="submit">Notify me</button>
+          <p class="nbx-fine">We'll email you when it's ready.</p>
+        </form>
+      </details>
+    </li>
+  </ul>
+
+  <p class="nbx-sr" aria-live="polite" data-nbx-status></p>
+</section>
